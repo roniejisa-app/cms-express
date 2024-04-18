@@ -1,0 +1,24 @@
+<form action="/admin/<%= module %>/edit/<%= id %>" method="POST">
+    <div class="d-flex justify-content-between my-5 header-view">
+        <h2>Sửa <%= name_show %></h2>
+        <div>
+            <button class="btn btn-success">Cập nhật</button>
+            <a class="btn btn-danger" href="/admin/<%= module %>">Hủy</a>
+        </div>
+    </div>
+    <% if(req.success && req.success.length) { %>
+    <div class="alert alert-success mb-3"><%= req.success %></div>
+    <% } %>
+    <div class="row">
+        <div class="col-12 col-md-9">
+            <% leftFields.forEach(field => { %> <%-
+            include(`./types/edit/${field.type}`, { field,req,data }) %> <% })
+            %>
+        </div>
+        <div class="col-12 col-md-3">
+            <% rightFields.forEach(field => { %> <%-
+            include(`./types/edit/${field.type}`, { field,req,data }) %> <% })
+            %>
+        </div>
+    </div>
+</form>

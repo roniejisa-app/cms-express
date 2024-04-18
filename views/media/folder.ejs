@@ -1,0 +1,6 @@
+<a <% if(!folder.delete_at){ %> href="<%= req.originalUrl %>/<%= folder.id %>" <% } %> data-id="<%= folder.id %>" class="item folder" data-file="<%= JSON.stringify(folder) %>">
+  <img src="/images/admin/folder.svg" alt="Folder">
+  <div class="item-info">
+    <h3><%= folder.filename %></h3>
+  </div>
+</a>

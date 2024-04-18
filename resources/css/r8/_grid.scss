@@ -1,0 +1,93 @@
+$defaultGutter: 1rem;
+$gutters: (
+    "_": 1rem,
+    "0": 0,
+    "1": .25rem,
+    "2": .5rem,
+    "3": 1rem,
+    "4": 2rem,
+    "5": 4rem
+);
+
+$grids: (
+    "576px": ("prefix": "sm", "container": 540px),
+    "768px": ("prefix": "md", "container": 720px),
+    "992px": ("prefix": "lg", "container": 960px),
+    "1200px": ("prefix": "xl", "container": 1140px),
+    "1400px": ("prefix": "xxl", "container": 1320px),
+);
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@mixin gutter($prefixGutter: "") {
+    @if($prefixGutter !="") {
+        $prefixGutter: "#{$prefixGutter}-";
+    }
+
+    @each $keyGutter, $gutter in $gutters {
+        @if($keyGutter !="_") {
+            $keyGutter: ".g-#{$prefixGutter}#{$keyGutter}";
+        }
+
+        @else {
+            $keyGutter : "";
+        }
+
+        .row#{$keyGutter} {
+            margin: 0 -#{$gutter};
+            
+            >[class*="col-"] {
+                padding: 0 $gutter;
+            }
+            
+            >:not(:has([class*="col-"])){
+                padding: 0 $gutter;
+            }
+        }
+    }
+}
+
+@mixin grid($prefix: "") {
+    @if($prefix !="") {
+        $prefix: $prefix + "-";
+    }
+
+    @for $i from 1 through 12 {
+        .col-#{$prefix}#{$i} {
+            flex-basis: calc(100% / 12) * $i;
+            padding: 0 calc($defaultGutter / 2);
+        }
+    }
+
+    @for $i from 1 through 12 {
+        .col-offset-#{$prefix}#{$i} {
+            margin-left: calc(100% / 12) * $i;
+        }
+    }
+}
+
+
+
+
+@include grid();
+@include gutter("");
+
+@each $size, $data in $grids {
+    @media screen and (min-width: #{$size}) {
+        @each $key, $value in $data {
+            @if($key =='container') {
+                .container {
+                    max-width: $value;
+                }
+            }
+
+            @if($key =='prefix') {
+                @include gutter($value);
+                @include grid($value);
+            }
+        }
+    }
+}

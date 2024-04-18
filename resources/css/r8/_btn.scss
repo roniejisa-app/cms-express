@@ -1,0 +1,28 @@
+@use 'variable' as *;
+
+.btn {
+    padding: 8px 12px;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: filter 300ms ease-in-out;
+
+    &:hover {
+        filter: brightness(1.1);
+    }
+
+    &-success {
+        background: $colorSuccess;
+    }
+
+    &-danger {
+        background: $colorDanger;
+    }
+
+    &-warning {
+        background: #fadb14;
+        color: black;
+    }
+}

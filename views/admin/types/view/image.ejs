@@ -1,0 +1,12 @@
+<div class="image-table">
+    <img
+        height="80"
+        width="80"
+        src="<% if(value) { %>
+    <%= '/'+JSON.parse(value).path_absolute %> 
+    <% } else { %>  
+    <%=  '/images/admin/no-image.svg' %>
+    <% } %>"
+        alt="Ảnh"
+    />
+</div>

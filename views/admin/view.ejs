@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-between my-5 header-view">
+    <h2>Quản lý <%= name_show %></h2>
+    <% if(req.permission.some(permission=> permission.includes(`${module}.add`)
+    || permission.includes(`${module}.create`))){ %>
+    <a
+        class="btn btn-success d-flex align-items-center"
+        href="/admin/<%= module %>/add"
+        >Thêm <%= name_show %></a
+    >
+    <% } %>
+</div>
+<% if(req.success && req.success.length) { %>
+<div class="alert alert-success mb-3"><%= req.success %></div>
+<% } %>
+<div class="mb-3 filter"></div>
+<table class="table">
+    <thead>
+        <tr>
+            <th width="5%">STT</th>
+            <% fields.forEach(field=> { %>
+            <th><%= field.label %></th>
+            <% }) %> <% if(req.permission.some(permission =>
+            permission.includes(`${module}.edit`) ||
+            permission.includes(`${module}.update`))){ %>
+            <th width="5%">Sửa</th>
+            <%}%> <% if(req.permission.some(permission =>
+            permission.includes(`${module}.delete`))){ %>
+            <th width="5%">Xóa</th>
+            <%}%>
+        </tr>
+    </thead>
+    <tbody>
+        <% listData.forEach((item,index) => { %>
+        <tr>
+            <td><%= index + 1 %></td>
+            <% fields.forEach(field=> { %>
+            <td>
+                <%- include(`./types/view/${field.type}`,{ field,
+                value:item[field.name] }); %>
+            </td>
+            <% }) %> <% if(req.permission.some(permission =>
+            permission.includes(`${module}.edit`) ||
+            permission.includes(`${module}.update`))){ %>
+            <td class="text-center">
+                <a
+                    href="/admin/<%= module %>/edit/<%= item.id %>"
+                    class="btn btn-warning"
+                    >Sửa</a
+                >
+            </td>
+            <% } %> <% if(req.permission.some(permission =>
+            permission.includes(`${module}.delete`))){ %>
+            <td class="text-center">
+                <form
+                    action="/admin/<%= module %>/delete/<%= item.id %>"
+                    method="POST"
+                    onclick="if(!confirm(`Bạn chắc chắn muốn xóa không?`)) return false"
+                >
+                    <button class="btn btn-danger">Xóa</button>
+                </form>
+            </td>
+            <% } %>
+        </tr>
+        <% }) %>
+    </tbody>
+</table>
+<%- paginate %>

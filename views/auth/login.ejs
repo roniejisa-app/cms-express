@@ -1,0 +1,27 @@
+<div class="w-50 mx-auto">
+    <h1>Đăng nhập</h1>
+    <% if (error.length) { %>
+        <div class="alert alert-danger text-center">
+            <%= error %>
+        </div>
+    <% } %>
+    <% if (success.length) { %>
+        <div class="alert alert-success text-center">
+            <%= success %>
+        </div>
+    <% } %>
+    <form action="/login" method="POST">
+        <div class="mb-3">
+            <label>Email</label>
+            <input type="text" name="email" class="form-control" placeholder="Email....">
+        </div>
+        <div class="mb-3">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" placeholder="Password....">
+        </div>
+        <div class="d-grid">
+            <button class="btn btn-primary">Đăng nhập</button>
+            <a href="/google/redirect" class="btn btn-danger mt-2">Đăng nhập với Google</a>
+        </div>
+    </form>
+</div>

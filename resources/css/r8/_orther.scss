@@ -1,0 +1,45 @@
+@use 'variable' as *;
+.d-flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.d-block {
+    display: block;
+}
+
+.form-control {
+    width: 100%;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #ebebeb;
+}
+
+.text-center {
+    text-align: center;
+}
+.text{
+    &-danger{
+        color: $colorDanger;
+    }
+    &-success{
+        color: $colorSuccess;
+    }
+    &-warning{
+        color: $colorDanger;
+    }
+    &-primary{
+        color: $colorPrimary;
+    }
+}
+.alert {
+    padding: 10px;
+    color: white;
+    border-radius: 6px;
+    &-success {
+        background-color: $colorSuccess;
+    }
+}

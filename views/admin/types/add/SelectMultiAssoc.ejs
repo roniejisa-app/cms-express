@@ -1,0 +1,12 @@
+<div class="form-group mb-3">
+  <label class="d-block mb-1"><%= field.label %></label>
+  <div class="grid">
+    <% field.data.forEach(option => { %>
+    <label role="button">
+      <input name="<%= field.name %>" value="<%= option[field.valueKey] %>" type="checkbox">
+      <%= option[field.labelKey] %>
+    </label>
+    <% }) %>
+    </input>
+  </div>
+</div>

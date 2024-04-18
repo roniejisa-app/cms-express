@@ -1,0 +1,29 @@
+<div class="form-group mb-3">
+    <label class="d-block mb-1"><%= field.label %></label>
+    <div class="image-form">
+        <textarea
+            class="form-control"
+            type="text"
+            name="<%= field.name %>"
+            placeholder="<%= field.placeholder ?? field.label  %>"
+            hidden
+        ><%= req.old[field.name] ?? '' %></textarea>
+        <span>
+            <img
+                src="<%= req.old[field.name] ? '/'+JSON.parse(req.old[field.name]).path_absolute : '/images/admin/no-image.svg' %>"
+                alt="Chưa chọn ảnh"
+            />
+        </span>
+        <div class="image-form-action">
+            <div class="btn btn-choose-image btn-success" data-type="last" type="button">
+                Chọn ảnh
+            </div>
+            <div class="btn btn-remove-image btn-danger" type="button">
+                Xóa ảnh
+            </div>
+        </div>
+    </div>
+    <% if (req.error && req.error[field.name]) { %>
+    <p class="text-danger"><%= req.error[field.name] %></p>
+    <% } %>
+</div>
