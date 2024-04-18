@@ -11,21 +11,21 @@ module.exports = {
             },
             module_id: {
                 type: Sequelize.INTEGER,
-                references: {
-                    model: {
-                        tableName: "modules"
-                    },
-                    key: "id"
-                },
+                // references: {
+                //     model: {
+                //         tableName: "modules"
+                //     },
+                //     key: "id"
+                // },
             },
             permission_id: {
                 type: Sequelize.INTEGER,
-                references: {
-                    model: {
-                        tableName: "permissions"
-                    },
-                    key: "id"
-                },
+                // references: {
+                //     model: {
+                //         tableName: "permissions"
+                //     },
+                //     key: "id"
+                // },
             },
             created_at: {
                 type: Sequelize.DATE,

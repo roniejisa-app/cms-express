@@ -11,21 +11,21 @@ module.exports = {
             },
             user_id: {
                 type: Sequelize.INTEGER,
-                references: {
-                    model: {
-                        tableName: "users"
-                    },
-                    key: "id"
-                }
+                // references: {
+                //     model: {
+                //         tableName: "users"
+                //     },
+                //     key: "id"
+                // }
             },
             role_id: {
                 type: Sequelize.INTEGER,
-                references: {
-                    model: {
-                        tableName: "roles"
-                    },
-                    key: "id"
-                }
+                // references: {
+                //     model: {
+                //         tableName: "roles"
+                //     },
+                //     key: "id"
+                // }
             },
             created_at: {
                 type: Sequelize.DATE,
