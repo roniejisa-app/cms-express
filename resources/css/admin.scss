@@ -1,7 +1,9 @@
 @use './r8/variable' as *;
+@use 'variable' as *;
 
 body {
     font-family: "Open Sans", sans-serif;
+    color: $colorText;
 }
 
 ul li a {
@@ -28,7 +30,7 @@ ul li a {
             a {
                 padding: 8px 0;
                 display: block;
-                color: black;
+                color: $colorText;
 
                 &.active {
                     color: #1677ff;
@@ -110,7 +112,7 @@ ul li a {
                 a {
                     display: block;
                     padding: 6px 12px;
-                    color: black;
+                    color: $colorText;
                 }
 
                 &:nth-last-of-type(1) a {
@@ -152,7 +154,7 @@ footer {
         border: 1px solid #ebebeb;
         min-height: 40px;
         border-radius: 6px;
-        color: black;
+        color: $colorText;
         transition: 300ms ease-in-out;
         transition-property: color, background, border-color, fill, font-weight;
         svg{

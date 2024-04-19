@@ -10,6 +10,7 @@ export default defineConfig({
             input: [
                 resolve(__dirname, "./resources/css/media.scss"),
                 resolve(__dirname, "./resources/css/admin.scss"),
+                resolve(__dirname, "./resources/css/chat.scss"),
                 resolve(__dirname, "./resources/css/r8/r8.scss"),
                 resolve(__dirname, "./resources/js/media/media.js"),
                 resolve(__dirname, "./resources/js/admin/admin.js"),

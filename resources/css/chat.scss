@@ -1,0 +1,209 @@
+@use 'variable' as *;
+.chat-box-admin {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    button {
+        transition: 300ms ease;
+        transition-property: background;
+        background: none;
+        fill: $colorBackgroundChat;
+        &:hover {
+            background: $colorButtonChat;
+        }
+    }
+    .show-chat-box {
+        padding: 10px;
+        border-radius: 6px;
+        border: none;
+        background: $colorBackgroundChat;
+        cursor: pointer;
+        fill: white;
+        svg {
+            height: 24px;
+            width: 24px;
+        }
+    }
+    .chat-content-header {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        align-items: center;
+        padding: 5px 6px;
+        border-bottom: 1px solid #ebebeb;
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            transition: 300ms ease;
+            transition-property: background;
+            padding: 5px;
+            border-radius: 6px;
+            svg {
+                fill: $colorBackgroundChat;
+                width: 20px;
+                height: 20px;
+                transition: 300ms ease;
+                transition-property: fill;
+            }
+            &:hover {
+                background: $colorBackgroundChat;
+                svg {
+                    fill: #ebebeb;
+                }
+            }
+        }
+    }
+    .chat-content {
+        position: absolute;
+        width: 25vw;
+        border: 1px solid #ebebeb;
+        border-radius: 6px;
+        height: 50vh;
+        bottom: 0;
+        background: white;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        .message {
+            flex: 1;
+            overflow: hidden;
+        }
+        .form-chat {
+            border-top: 1px solid #ebebeb;
+            padding: 6px;
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+            width: 100%;
+            .action-plus {
+                position: relative;
+                &.hidden {
+                    display: none;
+                }
+                .action-sub-menu:hover,
+                &:hover {
+                    .action-sub-menu {
+                        opacity: 1;
+                        visibility: visible;
+                        pointer-events: all;
+                    }
+                }
+                .action-sub-menu {
+                    position: absolute;
+                    opacity: 0;
+                    visibility: hidden;
+                    pointer-events: none;
+                    transition: 300ms ease;
+                    transition-property: opacity, visibility, pointer-events;
+                    bottom: 40px;
+                    background: white;
+                    padding: 10px;
+                    width: 200px;
+                    border-radius: 6px;
+                    border-bottom-right-radius: 0;
+                    filter: drop-shadow(2px 4px 1px rgba(0, 0, 0, 0.1));
+                    ul {
+                        display: flex;
+                        flex-direction: column;
+                        li {
+                            button {
+                                display: flex;
+                                align-items: center;
+                                width: 100%;
+                                svg {
+                                    flex-basis: 40px;
+                                }
+                            }
+                        }
+                    }
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        border-width: 10px;
+                        border-color: white transparent transparent white;
+                        border-style: solid;
+                        border-top-right-radius: 20px;
+                        border-bottom-left-radius: 20px;
+                        bottom: -14px;
+                        left: 6px;
+                    }
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        width: 100%;
+                        height: 17px;
+                        bottom: -17px;
+                        left: 0;
+                        background: transparent;
+                    }
+                }
+                // position: relative;
+                // .actions{
+                //     position: absolute;
+                // }
+            }
+            .actions {
+                transition: 300ms ease;
+                transition-property: width;
+                overflow: hidden;
+                display: flex;
+                gap: 10px;
+                &.hidden {
+                    display: none;
+                }
+                button {
+                    border: none;
+                }
+            }
+            .text-chat {
+                position: relative;
+                flex: 1;
+                overflow: auto;
+                .editor-chat-container {
+                    position: relative;
+                    border: 1px solid $colorBackgroundChat;
+                    border-radius: 20px;
+                    .editor-chat {
+                        width: 100%;
+                        padding: 5px 10px 5px 12px;
+                        position: relative;
+                        max-height: 150px;
+                        overflow: auto;
+                        max-width: calc(100% - 30px);
+                    }
+                    .placeholder {
+                        position: absolute;
+                        left: 13px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        color: #cbcbcb;
+                    }
+                }
+                button {
+                    border-radius: 50%;
+                    position: absolute;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: none;
+                    bottom: 2px;
+                    right: 2px;
+                }
+            }
+            button {
+                padding: 5px;
+                cursor: pointer;
+                border-radius: 6px;
+                border: none;
+                svg {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
+    }
+}

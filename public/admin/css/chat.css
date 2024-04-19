@@ -1,0 +1,199 @@
+.chat-box-admin {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
+.chat-box-admin button {
+  transition: 300ms ease;
+  transition-property: background;
+  background: none;
+  fill: #b37feb;
+}
+.chat-box-admin button:hover {
+  background: rgba(179, 127, 235, 0.1647058824);
+}
+.chat-box-admin .show-chat-box {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background: #b37feb;
+  cursor: pointer;
+  fill: white;
+}
+.chat-box-admin .show-chat-box svg {
+  height: 24px;
+  width: 24px;
+}
+.chat-box-admin .chat-content-header {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  align-items: center;
+  padding: 5px 6px;
+  border-bottom: 1px solid #ebebeb;
+}
+.chat-box-admin .chat-content-header button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  transition: 300ms ease;
+  transition-property: background;
+  padding: 5px;
+  border-radius: 6px;
+}
+.chat-box-admin .chat-content-header button svg {
+  fill: #b37feb;
+  width: 20px;
+  height: 20px;
+  transition: 300ms ease;
+  transition-property: fill;
+}
+.chat-box-admin .chat-content-header button:hover {
+  background: #b37feb;
+}
+.chat-box-admin .chat-content-header button:hover svg {
+  fill: #ebebeb;
+}
+.chat-box-admin .chat-content {
+  position: absolute;
+  width: 25vw;
+  border: 1px solid #ebebeb;
+  border-radius: 6px;
+  height: 50vh;
+  bottom: 0;
+  background: white;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+}
+.chat-box-admin .chat-content .message {
+  flex: 1;
+  overflow: hidden;
+}
+.chat-box-admin .chat-content .form-chat {
+  border-top: 1px solid #ebebeb;
+  padding: 6px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  width: 100%;
+}
+.chat-box-admin .chat-content .form-chat .action-plus {
+  position: relative;
+}
+.chat-box-admin .chat-content .form-chat .action-plus.hidden {
+  display: none;
+}
+.chat-box-admin .chat-content .form-chat .action-plus .action-sub-menu:hover .action-sub-menu, .chat-box-admin .chat-content .form-chat .action-plus:hover .action-sub-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+.chat-box-admin .chat-content .form-chat .action-plus .action-sub-menu {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: 300ms ease;
+  transition-property: opacity, visibility, pointer-events;
+  bottom: 40px;
+  background: white;
+  padding: 10px;
+  width: 200px;
+  border-radius: 6px;
+  border-bottom-right-radius: 0;
+  filter: drop-shadow(2px 4px 1px rgba(0, 0, 0, 0.1));
+}
+.chat-box-admin .chat-content .form-chat .action-plus .action-sub-menu ul {
+  display: flex;
+  flex-direction: column;
+}
+.chat-box-admin .chat-content .form-chat .action-plus .action-sub-menu ul li button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.chat-box-admin .chat-content .form-chat .action-plus .action-sub-menu ul li button svg {
+  flex-basis: 40px;
+}
+.chat-box-admin .chat-content .form-chat .action-plus .action-sub-menu::before {
+  content: "";
+  position: absolute;
+  border-width: 10px;
+  border-color: white transparent transparent white;
+  border-style: solid;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  bottom: -14px;
+  left: 6px;
+}
+.chat-box-admin .chat-content .form-chat .action-plus .action-sub-menu::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 17px;
+  bottom: -17px;
+  left: 0;
+  background: transparent;
+}
+.chat-box-admin .chat-content .form-chat .actions {
+  transition: 300ms ease;
+  transition-property: width;
+  overflow: hidden;
+  display: flex;
+  gap: 10px;
+}
+.chat-box-admin .chat-content .form-chat .actions.hidden {
+  display: none;
+}
+.chat-box-admin .chat-content .form-chat .actions button {
+  border: none;
+}
+.chat-box-admin .chat-content .form-chat .text-chat {
+  position: relative;
+  flex: 1;
+  overflow: auto;
+}
+.chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container {
+  position: relative;
+  border: 1px solid #b37feb;
+  border-radius: 20px;
+}
+.chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .editor-chat {
+  width: 100%;
+  padding: 5px 10px 5px 12px;
+  position: relative;
+  max-height: 150px;
+  overflow: auto;
+  max-width: calc(100% - 30px);
+}
+.chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .placeholder {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #cbcbcb;
+}
+.chat-box-admin .chat-content .form-chat .text-chat button {
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  bottom: 2px;
+  right: 2px;
+}
+.chat-box-admin .chat-content .form-chat button {
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 6px;
+  border: none;
+}
+.chat-box-admin .chat-content .form-chat button svg {
+  width: 16px;
+  height: 16px;
+}

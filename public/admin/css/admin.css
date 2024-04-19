@@ -1,5 +1,6 @@
 body {
   font-family: "Open Sans", sans-serif;
+  color: #322C2B;
 }
 
 ul li a {
@@ -22,7 +23,7 @@ ul li a:hover {
 .menu-admin ul li a {
   padding: 8px 0;
   display: block;
-  color: black;
+  color: #322C2B;
 }
 .menu-admin ul li a.active {
   color: #1677ff;
@@ -92,7 +93,7 @@ ul li a:hover {
 .header-main-admin .user-dropdown ul li a {
   display: block;
   padding: 6px 12px;
-  color: black;
+  color: #322C2B;
 }
 .header-main-admin .user-dropdown ul li:nth-last-of-type(1) a {
   border-bottom-left-radius: 6px;
@@ -127,7 +128,7 @@ footer {
   border: 1px solid #ebebeb;
   min-height: 40px;
   border-radius: 6px;
-  color: black;
+  color: #322C2B;
   transition: 300ms ease-in-out;
   transition-property: color, background, border-color, fill, font-weight;
 }
