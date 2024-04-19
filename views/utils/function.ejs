@@ -1,0 +1,7 @@
+<% 
+    getImg = function(data){
+        let img;
+        let responseData = JSON.parse(data);
+        return '/' +responseData.path_absolute;
+    }
+%>

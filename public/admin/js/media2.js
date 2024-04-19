@@ -1,3 +1,4 @@
+import { u as utils } from "./utils.js";
 let aside = document.querySelector("aside");
 let listFolderAside = aside.querySelector(".folder-list ul");
 let mediaMainEl = document.querySelector(".media-main");
@@ -1128,17 +1129,6 @@ function item() {
   });
   window.addEventListener("refresh-event-folder", listFolder);
 }
-const utils = {
-  formatBytes: (bytes, decimals = 2) => {
-    if (!+bytes)
-      return "0 Bytes";
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
-  }
-};
 var items = listItem.querySelectorAll(".item");
 var showInfo = new Event("show-info-file");
 var canvas, ctx, pageX, pageY, movePageX, movePageY, positionTransform, divCloneCanvas, itemsSelecting;

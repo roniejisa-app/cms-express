@@ -1,3 +1,4 @@
+<% include('../utils/function')  %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -15,7 +16,6 @@
 	</head>
 
 	<body>
-		<header></header>
 		<main>
 			<div class="row g-0">
 				<div class="col-12 col-md-2 menu-admin">
@@ -41,7 +41,7 @@
 					</aside>
 				</div>
 				<div class="col-12 col-md-10">
-					<div class="header-main-admin">
+					<header class="header-main-admin">
 						<div class="notification">
 							<span class="icon">
 								<svg
@@ -54,17 +54,17 @@
 							<div class="notification-menu"></div>
 						</div>
 						<div class="user-dropdown">
-							<div class="name">Phạm Minh Hiếu</div>
+							<div class="name"><%= req.user.fullname %></div>
 							<div class="image">
-								<img src="https://picsum.photos/400/400" alt="" />
+								<img src="<%= getImg(req.user.avatar) %>" alt="" />
 							</div>
 							<ul>
-								<li><a href="#">Sửa thông tin</a></li>
-								<li><a href="#">Đổi mật khẩu</a></li>
-								<li><a href="#">Đăng xuất</a></li>
+								<li><a href="/admin/users/edit/<%= req.user.id %>">Sửa thông tin</a></li>
+								<li><a href="/admin/users/edit/<%= req.user.id %>">Đổi mật khẩu</a></li>
+								<li><form action="/logout" method="POST"><button>Đăng xuất</button></form></li>
 							</ul>
 						</div>
-					</div>
+					</header>
 					<div class="main-body">
                         <div class="main">
 						    <%- body %>

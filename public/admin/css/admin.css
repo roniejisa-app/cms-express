@@ -3,10 +3,12 @@ body {
   color: #322C2B;
 }
 
+ul li button,
 ul li a {
   transition: 300ms ease-in-out;
   transition-property: color;
 }
+ul li button:hover,
 ul li a:hover {
   color: #1677ff !important;
 }
@@ -55,7 +57,7 @@ ul li a:hover {
 .header-main-admin .user-dropdown img {
   width: 48px;
   height: 48px;
-  object-fit: scale-down;
+  object-fit: cover;
   border-radius: 50%;
 }
 .header-main-admin .user-dropdown .name {
@@ -70,7 +72,8 @@ ul li a:hover {
   z-index: 9999;
   position: absolute;
   top: 120%;
-  width: 100%;
+  min-width: 200px;
+  right: 0;
   background: #e6f4ff;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
@@ -86,14 +89,21 @@ ul li a:hover {
   position: absolute;
   height: 30px;
   top: -30px;
-  left: 0;
+  right: 0;
   width: 100%;
   background: transparent;
 }
+.header-main-admin .user-dropdown ul li button,
 .header-main-admin .user-dropdown ul li a {
+  cursor: pointer;
   display: block;
+  background: none;
+  width: 100%;
+  border: none;
   padding: 6px 12px;
   color: #322C2B;
+  text-align: left;
+  font-size: 16px;
 }
 .header-main-admin .user-dropdown ul li:nth-last-of-type(1) a {
   border-bottom-left-radius: 6px;

@@ -10,6 +10,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var authRouter = require("./routes/auth");
 var adminRouter = require('./routes/admin');
+var chatRouter = require('./routes/chat');
 var apiRouter = require('./routes/api');
 const passport = require('passport');
 const { User, Role, ModulePermission, RoleModulePermission, Module, Permission } = require('./models/index');
@@ -84,6 +85,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(validateMiddleware);
 app.use('/', indexRouter);
 app.use('/', authRouter);
+app.use('/', chatRouter);
 app.use(authMiddleware);
 app.use('/admin', adminRouter);
 app.use('/api', apiRouter)

@@ -2,10 +2,11 @@
 @use 'variable' as *;
 
 body {
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     color: $colorText;
 }
 
+ul li button,
 ul li a {
     transition: 300ms ease-in-out;
     transition-property: color;
@@ -19,7 +20,8 @@ ul li a {
     background: $colorBackground;
     height: 100vh;
     overflow: auto;
-    box-shadow: 1px 0px 2px 0 rgba(0, 0, 0, 0.03), 1px 0px 6px -1px rgba(0, 0, 0, 0.02), 1px 0px 4px 0 rgba(0, 0, 0, 0.02);
+    box-shadow: 1px 0px 2px 0 rgba(0, 0, 0, 0.03),
+        1px 0px 6px -1px rgba(0, 0, 0, 0.02), 1px 0px 4px 0 rgba(0, 0, 0, 0.02);
 
     aside {
         padding: 0 16px;
@@ -47,7 +49,8 @@ ul li a {
     align-items: center;
     gap: 2rem;
     padding: 0 1rem;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03),
+        0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
 
     .notification {
         cursor: pointer;
@@ -68,7 +71,7 @@ ul li a {
         img {
             width: 48px;
             height: 48px;
-            object-fit: scale-down;
+            object-fit: cover;
             border-radius: 50%;
         }
 
@@ -87,7 +90,8 @@ ul li a {
             z-index: 9999;
             position: absolute;
             top: 120%;
-            width: 100%;
+            min-width: 200px;
+            right: 0;
             background: $colorBackground;
             border-bottom-left-radius: 6px;
             border-bottom-right-radius: 6px;
@@ -103,16 +107,23 @@ ul li a {
                 position: absolute;
                 height: 30px;
                 top: -30px;
-                left: 0;
+                right: 0;
                 width: 100%;
                 background: transparent;
             }
 
             li {
+                button,
                 a {
+                    cursor: pointer;
                     display: block;
+                    background: none;
+                    width: 100%;
+                    border: none;
                     padding: 6px 12px;
                     color: $colorText;
+                    text-align: left;
+                    font-size: 16px;
                 }
 
                 &:nth-last-of-type(1) a {
@@ -120,7 +131,7 @@ ul li a {
                     border-bottom-right-radius: 6px;
                 }
 
-                +li {
+                + li {
                     border-top: 1px solid white;
                 }
             }
@@ -132,7 +143,6 @@ ul li a {
     height: calc(100vh - 60px - 60px);
     overflow: auto;
     max-height: calc(100vh - 60px - 40px - 32px);
-
 }
 
 footer {
@@ -157,7 +167,7 @@ footer {
         color: $colorText;
         transition: 300ms ease-in-out;
         transition-property: color, background, border-color, fill, font-weight;
-        svg{
+        svg {
             width: 16px;
             height: 16px;
         }
@@ -196,7 +206,7 @@ footer {
 
 // END:CSS TABLE
 
-//FIELD 
+//FIELD
 //IMAGE
 .image-form {
     display: flex;
@@ -216,7 +226,8 @@ footer {
         display: flex;
         gap: 10px;
 
-        .btn {}
+        .btn {
+        }
     }
 }
 

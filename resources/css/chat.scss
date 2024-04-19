@@ -1,17 +1,9 @@
 @use 'variable' as *;
 .chat-box-admin {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    button {
-        transition: 300ms ease;
-        transition-property: background;
-        background: none;
-        fill: $colorBackgroundChat;
-        &:hover {
-            background: $colorButtonChat;
-        }
-    }
+    bottom: 15px;
+    right: 15px;
+
     .show-chat-box {
         padding: 10px;
         border-radius: 6px;
@@ -58,6 +50,22 @@
         }
     }
     .chat-content {
+        button {
+            transition: 300ms ease;
+            transition-property: background;
+            background: none;
+            fill: $colorBackgroundChat;
+            &:hover {
+                background: $colorButtonChat;
+            }
+        }
+        transform-origin: right bottom;
+        transition: 300ms;
+        transition-property: transform, opacity, pointer-events, visibility;
+        transform: scale(0);
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
         position: absolute;
         width: 25vw;
         border: 1px solid #ebebeb;
@@ -68,9 +76,97 @@
         right: 0;
         display: flex;
         flex-direction: column;
+        &.show {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: all;
+            visibility: visible;
+        }
         .message {
+            padding: 12px;
             flex: 1;
-            overflow: hidden;
+            overflow: auto;
+            .right,
+            .left {
+                margin-bottom: 4px;
+                display: flex;
+                justify-content: flex-start;
+                gap: 6px;
+                .avatar {
+                    width: 32px;
+                    height: 32px;
+                    img {
+                        border-radius: 50%;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+                .content {
+                    display: flex;
+                    border-radius: 25px;
+                    align-items: center;
+                    padding: 8px 12px;
+                    max-width: 70%;
+                    word-break: break-all;
+                    background: linear-gradient(
+                        #ff8fb2,
+                        #a797ff,
+                        #00e5ff,
+                        #00c3ff
+                    );
+                    color: white;
+                }
+            }
+            .right {
+                justify-content: flex-end;
+                &:not(:has(+ .left)):has(+ .right):nth-of-type(1) .content {
+                    border-top-right-radius: 25px;
+                    border-bottom-right-radius: 6px;
+                }
+                &:has(+ .right) .content {
+                    border-top-right-radius: 6px;
+                    border-bottom-right-radius: 6px;
+                }
+                &:has(+ .right) + .right:not(:has(+ .right)) .content,
+                &:has(+ .right)
+                    + .right:not(:has(+ .left))
+                    + .right:not(:has(+ .right))
+                    .content {
+                    border-top-right-radius: 6px;
+                    border-bottom-right-radius: 25px;
+                }
+                &:not(:has(+ .right)):has(+ .left) + .left:has(+.left) .content {
+                    border-top-left-radius: 25px;
+                    border-bottom-left-radius: 6px;
+                }
+            }
+            .left {
+                &:not(:has(+ .left)):has(+ .right) + .right:has(+.rightp) .content {
+                    border-top-right-radius: 25px;
+                    border-bottom-right-radius: 6px;
+                }
+                &:not(:has(+ .right)):has(+ .left):nth-of-type(1) .content {
+                    border-top-left-radius: 25px;
+                    border-bottom-left-radius: 6px;
+                }
+                &:has(+ .left) .content {
+                    border-top-left-radius: 6px;
+                    border-bottom-left-radius: 6px;
+                }
+                &:has(+ .left) + .left:not(:has(+ .left)) .content,
+                &:has(+ .left)
+                    + .left:not(:has(+ .right))
+                    + .left:not(:has(+ .left))
+                    .content {
+                    border-top-left-radius: 6px;
+                    border-bottom-left-radius: 25px;
+                }
+                &:not(:has(+ [class*='right'])), 
+                &:not(:has(+ [class*='left'])) {
+                    border-radius: 25px !important;
+                }
+            }
         }
         .form-chat {
             border-top: 1px solid #ebebeb;
@@ -83,14 +179,6 @@
                 position: relative;
                 &.hidden {
                     display: none;
-                }
-                .action-sub-menu:hover,
-                &:hover {
-                    .action-sub-menu {
-                        opacity: 1;
-                        visibility: visible;
-                        pointer-events: all;
-                    }
                 }
                 .action-sub-menu {
                     position: absolute;
@@ -106,6 +194,11 @@
                     border-radius: 6px;
                     border-bottom-right-radius: 0;
                     filter: drop-shadow(2px 4px 1px rgba(0, 0, 0, 0.1));
+                    &.active {
+                        opacity: 1;
+                        visibility: visible;
+                        pointer-events: all;
+                    }
                     ul {
                         display: flex;
                         flex-direction: column;
