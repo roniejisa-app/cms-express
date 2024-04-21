@@ -3254,6 +3254,658 @@ Object.assign(lookup, {
 const socket = lookup({
   autoConnect: false
 });
+let listStickers = [
+  {
+    label: "/images/emoji/first/label.png",
+    items: [
+      {
+        id: 1,
+        url: "/images/emoji/first/1.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 2,
+        url: "/images/emoji/first/2.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 3,
+        url: "/images/emoji/first/3.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 4,
+        url: "/images/emoji/first/4.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 5,
+        url: "/images/emoji/first/5.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 6,
+        url: "/images/emoji/first/6.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 7,
+        url: "/images/emoji/first/7.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 8,
+        url: "/images/emoji/first/8.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 9,
+        url: "/images/emoji/first/9.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 10,
+        url: "/images/emoji/first/10.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 11,
+        url: "/images/emoji/first/11.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 12,
+        url: "/images/emoji/first/12.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 13,
+        url: "/images/emoji/first/13.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 14,
+        url: "/images/emoji/first/14.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 15,
+        url: "/images/emoji/first/15.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 16,
+        url: "/images/emoji/first/16.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 17,
+        url: "/images/emoji/first/17.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 18,
+        url: "/images/emoji/first/18.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 19,
+        url: "/images/emoji/first/19.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 20,
+        url: "/images/emoji/first/20.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 21,
+        url: "/images/emoji/first/21.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 22,
+        url: "/images/emoji/first/22.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 23,
+        url: "/images/emoji/first/23.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 24,
+        url: "/images/emoji/first/24.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      }
+    ]
+  },
+  {
+    label: "/images/emoji/two/label.png",
+    items: [
+      {
+        id: 1,
+        url: "/images/emoji/two/1.png",
+        totalRow: 2,
+        totalColumn: 3,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 2,
+        url: "/images/emoji/two/2.png",
+        totalRow: 5,
+        totalColumn: 5,
+        countLeftInTotalRow: 1,
+        ms: 100
+      },
+      {
+        id: 3,
+        url: "/images/emoji/two/3.png",
+        totalRow: 5,
+        totalColumn: 5,
+        countLeftInTotalRow: 4,
+        ms: 100
+      },
+      {
+        id: 4,
+        url: "/images/emoji/two/4.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 5,
+        url: "/images/emoji/two/5.png",
+        totalRow: 2,
+        totalColumn: 3,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 6,
+        url: "/images/emoji/two/6.png",
+        totalRow: 2,
+        totalColumn: 3,
+        countLeftInTotalRow: 2,
+        ms: 100
+      },
+      {
+        id: 7,
+        url: "/images/emoji/two/7.png",
+        totalRow: 2,
+        totalColumn: 3,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 8,
+        url: "/images/emoji/two/8.png",
+        totalRow: 2,
+        totalColumn: 3,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 9,
+        url: "/images/emoji/two/9.png",
+        totalRow: 2,
+        totalColumn: 3,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 10,
+        url: "/images/emoji/two/10.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 11,
+        url: "/images/emoji/two/11.png",
+        totalRow: 3,
+        totalColumn: 3,
+        countLeftInTotalRow: 2,
+        ms: 100
+      },
+      {
+        id: 12,
+        url: "/images/emoji/two/12.png",
+        totalRow: 2,
+        totalColumn: 3,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 13,
+        url: "/images/emoji/two/13.png",
+        totalRow: 3,
+        totalColumn: 3,
+        countLeftInTotalRow: 2,
+        ms: 100
+      },
+      {
+        id: 14,
+        url: "/images/emoji/two/14.png",
+        totalRow: 2,
+        totalColumn: 3,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 15,
+        url: "/images/emoji/two/15.png",
+        totalRow: 5,
+        totalColumn: 5,
+        countLeftInTotalRow: 2,
+        ms: 100
+      },
+      {
+        id: 16,
+        url: "/images/emoji/two/16.png",
+        totalRow: 2,
+        totalColumn: 3,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 17,
+        url: "/images/emoji/two/17.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 18,
+        url: "/images/emoji/two/18.png",
+        totalRow: 7,
+        totalColumn: 7,
+        countLeftInTotalRow: 4,
+        ms: 100
+      },
+      {
+        id: 19,
+        url: "/images/emoji/two/19.png",
+        totalRow: 4,
+        totalColumn: 4,
+        countLeftInTotalRow: 4,
+        ms: 100
+      },
+      {
+        id: 20,
+        url: "/images/emoji/two/20.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 3,
+        ms: 100
+      }
+    ]
+  },
+  {
+    label: "/images/emoji/three/label.png",
+    items: [
+      {
+        id: 1,
+        url: "/images/emoji/three/1.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 2,
+        url: "/images/emoji/three/2.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 3,
+        url: "/images/emoji/three/3.png",
+        totalRow: 4,
+        totalColumn: 4,
+        countLeftInTotalRow: 4,
+        ms: 100
+      },
+      {
+        id: 4,
+        url: "/images/emoji/three/4.png",
+        totalRow: 4,
+        totalColumn: 4,
+        countLeftInTotalRow: 4,
+        ms: 100
+      },
+      {
+        id: 4,
+        url: "/images/emoji/three/4.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 5,
+        url: "/images/emoji/three/5.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 6,
+        url: "/images/emoji/three/6.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 7,
+        url: "/images/emoji/three/7.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 8,
+        url: "/images/emoji/three/8.png",
+        totalRow: 4,
+        totalColumn: 4,
+        countLeftInTotalRow: 4,
+        ms: 100
+      },
+      {
+        id: 9,
+        url: "/images/emoji/three/9.png",
+        totalRow: 4,
+        totalColumn: 4,
+        countLeftInTotalRow: 4,
+        ms: 100
+      },
+      {
+        id: 10,
+        url: "/images/emoji/three/10.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 11,
+        url: "/images/emoji/three/11.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 12,
+        url: "/images/emoji/three/12.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 13,
+        url: "/images/emoji/three/13.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 14,
+        url: "/images/emoji/three/14.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 15,
+        url: "/images/emoji/three/15.png",
+        totalRow: 4,
+        totalColumn: 4,
+        countLeftInTotalRow: 2,
+        ms: 100
+      },
+      {
+        id: 16,
+        url: "/images/emoji/three/16.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 17,
+        url: "/images/emoji/three/17.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 18,
+        url: "/images/emoji/three/18.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 19,
+        url: "/images/emoji/three/19.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 20,
+        url: "/images/emoji/three/20.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 21,
+        url: "/images/emoji/three/21.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 3,
+        ms: 100
+      },
+      {
+        id: 22,
+        url: "/images/emoji/three/22.png",
+        totalRow: 4,
+        totalColumn: 5,
+        countLeftInTotalRow: 5,
+        ms: 100
+      },
+      {
+        id: 23,
+        url: "/images/emoji/three/23.png",
+        totalRow: 4,
+        totalColumn: 4,
+        countLeftInTotalRow: 4,
+        ms: 100
+      },
+      {
+        id: 24,
+        url: "/images/emoji/three/24.png",
+        totalRow: 4,
+        totalColumn: 4,
+        countLeftInTotalRow: 4,
+        ms: 100
+      }
+    ]
+  }
+];
+function emojiAll(url2, totalRow, totalColumn, countLeftInTotalRow, ms, isRate = 1) {
+  const image = new Image();
+  image.src = url2;
+  let emoji;
+  return new Promise((resolve) => {
+    image.onload = () => {
+      emoji = document.createElement("div");
+      emoji.className = "emoji";
+      const widthOne = image.naturalWidth / totalColumn;
+      const heightOne = image.naturalHeight / totalRow;
+      emoji.style.backgroundImage = `url(${url2})`;
+      emoji.style.height = heightOne / isRate + "px";
+      emoji.style.width = widthOne / isRate + "px";
+      emoji.style.backgroundPosition = `${0}px ${0}px`;
+      emoji.setAttribute("width-one", widthOne);
+      emoji.setAttribute("height-one", heightOne);
+      emoji.setAttribute("count-left-in-total-row", countLeftInTotalRow);
+      emoji.setAttribute("total-row", totalRow);
+      emoji.setAttribute("total-column", totalColumn);
+      emoji.setAttribute("ms", ms);
+      resolve(emoji);
+    };
+  });
+}
+const emojiUtil = {
+  emojiAll,
+  addEventEmoji: (element) => {
+    const listEventEmoji = [];
+    window.addEventListener("event-emoji-" + element.className, (e) => {
+      const emoji = e.element;
+      const countLeftInTotalRow = emoji.getAttribute("count-left-in-total-row");
+      const totalColumn = emoji.getAttribute("total-column");
+      const totalRow = emoji.getAttribute("total-row");
+      const ms = emoji.getAttribute("ms");
+      const widthOne = emoji.getAttribute("width-one");
+      const heightOne = emoji.getAttribute("height-one");
+      let leftE = 0;
+      let topE = 0;
+      let countLeft = 0;
+      let countTop = 0;
+      let indexEmoji = listEventEmoji.findIndex(({ element: element2 }) => element2 === emoji);
+      if (indexEmoji === -1) {
+        indexEmoji = listEventEmoji.length;
+        listEventEmoji[indexEmoji] = {
+          element: emoji,
+          interval: null
+        };
+      }
+      listEventEmoji[indexEmoji].countInterval = 0;
+      !listEventEmoji[indexEmoji].interval && (listEventEmoji[indexEmoji].interval = setInterval(function() {
+        if (+countLeft === +totalColumn || +countLeft === +countLeftInTotalRow && +countTop === totalRow - 1) {
+          countLeft = 0;
+          +countTop++;
+        }
+        if (countTop === +totalRow) {
+          countTop = 0;
+        }
+        if (leftE === 0 && topE === 0) {
+          if (listEventEmoji[indexEmoji].countInterval >= 5) {
+            clearInterval(listEventEmoji[indexEmoji].interval);
+            listEventEmoji[indexEmoji].interval = null;
+          }
+          listEventEmoji[indexEmoji].countInterval++;
+        }
+        emoji.style.backgroundPosition = `${-leftE}px ${-topE}px`;
+        leftE = +countLeft * +widthOne;
+        topE = +countTop * +heightOne;
+        +countLeft++;
+      }, ms));
+    });
+    window.addEventListener("mouseover", (e) => {
+      let emojiEl = e.target;
+      if (emojiEl.closest(".emoji")) {
+        emojiEl = emojiEl.closest(".emoji");
+      }
+      if (emojiEl.classList.contains("emoji")) {
+        eventEmojiAction.element = emojiEl;
+        window.dispatchEvent(eventEmojiAction);
+      }
+    });
+    var eventEmojiAction = new Event("event-emoji-" + element.className);
+  }
+};
 const submit = new Event("submit-form-chat");
 const CHAT = (() => {
   const chatBox = document.querySelector(".chat-box-admin");
@@ -3267,7 +3919,11 @@ const CHAT = (() => {
   const chatClose = chatContentHeader.querySelector(".chat-close");
   const actionPlus = chatHTML.querySelector(".action-plus");
   const actionMenuSub = actionPlus.querySelector(".action-sub-menu");
+  let stickerBox = null;
+  let tabBox = null;
+  let stickerItemList = null;
   const userId = chatBox.dataset.userId;
+  let indexEmojiCurrent = 0;
   let flagWidth = false, rectAction, actionsWidth, addEventNow = false;
   function addEvent() {
     if (addEventNow)
@@ -3290,6 +3946,7 @@ const CHAT = (() => {
       editorChat.removeEventListener("keyup", handleKeyup);
       editorChat.removeEventListener("keydown", handleKeydown);
       chatClose.removeEventListener("keyup", handleDisconnect);
+      document.removeEventListener("mouseup", handleDocumentAddSocket);
       actionMenuSub.removeEventListener(
         "mousedown",
         handleActionMenuMousedown
@@ -3330,19 +3987,91 @@ const CHAT = (() => {
       rectAction = actions.getBoundingClientRect();
       actionsWidth = rectAction.width;
     }, 500);
+    Array.from(actions.children).forEach((button) => {
+      if (button.dataset.type === "sticker") {
+        button.onmouseup = (e) => {
+          if (!stickerBox || stickerBox.classList.contains("hidden")) {
+            e.stopPropagation();
+            handleShowSticker(e, button);
+          }
+        };
+      }
+    });
     editorChat.addEventListener("keyup", handleKeyup);
     editorChat.addEventListener("keydown", handleKeydown);
     chatClose.addEventListener("click", handleDisconnect);
     actionMenuSub.addEventListener("mousedown", handleActionMenuMousedown);
     actionPlus.addEventListener("mousedown", handleActionPlusMouseDown);
-    document.addEventListener("mousedown", handleDocumentAddSocket);
+    document.addEventListener("mouseup", handleDocumentAddSocket);
     formChat.addEventListener("submit-form-chat", handleChat);
     formChat.addEventListener("submit", handleChat);
+  }
+  async function handleShowSticker(e, button) {
+    if (!stickerBox) {
+      const listTab = listStickers.map((item, index) => {
+        const tabElement = document.createElement("div");
+        tabElement.className = "tab-item";
+        tabElement.dataset.index = index;
+        const image = document.createElement("img");
+        image.src = item.label;
+        tabElement.append(image);
+        return tabElement;
+      });
+      stickerBox = document.createElement("div");
+      stickerBox.className = "sticker-box";
+      tabBox = document.createElement("div");
+      tabBox.className = "tab-sticker-box";
+      stickerItemList = document.createElement("div");
+      stickerItemList.className = "sticker-items";
+      tabBox.append(...listTab);
+      stickerBox.append(tabBox, stickerItemList);
+      button.append(stickerBox);
+      listTab.forEach((tab, index) => {
+        tab.onclick = async (e2) => {
+          e2.stopPropagation();
+          if (tab.classList.contains("active"))
+            return false;
+          stickerItemList.style.display = "flex";
+          stickerItemList.innerHTML = `<style>.rs-loading-main{display: flex;width:100%;height:100%; justify-content: center; align-items: center;} .rsl-wave {font-size: var(--rs-l-size, 2rem); color: var(--rs-l-color, #ee4d2d); display: inline-flex; align-items: center; width: 1.25em; height: 1.25em; } .rsl-wave--icon { display: block; background: currentColor; border-radius: 99px; width: 0.25em; height: 0.25em; margin-right: 0.25em; margin-bottom: -0.25em; -webkit-animation: rsla_wave .56s linear infinite; animation: rsla_wave .56s linear infinite; -webkit-transform: translateY(.0001%); transform: translateY(.0001%); } @-webkit-keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } @keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } .rsl-wave--icon:nth-child(2) { -webkit-animation-delay: -.14s; animation-delay: -.14s; } .rsl-wave--icon:nth-child(3) { -webkit-animation-delay: -.28s; animation-delay: -.28s; margin-right: 0; }</style><div class="rs-loading-main"><div class="rsl-wave"> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> </div></div>`;
+          indexEmojiCurrent = +tab.dataset.index;
+          let items = await Promise.all(listStickers[tab.dataset.index].items.map((item) => {
+            return emojiUtil.emojiAll(item.url, item.totalRow, item.totalColumn, item.countLeftInTotalRow, item.ms);
+          }).map((item) => item));
+          if (tabBox.querySelector(".active")) {
+            tabBox.querySelector(".active").classList.remove("active");
+          }
+          tab.classList.add("active");
+          stickerItemList.style.display = "grid";
+          stickerItemList.innerHTML = "";
+          stickerItemList.append(...items);
+          emojiUtil.addEventEmoji(stickerItemList);
+        };
+        if (indexEmojiCurrent === index) {
+          setTimeout(() => {
+            tab.click();
+          }, 0);
+        }
+      });
+      stickerItemList.onmouseup = handleEventSendSticker;
+    } else {
+      stickerBox.classList.remove("hidden");
+    }
+    const rectButton = button.getBoundingClientRect();
+    const left = window.innerWidth - (rectButton.right + 330);
+    stickerBox.style.left = -Math.abs(left) + "px";
+  }
+  function handleEventSendSticker(e) {
+    e.stopPropagation();
+    if (e.target.classList.contains("emoji")) {
+      stickerBox.style.transformOrigin = `${Math.abs(stickerBox.style.left.replace("px", ""))}px bottom`;
+      stickerBox.classList.add("hidden");
+    }
   }
   function handleKeyup() {
     if (editorChat.innerText.length && !flagWidth) {
       flagWidth = true;
       editorChat.nextElementSibling.style.opacity = 0;
+      actions.style.overflow = "hidden";
       actions.animate(
         [
           {
@@ -3376,19 +4105,21 @@ const CHAT = (() => {
           fill: "forwards"
         }
       ).finished.then((response) => {
+        actions.style.overflow = null;
       });
     }
   }
   function handleKeydown(e) {
     if (e.keyCode === 13 && !e.shiftKey) {
       e.preventDefault();
+      submit.typeMessage = "message";
       formChat.dispatchEvent(submit);
       return false;
     }
   }
   function handleChat(e) {
     e.preventDefault();
-    chat(editorChat.innerText);
+    chat(editorChat.innerText, e);
   }
   function handleShowChat() {
     buttonShowChatBox.onclick = function() {
@@ -3411,14 +4142,17 @@ const CHAT = (() => {
     if (!e.target.closest(".action-plus")) {
       actionMenuSub.classList.remove("active");
     }
+    if (stickerBox && !stickerBox.classList.contains("hidden") && !e.target.closest(".sticker-box")) {
+      stickerBox.style.transformOrigin = `${Math.abs(stickerBox.style.left.replace("px", ""))}px bottom`;
+      stickerBox.classList.add("hidden");
+    }
   }
-  async function chat(data) {
-    socket.volatile.emit("chat-admin-socket", "admin", userId, utils.eD(data));
+  async function chat(data, event) {
+    socket.volatile.emit("chat-admin-socket", "admin", userId, utils.eD(data), event.typeMessage);
   }
   return {
     init: () => {
       handleShowChat();
-      addEventConnect();
     }
   };
 })();

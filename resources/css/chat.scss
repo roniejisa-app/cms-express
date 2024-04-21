@@ -136,13 +136,17 @@
                     border-top-right-radius: 6px;
                     border-bottom-right-radius: 25px;
                 }
-                &:not(:has(+ .right)):has(+ .left) + .left:has(+.left) .content {
+                &:not(:has(+ .right)):has(+ .left)
+                    + .left:has(+ .left)
+                    .content {
                     border-top-left-radius: 25px;
                     border-bottom-left-radius: 6px;
                 }
             }
             .left {
-                &:not(:has(+ .left)):has(+ .right) + .right:has(+.rightp) .content {
+                &:not(:has(+ .left)):has(+ .right)
+                    + .right:has(+ .rightp)
+                    .content {
                     border-top-right-radius: 25px;
                     border-bottom-right-radius: 6px;
                 }
@@ -162,7 +166,7 @@
                     border-top-left-radius: 6px;
                     border-bottom-left-radius: 25px;
                 }
-                &:not(:has(+ [class*='right'])), 
+                &:not(:has(+ [class*='right'])),
                 &:not(:has(+ [class*='left'])) {
                     border-radius: 25px !important;
                 }
@@ -242,13 +246,13 @@
             .actions {
                 transition: 300ms ease;
                 transition-property: width;
-                overflow: hidden;
                 display: flex;
                 gap: 10px;
                 &.hidden {
                     display: none;
                 }
                 button {
+                    position: relative;
                     border: none;
                 }
             }
@@ -297,6 +301,49 @@
                     height: 16px;
                 }
             }
+        }
+    }
+}
+
+.sticker-box {
+    position: absolute;
+    bottom: 150%;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid $colorBackgroundChat;
+    transition: transform 300ms ease;
+    &.hidden{
+        transform: scale(0);
+    }
+    .tab-sticker-box {
+        display: flex;
+        border-bottom: 2px solid $colorButtonChat;
+        .tab-item {
+            padding-left: 5px;
+            padding-right: 5px;
+            border-bottom: 2px solid $colorButtonChat;
+        }
+    }
+    .sticker-items {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        height: 240px;
+        overflow: auto;
+        width: 332px;
+    }
+}
+
+.chat-box-admin * {
+    &::-webkit-scrollbar {
+        width: 6px;
+        border-radius: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 6px;
+        background: $colorButtonChat;
+        transition: background 300ms ease;
+        &:hover {
+            background: $colorBackgroundChat;
         }
     }
 }

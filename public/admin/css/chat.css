@@ -224,7 +224,6 @@
 .chat-box-admin .chat-content .form-chat .actions {
   transition: 300ms ease;
   transition-property: width;
-  overflow: hidden;
   display: flex;
   gap: 10px;
 }
@@ -232,6 +231,7 @@
   display: none;
 }
 .chat-box-admin .chat-content .form-chat .actions button {
+  position: relative;
   border: none;
 }
 .chat-box-admin .chat-content .form-chat .text-chat {
@@ -278,4 +278,45 @@
 .chat-box-admin .chat-content .form-chat button svg {
   width: 16px;
   height: 16px;
+}
+
+.sticker-box {
+  position: absolute;
+  bottom: 150%;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #b37feb;
+  transition: transform 300ms ease;
+}
+.sticker-box.hidden {
+  transform: scale(0);
+}
+.sticker-box .tab-sticker-box {
+  display: flex;
+  border-bottom: 2px solid rgba(179, 127, 235, 0.1647058824);
+}
+.sticker-box .tab-sticker-box .tab-item {
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom: 2px solid rgba(179, 127, 235, 0.1647058824);
+}
+.sticker-box .sticker-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  height: 240px;
+  overflow: auto;
+  width: 332px;
+}
+
+.chat-box-admin *::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 6px;
+}
+.chat-box-admin *::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: rgba(179, 127, 235, 0.1647058824);
+  transition: background 300ms ease;
+}
+.chat-box-admin *::-webkit-scrollbar-thumb:hover {
+  background: #b37feb;
 }
