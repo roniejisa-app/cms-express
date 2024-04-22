@@ -1,4 +1,4 @@
-const { MessageAdmin, User } = require('../models/index');
+const { MessageAdmin, chatRoom, chatRoomUser, User } = require('../models/index');
 async function computeUserIdFromHeaders(userId) {
     return userId;
 }
@@ -33,17 +33,40 @@ module.exports = {
                 }
             });
 
-            socket.on('connect-admin-socket', async (room, userId, callback) => {
+            socket.on('connect-admin-socket', async (room, userId) => {
                 // Kiểm tra room đã tồn tại, và user trong room
                 let indexRoom = rooms.findIndex(roomData => {
                     return roomData.name === room;
                 });
+
+
                 if (indexRoom === -1) {
+                    let [roomChat, createRoomChat] = await chatRoom.findOrCreate({
+                        where: {
+                            key: room
+                        },
+                        defaults: {
+                            key: room,
+                            user_id: userId
+                        }
+                    })
                     indexRoom = rooms.length;
                     rooms[indexRoom] = {
                         name: room,
+                        roomData: roomChat,
                         users: []
                     }
+                }
+
+                // Kiểm tra nếu userId đã có thì bỏ
+                let checkRoomUser = await chatRoomUser.findOne({
+                    where: {
+                        user_id: 2,
+                        chat_room_id: rooms[indexRoom].roomData.id
+                    }
+                })
+                if (checkRoomUser) {
+                    rooms[indexRoom].roomData.addUsers([userId])
                 }
 
                 var checkHasUser = true;
@@ -64,20 +87,100 @@ module.exports = {
                 } else {
                     rooms[indexRoom].users[indexUser].socketId = socket.id;
                 }
+
                 socket.join(rooms[indexRoom].name);
-                io.to(rooms[indexRoom].name).emit("join room success", "Chào mừng bạn đã quay trở lại!");
+
+                // Lấy lại thông tin chat cũ của room 5 tin trước
+                let limit = 10;
+                let offset = 0
+                let { count, rows } = await MessageAdmin.findAndCountAll({
+                    where: {
+                        chat_room_id: rooms[indexRoom].roomData.id,
+                    },
+                    include: [
+                        {
+                            model: User,
+                            attributes: ["avatar", "fullname", "id", "email"],
+                            as: "user"
+                        }
+                    ],
+                    order: [["id", "DESC"]],
+                    offset,
+                    limit,
+                })
+
+                let listMessages = [];
+                rows.reverse().forEach(row => {
+                    let user = row.dataValues.user;
+                    if (user.id === +userId) {
+                        user = rooms[indexRoom].users[indexUser]
+                    }
+                    listMessages.push({
+                        data: row.dataValues,
+                        user
+                    })
+                })
+                let dataResponse = eD(listMessages);
+                io.to(rooms[indexRoom].name).emit("join room success", dataResponse);
             })
 
+            socket.on("load-more-message", async (room, userId, page) => {
+                let dataResponse = null;
+                let indexRoom = rooms.findIndex(roomData => {
+                    return roomData.name === room;
+                });
+
+                if (indexRoom === -1) {
+                    dataResponse = [];
+                    dataResponse = eD(dataResponse);
+                } else {
+                    let indexUser = rooms[indexRoom].users.findIndex(({ id }) => id === +userId);
+                    let limit = 10;
+                    let offset = (+page - 1) * limit;
+                    let { count, rows } = await MessageAdmin.findAndCountAll({
+                        where: {
+                            chat_room_id: rooms[indexRoom].roomData.id,
+                        },
+                        include: [
+                            {
+                                model: User,
+                                attributes: ["avatar", "fullname", "id", "email"],
+                                as: "user"
+                            }
+                        ],
+                        order: [["id", "DESC"]],
+                        offset,
+                        limit
+                    })
+
+                    let listMessages = [];
+                    rows.forEach(row => {
+                        let user = row.dataValues.user;
+                        if (user.id === +userId) {
+                            user = rooms[indexRoom].users[indexUser]
+                        }
+                        listMessages.push({
+                            data: row.dataValues,
+                            user
+                        })
+                    })
+                    dataResponse = eD(listMessages);
+                }
+                io.to(rooms[indexRoom].name).emit("response-message-load", dataResponse);
+            })
             socket.on("join", (data) => {
                 socket.emit("join", data);
             })
 
-            socket.on("chat-admin-socket", async (room, userId, data) => {
+            socket.on("chat-admin-socket", async (room, userId, data, type) => {
+                const roomCurrent = rooms.find(({ name }) => name === room);
                 const message = await MessageAdmin.create({
                     message: dD(data),
-                    user_id: userId
+                    user_id: userId,
+                    chat_room_id: roomCurrent.roomData.id,
+                    type
                 })
-                const roomCurrent = rooms.find(({ name }) => name === room);
+
                 const user = roomCurrent.users.find(({ id }) => id === +userId);
                 const dataEmit = {
                     data: message.dataValues,

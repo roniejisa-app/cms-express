@@ -93,6 +93,7 @@
   display: flex;
   justify-content: flex-start;
   gap: 6px;
+  align-items: flex-end;
 }
 .chat-box-admin .chat-content .message .right .avatar,
 .chat-box-admin .chat-content .message .left .avatar {
@@ -116,6 +117,20 @@
   word-break: break-all;
   background: linear-gradient(#ff8fb2, #a797ff, #00e5ff, #00c3ff);
   color: white;
+}
+.chat-box-admin .chat-content .message .right .action-content,
+.chat-box-admin .chat-content .message .left .action-content {
+  display: flex;
+  gap: 16px;
+}
+.chat-box-admin .chat-content .message .right .action-content button,
+.chat-box-admin .chat-content .message .left .action-content button {
+  height: 28px;
+  border: none;
+  width: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 5px;
 }
 .chat-box-admin .chat-content .message .right {
   justify-content: flex-end;

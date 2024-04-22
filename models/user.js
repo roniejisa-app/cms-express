@@ -46,6 +46,18 @@ module.exports = (sequelize, DataTypes) => {
                 as: "permissions",
                 otherKey: "permission_id"
             })
+            
+            User.belongsToMany(models.chatRoom, {
+                through: "chat_room_user",
+                foreignKey: "user_id",
+                otherKey: "chat_room_id",
+                as: "chatRooms"
+            })
+            
+            User.hasMany(models.chatRoom, {
+                foreignKey: "user_id",
+                as: "chatRoomOfUsers"
+            })
 
             User.belongsTo(models.Provider, {
                 foreignKey: 'provider_id',

@@ -86,7 +86,7 @@ app.use(validateMiddleware);
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/', chatRouter);
-app.use(authMiddleware);
+// app.use(authMiddleware);
 app.use('/admin', adminRouter);
 app.use('/api', apiRouter)
 app.use((error, req, res, next) => {

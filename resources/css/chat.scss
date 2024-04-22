@@ -1,4 +1,5 @@
 @use 'variable' as *;
+// @use 'feels' as *;
 .chat-box-admin {
     position: fixed;
     bottom: 15px;
@@ -92,6 +93,7 @@
                 display: flex;
                 justify-content: flex-start;
                 gap: 6px;
+                align-items: flex-end;
                 .avatar {
                     width: 32px;
                     height: 32px;
@@ -116,6 +118,18 @@
                         #00c3ff
                     );
                     color: white;
+                }
+                .action-content{
+                    display: flex;
+                    gap: 16px;
+                    button{
+                        height: 28px;
+                        border: none;
+                        width: 28px;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        padding: 5px;
+                    }
                 }
             }
             .right {
@@ -347,3 +361,6 @@
         }
     }
 }
+
+
+// Feels

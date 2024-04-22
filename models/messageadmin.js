@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            MessageAdmin.belongsTo(models.User,{
+                foreignKey:"user_id",
+                as:"user"
+            })
         }
     }
     MessageAdmin.init({
@@ -19,12 +23,10 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
-        user_id: {
-            type: DataTypes.INTEGER
-        },
-        message: {
-            type: DataTypes.TEXT
-        }
+        user_id: DataTypes.INTEGER,
+        chat_room_id: DataTypes.INTEGER,
+        message: DataTypes.TEXT,
+        type: DataTypes.STRING
     }, {
         sequelize,
         modelName: 'MessageAdmin',
