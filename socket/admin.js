@@ -1,4 +1,4 @@
-const { MessageAdmin, chatRoom, chatRoomUser, User } = require('../models/index');
+const { Message, chatRoom, chatRoomUser, User, MessageFeelUser } = require('../models/index');
 async function computeUserIdFromHeaders(userId) {
     return userId;
 }
@@ -93,7 +93,7 @@ module.exports = {
                 // Lấy lại thông tin chat cũ của room 5 tin trước
                 let limit = 10;
                 let offset = 0
-                let { count, rows } = await MessageAdmin.findAndCountAll({
+                let { count, rows } = await Message.findAndCountAll({
                     where: {
                         chat_room_id: rooms[indexRoom].roomData.id,
                     },
@@ -102,6 +102,9 @@ module.exports = {
                             model: User,
                             attributes: ["avatar", "fullname", "id", "email"],
                             as: "user"
+                        }, {
+                            model: MessageFeelUser,
+                            as: "feels"
                         }
                     ],
                     order: [["id", "DESC"]],
@@ -137,7 +140,7 @@ module.exports = {
                     let indexUser = rooms[indexRoom].users.findIndex(({ id }) => id === +userId);
                     let limit = 10;
                     let offset = (+page - 1) * limit;
-                    let { count, rows } = await MessageAdmin.findAndCountAll({
+                    let { count, rows } = await Message.findAndCountAll({
                         where: {
                             chat_room_id: rooms[indexRoom].roomData.id,
                         },
@@ -146,6 +149,9 @@ module.exports = {
                                 model: User,
                                 attributes: ["avatar", "fullname", "id", "email"],
                                 as: "user"
+                            }, {
+                                model: MessageFeelUser,
+                                as: "feels"
                             }
                         ],
                         order: [["id", "DESC"]],
@@ -174,7 +180,7 @@ module.exports = {
 
             socket.on("chat-admin-socket", async (room, userId, data, type) => {
                 const roomCurrent = rooms.find(({ name }) => name === room);
-                const message = await MessageAdmin.create({
+                const message = await Message.create({
                     message: dD(data),
                     user_id: userId,
                     chat_room_id: roomCurrent.roomData.id,
@@ -188,6 +194,31 @@ module.exports = {
                 }
                 let dataEncode = eD(dataEmit);
                 io.to(room).emit("chat-admin-client", dataEncode);
+            })
+
+            // Feel
+            socket.on("feel-message", async (room, userId, messageId, native) => {
+                const roomCurrent = rooms.find(({ name }) => name === room);
+                console.log(roomCurrent);
+                if (roomCurrent) {
+                    let feelData = await MessageFeelUser.findOne({
+                        where: {
+                            user_id: userId,
+                            message_id: messageId
+                        }
+                    })
+
+                    if (!feelData) {
+                        feelData = await MessageFeelUser.create({
+                            user_id: userId,
+                            message_id: messageId,
+                            native
+                        })
+                    } else if (feelData.native !== native) {
+                        await feelData.update({ native })
+                    }
+                    io.to(roomCurrent.name).emit('feel-message-response', eD(feelData))
+                }
             })
         });
     }

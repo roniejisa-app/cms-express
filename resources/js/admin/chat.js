@@ -5,19 +5,22 @@ import emojiUtil from '../sticker/showImage.js';
 import emojiData from '@emoji-mart/data'
 import { Picker } from 'emoji-mart'
 import langEmoji from './emoji-lang-vi.js';
+import { convertStringToEmoji } from '../utils/emoji-convert.js';
 const submitEventChat = new Event('submit-form-chat');
-
+const eventUpdateAction = new Event("update-action-message-item");
 const CHAT = (() => {
     const chatBox = document.querySelector('.chat-box-admin')
     const buttonShowChatBox = chatBox.querySelector('.show-chat-box')
     const chatHTML = chatBox.querySelector('.chat-content')
     const messageEl = chatHTML.querySelector('.message');
-    const formChat = chatHTML.querySelector('.form-chat')
-    const editorChat = chatHTML.querySelector('.editor-chat')
+    const formChat = chatHTML.querySelector('.form-chat');
+    const buttonFeel = formChat.querySelector('[data-type="icon"]');
+    const editorChat = chatHTML.querySelector('.editor-chat');
     const actions = chatHTML.querySelector('.actions')
     const chatContentHeader = chatHTML.querySelector('.chat-content-header')
     const chatClose = chatContentHeader.querySelector('.chat-close')
-    const actionPlus = chatHTML.querySelector('.action-plus')
+    const actionPlus = chatHTML.querySelector('.action-plus');
+    let beforeIcon = false;
     const actionMenuSub = actionPlus.querySelector('.action-sub-menu');
     let stickerBox = null;
     let tabBox = null;
@@ -37,7 +40,8 @@ const CHAT = (() => {
         addEventNow = true;
         socket.on('connect', () => {
             chatHTML.classList.add('show')
-            addEventConnect()
+            addEventConnect();
+            window.addEventListener('update-action-message-item', addFeels)
             socket.emit(
                 'connect-admin-socket',
                 'admin',
@@ -74,6 +78,7 @@ const CHAT = (() => {
                 // Bắt buộc sử dụng fixed khi bắt hiển thị lên ok
                 // new Picker({ data: emojiData, i18n: langEmoji })
             })
+            window.dispatchEvent(eventUpdateAction);
             messageEl.scrollTo({
                 top: messageEl.scrollHeight - messageEl.clientHeight
             })
@@ -92,6 +97,8 @@ const CHAT = (() => {
                 behavior: "smooth",
                 top: messageEl.scrollHeight - messageEl.clientHeight
             })
+
+            window.dispatchEvent(eventUpdateAction);
         })
 
         socket.on("response-message-load", (value) => {
@@ -103,27 +110,75 @@ const CHAT = (() => {
             listData.forEach(data => {
                 messageEl.insertAdjacentHTML('afterbegin', templateMessage(data, data.user.socketId === socket.id, messageEl))
                 // Bắt buộc sử dụng fixed khi bắt hiển thị lên ok
-                // new Picker({ data: emojiData, i18n: langEmoji })
+
             })
+            window.dispatchEvent(eventUpdateAction);
             if (listData.length > 0) {
                 pageLoadMore = false;
                 page++
                 loadMoreChat(messageEl)
             }
         })
+
+        socket.on("feel-message-response", (value) => {
+            const feelData = utils.dD(value);
+            const content = document.querySelector(`.message [data-id="${feelData.message_id}"] .message-body`);
+            if (content) {
+                let createSpanFeel = content.querySelector('span.feel');
+                if (!createSpanFeel) {
+                    createSpanFeel = document.createElement('span');
+                    createSpanFeel.className = "feel";
+                }
+                createSpanFeel.innerText = feelData.native;
+                content.append(createSpanFeel);
+            }
+        })
+    }
+
+    function addFeels() {
+        Array.from(messageEl.children).forEach((messageItem) => {
+            const feelMart = messageItem.querySelector(".emoji-mart");
+            feelMart.onclick = (e) => {
+                let picker = new Picker({
+                    data: emojiData,
+                    i18n: langEmoji,
+                    onClickOutside: function (e) {
+                        // Cần kiểm tra nếu click ngoài thì tắt đi 
+                        if (+picker.style.opacity === 1) {
+                            picker.remove();
+                        }
+                    },
+                    onEmojiSelect: function (e) {
+                        socket.volatile.emit("feel-message", 'admin', userId, messageItem.dataset.id, e.native);
+                        picker.remove();
+                    }
+                })
+                picker.style.position = "fixed";
+                picker.style.opacity = 0;
+                picker.className = "picker-emoji";
+                document.body.append(picker);
+                setTimeout(() => {
+                    const rect = picker.getBoundingClientRect();
+                    const top = e.pageY - rect.height - feelMart.offsetHeight;
+                    picker.style.top = (top < 0 ? 0 : top) + "px";
+                    picker.style.left = e.pageX - rect.width - feelMart.offsetWidth + "px";
+                    picker.style.opacity = 1;
+                }, 0);
+            }
+        })
     }
 
     function templateMessage(response, isMe, messageEl) {
         const { data, user } = response;
-
+        const feel = (data.feels && data.feels.length > 0) ? data.feels[data.feels.length - 1] : null;
         const avatar = JSON.parse(user.avatar);
         const lastItem = messageEl.children[messageEl.children.length - 1];
 
         if (lastItem && lastItem.classList.contains('left') && lastItem.dataset.id === user.socketId && lastItem.querySelector('.avatar img')) {
             lastItem.querySelector('.avatar img').remove();
         }
-        const content = getContentChat(data);
-        return `<div class="${isMe ? 'right' : 'left'}" data-id=${user.socketId}>
+        const content = getContentChat(data, feel);
+        return `<div class="item-message ${isMe ? 'right' : 'left'}" data-id=${data.id}>
             ${isMe ? `` : `<div class="avatar">
                 <img src="/${avatar.path_absolute}" alt="${user.fullname}" />
             </div>`}
@@ -133,7 +188,7 @@ const CHAT = (() => {
                     <div class="shadow"></div>
                 </button>
             </div>` : ''}
-            <div class="content">${content}</div>
+            ${content}
             ${isMe ? `` : `<div class="action-content">
                 <button class="emoji-mart">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm177.6 62.1C192.8 334.5 218.8 352 256 352s63.2-17.5 78.4-33.9c9-9.7 24.2-10.4 33.9-1.4s10.4 24.2 1.4 33.9c-22 23.8-60 49.4-113.6 49.4s-91.7-25.5-113.6-49.4c-9-9.7-8.4-24.9 1.4-33.9s24.9-8.4 33.9 1.4zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>
@@ -143,20 +198,25 @@ const CHAT = (() => {
         </div>`
     }
 
-    function getContentChat(data) {
+    function getContentChat(data, feel) {
         switch (data.type) {
             case 'message':
-                return data.message;
+                return `<div class="message-body content">${data.message}
+            ${feel ? `<span class="feel">${feel.native}</span>` : ``}
+            </div>`;
             case 'image':
                 return 1;
             case 'emoji':
                 return 2;
             case 'feel':
-                return 3;
+                return `<div class="message-body content-feel">${data.message}
+            ${feel ? `<span class="feel">${feel.native}</span>` : ``}
+            </div>`;
             case 'gif':
                 return 4;
         }
     }
+
     function addEventConnect() {
         setTimeout(() => {
             rectAction = actions.getBoundingClientRect()
@@ -186,6 +246,40 @@ const CHAT = (() => {
         formChat.addEventListener('submit-form-chat', handleChat)
 
         formChat.addEventListener('submit', handleChat)
+
+        buttonFeel.addEventListener('click', handleShowFeel);
+    }
+
+    function handleShowFeel(e) {
+        let picker = new Picker({
+            data: emojiData,
+            i18n: langEmoji,
+            onClickOutside: function (e) {
+                // Cần kiểm tra nếu click ngoài thì tắt đi 
+                if (+picker.style.opacity === 1) {
+                    picker.remove();
+                }
+            },
+            onEmojiSelect: function (e) {
+                editorChat.focus();
+                document.execCommand("insertText", false, e.native);
+                if (editorChat.innerText.length && !flagWidth) {
+                    flagWidth = true
+                    editorChat.nextElementSibling.style.opacity = 0;
+                }
+            }
+        })
+        picker.style.position = "fixed";
+        picker.style.opacity = 0;
+        picker.className = "picker-emoji";
+        document.body.append(picker);
+        setTimeout(() => {
+            const rect = picker.getBoundingClientRect();
+            const top = e.pageY - rect.height - this.offsetHeight;
+            picker.style.top = (top < 0 ? 0 : top) + "px";
+            picker.style.left = e.pageX - rect.width + this.offsetWidth + "px";
+            picker.style.opacity = 1;
+        }, 0);
     }
 
     async function handleShowSticker(e, button) {
@@ -245,6 +339,7 @@ const CHAT = (() => {
         })
         stickerItemList.onmouseup = handleEventSendSticker
     }
+
     function handleEventSendSticker(e) {
         e.stopPropagation();
         if (e.target.classList.contains('emoji')) {
@@ -253,7 +348,7 @@ const CHAT = (() => {
         }
     }
 
-    function handleKeyup() {
+    function handleKeyup(e) {
         if (editorChat.innerText.length && !flagWidth) {
             flagWidth = true
             editorChat.nextElementSibling.style.opacity = 0;
@@ -298,6 +393,14 @@ const CHAT = (() => {
                     actions.style.overflow = null;
                 })
         }
+        const oldContent = editorChat.innerHTML;
+        if (oldContent.slice(oldContent.length - 2, oldContent.length - 1) === ':') {
+            let newString = convertStringToEmoji(oldContent);
+            if(newString){
+                editorChat.innerHTML = ''
+                newString && document.execCommand('insertHTML', false, newString);
+            }
+        }
     }
 
     function handleKeydown(e) {
@@ -312,12 +415,23 @@ const CHAT = (() => {
             return false;
         }
     }
+
     function handleChat(e) {
         e.preventDefault();
-        e.typeMessage = "message";
+
+
+        // Kiểm tra xem có phải chỉ có emoji hay không
+        const pattern = /[\d\w\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễếệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]/;
+
+        if (pattern.test(editorChat.innerText)) {
+            e.typeMessage = "message";
+        } else {
+            e.typeMessage = "feel";
+        }
         chat(editorChat.innerText, e);
         editorChat.innerText = "";
     }
+
     function handleShowChat() {
         buttonShowChatBox.onclick = function () {
             socket.typeRoom = 1
@@ -358,7 +472,7 @@ const CHAT = (() => {
         let elementHeading = element.children[0];
         observer = new IntersectionObserver(async (entries) => {
             for (let i = 0; i < entries.length; i++) {
-                if (entries[i].isIntersecting && entries[i].intersectionRatio >= 0 && !pageLoadMore) {
+                if (entries[i].isIntersecting && +entries[i].intersectionRatio != 0 && !pageLoadMore) {
                     pageLoadMore = true;
                     observer.disconnect();
                     socket.volatile.emit("load-more-message", 'admin', userId, page);
@@ -368,9 +482,12 @@ const CHAT = (() => {
                     element.prepend(loading);
                 }
             }
+        }, {
+            root: element
         });
         observer.observe(elementHeading)
     }
+
     return {
         init: () => {
             handleShowChat()

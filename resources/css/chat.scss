@@ -69,9 +69,11 @@
         visibility: hidden;
         position: absolute;
         width: 25vw;
+        height: 50vh;
+        min-width: 330px;
+        min-height: 420px;
         border: 1px solid #ebebeb;
         border-radius: 6px;
-        height: 50vh;
         bottom: 0;
         background: white;
         right: 0;
@@ -87,13 +89,37 @@
             padding: 12px;
             flex: 1;
             overflow: auto;
-            .right,
-            .left {
-                margin-bottom: 4px;
+            .item-message {
                 display: flex;
                 justify-content: flex-start;
                 gap: 6px;
-                align-items: flex-end;
+                align-items: center;
+                &:has(.feel) {
+                    margin-bottom: 20px;
+                }
+                .message-body {
+                    display: flex;
+                    max-width: 70%;
+                    padding: 8px 12px;
+                    word-break: break-all;
+                    border-radius: 25px;
+                    align-items: center;
+                    position: relative;
+                    .feel {
+                        position: absolute;
+                        bottom: -15px;
+                        right: 2px;
+                        background: white;
+                        border: 1px solid #ebebeb;
+                        border-radius: 50%;
+                        font-size: 16px;
+                    }
+                }
+            }
+            .right,
+            .left {
+                margin-bottom: 6px;
+
                 .avatar {
                     width: 32px;
                     height: 32px;
@@ -105,12 +131,6 @@
                     }
                 }
                 .content {
-                    display: flex;
-                    border-radius: 25px;
-                    align-items: center;
-                    padding: 8px 12px;
-                    max-width: 70%;
-                    word-break: break-all;
                     background: linear-gradient(
                         #ff8fb2,
                         #a797ff,
@@ -118,14 +138,17 @@
                         #00c3ff
                     );
                     color: white;
+                    &-feel{
+                        font-size: 32px;
+                    }
                 }
-                .action-content{
+                .action-content {
                     display: flex;
                     gap: 16px;
-                    button{
-                        height: 28px;
+                    button {
+                        height: 24px;
                         border: none;
-                        width: 28px;
+                        width: 24px;
                         border-radius: 6px;
                         cursor: pointer;
                         padding: 5px;
@@ -326,7 +349,7 @@
     border-radius: 6px;
     border: 1px solid $colorBackgroundChat;
     transition: transform 300ms ease;
-    &.hidden{
+    &.hidden {
         transform: scale(0);
     }
     .tab-sticker-box {
@@ -361,6 +384,5 @@
         }
     }
 }
-
 
 // Feels

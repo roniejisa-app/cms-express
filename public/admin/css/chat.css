@@ -58,9 +58,11 @@
   visibility: hidden;
   position: absolute;
   width: 25vw;
+  height: 50vh;
+  min-width: 330px;
+  min-height: 420px;
   border: 1px solid #ebebeb;
   border-radius: 6px;
-  height: 50vh;
   bottom: 0;
   background: white;
   right: 0;
@@ -87,13 +89,36 @@
   flex: 1;
   overflow: auto;
 }
-.chat-box-admin .chat-content .message .right,
-.chat-box-admin .chat-content .message .left {
-  margin-bottom: 4px;
+.chat-box-admin .chat-content .message .item-message {
   display: flex;
   justify-content: flex-start;
   gap: 6px;
-  align-items: flex-end;
+  align-items: center;
+}
+.chat-box-admin .chat-content .message .item-message:has(.feel) {
+  margin-bottom: 20px;
+}
+.chat-box-admin .chat-content .message .item-message .message-body {
+  display: flex;
+  max-width: 70%;
+  padding: 8px 12px;
+  word-break: break-all;
+  border-radius: 25px;
+  align-items: center;
+  position: relative;
+}
+.chat-box-admin .chat-content .message .item-message .message-body .feel {
+  position: absolute;
+  bottom: -15px;
+  right: 2px;
+  background: white;
+  border: 1px solid #ebebeb;
+  border-radius: 50%;
+  font-size: 16px;
+}
+.chat-box-admin .chat-content .message .right,
+.chat-box-admin .chat-content .message .left {
+  margin-bottom: 6px;
 }
 .chat-box-admin .chat-content .message .right .avatar,
 .chat-box-admin .chat-content .message .left .avatar {
@@ -109,14 +134,12 @@
 }
 .chat-box-admin .chat-content .message .right .content,
 .chat-box-admin .chat-content .message .left .content {
-  display: flex;
-  border-radius: 25px;
-  align-items: center;
-  padding: 8px 12px;
-  max-width: 70%;
-  word-break: break-all;
   background: linear-gradient(#ff8fb2, #a797ff, #00e5ff, #00c3ff);
   color: white;
+}
+.chat-box-admin .chat-content .message .right .content-feel,
+.chat-box-admin .chat-content .message .left .content-feel {
+  font-size: 32px;
 }
 .chat-box-admin .chat-content .message .right .action-content,
 .chat-box-admin .chat-content .message .left .action-content {
@@ -125,9 +148,9 @@
 }
 .chat-box-admin .chat-content .message .right .action-content button,
 .chat-box-admin .chat-content .message .left .action-content button {
-  height: 28px;
+  height: 24px;
   border: none;
-  width: 28px;
+  width: 24px;
   border-radius: 6px;
   cursor: pointer;
   padding: 5px;
