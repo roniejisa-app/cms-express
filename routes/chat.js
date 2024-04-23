@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const https = require('https');
-const fetch = require('node-fetch');
-const Buffer = require('buffer').Buffer 
 const fs = require('fs');
 const GIFEncoder = require('gif-encoder-2')
 const { createCanvas, Image } = require('canvas')
@@ -11,51 +9,50 @@ const path = require('path')
 
 router.get('/download-image-facebook', (req, res) => {
     // let getLinkEmoji = Array.from(document.querySelectorAll('.uiGrid._51mz._5f0n ._5r8i')).map(item => item.style.backgroundImage)
-    // var a = document.querySelectorAll("[class='html-div xe8uvvx xdj266r x11i5rnm xat24cr x1mh8g0r xexx8yu x4uap5 x18d9i69 xkhd6sd x193iq5w x1n2onr6 x1vjfegm']")
-    // b = Array.from(a).map(b => b.querySelector('div').style.backgroundImage)
 
     const images = [
-        "blob:https://www.messenger.com/0505848e-8934-48d8-83aa-365f1105d356",
-        "blob:https://www.messenger.com/46cfa237-98b3-411b-a488-804503a06384",
-        "blob:https://www.messenger.com/8f03fac0-3107-420f-af61-9f275a6f96a4",
-        "blob:https://www.messenger.com/0b35b197-43ba-4738-becb-16f1c4e89e9b",
-        "blob:https://www.messenger.com/fd286d47-cfe3-46e3-bfb3-d64d252f06ec",
-        "blob:https://www.messenger.com/4553cbf0-6b42-4be8-bf14-29c2f6242d8e",
-        "blob:https://www.messenger.com/60beeb97-c147-4725-a93f-ca972269461f",
-        "blob:https://www.messenger.com/0ef3f062-334d-43b3-a200-65b001f2c483",
-        "blob:https://www.messenger.com/b3f7b8dc-d6a7-4ee2-a7a4-f6c81433fd28",
-        "blob:https://www.messenger.com/d139bcc9-7d5e-4b58-a4f8-83c657a8651f",
-        "blob:https://www.messenger.com/8f027306-8818-44b6-9b4a-626103a5b48c",
-        "blob:https://www.messenger.com/8d819317-8057-4348-9b09-0316fc3757cc",
-        "blob:https://www.messenger.com/a8a29fbc-3649-4107-a8c4-8076ef536cfc",
-        "blob:https://www.messenger.com/5e7d13d4-4f7e-4118-a51f-bae212e1ca27",
-        "blob:https://www.messenger.com/5a46f321-9684-4ee2-839e-c2be9cae182c",
-        "blob:https://www.messenger.com/ef5b975a-1538-483d-ba5b-78988793011a",
-        "blob:https://www.messenger.com/47745190-1c41-44c7-b1f5-b6136736c862",
-        "blob:https://www.messenger.com/ab6b6373-c26e-497a-9e11-581d499a93d2",
-        "blob:https://www.messenger.com/481e7127-115b-4896-bc89-8ca710bdb5be",
-        "blob:https://www.messenger.com/df25d867-dce3-4018-ae99-429cf3098f6a",
-        "blob:https://www.messenger.com/e7b50cde-0455-4c4c-a98b-466b176a6377",
-        "blob:https://www.messenger.com/45045426-0fe6-49f9-9d09-41db5dee6284",
-        "blob:https://www.messenger.com/c5ffb843-89bf-4403-aff6-2331ab6be9a0",
-        "blob:https://www.messenger.com/9ec678d1-4e6f-4f27-9848-2f01aa9b549f",
-    ]
+        "https://scontent.fhan2-3.fna.fbcdn.net/v/t39.1997-6/41497498_1926230664082594_7442829246206050304_n.png?stp=dst-png_s851x315&_nc_cat=111&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=jm9PslmP8OEAb6ZNlWE&_nc_oc=AdjV5zbYp6_tr7bGQ5EeDm7SHZWIBolE8NxEd8qFLfSEQPsPGqB4kX1yZlq3LVIZmUE&_nc_ht=scontent.fhan2-3.fna&oh=00_AfDzx9jDkGYRk8a73URfTL_oRmJ_q1lhv3bi2hye63nBlA&oe=66289B91",
+        "https://scontent.fhan2-3.fna.fbcdn.net/v/t39.1997-6/41632462_1926230944082566_2768751633734041600_n.png?stp=dst-png_s851x315&_nc_cat=111&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=pBO-7iCTdWkAb5hcHOT&_nc_ht=scontent.fhan2-3.fna&oh=00_AfAOUWvOaRvdJcdsKRpwFMQWk6YIhoLj2jwhXc09hv3wcA&oe=662886D0",
+        "https://scontent.fhan2-5.fna.fbcdn.net/v/t39.1997-6/41599411_1926231224082538_4675004101342265344_n.png?stp=dst-png_s851x315&_nc_cat=109&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=M0dw9Y9U1BkAb5PiirE&_nc_ht=scontent.fhan2-5.fna&oh=00_AfBWFUTPS13ju9L-T9U9iZ_HOD5IdLqwO_0hlLgnqkK4lQ&oe=66289FEA",
+        "https://scontent.fhan2-4.fna.fbcdn.net/v/t39.1997-6/41590259_1926231777415816_2025843469733330944_n.png?stp=dst-png_s851x315&_nc_cat=105&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=w3-Vx6rx_nUAb4sOTB9&_nc_ht=scontent.fhan2-4.fna&oh=00_AfA2beOYzIxUvKhzxsmD8rS7bYrZUpjYz1331CesdCyLrA&oe=66288BF2",
+        "https://scontent.fhan20-1.fna.fbcdn.net/v/t39.1997-6/41539937_1926232104082450_8878663098458701824_n.png?stp=dst-png_s851x315&_nc_cat=102&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=d-uXgh6QAywAb4-4qVq&_nc_ht=scontent.fhan20-1.fna&oh=00_AfAL_7_DepmEc6GjkOEZu3SWVeXnOgpSBLfCr9YeobA6xw&oe=6628806C",
+        "https://scontent.fhan2-5.fna.fbcdn.net/v/t39.1997-6/41480043_1926234670748860_6450111692482281472_n.png?stp=dst-png_s851x315&_nc_cat=109&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=xF8lmCD6tSMAb5PSU-f&_nc_oc=AdgW647mcvULe6JEMqF9JDSl5MV4att0oxRG64K5FkdSQrXgD2WgM-RqtenAZAReJP8&_nc_ht=scontent.fhan2-5.fna&oh=00_AfDClMmQPgPnYaoHdSI71KJdD2OkAjSa7A-I9CklM-7Sig&oe=66288CE9",
+        "https://scontent.fhan20-1.fna.fbcdn.net/v/t39.1997-6/41449440_1926234930748834_7056331173668061184_n.png?stp=dst-png_s851x315&_nc_cat=104&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=jYd8k4XU_20Ab5e1B-6&_nc_ht=scontent.fhan20-1.fna&oh=00_AfC1V7m9QAD68Msz12t929AVmzCYRHh5YWDi6MtX6IoglA&oe=66289B24",
+        "https://scontent.fhan20-1.fna.fbcdn.net/v/t39.1997-6/41531799_1926235247415469_1074072235834081280_n.png?stp=dst-png_s851x315&_nc_cat=102&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=oSB6_eo0DBgAb6BZPPp&_nc_ht=scontent.fhan20-1.fna&oh=00_AfDlWmiYC-Rn0FlFagc-5FhnoxscIMEFE2PENXKpuqbQaA&oe=66288A34",
+        "https://scontent.fhan20-1.fna.fbcdn.net/v/t39.1997-6/41585010_1926235960748731_6895387406078312448_n.png?stp=dst-png_s851x315&_nc_cat=102&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=HrrHytuwrFIAb4y0tKm&_nc_ht=scontent.fhan20-1.fna&oh=00_AfDvvuCp8KRFv4XbV9BFexHae26DhskEZQNTrgFGZXPJvw&oe=66286E59",
+        "https://scontent.fhan2-3.fna.fbcdn.net/v/t39.1997-6/41559516_1926236407415353_8747037619445039104_n.png?stp=dst-png_s851x315&_nc_cat=111&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=q70MVbq8gJsAb6GOxz_&_nc_ht=scontent.fhan2-3.fna&oh=00_AfAKeQ_lg3eew06_jG9137xuK2gCkHG-7wix26_nwvKVVw&oe=66288984",
+        "https://scontent.fhan2-4.fna.fbcdn.net/v/t39.1997-6/41490871_1926236800748647_7431763443356532736_n.png?stp=dst-png_s851x315&_nc_cat=105&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=oIeHKMCH3FYAb6Nxp47&_nc_ht=scontent.fhan2-4.fna&oh=00_AfAnC2vScc72sytMLXltMwbK9uxYk_kNJR4wOtHO8bgiAA&oe=66288345",
+        "https://scontent.fhan2-5.fna.fbcdn.net/v/t39.1997-6/41572826_1926237210748606_3879416423994359808_n.png?stp=dst-png_s851x315&_nc_cat=109&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=6heS7bnKkmAAb40MX1x&_nc_ht=scontent.fhan2-5.fna&oh=00_AfC91Lsc-Fz-iJI8HcV2E3gr6UfpVLD8GGdhnhPpfA-rRQ&oe=662878A8",
+        "https://scontent.fhan2-4.fna.fbcdn.net/v/t39.1997-6/41687210_1926237577415236_7348190530896920576_n.png?stp=dst-png_s851x315&_nc_cat=100&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=quiSbvh1HssAb4rgvJ0&_nc_ht=scontent.fhan2-4.fna&oh=00_AfA9RlDjPBcuc26md2AlGyoPDofYFXrxijM_Xf9PnvE4AA&oe=66287B8D",
+        "https://scontent.fhan2-4.fna.fbcdn.net/v/t39.1997-6/41606050_1926237894081871_5104148519069941760_n.png?stp=dst-png_s851x315&_nc_cat=100&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=wfYYnUrN_BsAb5QjEv0&_nc_ht=scontent.fhan2-4.fna&oh=00_AfAgL_YzZKdVvJClNr-8O05iCaEmZH_fnM5HF9z2mSDXeg&oe=66287083",
+        "https://scontent.fhan20-1.fna.fbcdn.net/v/t39.1997-6/41645343_1926238430748484_2479092871718764544_n.png?stp=dst-png_s851x315&_nc_cat=102&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=H8PYZTk6vDQAb4nsboh&_nc_ht=scontent.fhan20-1.fna&oh=00_AfAH00XatlIE4uSGqeL2G0Ke86Bs2sqDns2CJI5sEs1DHQ&oe=6628A597",
+        "https://scontent.fhan20-1.fna.fbcdn.net/v/t39.1997-6/41461140_1926238797415114_4121059891181780992_n.png?stp=dst-png_s851x315&_nc_cat=104&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=1pGa4TqHB7MAb58fkml&_nc_ht=scontent.fhan20-1.fna&oh=00_AfAWnPVe9NIvUaalkMQTrIsMoZ7JezbiS_QDL6XxIx01fA&oe=66288A94",
+        "https://scontent.fhan2-5.fna.fbcdn.net/v/t39.1997-6/41694548_1926239104081750_3174187630124335104_n.png?stp=dst-png_s851x315&_nc_cat=107&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=rUWv_rbFlk8Ab49pQmY&_nc_ht=scontent.fhan2-5.fna&oh=00_AfB8CrJ2b776BkQUxQKyY1bgLkKkrmPuqpjuQh-kt_d0aA&oe=66287D58",
+        "https://scontent.fhan2-3.fna.fbcdn.net/v/t39.1997-6/41666997_1926239327415061_6482341427719176192_n.png?stp=dst-png_s851x315&_nc_cat=108&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=HWd6WqiCKm8Ab7MKp_-&_nc_ht=scontent.fhan2-3.fna&oh=00_AfDlPfdS65b6FOfTw7LiD7le4XKZZQ_0D9IikIvITUwW5g&oe=66288616",
+        "https://scontent.fhan2-5.fna.fbcdn.net/v/t39.1997-6/41497478_1926239687415025_784143247361441792_n.png?stp=dst-png_s851x315&_nc_cat=106&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=hadYOaYHq30Ab6BlahE&_nc_ht=scontent.fhan2-5.fna&oh=00_AfB3nsjJRboYq7NK85M73hKTriWjEaJpsVwu7merRtoR8g&oe=66289754",
+        "https://scontent.fhan2-3.fna.fbcdn.net/v/t39.1997-6/41696851_1926240314081629_3774585235895746560_n.png?stp=dst-png_s851x315&_nc_cat=101&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=EcmdUCiA_LwAb7lW5sF&_nc_ht=scontent.fhan2-3.fna&oh=00_AfBUKHtLZ8HLzj7Re0N7BjfP3lGNIyhWZxxO1JlMgHR0dw&oe=66289974",
+        "https://scontent.fhan2-4.fna.fbcdn.net/v/t39.1997-6/41714284_1926240637414930_6546602646797549568_n.png?stp=dst-png_s851x315&_nc_cat=110&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=eL2Vbs0qmzUAb6x-FTd&_nc_ht=scontent.fhan2-4.fna&oh=00_AfAa381f5cAEYIDd_u216r18pJwuzCrTOTB5Yr8jUK41Iw&oe=66286EC6",
+        "https://scontent.fhan2-4.fna.fbcdn.net/v/t39.1997-6/41550608_1926241050748222_1349520883802177536_n.png?stp=dst-png_s851x315&_nc_cat=105&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=bksyiusVvp8Ab6WMmO8&_nc_ht=scontent.fhan2-4.fna&oh=00_AfC1Fen05mHut9yrkcmbJ_IlmH6h4CaNEETsFvxqi6iRYw&oe=66289538",
+        "https://scontent.fhan2-5.fna.fbcdn.net/v/t39.1997-6/41642508_1926241337414860_3440311264142688256_n.png?stp=dst-png_s851x315&_nc_cat=106&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=OJXCHEC78tcAb72oLVJ&_nc_ht=scontent.fhan2-5.fna&oh=00_AfDhJl9191mqP6MYop2dsX9_OEqrRTEk3jrkiXBHUYA56Q&oe=6628A070",
+        "https://scontent.fhan20-1.fna.fbcdn.net/v/t39.1997-6/41579705_1926241740748153_8452243747286024192_n.png?stp=dst-png_s851x315&_nc_cat=102&ccb=1-7&_nc_sid=ba09c1&_nc_ohc=Yv276cHdhRoAb75SSEo&_nc_ht=scontent.fhan20-1.fna&oh=00_AfCpsk9AA8evstNAqhlDdORUG2rz8UPyo5EOxxi4V1_NoA&oe=66288C95",
+    ];
 
     let path = process.cwd() + '/public/images/emoji/three/';
-    fetch("blob:https://www.messenger.com/0505848e-8934-48d8-83aa-365f1105d356", {
-        "headers": {},
-        "method": "GET"
-    }).then(function (resp) {
-        return resp.blob();
-    }).then(async (blob) => {
-        response.pipe(file);
-        var buffer = await blob.arrayBuffer();
-        buffer = Buffer.from(buffer);
-        fs.createWriteStream(path + `test.webp`).write(buffer);
+    for (let i = 0; i < images.length; i++) {
+        let file = fs.createWriteStream(path + `${i + 1}.png`);
+        https.get(images[i], function (response) {
+            response.pipe(file);
+            file.on('finish', function () {
+                file.close(console.log("OK"));
+            }).on('error', function (err) {
+                fs.unlink(dest); // Delete the file async if there is an error
+                console.log("ERROR");
+            });
+        })
+    }
+    return res.json({
+        status: 200
     })
-    // for (let i = 0; i < images.length; i++) {
-
-    // }
 })
 
 router.get('/edit-image-to-gif', (req, res) => {

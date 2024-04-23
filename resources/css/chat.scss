@@ -62,7 +62,7 @@
         }
         transform-origin: right bottom;
         transition: 300ms;
-        transition-property: transform, opacity, pointer-events, visibility;
+        transition-property: transform, pointer-events, visibility;
         transform: scale(0);
         opacity: 0;
         pointer-events: none;
@@ -296,11 +296,15 @@
             .text-chat {
                 position: relative;
                 flex: 1;
-                overflow: auto;
+                max-width: calc(100% - 72px);
+                transition: max-width 300ms;
+                transform-origin: center;
                 .editor-chat-container {
                     position: relative;
+                    background: #f7f7f7;
                     border: 1px solid $colorBackgroundChat;
                     border-radius: 20px;
+
                     .editor-chat {
                         width: 100%;
                         padding: 5px 10px 5px 12px;
@@ -308,13 +312,62 @@
                         max-height: 150px;
                         overflow: auto;
                         max-width: calc(100% - 30px);
+                        line-height: 1;
                     }
                     .placeholder {
                         position: absolute;
                         left: 13px;
-                        top: 50%;
-                        transform: translateY(-50%);
+                        bottom: 4px;
                         color: #cbcbcb;
+                    }
+                    &:has(.box-upload-image) {
+                        border-top: none;
+                        border-top-left-radius: initial;
+                        border-top-right-radius: initial;
+                    }
+                    .box-upload-image {
+                        position: absolute;
+                        bottom: 100%;
+                        font-size: 0;
+                        left: -1px;
+                        padding: 12px;
+                        border-top-left-radius: 20px;
+                        border-top-right-radius: 20px;
+                        display: flex;
+                        gap: 6px;
+                        background: #f7f7f7;
+                        z-index: 1;
+                        border: 1px solid #b37feb;
+                        border-bottom: none;
+                        align-items: center;
+                        width: calc(100% + 2px);
+                        overflow: hidden;
+                        .btn-add-file-message {
+                            position: relative;
+                            width: 48px;
+                            height: 48px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            svg {
+                                width: 40px;
+                                height: 40px;
+                            }
+                        }
+                        .list-image-add {
+                            display: flex;
+                            gap: 6px;
+                            .item-image-add {
+                                img {
+                                    width: 48px;
+                                    height: 48px;
+                                    object-fit: scale-down;
+                                }
+                            }
+                        }
+                        &::-webkit-scrollbar {
+                            display: none;
+                        }
                     }
                 }
                 button {
@@ -400,4 +453,27 @@
     }
 }
 
+.scroll-custom {
+    position: fixed;
+    height: 12px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.1);
+    transition: background 300ms ease;
+    &:hover {
+        background: $colorButtonChat;
+        .scroll-bar {
+            background: $colorBackgroundChat;
+        }
+    }
+    .scroll-bar {
+        transition: background 300ms ease;
+        background: rgba(0, 0, 0, 0.3);
+        position: absolute;
+        height: 100%;
+        left: 0;
+        height: 100%;
+        border-radius: 6px;
+        cursor: move;
+    }
+}
 // Feels

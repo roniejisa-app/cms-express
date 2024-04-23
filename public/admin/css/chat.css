@@ -51,7 +51,7 @@
 .chat-box-admin .chat-content {
   transform-origin: right bottom;
   transition: 300ms;
-  transition-property: transform, opacity, pointer-events, visibility;
+  transition-property: transform, pointer-events, visibility;
   transform: scale(0);
   opacity: 0;
   pointer-events: none;
@@ -275,10 +275,13 @@
 .chat-box-admin .chat-content .form-chat .text-chat {
   position: relative;
   flex: 1;
-  overflow: auto;
+  max-width: calc(100% - 72px);
+  transition: max-width 300ms;
+  transform-origin: center;
 }
 .chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container {
   position: relative;
+  background: #f7f7f7;
   border: 1px solid #b37feb;
   border-radius: 20px;
 }
@@ -289,13 +292,60 @@
   max-height: 150px;
   overflow: auto;
   max-width: calc(100% - 30px);
+  line-height: 1;
 }
 .chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .placeholder {
   position: absolute;
   left: 13px;
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: 4px;
   color: #cbcbcb;
+}
+.chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container:has(.box-upload-image) {
+  border-top: none;
+  border-top-left-radius: initial;
+  border-top-right-radius: initial;
+}
+.chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image {
+  position: absolute;
+  bottom: 100%;
+  font-size: 0;
+  left: -1px;
+  padding: 12px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  display: flex;
+  gap: 6px;
+  background: #f7f7f7;
+  z-index: 1;
+  border: 1px solid #b37feb;
+  border-bottom: none;
+  align-items: center;
+  width: calc(100% + 2px);
+  overflow: hidden;
+}
+.chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image .btn-add-file-message {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image .btn-add-file-message svg {
+  width: 40px;
+  height: 40px;
+}
+.chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image .list-image-add {
+  display: flex;
+  gap: 6px;
+}
+.chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image .list-image-add .item-image-add img {
+  width: 48px;
+  height: 48px;
+  object-fit: scale-down;
+}
+.chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image::-webkit-scrollbar {
+  display: none;
 }
 .chat-box-admin .chat-content .form-chat .text-chat button {
   border-radius: 50%;
@@ -372,4 +422,28 @@
 }
 .chat-box-admin *::-webkit-scrollbar-thumb:hover {
   background: #b37feb;
+}
+
+.scroll-custom {
+  position: fixed;
+  height: 12px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.1);
+  transition: background 300ms ease;
+}
+.scroll-custom:hover {
+  background: rgba(179, 127, 235, 0.1647058824);
+}
+.scroll-custom:hover .scroll-bar {
+  background: #b37feb;
+}
+.scroll-custom .scroll-bar {
+  transition: background 300ms ease;
+  background: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  height: 100%;
+  left: 0;
+  height: 100%;
+  border-radius: 6px;
+  cursor: move;
 }

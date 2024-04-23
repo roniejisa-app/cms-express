@@ -8,6 +8,8 @@ import langEmoji from './emoji-lang-vi.js';
 import { convertStringToEmoji } from '../utils/emoji-convert.js';
 const submitEventChat = new Event('submit-form-chat');
 const eventUpdateAction = new Event("update-action-message-item");
+const resizeEditorChat = new Event("resize-editor-chat");
+const beforeResizeEditorChat = new Event("before-resize-editor-chat");
 const CHAT = (() => {
     const chatBox = document.querySelector('.chat-box-admin')
     const buttonShowChatBox = chatBox.querySelector('.show-chat-box')
@@ -15,6 +17,7 @@ const CHAT = (() => {
     const messageEl = chatHTML.querySelector('.message');
     const formChat = chatHTML.querySelector('.form-chat');
     const buttonFeel = formChat.querySelector('[data-type="icon"]');
+    const editorChatContent = chatHTML.querySelector('.editor-chat-container');
     const editorChat = chatHTML.querySelector('.editor-chat');
     const actions = chatHTML.querySelector('.actions')
     const chatContentHeader = chatHTML.querySelector('.chat-content-header')
@@ -22,6 +25,13 @@ const CHAT = (() => {
     const actionPlus = chatHTML.querySelector('.action-plus');
     const actionMenuSub = actionPlus.querySelector('.action-sub-menu');
     const listActionSub = actionMenuSub.querySelector('ul');
+    let scrollLeft = 0;
+    let scrollRight = 0;
+    let initialClientX = 0;
+    let initialOffsetX = 0;
+    let boxImageUpload;
+    let buttonAddFileEl;
+    let listFileAddEl;
     let stickerBox = null;
     let tabBox = null;
     let stickerItemList = null;
@@ -30,6 +40,8 @@ const CHAT = (() => {
     let indexEmojiCurrent = 0;
     let page = 2;
     let pageLoadMore = false;
+    let newDataTransfer = new DataTransfer();
+    let flagScrollBar = false;
     let flagWidth = false,
         rectAction,
         actionsWidth,
@@ -41,7 +53,8 @@ const CHAT = (() => {
         socket.on('connect', () => {
             chatHTML.classList.add('show')
             addEventSocketConnect();
-            window.addEventListener('update-action-message-item', addEventForItemMessage)
+            window.addEventListener('update-action-message-item', addEventForItemMessage);
+            window.addEventListener("paste", handlePasteData);
             socket.emit(
                 'connect-admin-socket',
                 'admin',
@@ -56,7 +69,8 @@ const CHAT = (() => {
         })
 
         socket.on('disconnect', () => {
-            chatHTML.classList.remove('show')
+            chatHTML.classList.remove('show');
+            window.removeEventListener("paste", handlePasteData);
             formChat.removeEventListener('submit-form-chat', handleChat)
             editorChat.removeEventListener('keyup', handleKeyup)
             editorChat.removeEventListener('keydown', handleKeydown)
@@ -133,6 +147,161 @@ const CHAT = (() => {
         })
     }
 
+    function handlePasteData(e) {
+        // Lấy ra item hình ảnh từ dữ liệu dán
+        // console.log(e.clipboardData.items[0].getAsFile());
+        var item = Array.from(e.clipboardData.items).find(x => /^image\//.test(x.type));
+        // Kiểm tra xem có phải là hình ảnh không
+        e.preventDefault();
+        if (item) {
+            if (!boxImageUpload) {
+                createBoxImageUpload();
+            }
+            // Lấy blob của hình ảnh
+            var blob = item.getAsFile();
+            // Tạo một đối tượng Image
+            var img = new Image();
+            // Khi hình ảnh được tải hoàn tất, chèn nó vào trang
+            img.onload = function () {
+                const itemEl = document.createElement('div');
+                itemEl.className = 'item-image-add';
+                itemEl.append(this);
+                listFileAddEl.appendChild(itemEl);
+            };
+            // Đặt đường dẫn của hình ảnh là URL của blob
+            img.src = URL.createObjectURL(blob);
+        } else {
+            var pastedText = (e.originalEvent || e).clipboardData.getData('text/plain');
+            checkKeypress(pastedText);
+            document.execCommand('insertText', false, pastedText);
+        }
+    }
+    // xử lý upload file ở chỗ này thôi
+    function createBoxImageUpload() {
+        boxImageUpload = document.createElement('div');
+        boxImageUpload.className = "box-upload-image";
+        buttonAddFileEl = document.createElement('button');
+        buttonAddFileEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM216 408c0 13.3-10.7 24-24 24s-24-10.7-24-24V305.9l-31 31c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l72-72c9.4-9.4 24.6-9.4 33.9 0l72 72c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-31-31V408z"/></svg>`;
+        buttonAddFileEl.className = "btn-add-file-message";
+        listFileAddEl = document.createElement('div');
+        listFileAddEl.className = "list-image-add";
+        boxImageUpload.append(buttonAddFileEl, listFileAddEl);
+        editorChatContent.prepend(boxImageUpload);
+        addEventBoxImageUpload();
+    }
+
+    function addEventBoxImageUpload() {
+        // Tạo một MutationObserver instance
+        var observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                // Kiểm tra nếu có thêm phần tử con mới vào phần tử target
+                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                    // chỗ này kiểm tra xem có thanh scroll chưa thì thêm vào
+                    let { widthParent, widthChild, rectBoxImage } = getSizeOfBoxUpload();
+                    let scrollEl = document.querySelector('.scroll-custom');
+                    let scrollBar;
+                    let diffScrollBar = widthChild - widthParent;
+                    if (diffScrollBar > 0 && !scrollEl) {
+                        scrollEl = document.createElement('div');
+                        scrollBar = document.createElement('div');
+                        scrollEl.style.width = widthParent + 'px';
+                        scrollEl.style.left = rectBoxImage.left + 'px';
+                        scrollEl.style.top = rectBoxImage.top + rectBoxImage.height - 20 + 'px';
+                        scrollEl.className = "scroll-custom";
+                        scrollBar.className = "scroll-bar";
+                        scrollEl.append(scrollBar);
+                        document.body.append(scrollEl);
+                        scrollBar.addEventListener('mousedown', (e) => {
+                            flagScrollBar = true;
+                            initialClientX = e.clientX;
+                            initialOffsetX = scrollBar.offsetWidth + scrollBar.offsetLeft;
+                            scrollLeft = scrollBar.offsetLeft;
+                            scrollRight = boxImageUpload.offsetWidth - (scrollBar.offsetWidth + scrollBar.offsetLeft);
+                            document.addEventListener('mousemove', handleMovesScroll)
+                        })
+
+
+                        document.addEventListener('mouseup', () => {
+                            document.removeEventListener('mousemove', handleMovesScroll)
+                        })
+
+                        window.addEventListener('before-resize-editor-chat', e => {
+                            if (boxImageUpload && scrollEl) {
+                                scrollEl.style.opacity = 0;
+                            }
+                        })
+
+                        window.addEventListener('resize-editor-chat', e => {
+                            if (boxImageUpload && scrollEl) {
+                                let { widthParent, widthChild, rectBoxImage } = getSizeOfBoxUpload();
+                                scrollEl.style.width = widthParent + 'px';
+                                scrollEl.style.left = rectBoxImage.left + 'px';
+                                scrollEl.style.top = rectBoxImage.top + rectBoxImage.height - 20 + 'px';
+                                if (scrollEl.dataset.percent) {
+                                    widthChild = buttonAddFileEl.offsetWidth + listFileAddEl.offsetWidth;
+                                    const rate = widthParent / widthChild;
+                                    scrollBar.style.width = widthParent * rate + 'px';
+                                    const maxLeft = widthParent - scrollBar.offsetWidth;
+                                    scrollBar.style.left = maxLeft / 100 * +scrollEl.dataset.percent + 'px';
+                                }
+
+                                setTimeout(() => {
+                                    scrollEl.style.opacity = 1;
+                                }, 0);
+                            }
+                        })
+
+                        function handleMovesScroll(e) {
+                            let dragSpace = e.clientX - initialClientX;
+                            let leftCurrent = scrollLeft + dragSpace;
+                            let maxLeft = boxImageUpload.offsetWidth - scrollBar.offsetWidth;
+                            if (leftCurrent > maxLeft) {
+                                leftCurrent = maxLeft;
+                            }
+
+                            if (leftCurrent < 0) {
+                                leftCurrent = 0.01;
+                            }
+                            const scrollWidth = boxImageUpload.scrollWidth;
+                            let percent = leftCurrent / maxLeft * 100;
+                            let allScrollReal = scrollWidth - boxImageUpload.offsetWidth;
+                            let onePercentOfBoxImage = allScrollReal / 100;
+                            let scrollReal = onePercentOfBoxImage * percent;
+                            scrollEl.dataset.percent = percent;
+                            scrollBar.style.left = leftCurrent + 'px';
+                            boxImageUpload.scrollLeft = scrollReal;
+                        }
+                    } else if (scrollEl) {
+                        scrollBar = scrollEl.firstElementChild
+                    }
+                    if (scrollBar) {
+                        // Nếu kích thước của phần tử con > kích thước phần tử cha 2px
+                        /*
+                            Tính tỉ lệ
+                        */
+                        const rate = widthParent / widthChild;
+                        scrollBar.style.width = widthParent * rate + 'px';
+                    }
+
+                }
+            });
+        });
+
+        // Thiết lập options cho MutationObserver (theo dõi các thay đổi trong phần tử con và các thay đổi trong thuộc tính của phần tử con)
+        var config = { childList: true, subtree: true };
+
+        // Bắt đầu theo dõi phần tử target với các options đã thiết lập
+        observer.observe(boxImageUpload, config);
+    }
+
+    function getSizeOfBoxUpload() {
+        const widthChild = buttonAddFileEl.offsetWidth + listFileAddEl.offsetWidth;
+        const rectBoxImage = boxImageUpload.getBoundingClientRect();
+        const widthParent = rectBoxImage.width;
+        return {
+            widthChild, rectBoxImage, widthParent
+        }
+    }
     function addEventForItemMessage() {
         Array.from(messageEl.children).forEach((messageItem) => {
             const feelMart = messageItem.querySelector(".emoji-mart");
@@ -234,6 +403,16 @@ const CHAT = (() => {
                 };
             }
         })
+
+        Array.from(listActionSub.children).forEach(button => {
+            button.onmouseup = (e) => {
+                if (!stickerBox || stickerBox.classList.contains("hidden")) {
+                    e.stopPropagation();
+                    handleShowSticker(e);
+                    handleActionPlusMouseDown();
+                }
+            }
+        })
         editorChat.addEventListener('keyup', handleKeyup)
         editorChat.addEventListener('keydown', handleKeydown)
         // Xử lý sự kiên show action chat
@@ -267,10 +446,7 @@ const CHAT = (() => {
             onEmojiSelect: function (e) {
                 editorChat.focus();
                 document.execCommand("insertText", false, e.native);
-                if (editorChat.innerText.length && !flagWidth) {
-                    flagWidth = true
-                    editorChat.nextElementSibling.style.opacity = 0;
-                }
+                checkLengthEditor();
             }
         })
         picker.style.position = "fixed";
@@ -329,7 +505,6 @@ const CHAT = (() => {
                 stickerItemList.innerHTML = `<style>.rs-loading-main{display: flex;width:100%;height:100%; justify-content: center; align-items: center;} .rsl-wave {font-size: var(--rs-l-size, 2rem); color: var(--rs-l-color, #ee4d2d); display: inline-flex; align-items: center; width: 1.25em; height: 1.25em; } .rsl-wave--icon { display: block; background: currentColor; border-radius: 99px; width: 0.25em; height: 0.25em; margin-right: 0.25em; margin-bottom: -0.25em; -webkit-animation: rsla_wave .56s linear infinite; animation: rsla_wave .56s linear infinite; -webkit-transform: translateY(.0001%); transform: translateY(.0001%); } @-webkit-keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } @keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } .rsl-wave--icon:nth-child(2) { -webkit-animation-delay: -.14s; animation-delay: -.14s; } .rsl-wave--icon:nth-child(3) { -webkit-animation-delay: -.28s; animation-delay: -.28s; margin-right: 0; }</style><div class="rs-loading-main"><div class="rsl-wave"> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> </div></div>`;
                 indexEmojiCurrent = +tab.dataset.index;
                 let items = await Promise.all(listStickers[tab.dataset.index].items.map(item => {
-                    console.log(item);
                     return emojiUtil.emojiAll(item.url, item.imgUrl, item.totalRow, item.totalColumn, item.countLeftInTotalRow, item.ms)
                 }).map(el => el));
                 if (tabBox.querySelector('.active')) {
@@ -357,10 +532,75 @@ const CHAT = (() => {
             stickerBox.classList.add("hidden");
         }
     }
-
-    function handleKeyup(e) {
-        if (editorChat.innerText.length && !flagWidth) {
+    function checkLengthEditor() {
+        if (editorChat.innerText.trim().length && !flagWidth) {
             flagWidth = true
+            window.dispatchEvent(beforeResizeEditorChat)
+            editorChat.nextElementSibling.style.opacity = 0;
+            actions.style.overflow = "hidden";
+            actions
+                .animate(
+                    [
+                        {
+                            width: `${actionsWidth}px`,
+                        },
+                        {
+                            width: '26px',
+                        },
+                    ],
+                    {
+                        duration: 300,
+                        fill: 'forwards',
+                    }
+                )
+                .finished.then((response) => {
+                    actions.classList.add('hidden')
+                    actionPlus.classList.remove('hidden');
+                    window.dispatchEvent(resizeEditorChat);
+                })
+            return true;
+        }
+        return false
+    }
+    function handleKeyup(e) {
+        checkLengthEditor()
+        if (editorChat.innerText.trim().length === 0) {
+            flagWidth = false
+            window.dispatchEvent(beforeResizeEditorChat)
+            editorChat.nextElementSibling.style.opacity = 1
+            actions.classList.remove('hidden')
+            actionPlus.classList.add('hidden')
+            actions
+                .animate(
+                    [
+                        {
+                            width: `${actionsWidth}px`,
+                        },
+                    ],
+                    {
+                        duration: 300,
+                        fill: 'forwards',
+                    }
+                )
+                .finished.then((response) => {
+                    actions.style.overflow = null;
+                    window.dispatchEvent(resizeEditorChat);
+                })
+        }
+        const oldContent = editorChat.innerHTML;
+        if (oldContent.slice(oldContent.length - 2, oldContent.length - 1) === ':') {
+            let newString = convertStringToEmoji(oldContent);
+            if (newString) {
+                editorChat.innerHTML = ''
+                newString && document.execCommand('insertHTML', false, newString);
+            }
+        }
+    }
+
+    function checkKeypress(e, data = false) {
+        if (!flagWidth && (!e.ctrlKey || data)) {
+            flagWidth = true
+            window.dispatchEvent(beforeResizeEditorChat)
             editorChat.nextElementSibling.style.opacity = 0;
             actions.style.overflow = "hidden";
             actions
@@ -381,43 +621,12 @@ const CHAT = (() => {
                 .finished.then((response) => {
                     actions.classList.add('hidden')
                     actionPlus.classList.remove('hidden')
+                    window.dispatchEvent(resizeEditorChat);
                 })
-        } else if (editorChat.innerText.length === 0 && flagWidth) {
-            flagWidth = false
-            editorChat.nextElementSibling.style.opacity = 1
-            actions.classList.remove('hidden')
-            actionPlus.classList.add('hidden')
-            actions
-                .animate(
-                    [
-                        {
-                            width: `${actionsWidth}px`,
-                        },
-                    ],
-                    {
-                        duration: 300,
-                        fill: 'forwards',
-                    }
-                )
-                .finished.then((response) => {
-                    actions.style.overflow = null;
-                })
-        }
-        const oldContent = editorChat.innerHTML;
-        if (oldContent.slice(oldContent.length - 2, oldContent.length - 1) === ':') {
-            let newString = convertStringToEmoji(oldContent);
-            if (newString) {
-                editorChat.innerHTML = ''
-                newString && document.execCommand('insertHTML', false, newString);
-            }
         }
     }
-
     function handleKeydown(e) {
-        if (editorChat.innerText.length && !flagWidth) {
-            flagWidth = true
-            editorChat.nextElementSibling.style.opacity = 0;
-        }
+        checkKeypress(e);
         if (e.keyCode === 13 && !e.shiftKey) {
             e.preventDefault();
             submitEventChat.typeMessage = "message";
