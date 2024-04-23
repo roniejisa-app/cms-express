@@ -459,19 +459,23 @@
     border-radius: 6px;
     background: rgba(0, 0, 0, 0.1);
     transition: background 300ms ease;
+    padding: 2px 0 ;
     &:hover {
         background: $colorButtonChat;
         .scroll-bar {
-            background: $colorBackgroundChat;
+            border-color: $colorBackgroundChat;
         }
     }
     .scroll-bar {
-        transition: background 300ms ease;
-        background: rgba(0, 0, 0, 0.3);
+        transition: border-color 300ms ease;
+        background: transparent;
         position: absolute;
         height: 100%;
         left: 0;
-        height: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        height: calc(100% - 4px);
+        border: 3px solid rgba(0, 0, 0, 0.2);
         border-radius: 6px;
         cursor: move;
     }
