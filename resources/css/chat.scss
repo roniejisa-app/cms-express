@@ -138,7 +138,7 @@
                         #00c3ff
                     );
                     color: white;
-                    &-feel{
+                    &-feel {
                         font-size: 32px;
                     }
                 }
@@ -343,12 +343,11 @@
 }
 
 .sticker-box {
-    position: absolute;
-    bottom: 150%;
+    position: fixed;
     background: white;
     border-radius: 6px;
     border: 1px solid $colorBackgroundChat;
-    transition: transform 300ms ease;
+    transition: transform 200ms ease;
     &.hidden {
         transform: scale(0);
     }
@@ -359,6 +358,7 @@
             padding-left: 5px;
             padding-right: 5px;
             border-bottom: 2px solid $colorButtonChat;
+            cursor: pointer;
         }
     }
     .sticker-items {
@@ -367,6 +367,21 @@
         height: 240px;
         overflow: auto;
         width: 332px;
+        &::-webkit-scrollbar {
+            width: 6px;
+            border-radius: 6px;
+        }
+        &::-webkit-scrollbar-thumb {
+            border-radius: 6px;
+            background: $colorButtonChat;
+            transition: background 300ms ease;
+            &:hover {
+                background: $colorBackgroundChat;
+            }
+        }
+        .emoji {
+            cursor: pointer;
+        }
     }
 }
 

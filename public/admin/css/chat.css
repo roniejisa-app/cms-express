@@ -319,12 +319,11 @@
 }
 
 .sticker-box {
-  position: absolute;
-  bottom: 150%;
+  position: fixed;
   background: white;
   border-radius: 6px;
   border: 1px solid #b37feb;
-  transition: transform 300ms ease;
+  transition: transform 200ms ease;
 }
 .sticker-box.hidden {
   transform: scale(0);
@@ -337,6 +336,7 @@
   padding-left: 5px;
   padding-right: 5px;
   border-bottom: 2px solid rgba(179, 127, 235, 0.1647058824);
+  cursor: pointer;
 }
 .sticker-box .sticker-items {
   display: grid;
@@ -344,6 +344,21 @@
   height: 240px;
   overflow: auto;
   width: 332px;
+}
+.sticker-box .sticker-items::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 6px;
+}
+.sticker-box .sticker-items::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: rgba(179, 127, 235, 0.1647058824);
+  transition: background 300ms ease;
+}
+.sticker-box .sticker-items::-webkit-scrollbar-thumb:hover {
+  background: #b37feb;
+}
+.sticker-box .sticker-items .emoji {
+  cursor: pointer;
 }
 
 .chat-box-admin *::-webkit-scrollbar {

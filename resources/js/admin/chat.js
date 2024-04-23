@@ -2,7 +2,7 @@ import socket from './socket.js';
 import utils from '../utils/utils.js';
 import listStickers from '../sticker/list.js';
 import emojiUtil from '../sticker/showImage.js';
-import emojiData from '@emoji-mart/data'
+import emojiData from '@emoji-mart/data/sets/14/facebook.json'
 import { Picker } from 'emoji-mart'
 import langEmoji from './emoji-lang-vi.js';
 import { convertStringToEmoji } from '../utils/emoji-convert.js';
@@ -20,8 +20,8 @@ const CHAT = (() => {
     const chatContentHeader = chatHTML.querySelector('.chat-content-header')
     const chatClose = chatContentHeader.querySelector('.chat-close')
     const actionPlus = chatHTML.querySelector('.action-plus');
-    let beforeIcon = false;
     const actionMenuSub = actionPlus.querySelector('.action-sub-menu');
+    const listActionSub = actionMenuSub.querySelector('ul');
     let stickerBox = null;
     let tabBox = null;
     let stickerItemList = null;
@@ -33,15 +33,15 @@ const CHAT = (() => {
     let flagWidth = false,
         rectAction,
         actionsWidth,
-        addEventNow = false;
+        addSocketEventNow = false;
 
-    function addEvent() {
-        if (addEventNow) return;
-        addEventNow = true;
+    function addSocketEvent() {
+        if (addSocketEventNow) return;
+        addSocketEventNow = true;
         socket.on('connect', () => {
             chatHTML.classList.add('show')
-            addEventConnect();
-            window.addEventListener('update-action-message-item', addFeels)
+            addEventSocketConnect();
+            window.addEventListener('update-action-message-item', addEventForItemMessage)
             socket.emit(
                 'connect-admin-socket',
                 'admin',
@@ -51,10 +51,12 @@ const CHAT = (() => {
 
 
         socket.on('connect_error', () => {
-            console.log(2)
+            chatHTML.classList.remove('show')
+            socket.disconnect();
         })
 
         socket.on('disconnect', () => {
+            chatHTML.classList.remove('show')
             formChat.removeEventListener('submit-form-chat', handleChat)
             editorChat.removeEventListener('keyup', handleKeyup)
             editorChat.removeEventListener('keydown', handleKeydown)
@@ -75,8 +77,6 @@ const CHAT = (() => {
             const listData = utils.dD(value);
             listData.forEach(data => {
                 messageEl.insertAdjacentHTML('beforeend', templateMessage(data, data.user.socketId === socket.id, messageEl))
-                // Bắt buộc sử dụng fixed khi bắt hiển thị lên ok
-                // new Picker({ data: emojiData, i18n: langEmoji })
             })
             window.dispatchEvent(eventUpdateAction);
             messageEl.scrollTo({
@@ -91,8 +91,6 @@ const CHAT = (() => {
             data = utils.dD(data);
 
             messageEl.insertAdjacentHTML('beforeend', templateMessage(data, data.user.socketId === socket.id, messageEl))
-            // Bắt buộc sử dụng fixed khi bắt hiển thị lên ok
-            // new Picker({ data: emojiData, i18n: langEmoji })
             messageEl.scrollTo({
                 behavior: "smooth",
                 top: messageEl.scrollHeight - messageEl.clientHeight
@@ -135,13 +133,15 @@ const CHAT = (() => {
         })
     }
 
-    function addFeels() {
+    function addEventForItemMessage() {
         Array.from(messageEl.children).forEach((messageItem) => {
             const feelMart = messageItem.querySelector(".emoji-mart");
             feelMart.onclick = (e) => {
                 let picker = new Picker({
                     data: emojiData,
                     i18n: langEmoji,
+                    locale: 'vi',
+                    set: 'facebook',
                     onClickOutside: function (e) {
                         // Cần kiểm tra nếu click ngoài thì tắt đi 
                         if (+picker.style.opacity === 1) {
@@ -204,8 +204,10 @@ const CHAT = (() => {
                 return `<div class="message-body content">${data.message}
             ${feel ? `<span class="feel">${feel.native}</span>` : ``}
             </div>`;
-            case 'image':
-                return 1;
+            case 'sticker':
+                return `<div class="message-body sticker">${data.message}
+                        ${feel ? `<span class="feel">${feel.native}</span>` : ``}
+                        </div>`;
             case 'emoji':
                 return 2;
             case 'feel':
@@ -217,7 +219,7 @@ const CHAT = (() => {
         }
     }
 
-    function addEventConnect() {
+    function addEventSocketConnect() {
         setTimeout(() => {
             rectAction = actions.getBoundingClientRect()
             actionsWidth = rectAction.width
@@ -227,7 +229,7 @@ const CHAT = (() => {
                 button.onmouseup = (e) => {
                     if (!stickerBox || stickerBox.classList.contains("hidden")) {
                         e.stopPropagation();
-                        handleShowSticker(e, button);
+                        handleShowSticker(e);
                     }
                 };
             }
@@ -254,6 +256,8 @@ const CHAT = (() => {
         let picker = new Picker({
             data: emojiData,
             i18n: langEmoji,
+            locale: 'vi',
+            set: 'facebook',
             onClickOutside: function (e) {
                 // Cần kiểm tra nếu click ngoài thì tắt đi 
                 if (+picker.style.opacity === 1) {
@@ -282,18 +286,22 @@ const CHAT = (() => {
         }, 0);
     }
 
-    async function handleShowSticker(e, button) {
+    async function handleShowSticker(e) {
         if (!stickerBox) {
-            createAndAddEventStickerBox(e, button);
+            createAndAddEventStickerBox(e);
         } else {
             stickerBox.classList.remove("hidden");
         }
-        const rectButton = button.getBoundingClientRect();
-        const left = window.innerWidth - (rectButton.right + 330);
-        stickerBox.style.left = -Math.abs(left) + 'px';
+        setTimeout(() => {
+            const rect = stickerBox.getBoundingClientRect();
+            const rectTargetElement = e.target.getBoundingClientRect();
+            stickerBox.style.top = rectTargetElement.top - rect.height - rectTargetElement.height + "px";
+            stickerBox.style.left = rectTargetElement.left + "px";
+            stickerBox.style.opacity = 1;
+        }, 200);
     }
 
-    function createAndAddEventStickerBox(e, button) {
+    function createAndAddEventStickerBox(e) {
         const listTab = listStickers.map((item, index) => {
             const tabElement = document.createElement('div');
             tabElement.className = "tab-item";
@@ -311,7 +319,8 @@ const CHAT = (() => {
         stickerItemList.className = "sticker-items";
         tabBox.append(...listTab);
         stickerBox.append(tabBox, stickerItemList);
-        button.append(stickerBox);
+        stickerBox.style.opacity = 0;
+        document.body.append(stickerBox);
         listTab.forEach((tab, index) => {
             tab.onclick = async (e) => {
                 e.stopPropagation();
@@ -320,8 +329,9 @@ const CHAT = (() => {
                 stickerItemList.innerHTML = `<style>.rs-loading-main{display: flex;width:100%;height:100%; justify-content: center; align-items: center;} .rsl-wave {font-size: var(--rs-l-size, 2rem); color: var(--rs-l-color, #ee4d2d); display: inline-flex; align-items: center; width: 1.25em; height: 1.25em; } .rsl-wave--icon { display: block; background: currentColor; border-radius: 99px; width: 0.25em; height: 0.25em; margin-right: 0.25em; margin-bottom: -0.25em; -webkit-animation: rsla_wave .56s linear infinite; animation: rsla_wave .56s linear infinite; -webkit-transform: translateY(.0001%); transform: translateY(.0001%); } @-webkit-keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } @keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } .rsl-wave--icon:nth-child(2) { -webkit-animation-delay: -.14s; animation-delay: -.14s; } .rsl-wave--icon:nth-child(3) { -webkit-animation-delay: -.28s; animation-delay: -.28s; margin-right: 0; }</style><div class="rs-loading-main"><div class="rsl-wave"> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> </div></div>`;
                 indexEmojiCurrent = +tab.dataset.index;
                 let items = await Promise.all(listStickers[tab.dataset.index].items.map(item => {
-                    return emojiUtil.emojiAll(item.url, item.totalRow, item.totalColumn, item.countLeftInTotalRow, item.ms)
-                }).map(item => item));
+                    console.log(item);
+                    return emojiUtil.emojiAll(item.url, item.imgUrl, item.totalRow, item.totalColumn, item.countLeftInTotalRow, item.ms)
+                }).map(el => el));
                 if (tabBox.querySelector('.active')) {
                     tabBox.querySelector('.active').classList.remove('active');
                 }
@@ -343,7 +353,7 @@ const CHAT = (() => {
     function handleEventSendSticker(e) {
         e.stopPropagation();
         if (e.target.classList.contains('emoji')) {
-            stickerBox.style.transformOrigin = `${Math.abs(stickerBox.style.left.replace("px", ''))}px bottom`;
+            sendSticker(e.target, e);
             stickerBox.classList.add("hidden");
         }
     }
@@ -396,7 +406,7 @@ const CHAT = (() => {
         const oldContent = editorChat.innerHTML;
         if (oldContent.slice(oldContent.length - 2, oldContent.length - 1) === ':') {
             let newString = convertStringToEmoji(oldContent);
-            if(newString){
+            if (newString) {
                 editorChat.innerHTML = ''
                 newString && document.execCommand('insertHTML', false, newString);
             }
@@ -418,8 +428,6 @@ const CHAT = (() => {
 
     function handleChat(e) {
         e.preventDefault();
-
-
         // Kiểm tra xem có phải chỉ có emoji hay không
         const pattern = /[\d\w\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễếệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]/;
 
@@ -436,7 +444,7 @@ const CHAT = (() => {
         buttonShowChatBox.onclick = function () {
             socket.typeRoom = 1
             socket.connect()
-            addEvent()
+            addSocketEvent()
         }
     }
 
@@ -459,13 +467,19 @@ const CHAT = (() => {
         }
 
         if (stickerBox && !stickerBox.classList.contains('hidden') && !e.target.closest(".sticker-box")) {
-            stickerBox.style.transformOrigin = `${Math.abs(stickerBox.style.left.replace("px", ''))}px bottom`;
             stickerBox.classList.add('hidden');
         }
     }
 
-    async function chat(data, event) {
+    function chat(data, event) {
         socket.volatile.emit('chat-admin-socket', 'admin', userId, utils.eD(data), event.typeMessage);
+    }
+
+    function sendSticker(elementSticker, event) {
+        event.typeMessage = "sticker";
+        let newElement = document.createElement('span');
+        newElement.innerHTML = `<img src="${elementSticker.getAttribute('image-url')}" width="${elementSticker.getAttribute('width-one')}" height="${elementSticker.getAttribute('height-one')}">`
+        socket.volatile.emit('chat-admin-socket', 'admin', userId, utils.eD(newElement.outerHTML), event.typeMessage);
     }
 
     async function loadMoreChat(element) {
@@ -485,7 +499,7 @@ const CHAT = (() => {
         }, {
             root: element
         });
-        observer.observe(elementHeading)
+        elementHeading && observer.observe(elementHeading)
     }
 
     return {

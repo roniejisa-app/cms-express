@@ -19,18 +19,6 @@ module.exports = (sequelize, DataTypes) => {
                 as: 'phone'
             })
 
-            User.hasMany(models.Post, {
-                foreignKey: "user_id",
-                as: 'posts'
-            })
-
-            User.belongsToMany(models.Course, {
-                through: "course_user",
-                foreignKey: "user_id",
-                otherKey: "course_id",
-                as: "courses"
-            })
-
             User.belongsToMany(models.Role, {
                 foreignKey: "user_id",
                 through: "user_role",

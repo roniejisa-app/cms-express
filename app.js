@@ -1,9 +1,9 @@
 require('dotenv').config();
 const session = require('express-session');
-var createError = require('http-errors');
 var express = require('express');
 var expressEjsLayout = require('express-ejs-layouts');
 var path = require('path');
+var { globSync } = require('glob');
 var cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 var logger = require('morgan');
@@ -86,11 +86,25 @@ app.use(validateMiddleware);
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/', chatRouter);
+// Đăng ký các file tại đây
+let files = globSync(process.cwd() + "/platform/*/routes/*").filter(file => {
+    return (
+        file.indexOf('.') !== 0 &&
+        file.slice(-3) === '.js'
+    );
+})
+for (let i = 0; i < files.length; i++) {
+    const router = require(path.join(process.cwd(), files[i]));
+    app.use('/', router);
+}
 // app.use(authMiddleware);
 app.use('/admin', adminRouter);
-app.use('/api', apiRouter)
-app.use((error, req, res, next) => {
+app.use('/api', apiRouter);
 
+
+
+
+app.use((error, req, res, next) => {
     switch (error.code) {
         case 'LIMIT_UNEXPECTED_FILE':
             return res.json({
@@ -106,7 +120,6 @@ app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
-
     // render the error page
     res.status(err.status || 500);
     res.render('error');

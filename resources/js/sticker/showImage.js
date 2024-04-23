@@ -1,4 +1,4 @@
-function emojiAll(url, totalRow, totalColumn, countLeftInTotalRow, ms, isRate = 1) {
+function emojiAll(url, imageUrl, totalRow, totalColumn, countLeftInTotalRow, ms, isRate = 1) {
     const image = new Image();
     image.src = url;
     let emoji;
@@ -18,12 +18,11 @@ function emojiAll(url, totalRow, totalColumn, countLeftInTotalRow, ms, isRate = 
             emoji.setAttribute('total-row', totalRow);
             emoji.setAttribute('total-column', totalColumn);
             emoji.setAttribute('ms', ms);
+            emoji.setAttribute('image-url', imageUrl);
             resolve(emoji);
         }
     })
 }
-
-
 
 export default {
     emojiAll,
@@ -86,5 +85,35 @@ export default {
             }
         })
         var eventEmojiAction = new Event("event-emoji-" + element.className);
+    },
+    runEmojiForElement: (emoji) => {
+        if (emoji.dataset.running) {
+            return false
+        }
+        emoji.dataset.running = true;
+        const countLeftInTotalRow = emoji.getAttribute('count-left-in-total-row');
+        const totalColumn = emoji.getAttribute('total-column');
+        const totalRow = emoji.getAttribute('total-row');
+        const ms = emoji.getAttribute('ms');
+        const widthOne = emoji.getAttribute('width-one');
+        const heightOne = emoji.getAttribute('height-one');
+        let leftE = 0;
+        let topE = 0;
+        let countLeft = 0;
+        let countTop = 0;
+
+        setInterval(function () {
+            if (+countLeft === +totalColumn || (+countLeft === +countLeftInTotalRow && +countTop === totalRow - 1)) {
+                countLeft = 0;
+                +countTop++;
+            }
+            if (countTop === +totalRow) {
+                countTop = 0;
+            }
+            emoji.style.backgroundPosition = `${-leftE}px ${-topE}px`;
+            leftE = +countLeft * +widthOne;
+            topE = +countTop * +heightOne;
+            +countLeft++;
+        }, ms)
     }
 }

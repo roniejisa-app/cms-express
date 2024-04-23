@@ -199,7 +199,6 @@ module.exports = {
             // Feel
             socket.on("feel-message", async (room, userId, messageId, native) => {
                 const roomCurrent = rooms.find(({ name }) => name === room);
-                console.log(roomCurrent);
                 if (roomCurrent) {
                     let feelData = await MessageFeelUser.findOne({
                         where: {
