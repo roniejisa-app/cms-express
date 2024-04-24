@@ -8,8 +8,8 @@ function screen() {
     let loadData = false;
     let observer = new IntersectionObserver(intersectionCallback);
     async function intersectionCallback(entries) {
-        for (let i = 0; i < entries.length; i++) {
-            if (entries[i].isIntersecting && !loadData) {
+        for (const entry of entries) {
+            if (entry.isIntersecting && !loadData) {
                 page++;
                 loadData = true;
                 const { pathname } = window.location;

@@ -87,8 +87,8 @@ const XHR = {
             // Thêm thông tin header
             if (Object.keys(this.headers).length) {
                 for (var key of Object.keys(this.headers)) {
-                    if(this.type === "formData" && key === "Content-Type"){
-                    }else{
+                    if (this.type === "formData" && key === "Content-Type") {
+                    } else {
                         xhr.setRequestHeader(key, this.headers[key]);
                     }
                 }
@@ -107,8 +107,8 @@ const XHR = {
             const newFormData = new FormData();
             for (let key of Object.keys(this.body)) {
                 if (Array.isArray(this.body[key])) {
-                    for (let i = 0; i < this.body[key].length; i++) {
-                        newFormData.append(key, this.body[key][i]);
+                    for (const value of this.body[key]) {
+                        newFormData.append(key, value);
                     }
                 } else {
                     newFormData.append(key, XHR.body[key]);

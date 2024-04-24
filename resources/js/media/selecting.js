@@ -1,6 +1,6 @@
 import { files, listItem, mediaInfo } from './selector.js';
 import { allAction } from './item.js';
-import {formatBytes} from '../utils/utils.js';
+import { formatBytes } from '../utils/utils.js';
 var items = listItem.querySelectorAll('.item');
 var showInfo = new Event('show-info-file');
 //Xử lý các vấn đề sau 
@@ -141,9 +141,8 @@ function addEventForItems() {
      * Mặc định nếu không có item đã chọn thì chọn item đầu tiên
      * 
      */
-    for (var index = 0; index < items.length; index++) {
-        items[index].index = index;
-        items[index].onclick = function (event) {
+    for (const item of items) {
+        item.onclick = function (event) {
             event.preventDefault();
             const _this = this;
             var startItemChecked = getItemSelecting('start');
@@ -229,14 +228,16 @@ function getItemSelecting(position = undefined) {
     const listItemSelecting = [];
     let firstIndex = null;
     let lastIndex = null;
-    for (var index = 0; index < items.length; index++) {
-        if (items[index].firstElementChild.checked) {
+    let index = 0;
+    for (const item of items) {
+        if (item.firstElementChild.checked) {
             if (firstIndex === null) {
                 firstIndex = index;
             }
             lastIndex = index;
-            listItemSelecting[index] = items[index];
+            listItemSelecting[index] = item;
         }
+        index++;
     }
 
     switch (position) {

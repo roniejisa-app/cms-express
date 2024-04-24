@@ -311,8 +311,8 @@ const XHR = {
       const newFormData = new FormData();
       for (let key of Object.keys(this.body)) {
         if (Array.isArray(this.body[key])) {
-          for (let i = 0; i < this.body[key].length; i++) {
-            newFormData.append(key, this.body[key][i]);
+          for (const value of this.body[key]) {
+            newFormData.append(key, value);
           }
         } else {
           newFormData.append(key, XHR.body[key]);
@@ -933,8 +933,8 @@ function listFolder() {
 function showFolderChild() {
   if (!listAnchorSide)
     return false;
-  for (let i = 0; i < listAnchorSide.length; i++) {
-    listAnchorSide[i].onclick = showFolderChild2;
+  for (const anchorSide of listAnchorSide) {
+    anchorSide.onclick = showFolderChild2;
   }
   async function showFolderChild2(e) {
     if (e.target.nodeName === "svg" || e.target.nodeName === "path") {
@@ -949,15 +949,13 @@ function showFolderChild() {
   }
 }
 function allAction() {
-  for (let i = 0; i < listItem.children.length; i++) {
-    const item2 = listItem.children[i];
+  for (const item2 of listItem.children) {
     const { id, customs, filename, description, note, path_absolute, extension: extension2 } = JSON.parse(item2.dataset.file);
     const dataCustom = JSON.parse(customs);
-    item2.querySelector("input");
-    const removeItemBtn = listItem.children[i].querySelector(".delete");
-    const editItemBtn = listItem.children[i].querySelector(".edit");
-    const restoreItemBtn = listItem.children[i].querySelector(".restore");
-    const deleteItemBtn = listItem.children[i].querySelector(".delete-force");
+    const removeItemBtn = item2.querySelector(".delete");
+    const editItemBtn = item2.querySelector(".edit");
+    const restoreItemBtn = item2.querySelector(".restore");
+    const deleteItemBtn = item2.querySelector(".delete-force");
     item2.addEventListener("mouseover", function() {
       this.classList.add("show");
     });
@@ -1225,9 +1223,8 @@ function isCollision(element1, element2) {
   return false;
 }
 function addEventForItems() {
-  for (var index = 0; index < items.length; index++) {
-    items[index].index = index;
-    items[index].onclick = function(event2) {
+  for (const item2 of items) {
+    item2.onclick = function(event2) {
       event2.preventDefault();
       const _this = this;
       var startItemChecked = getItemSelecting("start");
@@ -1235,9 +1232,9 @@ function addEventForItems() {
       var listItemSelecting = getItemSelecting();
       if (!event2.ctrlKey && !event2.shiftKey) {
         if (listItemSelecting.length) {
-          listItemSelecting.forEach((item2) => {
-            if (item2 !== this) {
-              item2.firstElementChild.checked = false;
+          listItemSelecting.forEach((item3) => {
+            if (item3 !== this) {
+              item3.firstElementChild.checked = false;
             }
           });
         }
@@ -1287,7 +1284,7 @@ function addEventForItems() {
             }
           }
         } else {
-          Array.from(items).filter((item2, index2) => index2 <= _this.index).forEach((item2) => item2.firstElementChild.checked = true);
+          Array.from(items).filter((item3, index) => index <= _this.index).forEach((item3) => item3.firstElementChild.checked = true);
         }
       }
       window.dispatchEvent(showInfo);
@@ -1298,14 +1295,16 @@ function getItemSelecting(position = void 0) {
   const listItemSelecting = [];
   let firstIndex = null;
   let lastIndex = null;
-  for (var index = 0; index < items.length; index++) {
-    if (items[index].firstElementChild.checked) {
+  let index = 0;
+  for (const item2 of items) {
+    if (item2.firstElementChild.checked) {
       if (firstIndex === null) {
         firstIndex = index;
       }
       lastIndex = index;
-      listItemSelecting[index] = items[index];
+      listItemSelecting[index] = item2;
     }
+    index++;
   }
   switch (position) {
     case "start":
@@ -1586,8 +1585,8 @@ function handleUploadPlace() {
       let dataTransferFiles = dataTransfer.files;
       const dataTransferItems = dataTransfer.items;
       if (dataTransferFiles.length === 0) {
-        for (let i = 0; i < files2.length; i++) {
-          dataTransferItems.add(files2[i]);
+        for (const file of files2) {
+          dataTransferItems.add(file);
         }
         renderItems(getDataTransferFiles());
       } else {
@@ -1686,8 +1685,8 @@ function handleUploadPlace() {
   function sortAfterDrag() {
     const newDataTransfer = new DataTransfer();
     const listChildren = listFileEl.children;
-    for (let i = 0; i < listChildren.length; i++) {
-      const index = Array.from(dataTransfer.files).findIndex((dataTransferFile) => isSame(dataTransferFile, JSON.parse(listChildren[i].dataset.info)));
+    for (const itemUpload of listChildren) {
+      const index = Array.from(dataTransfer.files).findIndex((dataTransferFile) => isSame(dataTransferFile, JSON.parse(itemUpload.dataset.info)));
       if (index !== -1) {
         newDataTransfer.items.add(dataTransfer.files[index]);
       }
@@ -1725,8 +1724,8 @@ function screen() {
   let loadData = false;
   let observer = new IntersectionObserver(intersectionCallback);
   async function intersectionCallback(entries) {
-    for (let i = 0; i < entries.length; i++) {
-      if (entries[i].isIntersecting && !loadData) {
+    for (const entry of entries) {
+      if (entry.isIntersecting && !loadData) {
         page++;
         loadData = true;
         const { pathname } = window.location;
@@ -1831,6 +1830,8 @@ var MAIN = (() => {
       return;
     chooseFile2.addEventListener("click", function(e) {
       const iframeEl = window.frameElement;
+      if (!iframeEl)
+        return false;
       const uuid = iframeEl.dataset.uuid;
       const type = iframeEl.dataset.type;
       const objectData = getItemSelecting(type);

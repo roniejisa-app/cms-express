@@ -11,7 +11,6 @@ export const formatBytes = (bytes, decimals = 2) => {
 export const getBase64 = (file) => {
     return new Promise(resolve => {
         var reader = new FileReader();
-        console.log(file);
         reader.readAsDataURL(file);
         reader.onload = function () {
             resolve(reader.result);

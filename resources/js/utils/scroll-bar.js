@@ -1,7 +1,7 @@
 function getSizeOfBoxUpload(elementContainer, ...elementSub) {
     let widthChild = 0;
-    for (let i = 0; i < elementSub.length; i++) {
-        widthChild += elementSub[i].offsetWidth;
+    for (const element of elementSub) {
+        widthChild += +element.offsetWidth;
     }
     const rectBoxImage = elementContainer.getBoundingClientRect();
     const widthParent = rectBoxImage.width;

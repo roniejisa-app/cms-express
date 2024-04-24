@@ -50968,8 +50968,8 @@ const convertStringToEmoji = function(string) {
 };
 function getSizeOfBoxUpload(elementContainer, ...elementSub) {
   let widthChild = 0;
-  for (let i2 = 0; i2 < elementSub.length; i2++) {
-    widthChild += elementSub[i2].offsetWidth;
+  for (const element of elementSub) {
+    widthChild += +element.offsetWidth;
   }
   const rectBoxImage = elementContainer.getBoundingClientRect();
   const widthParent = rectBoxImage.width;
@@ -51167,18 +51167,20 @@ const CHAT = (() => {
       );
       messageEl.innerHTML = "";
     });
-    socket.on("join room success", (value2) => {
+    socket.on("join room success", async (value2) => {
       const listData = dD(value2);
-      listData.forEach((data) => {
+      for (const data of listData) {
         messageEl.insertAdjacentHTML("beforeend", templateMessage(data, data.user.socketId === socket.id, messageEl));
-      });
-      window.dispatchEvent(eventUpdateAction);
-      messageEl.scrollTo({
-        top: messageEl.scrollHeight - messageEl.clientHeight
-      });
-      page = 2;
-      pageLoadMore = false;
-      loadMoreChat(messageEl);
+      }
+      setTimeout(() => {
+        messageEl.scrollTo({
+          top: messageEl.scrollHeight - messageEl.clientHeight
+        });
+        window.dispatchEvent(eventUpdateAction);
+        page = 2;
+        pageLoadMore = false;
+        loadMoreChat(messageEl);
+      }, 100);
     });
     socket.on("chat-admin-client", (data) => {
       data = dD(data);
@@ -51273,7 +51275,6 @@ const CHAT = (() => {
           boxImageUpload = void 0;
         }
       }
-      console.log(newDataTransfer.files);
     };
     itemEl.draggable = true;
     itemEl.ondragstart = (e) => {
@@ -51703,9 +51704,7 @@ const CHAT = (() => {
         files: [],
         stringData: null
       };
-      const dataFiles = Array.from(newDataTransfer.files);
-      for (let i2 = 0; i2 < dataFiles.length; i2++) {
-        let file = dataFiles[i2];
+      for (const file of newDataTransfer.files) {
         const base64 = await getBase64(file);
         dataFile.files.push({
           size: file.size,
@@ -51731,8 +51730,8 @@ const CHAT = (() => {
   async function loadMoreChat(element) {
     let elementHeading = element.children[0];
     observer = new IntersectionObserver(async (entries) => {
-      for (let i2 = 0; i2 < entries.length; i2++) {
-        if (entries[i2].isIntersecting && +entries[i2].intersectionRatio != 0 && !pageLoadMore) {
+      for (const entry of entries) {
+        if (entry.isIntersecting && +entry.intersectionRatio != 0 && !pageLoadMore) {
           pageLoadMore = true;
           observer.disconnect();
           socket.volatile.emit("load-more-message", "admin", userId, page);
@@ -51752,7 +51751,6 @@ const CHAT = (() => {
     inputFile.multiple = true;
     inputFile.accept = ".jpg,.png,.jpeg,.gif,.webp,.tiff";
     inputFile.addEventListener("change", (e) => {
-      console.log(boxImageUpload);
       if (!boxImageUpload) {
         createBoxImageUpload();
       }
@@ -51771,8 +51769,8 @@ const CHAT = (() => {
   }
   function sortDataUpload() {
     let refreshDataTransfer = new DataTransfer();
-    for (let i2 = 0; i2 < listFileAddEl.children.length; i2++) {
-      const info = JSON.parse(listFileAddEl.children[i2].dataset.info);
+    for (const fileEl of listFileAddEl.children) {
+      const info = JSON.parse(fileEl.dataset.info);
       const index = Array.from(newDataTransfer.files).findIndex((file) => isSameFile(file, info));
       if (index !== -1) {
         refreshDataTransfer.items.add(newDataTransfer.files[index]);

@@ -88,18 +88,20 @@ const CHAT = (() => {
             messageEl.innerHTML = "";
         })
 
-        socket.on('join room success', (value) => {
+        socket.on('join room success', async (value) => {
             const listData = dD(value);
-            listData.forEach(data => {
+            for (const data of listData) {
                 messageEl.insertAdjacentHTML('beforeend', templateMessage(data, data.user.socketId === socket.id, messageEl))
-            })
-            window.dispatchEvent(eventUpdateAction);
-            messageEl.scrollTo({
-                top: messageEl.scrollHeight - messageEl.clientHeight
-            })
-            page = 2;
-            pageLoadMore = false;
-            loadMoreChat(messageEl)
+            }
+            setTimeout(() => {
+                messageEl.scrollTo({
+                    top: messageEl.scrollHeight - messageEl.clientHeight
+                })
+                window.dispatchEvent(eventUpdateAction);
+                page = 2;
+                pageLoadMore = false;
+                loadMoreChat(messageEl)
+            }, 100);
         })
 
         socket.on("chat-admin-client", (data) => {
@@ -160,7 +162,6 @@ const CHAT = (() => {
 
     async function handlePasteData(e) {
         // Lấy ra item hình ảnh từ dữ liệu dán
-        // console.log(e.clipboardData.items[0].getAsFile());
         var item = Array.from(e.clipboardData.items).find(x => /^image\//.test(x.type));
         // Kiểm tra xem có phải là hình ảnh không
         e.preventDefault();
@@ -212,7 +213,6 @@ const CHAT = (() => {
                     boxImageUpload = undefined;
                 }
             }
-            console.log(newDataTransfer.files);
         }
         // Kích hoạt kiện kéo
         itemEl.draggable = true;
@@ -693,9 +693,7 @@ const CHAT = (() => {
                 files: [],
                 stringData: null,
             };
-            const dataFiles = Array.from(newDataTransfer.files);
-            for (let i = 0; i < dataFiles.length; i++) {
-                let file = dataFiles[i];
+            for (const file of newDataTransfer.files) {
                 const base64 = await getBase64(file);
                 dataFile.files.push({
                     size: file.size,
@@ -723,8 +721,8 @@ const CHAT = (() => {
     async function loadMoreChat(element) {
         let elementHeading = element.children[0];
         observer = new IntersectionObserver(async (entries) => {
-            for (let i = 0; i < entries.length; i++) {
-                if (entries[i].isIntersecting && +entries[i].intersectionRatio != 0 && !pageLoadMore) {
+            for (const entry of entries) {
+                if (entry.isIntersecting && +entry.intersectionRatio != 0 && !pageLoadMore) {
                     pageLoadMore = true;
                     observer.disconnect();
                     socket.volatile.emit("load-more-message", 'admin', userId, page);
@@ -745,7 +743,6 @@ const CHAT = (() => {
         inputFile.multiple = true;
         inputFile.accept = ".jpg,.png,.jpeg,.gif,.webp,.tiff";
         inputFile.addEventListener('change', (e) => {
-            console.log(boxImageUpload);
             if (!boxImageUpload) {
                 createBoxImageUpload();
             }
@@ -765,17 +762,17 @@ const CHAT = (() => {
 
     function sortDataUpload() {
         let refreshDataTransfer = new DataTransfer();
-        for (let i = 0; i < listFileAddEl.children.length; i++) {
-            const info = JSON.parse(listFileAddEl.children[i].dataset.info);
-            const index = Array.from(newDataTransfer.files).findIndex(file => isSameFile(file,info));
-            if(index !== -1){
+        for (const fileEl of listFileAddEl.children) {
+            const info = JSON.parse(fileEl.dataset.info);
+            const index = Array.from(newDataTransfer.files).findIndex(file => isSameFile(file, info));
+            if (index !== -1) {
                 refreshDataTransfer.items.add(newDataTransfer.files[index]);
             }
         }
         newDataTransfer = refreshDataTransfer;
     }
-    
-    function isSameFile(file, infoFile){
+
+    function isSameFile(file, infoFile) {
         return file.name === infoFile.name && file.size === infoFile.size && file.customId === infoFile.customId && file.type === infoFile.type;
     }
     return {
