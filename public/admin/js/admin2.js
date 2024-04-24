@@ -51336,7 +51336,7 @@ const CHAT = (() => {
         button.onmouseup = (e) => {
           if (!stickerBox || stickerBox.classList.contains("hidden")) {
             e.stopPropagation();
-            handleShowSticker(e);
+            handleShowSticker(e, e.target);
           }
         };
       }
@@ -51345,7 +51345,7 @@ const CHAT = (() => {
       button.onmouseup = (e) => {
         if (!stickerBox || stickerBox.classList.contains("hidden")) {
           e.stopPropagation();
-          handleShowSticker(e);
+          handleShowSticker(e, actionPlus);
           handleActionPlusMouseDown();
         }
       };
@@ -51390,7 +51390,7 @@ const CHAT = (() => {
       picker.style.opacity = 1;
     }, 0);
   }
-  async function handleShowSticker(e) {
+  async function handleShowSticker(e, targetEl) {
     if (!stickerBox) {
       createAndAddEventStickerBox();
     } else {
@@ -51398,7 +51398,7 @@ const CHAT = (() => {
     }
     setTimeout(() => {
       const rect = stickerBox.getBoundingClientRect();
-      const rectTargetElement = e.target.getBoundingClientRect();
+      const rectTargetElement = targetEl.getBoundingClientRect();
       let left = rectTargetElement.left;
       let top = rectTargetElement.top - rect.height - rectTargetElement.height;
       if (left + stickerBox.offsetWidth > window.innerWidth) {
@@ -51407,7 +51407,6 @@ const CHAT = (() => {
       if (top < 0) {
         top = 0;
       }
-      console.log(left);
       let sumLeftAndWidthStickerBox = left + stickerBox.offsetWidth;
       let excessPart = sumLeftAndWidthStickerBox - rectTargetElement.left - rectTargetElement.width / 2;
       let leftTransitionForm = stickerBox.offsetWidth - excessPart;
