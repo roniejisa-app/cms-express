@@ -1,4 +1,7 @@
 const { Message, chatRoom, chatRoomUser, User, MessageFeelUser } = require('../models/index');
+require('dotenv').config();
+const fs = require('fs');
+const { createFolderFromString } = require('../utils/uploadFile');
 async function computeUserIdFromHeaders(userId) {
     return userId;
 }
@@ -17,6 +20,21 @@ function dD(base64Data) {
     let threeDecode = atob(secondDecode.slice(5, -6));
     let data = JSON.parse(decodeURIComponent(threeDecode));
     return data;
+}
+
+async function createMessage(io, { dataDecode, roomCurrent, user, type }) {
+    const message = await Message.create({
+        message: dataDecode,
+        user_id: user.id,
+        chat_room_id: roomCurrent.roomData.id,
+        type
+    })
+    const dataEmit = {
+        data: message.dataValues,
+        user
+    }
+    let dataSend = eD(dataEmit);
+    io.to(roomCurrent.name).emit("chat-admin-client", dataSend);
 }
 
 module.exports = {
@@ -180,20 +198,50 @@ module.exports = {
 
             socket.on("chat-admin-socket", async (room, userId, data, type) => {
                 const roomCurrent = rooms.find(({ name }) => name === room);
-                const message = await Message.create({
-                    message: dD(data),
-                    user_id: userId,
-                    chat_room_id: roomCurrent.roomData.id,
-                    type
-                })
-
                 const user = roomCurrent.users.find(({ id }) => id === +userId);
-                const dataEmit = {
-                    data: message.dataValues,
-                    user
+
+                let dataDecode = dD(data);
+                if (type === 'file') {
+                    const files = dataDecode.files;
+                    for (let i = 0; i < dataDecode.files.length; i++) {
+                        let { type: typeFile, size, base64 } = files[i];
+                        let typeReal = typeFile.split('/').pop();
+                        if (process.env.FILE_UPLOAD_ACCEPT.split(',').includes(typeReal)) {
+                            // Thêm folder messages;
+                            const folderPath = 'messages';
+                            createFolderFromString(folderPath);
+                            const ext = base64.substring(base64.indexOf("/") + 1, base64.indexOf(";base64"));
+                            const fileType = base64.substring("data:".length, base64.indexOf("/"));
+                            const regex = new RegExp(`^data:${fileType}\/${ext};base64,`, 'gi');
+                            const base64Data = base64.replace(regex, "");
+                            let randomString = Math.random().toString(36).toString(36).substring(2) + new Date().getTime().toString(36).substring(2);
+                            const fileAbsolute = folderPath + '/' + randomString + '.' + typeReal;
+                            fs.writeFileSync(process.cwd() + process.env.FOLDER_UPLOAD_SERVER + '/' + fileAbsolute, base64Data, "base64");
+                            createMessage(io, {
+                                dataDecode: `/uploads/` + fileAbsolute,
+                                user,
+                                roomCurrent,
+                                type: 'image'
+                            })
+                        }
+
+                    }
+                    if (dataDecode.stringData) {
+                        createMessage(io, {
+                            dataDecode: dataDecode.stringData,
+                            user,
+                            roomCurrent,
+                            type: 'message',
+                        })
+                    }
+                } else {
+                    createMessage(io, {
+                        dataDecode,
+                        user,
+                        roomCurrent,
+                        type
+                    })
                 }
-                let dataEncode = eD(dataEmit);
-                io.to(room).emit("chat-admin-client", dataEncode);
             })
 
             // Feel

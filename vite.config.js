@@ -24,10 +24,8 @@ export default defineConfig({
                 //         : `[ext]/[name]-[hash].[ext]`;
                 // },
                 // chunkFileNames: function (file) {
-                // console.log(file);
                 // },
                 // entryFileNames: function (file) {
-                //     console.log(file);
                 // }
                 entryFileNames: `js/[name].js`,
                 chunkFileNames: `js/[name].js`,

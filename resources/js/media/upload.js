@@ -172,8 +172,8 @@ function handleUploadPlace() {
             let dataTransferFiles = dataTransfer.files;
             const dataTransferItems = dataTransfer.items;
             if (dataTransferFiles.length === 0) {
-                for (let i = 0; i < files.length; i++) {
-                    dataTransferItems.add(files[i]);
+                for (const file of files) {
+                    dataTransferItems.add(file);
                 }
                 renderItems(getDataTransferFiles());
             } else {
@@ -289,8 +289,8 @@ function handleUploadPlace() {
     function sortAfterDrag() {
         const newDataTransfer = new DataTransfer();
         const listChildren = listFileEl.children
-        for (let i = 0; i < listChildren.length; i++) {
-            const index = Array.from(dataTransfer.files).findIndex(dataTransferFile => isSame(dataTransferFile, JSON.parse(listChildren[i].dataset.info)));
+        for (const itemUpload of listChildren) {
+            const index = Array.from(dataTransfer.files).findIndex(dataTransferFile => isSame(dataTransferFile, JSON.parse(itemUpload.dataset.info)));
             if (index !== -1) {
                 newDataTransfer.items.add(dataTransfer.files[index]);
             }
@@ -311,13 +311,13 @@ window.addEventListener('load-item', e => {
     }
 })
 function upload() {
-    if(buttonAddNewFolder){
+    if (buttonAddNewFolder) {
         buttonAddNewFolder.onclick = (e) => {
             window.dispatchEvent(eventAddFolder);
         }
     }
 
-    if(buttonUploadFile){
+    if (buttonUploadFile) {
         buttonUploadFile.onclick = (e) => {
             window.dispatchEvent(eventUploadFile);
         }

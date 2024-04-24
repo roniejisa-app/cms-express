@@ -17,7 +17,7 @@ function moduleListener() {
 
     event.on('delete', async (...args) => {
         const [req, module, id] = args;
-        console.log(new Date().getSeconds());
+        // console.log(new Date().getSeconds());
     })
 }
 

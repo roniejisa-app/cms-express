@@ -30,7 +30,6 @@ module.exports = {
     index: async (req, res) => {
         const { module, name, name_show, fields, modelMain } = await getData(req);
         let { page, sort, limit } = req.query;
-        console.log(page);
         fields.sort((a, b) => {
             if (!a.order) {
                 a.order = 99;

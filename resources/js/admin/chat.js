@@ -1,16 +1,20 @@
 import socket from './socket.js';
-import utils from '../utils/utils.js';
+import { eD, dD, getBase64 } from '../utils/utils.js';
 import listStickers from '../sticker/list.js';
 import emojiUtil from '../sticker/showImage.js';
 import emojiData from '@emoji-mart/data/sets/14/facebook.json'
 import { Picker } from 'emoji-mart'
 import langEmoji from './emoji-lang-vi.js';
 import { convertStringToEmoji } from '../utils/emoji-convert.js';
+import { createScrollbar, resizeEditorChat, beforeResizeEditorChat } from '../utils/scroll-bar.js';
+import { rsLoading } from '../utils/template.js';
+import { stringVietnamese } from '../utils/pattern.js';
 const submitEventChat = new Event('submit-form-chat');
 const eventUpdateAction = new Event("update-action-message-item");
-const resizeEditorChat = new Event("resize-editor-chat");
-const beforeResizeEditorChat = new Event("before-resize-editor-chat");
 const CHAT = (() => {
+    const inputFile = document.createElement('input');
+
+    // Thêm input file;
     const chatBox = document.querySelector('.chat-box-admin')
     const buttonShowChatBox = chatBox.querySelector('.show-chat-box')
     const chatHTML = chatBox.querySelector('.chat-content')
@@ -24,11 +28,7 @@ const CHAT = (() => {
     const chatClose = chatContentHeader.querySelector('.chat-close')
     const actionPlus = chatHTML.querySelector('.action-plus');
     const actionMenuSub = actionPlus.querySelector('.action-sub-menu');
-    const listActionSub = actionMenuSub.querySelector('ul');
-    let scrollLeft = 0;
-    let scrollRight = 0;
-    let initialClientX = 0;
-    let initialOffsetX = 0;
+    const listActionSub = actionMenuSub.querySelectorAll('ul button');
     let boxImageUpload;
     let buttonAddFileEl;
     let listFileAddEl;
@@ -37,11 +37,12 @@ const CHAT = (() => {
     let stickerItemList = null;
     const userId = chatBox.dataset.userId;
     let observer;
+    let itemDrag;
     let indexEmojiCurrent = 0;
     let page = 2;
     let pageLoadMore = false;
     let newDataTransfer = new DataTransfer();
-    let flagScrollBar = false;
+    let editorHeight = 0;
     let flagWidth = false,
         rectAction,
         actionsWidth,
@@ -87,22 +88,24 @@ const CHAT = (() => {
             messageEl.innerHTML = "";
         })
 
-        socket.on('join room success', (value) => {
-            const listData = utils.dD(value);
-            listData.forEach(data => {
+        socket.on('join room success', async (value) => {
+            const listData = dD(value);
+            for (const data of listData) {
                 messageEl.insertAdjacentHTML('beforeend', templateMessage(data, data.user.socketId === socket.id, messageEl))
-            })
-            window.dispatchEvent(eventUpdateAction);
-            messageEl.scrollTo({
-                top: messageEl.scrollHeight - messageEl.clientHeight
-            })
-            page = 2;
-            pageLoadMore = false;
-            loadMoreChat(messageEl)
+            }
+            setTimeout(() => {
+                messageEl.scrollTo({
+                    top: messageEl.scrollHeight - messageEl.clientHeight
+                })
+                window.dispatchEvent(eventUpdateAction);
+                page = 2;
+                pageLoadMore = false;
+                loadMoreChat(messageEl)
+            }, 100);
         })
 
         socket.on("chat-admin-client", (data) => {
-            data = utils.dD(data);
+            data = dD(data);
 
             messageEl.insertAdjacentHTML('beforeend', templateMessage(data, data.user.socketId === socket.id, messageEl))
             messageEl.scrollTo({
@@ -114,7 +117,7 @@ const CHAT = (() => {
         })
 
         socket.on("response-message-load", (value) => {
-            const listData = utils.dD(value);
+            const listData = dD(value);
             const loading = messageEl.querySelector('.load-more-message');
             if (loading) {
                 loading.remove();
@@ -133,9 +136,12 @@ const CHAT = (() => {
         })
 
         socket.on("feel-message-response", (value) => {
-            const feelData = utils.dD(value);
-            const content = document.querySelector(`.message [data-id="${feelData.message_id}"] .message-body`);
-            if (content) {
+            const feelData = dD(value);
+            // Kiểm tra là cuối thì sẽ scroll xuống cuối
+
+            const messageItem = document.querySelector(`.message [data-id="${feelData.message_id}"]`);
+            if (messageItem) {
+                const content = messageItem.querySelector('.message-body');
                 let createSpanFeel = content.querySelector('span.feel');
                 if (!createSpanFeel) {
                     createSpanFeel = document.createElement('span');
@@ -144,12 +150,18 @@ const CHAT = (() => {
                 createSpanFeel.innerText = feelData.native;
                 content.append(createSpanFeel);
             }
+
+            const lastMessage = messageEl.children[messageEl.children.length - 1];
+            if (lastMessage === messageItem) {
+                messageEl.scrollTo({
+                    top: messageEl.scrollHeight - messageEl.clientHeight
+                })
+            }
         })
     }
 
-    function handlePasteData(e) {
+    async function handlePasteData(e) {
         // Lấy ra item hình ảnh từ dữ liệu dán
-        // console.log(e.clipboardData.items[0].getAsFile());
         var item = Array.from(e.clipboardData.items).find(x => /^image\//.test(x.type));
         // Kiểm tra xem có phải là hình ảnh không
         e.preventDefault();
@@ -158,22 +170,73 @@ const CHAT = (() => {
                 createBoxImageUpload();
             }
             // Lấy blob của hình ảnh
-            var blob = item.getAsFile();
+            var file = item.getAsFile();
             // Tạo một đối tượng Image
             var img = new Image();
             // Khi hình ảnh được tải hoàn tất, chèn nó vào trang
             img.onload = function () {
-                const itemEl = document.createElement('div');
-                itemEl.className = 'item-image-add';
-                itemEl.append(this);
-                listFileAddEl.appendChild(itemEl);
+                itemUploadMessage(this, newDataTransfer.items.length);
+                newDataTransfer.items.add(file);
             };
             // Đặt đường dẫn của hình ảnh là URL của blob
-            img.src = URL.createObjectURL(blob);
+            img.src = URL.createObjectURL(file);
         } else {
             var pastedText = (e.originalEvent || e).clipboardData.getData('text/plain');
             checkKeypress(pastedText);
             document.execCommand('insertText', false, pastedText);
+        }
+    }
+    function itemUploadMessage(imageEl, file) {
+        let info = {
+            name: file.name,
+            size: file.size,
+            type: file.type,
+            customId: file.customId
+        };
+        const itemEl = document.createElement('div');
+        itemEl.className = 'item-image-add';
+        itemEl.dataset.info = JSON.stringify(info);
+        const closeEl = document.createElement('button');
+        closeEl.className = "close-image-item";
+        closeEl.type = "button";
+        closeEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"/></svg>`;
+        itemEl.append(imageEl);
+        itemEl.append(closeEl);
+        listFileAddEl.appendChild(itemEl);
+        closeEl.onclick = () => {
+            const index = Array.from(newDataTransfer.files).findIndex(file => file.customId === info.customId);
+            if (index !== -1) {
+                newDataTransfer.items.remove(index);
+                itemEl.remove();
+                if (newDataTransfer.files.length === 0) {
+                    boxImageUpload.remove()
+                    boxImageUpload = undefined;
+                }
+            }
+        }
+        // Kích hoạt kiện kéo
+        itemEl.draggable = true;
+
+        itemEl.ondragstart = (e) => {
+            itemDrag = itemEl;
+        }
+
+        itemEl.ondragover = (e) => {
+            e.preventDefault();
+            const itemTarget = e.target.closest('.item-image-add');
+            if (itemTarget) {
+                const rate = itemTarget.offsetWidth / 2;
+                if (e.offsetX > rate) {
+                    itemTarget.parentElement.insertBefore(itemTarget, itemDrag);
+                } else if (e.offsetX <= rate) {
+                    itemTarget.parentElement.insertBefore(itemDrag, itemTarget);
+                }
+            }
+        }
+
+        itemEl.ondrop = () => {
+            itemDrag = undefined;
+            sortDataUpload();
         }
     }
     // xử lý upload file ở chỗ này thôi
@@ -183,125 +246,17 @@ const CHAT = (() => {
         buttonAddFileEl = document.createElement('button');
         buttonAddFileEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM216 408c0 13.3-10.7 24-24 24s-24-10.7-24-24V305.9l-31 31c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l72-72c9.4-9.4 24.6-9.4 33.9 0l72 72c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-31-31V408z"/></svg>`;
         buttonAddFileEl.className = "btn-add-file-message";
+        buttonAddFileEl.type = "button";
         listFileAddEl = document.createElement('div');
         listFileAddEl.className = "list-image-add";
         boxImageUpload.append(buttonAddFileEl, listFileAddEl);
         editorChatContent.prepend(boxImageUpload);
-        addEventBoxImageUpload();
+        buttonAddFileEl.onclick = e => {
+            inputFile.click();
+        };
+        createScrollbar(boxImageUpload, buttonAddFileEl, listFileAddEl)
     }
 
-    function addEventBoxImageUpload() {
-        // Tạo một MutationObserver instance
-        var observer = new MutationObserver(function (mutations) {
-            mutations.forEach(function (mutation) {
-                // Kiểm tra nếu có thêm phần tử con mới vào phần tử target
-                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                    // chỗ này kiểm tra xem có thanh scroll chưa thì thêm vào
-                    let { widthParent, widthChild, rectBoxImage } = getSizeOfBoxUpload();
-                    let scrollEl = document.querySelector('.scroll-custom');
-                    let scrollBar;
-                    let diffScrollBar = widthChild - widthParent;
-                    if (diffScrollBar > 0 && !scrollEl) {
-                        scrollEl = document.createElement('div');
-                        scrollBar = document.createElement('div');
-                        scrollEl.style.width = widthParent + 'px';
-                        scrollEl.style.left = rectBoxImage.left + 'px';
-                        scrollEl.style.top = rectBoxImage.top + rectBoxImage.height - 20 + 'px';
-                        scrollEl.className = "scroll-custom";
-                        scrollBar.className = "scroll-bar";
-                        scrollEl.append(scrollBar);
-                        document.body.append(scrollEl);
-                        scrollBar.addEventListener('mousedown', (e) => {
-                            flagScrollBar = true;
-                            initialClientX = e.clientX;
-                            initialOffsetX = scrollBar.offsetWidth + scrollBar.offsetLeft;
-                            scrollLeft = scrollBar.offsetLeft;
-                            scrollRight = boxImageUpload.offsetWidth - (scrollBar.offsetWidth + scrollBar.offsetLeft);
-                            document.addEventListener('mousemove', handleMovesScroll)
-                        })
-
-
-                        document.addEventListener('mouseup', () => {
-                            document.removeEventListener('mousemove', handleMovesScroll)
-                        })
-
-                        window.addEventListener('before-resize-editor-chat', e => {
-                            if (boxImageUpload && scrollEl) {
-                                scrollEl.style.opacity = 0;
-                            }
-                        })
-
-                        window.addEventListener('resize-editor-chat', e => {
-                            if (boxImageUpload && scrollEl) {
-                                let { widthParent, widthChild, rectBoxImage } = getSizeOfBoxUpload();
-                                scrollEl.style.width = widthParent + 'px';
-                                scrollEl.style.left = rectBoxImage.left + 'px';
-                                scrollEl.style.top = rectBoxImage.top + rectBoxImage.height - 20 + 'px';
-                                if (scrollEl.dataset.percent) {
-                                    widthChild = buttonAddFileEl.offsetWidth + listFileAddEl.offsetWidth;
-                                    const rate = widthParent / widthChild;
-                                    scrollBar.style.width = widthParent * rate + 'px';
-                                    const maxLeft = widthParent - scrollBar.offsetWidth;
-                                    scrollBar.style.left = maxLeft / 100 * +scrollEl.dataset.percent + 'px';
-                                }
-
-                                setTimeout(() => {
-                                    scrollEl.style.opacity = 1;
-                                }, 0);
-                            }
-                        })
-
-                        function handleMovesScroll(e) {
-                            let dragSpace = e.clientX - initialClientX;
-                            let leftCurrent = scrollLeft + dragSpace;
-                            let maxLeft = boxImageUpload.offsetWidth - scrollBar.offsetWidth;
-                            if (leftCurrent > maxLeft) {
-                                leftCurrent = maxLeft;
-                            }
-
-                            if (leftCurrent < 0) {
-                                leftCurrent = 0.01;
-                            }
-                            const scrollWidth = boxImageUpload.scrollWidth;
-                            let percent = leftCurrent / maxLeft * 100;
-                            let allScrollReal = scrollWidth - boxImageUpload.offsetWidth;
-                            let onePercentOfBoxImage = allScrollReal / 100;
-                            let scrollReal = onePercentOfBoxImage * percent;
-                            scrollEl.dataset.percent = percent;
-                            scrollBar.style.left = leftCurrent + 'px';
-                            boxImageUpload.scrollLeft = scrollReal;
-                        }
-                    } else if (scrollEl) {
-                        scrollBar = scrollEl.firstElementChild
-                    }
-                    if (scrollBar) {
-                        // Nếu kích thước của phần tử con > kích thước phần tử cha 2px
-                        /*
-                            Tính tỉ lệ
-                        */
-                        const rate = widthParent / widthChild;
-                        scrollBar.style.width = widthParent * rate + 'px';
-                    }
-
-                }
-            });
-        });
-
-        // Thiết lập options cho MutationObserver (theo dõi các thay đổi trong phần tử con và các thay đổi trong thuộc tính của phần tử con)
-        var config = { childList: true, subtree: true };
-
-        // Bắt đầu theo dõi phần tử target với các options đã thiết lập
-        observer.observe(boxImageUpload, config);
-    }
-
-    function getSizeOfBoxUpload() {
-        const widthChild = buttonAddFileEl.offsetWidth + listFileAddEl.offsetWidth;
-        const rectBoxImage = boxImageUpload.getBoundingClientRect();
-        const widthParent = rectBoxImage.width;
-        return {
-            widthChild, rectBoxImage, widthParent
-        }
-    }
     function addEventForItemMessage() {
         Array.from(messageEl.children).forEach((messageItem) => {
             const feelMart = messageItem.querySelector(".emoji-mart");
@@ -383,36 +338,60 @@ const CHAT = (() => {
                 return `<div class="message-body content-feel">${data.message}
             ${feel ? `<span class="feel">${feel.native}</span>` : ``}
             </div>`;
-            case 'gif':
-                return 4;
+            case 'image':
+                return `<div class="message-body image-message">
+                <img src="${data.message}"/>
+            ${feel ? `<span class="feel">${feel.native}</span>` : ``}
+            </div>`
         }
     }
 
     function addEventSocketConnect() {
         setTimeout(() => {
             rectAction = actions.getBoundingClientRect()
-            actionsWidth = rectAction.width
+            actionsWidth = rectAction.width;
+            editorHeight = editorChat.offsetHeight;
         }, 500)
         Array.from(actions.children).forEach(button => {
-            if (button.dataset.type === "sticker") {
-                button.onmouseup = (e) => {
-                    if (!stickerBox || stickerBox.classList.contains("hidden")) {
-                        e.stopPropagation();
-                        handleShowSticker(e);
+            switch (button.dataset.type) {
+                case 'sticker':
+                    button.onmouseup = (e) => {
+                        if (!stickerBox || stickerBox.classList.contains("hidden")) {
+                            e.stopPropagation();
+                            handleShowSticker(e, e.target);
+                        }
+                    };
+                    break
+                case 'image':
+                    button.onclick = (e) => {
+                        inputFile.click();
                     }
-                };
+                    break;
+
             }
         })
 
-        Array.from(listActionSub.children).forEach(button => {
-            button.onmouseup = (e) => {
-                if (!stickerBox || stickerBox.classList.contains("hidden")) {
-                    e.stopPropagation();
-                    handleShowSticker(e);
-                    handleActionPlusMouseDown();
-                }
+        Array.from(listActionSub).forEach(button => {
+            switch (button.dataset.type) {
+                case 'sticker':
+                    button.onmouseup = (e) => {
+                        if (!stickerBox || stickerBox.classList.contains("hidden")) {
+                            e.stopPropagation();
+                            handleShowSticker(e, actionPlus);
+                            handleActionPlusMouseDown();
+                        }
+
+                    }
+                    break;
+                case 'image':
+                    button.onclick = () => {
+                        inputFile.click();
+                    }
+                    break;
             }
+
         })
+        editorChat.addEventListener('input', handleInput)
         editorChat.addEventListener('keyup', handleKeyup)
         editorChat.addEventListener('keydown', handleKeydown)
         // Xử lý sự kiên show action chat
@@ -462,7 +441,7 @@ const CHAT = (() => {
         }, 0);
     }
 
-    async function handleShowSticker(e) {
+    async function handleShowSticker(e, targetEl) {
         if (!stickerBox) {
             createAndAddEventStickerBox(e);
         } else {
@@ -470,9 +449,24 @@ const CHAT = (() => {
         }
         setTimeout(() => {
             const rect = stickerBox.getBoundingClientRect();
-            const rectTargetElement = e.target.getBoundingClientRect();
-            stickerBox.style.top = rectTargetElement.top - rect.height - rectTargetElement.height + "px";
-            stickerBox.style.left = rectTargetElement.left + "px";
+            const rectTargetElement = targetEl.getBoundingClientRect();
+            let left = rectTargetElement.left;
+            let top = rectTargetElement.top - rect.height - rectTargetElement.height;
+            if (left + stickerBox.offsetWidth > window.innerWidth) {
+                left = window.innerWidth - stickerBox.offsetWidth - 20;
+            }
+            if (top < 0) {
+                top = 0;
+            }
+            // Tổng = left + stickerBox.offsetWidth
+            //  Phần thừa ra = rectTargetElement.left + rectTargetElement.width
+            // Lấy tổng stickerBox - phần thưa ra số px left transform hiện tại
+            let sumLeftAndWidthStickerBox = left + stickerBox.offsetWidth;
+            let excessPart = sumLeftAndWidthStickerBox - rectTargetElement.left - rectTargetElement.width / 2;
+            let leftTransitionForm = stickerBox.offsetWidth - excessPart;
+            stickerBox.style.transformOrigin = `${leftTransitionForm}px ${stickerBox.offsetHeight}px`;
+            stickerBox.style.top = top + "px";
+            stickerBox.style.left = left + "px";
             stickerBox.style.opacity = 1;
         }, 200);
     }
@@ -502,7 +496,7 @@ const CHAT = (() => {
                 e.stopPropagation();
                 if (tab.classList.contains('active')) return false;
                 stickerItemList.style.display = "flex";
-                stickerItemList.innerHTML = `<style>.rs-loading-main{display: flex;width:100%;height:100%; justify-content: center; align-items: center;} .rsl-wave {font-size: var(--rs-l-size, 2rem); color: var(--rs-l-color, #ee4d2d); display: inline-flex; align-items: center; width: 1.25em; height: 1.25em; } .rsl-wave--icon { display: block; background: currentColor; border-radius: 99px; width: 0.25em; height: 0.25em; margin-right: 0.25em; margin-bottom: -0.25em; -webkit-animation: rsla_wave .56s linear infinite; animation: rsla_wave .56s linear infinite; -webkit-transform: translateY(.0001%); transform: translateY(.0001%); } @-webkit-keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } @keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } .rsl-wave--icon:nth-child(2) { -webkit-animation-delay: -.14s; animation-delay: -.14s; } .rsl-wave--icon:nth-child(3) { -webkit-animation-delay: -.28s; animation-delay: -.28s; margin-right: 0; }</style><div class="rs-loading-main"><div class="rsl-wave"> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> </div></div>`;
+                stickerItemList.innerHTML = rsLoading(`width:100%;height:100%`);
                 indexEmojiCurrent = +tab.dataset.index;
                 let items = await Promise.all(listStickers[tab.dataset.index].items.map(item => {
                     return emojiUtil.emojiAll(item.url, item.imgUrl, item.totalRow, item.totalColumn, item.countLeftInTotalRow, item.ms)
@@ -532,11 +526,12 @@ const CHAT = (() => {
             stickerBox.classList.add("hidden");
         }
     }
+
     function checkLengthEditor() {
         if (editorChat.innerText.trim().length && !flagWidth) {
             flagWidth = true
             window.dispatchEvent(beforeResizeEditorChat)
-            editorChat.nextElementSibling.style.opacity = 0;
+            editorChat.nextElementSibling.classList.add('hidden');
             actions.style.overflow = "hidden";
             actions
                 .animate(
@@ -562,12 +557,23 @@ const CHAT = (() => {
         }
         return false
     }
+
+    function handleInput(e) {
+        checkKeypress(e);
+        // Kiểm nha nếu độ dài lớn hơn độ dài trước thì thay đổi
+        if (e.target.offsetHeight != editorHeight) {
+            editorHeight = e.target.offsetHeight;
+            window.dispatchEvent(beforeResizeEditorChat)
+            window.dispatchEvent(resizeEditorChat);
+        }
+    }
+
     function handleKeyup(e) {
         checkLengthEditor()
         if (editorChat.innerText.trim().length === 0) {
             flagWidth = false
             window.dispatchEvent(beforeResizeEditorChat)
-            editorChat.nextElementSibling.style.opacity = 1
+            editorChat.nextElementSibling.classList.remove('hidden');
             actions.classList.remove('hidden')
             actionPlus.classList.add('hidden')
             actions
@@ -601,7 +607,7 @@ const CHAT = (() => {
         if (!flagWidth && (!e.ctrlKey || data)) {
             flagWidth = true
             window.dispatchEvent(beforeResizeEditorChat)
-            editorChat.nextElementSibling.style.opacity = 0;
+            editorChat.nextElementSibling.classList.add('hidden');
             actions.style.overflow = "hidden";
             actions
                 .animate(
@@ -625,8 +631,8 @@ const CHAT = (() => {
                 })
         }
     }
+
     function handleKeydown(e) {
-        checkKeypress(e);
         if (e.keyCode === 13 && !e.shiftKey) {
             e.preventDefault();
             submitEventChat.typeMessage = "message";
@@ -638,9 +644,10 @@ const CHAT = (() => {
     function handleChat(e) {
         e.preventDefault();
         // Kiểm tra xem có phải chỉ có emoji hay không
-        const pattern = /[\d\w\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễếệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]/;
-
-        if (pattern.test(editorChat.innerText)) {
+        // Kiểm tra có file trước hay không
+        if (newDataTransfer.files.length) {
+            e.typeMessage = "file"
+        } else if (stringVietnamese.test(editorChat.innerText)) {
             e.typeMessage = "message";
         } else {
             e.typeMessage = "feel";
@@ -680,28 +687,48 @@ const CHAT = (() => {
         }
     }
 
-    function chat(data, event) {
-        socket.volatile.emit('chat-admin-socket', 'admin', userId, utils.eD(data), event.typeMessage);
+    async function chat(data, event) {
+        if (event.typeMessage === 'file') {
+            let dataFile = {
+                files: [],
+                stringData: null,
+            };
+            for (const file of newDataTransfer.files) {
+                const base64 = await getBase64(file);
+                dataFile.files.push({
+                    size: file.size,
+                    type: file.type,
+                    base64
+                })
+            }
+            dataFile.stringData = data;
+            socket.volatile.emit('chat-admin-socket', 'admin', userId, eD(dataFile), event.typeMessage);
+            newDataTransfer = new DataTransfer();
+            boxImageUpload.remove();
+            boxImageUpload = undefined;
+        } else {
+            socket.volatile.emit('chat-admin-socket', 'admin', userId, eD(data), event.typeMessage);
+        }
     }
 
     function sendSticker(elementSticker, event) {
         event.typeMessage = "sticker";
         let newElement = document.createElement('span');
         newElement.innerHTML = `<img src="${elementSticker.getAttribute('image-url')}" width="${elementSticker.getAttribute('width-one')}" height="${elementSticker.getAttribute('height-one')}">`
-        socket.volatile.emit('chat-admin-socket', 'admin', userId, utils.eD(newElement.outerHTML), event.typeMessage);
+        socket.volatile.emit('chat-admin-socket', 'admin', userId, eD(newElement.outerHTML), event.typeMessage);
     }
 
     async function loadMoreChat(element) {
         let elementHeading = element.children[0];
         observer = new IntersectionObserver(async (entries) => {
-            for (let i = 0; i < entries.length; i++) {
-                if (entries[i].isIntersecting && +entries[i].intersectionRatio != 0 && !pageLoadMore) {
+            for (const entry of entries) {
+                if (entry.isIntersecting && +entry.intersectionRatio != 0 && !pageLoadMore) {
                     pageLoadMore = true;
                     observer.disconnect();
                     socket.volatile.emit("load-more-message", 'admin', userId, page);
                     const loading = document.createElement('div');
                     loading.className = "load-more-message";
-                    loading.innerHTML = `<style>.rs-loading-main{display: flex;width:100%;height:100%; justify-content: center; align-items: center;} .rsl-wave {font-size: var(--rs-l-size, 2rem); color: var(--rs-l-color, #ee4d2d); display: inline-flex; align-items: center; width: 1.25em; height: 1.25em; } .rsl-wave--icon { display: block; background: currentColor; border-radius: 99px; width: 0.25em; height: 0.25em; margin-right: 0.25em; margin-bottom: -0.25em; -webkit-animation: rsla_wave .56s linear infinite; animation: rsla_wave .56s linear infinite; -webkit-transform: translateY(.0001%); transform: translateY(.0001%); } @-webkit-keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } @keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } .rsl-wave--icon:nth-child(2) { -webkit-animation-delay: -.14s; animation-delay: -.14s; } .rsl-wave--icon:nth-child(3) { -webkit-animation-delay: -.28s; animation-delay: -.28s; margin-right: 0; }</style><div class="rs-loading-main"><div class="rsl-wave"> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> </div></div>`;
+                    loading.innerHTML = rsLoading(`width:100%;height:100%`);
                     element.prepend(loading);
                 }
             }
@@ -711,9 +738,47 @@ const CHAT = (() => {
         elementHeading && observer.observe(elementHeading)
     }
 
+    function handleInputFile() {
+        inputFile.type = "file";
+        inputFile.multiple = true;
+        inputFile.accept = ".jpg,.png,.jpeg,.gif,.webp,.tiff";
+        inputFile.addEventListener('change', (e) => {
+            if (!boxImageUpload) {
+                createBoxImageUpload();
+            }
+            Array.from(e.target.files).forEach(file => {
+                const url = URL.createObjectURL(file);
+                const image = new Image();
+                image.onload = function () {
+                    let randomString = Math.random().toString(36).toString(36).substring(2) + new Date().getTime().toString(36).substring(2);
+                    file.customId = randomString;
+                    itemUploadMessage(this, file);
+                    newDataTransfer.items.add(file);
+                }
+                image.src = url;
+            })
+        })
+    }
+
+    function sortDataUpload() {
+        let refreshDataTransfer = new DataTransfer();
+        for (const fileEl of listFileAddEl.children) {
+            const info = JSON.parse(fileEl.dataset.info);
+            const index = Array.from(newDataTransfer.files).findIndex(file => isSameFile(file, info));
+            if (index !== -1) {
+                refreshDataTransfer.items.add(newDataTransfer.files[index]);
+            }
+        }
+        newDataTransfer = refreshDataTransfer;
+    }
+
+    function isSameFile(file, infoFile) {
+        return file.name === infoFile.name && file.size === infoFile.size && file.customId === infoFile.customId && file.type === infoFile.type;
+    }
     return {
         init: () => {
-            handleShowChat()
+            handleShowChat();
+            handleInputFile();
         },
     }
 })()

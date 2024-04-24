@@ -169,8 +169,8 @@ function listFolder() {
 
 function showFolderChild() {
     if (!listAnchorSide) return false;
-    for (let i = 0; i < listAnchorSide.length; i++) {
-        listAnchorSide[i].onclick = showFolderChild;
+    for (const anchorSide of listAnchorSide) {
+        anchorSide.onclick = showFolderChild;
     }
 
     async function showFolderChild(e) {
@@ -187,15 +187,13 @@ function showFolderChild() {
 }
 
 function allAction() {
-    for (let i = 0; i < listItem.children.length; i++) {
-        const item = listItem.children[i];
+    for (const item of listItem.children) {
         const { id, customs, filename, description, note, path_absolute, extension } = JSON.parse(item.dataset.file);
         const dataCustom = JSON.parse(customs);
-        const inputEl = item.querySelector('input');
-        const removeItemBtn = listItem.children[i].querySelector('.delete');
-        const editItemBtn = listItem.children[i].querySelector('.edit');
-        const restoreItemBtn = listItem.children[i].querySelector('.restore');
-        const deleteItemBtn = listItem.children[i].querySelector('.delete-force');
+        const removeItemBtn = item.querySelector('.delete');
+        const editItemBtn = item.querySelector('.edit');
+        const restoreItemBtn = item.querySelector('.restore');
+        const deleteItemBtn = item.querySelector('.delete-force');
         item.addEventListener('mouseover', function () {
             this.classList.add('show');
         })

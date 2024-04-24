@@ -6,7 +6,6 @@ module.exports = {
     createFolder: function (pathAbsolute, isAdd = true) {
         var name;
         var kebabName;
-        var fullPath;
         var mediaId;
         var pathBeforeChange;
         var fullPath = process.cwd() + process.env.FOLDER_UPLOAD_SERVER;
@@ -68,5 +67,55 @@ module.exports = {
             name: name,
             mediaId
         };
+    },
+    /**
+     * 
+     * @param {*} pathAbsolute - Không có thông tin từ tệp gốc vì trong fullPath đã có sẵn
+     */
+    createFolderFromString: (pathAbsolute) => {
+        pathAbsolute = pathAbsolute.split('/');
+        let kebabName;
+        let pathBeforeChange;
+        let name;
+        let fullPath = process.cwd() + process.env.FOLDER_UPLOAD_SERVER;
+        for (let i = 0; i < pathAbsolute.length; i++) {
+            name = pathAbsolute[i];
+            kebabName = toKebabCase(name);
+            pathBeforeChange = ('/' + kebabName);
+            fullPath += ('/' + kebabName);
+
+            // try {
+            /**
+             * Nếu các thư mục lúc đầu không phải thư mục cuối cùng thì chỉ kiểm tra tồn tại thì bỏ qua luôn
+             */
+            if (fs.existsSync(fullPath)) {
+                continue;
+            }
+
+            var number = 2;
+            var flagName = true;
+            while (fs.existsSync(fullPath)) {
+                const pathNew = kebabName + '-' + number;
+                fullPath = fullPath.replace(pathBeforeChange, '') + '/' + pathNew;
+                pathBeforeChange = '/' + pathNew;
+                flagName = false;
+                number++;
+            }
+
+            if (!flagName) {
+                kebabName += `-${number - 1}`;
+            }
+
+            if (!fs.existsSync(fullPath)) {
+                fs.mkdirSync(fullPath);
+            }
+
+            folderUpload = fullPath;
+            // } catch (e) {
+            //     return {
+            //         status: false
+            //     };
+            // }
+        }
     }
 };

@@ -87,6 +87,7 @@ var MAIN = (() => {
         if (!chooseFile) return;
         chooseFile.addEventListener('click', function (e) {
             const iframeEl = window.frameElement;
+            if(!iframeEl) return false;
             const uuid = iframeEl.dataset.uuid;
             const type = iframeEl.dataset.type;
             const objectData = getItemSelecting(type);
