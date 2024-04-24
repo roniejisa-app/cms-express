@@ -23,7 +23,6 @@ module.exports = {
                 data = await Promise.all(data.map((id) => {
                     return model.findByPk(id)
                 }));
-                console.log(data);
                 fn = (isAdd ? 'add' : 'set') + fn;
                 await item[fn](data);
             },

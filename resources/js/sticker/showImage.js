@@ -58,7 +58,7 @@ export default {
                 }
                 if (countTop === +totalRow) {
                     countTop = 0;
-                    // console.log("reset");
+                    // Reset tại đây;
                 }
                 if (leftE === 0 && topE === 0) {
                     if (listEventEmoji[indexEmoji].countInterval >= 5) {

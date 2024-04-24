@@ -12,8 +12,6 @@ router.get('/', function (req, res, next) {
     res.render('index', { title: 'Express', req });
 });
 router.get('/test',async function (req, res, next) {
-    const roomChat = await chatRoom.findByPk(1);
-    console.log(roomChat);
     res.render('test');
 })
 router.get('/send-mail', async (req, res) => {

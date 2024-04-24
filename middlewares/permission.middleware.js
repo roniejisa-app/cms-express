@@ -14,7 +14,6 @@ module.exports = (req, res, next) => {
                     break;
                 case 'edit':
                 case 'update':
-                    console.log(module);
                     flag = permission.some(permission => permission.includes(`${module}.update`) || permission.includes(`${module}.edit`))
                     break;
                 case 'delete':

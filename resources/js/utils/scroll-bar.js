@@ -18,8 +18,9 @@ export const createScrollbar = function (elementContainer, ...elementSub) {
     // Tạo một MutationObserver instance
     const observer = new MutationObserver(function (mutations) {
         mutations.forEach(function (mutation) {
+            console.log(mutation);
             // Kiểm tra nếu có thêm phần tử con mới vào phần tử target
-            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+            if (mutation.type === 'childList') {
                 // chỗ này kiểm tra xem có thanh scroll chưa thì thêm vào
                 let { widthParent, widthChild, rectBoxImage } = getSizeOfBoxUpload(elementContainer, ...elementSub);
                 let scrollEl = document.querySelector('.scroll-custom');
@@ -73,6 +74,7 @@ export const createScrollbar = function (elementContainer, ...elementSub) {
                     })
 
                     document.addEventListener('mouseup', () => {
+                        document.body.style.cursor = null;
                         document.removeEventListener('mousemove', handleMovesScroll)
                     })
 
@@ -84,11 +86,12 @@ export const createScrollbar = function (elementContainer, ...elementSub) {
 
                     window.addEventListener('resize-editor-chat', e => {
                         if (elementContainer && scrollEl) {
-                            let { widthParent, widthChild, rectBoxImage } = getSizeOfBoxUpload(elementContainer, ...elementSub);
+                            let { widthParent, rectBoxImage } = getSizeOfBoxUpload(elementContainer, ...elementSub);
                             scrollEl.style.width = widthParent - 8 + 'px';
                             scrollEl.style.left = rectBoxImage.left + 4 + 'px';
                             scrollEl.style.top = rectBoxImage.top + rectBoxImage.height - 20 + 'px';
                             if (scrollEl.dataset.percent) {
+                                let { widthParent, widthChild } = getSizeOfBoxUpload(elementContainer, ...elementSub);
                                 const rate = widthParent / widthChild;
                                 scrollBar.style.width = widthParent * rate + 'px';
                                 const maxLeft = scrollEl.offsetWidth - scrollBar.offsetWidth;
@@ -99,6 +102,7 @@ export const createScrollbar = function (elementContainer, ...elementSub) {
                     })
 
                     function handleMovesScroll(e) {
+                        document.body.style.cursor = 'move';
                         let dragSpace = e.clientX - initialClientX;
                         let leftCurrent = scrollLeft + dragSpace;
                         let maxLeft = scrollEl.offsetWidth - scrollBar.offsetWidth;
@@ -121,7 +125,7 @@ export const createScrollbar = function (elementContainer, ...elementSub) {
                 } else if (scrollEl) {
                     scrollBar = scrollEl.firstElementChild
                 }
-                if (scrollBar) {
+                if (scrollBar && widthParent < widthChild) {
                     // Nếu kích thước của phần tử con > kích thước phần tử cha 2px
                     /*
                         Tính tỉ lệ cách lấy chiều rộng ngoài chia cho chiều rộng thực 
@@ -130,6 +134,9 @@ export const createScrollbar = function (elementContainer, ...elementSub) {
                     */
                     const rate = widthParent / widthChild;
                     scrollBar.style.width = widthParent * rate + 'px';
+                } else if (scrollEl) {
+                    scrollEl.remove();
+                    scrollEl = undefined;
                 }
             }
         });
@@ -143,4 +150,3 @@ export const createScrollbar = function (elementContainer, ...elementSub) {
 }
 export const resizeEditorChat = new Event("resize-editor-chat");
 export const beforeResizeEditorChat = new Event("before-resize-editor-chat");
-export default {}

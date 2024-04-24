@@ -531,4 +531,4 @@ const listNew = a.map(item => {
     return newItem;
 })
 
-console.log(listNew)
+// console.log(listNew)

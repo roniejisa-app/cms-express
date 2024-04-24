@@ -1,6 +1,6 @@
 import { files, listItem, mediaInfo } from './selector.js';
 import { allAction } from './item.js';
-import utils from '../utils/utils.js';
+import {formatBytes} from '../utils/utils.js';
 var items = listItem.querySelectorAll('.item');
 var showInfo = new Event('show-info-file');
 //Xử lý các vấn đề sau 
@@ -349,7 +349,7 @@ function startSelecting() {
         function showInfo(e, isImage = false) {
             objectDataInfo.filename = custom.filename;
             objectDataInfo.extension = custom.extension;
-            objectDataInfo.size = utils.formatBytes(custom.size);
+            objectDataInfo.size = formatBytes(custom.size);
             if (isImage) {
                 objectDataInfo.natural = `${imgEl.naturalWidth} ✕ ${imgEl.naturalHeight}`
             }

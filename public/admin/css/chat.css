@@ -116,6 +116,17 @@
   border-radius: 50%;
   font-size: 16px;
 }
+.chat-box-admin .chat-content .message .item-message .image-message {
+  padding: 0;
+  cursor: pointer;
+}
+.chat-box-admin .chat-content .message .item-message .image-message img {
+  border: 1px solid #dedede;
+  border-radius: 25px;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
 .chat-box-admin .chat-content .message .right,
 .chat-box-admin .chat-content .message .left {
   margin-bottom: 6px;
@@ -158,39 +169,52 @@
 .chat-box-admin .chat-content .message .right {
   justify-content: flex-end;
 }
+.chat-box-admin .chat-content .message .right:not(:has(+ .left)):has(+ .right):nth-of-type(1) .image-message img,
 .chat-box-admin .chat-content .message .right:not(:has(+ .left)):has(+ .right):nth-of-type(1) .content {
   border-top-right-radius: 25px;
   border-bottom-right-radius: 6px;
 }
+.chat-box-admin .chat-content .message .right:has(+ .right) .image-message img,
 .chat-box-admin .chat-content .message .right:has(+ .right) .content {
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
 }
-.chat-box-admin .chat-content .message .right:has(+ .right) + .right:not(:has(+ .right)) .content, .chat-box-admin .chat-content .message .right:has(+ .right) + .right:not(:has(+ .left)) + .right:not(:has(+ .right)) .content {
+.chat-box-admin .chat-content .message .right:has(+ .right) + .right:not(:has(+ .right)) .image-message img,
+.chat-box-admin .chat-content .message .right:has(+ .right) + .right:not(:has(+ .right)) .content, .chat-box-admin .chat-content .message .right:has(+ .right) + .right:not(:has(+ .left)) + .right:not(:has(+ .right)) .image-message img,
+.chat-box-admin .chat-content .message .right:has(+ .right) + .right:not(:has(+ .left)) + .right:not(:has(+ .right)) .content {
   border-top-right-radius: 6px;
   border-bottom-right-radius: 25px;
 }
+.chat-box-admin .chat-content .message .right:not(:has(+ .right)):has(+ .left) + .left:has(+ .left) .image-message img,
 .chat-box-admin .chat-content .message .right:not(:has(+ .right)):has(+ .left) + .left:has(+ .left) .content {
   border-top-left-radius: 25px;
   border-bottom-left-radius: 6px;
 }
-.chat-box-admin .chat-content .message .left:not(:has(+ .left)):has(+ .right) + .right:has(+ .rightp) .content {
+.chat-box-admin .chat-content .message .left:not(:has(+ .left)):has(+ .right) + .right:has(+ .right) .image-message img,
+.chat-box-admin .chat-content .message .left:not(:has(+ .left)):has(+ .right) + .right:has(+ .right) .content {
   border-top-right-radius: 25px;
   border-bottom-right-radius: 6px;
 }
+.chat-box-admin .chat-content .message .left:not(:has(+ .right)):has(+ .left):nth-of-type(1) .image-message img,
 .chat-box-admin .chat-content .message .left:not(:has(+ .right)):has(+ .left):nth-of-type(1) .content {
   border-top-left-radius: 25px;
   border-bottom-left-radius: 6px;
 }
+.chat-box-admin .chat-content .message .left:has(+ .left) .image-message img,
 .chat-box-admin .chat-content .message .left:has(+ .left) .content {
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
 }
-.chat-box-admin .chat-content .message .left:has(+ .left) + .left:not(:has(+ .left)) .content, .chat-box-admin .chat-content .message .left:has(+ .left) + .left:not(:has(+ .right)) + .left:not(:has(+ .left)) .content {
+.chat-box-admin .chat-content .message .left:has(+ .left) + .left:not(:has(+ .left)) .image-message img,
+.chat-box-admin .chat-content .message .left:has(+ .left) + .left:not(:has(+ .left)) .content, .chat-box-admin .chat-content .message .left:has(+ .left) + .left:not(:has(+ .right)) + .left:not(:has(+ .left)) .image-message img,
+.chat-box-admin .chat-content .message .left:has(+ .left) + .left:not(:has(+ .right)) + .left:not(:has(+ .left)) .content {
   border-top-left-radius: 6px;
   border-bottom-left-radius: 25px;
 }
 .chat-box-admin .chat-content .message .left:not(:has(+ [class*=right])), .chat-box-admin .chat-content .message .left:not(:has(+ [class*=left])) {
+  border-radius: 25px !important;
+}
+.chat-box-admin .chat-content .message .left:not(:has(+ [class*=right])) img, .chat-box-admin .chat-content .message .left:not(:has(+ [class*=left])) img {
   border-radius: 25px !important;
 }
 .chat-box-admin .chat-content .form-chat {
@@ -218,6 +242,7 @@
   padding: 10px;
   width: 200px;
   border-radius: 6px;
+  z-index: 10;
   border-bottom-right-radius: 0;
   filter: drop-shadow(2px 4px 1px rgba(0, 0, 0, 0.1));
 }
@@ -318,7 +343,7 @@
   bottom: 100%;
   font-size: 0;
   left: -1px;
-  padding: 12px;
+  padding: 12px 12px 20px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   display: flex;
@@ -341,6 +366,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 6px;
 }
 .chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image .btn-add-file-message svg {
   width: 40px;
@@ -350,10 +376,35 @@
   display: flex;
   gap: 6px;
 }
+.chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image .list-image-add .item-image-add {
+  position: relative;
+}
 .chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image .list-image-add .item-image-add img {
+  border-radius: 6px;
   width: 48px;
   height: 48px;
   object-fit: scale-down;
+}
+.chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image .list-image-add .item-image-add .close-image-item {
+  height: fit-content;
+  position: absolute;
+  background: white;
+  padding: 2px;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: translate(50%, -50%);
+  right: 0;
+  top: 0;
+  font-size: 0;
+  transition: fill 300ms ease;
+  z-index: 1;
+}
+.chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image .list-image-add .item-image-add .close-image-item:hover {
+  fill: #ff2200;
+}
+.chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image .list-image-add .item-image-add .close-image-item svg {
+  width: 16px;
+  height: 16px;
 }
 .chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image::-webkit-scrollbar {
   display: none;
@@ -443,6 +494,7 @@
   transition: background 300ms ease;
   padding: 2px 0;
   user-select: none;
+  cursor: pointer;
 }
 .scroll-custom:hover {
   background: rgba(179, 127, 235, 0.1647058824);

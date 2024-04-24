@@ -1,4 +1,4 @@
-import { u as utils } from "./utils.js";
+import { d as dD, g as getBase64, e as eD } from "./utils.js";
 const PACKET_TYPES = /* @__PURE__ */ Object.create(null);
 PACKET_TYPES["open"] = "0";
 PACKET_TYPES["close"] = "1";
@@ -50984,13 +50984,15 @@ const createScrollbar = function(elementContainer, ...elementSub) {
   let initialClientX = 0;
   const observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
-      if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+      console.log(mutation);
+      if (mutation.type === "childList") {
         let { widthParent, widthChild, rectBoxImage } = getSizeOfBoxUpload(elementContainer, ...elementSub);
         let scrollEl = document.querySelector(".scroll-custom");
         let scrollBar;
         let diffScrollBar = widthChild - widthParent;
         if (diffScrollBar > 0 && !scrollEl) {
           let handleMovesScroll = function(e) {
+            document.body.style.cursor = "move";
             let dragSpace = e.clientX - initialClientX;
             let leftCurrent = scrollLeft + dragSpace;
             let maxLeft = scrollEl.offsetWidth - scrollBar.offsetWidth;
@@ -51050,6 +51052,7 @@ const createScrollbar = function(elementContainer, ...elementSub) {
             document.addEventListener("mousemove", handleMovesScroll);
           });
           document.addEventListener("mouseup", () => {
+            document.body.style.cursor = null;
             document.removeEventListener("mousemove", handleMovesScroll);
           });
           window.addEventListener("before-resize-editor-chat", (e) => {
@@ -51059,13 +51062,14 @@ const createScrollbar = function(elementContainer, ...elementSub) {
           });
           window.addEventListener("resize-editor-chat", (e) => {
             if (elementContainer && scrollEl) {
-              let { widthParent: widthParent2, widthChild: widthChild2, rectBoxImage: rectBoxImage2 } = getSizeOfBoxUpload(elementContainer, ...elementSub);
+              let { widthParent: widthParent2, rectBoxImage: rectBoxImage2 } = getSizeOfBoxUpload(elementContainer, ...elementSub);
               scrollEl.style.width = widthParent2 - 8 + "px";
               scrollEl.style.left = rectBoxImage2.left + 4 + "px";
               scrollEl.style.top = rectBoxImage2.top + rectBoxImage2.height - 20 + "px";
               if (scrollEl.dataset.percent) {
-                const rate = widthParent2 / widthChild2;
-                scrollBar.style.width = widthParent2 * rate + "px";
+                let { widthParent: widthParent3, widthChild: widthChild2 } = getSizeOfBoxUpload(elementContainer, ...elementSub);
+                const rate = widthParent3 / widthChild2;
+                scrollBar.style.width = widthParent3 * rate + "px";
                 const maxLeft = scrollEl.offsetWidth - scrollBar.offsetWidth;
                 scrollBar.style.left = maxLeft / 100 * +scrollEl.dataset.percent + "px";
               }
@@ -51075,9 +51079,12 @@ const createScrollbar = function(elementContainer, ...elementSub) {
         } else if (scrollEl) {
           scrollBar = scrollEl.firstElementChild;
         }
-        if (scrollBar) {
+        if (scrollBar && widthParent < widthChild) {
           const rate = widthParent / widthChild;
           scrollBar.style.width = widthParent * rate + "px";
+        } else if (scrollEl) {
+          scrollEl.remove();
+          scrollEl = void 0;
         }
       }
     });
@@ -51087,9 +51094,14 @@ const createScrollbar = function(elementContainer, ...elementSub) {
 };
 const resizeEditorChat = new Event("resize-editor-chat");
 const beforeResizeEditorChat = new Event("before-resize-editor-chat");
+const rsLoading = (cssPrefix = "width:100%;height:100%") => {
+  return `<style>.rs-loading-main{display: flex;${cssPrefix}; justify-content: center; align-items: center;} .rsl-wave {font-size: var(--rs-l-size, 2rem); color: var(--rs-l-color, #ee4d2d); display: inline-flex; align-items: center; width: 1.25em; height: 1.25em; } .rsl-wave--icon { display: block; background: currentColor; border-radius: 99px; width: 0.25em; height: 0.25em; margin-right: 0.25em; margin-bottom: -0.25em; -webkit-animation: rsla_wave .56s linear infinite; animation: rsla_wave .56s linear infinite; -webkit-transform: translateY(.0001%); transform: translateY(.0001%); } @-webkit-keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } @keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } .rsl-wave--icon:nth-child(2) { -webkit-animation-delay: -.14s; animation-delay: -.14s; } .rsl-wave--icon:nth-child(3) { -webkit-animation-delay: -.28s; animation-delay: -.28s; margin-right: 0; }</style><div class="rs-loading-main"><div class="rsl-wave"> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> </div></div>`;
+};
+const stringVietnamese = /[\d\w\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễếệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]/;
 const submitEventChat = new Event("submit-form-chat");
 const eventUpdateAction = new Event("update-action-message-item");
 const CHAT = (() => {
+  const inputFile = document.createElement("input");
   const chatBox = document.querySelector(".chat-box-admin");
   const buttonShowChatBox = chatBox.querySelector(".show-chat-box");
   const chatHTML = chatBox.querySelector(".chat-content");
@@ -51103,7 +51115,7 @@ const CHAT = (() => {
   const chatClose = chatContentHeader.querySelector(".chat-close");
   const actionPlus = chatHTML.querySelector(".action-plus");
   const actionMenuSub = actionPlus.querySelector(".action-sub-menu");
-  const listActionSub = actionMenuSub.querySelector("ul");
+  const listActionSub = actionMenuSub.querySelectorAll("ul button");
   let boxImageUpload;
   let buttonAddFileEl;
   let listFileAddEl;
@@ -51112,6 +51124,7 @@ const CHAT = (() => {
   let stickerItemList = null;
   const userId = chatBox.dataset.userId;
   let observer;
+  let itemDrag;
   let indexEmojiCurrent = 0;
   let page = 2;
   let pageLoadMore = false;
@@ -51156,7 +51169,7 @@ const CHAT = (() => {
       messageEl.innerHTML = "";
     });
     socket.on("join room success", (value2) => {
-      const listData = utils.dD(value2);
+      const listData = dD(value2);
       listData.forEach((data) => {
         messageEl.insertAdjacentHTML("beforeend", templateMessage(data, data.user.socketId === socket.id, messageEl));
       });
@@ -51169,7 +51182,7 @@ const CHAT = (() => {
       loadMoreChat(messageEl);
     });
     socket.on("chat-admin-client", (data) => {
-      data = utils.dD(data);
+      data = dD(data);
       messageEl.insertAdjacentHTML("beforeend", templateMessage(data, data.user.socketId === socket.id, messageEl));
       messageEl.scrollTo({
         behavior: "smooth",
@@ -51178,7 +51191,7 @@ const CHAT = (() => {
       window.dispatchEvent(eventUpdateAction);
     });
     socket.on("response-message-load", (value2) => {
-      const listData = utils.dD(value2);
+      const listData = dD(value2);
       const loading = messageEl.querySelector(".load-more-message");
       if (loading) {
         loading.remove();
@@ -51194,9 +51207,10 @@ const CHAT = (() => {
       }
     });
     socket.on("feel-message-response", (value2) => {
-      const feelData = utils.dD(value2);
-      const content = document.querySelector(`.message [data-id="${feelData.message_id}"] .message-body`);
-      if (content) {
+      const feelData = dD(value2);
+      const messageItem = document.querySelector(`.message [data-id="${feelData.message_id}"]`);
+      if (messageItem) {
+        const content = messageItem.querySelector(".message-body");
         let createSpanFeel = content.querySelector("span.feel");
         if (!createSpanFeel) {
           createSpanFeel = document.createElement("span");
@@ -51205,9 +51219,15 @@ const CHAT = (() => {
         createSpanFeel.innerText = feelData.native;
         content.append(createSpanFeel);
       }
+      const lastMessage = messageEl.children[messageEl.children.length - 1];
+      if (lastMessage === messageItem) {
+        messageEl.scrollTo({
+          top: messageEl.scrollHeight - messageEl.clientHeight
+        });
+      }
     });
   }
-  function handlePasteData(e) {
+  async function handlePasteData(e) {
     var item = Array.from(e.clipboardData.items).find((x) => /^image\//.test(x.type));
     e.preventDefault();
     if (item) {
@@ -51215,14 +51235,10 @@ const CHAT = (() => {
         createBoxImageUpload();
       }
       var file = item.getAsFile();
-      newDataTransfer.items.add(file);
-      console.log(newDataTransfer.files);
       var img = new Image();
       img.onload = function() {
-        const itemEl = document.createElement("div");
-        itemEl.className = "item-image-add";
-        itemEl.append(this);
-        listFileAddEl.appendChild(itemEl);
+        itemUploadMessage(this, newDataTransfer.items.length);
+        newDataTransfer.items.add(file);
       };
       img.src = URL.createObjectURL(file);
     } else {
@@ -51230,6 +51246,46 @@ const CHAT = (() => {
       checkKeypress(pastedText);
       document.execCommand("insertText", false, pastedText);
     }
+  }
+  function itemUploadMessage(imageEl, index) {
+    const itemEl = document.createElement("div");
+    itemEl.className = "item-image-add";
+    itemEl.dataset.i = index;
+    const closeEl = document.createElement("button");
+    closeEl.className = "close-image-item";
+    closeEl.type = "button";
+    closeEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"/></svg>`;
+    itemEl.append(imageEl);
+    itemEl.append(closeEl);
+    listFileAddEl.appendChild(itemEl);
+    closeEl.onclick = () => {
+      newDataTransfer.items.remove(index);
+      itemEl.remove();
+      if (newDataTransfer.files.length === 0) {
+        boxImageUpload.remove();
+        boxImageUpload = void 0;
+      }
+    };
+    itemEl.draggable = true;
+    itemEl.ondragstart = (e) => {
+      itemDrag = itemEl;
+    };
+    itemEl.ondragover = (e) => {
+      e.preventDefault();
+      const itemTarget = e.target.closest(".item-image-add");
+      if (itemTarget) {
+        const rate = itemTarget.offsetWidth / 2;
+        if (e.offsetX > rate) {
+          itemTarget.parentElement.insertBefore(itemTarget, itemDrag);
+        } else if (e.offsetX <= rate) {
+          itemTarget.parentElement.insertBefore(itemDrag, itemTarget);
+        }
+      }
+    };
+    itemEl.ondrop = () => {
+      itemDrag = void 0;
+      sortDataUpload();
+    };
   }
   function createBoxImageUpload() {
     boxImageUpload = document.createElement("div");
@@ -51242,6 +51298,9 @@ const CHAT = (() => {
     listFileAddEl.className = "list-image-add";
     boxImageUpload.append(buttonAddFileEl, listFileAddEl);
     editorChatContent.prepend(boxImageUpload);
+    buttonAddFileEl.onclick = (e) => {
+      inputFile.click();
+    };
     createScrollbar(boxImageUpload, buttonAddFileEl, listFileAddEl);
   }
   function addEventForItemMessage() {
@@ -51321,8 +51380,11 @@ const CHAT = (() => {
         return `<div class="message-body content-feel">${data.message}
             ${feel ? `<span class="feel">${feel.native}</span>` : ``}
             </div>`;
-      case "gif":
-        return 4;
+      case "image":
+        return `<div class="message-body image-message">
+                <img src="${data.message}"/>
+            ${feel ? `<span class="feel">${feel.native}</span>` : ``}
+            </div>`;
     }
   }
   function addEventSocketConnect() {
@@ -51332,23 +51394,39 @@ const CHAT = (() => {
       editorHeight = editorChat.offsetHeight;
     }, 500);
     Array.from(actions.children).forEach((button) => {
-      if (button.dataset.type === "sticker") {
-        button.onmouseup = (e) => {
-          if (!stickerBox || stickerBox.classList.contains("hidden")) {
-            e.stopPropagation();
-            handleShowSticker(e, e.target);
-          }
-        };
+      switch (button.dataset.type) {
+        case "sticker":
+          button.onmouseup = (e) => {
+            if (!stickerBox || stickerBox.classList.contains("hidden")) {
+              e.stopPropagation();
+              handleShowSticker(e, e.target);
+            }
+          };
+          break;
+        case "image":
+          button.onclick = (e) => {
+            inputFile.click();
+          };
+          break;
       }
     });
-    Array.from(listActionSub.children).forEach((button) => {
-      button.onmouseup = (e) => {
-        if (!stickerBox || stickerBox.classList.contains("hidden")) {
-          e.stopPropagation();
-          handleShowSticker(e, actionPlus);
-          handleActionPlusMouseDown();
-        }
-      };
+    Array.from(listActionSub).forEach((button) => {
+      switch (button.dataset.type) {
+        case "sticker":
+          button.onmouseup = (e) => {
+            if (!stickerBox || stickerBox.classList.contains("hidden")) {
+              e.stopPropagation();
+              handleShowSticker(e, actionPlus);
+              handleActionPlusMouseDown();
+            }
+          };
+          break;
+        case "image":
+          button.onclick = () => {
+            inputFile.click();
+          };
+          break;
+      }
     });
     editorChat.addEventListener("input", handleInput);
     editorChat.addEventListener("keyup", handleKeyup);
@@ -51410,7 +51488,6 @@ const CHAT = (() => {
       let sumLeftAndWidthStickerBox = left + stickerBox.offsetWidth;
       let excessPart = sumLeftAndWidthStickerBox - rectTargetElement.left - rectTargetElement.width / 2;
       let leftTransitionForm = stickerBox.offsetWidth - excessPart;
-      console.log(leftTransitionForm);
       stickerBox.style.transformOrigin = `${leftTransitionForm}px ${stickerBox.offsetHeight}px`;
       stickerBox.style.top = top + "px";
       stickerBox.style.left = left + "px";
@@ -51443,7 +51520,7 @@ const CHAT = (() => {
         if (tab.classList.contains("active"))
           return false;
         stickerItemList.style.display = "flex";
-        stickerItemList.innerHTML = `<style>.rs-loading-main{display: flex;width:100%;height:100%; justify-content: center; align-items: center;} .rsl-wave {font-size: var(--rs-l-size, 2rem); color: var(--rs-l-color, #ee4d2d); display: inline-flex; align-items: center; width: 1.25em; height: 1.25em; } .rsl-wave--icon { display: block; background: currentColor; border-radius: 99px; width: 0.25em; height: 0.25em; margin-right: 0.25em; margin-bottom: -0.25em; -webkit-animation: rsla_wave .56s linear infinite; animation: rsla_wave .56s linear infinite; -webkit-transform: translateY(.0001%); transform: translateY(.0001%); } @-webkit-keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } @keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } .rsl-wave--icon:nth-child(2) { -webkit-animation-delay: -.14s; animation-delay: -.14s; } .rsl-wave--icon:nth-child(3) { -webkit-animation-delay: -.28s; animation-delay: -.28s; margin-right: 0; }</style><div class="rs-loading-main"><div class="rsl-wave"> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> </div></div>`;
+        stickerItemList.innerHTML = rsLoading(`width:100%;height:100%`);
         indexEmojiCurrent = +tab.dataset.index;
         let items = await Promise.all(listStickers[tab.dataset.index].items.map((item) => {
           return emojiUtil.emojiAll(item.url, item.imgUrl, item.totalRow, item.totalColumn, item.countLeftInTotalRow, item.ms);
@@ -51576,8 +51653,9 @@ const CHAT = (() => {
   }
   function handleChat(e) {
     e.preventDefault();
-    const pattern = /[\d\w\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễếệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]/;
-    if (pattern.test(editorChat.innerText)) {
+    if (newDataTransfer.files.length) {
+      e.typeMessage = "file";
+    } else if (stringVietnamese.test(editorChat.innerText)) {
       e.typeMessage = "message";
     } else {
       e.typeMessage = "feel";
@@ -51610,14 +51688,36 @@ const CHAT = (() => {
       stickerBox.classList.add("hidden");
     }
   }
-  function chat(data, event) {
-    socket.volatile.emit("chat-admin-socket", "admin", userId, utils.eD(data), event.typeMessage);
+  async function chat(data, event) {
+    if (event.typeMessage === "file") {
+      let dataFile = {
+        files: [],
+        stringData: null
+      };
+      const dataFiles = Array.from(newDataTransfer.files);
+      for (let i2 = 0; i2 < dataFiles.length; i2++) {
+        let file = dataFiles[i2];
+        const base64 = await getBase64(file);
+        dataFile.files.push({
+          size: file.size,
+          type: file.type,
+          base64
+        });
+      }
+      dataFile.stringData = data;
+      socket.volatile.emit("chat-admin-socket", "admin", userId, eD(dataFile), event.typeMessage);
+      newDataTransfer = new DataTransfer();
+      boxImageUpload.remove();
+      boxImageUpload = void 0;
+    } else {
+      socket.volatile.emit("chat-admin-socket", "admin", userId, eD(data), event.typeMessage);
+    }
   }
   function sendSticker(elementSticker, event) {
     event.typeMessage = "sticker";
     let newElement = document.createElement("span");
     newElement.innerHTML = `<img src="${elementSticker.getAttribute("image-url")}" width="${elementSticker.getAttribute("width-one")}" height="${elementSticker.getAttribute("height-one")}">`;
-    socket.volatile.emit("chat-admin-socket", "admin", userId, utils.eD(newElement.outerHTML), event.typeMessage);
+    socket.volatile.emit("chat-admin-socket", "admin", userId, eD(newElement.outerHTML), event.typeMessage);
   }
   async function loadMoreChat(element) {
     let elementHeading = element.children[0];
@@ -51629,7 +51729,7 @@ const CHAT = (() => {
           socket.volatile.emit("load-more-message", "admin", userId, page);
           const loading = document.createElement("div");
           loading.className = "load-more-message";
-          loading.innerHTML = `<style>.rs-loading-main{display: flex;width:100%;height:100%; justify-content: center; align-items: center;} .rsl-wave {font-size: var(--rs-l-size, 2rem); color: var(--rs-l-color, #ee4d2d); display: inline-flex; align-items: center; width: 1.25em; height: 1.25em; } .rsl-wave--icon { display: block; background: currentColor; border-radius: 99px; width: 0.25em; height: 0.25em; margin-right: 0.25em; margin-bottom: -0.25em; -webkit-animation: rsla_wave .56s linear infinite; animation: rsla_wave .56s linear infinite; -webkit-transform: translateY(.0001%); transform: translateY(.0001%); } @-webkit-keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } @keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } .rsl-wave--icon:nth-child(2) { -webkit-animation-delay: -.14s; animation-delay: -.14s; } .rsl-wave--icon:nth-child(3) { -webkit-animation-delay: -.28s; animation-delay: -.28s; margin-right: 0; }</style><div class="rs-loading-main"><div class="rsl-wave"> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> </div></div>`;
+          loading.innerHTML = rsLoading(`width:100%;height:100%`);
           element.prepend(loading);
         }
       }
@@ -51638,9 +51738,39 @@ const CHAT = (() => {
     });
     elementHeading && observer.observe(elementHeading);
   }
+  function handleInputFile() {
+    inputFile.type = "file";
+    inputFile.multiple = true;
+    inputFile.accept = ".jpg,.png,.jpeg,.gif,.webp,.tiff";
+    inputFile.addEventListener("change", (e) => {
+      console.log(boxImageUpload);
+      if (!boxImageUpload) {
+        createBoxImageUpload();
+      }
+      Array.from(e.target.files).forEach((file) => {
+        const url2 = URL.createObjectURL(file);
+        const image = new Image();
+        image.onload = function() {
+          itemUploadMessage(this, newDataTransfer.items.length);
+          newDataTransfer.items.add(file);
+        };
+        image.src = url2;
+      });
+    });
+  }
+  function sortDataUpload() {
+    let refreshDataTransfer = new DataTransfer();
+    Array.from(listFileAddEl.children).forEach((item, index) => {
+      let indexOld = item.dataset.i;
+      refreshDataTransfer.items.add(newDataTransfer.files[indexOld]);
+      item.dataset.i = index;
+    });
+    newDataTransfer = refreshDataTransfer;
+  }
   return {
     init: () => {
       handleShowChat();
+      handleInputFile();
     }
   };
 })();

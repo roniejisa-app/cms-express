@@ -1,5 +1,5 @@
 import socket from './socket.js';
-import utils from '../utils/utils.js';
+import { eD, dD, getBase64 } from '../utils/utils.js';
 import listStickers from '../sticker/list.js';
 import emojiUtil from '../sticker/showImage.js';
 import emojiData from '@emoji-mart/data/sets/14/facebook.json'
@@ -7,9 +7,14 @@ import { Picker } from 'emoji-mart'
 import langEmoji from './emoji-lang-vi.js';
 import { convertStringToEmoji } from '../utils/emoji-convert.js';
 import { createScrollbar, resizeEditorChat, beforeResizeEditorChat } from '../utils/scroll-bar.js';
+import { rsLoading } from '../utils/template.js';
+import { stringVietnamese } from '../utils/pattern.js';
 const submitEventChat = new Event('submit-form-chat');
 const eventUpdateAction = new Event("update-action-message-item");
 const CHAT = (() => {
+    const inputFile = document.createElement('input');
+
+    // Thêm input file;
     const chatBox = document.querySelector('.chat-box-admin')
     const buttonShowChatBox = chatBox.querySelector('.show-chat-box')
     const chatHTML = chatBox.querySelector('.chat-content')
@@ -23,7 +28,7 @@ const CHAT = (() => {
     const chatClose = chatContentHeader.querySelector('.chat-close')
     const actionPlus = chatHTML.querySelector('.action-plus');
     const actionMenuSub = actionPlus.querySelector('.action-sub-menu');
-    const listActionSub = actionMenuSub.querySelector('ul');
+    const listActionSub = actionMenuSub.querySelectorAll('ul button');
     let boxImageUpload;
     let buttonAddFileEl;
     let listFileAddEl;
@@ -32,6 +37,7 @@ const CHAT = (() => {
     let stickerItemList = null;
     const userId = chatBox.dataset.userId;
     let observer;
+    let itemDrag;
     let indexEmojiCurrent = 0;
     let page = 2;
     let pageLoadMore = false;
@@ -83,7 +89,7 @@ const CHAT = (() => {
         })
 
         socket.on('join room success', (value) => {
-            const listData = utils.dD(value);
+            const listData = dD(value);
             listData.forEach(data => {
                 messageEl.insertAdjacentHTML('beforeend', templateMessage(data, data.user.socketId === socket.id, messageEl))
             })
@@ -97,7 +103,7 @@ const CHAT = (() => {
         })
 
         socket.on("chat-admin-client", (data) => {
-            data = utils.dD(data);
+            data = dD(data);
 
             messageEl.insertAdjacentHTML('beforeend', templateMessage(data, data.user.socketId === socket.id, messageEl))
             messageEl.scrollTo({
@@ -109,7 +115,7 @@ const CHAT = (() => {
         })
 
         socket.on("response-message-load", (value) => {
-            const listData = utils.dD(value);
+            const listData = dD(value);
             const loading = messageEl.querySelector('.load-more-message');
             if (loading) {
                 loading.remove();
@@ -128,9 +134,12 @@ const CHAT = (() => {
         })
 
         socket.on("feel-message-response", (value) => {
-            const feelData = utils.dD(value);
-            const content = document.querySelector(`.message [data-id="${feelData.message_id}"] .message-body`);
-            if (content) {
+            const feelData = dD(value);
+            // Kiểm tra là cuối thì sẽ scroll xuống cuối
+
+            const messageItem = document.querySelector(`.message [data-id="${feelData.message_id}"]`);
+            if (messageItem) {
+                const content = messageItem.querySelector('.message-body');
                 let createSpanFeel = content.querySelector('span.feel');
                 if (!createSpanFeel) {
                     createSpanFeel = document.createElement('span');
@@ -139,10 +148,17 @@ const CHAT = (() => {
                 createSpanFeel.innerText = feelData.native;
                 content.append(createSpanFeel);
             }
+
+            const lastMessage = messageEl.children[messageEl.children.length - 1];
+            if (lastMessage === messageItem) {
+                messageEl.scrollTo({
+                    top: messageEl.scrollHeight - messageEl.clientHeight
+                })
+            }
         })
     }
 
-    function handlePasteData(e) {
+    async function handlePasteData(e) {
         // Lấy ra item hình ảnh từ dữ liệu dán
         // console.log(e.clipboardData.items[0].getAsFile());
         var item = Array.from(e.clipboardData.items).find(x => /^image\//.test(x.type));
@@ -154,17 +170,12 @@ const CHAT = (() => {
             }
             // Lấy blob của hình ảnh
             var file = item.getAsFile();
-
-            newDataTransfer.items.add(file);
-            console.log(newDataTransfer.files);
             // Tạo một đối tượng Image
             var img = new Image();
             // Khi hình ảnh được tải hoàn tất, chèn nó vào trang
             img.onload = function () {
-                const itemEl = document.createElement('div');
-                itemEl.className = 'item-image-add';
-                itemEl.append(this);
-                listFileAddEl.appendChild(itemEl);
+                itemUploadMessage(this, newDataTransfer.items.length);
+                newDataTransfer.items.add(file);
             };
             // Đặt đường dẫn của hình ảnh là URL của blob
             img.src = URL.createObjectURL(file);
@@ -172,6 +183,50 @@ const CHAT = (() => {
             var pastedText = (e.originalEvent || e).clipboardData.getData('text/plain');
             checkKeypress(pastedText);
             document.execCommand('insertText', false, pastedText);
+        }
+    }
+    function itemUploadMessage(imageEl, index) {
+        const itemEl = document.createElement('div');
+        itemEl.className = 'item-image-add';
+        itemEl.dataset.i = index;
+        const closeEl = document.createElement('button');
+        closeEl.className = "close-image-item";
+        closeEl.type = "button";
+        closeEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"/></svg>`;
+        itemEl.append(imageEl);
+        itemEl.append(closeEl);
+        listFileAddEl.appendChild(itemEl);
+        closeEl.onclick = () => {
+            newDataTransfer.items.remove(index);
+            itemEl.remove();
+            if (newDataTransfer.files.length === 0) {
+                boxImageUpload.remove()
+                boxImageUpload = undefined;
+            }
+        }
+        // Kích hoạt kiện kéo
+        itemEl.draggable = true;
+
+        itemEl.ondragstart = (e) => {
+            itemDrag = itemEl;
+        }
+
+        itemEl.ondragover = (e) => {
+            e.preventDefault();
+            const itemTarget = e.target.closest('.item-image-add');
+            if (itemTarget) {
+                const rate = itemTarget.offsetWidth / 2;
+                if (e.offsetX > rate) {
+                    itemTarget.parentElement.insertBefore(itemTarget, itemDrag);
+                } else if (e.offsetX <= rate) {
+                    itemTarget.parentElement.insertBefore(itemDrag, itemTarget);
+                }
+            }
+        }
+
+        itemEl.ondrop = () => {
+            itemDrag = undefined;
+            sortDataUpload();
         }
     }
     // xử lý upload file ở chỗ này thôi
@@ -186,6 +241,9 @@ const CHAT = (() => {
         listFileAddEl.className = "list-image-add";
         boxImageUpload.append(buttonAddFileEl, listFileAddEl);
         editorChatContent.prepend(boxImageUpload);
+        buttonAddFileEl.onclick = e => {
+            inputFile.click();
+        };
         createScrollbar(boxImageUpload, buttonAddFileEl, listFileAddEl)
     }
 
@@ -270,8 +328,11 @@ const CHAT = (() => {
                 return `<div class="message-body content-feel">${data.message}
             ${feel ? `<span class="feel">${feel.native}</span>` : ``}
             </div>`;
-            case 'gif':
-                return 4;
+            case 'image':
+                return `<div class="message-body image-message">
+                <img src="${data.message}"/>
+            ${feel ? `<span class="feel">${feel.native}</span>` : ``}
+            </div>`
         }
     }
 
@@ -282,24 +343,43 @@ const CHAT = (() => {
             editorHeight = editorChat.offsetHeight;
         }, 500)
         Array.from(actions.children).forEach(button => {
-            if (button.dataset.type === "sticker") {
-                button.onmouseup = (e) => {
-                    if (!stickerBox || stickerBox.classList.contains("hidden")) {
-                        e.stopPropagation();
-                        handleShowSticker(e, e.target);
+            switch (button.dataset.type) {
+                case 'sticker':
+                    button.onmouseup = (e) => {
+                        if (!stickerBox || stickerBox.classList.contains("hidden")) {
+                            e.stopPropagation();
+                            handleShowSticker(e, e.target);
+                        }
+                    };
+                    break
+                case 'image':
+                    button.onclick = (e) => {
+                        inputFile.click();
                     }
-                };
+                    break;
+
             }
         })
 
-        Array.from(listActionSub.children).forEach(button => {
-            button.onmouseup = (e) => {
-                if (!stickerBox || stickerBox.classList.contains("hidden")) {
-                    e.stopPropagation();
-                    handleShowSticker(e, actionPlus);
-                    handleActionPlusMouseDown();
-                }
+        Array.from(listActionSub).forEach(button => {
+            switch (button.dataset.type) {
+                case 'sticker':
+                    button.onmouseup = (e) => {
+                        if (!stickerBox || stickerBox.classList.contains("hidden")) {
+                            e.stopPropagation();
+                            handleShowSticker(e, actionPlus);
+                            handleActionPlusMouseDown();
+                        }
+
+                    }
+                    break;
+                case 'image':
+                    button.onclick = () => {
+                        inputFile.click();
+                    }
+                    break;
             }
+
         })
         editorChat.addEventListener('input', handleInput)
         editorChat.addEventListener('keyup', handleKeyup)
@@ -374,7 +454,6 @@ const CHAT = (() => {
             let sumLeftAndWidthStickerBox = left + stickerBox.offsetWidth;
             let excessPart = sumLeftAndWidthStickerBox - rectTargetElement.left - rectTargetElement.width / 2;
             let leftTransitionForm = stickerBox.offsetWidth - excessPart;
-            console.log(leftTransitionForm);
             stickerBox.style.transformOrigin = `${leftTransitionForm}px ${stickerBox.offsetHeight}px`;
             stickerBox.style.top = top + "px";
             stickerBox.style.left = left + "px";
@@ -407,7 +486,7 @@ const CHAT = (() => {
                 e.stopPropagation();
                 if (tab.classList.contains('active')) return false;
                 stickerItemList.style.display = "flex";
-                stickerItemList.innerHTML = `<style>.rs-loading-main{display: flex;width:100%;height:100%; justify-content: center; align-items: center;} .rsl-wave {font-size: var(--rs-l-size, 2rem); color: var(--rs-l-color, #ee4d2d); display: inline-flex; align-items: center; width: 1.25em; height: 1.25em; } .rsl-wave--icon { display: block; background: currentColor; border-radius: 99px; width: 0.25em; height: 0.25em; margin-right: 0.25em; margin-bottom: -0.25em; -webkit-animation: rsla_wave .56s linear infinite; animation: rsla_wave .56s linear infinite; -webkit-transform: translateY(.0001%); transform: translateY(.0001%); } @-webkit-keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } @keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } .rsl-wave--icon:nth-child(2) { -webkit-animation-delay: -.14s; animation-delay: -.14s; } .rsl-wave--icon:nth-child(3) { -webkit-animation-delay: -.28s; animation-delay: -.28s; margin-right: 0; }</style><div class="rs-loading-main"><div class="rsl-wave"> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> </div></div>`;
+                stickerItemList.innerHTML = rsLoading(`width:100%;height:100%`);
                 indexEmojiCurrent = +tab.dataset.index;
                 let items = await Promise.all(listStickers[tab.dataset.index].items.map(item => {
                     return emojiUtil.emojiAll(item.url, item.imgUrl, item.totalRow, item.totalColumn, item.countLeftInTotalRow, item.ms)
@@ -437,6 +516,7 @@ const CHAT = (() => {
             stickerBox.classList.add("hidden");
         }
     }
+
     function checkLengthEditor() {
         if (editorChat.innerText.trim().length && !flagWidth) {
             flagWidth = true
@@ -467,6 +547,7 @@ const CHAT = (() => {
         }
         return false
     }
+
     function handleInput(e) {
         checkKeypress(e);
         // Kiểm nha nếu độ dài lớn hơn độ dài trước thì thay đổi
@@ -540,8 +621,8 @@ const CHAT = (() => {
                 })
         }
     }
-    function handleKeydown(e) {
 
+    function handleKeydown(e) {
         if (e.keyCode === 13 && !e.shiftKey) {
             e.preventDefault();
             submitEventChat.typeMessage = "message";
@@ -553,9 +634,10 @@ const CHAT = (() => {
     function handleChat(e) {
         e.preventDefault();
         // Kiểm tra xem có phải chỉ có emoji hay không
-        const pattern = /[\d\w\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễếệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]/;
-
-        if (pattern.test(editorChat.innerText)) {
+        // Kiểm tra có file trước hay không
+        if (newDataTransfer.files.length) {
+            e.typeMessage = "file"
+        } else if (stringVietnamese.test(editorChat.innerText)) {
             e.typeMessage = "message";
         } else {
             e.typeMessage = "feel";
@@ -595,15 +677,37 @@ const CHAT = (() => {
         }
     }
 
-    function chat(data, event) {
-        socket.volatile.emit('chat-admin-socket', 'admin', userId, utils.eD(data), event.typeMessage);
+    async function chat(data, event) {
+        if (event.typeMessage === 'file') {
+            let dataFile = {
+                files: [],
+                stringData: null,
+            };
+            const dataFiles = Array.from(newDataTransfer.files);
+            for (let i = 0; i < dataFiles.length; i++) {
+                let file = dataFiles[i];
+                const base64 = await getBase64(file);
+                dataFile.files.push({
+                    size: file.size,
+                    type: file.type,
+                    base64
+                })
+            }
+            dataFile.stringData = data;
+            socket.volatile.emit('chat-admin-socket', 'admin', userId, eD(dataFile), event.typeMessage);
+            newDataTransfer = new DataTransfer();
+            boxImageUpload.remove();
+            boxImageUpload = undefined;
+        } else {
+            socket.volatile.emit('chat-admin-socket', 'admin', userId, eD(data), event.typeMessage);
+        }
     }
 
     function sendSticker(elementSticker, event) {
         event.typeMessage = "sticker";
         let newElement = document.createElement('span');
         newElement.innerHTML = `<img src="${elementSticker.getAttribute('image-url')}" width="${elementSticker.getAttribute('width-one')}" height="${elementSticker.getAttribute('height-one')}">`
-        socket.volatile.emit('chat-admin-socket', 'admin', userId, utils.eD(newElement.outerHTML), event.typeMessage);
+        socket.volatile.emit('chat-admin-socket', 'admin', userId, eD(newElement.outerHTML), event.typeMessage);
     }
 
     async function loadMoreChat(element) {
@@ -616,7 +720,7 @@ const CHAT = (() => {
                     socket.volatile.emit("load-more-message", 'admin', userId, page);
                     const loading = document.createElement('div');
                     loading.className = "load-more-message";
-                    loading.innerHTML = `<style>.rs-loading-main{display: flex;width:100%;height:100%; justify-content: center; align-items: center;} .rsl-wave {font-size: var(--rs-l-size, 2rem); color: var(--rs-l-color, #ee4d2d); display: inline-flex; align-items: center; width: 1.25em; height: 1.25em; } .rsl-wave--icon { display: block; background: currentColor; border-radius: 99px; width: 0.25em; height: 0.25em; margin-right: 0.25em; margin-bottom: -0.25em; -webkit-animation: rsla_wave .56s linear infinite; animation: rsla_wave .56s linear infinite; -webkit-transform: translateY(.0001%); transform: translateY(.0001%); } @-webkit-keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } @keyframes rsla_wave { 50% { -webkit-transform: translateY(-0.25em); transform: translateY(-0.25em); } } .rsl-wave--icon:nth-child(2) { -webkit-animation-delay: -.14s; animation-delay: -.14s; } .rsl-wave--icon:nth-child(3) { -webkit-animation-delay: -.28s; animation-delay: -.28s; margin-right: 0; }</style><div class="rs-loading-main"><div class="rsl-wave"> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> <span class="rsl-wave--icon"></span> </div></div>`;
+                    loading.innerHTML = rsLoading(`width:100%;height:100%`);
                     element.prepend(loading);
                 }
             }
@@ -626,9 +730,40 @@ const CHAT = (() => {
         elementHeading && observer.observe(elementHeading)
     }
 
+    function handleInputFile() {
+        inputFile.type = "file";
+        inputFile.multiple = true;
+        inputFile.accept = ".jpg,.png,.jpeg,.gif,.webp,.tiff";
+        inputFile.addEventListener('change', (e) => {
+            console.log(boxImageUpload);
+            if (!boxImageUpload) {
+                createBoxImageUpload();
+            }
+            Array.from(e.target.files).forEach(file => {
+                const url = URL.createObjectURL(file);
+                const image = new Image();
+                image.onload = function () {
+                    itemUploadMessage(this, newDataTransfer.items.length);
+                    newDataTransfer.items.add(file);
+                }
+                image.src = url;
+            })
+        })
+    }
+
+    function sortDataUpload() {
+        let refreshDataTransfer = new DataTransfer();
+        Array.from(listFileAddEl.children).forEach((item, index) => {
+            let indexOld = item.dataset.i;
+            refreshDataTransfer.items.add(newDataTransfer.files[indexOld]);
+            item.dataset.i = index;
+        })
+        newDataTransfer = refreshDataTransfer;
+    }
     return {
         init: () => {
-            handleShowChat()
+            handleShowChat();
+            handleInputFile();
         },
     }
 })()

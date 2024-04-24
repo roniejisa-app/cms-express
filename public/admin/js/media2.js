@@ -1,4 +1,4 @@
-import { u as utils } from "./utils.js";
+import { f as formatBytes } from "./utils.js";
 let aside = document.querySelector("aside");
 let listFolderAside = aside.querySelector(".folder-list ul");
 let mediaMainEl = document.querySelector(".media-main");
@@ -1392,7 +1392,7 @@ function startSelecting() {
     function showInfo2(e, isImage = false) {
       objectDataInfo.filename = custom.filename;
       objectDataInfo.extension = custom.extension;
-      objectDataInfo.size = utils.formatBytes(custom.size);
+      objectDataInfo.size = formatBytes(custom.size);
       if (isImage) {
         objectDataInfo.natural = `${imgEl.naturalWidth} ✕ ${imgEl.naturalHeight}`;
       }
