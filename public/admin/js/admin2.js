@@ -51069,9 +51069,7 @@ const createScrollbar = function(elementContainer, ...elementSub) {
                 const maxLeft = scrollEl.offsetWidth - scrollBar.offsetWidth;
                 scrollBar.style.left = maxLeft / 100 * +scrollEl.dataset.percent + "px";
               }
-              setTimeout(() => {
-                scrollEl.style.opacity = 1;
-              }, 0);
+              scrollEl.style.opacity = 1;
             }
           });
         } else if (scrollEl) {
@@ -51117,7 +51115,8 @@ const CHAT = (() => {
   let indexEmojiCurrent = 0;
   let page = 2;
   let pageLoadMore = false;
-  new DataTransfer();
+  let newDataTransfer = new DataTransfer();
+  let editorHeight = 0;
   let flagWidth = false, rectAction, actionsWidth, addSocketEventNow = false;
   function addSocketEvent() {
     if (addSocketEventNow)
@@ -51215,7 +51214,9 @@ const CHAT = (() => {
       if (!boxImageUpload) {
         createBoxImageUpload();
       }
-      var blob = item.getAsFile();
+      var file = item.getAsFile();
+      newDataTransfer.items.add(file);
+      console.log(newDataTransfer.files);
       var img = new Image();
       img.onload = function() {
         const itemEl = document.createElement("div");
@@ -51223,7 +51224,7 @@ const CHAT = (() => {
         itemEl.append(this);
         listFileAddEl.appendChild(itemEl);
       };
-      img.src = URL.createObjectURL(blob);
+      img.src = URL.createObjectURL(file);
     } else {
       var pastedText = (e.originalEvent || e).clipboardData.getData("text/plain");
       checkKeypress(pastedText);
@@ -51236,6 +51237,7 @@ const CHAT = (() => {
     buttonAddFileEl = document.createElement("button");
     buttonAddFileEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM216 408c0 13.3-10.7 24-24 24s-24-10.7-24-24V305.9l-31 31c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l72-72c9.4-9.4 24.6-9.4 33.9 0l72 72c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-31-31V408z"/></svg>`;
     buttonAddFileEl.className = "btn-add-file-message";
+    buttonAddFileEl.type = "button";
     listFileAddEl = document.createElement("div");
     listFileAddEl.className = "list-image-add";
     boxImageUpload.append(buttonAddFileEl, listFileAddEl);
@@ -51327,6 +51329,7 @@ const CHAT = (() => {
     setTimeout(() => {
       rectAction = actions.getBoundingClientRect();
       actionsWidth = rectAction.width;
+      editorHeight = editorChat.offsetHeight;
     }, 500);
     Array.from(actions.children).forEach((button) => {
       if (button.dataset.type === "sticker") {
@@ -51347,6 +51350,7 @@ const CHAT = (() => {
         }
       };
     });
+    editorChat.addEventListener("input", handleInput);
     editorChat.addEventListener("keyup", handleKeyup);
     editorChat.addEventListener("keydown", handleKeydown);
     chatClose.addEventListener("click", handleDisconnect);
@@ -51483,6 +51487,14 @@ const CHAT = (() => {
     }
     return false;
   }
+  function handleInput(e) {
+    checkKeypress(e);
+    if (e.target.offsetHeight != editorHeight) {
+      editorHeight = e.target.offsetHeight;
+      window.dispatchEvent(beforeResizeEditorChat);
+      window.dispatchEvent(resizeEditorChat);
+    }
+  }
   function handleKeyup(e) {
     checkLengthEditor();
     if (editorChat.innerText.trim().length === 0) {
@@ -51542,7 +51554,6 @@ const CHAT = (() => {
     }
   }
   function handleKeydown(e) {
-    checkKeypress(e);
     if (e.keyCode === 13 && !e.shiftKey) {
       e.preventDefault();
       submitEventChat.typeMessage = "message";

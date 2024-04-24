@@ -94,10 +94,7 @@ export const createScrollbar = function (elementContainer, ...elementSub) {
                                 const maxLeft = scrollEl.offsetWidth - scrollBar.offsetWidth;
                                 scrollBar.style.left = maxLeft / 100 * +scrollEl.dataset.percent + 'px';
                             }
-
-                            setTimeout(() => {
-                                scrollEl.style.opacity = 1;
-                            }, 0);
+                            scrollEl.style.opacity = 1;
                         }
                     })
 
