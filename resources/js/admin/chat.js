@@ -360,8 +360,25 @@ const CHAT = (() => {
         setTimeout(() => {
             const rect = stickerBox.getBoundingClientRect();
             const rectTargetElement = e.target.getBoundingClientRect();
-            stickerBox.style.top = rectTargetElement.top - rect.height - rectTargetElement.height + "px";
-            stickerBox.style.left = rectTargetElement.left + "px";
+            let left = rectTargetElement.left;
+            let top = rectTargetElement.top - rect.height - rectTargetElement.height;
+            if (left + stickerBox.offsetWidth > window.innerWidth) {
+                left = window.innerWidth - stickerBox.offsetWidth - 20;
+            }
+            if (top < 0) {
+                top = 0;
+            }
+            console.log(left);
+            // Tổng = left + stickerBox.offsetWidth
+            //  Phần thừa ra = rectTargetElement.left + rectTargetElement.width
+            // Lấy tổng stickerBox - phần thưa ra số px left transform hiện tại
+            let sumLeftAndWidthStickerBox = left + stickerBox.offsetWidth;
+            let excessPart = sumLeftAndWidthStickerBox - rectTargetElement.left - rectTargetElement.width / 2;
+            let leftTransitionForm = stickerBox.offsetWidth - excessPart;
+            console.log(leftTransitionForm);
+            stickerBox.style.transformOrigin = `${leftTransitionForm}px ${stickerBox.offsetHeight}px`;
+            stickerBox.style.top = top + "px";
+            stickerBox.style.left = left + "px";
             stickerBox.style.opacity = 1;
         }, 200);
     }
