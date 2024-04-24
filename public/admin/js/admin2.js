@@ -50984,7 +50984,6 @@ const createScrollbar = function(elementContainer, ...elementSub) {
   let initialClientX = 0;
   const observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
-      console.log(mutation);
       if (mutation.type === "childList") {
         let { widthParent, widthChild, rectBoxImage } = getSizeOfBoxUpload(elementContainer, ...elementSub);
         let scrollEl = document.querySelector(".scroll-custom");
@@ -51038,17 +51037,17 @@ const createScrollbar = function(elementContainer, ...elementSub) {
             scrollBar.style.left = leftCurrent + "px";
             elementContainer.scrollLeft = scrollReal;
             initialClientX = e.clientX;
-            scrollBar.offsetWidth + scrollBar.offsetLeft;
+            initialOffsetX = scrollBar.offsetWidth + scrollBar.offsetLeft;
             scrollLeft = scrollBar.offsetLeft;
-            elementContainer.offsetWidth - (scrollBar.offsetWidth + scrollBar.offsetLeft);
+            scrollRight = elementContainer.offsetWidth - (scrollBar.offsetWidth + scrollBar.offsetLeft);
             document.addEventListener("mousemove", handleMovesScroll);
           });
           scrollBar.addEventListener("mousedown", (e) => {
             e.stopPropagation();
             initialClientX = e.clientX;
-            scrollBar.offsetWidth + scrollBar.offsetLeft;
+            initialOffsetX = scrollBar.offsetWidth + scrollBar.offsetLeft;
             scrollLeft = scrollBar.offsetLeft;
-            elementContainer.offsetWidth - (scrollBar.offsetWidth + scrollBar.offsetLeft);
+            scrollRight = elementContainer.offsetWidth - (scrollBar.offsetWidth + scrollBar.offsetLeft);
             document.addEventListener("mousemove", handleMovesScroll);
           });
           document.addEventListener("mouseup", () => {
@@ -51247,10 +51246,16 @@ const CHAT = (() => {
       document.execCommand("insertText", false, pastedText);
     }
   }
-  function itemUploadMessage(imageEl, index) {
+  function itemUploadMessage(imageEl, file) {
+    let info = {
+      name: file.name,
+      size: file.size,
+      type: file.type,
+      customId: file.customId
+    };
     const itemEl = document.createElement("div");
     itemEl.className = "item-image-add";
-    itemEl.dataset.i = index;
+    itemEl.dataset.info = JSON.stringify(info);
     const closeEl = document.createElement("button");
     closeEl.className = "close-image-item";
     closeEl.type = "button";
@@ -51259,12 +51264,16 @@ const CHAT = (() => {
     itemEl.append(closeEl);
     listFileAddEl.appendChild(itemEl);
     closeEl.onclick = () => {
-      newDataTransfer.items.remove(index);
-      itemEl.remove();
-      if (newDataTransfer.files.length === 0) {
-        boxImageUpload.remove();
-        boxImageUpload = void 0;
+      const index = Array.from(newDataTransfer.files).findIndex((file2) => file2.customId === info.customId);
+      if (index !== -1) {
+        newDataTransfer.items.remove(index);
+        itemEl.remove();
+        if (newDataTransfer.files.length === 0) {
+          boxImageUpload.remove();
+          boxImageUpload = void 0;
+        }
       }
+      console.log(newDataTransfer.files);
     };
     itemEl.draggable = true;
     itemEl.ondragstart = (e) => {
@@ -51751,7 +51760,9 @@ const CHAT = (() => {
         const url2 = URL.createObjectURL(file);
         const image = new Image();
         image.onload = function() {
-          itemUploadMessage(this, newDataTransfer.items.length);
+          let randomString = Math.random().toString(36).toString(36).substring(2) + (/* @__PURE__ */ new Date()).getTime().toString(36).substring(2);
+          file.customId = randomString;
+          itemUploadMessage(this, file);
           newDataTransfer.items.add(file);
         };
         image.src = url2;
@@ -51760,12 +51771,17 @@ const CHAT = (() => {
   }
   function sortDataUpload() {
     let refreshDataTransfer = new DataTransfer();
-    Array.from(listFileAddEl.children).forEach((item, index) => {
-      let indexOld = item.dataset.i;
-      refreshDataTransfer.items.add(newDataTransfer.files[indexOld]);
-      item.dataset.i = index;
-    });
+    for (let i2 = 0; i2 < listFileAddEl.children.length; i2++) {
+      const info = JSON.parse(listFileAddEl.children[i2].dataset.info);
+      const index = Array.from(newDataTransfer.files).findIndex((file) => isSameFile(file, info));
+      if (index !== -1) {
+        refreshDataTransfer.items.add(newDataTransfer.files[index]);
+      }
+    }
     newDataTransfer = refreshDataTransfer;
+  }
+  function isSameFile(file, infoFile) {
+    return file.name === infoFile.name && file.size === infoFile.size && file.customId === infoFile.customId && file.type === infoFile.type;
   }
   return {
     init: () => {

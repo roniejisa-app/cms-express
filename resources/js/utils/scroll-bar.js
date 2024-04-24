@@ -12,13 +12,10 @@ function getSizeOfBoxUpload(elementContainer, ...elementSub) {
 
 export const createScrollbar = function (elementContainer, ...elementSub) {
     let scrollLeft = 0;
-    let scrollRight = 0;
     let initialClientX = 0;
-    let initialOffsetX = 0;
     // Tạo một MutationObserver instance
     const observer = new MutationObserver(function (mutations) {
         mutations.forEach(function (mutation) {
-            console.log(mutation);
             // Kiểm tra nếu có thêm phần tử con mới vào phần tử target
             if (mutation.type === 'childList') {
                 // chỗ này kiểm tra xem có thanh scroll chưa thì thêm vào
