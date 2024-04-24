@@ -6,10 +6,9 @@ import emojiData from '@emoji-mart/data/sets/14/facebook.json'
 import { Picker } from 'emoji-mart'
 import langEmoji from './emoji-lang-vi.js';
 import { convertStringToEmoji } from '../utils/emoji-convert.js';
+import { createScrollbar, resizeEditorChat, beforeResizeEditorChat } from '../utils/scroll-bar.js';
 const submitEventChat = new Event('submit-form-chat');
 const eventUpdateAction = new Event("update-action-message-item");
-const resizeEditorChat = new Event("resize-editor-chat");
-const beforeResizeEditorChat = new Event("before-resize-editor-chat");
 const CHAT = (() => {
     const chatBox = document.querySelector('.chat-box-admin')
     const buttonShowChatBox = chatBox.querySelector('.show-chat-box')
@@ -41,7 +40,6 @@ const CHAT = (() => {
     let page = 2;
     let pageLoadMore = false;
     let newDataTransfer = new DataTransfer();
-    let flagScrollBar = false;
     let flagWidth = false,
         rectAction,
         actionsWidth,
@@ -187,121 +185,9 @@ const CHAT = (() => {
         listFileAddEl.className = "list-image-add";
         boxImageUpload.append(buttonAddFileEl, listFileAddEl);
         editorChatContent.prepend(boxImageUpload);
-        addEventBoxImageUpload();
+        createScrollbar(boxImageUpload, buttonAddFileEl, listFileAddEl)
     }
 
-    function addEventBoxImageUpload() {
-        // Tạo một MutationObserver instance
-        var observer = new MutationObserver(function (mutations) {
-            mutations.forEach(function (mutation) {
-                // Kiểm tra nếu có thêm phần tử con mới vào phần tử target
-                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                    // chỗ này kiểm tra xem có thanh scroll chưa thì thêm vào
-                    let { widthParent, widthChild, rectBoxImage } = getSizeOfBoxUpload();
-                    let scrollEl = document.querySelector('.scroll-custom');
-                    let scrollBar;
-                    let diffScrollBar = widthChild - widthParent;
-                    if (diffScrollBar > 0 && !scrollEl) {
-                        scrollEl = document.createElement('div');
-                        scrollBar = document.createElement('div');
-                        scrollEl.style.width = widthParent + 'px';
-                        scrollEl.style.left = rectBoxImage.left + 'px';
-                        scrollEl.style.top = rectBoxImage.top + rectBoxImage.height - 20 + 'px';
-                        scrollEl.className = "scroll-custom";
-                        scrollBar.className = "scroll-bar";
-                        scrollEl.append(scrollBar);
-                        document.body.append(scrollEl);
-                        scrollBar.addEventListener('mousedown', (e) => {
-                            flagScrollBar = true;
-                            initialClientX = e.clientX;
-                            initialOffsetX = scrollBar.offsetWidth + scrollBar.offsetLeft;
-                            scrollLeft = scrollBar.offsetLeft;
-                            scrollRight = boxImageUpload.offsetWidth - (scrollBar.offsetWidth + scrollBar.offsetLeft);
-                            document.addEventListener('mousemove', handleMovesScroll)
-                        })
-
-
-                        document.addEventListener('mouseup', () => {
-                            document.removeEventListener('mousemove', handleMovesScroll)
-                        })
-
-                        window.addEventListener('before-resize-editor-chat', e => {
-                            if (boxImageUpload && scrollEl) {
-                                scrollEl.style.opacity = 0;
-                            }
-                        })
-
-                        window.addEventListener('resize-editor-chat', e => {
-                            if (boxImageUpload && scrollEl) {
-                                let { widthParent, widthChild, rectBoxImage } = getSizeOfBoxUpload();
-                                scrollEl.style.width = widthParent + 'px';
-                                scrollEl.style.left = rectBoxImage.left + 'px';
-                                scrollEl.style.top = rectBoxImage.top + rectBoxImage.height - 20 + 'px';
-                                if (scrollEl.dataset.percent) {
-                                    widthChild = buttonAddFileEl.offsetWidth + listFileAddEl.offsetWidth;
-                                    const rate = widthParent / widthChild;
-                                    scrollBar.style.width = widthParent * rate + 'px';
-                                    const maxLeft = widthParent - scrollBar.offsetWidth;
-                                    scrollBar.style.left = maxLeft / 100 * +scrollEl.dataset.percent + 'px';
-                                }
-
-                                setTimeout(() => {
-                                    scrollEl.style.opacity = 1;
-                                }, 0);
-                            }
-                        })
-
-                        function handleMovesScroll(e) {
-                            let dragSpace = e.clientX - initialClientX;
-                            let leftCurrent = scrollLeft + dragSpace;
-                            let maxLeft = boxImageUpload.offsetWidth - scrollBar.offsetWidth;
-                            if (leftCurrent > maxLeft) {
-                                leftCurrent = maxLeft;
-                            }
-
-                            if (leftCurrent < 0) {
-                                leftCurrent = 0.01;
-                            }
-                            const scrollWidth = boxImageUpload.scrollWidth;
-                            let percent = leftCurrent / maxLeft * 100;
-                            let allScrollReal = scrollWidth - boxImageUpload.offsetWidth;
-                            let onePercentOfBoxImage = allScrollReal / 100;
-                            let scrollReal = onePercentOfBoxImage * percent;
-                            scrollEl.dataset.percent = percent;
-                            scrollBar.style.left = leftCurrent + 'px';
-                            boxImageUpload.scrollLeft = scrollReal;
-                        }
-                    } else if (scrollEl) {
-                        scrollBar = scrollEl.firstElementChild
-                    }
-                    if (scrollBar) {
-                        // Nếu kích thước của phần tử con > kích thước phần tử cha 2px
-                        /*
-                            Tính tỉ lệ
-                        */
-                        const rate = widthParent / widthChild;
-                        scrollBar.style.width = widthParent * rate + 'px';
-                    }
-
-                }
-            });
-        });
-
-        // Thiết lập options cho MutationObserver (theo dõi các thay đổi trong phần tử con và các thay đổi trong thuộc tính của phần tử con)
-        var config = { childList: true, subtree: true };
-
-        // Bắt đầu theo dõi phần tử target với các options đã thiết lập
-        observer.observe(boxImageUpload, config);
-    }
-
-    function getSizeOfBoxUpload() {
-        const widthChild = buttonAddFileEl.offsetWidth + listFileAddEl.offsetWidth;
-        const rectBoxImage = boxImageUpload.getBoundingClientRect();
-        const widthParent = rectBoxImage.width;
-        return {
-            widthChild, rectBoxImage, widthParent
-        }
-    }
     function addEventForItemMessage() {
         Array.from(messageEl.children).forEach((messageItem) => {
             const feelMart = messageItem.querySelector(".emoji-mart");
@@ -536,7 +422,7 @@ const CHAT = (() => {
         if (editorChat.innerText.trim().length && !flagWidth) {
             flagWidth = true
             window.dispatchEvent(beforeResizeEditorChat)
-            editorChat.nextElementSibling.style.opacity = 0;
+            editorChat.nextElementSibling.classList.add('hidden');
             actions.style.overflow = "hidden";
             actions
                 .animate(
@@ -567,7 +453,7 @@ const CHAT = (() => {
         if (editorChat.innerText.trim().length === 0) {
             flagWidth = false
             window.dispatchEvent(beforeResizeEditorChat)
-            editorChat.nextElementSibling.style.opacity = 1
+            editorChat.nextElementSibling.classList.remove('hidden');
             actions.classList.remove('hidden')
             actionPlus.classList.add('hidden')
             actions
@@ -601,7 +487,7 @@ const CHAT = (() => {
         if (!flagWidth && (!e.ctrlKey || data)) {
             flagWidth = true
             window.dispatchEvent(beforeResizeEditorChat)
-            editorChat.nextElementSibling.style.opacity = 0;
+            editorChat.nextElementSibling.classList.add('hidden');
             actions.style.overflow = "hidden";
             actions
                 .animate(

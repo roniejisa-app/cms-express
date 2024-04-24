@@ -50966,10 +50966,131 @@ const convertStringToEmoji = function(string) {
     return check;
   }
 };
-const submitEventChat = new Event("submit-form-chat");
-const eventUpdateAction = new Event("update-action-message-item");
+function getSizeOfBoxUpload(elementContainer, ...elementSub) {
+  let widthChild = 0;
+  for (let i2 = 0; i2 < elementSub.length; i2++) {
+    widthChild += elementSub[i2].offsetWidth;
+  }
+  const rectBoxImage = elementContainer.getBoundingClientRect();
+  const widthParent = rectBoxImage.width;
+  return {
+    widthChild,
+    rectBoxImage,
+    widthParent
+  };
+}
+const createScrollbar = function(elementContainer, ...elementSub) {
+  let scrollLeft = 0;
+  let initialClientX = 0;
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+        let { widthParent, widthChild, rectBoxImage } = getSizeOfBoxUpload(elementContainer, ...elementSub);
+        let scrollEl = document.querySelector(".scroll-custom");
+        let scrollBar;
+        let diffScrollBar = widthChild - widthParent;
+        if (diffScrollBar > 0 && !scrollEl) {
+          let handleMovesScroll = function(e) {
+            let dragSpace = e.clientX - initialClientX;
+            let leftCurrent = scrollLeft + dragSpace;
+            let maxLeft = scrollEl.offsetWidth - scrollBar.offsetWidth;
+            if (leftCurrent > maxLeft) {
+              leftCurrent = maxLeft;
+            }
+            if (leftCurrent < 0) {
+              leftCurrent = 0;
+            }
+            const scrollWidth = elementContainer.scrollWidth;
+            let percent = leftCurrent / maxLeft * 100;
+            let allScrollReal = scrollWidth - scrollEl.offsetWidth;
+            let onePercentOfBoxImage = allScrollReal / 100;
+            let scrollReal = onePercentOfBoxImage * percent;
+            scrollEl.dataset.percent = percent;
+            scrollBar.style.left = leftCurrent + "px";
+            elementContainer.scrollLeft = scrollReal;
+          };
+          scrollEl = document.createElement("div");
+          scrollBar = document.createElement("div");
+          scrollEl.style.width = widthParent - 8 + "px";
+          scrollEl.style.left = rectBoxImage.left + 4 + "px";
+          scrollEl.style.top = rectBoxImage.top + rectBoxImage.height - 20 + "px";
+          scrollEl.className = "scroll-custom";
+          scrollBar.className = "scroll-bar";
+          scrollEl.append(scrollBar);
+          document.body.append(scrollEl);
+          scrollEl.addEventListener("mousedown", (e) => {
+            let leftCurrent = e.offsetX - scrollBar.offsetWidth / 2;
+            let maxLeft = scrollEl.offsetWidth - scrollBar.offsetWidth;
+            let percent = leftCurrent / maxLeft * 100;
+            if (leftCurrent > maxLeft) {
+              leftCurrent = maxLeft;
+            }
+            if (leftCurrent < 0) {
+              leftCurrent = 0;
+            }
+            const scrollWidth = elementContainer.scrollWidth;
+            let allScrollReal = scrollWidth - scrollEl.offsetWidth;
+            let onePercentOfBoxImage = allScrollReal / 100;
+            let scrollReal = onePercentOfBoxImage * percent;
+            scrollEl.dataset.percent = percent;
+            scrollBar.style.left = leftCurrent + "px";
+            elementContainer.scrollLeft = scrollReal;
+            initialClientX = e.clientX;
+            scrollBar.offsetWidth + scrollBar.offsetLeft;
+            scrollLeft = scrollBar.offsetLeft;
+            elementContainer.offsetWidth - (scrollBar.offsetWidth + scrollBar.offsetLeft);
+            document.addEventListener("mousemove", handleMovesScroll);
+          });
+          scrollBar.addEventListener("mousedown", (e) => {
+            e.stopPropagation();
+            initialClientX = e.clientX;
+            scrollBar.offsetWidth + scrollBar.offsetLeft;
+            scrollLeft = scrollBar.offsetLeft;
+            elementContainer.offsetWidth - (scrollBar.offsetWidth + scrollBar.offsetLeft);
+            document.addEventListener("mousemove", handleMovesScroll);
+          });
+          document.addEventListener("mouseup", () => {
+            document.removeEventListener("mousemove", handleMovesScroll);
+          });
+          window.addEventListener("before-resize-editor-chat", (e) => {
+            if (elementContainer && scrollEl) {
+              scrollEl.style.opacity = 0;
+            }
+          });
+          window.addEventListener("resize-editor-chat", (e) => {
+            if (elementContainer && scrollEl) {
+              let { widthParent: widthParent2, widthChild: widthChild2, rectBoxImage: rectBoxImage2 } = getSizeOfBoxUpload(elementContainer, ...elementSub);
+              scrollEl.style.width = widthParent2 - 8 + "px";
+              scrollEl.style.left = rectBoxImage2.left + 4 + "px";
+              scrollEl.style.top = rectBoxImage2.top + rectBoxImage2.height - 20 + "px";
+              if (scrollEl.dataset.percent) {
+                const rate = widthParent2 / widthChild2;
+                scrollBar.style.width = widthParent2 * rate + "px";
+                const maxLeft = scrollEl.offsetWidth - scrollBar.offsetWidth;
+                scrollBar.style.left = maxLeft / 100 * +scrollEl.dataset.percent + "px";
+              }
+              setTimeout(() => {
+                scrollEl.style.opacity = 1;
+              }, 0);
+            }
+          });
+        } else if (scrollEl) {
+          scrollBar = scrollEl.firstElementChild;
+        }
+        if (scrollBar) {
+          const rate = widthParent / widthChild;
+          scrollBar.style.width = widthParent * rate + "px";
+        }
+      }
+    });
+  });
+  const config = { childList: true, subtree: true };
+  observer.observe(elementContainer, config);
+};
 const resizeEditorChat = new Event("resize-editor-chat");
 const beforeResizeEditorChat = new Event("before-resize-editor-chat");
+const submitEventChat = new Event("submit-form-chat");
+const eventUpdateAction = new Event("update-action-message-item");
 const CHAT = (() => {
   const chatBox = document.querySelector(".chat-box-admin");
   const buttonShowChatBox = chatBox.querySelector(".show-chat-box");
@@ -50985,8 +51106,6 @@ const CHAT = (() => {
   const actionPlus = chatHTML.querySelector(".action-plus");
   const actionMenuSub = actionPlus.querySelector(".action-sub-menu");
   const listActionSub = actionMenuSub.querySelector("ul");
-  let scrollLeft = 0;
-  let initialClientX = 0;
   let boxImageUpload;
   let buttonAddFileEl;
   let listFileAddEl;
@@ -51121,100 +51240,7 @@ const CHAT = (() => {
     listFileAddEl.className = "list-image-add";
     boxImageUpload.append(buttonAddFileEl, listFileAddEl);
     editorChatContent.prepend(boxImageUpload);
-    addEventBoxImageUpload();
-  }
-  function addEventBoxImageUpload() {
-    var observer2 = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
-          let { widthParent, widthChild, rectBoxImage } = getSizeOfBoxUpload();
-          let scrollEl = document.querySelector(".scroll-custom");
-          let scrollBar;
-          let diffScrollBar = widthChild - widthParent;
-          if (diffScrollBar > 0 && !scrollEl) {
-            let handleMovesScroll = function(e) {
-              let dragSpace = e.clientX - initialClientX;
-              let leftCurrent = scrollLeft + dragSpace;
-              let maxLeft = boxImageUpload.offsetWidth - scrollBar.offsetWidth;
-              if (leftCurrent > maxLeft) {
-                leftCurrent = maxLeft;
-              }
-              if (leftCurrent < 0) {
-                leftCurrent = 0.01;
-              }
-              const scrollWidth = boxImageUpload.scrollWidth;
-              let percent = leftCurrent / maxLeft * 100;
-              let allScrollReal = scrollWidth - boxImageUpload.offsetWidth;
-              let onePercentOfBoxImage = allScrollReal / 100;
-              let scrollReal = onePercentOfBoxImage * percent;
-              scrollEl.dataset.percent = percent;
-              scrollBar.style.left = leftCurrent + "px";
-              boxImageUpload.scrollLeft = scrollReal;
-            };
-            scrollEl = document.createElement("div");
-            scrollBar = document.createElement("div");
-            scrollEl.style.width = widthParent + "px";
-            scrollEl.style.left = rectBoxImage.left + "px";
-            scrollEl.style.top = rectBoxImage.top + rectBoxImage.height - 20 + "px";
-            scrollEl.className = "scroll-custom";
-            scrollBar.className = "scroll-bar";
-            scrollEl.append(scrollBar);
-            document.body.append(scrollEl);
-            scrollBar.addEventListener("mousedown", (e) => {
-              initialClientX = e.clientX;
-              scrollBar.offsetWidth + scrollBar.offsetLeft;
-              scrollLeft = scrollBar.offsetLeft;
-              boxImageUpload.offsetWidth - (scrollBar.offsetWidth + scrollBar.offsetLeft);
-              document.addEventListener("mousemove", handleMovesScroll);
-            });
-            document.addEventListener("mouseup", () => {
-              document.removeEventListener("mousemove", handleMovesScroll);
-            });
-            window.addEventListener("before-resize-editor-chat", (e) => {
-              if (boxImageUpload && scrollEl) {
-                scrollEl.style.opacity = 0;
-              }
-            });
-            window.addEventListener("resize-editor-chat", (e) => {
-              if (boxImageUpload && scrollEl) {
-                let { widthParent: widthParent2, widthChild: widthChild2, rectBoxImage: rectBoxImage2 } = getSizeOfBoxUpload();
-                scrollEl.style.width = widthParent2 + "px";
-                scrollEl.style.left = rectBoxImage2.left + "px";
-                scrollEl.style.top = rectBoxImage2.top + rectBoxImage2.height - 20 + "px";
-                if (scrollEl.dataset.percent) {
-                  widthChild2 = buttonAddFileEl.offsetWidth + listFileAddEl.offsetWidth;
-                  const rate = widthParent2 / widthChild2;
-                  scrollBar.style.width = widthParent2 * rate + "px";
-                  const maxLeft = widthParent2 - scrollBar.offsetWidth;
-                  scrollBar.style.left = maxLeft / 100 * +scrollEl.dataset.percent + "px";
-                }
-                setTimeout(() => {
-                  scrollEl.style.opacity = 1;
-                }, 0);
-              }
-            });
-          } else if (scrollEl) {
-            scrollBar = scrollEl.firstElementChild;
-          }
-          if (scrollBar) {
-            const rate = widthParent / widthChild;
-            scrollBar.style.width = widthParent * rate + "px";
-          }
-        }
-      });
-    });
-    var config = { childList: true, subtree: true };
-    observer2.observe(boxImageUpload, config);
-  }
-  function getSizeOfBoxUpload() {
-    const widthChild = buttonAddFileEl.offsetWidth + listFileAddEl.offsetWidth;
-    const rectBoxImage = boxImageUpload.getBoundingClientRect();
-    const widthParent = rectBoxImage.width;
-    return {
-      widthChild,
-      rectBoxImage,
-      widthParent
-    };
+    createScrollbar(boxImageUpload, buttonAddFileEl, listFileAddEl);
   }
   function addEventForItemMessage() {
     Array.from(messageEl.children).forEach((messageItem) => {
@@ -51433,7 +51459,7 @@ const CHAT = (() => {
     if (editorChat.innerText.trim().length && !flagWidth) {
       flagWidth = true;
       window.dispatchEvent(beforeResizeEditorChat);
-      editorChat.nextElementSibling.style.opacity = 0;
+      editorChat.nextElementSibling.classList.add("hidden");
       actions.style.overflow = "hidden";
       actions.animate(
         [
@@ -51462,7 +51488,7 @@ const CHAT = (() => {
     if (editorChat.innerText.trim().length === 0) {
       flagWidth = false;
       window.dispatchEvent(beforeResizeEditorChat);
-      editorChat.nextElementSibling.style.opacity = 1;
+      editorChat.nextElementSibling.classList.remove("hidden");
       actions.classList.remove("hidden");
       actionPlus.classList.add("hidden");
       actions.animate(
@@ -51493,7 +51519,7 @@ const CHAT = (() => {
     if (!flagWidth && (!e.ctrlKey || data)) {
       flagWidth = true;
       window.dispatchEvent(beforeResizeEditorChat);
-      editorChat.nextElementSibling.style.opacity = 0;
+      editorChat.nextElementSibling.classList.add("hidden");
       actions.style.overflow = "hidden";
       actions.animate(
         [

@@ -299,6 +299,15 @@
   left: 13px;
   bottom: 4px;
   color: #cbcbcb;
+  user-select: none;
+  visibility: visible;
+  pointer-events: none;
+  opacity: 1;
+}
+.chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .placeholder.hidden {
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
 }
 .chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container:has(.box-upload-image) {
   border-top: none;
@@ -322,6 +331,9 @@
   align-items: center;
   width: calc(100% + 2px);
   overflow: hidden;
+}
+.chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image * {
+  user-select: none;
 }
 .chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image .btn-add-file-message {
   position: relative;
@@ -431,6 +443,7 @@
   background: rgba(0, 0, 0, 0.05);
   transition: background 300ms ease;
   padding: 2px 0;
+  user-select: none;
 }
 .scroll-custom:hover {
   background: rgba(179, 127, 235, 0.1647058824);
@@ -450,4 +463,5 @@
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 6px;
   cursor: move;
+  user-select: none;
 }
