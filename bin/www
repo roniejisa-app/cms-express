@@ -6,14 +6,23 @@
 
 var app = require('../app');
 var debug = require('debug')('node3:server');
-var http = require('http');
+var https = require('https');
 const { Server } = require('socket.io');
 const { socketAdmin } = require('../socket/admin');
-
+const socketRTC = require('../socket/rtc');
+const runNMS = require("../rtmp/admin");
+const fs = require('fs');
+const { resolve } = require('path');
 /**
  * Get port from environment and store in Express.
  */
+var key = fs.readFileSync(__dirname + '/server.key');
+var cert = fs.readFileSync(__dirname + '/server.crt');
 
+var credentials = {
+    key: key,
+    cert: cert
+};
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
@@ -21,12 +30,20 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server = https.createServer(credentials, app);
 const io = new Server(server, {
     maxHttpBufferSize: 1e20, pingTimeout: 60000
 });
 // Thêm socket vào đây
 socketAdmin(io);
+socketRTC(io);
+runNMS(Object.assign({}, {
+    key:  resolve(process.cwd() + '/bin/server.key'),
+    cert: resolve(process.cwd() + '/bin/server.crt'),
+}, {
+    port: 3002,
+    mediaroot: process.cwd() + '/public/lives',
+}));
 /**
  * Listen on provided port, on all network interfaces.
  */
