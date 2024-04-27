@@ -1,26 +1,89 @@
-
+import socket from "./socket.js";
+navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+let isAlreadyCalling = {};
 const { RTCPeerConnection, RTCSessionDescription } = window;
-import socket from "../admin/socket.js";
-const peerConnection = new RTCPeerConnection();
-const screenPeerConnection = new RTCPeerConnection();
-let isAlreadyCalling = false;
-let isAlreadyShare = false;
-let peers = {
-    cams: {},
-    screens: {}
-};
 
-socket.on('connect', async () => {
+socket.connect();
+// RSMEET._();
+const form = document.querySelector('form.room');
+let roomNameInput = form.querySelector('input');
+const peerConnection = new RTCPeerConnection();
+const roomAction = document.querySelector('.room-action');
+const muteBtn = roomAction.querySelector(".mute");
+const leaveRoom = roomAction.querySelector(".leave-room");
+const hideCamera = roomAction.querySelector(".hide-camera");
+const roomMain = document.querySelector('.room-main');
+const remoteVideo = document.getElementById("remote-video");
+const localVideo = document.getElementById("local-video");
+let roomName = roomNameInput.value;
+form.onsubmit = (e) => {
+    e.preventDefault();
+    roomName = roomNameInput.value;
+    socket.emit("join", roomName);
+}
+
+socket.on("ready", (otherUsers) => {
+    navigator.getUserMedia(
+        { video: true, audio: true },
+        stream => {
+            roomAction.style.display = "flex";
+            if (localVideo) {
+                localVideo.srcObject = stream;
+                localVideo.onloadedmetadata = () => {
+                    localVideo.play();
+                }
+            }
+            stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
+            for (const socketId of otherUsers) {
+                isAlreadyCalling[socketId] = false;
+                callUser(socketId)
+            }
+        },
+        error => {
+            console.warn(error.message);
+        }
+    );
 })
+muteBtn.onclick = () => {
+    if (muteBtn.innerText === "Mute") {
+        for (const track of localVideo.srcObject.getTracks()) {
+            if (track.kind === "audio") {
+                track.enabled = false;
+            }
+        }
+        muteBtn.innerText = "Un mute"
+    } else {
+        for (const track of localVideo.srcObject.getTracks()) {
+            if (track.kind === "audio") {
+                track.enabled = true;
+            }
+        }
+        muteBtn.innerText = "Mute"
+    }
+}
+
+hideCamera.onclick = () => {
+    if (hideCamera.innerText === "Hide Camera") {
+        for (const track of localVideo.srcObject.getTracks()) {
+            if (track.kind === "video") {
+                track.enabled = false;
+            }
+        }
+        hideCamera.innerText = "Show Camera"
+    } else {
+        for (const track of localVideo.srcObject.getTracks()) {
+            if (track.kind === "video") {
+                track.enabled = true;
+            }
+        }
+        hideCamera.innerText = "Hide Camera"
+    }
+}
+
+
 
 socket.on("update-user-list", ({ users }) => {
     updateUserList(users);
-    for (const socketId of users) {
-        peers.cams[socketId] = new RTCPeerConnection();
-        peers.screens[socketId] = new RTCPeerConnection();
-    }
-
-    addEventListenerPeerOnTrack();
 });
 
 socket.on("remove-user", ({ socketId }) => {
@@ -33,6 +96,7 @@ socket.on("remove-user", ({ socketId }) => {
 
 function updateUserList(socketIds) {
     const activeUserContainer = document.getElementById("active-user-container");
+
     socketIds.forEach(socketId => {
         const alreadyExistingUser = document.getElementById(socketId);
         if (!alreadyExistingUser) {
@@ -44,44 +108,42 @@ function updateUserList(socketIds) {
 
 function createUserItemContainer(socketId) {
     const userContainerEl = document.createElement("div");
+
     const usernameEl = document.createElement("p");
+
     userContainerEl.setAttribute("class", "active-user");
     userContainerEl.setAttribute("id", socketId);
     usernameEl.setAttribute("class", "username");
     usernameEl.innerHTML = `Socket: ${socketId}`;
+
     userContainerEl.appendChild(usernameEl);
+
     userContainerEl.addEventListener("click", () => {
+        // unselectUsersFromList();
         userContainerEl.setAttribute("class", "active-user active-user--selected");
         const talkingWithInfo = document.getElementById("talking-with-info");
-        talkingWithInfo.innerHTML = `Talking with: "Socket: ${socketId}" <button class="share-screen">Share screen</button>`;
-        for (let socketId of Object.keys(peers.cams)) {
-            callUser(socketId);
-        }
-
-        const buttonShareScreen = talkingWithInfo.querySelector('.share-screen');
-        addEventShareAll(buttonShareScreen);
+        talkingWithInfo.innerHTML = `Talking with: "Socket: ${socketId}"`;
+        callUser(socketId);
     });
     return userContainerEl;
 }
 
-
-
 async function callUser(socketId) {
-    const offer = await peers.cams[socketId].createOffer();
-    await peers.cams[socketId].setLocalDescription(new RTCSessionDescription(offer));
+    const offer = await peerConnection.createOffer();
+    await peerConnection.setLocalDescription(new RTCSessionDescription(offer));
+
     socket.emit("call-user", {
         offer,
-        to: socketId,
-        from: socket.id
+        to: socketId
     });
 }
 
 socket.on("call-made", async data => {
-    await await peers.cams[data.socket].setRemoteDescription(
+    await peerConnection.setRemoteDescription(
         new RTCSessionDescription(data.offer)
     );
-    const answer = await await peers.cams[data.socket].createAnswer();
-    await await peers.cams[data.socket].setLocalDescription(new RTCSessionDescription(answer));
+    const answer = await peerConnection.createAnswer();
+    await peerConnection.setLocalDescription(new RTCSessionDescription(answer));
 
     socket.emit("make-answer", {
         answer,
@@ -90,147 +152,21 @@ socket.on("call-made", async data => {
 });
 
 socket.on("answer-made", async data => {
-    await peers.cams[data.socket].setRemoteDescription(
+    await peerConnection.setRemoteDescription(
         new RTCSessionDescription(data.answer)
     );
 
-    if (!isAlreadyCalling) {
-        for (let socketId of Object.keys(peers.cams)) {
-            callUser(socketId);
-        }
-        isAlreadyCalling = true;
+    if (!isAlreadyCalling[data.socket]) {
+        callUser(data.socket);
+        isAlreadyCalling[data.socket] = true;
     }
 });
 
-const localVideo = document.getElementById("videoCall");
-const remoteVideo = document.getElementById("remote-video");
-const constraints = {
-    audio: true,
-    video: { width: 300, height: 200 },
+peerConnection.ontrack = function ({ streams: [stream] }) {
+    if (remoteVideo) {
+        remoteVideo.srcObject = stream;
+        remoteVideo.onloadedmetadata = () => {
+            remoteVideo.play();
+        }
+    }
 };
-
-
-
-function addEventListenerPeerOnTrack() {
-    navigator.mediaDevices
-        .getUserMedia(constraints)
-        .then((mediaStream) => {
-            for (const socketId of Object.keys(peers.cams)) {
-                mediaStream.getTracks().forEach(track => peers.cams[socketId].addTrack(track, mediaStream));
-            }
-            // if (localVideo) {
-            //     localVideo.srcObject = mediaStream;
-            // }
-            // localVideo.play();
-        },
-            error => {
-                console.warn(error.message);
-            }
-        );
-
-    for (const socketId of Object.keys(peers.cams)) {
-        peers.cams[socketId].ontrack = function ({ streams: [stream] }) {
-            if (remoteVideo) {
-                remoteVideo.srcObject = stream;
-                remoteVideo.onloadeddata = () => {
-                    remoteVideo.play();
-                }
-            }
-        };
-    }
-
-    for (const socketId of Object.keys(peers.screens)) {
-        peers.screens[socketId].ontrack = function ({ streams: [stream] }) {
-            if (screeShare) {
-                screeShare.srcObject = stream;
-                screeShare.onloadeddata = () => {
-                    screeShare.play();
-                }
-            }
-        }
-    }
-}
-
-let screeShare = document.getElementById('screenShare');
-socket.on("share-screen-made", async data => {
-    await peers.screens[data.socket].setRemoteDescription(
-        new RTCSessionDescription(data.offer)
-    );
-    const answer = await peers.screens[data.socket].createAnswer();
-    await peers.screens[data.socket].setLocalDescription(new RTCSessionDescription(answer));
-    console.log(data);
-    socket.emit("make-screen-answer", {
-        answer,
-        to: data.socket,
-    });
-})
-
-socket.on("answer-share-screen-made", async data => {
-    await peers.screens[data.socket].setRemoteDescription(
-        new RTCSessionDescription(data.answer)
-    );
-    if (!isAlreadyShare) {
-        for (const socketId of Object.keys(peers.screens)) {
-            shareScreen(socketId);
-        }
-        isAlreadyShare = true;
-    }
-})
-
-function addEventShareAll(buttonShareScreen) {
-    buttonShareScreen.onclick = async () => {
-        if (isAlreadyShare) {
-            stopShare();
-        } else {
-            try {
-                const mediaStream = await startCapture(displayMediaOptions);
-                for (const socketId of Object.keys(peers.screens)) {
-                    mediaStream.getTracks().forEach(track => peers.screens[socketId].addTrack(track, mediaStream));
-                    shareScreen(socketId);
-                }
-
-            } catch (e) {
-                console.log("Hủy không share nữa");
-            }
-        }
-        // Chỉnh chỗ này để có thể share cho tất cả mọi người
-    }
-}
-
-const displayMediaOptions = {
-    video: {
-        displaySurface: "monitor",
-    },
-    audio: {
-        suppressLocalAudioPlayback: true,
-    },
-    preferCurrentTab: false,
-    selfBrowserSurface: "exclude",
-    systemAudio: "include",
-    surfaceSwitching: "include",
-    monitorTypeSurfaces: "include",
-};
-
-async function startCapture(displayMediaOptions) {
-    let captureStream;
-
-    try {
-        captureStream =
-            await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
-    } catch (err) {
-        console.error(`Error: ${err}`);
-    }
-    return captureStream;
-}
-
-
-async function shareScreen(socketId) {
-    const offer = await peers.screens[socketId].createOffer();
-    await peers.screens[socketId].setLocalDescription(new RTCSessionDescription(offer));
-    socket.emit("share-screen-for-user", {
-        offer,
-        to: socketId
-    })
-}
-
-socket.connect();

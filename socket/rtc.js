@@ -1,5 +1,4 @@
 let activeSockets = [];
-
 module.exports = (io) => {
     io.on("connection", socket => {
         const existingSocket = activeSockets.find(
@@ -19,7 +18,13 @@ module.exports = (io) => {
                 users: [socket.id]
             });
         }
-
+        socket.on("join", roomName => {
+            socket.join(roomName);
+            const rooms = io.of("/").adapter.rooms;
+            const room = rooms.get(roomName) 
+            const otherUsers = Array.from(room).filter(socketId => socketId !== socket.id);
+            socket.emit("ready",otherUsers);
+        });
 
         socket.on("disconnect", () => {
             activeSockets = activeSockets.filter(
@@ -33,7 +38,7 @@ module.exports = (io) => {
         socket.on("call-user", data => {
             socket.to(data.to).emit("call-made", {
                 offer: data.offer,
-                socket: socket.id,
+                socket: socket.id
             });
         });
 
@@ -43,21 +48,7 @@ module.exports = (io) => {
                 answer: data.answer
             });
         });
-
-        socket.on("share-screen-for-user", data => {
-            socket.to(data.to).emit("share-screen-made", {
-                offer: data.offer,
-                socket: socket.id
-            })
-        })
-
-        socket.on("make-screen-answer", data => {
-            socket.to(data.to).emit("answer-share-screen-made", {
-                answer: data.answer,
-                socket: socket.id
-            })
-        })
     });
 
-
 }
+

@@ -1,7 +1,25 @@
-<h1>Welcome to CMS</h1>
-<div id="active-user-container"></div>
-<video id="videoCall"></video>
-<video id="remote-video"></video>
-<div id="talking-with-info"></div>
-<video id="screenShare" width="500"></video>
-<div class="share"></div>
+<form class="room">
+    <h1>RS MEET</h1>
+    <input type="text" name="room" placeholder="Nhập zoom" />
+    <button>Vào ngay</button>
+</form>
+
+<div class="content-container">
+    <div class="active-users-panel" id="active-user-container">
+        <h3 class="panel-title">Active Users:</h3>
+    </div>
+    <div class="video-chat-container">
+        <h2 class="talk-info" id="talking-with-info">
+            Select active user on the left menu.
+        </h2>
+        <div class="room-main">
+            <video class="local-video" id="local-video"></video>
+            <video class="remote-video" id="remote-video"></video>
+        </div>
+        <div class="room-action">
+            <button class="mute">Mute</button>
+            <button class="hide-camera">Hide Camera</button>
+            <button class="leave-room">Leave Room</button>
+        </div> 
+    </div>
+</div>

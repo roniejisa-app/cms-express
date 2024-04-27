@@ -8,13 +8,13 @@ export default defineConfig({
         minify: false,
         rollupOptions: {
             input: [
-                resolve(__dirname, "./resources/css/media.scss"),
-                resolve(__dirname, "./resources/css/admin.scss"),
-                resolve(__dirname, "./resources/css/chat.scss"),
+                // resolve(__dirname, "./resources/css/media.scss"),
+                // resolve(__dirname, "./resources/css/admin.scss"),
+                // resolve(__dirname, "./resources/css/chat.scss"),
                 resolve(__dirname, "./resources/css/meet.scss"),
-                resolve(__dirname, "./resources/css/r8/r8.scss"),
-                resolve(__dirname, "./resources/js/media/media.js"),
-                resolve(__dirname, "./resources/js/admin/admin.js"),
+                // resolve(__dirname, "./resources/css/r8/r8.scss"),
+                // resolve(__dirname, "./resources/js/media/media.js"),
+                // resolve(__dirname, "./resources/js/admin/admin.js"),
                 resolve(__dirname, "./resources/js/admin/livestream.js"),
                 // resolve(__dirname, "./resources/js/listener.js")
             ],

@@ -37,13 +37,14 @@ const io = new Server(server, {
 // Thêm socket vào đây
 socketAdmin(io);
 socketRTC(io);
-runNMS(Object.assign({}, {
-    key:  resolve(process.cwd() + '/bin/server.key'),
-    cert: resolve(process.cwd() + '/bin/server.crt'),
-}, {
-    port: 3002,
-    mediaroot: process.cwd() + '/public/lives',
-}));
+
+// runNMS(Object.assign({}, {
+//     key:  resolve(process.cwd() + '/bin/server.key'),
+//     cert: resolve(process.cwd() + '/bin/server.crt'),
+// }, {
+//     port: 3002,
+//     mediaroot: process.cwd() + '/public/lives',
+// }));
 /**
  * Listen on provided port, on all network interfaces.
  */
