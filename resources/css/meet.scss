@@ -6,6 +6,7 @@
 
 .room-main{
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 }
 .room-action{
@@ -13,12 +14,12 @@
     justify-content: center;
 }
 
-.remote-video,
+.video-stream,
+.video-peer,
 .local-video {
     max-width: 100%;
-    max-height: calc(100vh);
+    max-height: calc(100vh - 80px);
     object-fit: scale-down;
-    margin: auto;
 }
 
 .local-video {
