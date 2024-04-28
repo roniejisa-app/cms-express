@@ -36,6 +36,7 @@ const offerOptions = {
     offerToReceiveAudio: 1,
     offerToReceiveVideo: 1
 };
+
 form.onsubmit = (e) => {
     e.preventDefault();
     roomName = roomNameInput.value;
@@ -78,49 +79,13 @@ socket.on("ready", (otherUsers, userStream) => {
         }
     );
 })
-muteBtn.onclick = () => {
-    if (muteBtn.innerText === "Mute") {
-        for (const track of localVideo.srcObject.getTracks()) {
-            if (track.kind === "audio") {
-                track.enabled = false;
-            }
-        }
-        muteBtn.innerText = "Un mute"
-    } else {
-        for (const track of localVideo.srcObject.getTracks()) {
-            if (track.kind === "audio") {
-                track.enabled = true;
-            }
-        }
-        muteBtn.innerText = "Mute"
-    }
-}
 
-hideCamera.onclick = () => {
-    if (hideCamera.innerText === "Hide Camera") {
-        for (const track of localVideo.srcObject.getTracks()) {
-            if (track.kind === "video") {
-                track.enabled = false;
-            }
-        }
-        hideCamera.innerText = "Show Camera"
-    } else {
-        for (const track of localVideo.srcObject.getTracks()) {
-            if (track.kind === "video") {
-                track.enabled = true;
-            }
-        }
-        hideCamera.innerText = "Hide Camera"
-    }
-}
 
-shareRoom.onclick = async () => {
-    screenStream = await startCapture(displayMediaOptions);
-    if (screenStream) {
-        addPeerStream(socket.id);
-        socket.emit("stream-screen", roomName, socket.id);
-    }
-}
+socket.on("update-user-list", async ({ users }) => {
+    await updateUserList(users);
+    socket.emit("done-add", roomName, socket.id, "call");
+});
+
 // Bước này chỉ để nhận socketId từ máy chuẩn bị stream còn có sẵn peer rùi thì gọi thẳng bước ở bên trong là xong
 socket.on('start-stream', async (socketId) => {
     isAlreadyStream[socketId] = false;
@@ -128,25 +93,12 @@ socket.on('start-stream', async (socketId) => {
     socket.emit("add-stream-done", roomName, socketId);
 })
 
+// Từ màn stream gọi đến các màn đã có kết nối vào
 socket.on("call-stream-now", async (socketId) => {
     await addPeerStream(socketId);
     callStream(socketId);
 })
 
-async function startCapture(displayMediaOptions) {
-    let captureStream;
-    try {
-        captureStream = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
-    } catch (err) {
-        return captureStream;
-    }
-    return captureStream;
-}
-
-socket.on("update-user-list", async ({ users }) => {
-    await updateUserList(users);
-    socket.emit("done-add", roomName, socket.id, "call");
-});
 
 socket.on("done-call-start", (type) => {
     for (let socketId of Object.keys(peers)) {
@@ -160,12 +112,15 @@ socket.on("done-call-start", (type) => {
     }
 })
 
-socket.on("remove-user", ({ socketId }) => {
-    const elToRemove = document.getElementById(socketId);
-    if (elToRemove) {
-        elToRemove.remove();
+async function startCapture(displayMediaOptions) {
+    let captureStream;
+    try {
+        captureStream = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+    } catch (err) {
+        return captureStream;
     }
-});
+    return captureStream;
+}
 
 async function updateUserList(socketIds) {
     let count = 0;
@@ -305,6 +260,50 @@ socket.on("answer-made", async data => {
     }
 });
 
+
+muteBtn.onclick = () => {
+    if (muteBtn.innerText === "Mute") {
+        for (const track of localVideo.srcObject.getTracks()) {
+            if (track.kind === "audio") {
+                track.enabled = false;
+            }
+        }
+        muteBtn.innerText = "Un mute"
+    } else {
+        for (const track of localVideo.srcObject.getTracks()) {
+            if (track.kind === "audio") {
+                track.enabled = true;
+            }
+        }
+        muteBtn.innerText = "Mute"
+    }
+}
+
+hideCamera.onclick = () => {
+    if (hideCamera.innerText === "Hide Camera") {
+        for (const track of localVideo.srcObject.getTracks()) {
+            if (track.kind === "video") {
+                track.enabled = false;
+            }
+        }
+        hideCamera.innerText = "Show Camera"
+    } else {
+        for (const track of localVideo.srcObject.getTracks()) {
+            if (track.kind === "video") {
+                track.enabled = true;
+            }
+        }
+        hideCamera.innerText = "Hide Camera"
+    }
+}
+
+shareRoom.onclick = async () => {
+    screenStream = await startCapture(displayMediaOptions);
+    if (screenStream) {
+        addPeerStream(socket.id);
+        socket.emit("stream-screen", roomName, socket.id);
+    }
+}
 
 function iceCallbackLocal(event, destRemote) {
     handleCandidate(event.candidate, destRemote, 'pc1: ', 'local');
