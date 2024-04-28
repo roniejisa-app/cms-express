@@ -1,4 +1,5 @@
 let totalUserReady = {};
+let userStream = [];
 module.exports = (io) => {
     io.on("connection", socket => {
         socket.on("join", roomName => {
@@ -8,8 +9,8 @@ module.exports = (io) => {
             if (!totalUserReady[roomName + "-call"] || totalUserReady[roomName + "-call"].length > 0) {
                 totalUserReady[roomName + "-call"] = [];
             }
-            
-            socket.emit("ready", otherUsers);
+
+            socket.emit("ready", otherUsers, userStream);
             for (const user of otherUsers) {
                 socket.to(user).emit("update-user-list", {
                     users: [socket.id]
@@ -53,6 +54,7 @@ module.exports = (io) => {
         });
 
         socket.on("stream-screen", (roomName) => {
+            userStream.push(socket.id);
             socket.join(roomName);
             const room = getRoom(roomName);
             const otherUsers = Array.from(room).filter(socketId => socketId !== socket.id);

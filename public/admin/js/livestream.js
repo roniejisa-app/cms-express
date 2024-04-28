@@ -3293,7 +3293,7 @@ form.onsubmit = (e) => {
   roomName = roomNameInput.value;
   socket.emit("join", roomName);
 };
-socket.on("ready", (otherUsers) => {
+socket.on("ready", (otherUsers, userStream) => {
   navigator.getUserMedia(
     { video: true, audio: true },
     async (stream) => {
@@ -3315,6 +3315,11 @@ socket.on("ready", (otherUsers) => {
           await addPeer(socketId);
           socket.emit("done-add", roomName, socket.id, "call");
         }
+      }
+      for (const socketId of userStream) {
+        isAlreadyStream[socketId] = false;
+        await addPeerStream(socketId);
+        socket.emit("add-stream-done", roomName, socketId);
       }
     },
     (error) => {
@@ -3422,7 +3427,9 @@ async function addPeer(socketId) {
     return true;
   }
   return new Promise((resolve) => {
-    peers[socketId] = {};
+    if (!peers[socketId]) {
+      peers[socketId] = {};
+    }
     peers[socketId].local = new RTCPeerConnection();
     peers[socketId].remote = new RTCPeerConnection();
     peers[socketId].local.onnegotiationneeded = async (e) => {
@@ -3443,12 +3450,11 @@ async function addPeer(socketId) {
 }
 async function addPeerStream(socketId) {
   return new Promise((resolve) => {
-    peers[socketId] = {};
+    if (!peers[socketId]) {
+      peers[socketId] = {};
+    }
     peers[socketId].localScreen = new RTCPeerConnection();
     peers[socketId].remoteScreen = new RTCPeerConnection();
-    peers[socketId].localScreen.onnegotiationneeded = async (e) => {
-      peers[socketId].offer = await peers[socketId].localScreen.createOffer(offerOptions);
-    };
     peers[socketId].remoteScreen.ontrack = (e) => gotRemoteStreamScreen(e, socketId);
     peers[socketId].localScreen.onicecandidate = (e) => iceCallbackLocal(e, peers[socketId].remoteScreen);
     peers[socketId].remoteScreen.onicecandidate = (e) => iceCallbackRemote(e, peers[socketId].localScreen);
