@@ -83,8 +83,21 @@ module.exports = (io) => {
             });
         });
 
+        socket.on("leave-room", (roomName) => {
+            userStream = userStream.filter(socketId => socketId !== socket.id);
+            io.to(roomName).emit("leave-room-now", socket.id);
+        })
+
+        socket.on("check-room-after-leave", (roomName, socketId) => {
+            let room = getRoom(roomName);
+            if (room.has(socketId)) {
+                room.delete(socketId);
+            }
+            room = getRoom(roomName);
+        })
+
         socket.on("disconnect", () => {
-            socket.emit("close-socket", socket.id);
+            io.emit("leave-room-now", socket.id);
         })
     });
 
