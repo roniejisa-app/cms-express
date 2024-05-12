@@ -86,13 +86,10 @@ class PeerRS {
     });
     __publicField(this, "handleCandidate", (candidate, dest, prefix, type) => {
       dest.addIceCandidate(candidate).then(this.onAddIceCandidateSuccess, this.onAddIceCandidateError);
-      console.log(`${prefix}New ${type} ICE candidate: ${candidate ? candidate.candidate : "(null)"}`);
     });
     __publicField(this, "onAddIceCandidateSuccess", () => {
-      console.log("AddIceCandidate success.");
     });
     __publicField(this, "onAddIceCandidateError", (error) => {
-      console.log(`Failed to add ICE candidate: ${error.toString()}`);
     });
     __publicField(this, "gotRemoteStream", (e, socketId) => {
       if (!this.peers[socketId].remoteVideo) {
@@ -138,13 +135,14 @@ class PeerRS {
         this.peers[socketId].remoteVideo.remove();
       }
     });
-    __publicField(this, "remotePeerRemoteStream", (socketId) => {
+    __publicField(this, "removePeerRemoteStream", (socketId) => {
       if (this.peers[socketId] && this.peers[socketId].remoteVideoStream && this.peers[socketId].remoteVideoStream.srcObject) {
         for (const track of this.peers[socketId].remoteVideoStream.srcObject.getTracks()) {
           track.stop();
         }
         this.peers[socketId].remoteVideoStream.srcObject = null;
         this.peers[socketId].remoteVideoStream.remove();
+        delete this.peers[socketId].remoteVideoStream;
       }
     });
     this.localStream = null;
@@ -255,10 +253,16 @@ socket.on("update-user-list", async ({ users }) => {
   socket.emit("done-add", roomName, socket.id, "call");
 });
 socket.on("start-stream", async (socketId) => {
+  if (peerRS.peers[socketId]) {
+    peerRS.peers[socketId].isAlreadyStream = false;
+  }
   await peerRS.addPeerStream(socketId);
   socket.emit("add-stream-done", roomName, socketId);
 });
 socket.on("call-stream-now", async (socketId) => {
+  if (peerRS.peers[socketId]) {
+    peerRS.peers[socketId].isAlreadyStream = false;
+  }
   await peerRS.addPeerStream(socketId);
   callStream(socketId);
 });
@@ -332,7 +336,7 @@ socket.on("answer-made", async (data) => {
 });
 socket.on("leave-room-now", (socketId) => {
   peerRS.remotePeerLocal(socketId);
-  peerRS.remotePeerRemoteStream(socketId);
+  peerRS.removePeerRemoteStream(socketId);
   delete peerRS.peers[socketId];
   if (socketId === socket.id) {
     if (localVideo.srcObject && localVideo.srcObject.getTracks()) {
@@ -343,12 +347,15 @@ socket.on("leave-room-now", (socketId) => {
     }
     for (const socketIdRemote of Object.keys(peerRS.peers)) {
       peerRS.removePeerRemote(socketIdRemote);
-      peerRS.remotePeerRemoteStream(socketIdRemote);
+      peerRS.removePeerRemoteStream(socketIdRemote);
       delete peerRS.peers[socketIdRemote];
     }
     socket.emit("check-room-after-leave", roomName, socketId);
     showForm(false);
   }
+});
+socket.on("stop-share-screen-now", (socketId) => {
+  peerRS.removePeerRemoteStream(socketId);
 });
 muteBtn.onclick = () => {
   if (muteBtn.innerText === "Mute") {
@@ -385,10 +392,16 @@ hideCamera.onclick = () => {
   }
 };
 shareRoom.onclick = async () => {
-  let screenStream = await peerRS.startCapture();
-  peerRS.setScreenStream(screenStream);
-  peerRS.addPeerStream(socket.id);
-  socket.emit("stream-screen", roomName, socket.id);
+  if (shareRoom.innerText === "Share screen") {
+    let screenStream = await peerRS.startCapture();
+    peerRS.setScreenStream(screenStream);
+    peerRS.addPeerStream(socket.id);
+    socket.emit("stream-screen", roomName, socket.id);
+    shareRoom.innerText = "Stop share screen";
+  } else {
+    socket.emit("stop-share-screen", roomName);
+    shareRoom.innerText = "Share screen";
+  }
 };
 leaveRoom.onclick = async () => {
   socket.emit("leave-room", roomName);

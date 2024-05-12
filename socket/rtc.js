@@ -35,10 +35,6 @@ module.exports = (io) => {
             }
         })
 
-        socket.on("disconnect", () => {
-
-        });
-
         socket.on("call-user", (data) => {
             socket.to(data.to).emit("call-made", {
                 offer: data.offer,
@@ -98,6 +94,11 @@ module.exports = (io) => {
 
         socket.on("disconnect", () => {
             io.emit("leave-room-now", socket.id);
+        })
+
+        socket.on("stop-share-screen", (roomName) => {
+            userStream = userStream.filter(socketId => socketId !== socket.id);
+            io.to(roomName).emit("stop-share-screen-now", socket.id);
         })
     });
 

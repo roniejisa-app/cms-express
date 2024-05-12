@@ -95,15 +95,15 @@ export class PeerRS {
     handleCandidate = (candidate, dest, prefix, type) => {
         dest.addIceCandidate(candidate)
             .then(this.onAddIceCandidateSuccess, this.onAddIceCandidateError);
-        console.log(`${prefix}New ${type} ICE candidate: ${candidate ? candidate.candidate : '(null)'}`);
+        // console.log(`${prefix}New ${type} ICE candidate: ${candidate ? candidate.candidate : '(null)'}`);
     }
 
     onAddIceCandidateSuccess = () => {
-        console.log('AddIceCandidate success.');
+        // console.log('AddIceCandidate success.');
     }
 
     onAddIceCandidateError = (error) => {
-        console.log(`Failed to add ICE candidate: ${error.toString()}`);
+        // console.log(`Failed to add ICE candidate: ${error.toString()}`);
     }
 
     gotRemoteStream = (e, socketId) => {
@@ -154,15 +154,15 @@ export class PeerRS {
         }
     }
 
-    remotePeerRemoteStream = (socketId) => {
+    removePeerRemoteStream = (socketId) => {
         if (this.peers[socketId] && this.peers[socketId].remoteVideoStream && this.peers[socketId].remoteVideoStream.srcObject) {
             for (const track of this.peers[socketId].remoteVideoStream.srcObject.getTracks()) {
                 track.stop();
             }
             this.peers[socketId].remoteVideoStream.srcObject = null;
             this.peers[socketId].remoteVideoStream.remove();
+            delete this.peers[socketId].remoteVideoStream;
         }
     }
 }
-
 export default {};

@@ -109,12 +109,18 @@ socket.on("update-user-list", async ({ users }) => {
 
 // Bước này chỉ để nhận socketId từ máy chuẩn bị stream còn có sẵn peer rùi thì gọi thẳng bước ở bên trong là xong
 socket.on('start-stream', async (socketId) => {
+    if (peerRS.peers[socketId]) {
+        peerRS.peers[socketId].isAlreadyStream = false;
+    }
     await peerRS.addPeerStream(socketId);
     socket.emit("add-stream-done", roomName, socketId);
 })
 
 // Từ màn stream gọi đến các màn đã có kết nối vào
 socket.on("call-stream-now", async (socketId) => {
+    if (peerRS.peers[socketId]) {
+        peerRS.peers[socketId].isAlreadyStream = false;
+    }
     await peerRS.addPeerStream(socketId);
     callStream(socketId);
 })
@@ -205,7 +211,7 @@ socket.on("answer-made", async data => {
 
 socket.on("leave-room-now", (socketId) => {
     peerRS.remotePeerLocal(socketId);
-    peerRS.remotePeerRemoteStream(socketId);
+    peerRS.removePeerRemoteStream(socketId);
     delete peerRS.peers[socketId];
     if (socketId === socket.id) {
         if (localVideo.srcObject && localVideo.srcObject.getTracks()) {
@@ -217,12 +223,16 @@ socket.on("leave-room-now", (socketId) => {
 
         for (const socketIdRemote of Object.keys(peerRS.peers)) {
             peerRS.removePeerRemote(socketIdRemote);
-            peerRS.remotePeerRemoteStream(socketIdRemote);
+            peerRS.removePeerRemoteStream(socketIdRemote);
             delete peerRS.peers[socketIdRemote];
         }
         socket.emit("check-room-after-leave", roomName, socketId);
         showForm(false);
     }
+})
+
+socket.on("stop-share-screen-now", (socketId) => {
+    peerRS.removePeerRemoteStream(socketId);
 })
 // Xử lý các hành động
 muteBtn.onclick = () => {
@@ -262,10 +272,16 @@ hideCamera.onclick = () => {
 }
 
 shareRoom.onclick = async () => {
-    let screenStream = await peerRS.startCapture();
-    peerRS.setScreenStream(screenStream);
-    peerRS.addPeerStream(socket.id);
-    socket.emit("stream-screen", roomName, socket.id);
+    if (shareRoom.innerText === "Share screen") {
+        let screenStream = await peerRS.startCapture();
+        peerRS.setScreenStream(screenStream);
+        peerRS.addPeerStream(socket.id);
+        socket.emit("stream-screen", roomName, socket.id);
+        shareRoom.innerText = "Stop share screen"
+    } else {
+        socket.emit("stop-share-screen", roomName);
+        shareRoom.innerText = "Share screen"
+    }
 }
 
 leaveRoom.onclick = async () => {
