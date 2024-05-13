@@ -1,5 +1,6 @@
 @use './r8/variable' as *;
 @use 'variable' as *;
+@use 'mixins' as *;
 
 body {
     font-family: 'Open Sans', sans-serif;
@@ -185,10 +186,68 @@ footer {
 // Done css
 
 // CSS TABLE
+.table-data{
+    position: relative;
+}
+table {
+    background: #e6f4ff;
+    border-radius: 6px;
+}
 .table {
+    tbody {
+        tr:has(input:checked),
+        tr:hover {
+            background-color: #99caf1;
+        }
+    }
     tr {
-        td:first-child {
-            text-align: center;
+        label {
+            position: relative;
+            width: 18px;
+            height: 18px;
+            display: block;
+            cursor: pointer;
+            border: 1px solid black;
+            border-radius: 4px;
+            margin: 0 auto;
+            transition: 200ms;
+            transition-property: box-shadow, border-color, background-color;
+            &:hover,
+            &:has(input:checked) {
+                border-color: #1677ff;
+                box-shadow: 0 0 3px 5px #1677ff50;
+                background-color: #1677ff90;
+                &::before {
+                    border-color: white;
+                }
+                &.not-full::before {
+                    width: 12px;
+                    border-radius: 6px;
+                    height: 2px;
+                    border: none;
+                    background: white;
+                    transform: translate(-50%, -50%);
+                }
+            }
+            &:hover {
+                &::before {
+                    border-color: gray;
+                }
+            }
+
+            &::before {
+                content: '';
+                height: 5px;
+                width: 8px;
+                transition: border-color 200ms;
+                border: 2px solid transparent;
+                border-top: none;
+                border-right: none;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -80%) rotate(-50deg);
+            }
         }
     }
 }
@@ -202,6 +261,7 @@ footer {
     top: 0px;
     padding: 10px 0;
     background: white;
+    z-index: 1;
 }
 
 // END:CSS TABLE
@@ -225,18 +285,121 @@ footer {
     .image-form-action {
         display: flex;
         gap: 10px;
-
-        .btn {
-        }
     }
 }
 
 .image-table {
-    text-align: center;
-
     img {
         object-fit: scale-down;
     }
 }
 
 //END: IMAGE
+
+// CSS BTN
+.filter {
+    display: flex;
+    gap: 10px;
+    .btn-filter {
+        display: flex;
+        white-space: nowrap;
+        align-items: center;
+        gap: 10px;
+        svg {
+            fill: white;
+            width: 16px;
+            height: 16px;
+        }
+    }
+    .search-form {
+        position: relative;
+        display: flex;
+        input {
+            width: 100%;
+            border-radius: 6px;
+            border: 1px solid #cacaca;
+            padding: 10px 35px 10px 15px;
+        }
+        @include focusInput();
+        svg {
+            top: 50%;
+            transform: translateY(-50%);
+            right: 15px;
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            fill: #cacaca;
+        }
+    }
+}
+
+// Filter box
+.filter-box {
+    overflow: hidden;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: 300ms ease-in;
+    transition-property: visibility, pointer-events, opacity;
+    form {
+        position: relative;
+        z-index: 1;
+        padding: 15px;
+        background: white;
+        min-width: 500px;
+        height: 100vh;
+        display: block;
+        transition: transform 300ms ease-in;
+        transform: translateX(100%);
+        overflow: auto;
+        .actions {
+            position: sticky;
+            bottom: -15px;
+            background: white;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+    }
+    .overlay {
+        flex: 1;
+        inset: 0;
+        background: #00000030;
+        transition: transform 300ms ease-in;
+        transform: translateX(-100%);
+        cursor: pointer;
+    }
+    .filter-item {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 12px;
+        input,
+        select {
+            padding: 8px 12px;
+            border-radius: 6px;
+            outline: none;
+            border: 1px solid #ebebeb;
+            height: 100%;
+        }
+        button {
+            svg {
+                width: 16px;
+                fill: white;
+            }
+        }
+    }
+    &.show {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+        form {
+            transform: initial;
+        }
+        .overlay {
+            transform: initial;
+        }
+    }
+}

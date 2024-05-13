@@ -22,7 +22,15 @@
     }
 
     &-warning {
-        background: #fadb14;
+        background: $colorWarning;
         color: black;
+    }
+    
+    &-primary {
+        background: $colorPrimary;
+    }
+
+    &-filter{
+        background: brown;
     }
 }

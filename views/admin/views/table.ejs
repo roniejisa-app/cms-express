@@ -1,0 +1,68 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th width="3%">
+                <label class="check-all">
+                    <input type="checkbox" hidden />
+                </label>
+            </th>
+            <th width="5%">STT</th>
+            <% fields.forEach(field=> { %>
+            <th><%= field.label %></th>
+            <% }) %> <% if(req.permission.some(permission =>
+            permission.includes(`${module}.edit`) ||
+            permission.includes(`${module}.update`))){ %>
+            <th width="5%">Sửa</th>
+            <%}%> <% if(req.permission.some(permission =>
+            permission.includes(`${module}.delete`))){ %>
+            <th width="5%">Xóa</th>
+            <%}%>
+        </tr>
+    </thead>
+    <tbody>
+        <% if(!listData.length){ %> 
+            <tr>
+                <td colspan="100%" style="text-align: center">Không tìm thấy thông tin</td>
+            </tr>
+        <% }else{ %> 
+            <% listData.forEach((item,index) => { %>
+            <tr>
+                <td>
+                    <label class="check-single">
+                        <input type="checkbox" value="<%= item.id %>" hidden />
+                    </label>
+                </td>
+                <td><%= index + 1 %></td>
+                <% fields.forEach(field=> { %>
+                <td>
+                    <%- include(`../types/view/${field.type}`,{ field,
+                    value:item[field.name] }); %>
+                </td>
+                <% }) %> <% if(req.permission.some(permission =>
+                permission.includes(`${module}.edit`) ||
+                permission.includes(`${module}.update`))){ %>
+                <td class="text-center">
+                    <a
+                        href="/admin/<%= module %>/edit/<%= item.id %>"
+                        class="btn btn-warning"
+                        >Sửa</a
+                    >
+                </td>
+                <% } %> <% if(req.permission.some(permission =>
+                permission.includes(`${module}.delete`))){ %>
+                <td class="text-center">
+                    <form
+                        action="/admin/<%= module %>/delete/<%= item.id %>"
+                        method="POST"
+                        onclick="if(!confirm(`Bạn chắc chắn muốn xóa không?`)) return false"
+                    >
+                        <button class="btn btn-danger">Xóa</button>
+                    </form>
+                </td>
+                <% } %>
+            </tr>
+            <% }) %>
+        <% } %>
+    </tbody>
+</table>
+<%- paginate %>

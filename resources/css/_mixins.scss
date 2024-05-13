@@ -1,0 +1,16 @@
+@mixin focusInput() {
+    input {
+        transition: 200ms ease-in-out;
+        transition-property: box-shadow, border-color;
+        &:focus {
+            border-color: #1677ff;
+            box-shadow: 0 0 2px 5px #1677ff50;
+            + svg {
+                fill: #1677ff;
+            }
+        }
+    }
+    svg {
+        transition: fill 200ms ease-in-out;
+    }
+}

@@ -9,8 +9,11 @@ module.exports = {
             </a>`
         }
         for (let i = 1; i <= totalPage; i++) {
-            if ([1, 2, totalPage, totalPage - 1, +page + 1, +page + 2, +page - 1, +page - 2, +page].includes(i)) {
-                output += `<a class="${i === +page ? 'active' : ''}" href="/admin/${module}?page=${i}">${i}</a>`
+            if(i === +page){
+                output += `<a class="${i === +page ? 'active' : ''}">${i}</a>`
+            }
+            else if ([1, 2, totalPage, totalPage - 1, +page + 1, +page + 2, +page - 1, +page - 2, +page].includes(i)) {
+                output += `<a href="/admin/${module}?page=${i}">${i}</a>`
             } else {
                 output += '_';
             }

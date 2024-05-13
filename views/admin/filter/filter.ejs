@@ -1,0 +1,39 @@
+<div class="filter-box">
+    <div class="overlay"></div>
+    <form action="/admin/<%= module %>/filter">
+        <h2 class="mb-3">Lọc thông tin</h2>
+        <div
+            class="filter-list"
+            data-filter="<%= JSON.stringify(filterFields)%>"
+        >
+            <div class="filter-item">
+                <label>
+                    <select name="field">
+                        <% filterFields.forEach(({name, label}) => { %>
+                        <option value="<%= name %>"><%= label %></option>
+                        <%}) %>
+                    </select>
+                </label>
+                <label>
+                    <select name="type">
+                        <option value="contains">Có ký tự</option>
+                        <option value="equal">Bằng</option>
+                        <option value="large_than">Lớn hơn</option>
+                        <option value="small_than">Nhỏ hơn</option>
+                    </select>
+                </label>
+                <div class="filter-column">
+                    <input
+                        type="text"
+                        name="value"
+                        placeholder="Nhập từ khóa..."
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <button class="btn btn-primary" type="button">Thêm bộ lọc</button>
+            <button class="btn btn-success">Lọc</button>
+        </div>
+    </form>
+</div>

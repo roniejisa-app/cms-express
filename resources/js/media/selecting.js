@@ -108,7 +108,6 @@ function handleMouseUp() {
     positionTransform = undefined;
     selecting = false;
     canvas && canvas.remove();
-    window.dispatchEvent(showInfo)
 }
 
 function isCollision(element1, element2) {
@@ -239,7 +238,6 @@ function getItemSelecting(position = undefined) {
         }
         index++;
     }
-
     switch (position) {
         case 'start':
             var objectItem = {
@@ -301,7 +299,7 @@ function startSelecting() {
     window.addEventListener('refresh-event', refreshItem)
     window.addEventListener('show-info-file', function () {
         let objectItem = getItemSelecting('last');
-        if (!objectItem.index) {
+        if (objectItem.index === null || objectItem.index === undefined) {
             mediaInfo.innerHTML = '<p class="text-center">Chọn tệp để xem thông tin</p>';
             return false;
         };

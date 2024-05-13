@@ -1,4 +1,4 @@
-import { f as formatBytes } from "./utils.js";
+import { r as request, f as formatBytes } from "./utils.js";
 let aside = document.querySelector("aside");
 let listFolderAside = aside.querySelector(".folder-list ul");
 let mediaMainEl = document.querySelector(".media-main");
@@ -285,9 +285,9 @@ const XHR = {
         dispatchEvent(event);
       });
       let params = this.getParams();
-      let urlEndpoint = this.endpoint + url + (params ? "?" + params : "");
+      let urlEndpoint2 = this.endpoint + url + (params ? "?" + params : "");
       let data = this.buildBody();
-      xhr.open(method, urlEndpoint);
+      xhr.open(method, urlEndpoint2);
       if (Object.keys(this.headers).length) {
         for (var key of Object.keys(this.headers)) {
           if (this.type === "formData" && key === "Content-Type")
@@ -689,96 +689,6 @@ function eventRotateAndFlipImage() {
     };
   };
 }
-const request = {
-  endpoint: "",
-  headers: {},
-  body: {},
-  params: {},
-  options: {},
-  setHeaders: (key, value) => {
-    request.headers[key] = value;
-  },
-  setBody: (key, value) => {
-    request.body[key] = value;
-  },
-  buildData: (data, type) => {
-    if (type === "json") {
-      return JSON.stringify(data);
-    } else if (type === "formData") {
-      const newFormData = new FormData();
-      for (const [key, value] of Object.entries(data)) {
-        if (value instanceof FileList) {
-          Array.from(value).forEach((file) => {
-            newFormData.append(key, file);
-          });
-        } else {
-          newFormData.append(key, value);
-        }
-      }
-      return newFormData;
-    } else {
-      var params = [];
-      for (const [key, value] of Object.entries(data)) {
-        params.push(`${key}=${value}`);
-      }
-      params = params.join("&");
-      return params;
-    }
-  },
-  setParam: (key, value) => {
-    request.params[key] = value;
-  },
-  send: async (method, url, body = null, type = "json") => {
-    let dataParam = "";
-    const options = {
-      headers: request.headers
-    };
-    if (type === "json") {
-      options.headers["Content-Type"] = "application/json";
-    } else if (type === "form") {
-      options.headers["Content-Type"] = "application/x-www-form-urlencoded";
-    } else if (type === "formData") {
-      delete options.headers["Content-Type"];
-    }
-    if (body) {
-      if (method === "GET" || type === "form" || type === "formData") {
-        options["body"] = request.buildData(body, type);
-      } else {
-        options["body"] = JSON.stringify(body);
-      }
-    }
-    if (Object.entries(request.params).length) {
-      dataParam += "?" + request.buildData(request.params);
-    }
-    options["method"] = method;
-    try {
-      const response = await fetch(`${request.getEndpoint()}${url}${dataParam}`, options);
-      const json = await response.json();
-      return {
-        error: false,
-        status: "OK",
-        data: json
-      };
-    } catch (err) {
-      return {
-        error: true,
-        message: err
-      };
-    }
-  },
-  getEndpoint: () => {
-    return request.endpoint;
-  },
-  setEndpoint: (endpoint) => {
-    request.endpoint = endpoint;
-  },
-  get: async (url, body = null, type = "json") => {
-    return await request.send("GET", url, body, type);
-  },
-  post: async (url, body, type = "json") => {
-    return await request.send("POST", url, body, type);
-  }
-};
 let listAnchorSide = getAnchorAsideFolder();
 const eventHasNewFolder = new Event("has-new-folder");
 const eventAddAllAction = new Event("add-all-action");
@@ -1212,7 +1122,6 @@ function handleMouseUp() {
   positionTransform = void 0;
   selecting = false;
   canvas && canvas.remove();
-  window.dispatchEvent(showInfo);
 }
 function isCollision(element1, element2) {
   const rect1 = element1.getBoundingClientRect();
@@ -1347,7 +1256,7 @@ function startSelecting() {
   window.addEventListener("refresh-event", refreshItem);
   window.addEventListener("show-info-file", function() {
     let objectItem = getItemSelecting("last");
-    if (!objectItem.index) {
+    if (objectItem.index === null || objectItem.index === void 0) {
       mediaInfo.innerHTML = '<p class="text-center">Chọn tệp để xem thông tin</p>';
       return false;
     }
@@ -1447,6 +1356,7 @@ function startSelecting() {
 }
 const refreshItemEvent = new Event("refresh-event");
 const eventChooseImage = new Event("choose-image");
+const urlEndpoint = "https://localhost:3000";
 const buttonAddNewFolder = document.querySelector(".add-folder");
 const buttonUploadFile = document.querySelector(".upload-file");
 let dataTransfer = new DataTransfer();
@@ -1469,7 +1379,7 @@ window.addEventListener("add-folder", (e) => {
   formAdd.onsubmit = async (e2) => {
     button.setAttribute("disabled", true);
     e2.preventDefault();
-    request.setEndpoint("http://localhost:3000/admin");
+    request.setEndpoint(urlEndpoint + "/admin");
     const res = await request.post("/medias/add/folder", {
       folderName: input.value,
       media_id
@@ -1483,20 +1393,37 @@ window.addEventListener("add-folder", (e) => {
       if (!listFolderAside.querySelector("li")) {
         listFolderAside.innerHTML = "";
       }
-      let anchor = listFolderAside.querySelector(`[href="/admin/medias/${media_id.startsWith("/") ? media_id.slice(1) : media_id}"]`);
+      let anchor = listFolderAside.querySelector(
+        `[href="/admin/medias/${media_id.startsWith("/") ? media_id.slice(1) : media_id}"]`
+      );
       if (!anchor) {
-        listFolderAside.insertAdjacentHTML("beforeend", template.itemFolderAside(res.data.folder));
+        listFolderAside.insertAdjacentHTML(
+          "beforeend",
+          template.itemFolderAside(res.data.folder)
+        );
       } else if (!anchor.nextElementSibling) {
-        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        const svg = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "svg"
+        );
         svg.setAttributeNS(null, "viewBox", "0 0 320 512");
         svg.innerHTML = `<path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"></path>`;
         anchor.prepend(svg);
-        anchor.insertAdjacentHTML("afterend", `<ul>${template.itemFolderAside(res.data.folder)}</ul>`);
+        anchor.insertAdjacentHTML(
+          "afterend",
+          `<ul>${template.itemFolderAside(res.data.folder)}</ul>`
+        );
       } else {
-        anchor.nextElementSibling.insertAdjacentHTML("beforeend", template.itemFolderAside(res.data.folder));
+        anchor.nextElementSibling.insertAdjacentHTML(
+          "beforeend",
+          template.itemFolderAside(res.data.folder)
+        );
       }
       window.dispatchEvent(eventHasNewFolder);
-      listItemFolder.insertAdjacentHTML("beforeend", template.itemFolder(res.data.folder));
+      listItemFolder.insertAdjacentHTML(
+        "beforeend",
+        template.itemFolder(res.data.folder)
+      );
       notify.success(res.data.message);
       formAdd.remove();
       window.dispatchEvent(eventRefreshFolder);
@@ -1523,7 +1450,7 @@ window.addEventListener("add-file", (e) => {
   formUploadFile.onsubmit = async (e2) => {
     e2.preventDefault();
     button.setAttribute("disabled", true);
-    XHR.setEndpoint("http://localhost:3000/admin");
+    XHR.setEndpoint(urlEndpoint + "/admin");
     const media_id = window.location.pathname.replace("/admin/medias", "");
     XHR.setType("formData");
     const res = await XHR.post("/medias/add/file", {
@@ -1591,7 +1518,9 @@ function handleUploadPlace() {
         renderItems(getDataTransferFiles());
       } else {
         const newFiles = Array.from(files2).filter((file) => {
-          if (!Array.from(dataTransferFiles).some((dataTransferFile) => isSame(dataTransferFile, file))) {
+          if (!Array.from(dataTransferFiles).some(
+            (dataTransferFile) => isSame(dataTransferFile, file)
+          )) {
             dataTransferItems.add(file);
             return true;
           } else {
@@ -1621,20 +1550,27 @@ function handleUploadPlace() {
       const button2 = document.createElement("button");
       span.innerText = filename;
       itemEl.className = "item";
-      if (["png", "jpeg", "jpg", "webp", "tiff", "svg", "bmp"].includes(extension2.toLowerCase())) {
+      if (["png", "jpeg", "jpg", "webp", "tiff", "svg", "bmp"].includes(
+        extension2.toLowerCase()
+      )) {
         img.src = url;
-      } else if (["docx", "pptx", "xlsx", "pdf", "mp4"].includes(extension2.toLowerCase())) {
+      } else if (["docx", "pptx", "xlsx", "pdf", "mp4"].includes(
+        extension2.toLowerCase()
+      )) {
         img.src = `/images/admin/${extension2.toLowerCase()}.svg`;
       } else {
         img.src = "/images/admin/file.svg";
       }
       button2.type = "button";
       button2.innerHTML = "&times;";
-      itemEl.setAttribute("data-info", JSON.stringify({
-        name: file.name,
-        type: file.type,
-        size: file.size
-      }));
+      itemEl.setAttribute(
+        "data-info",
+        JSON.stringify({
+          name: file.name,
+          type: file.type,
+          size: file.size
+        })
+      );
       itemEl.append(img, button2, span);
       return {
         itemEl,
@@ -1652,7 +1588,9 @@ function handleUploadPlace() {
     listEl.forEach((item2) => {
       item2.button.onclick = (e) => {
         e.preventDefault();
-        const indexRemove = Array.from(dataTransfer.files).findIndex((dataTransferFile) => isSame(dataTransferFile, item2));
+        const indexRemove = Array.from(dataTransfer.files).findIndex(
+          (dataTransferFile) => isSame(dataTransferFile, item2)
+        );
         dataTransfer.items.remove(indexRemove);
         item2.itemEl.remove();
         getDataTransferFiles();
@@ -1667,9 +1605,15 @@ function handleUploadPlace() {
         if (itemTarget) {
           const rate = itemTarget.offsetWidth / 2;
           if (e.offsetX > rate) {
-            itemTarget.parentElement.insertBefore(itemTarget, itemDrag);
+            itemTarget.parentElement.insertBefore(
+              itemTarget,
+              itemDrag
+            );
           } else if (e.offsetX <= rate) {
-            itemTarget.parentElement.insertBefore(itemDrag, itemTarget);
+            itemTarget.parentElement.insertBefore(
+              itemDrag,
+              itemTarget
+            );
           }
         }
       };
@@ -1686,7 +1630,12 @@ function handleUploadPlace() {
     const newDataTransfer = new DataTransfer();
     const listChildren = listFileEl.children;
     for (const itemUpload of listChildren) {
-      const index = Array.from(dataTransfer.files).findIndex((dataTransferFile) => isSame(dataTransferFile, JSON.parse(itemUpload.dataset.info)));
+      const index = Array.from(dataTransfer.files).findIndex(
+        (dataTransferFile) => isSame(
+          dataTransferFile,
+          JSON.parse(itemUpload.dataset.info)
+        )
+      );
       if (index !== -1) {
         newDataTransfer.items.add(dataTransfer.files[index]);
       }

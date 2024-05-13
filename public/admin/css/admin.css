@@ -154,8 +154,62 @@ footer {
   fill: white;
 }
 
-.table tr td:first-child {
-  text-align: center;
+.table-data {
+  position: relative;
+}
+
+table {
+  background: #e6f4ff;
+  border-radius: 6px;
+}
+
+.table tbody tr:has(input:checked),
+.table tbody tr:hover {
+  background-color: #99caf1;
+}
+.table tr label {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  display: block;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin: 0 auto;
+  transition: 200ms;
+  transition-property: box-shadow, border-color, background-color;
+}
+.table tr label:hover, .table tr label:has(input:checked) {
+  border-color: #1677ff;
+  box-shadow: 0 0 3px 5px rgba(22, 119, 255, 0.3137254902);
+  background-color: rgba(22, 119, 255, 0.5647058824);
+}
+.table tr label:hover::before, .table tr label:has(input:checked)::before {
+  border-color: white;
+}
+.table tr label:hover.not-full::before, .table tr label:has(input:checked).not-full::before {
+  width: 12px;
+  border-radius: 6px;
+  height: 2px;
+  border: none;
+  background: white;
+  transform: translate(-50%, -50%);
+}
+.table tr label:hover::before {
+  border-color: gray;
+}
+.table tr label::before {
+  content: "";
+  height: 5px;
+  width: 8px;
+  transition: border-color 200ms;
+  border: 2px solid transparent;
+  border-top: none;
+  border-right: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -80%) rotate(-50deg);
 }
 
 .main {
@@ -167,6 +221,7 @@ footer {
   top: 0px;
   padding: 10px 0;
   background: white;
+  z-index: 1;
 }
 
 .image-form {
@@ -184,9 +239,124 @@ footer {
   display: flex;
   gap: 10px;
 }
-.image-table {
-  text-align: center;
-}
+
 .image-table img {
   object-fit: scale-down;
+}
+
+.filter {
+  display: flex;
+  gap: 10px;
+}
+.filter .btn-filter {
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  gap: 10px;
+}
+.filter .btn-filter svg {
+  fill: white;
+  width: 16px;
+  height: 16px;
+}
+.filter .search-form {
+  position: relative;
+  display: flex;
+}
+.filter .search-form input {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #cacaca;
+  padding: 10px 35px 10px 15px;
+}
+.filter .search-form input {
+  transition: 200ms ease-in-out;
+  transition-property: box-shadow, border-color;
+}
+.filter .search-form input:focus {
+  border-color: #1677ff;
+  box-shadow: 0 0 2px 5px rgba(22, 119, 255, 0.3137254902);
+}
+.filter .search-form input:focus + svg {
+  fill: #1677ff;
+}
+.filter .search-form svg {
+  transition: fill 200ms ease-in-out;
+}
+.filter .search-form svg {
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  fill: #cacaca;
+}
+
+.filter-box {
+  overflow: hidden;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: 300ms ease-in;
+  transition-property: visibility, pointer-events, opacity;
+}
+.filter-box form {
+  position: relative;
+  z-index: 1;
+  padding: 15px;
+  background: white;
+  min-width: 500px;
+  height: 100vh;
+  display: block;
+  transition: transform 300ms ease-in;
+  transform: translateX(100%);
+  overflow: auto;
+}
+.filter-box form .actions {
+  position: sticky;
+  bottom: -15px;
+  background: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.filter-box .overlay {
+  flex: 1;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.1882352941);
+  transition: transform 300ms ease-in;
+  transform: translateX(-100%);
+  cursor: pointer;
+}
+.filter-box .filter-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.filter-box .filter-item input,
+.filter-box .filter-item select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  outline: none;
+  border: 1px solid #ebebeb;
+  height: 100%;
+}
+.filter-box .filter-item button svg {
+  width: 16px;
+  fill: white;
+}
+.filter-box.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+.filter-box.show form {
+  transform: initial;
+}
+.filter-box.show .overlay {
+  transform: initial;
 }

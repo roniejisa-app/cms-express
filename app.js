@@ -12,6 +12,7 @@ var authRouter = require("./routes/auth");
 var adminRouter = require('./routes/admin');
 var chatRouter = require('./routes/chat');
 var apiRouter = require('./routes/api');
+var crawlerRouter = require("./routes/crawler");
 const passport = require('passport');
 const { User, Role, ModulePermission, RoleModulePermission, Module, Permission } = require('./models/index');
 // const { getAllPermissionOfUser } = require('./utils/permission');
@@ -99,6 +100,7 @@ for (let i = 0; i < files.length; i++) {
 }
 // app.use(authMiddleware);
 app.use('/admin', adminRouter);
+app.use('/crawler', crawlerRouter);
 app.use('/api', apiRouter);
 
 

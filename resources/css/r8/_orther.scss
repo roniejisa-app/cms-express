@@ -21,17 +21,17 @@
 .text-center {
     text-align: center;
 }
-.text{
-    &-danger{
+.text {
+    &-danger {
         color: $colorDanger;
     }
-    &-success{
+    &-success {
         color: $colorSuccess;
     }
-    &-warning{
+    &-warning {
         color: $colorDanger;
     }
-    &-primary{
+    &-primary {
         color: $colorPrimary;
     }
 }
@@ -41,5 +41,25 @@
     border-radius: 6px;
     &-success {
         background-color: $colorSuccess;
+    }
+}
+
+.status {
+    padding: 5px;
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    &-success {
+        background-color: $colorSuccess;
+    }
+    &-danger {
+        background-color: $colorDanger;
+    }
+    &-warning{
+        background-color: $colorWarning;
+        color: black;
+    }
+    &-primary{
+        background-color: $colorPrimary;
     }
 }

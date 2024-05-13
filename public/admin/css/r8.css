@@ -972,6 +972,12 @@
   background: #fadb14;
   color: black;
 }
+.btn-primary {
+  background: #1677ff;
+}
+.btn-filter {
+  background: brown;
+}
 
 .p-1 {
   padding: 4px;
@@ -1618,6 +1624,26 @@
   background-color: #52c41a;
 }
 
+.status {
+  padding: 5px;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+}
+.status-success {
+  background-color: #52c41a;
+}
+.status-danger {
+  background-color: #ff4d4f;
+}
+.status-warning {
+  background-color: #fadb14;
+  color: black;
+}
+.status-primary {
+  background-color: #1677ff;
+}
+
 .table {
   width: 100%;
   border-spacing: 0;
@@ -1631,11 +1657,26 @@
 .table th,
 .table td {
   padding: 5px;
-  border: 1px solid #ebebeb;
+  text-align: left;
+}
+.table th {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .table tr:nth-last-of-type(1) td:nth-last-of-type(1) {
   border-bottom-right-radius: 6px;
 }
 .table tr:nth-last-of-type(1) td:nth-of-type(1) {
   border-bottom-left-radius: 6px;
+}
+.table tbody tr {
+  border-radius: 6px;
+  overflow: hidden;
+  transition: background-color 200ms ease-in-out;
+}
+.table tbody tr:nth-child(2n+1) {
+  background: rgba(235, 235, 235, 0.3137254902);
+}
+.table tbody tr:nth-child(2n) {
+  background: rgba(255, 255, 255, 0.3137254902);
 }
