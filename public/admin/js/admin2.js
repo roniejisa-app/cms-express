@@ -47883,13 +47883,12 @@ const CHAT = (() => {
     socket.on("connect", () => {
       chatHTML.classList.add("show");
       addEventSocketConnect();
-      window.addEventListener("update-action-message-item", addEventForItemMessage);
-      window.addEventListener("paste", handlePasteData);
-      socket.emit(
-        "connect-admin-socket",
-        "admin",
-        userId
+      window.addEventListener(
+        "update-action-message-item",
+        addEventForItemMessage
       );
+      window.addEventListener("paste", handlePasteData);
+      socket.emit("connect-admin-socket", "admin", userId);
     });
     socket.on("connect_error", () => {
       chatHTML.classList.remove("show");
@@ -47916,7 +47915,14 @@ const CHAT = (() => {
     socket.on("join room success", async (value) => {
       const listData = dD(value);
       for (const data of listData) {
-        messageEl.insertAdjacentHTML("beforeend", templateMessage(data, data.user.socketId === socket.id, messageEl));
+        messageEl.insertAdjacentHTML(
+          "beforeend",
+          templateMessage(
+            data,
+            data.user.socketId === socket.id,
+            messageEl
+          )
+        );
       }
       setTimeout(() => {
         messageEl.scrollTo({
@@ -47930,7 +47936,14 @@ const CHAT = (() => {
     });
     socket.on("chat-admin-client", (data) => {
       data = dD(data);
-      messageEl.insertAdjacentHTML("beforeend", templateMessage(data, data.user.socketId === socket.id, messageEl));
+      messageEl.insertAdjacentHTML(
+        "beforeend",
+        templateMessage(
+          data,
+          data.user.socketId === socket.id,
+          messageEl
+        )
+      );
       messageEl.scrollTo({
         behavior: "smooth",
         top: messageEl.scrollHeight - messageEl.clientHeight
@@ -47944,7 +47957,14 @@ const CHAT = (() => {
         loading.remove();
       }
       listData.forEach((data) => {
-        messageEl.insertAdjacentHTML("afterbegin", templateMessage(data, data.user.socketId === socket.id, messageEl));
+        messageEl.insertAdjacentHTML(
+          "afterbegin",
+          templateMessage(
+            data,
+            data.user.socketId === socket.id,
+            messageEl
+          )
+        );
       });
       window.dispatchEvent(eventUpdateAction);
       if (listData.length > 0) {
@@ -47955,7 +47975,9 @@ const CHAT = (() => {
     });
     socket.on("feel-message-response", (value) => {
       const feelData = dD(value);
-      const messageItem = document.querySelector(`.message [data-id="${feelData.message_id}"]`);
+      const messageItem = document.querySelector(
+        `.message [data-id="${feelData.message_id}"]`
+      );
       if (messageItem) {
         const content = messageItem.querySelector(".message-body");
         let createSpanFeel = content.querySelector("span.feel");
@@ -47975,7 +47997,9 @@ const CHAT = (() => {
     });
   }
   async function handlePasteData(e) {
-    let item = Array.from(e.clipboardData.items).find((x) => /^image\//.test(x.type));
+    let item = Array.from(e.clipboardData.items).find(
+      (x) => /^image\//.test(x.type)
+    );
     e.preventDefault();
     if (item) {
       if (!boxImageUpload) {
@@ -47989,7 +48013,9 @@ const CHAT = (() => {
       };
       img.src = URL.createObjectURL(file);
     } else {
-      let pastedText = (e.originalEvent || e).clipboardData.getData("text/plain");
+      let pastedText = (e.originalEvent || e).clipboardData.getData(
+        "text/plain"
+      );
       checkKeypress(pastedText);
       document.execCommand("insertText", false, pastedText);
     }
@@ -48012,7 +48038,9 @@ const CHAT = (() => {
     itemEl.append(closeEl);
     listFileAddEl.appendChild(itemEl);
     closeEl.onclick = () => {
-      const index = Array.from(newDataTransfer.files).findIndex((file2) => file2.customId === info.customId);
+      const index = Array.from(newDataTransfer.files).findIndex(
+        (file2) => file2.customId === info.customId
+      );
       if (index !== -1) {
         newDataTransfer.items.remove(index);
         itemEl.remove();
@@ -48074,12 +48102,18 @@ const CHAT = (() => {
             }
           },
           onEmojiSelect: function(e2) {
-            socket.volatile.emit("feel-message", "admin", userId, messageItem.dataset.id, e2.native);
+            socket.volatile.emit(
+              "feel-message",
+              "admin",
+              userId,
+              messageItem.dataset.id,
+              e2.native
+            );
             picker.remove();
           }
         });
         picker.style.position = "fixed";
-        picker.style.zIndex = "1";
+        picker.style.zIndex = 2;
         picker.style.opacity = 0;
         picker.className = "picker-emoji";
         document.body.append(picker);
@@ -48215,7 +48249,7 @@ const CHAT = (() => {
     });
     picker.style.position = "fixed";
     picker.style.opacity = 0;
-    picker.style.zIndex = 1;
+    picker.style.zIndex = 2;
     picker.className = "picker-emoji";
     document.body.append(picker);
     setTimeout(() => {
@@ -48280,9 +48314,18 @@ const CHAT = (() => {
         stickerItemList.style.display = "flex";
         stickerItemList.innerHTML = rsLoading(`width:100%;height:100%`);
         indexEmojiCurrent = +tab.dataset.index;
-        let items = await Promise.all(listStickers[tab.dataset.index].items.map((item) => {
-          return emojiUtil.emojiAll(item.url, item.imgUrl, item.totalRow, item.totalColumn, item.countLeftInTotalRow, item.ms);
-        }).map((el) => el));
+        let items = await Promise.all(
+          listStickers[tab.dataset.index].items.map((item) => {
+            return emojiUtil.emojiAll(
+              item.url,
+              item.imgUrl,
+              item.totalRow,
+              item.totalColumn,
+              item.countLeftInTotalRow,
+              item.ms
+            );
+          }).map((el) => el)
+        );
         if (tabBox.querySelector(".active")) {
           tabBox.querySelector(".active").classList.remove("active");
         }
@@ -48461,37 +48504,67 @@ const CHAT = (() => {
         });
       }
       dataFile.stringData = data;
-      socket.volatile.emit("chat-admin-socket", "admin", userId, eD(dataFile), event.typeMessage);
+      socket.volatile.emit(
+        "chat-admin-socket",
+        "admin",
+        userId,
+        eD(dataFile),
+        event.typeMessage
+      );
       newDataTransfer = new DataTransfer();
       boxImageUpload.remove();
       boxImageUpload = void 0;
     } else {
-      socket.volatile.emit("chat-admin-socket", "admin", userId, eD(data), event.typeMessage);
+      socket.volatile.emit(
+        "chat-admin-socket",
+        "admin",
+        userId,
+        eD(data),
+        event.typeMessage
+      );
     }
   }
   function sendSticker(elementSticker, event) {
     event.typeMessage = "sticker";
     let newElement = document.createElement("span");
-    newElement.innerHTML = `<img src="${elementSticker.getAttribute("image-url")}" width="${elementSticker.getAttribute("width-one")}" height="${elementSticker.getAttribute("height-one")}">`;
-    socket.volatile.emit("chat-admin-socket", "admin", userId, eD(newElement.outerHTML), event.typeMessage);
+    newElement.innerHTML = `<img src="${elementSticker.getAttribute(
+      "image-url"
+    )}" width="${elementSticker.getAttribute(
+      "width-one"
+    )}" height="${elementSticker.getAttribute("height-one")}">`;
+    socket.volatile.emit(
+      "chat-admin-socket",
+      "admin",
+      userId,
+      eD(newElement.outerHTML),
+      event.typeMessage
+    );
   }
   async function loadMoreChat(element) {
     let elementHeading = element.children[0];
-    observer = new IntersectionObserver(async (entries) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting && +entry.intersectionRatio != 0 && !pageLoadMore) {
-          pageLoadMore = true;
-          observer.disconnect();
-          socket.volatile.emit("load-more-message", "admin", userId, page);
-          const loading = document.createElement("div");
-          loading.className = "load-more-message";
-          loading.innerHTML = rsLoading(`width:100%;height:100%`);
-          element.prepend(loading);
+    observer = new IntersectionObserver(
+      async (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && +entry.intersectionRatio != 0 && !pageLoadMore) {
+            pageLoadMore = true;
+            observer.disconnect();
+            socket.volatile.emit(
+              "load-more-message",
+              "admin",
+              userId,
+              page
+            );
+            const loading = document.createElement("div");
+            loading.className = "load-more-message";
+            loading.innerHTML = rsLoading(`width:100%;height:100%`);
+            element.prepend(loading);
+          }
         }
+      },
+      {
+        root: element
       }
-    }, {
-      root: element
-    });
+    );
     elementHeading && observer.observe(elementHeading);
   }
   function handleInputFile() {
@@ -48519,7 +48592,9 @@ const CHAT = (() => {
     let refreshDataTransfer = new DataTransfer();
     for (const fileEl of listFileAddEl.children) {
       const info = JSON.parse(fileEl.dataset.info);
-      const index = Array.from(newDataTransfer.files).findIndex((file) => isSameFile(file, info));
+      const index = Array.from(newDataTransfer.files).findIndex(
+        (file) => isSameFile(file, info)
+      );
       if (index !== -1) {
         refreshDataTransfer.items.add(newDataTransfer.files[index]);
       }
