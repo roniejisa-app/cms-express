@@ -88,7 +88,7 @@ app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/', chatRouter);
 // Đăng ký các file tại đây
-let files = globSync(process.cwd() + "/platform/*/routes/*").filter(file => {
+let files = globSync(process.cwd() + "/platform/plugins/*/routes/*").filter(file => {
     return (
         file.indexOf('.') !== 0 &&
         file.slice(-3) === '.js'
