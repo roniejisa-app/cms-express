@@ -57,7 +57,8 @@ ul li a:hover {
 .header-main-admin .user-dropdown img {
   width: 48px;
   height: 48px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
 }
 .header-main-admin .user-dropdown .name {
@@ -113,12 +114,6 @@ ul li a:hover {
   border-top: 1px solid white;
 }
 
-.main {
-  height: calc(100vh - 60px - 60px);
-  overflow: auto;
-  max-height: calc(100vh - 60px - 40px - 32px);
-}
-
 footer {
   height: 40px;
   padding-top: 20px;
@@ -158,47 +153,59 @@ footer {
   position: relative;
 }
 
-table {
+.table:not(.permission) {
   background: #e6f4ff;
   border-radius: 6px;
 }
-
-.table tbody tr:has(input:checked),
-.table tbody tr:hover {
+.table:not(.permission) tbody tr:has(input:checked) {
+  background-color: #7feaad;
+}
+.table:not(.permission) tbody tr:hover {
   background-color: #99caf1;
 }
-.table tr label {
+.table:not(.permission) tr label {
   position: relative;
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   display: block;
   cursor: pointer;
   border: 1px solid black;
-  border-radius: 4px;
+  border-radius: 2px;
   margin: 0 auto;
   transition: 200ms;
   transition-property: box-shadow, border-color, background-color;
 }
-.table tr label:hover, .table tr label:has(input:checked) {
+.table:not(.permission) tr label.not-full {
+  background-color: rgba(22, 119, 255, 0.5647058824);
+  border-color: #1677ff;
+  box-shadow: 0 0 3px 5px rgba(22, 119, 255, 0.3137254902);
+}
+.table:not(.permission) tr label.not-full::after {
+  content: "";
+  width: 12px;
+  border-radius: 6px;
+  height: 2px;
+  background: white;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.table:not(.permission) tr label:hover, .table:not(.permission) tr label:has(input:checked) {
   border-color: #1677ff;
   box-shadow: 0 0 3px 5px rgba(22, 119, 255, 0.3137254902);
   background-color: rgba(22, 119, 255, 0.5647058824);
 }
-.table tr label:hover::before, .table tr label:has(input:checked)::before {
+.table:not(.permission) tr label:hover::before, .table:not(.permission) tr label:has(input:checked)::before {
   border-color: white;
 }
-.table tr label:hover.not-full::before, .table tr label:has(input:checked).not-full::before {
-  width: 12px;
-  border-radius: 6px;
-  height: 2px;
-  border: none;
-  background: white;
-  transform: translate(-50%, -50%);
+.table:not(.permission) tr label:hover {
+  background-color: transparent;
 }
-.table tr label:hover::before {
-  border-color: gray;
+.table:not(.permission) tr label:hover::before {
+  border-color: #ebebeb;
 }
-.table tr label::before {
+.table:not(.permission) tr label::before {
   content: "";
   height: 5px;
   width: 8px;
@@ -214,6 +221,9 @@ table {
 
 .main {
   padding: 0 1rem;
+  height: calc(100vh - 60px - 40px - 36px);
+  overflow: auto;
+  max-height: calc(100vh - 60px - 40px - 36px);
 }
 
 .header-view {
@@ -221,7 +231,7 @@ table {
   top: 0px;
   padding: 10px 0;
   background: white;
-  z-index: 1;
+  z-index: 2;
 }
 
 .image-form {
@@ -233,7 +243,8 @@ table {
 .image-form span img {
   width: 160px;
   height: 160px;
-  object-fit: scale-down;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
 }
 .image-form .image-form-action {
   display: flex;
@@ -241,7 +252,8 @@ table {
 }
 
 .image-table img {
-  object-fit: scale-down;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
 }
 
 .filter {
@@ -268,8 +280,6 @@ table {
   border-radius: 6px;
   border: 1px solid #cacaca;
   padding: 10px 35px 10px 15px;
-}
-.filter .search-form input {
   transition: 200ms ease-in-out;
   transition-property: box-shadow, border-color;
 }
@@ -282,8 +292,6 @@ table {
 }
 .filter .search-form svg {
   transition: fill 200ms ease-in-out;
-}
-.filter .search-form svg {
   top: 50%;
   transform: translateY(-50%);
   right: 15px;
@@ -291,6 +299,59 @@ table {
   width: 14px;
   height: 14px;
   fill: #cacaca;
+}
+.filter .sort-show-filter {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.filter .sort-show-filter select {
+  padding: 5px;
+  height: 100%;
+  border: 1px solid #ebebeb;
+  border-radius: 6px;
+  margin-left: 10px;
+}
+.filter .checkbox-action {
+  position: relative;
+}
+.filter .checkbox-action[disabled] {
+  opacity: 0.5;
+}
+.filter .checkbox-action button {
+  height: -webkit-fill-available;
+}
+.filter .checkbox-action.show ul {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  transform: translateY(0);
+}
+.filter .checkbox-action ul {
+  min-width: 100px;
+  border-radius: 6px;
+  position: absolute;
+  left: 110%;
+  background: white;
+  top: 0;
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(20px);
+  box-shadow: 0 1px 2px;
+  transition: 300ms;
+  overflow: hidden;
+  transition-property: visibility, transform, opacity, pointer-events;
+}
+.filter .checkbox-action ul li {
+  padding: 8px 10px;
+  cursor: pointer;
+}
+.filter .checkbox-action ul li:hover {
+  color: white;
+  background-color: #ff4d4f;
 }
 
 .filter-box {
@@ -310,7 +371,6 @@ table {
   z-index: 1;
   padding: 15px;
   background: white;
-  min-width: 500px;
   height: 100vh;
   display: block;
   transition: transform 300ms ease-in;

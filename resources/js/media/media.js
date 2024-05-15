@@ -6,7 +6,7 @@ import eventImage from "./event-edit-image.js";
 import XHR from "../utils/xhr.js";
 import notify from "../utils/notify.js";
 
-var MAIN = (() => {
+const MAIN = (() => {
     function handleDeleteAll() {
         const deleteAllBtn = document.querySelector('.events .delete');
         deleteAllBtn && deleteAllBtn.addEventListener('click', async (e) => {

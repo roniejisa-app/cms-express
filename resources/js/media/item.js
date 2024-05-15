@@ -237,7 +237,7 @@ function allAction() {
                 /**
                  * Kiểm tra nếu có ảnh thì mới có phần này
                  */
-                var imageContainer, imgEl;
+                let imageContainer, imgEl;
                 if (['png', 'jpeg', 'webp', 'tiff', 'bmp', 'jpg'].includes(extension)) {
                     const divImageEdit = document.createElement('div');
                     const divImageContainer = document.createElement('div');

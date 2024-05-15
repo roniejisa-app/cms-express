@@ -28,7 +28,7 @@ const XHR = {
             }
 
             xhr.addEventListener('progress', function (e) {
-                var percent = +((e.loaded / e.total) * 100).toFixed(2);
+                let percent = +((e.loaded / e.total) * 100).toFixed(2);
                 let divProgress = document.body.querySelector('.progress-upload');
                 if (!document.body.querySelector('.progress-upload')) {
                     divProgress = document.createElement('div');
@@ -86,7 +86,7 @@ const XHR = {
 
             // Thêm thông tin header
             if (Object.keys(this.headers).length) {
-                for (var key of Object.keys(this.headers)) {
+                for (let key of Object.keys(this.headers)) {
                     if (this.type === "formData" && key === "Content-Type") {
                     } else {
                         xhr.setRequestHeader(key, this.headers[key]);

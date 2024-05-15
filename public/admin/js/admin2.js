@@ -1,5 +1,5 @@
 import { s as socket } from "./socket.js";
-import { d as dD, g as getBase64, e as eD, r as request } from "./utils.js";
+import { d as dD, g as getBase64, e as eD, n as notify, r as request, u as urlEndpoint } from "./config.js";
 let listStickers = [
   {
     "label": "/images/emoji/first/label.png",
@@ -719,7 +719,7 @@ const emojiUtil = {
         window.dispatchEvent(eventEmojiAction);
       }
     });
-    var eventEmojiAction = new Event("event-emoji-" + element.className);
+    let eventEmojiAction = new Event("event-emoji-" + element.className);
   },
   runEmojiForElement: (emoji) => {
     if (emoji.dataset.running) {
@@ -47975,21 +47975,21 @@ const CHAT = (() => {
     });
   }
   async function handlePasteData(e) {
-    var item = Array.from(e.clipboardData.items).find((x) => /^image\//.test(x.type));
+    let item = Array.from(e.clipboardData.items).find((x) => /^image\//.test(x.type));
     e.preventDefault();
     if (item) {
       if (!boxImageUpload) {
         createBoxImageUpload();
       }
-      var file = item.getAsFile();
-      var img = new Image();
+      let file = item.getAsFile();
+      let img = new Image();
       img.onload = function() {
         itemUploadMessage(this, newDataTransfer.items.length);
         newDataTransfer.items.add(file);
       };
       img.src = URL.createObjectURL(file);
     } else {
-      var pastedText = (e.originalEvent || e).clipboardData.getData("text/plain");
+      let pastedText = (e.originalEvent || e).clipboardData.getData("text/plain");
       checkKeypress(pastedText);
       document.execCommand("insertText", false, pastedText);
     }
@@ -48079,6 +48079,7 @@ const CHAT = (() => {
           }
         });
         picker.style.position = "fixed";
+        picker.style.zIndex = "1";
         picker.style.opacity = 0;
         picker.className = "picker-emoji";
         document.body.append(picker);
@@ -48214,6 +48215,7 @@ const CHAT = (() => {
     });
     picker.style.position = "fixed";
     picker.style.opacity = 0;
+    picker.style.zIndex = 1;
     picker.className = "picker-emoji";
     document.body.append(picker);
     setTimeout(() => {
@@ -48626,58 +48628,258 @@ const MEDIA = (() => {
     }
   };
 })();
-const FILTER = (() => {
-  const btnFilter = document.querySelector(".btn-filter");
-  if (!btnFilter)
-    return false;
-  const filterBox = document.querySelector(".filter-box");
-  const filterForm = filterBox.querySelector("form");
-  const overlayFilter = filterBox.querySelector(".overlay");
-  const filterList = filterBox.querySelector(".filter-list");
-  const filterItemClone = filterList.firstElementChild.cloneNode(true);
-  const btnAddFilter = filterBox.querySelector('[type="button"]');
-  const tableDataEl = document.querySelector(".table-data");
-  function toggleFilter() {
-    filterBox.classList.toggle("show");
+const CHECKBOX = (() => {
+  function start() {
+    const checkboxAll = document.querySelector(".check-all input");
+    if (!checkboxAll)
+      return;
+    const { parentElement: labelCheckboxAll } = checkboxAll;
+    const checkboxAction = document.querySelector(".checkbox-action");
+    const btnCheckboxAction = checkboxAction.querySelector("button");
+    const listAction = checkboxAction.querySelector("ul");
+    const checkboxSingles = document.querySelectorAll(".check-single input");
+    let countCheck = 0;
+    function handleCheckboxAll({ target: { checked } }) {
+      for (const inputSingle of checkboxSingles) {
+        inputSingle.checked = checked;
+      }
+      countCheck = checked ? checkboxSingles.length : 0;
+      checked && removeNotFull();
+    }
+    checkboxAll.onchange = handleCheckboxAll;
+    function handleCheckboxSingle({ target: { checked } }) {
+      if (checked) {
+        countCheck++;
+      } else {
+        countCheck--;
+      }
+      if (countCheck >= 1) {
+        if (countCheck === checkboxSingles.length) {
+          removeNotFull();
+          checkboxAll.checked = true;
+        } else {
+          labelCheckboxAll.classList.add("not-full");
+          checkboxAll.checked = false;
+        }
+      } else {
+        removeNotFull();
+        checkboxAll.checked = false;
+      }
+    }
+    function removeNotFull() {
+      if (labelCheckboxAll.classList.contains("not-full")) {
+        labelCheckboxAll.classList.remove("not-full");
+      }
+    }
+    for (const inputSingle of checkboxSingles) {
+      inputSingle.onchange = handleCheckboxSingle;
+    }
+    btnCheckboxAction.onclick = () => {
+      checkboxAction.classList.toggle("show");
+    };
+    for (const action of listAction.children) {
+      action.onclick = async (e) => {
+        e.stopPropagation();
+        const dataValues = getDataChecked();
+        const type = action.dataset.type;
+        if (!dataValues.length) {
+          notify.error("Vui lòng chọn ít nhất 1 hàng!");
+          return false;
+        }
+        switch (type) {
+          case "delete":
+            request.setEndpoint(urlEndpoint);
+            const { status, data } = await request.post(
+              `/admin/${checkboxAction.dataset.module}/delete-multiple`,
+              {
+                ids: dataValues
+              }
+            );
+            if (status === "OK") {
+              notify.success(data.message);
+              TABLE.filter({}, true);
+            }
+            break;
+        }
+      };
+    }
+    function getDataChecked() {
+      return Array.from(checkboxSingles).filter((input) => input.checked).map(({ value }) => value);
+    }
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".checkbox-action") && checkboxAction.classList.contains("show")) {
+        checkboxAction.classList.remove("show");
+      }
+    });
   }
-  function addFilterItem() {
-    const removeBtn = document.createElement("button");
-    removeBtn.classList.add("btn", "btn-danger");
-    removeBtn.type = "button";
-    removeBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/></svg>`;
-    const newItemFilter = filterItemClone.cloneNode(true);
-    newItemFilter.append(removeBtn);
-    filterList.append(newItemFilter);
-    removeBtn.onclick = () => newItemFilter.remove();
-  }
-  filterForm.onsubmit = async (e) => {
-    e.preventDefault();
-    const formData = Array.from(filterList.children).reduce(
-      (formData2, filterItem) => {
-        const listData = filterItem.querySelectorAll("[name]");
-        listData.forEach((item) => {
-          console.log(item);
-          if (!formData2[item.name]) {
-            formData2[item.name] = [];
-          }
-          formData2[item.name].push(item.value);
-        });
-        return formData2;
-      },
-      {}
-    );
-    tableDataEl.insertAdjacentHTML(
-      "beforeend",
-      `${rsLoading('position:absolute;width:100%;height:100%;top:0;background:rgba(0,0,0,<div className="3"></div>)')}`
-    );
-    const response = await request.post(filterForm.action, formData);
-    tableDataEl.innerHTML = response.data.html;
-  };
-  btnAddFilter.onclick = addFilterItem;
-  overlayFilter.onclick = toggleFilter;
-  btnFilter.onclick = toggleFilter;
   return {
+    init: () => start(),
+    reload: () => start()
+  };
+})();
+const FILTER = (() => {
+  function start() {
+    const btnFilter = document.querySelector(".btn-filter");
+    if (!btnFilter)
+      return false;
+    const filterBox = document.querySelector(".filter-box");
+    const filterForm = filterBox.querySelector("form");
+    const overlayFilter = filterBox.querySelector(".overlay");
+    const filterList = filterBox.querySelector(".filter-list");
+    const closeFilter = filterBox.querySelector(".close-filter");
+    const filterItemClone = filterList.firstElementChild.cloneNode(true);
+    const btnAddFilter = filterBox.querySelector('[type="button"]');
+    function toggleFilter() {
+      filterBox.classList.toggle("show");
+    }
+    function addFilterItem() {
+      const removeBtn = document.createElement("button");
+      removeBtn.classList.add("btn", "btn-danger");
+      removeBtn.type = "button";
+      removeBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/></svg>`;
+      const newItemFilter = filterItemClone.cloneNode(true);
+      newItemFilter.append(removeBtn);
+      filterList.append(newItemFilter);
+      removeBtn.onclick = () => newItemFilter.remove();
+    }
+    let timerForm = null;
+    filterForm.onsubmit = async (e) => {
+      e.preventDefault();
+      clearTimeout(timerForm);
+      timerForm = setTimeout(() => {
+        const formData = Array.from(filterList.children).reduce(
+          (formData2, filterItem) => {
+            const listData = filterItem.querySelectorAll("[name]");
+            listData.forEach((item) => {
+              if (!formData2[item.name]) {
+                formData2[item.name] = [];
+              }
+              formData2[item.name].push(item.value);
+            });
+            return formData2;
+          },
+          {}
+        );
+        TABLE.filter(formData);
+      }, 300);
+    };
+    btnAddFilter.onclick = addFilterItem;
+    overlayFilter.onclick = toggleFilter;
+    btnFilter.onclick = toggleFilter;
+    closeFilter.onclick = toggleFilter;
+  }
+  return {
+    init: () => start(),
+    reload: () => start()
+  };
+})();
+const PAGINATION = (() => {
+  function start() {
+    const paginates = document.querySelectorAll("[data-fetch]");
+    for (const paginateEl of paginates) {
+      paginateEl.onclick = (e) => {
+        e.preventDefault();
+        const page = paginateEl.getAttribute("data-fetch");
+        TABLE.filter({ page }, true);
+      };
+    }
+  }
+  return {
+    init: () => start()
+  };
+})();
+const TABLE = (() => {
+  const tableDataEl = document.querySelector(".table-data");
+  const limitEl = document.querySelector(".sort-show-filter [data-limit]");
+  const sortEl = document.querySelector(".sort-show-filter [data-sort]");
+  let filterBody = {};
+  function searchInputDefault() {
+    let searchFormInput = document.querySelector(".search-form input");
+    if (!searchFormInput)
+      return;
+    let searchFormTimer;
+    searchFormInput.oninput = () => {
+      clearTimeout(searchFormTimer);
+      searchFormTimer = setTimeout(() => {
+        const { name, value } = searchFormInput;
+        TABLE.filter(
+          {
+            field: name,
+            type: "contains",
+            value
+          },
+          true
+        );
+      }, 500);
+    };
+  }
+  if (limitEl) {
+    limitEl.onchange = () => TABLE.filter({}, true);
+  }
+  if (sortEl) {
+    sortEl.onchange = () => TABLE.filter({}, true);
+  }
+  return {
+    filter: async (data, useOldData = false) => {
+      if (useOldData) {
+        let indexDuplicate = null;
+        let index = 0;
+        for (const [name, value] of Object.entries(data)) {
+          const oldData = filterBody[name];
+          if (oldData) {
+            if (Array.isArray(oldData)) {
+              if (!indexDuplicate && index === 0) {
+                indexDuplicate = oldData.findIndex((data2) => {
+                  console.log(data2, value);
+                  return data2 === value;
+                });
+              }
+              if (indexDuplicate != -1 && indexDuplicate != null) {
+                filterBody[name].splice(indexDuplicate, 1);
+              }
+              filterBody[name].push(value);
+            } else {
+              filterBody[name] = value;
+            }
+          } else {
+            if (["type", "field", "value"].includes(name)) {
+              filterBody[name] = [value];
+            } else {
+              filterBody[name] = value;
+            }
+          }
+          index++;
+        }
+      } else {
+        filterBody = data;
+      }
+      filterBody = {
+        ...filterBody,
+        limit: limitEl.value
+      };
+      if (sortEl) {
+        filterBody.sort = sortEl.dataset.for;
+        filterBody.sortType = sortEl.value;
+      }
+      tableDataEl.insertAdjacentHTML(
+        "beforeend",
+        `${rsLoading(
+          'position:absolute;width:100%;height:100%;top:0;background:rgba(0,0,0,<div className="3"></div>)'
+        )}`
+      );
+      request.setEndpoint(urlEndpoint);
+      const response = await request.post(
+        `/admin/${tableDataEl.dataset.module}/filter`,
+        filterBody
+      );
+      tableDataEl.innerHTML = response.data.html;
+      TABLE.init();
+    },
     init: () => {
+      searchInputDefault();
+      typeof FILTER.init === "function" && FILTER.init();
+      typeof CHECKBOX.init === "function" && CHECKBOX.init();
+      typeof PAGINATION.init === "function" && PAGINATION.init();
     }
   };
 })();
@@ -48685,5 +48887,5 @@ window.addEventListener("DOMContentLoaded", function() {
   MEDIA.init();
   MEDIA.event();
   CHAT.init();
-  FILTER.init();
+  TABLE.init();
 });

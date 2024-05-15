@@ -52,7 +52,7 @@ const template = {
         return output;
     },
     listItemFolderAside: (data, id = null) => {
-        var listItem = data.map(folder => {
+        let listItem = data.map(folder => {
             return `<li>
                 <a href="/admin/medias/${id != null ? id + '/' : ''}${folder.id}">
                     ${folder.medias && folder.medias ?

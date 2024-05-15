@@ -6,7 +6,9 @@
 		"start": "nodemon ./bin/www",
 		"start-dev": "node ./bin/www",
 		"vite": "vite",
-		"build": "vite build"
+		"build": "vite build",
+        "admin:css": "tailwindcss -i ./resources/css/main.scss -o ./public/admin/css/style.css --watch",
+        "user:css": "tailwindcss -i ./resources/css/client.scss -o ./public/src/output.css --watch"
 	},
 	"dependencies": {
 		"@emoji-mart/data": "^1.1.2",
@@ -48,9 +50,12 @@
 	},
 	"devDependencies": {
 		"@faker-js/faker": "^8.4.1",
+		"autoprefixer": "^10.4.19",
 		"nodemon": "^3.1.0",
+		"postcss": "^8.4.38",
 		"sass": "^1.72.0",
 		"sequelize-cli": "^6.6.2",
+		"tailwindcss": "^3.4.3",
 		"vite": "^4.5.3"
 	}
 }

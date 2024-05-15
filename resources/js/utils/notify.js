@@ -9,22 +9,21 @@ const notify = {
             top: '30px',
             right: '30px',
             width: '300px',
-            height: '60px',
+            minHeight: '60px',
             display: 'flex',
             alignItems: 'center',
             overflow: 'hidden',
-            padding: "0 20px",
-            zIndex: 10000
+            zIndex: 999999
         })
         const divMessage = document.createElement('div');
         Object.assign(divMessage.style, {
             position: 'relative',
-            background: 'white',
             width: '100%',
+            padding:"3px",
             borderRadius: '6px'
         });
         divMessage.innerHTML = `
-            <div style="display:flex;align-items:center;height:60px;border-radius:6px">
+            <div style="display:flex;background:white;align-items:center; border-radius:6px;height:60px;border-radius:6px;box-shadow:1px 1px 2px">
                 <div style="border-top-left-radius:6px;border-bottom-left-radius:6px;background:${type === 'success' ? 'green' : 'red'};width:10px;height:100%"></div>
                 <div style="flex:1; padding: 0 20px;color:${type === 'success' ? 'green' : 'red'};border-top-right-radius:6px;border-bottom-right-radius:6px">${message}</div>
             </div>

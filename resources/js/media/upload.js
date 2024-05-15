@@ -12,7 +12,7 @@ let dataTransfer = new DataTransfer()
 const eventAddFolder = new Event('add-folder')
 const eventUploadFile = new Event('add-file')
 const eventLoadItem = new Event('load-item')
-var formAdd, formUploadFile
+let formAdd, formUploadFile, listEl
 window.addEventListener('add-folder', (e) => {
     formAdd = document.createElement('form')
     formAdd.classList.add('form-add-folder')
@@ -103,10 +103,10 @@ window.addEventListener('add-folder', (e) => {
 window.addEventListener('add-file', (e) => {
     formUploadFile = document.createElement('form')
     formUploadFile.classList.add('form-add-file')
+    // Cleanup
     formUploadFile.onclick = (e) => {
         if (e.target === formUploadFile) {
-            formUploadFile.remove()
-            dataTransfer = new DataTransfer()
+            cleanUpFormUpload();
         }
     }
     const { divContainer, input, button } = handleUploadPlace()
@@ -133,8 +133,7 @@ window.addEventListener('add-file', (e) => {
             eventLoadItem.items = res.successFiles
             window.dispatchEvent(eventLoadItem)
             notify.success(res.message)
-            formUploadFile.remove()
-            dataTransfer = new DataTransfer()
+            cleanUpFormUpload();
             window.dispatchEvent(refreshItemEvent)
         } else {
             notify.error(res.message)
@@ -228,7 +227,7 @@ function handleUploadPlace() {
     }
 
     function renderItems(items) {
-        const listEl = Array.from(items).map((file, index) => {
+        listEl = Array.from(items).map((file, index) => {
             const filename = file.name
             const extension = filename.slice(filename.lastIndexOf('.') + 1)
             const url = URL.createObjectURL(file)
@@ -290,6 +289,8 @@ function handleUploadPlace() {
                 )
                 dataTransfer.items.remove(indexRemove)
                 item.itemEl.remove()
+                //Clean up
+                URL.revokeObjectURL(item.url)
                 getDataTransferFiles()
             }
             // Kích hoạt kiện kéo
@@ -355,6 +356,14 @@ function handleUploadPlace() {
         divContainer,
         input,
         button,
+    }
+}
+
+function cleanUpFormUpload() {
+    formUploadFile.remove()
+    dataTransfer = new DataTransfer()
+    for (const { url } of listEl) {
+        URL.revokeObjectURL(url)
     }
 }
 

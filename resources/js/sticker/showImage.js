@@ -84,7 +84,7 @@ export default {
                 window.dispatchEvent(eventEmojiAction)
             }
         })
-        var eventEmojiAction = new Event("event-emoji-" + element.className);
+        let eventEmojiAction = new Event("event-emoji-" + element.className);
     },
     runEmojiForElement: (emoji) => {
         if (emoji.dataset.running) {

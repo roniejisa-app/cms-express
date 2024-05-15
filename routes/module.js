@@ -10,5 +10,6 @@ router.post('/:module/filter', moduleController.filter);
 router.get('/:module/edit/:id', moduleController.edit);
 router.post('/:module/edit/:id', moduleController.handleUpdate);
 router.post('/:module/delete/:id', moduleController.handleDelete);
+router.post('/:module/delete-multiple', moduleController.handleDeleteMulti);
 
 module.exports = router;

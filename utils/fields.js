@@ -8,7 +8,7 @@ module.exports = {
      */
     chooseMultiAssoc: (modelName, valueKey, labelKey, fn) => {
         return {
-            type: "selectMultiAssoc",
+            type: 'selectMultiAssoc',
             modelName: modelName,
             valueKey: valueKey,
             labelKey: labelKey,
@@ -20,15 +20,20 @@ module.exports = {
              * @param {*} isAdd // Kiểm tra xem có phải thêm mới
              */
             addOrEditAssociate: async (item, model, data, isAdd = true) => {
-                data = await Promise.all(data.map((id) => {
-                    return model.findByPk(id)
-                }));
-                fn = (isAdd ? 'add' : 'set') + fn;
-                await item[fn](data);
+                data = await Promise.all(
+                    data.map((id) => {
+                        return model.findByPk(id)
+                    })
+                )
+                const newFn = (isAdd ? 'add' : 'set') + fn
+                if (isAdd && !data.length) {
+                    return true
+                }
+                await item[newFn](data)
             },
             data: async (model) => {
                 return await model.findAll({ attribute: [valueKey, labelKey] })
-            }
+            },
         }
     },
     /**
@@ -40,13 +45,15 @@ module.exports = {
     selectAssoc: (modelName, valueKey, labelKey) => {
         return {
             data: async (model) => {
-                const results = await model.findAll({ attributes: [valueKey, labelKey] });
-                return results;
+                const results = await model.findAll({
+                    attributes: [valueKey, labelKey],
+                })
+                return results
             },
-            type: "selectAssoc",
+            type: 'selectAssoc',
             modelName: modelName,
             valueKey: valueKey,
-            labelKey: labelKey
+            labelKey: labelKey,
         }
-    }
+    },
 }

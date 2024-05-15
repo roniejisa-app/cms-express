@@ -162,7 +162,7 @@ const CHAT = (() => {
 
     async function handlePasteData(e) {
         // Lấy ra item hình ảnh từ dữ liệu dán
-        var item = Array.from(e.clipboardData.items).find(x => /^image\//.test(x.type));
+        let item = Array.from(e.clipboardData.items).find(x => /^image\//.test(x.type));
         // Kiểm tra xem có phải là hình ảnh không
         e.preventDefault();
         if (item) {
@@ -170,9 +170,9 @@ const CHAT = (() => {
                 createBoxImageUpload();
             }
             // Lấy blob của hình ảnh
-            var file = item.getAsFile();
+            let file = item.getAsFile();
             // Tạo một đối tượng Image
-            var img = new Image();
+            let img = new Image();
             // Khi hình ảnh được tải hoàn tất, chèn nó vào trang
             img.onload = function () {
                 itemUploadMessage(this, newDataTransfer.items.length);
@@ -181,7 +181,7 @@ const CHAT = (() => {
             // Đặt đường dẫn của hình ảnh là URL của blob
             img.src = URL.createObjectURL(file);
         } else {
-            var pastedText = (e.originalEvent || e).clipboardData.getData('text/plain');
+            let pastedText = (e.originalEvent || e).clipboardData.getData('text/plain');
             checkKeypress(pastedText);
             document.execCommand('insertText', false, pastedText);
         }
@@ -278,6 +278,7 @@ const CHAT = (() => {
                     }
                 })
                 picker.style.position = "fixed";
+                picker.style.zIndex = "1";
                 picker.style.opacity = 0;
                 picker.className = "picker-emoji";
                 document.body.append(picker);
@@ -430,7 +431,9 @@ const CHAT = (() => {
         })
         picker.style.position = "fixed";
         picker.style.opacity = 0;
+        picker.style.zIndex = 1;
         picker.className = "picker-emoji";
+
         document.body.append(picker);
         setTimeout(() => {
             const rect = picker.getBoundingClientRect();

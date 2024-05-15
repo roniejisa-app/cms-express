@@ -1628,7 +1628,9 @@
   padding: 5px;
   color: white;
   border-radius: 6px;
+  outline: none;
   font-weight: bold;
+  border: none;
 }
 .status-success {
   background-color: #52c41a;

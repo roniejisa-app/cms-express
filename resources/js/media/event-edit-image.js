@@ -76,7 +76,7 @@ function addEventCropImage(imageContainer, imgEditEl, imgEl, inputChangeImage) {
     imageContainer.style.fontSize = 0;
     imgEditEl.style.pointerEvents = 'none';
     imageContainer.style.userSelect = 'none';
-    var changeImage = false;
+    let changeImage = false;
     divEl = document.createElement('div');
     const topLeftEl = document.createElement('div');
     const topRightEl = document.createElement('div');

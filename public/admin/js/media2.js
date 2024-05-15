@@ -1,4 +1,4 @@
-import { r as request, f as formatBytes } from "./utils.js";
+import { n as notify, r as request, f as formatBytes, u as urlEndpoint } from "./config.js";
 let aside = document.querySelector("aside");
 let listFolderAside = aside.querySelector(".folder-list ul");
 let mediaMainEl = document.querySelector(".media-main");
@@ -7,78 +7,6 @@ let listItem = files.querySelector(".list-item");
 let folderEl = mediaMainEl.querySelector(".folders");
 let listItemFolder = folderEl.querySelector(".list-item");
 let mediaInfo = document.querySelector(".media-info");
-const notify = {
-  template: (type, message) => {
-    var _a;
-    (_a = document.body.querySelector("[notify]")) == null ? void 0 : _a.remove();
-    const divContainer = document.createElement("div");
-    divContainer.setAttribute("notify", "");
-    Object.assign(divContainer.style, {
-      position: "fixed",
-      top: "30px",
-      right: "30px",
-      width: "300px",
-      height: "60px",
-      display: "flex",
-      alignItems: "center",
-      overflow: "hidden",
-      padding: "0 20px",
-      zIndex: 1e4
-    });
-    const divMessage = document.createElement("div");
-    Object.assign(divMessage.style, {
-      position: "relative",
-      background: "white",
-      width: "100%",
-      borderRadius: "6px"
-    });
-    divMessage.innerHTML = `
-            <div style="display:flex;align-items:center;height:60px;border-radius:6px">
-                <div style="border-top-left-radius:6px;border-bottom-left-radius:6px;background:${type === "success" ? "green" : "red"};width:10px;height:100%"></div>
-                <div style="flex:1; padding: 0 20px;color:${type === "success" ? "green" : "red"};border-top-right-radius:6px;border-bottom-right-radius:6px">${message}</div>
-            </div>
-        `;
-    divContainer.append(divMessage);
-    divMessage.animate([
-      {
-        transform: `translateX(100%) rotate(5deg)`
-      },
-      {
-        transform: `translateX(0%)`
-      }
-    ], {
-      duration: 400,
-      fill: "forwards",
-      easing: "ease-in-out"
-    }).finished.then((item2) => {
-      setTimeout(() => {
-        divMessage.animate([
-          {
-            transform: `translateX(0%)`,
-            opacity: 1
-          },
-          {
-            transform: `translateX(100%) rotate(-5deg)`,
-            opacity: 0
-          }
-        ], {
-          duration: 300,
-          fill: "forwards",
-          easing: "ease-in-out"
-        }).finished.then((item3) => {
-          divContainer.remove();
-        });
-      }, 3e3);
-    });
-    document.body.append(divContainer);
-  },
-  success: (message) => {
-    notify.template("success", message);
-  },
-  error: (message) => {
-    notify.template("error", message);
-  }
-};
 const template = {
   itemFolder: (data) => {
     return `<a href="${window.location.pathname}/${data.id}" class="item folder" data-file='${JSON.stringify(data)}'>
@@ -133,7 +61,7 @@ const template = {
     return output;
   },
   listItemFolderAside: (data, id = null) => {
-    var listItem2 = data.map((folder) => {
+    let listItem2 = data.map((folder) => {
       return `<li>
                 <a href="/admin/medias/${id != null ? id + "/" : ""}${folder.id}">
                     ${folder.medias && folder.medias ? `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -239,7 +167,7 @@ const XHR = {
         this.setHeader("Content-Type", "multipart/form-data");
       }
       xhr.addEventListener("progress", function(e) {
-        var percent = +(e.loaded / e.total * 100).toFixed(2);
+        let percent = +(e.loaded / e.total * 100).toFixed(2);
         let divProgress = document.body.querySelector(".progress-upload");
         if (!document.body.querySelector(".progress-upload")) {
           divProgress = document.createElement("div");
@@ -289,7 +217,7 @@ const XHR = {
       let data = this.buildBody();
       xhr.open(method, urlEndpoint2);
       if (Object.keys(this.headers).length) {
-        for (var key of Object.keys(this.headers)) {
+        for (let key of Object.keys(this.headers)) {
           if (this.type === "formData" && key === "Content-Type")
             ;
           else {
@@ -417,7 +345,7 @@ function addEventCropImage(imageContainer, imgEditEl, imgEl, inputChangeImage) {
   imageContainer.style.fontSize = 0;
   imgEditEl.style.pointerEvents = "none";
   imageContainer.style.userSelect = "none";
-  var changeImage = false;
+  let changeImage = false;
   divEl = document.createElement("div");
   const topLeftEl = document.createElement("div");
   const topRightEl = document.createElement("div");
@@ -904,7 +832,7 @@ function allAction() {
         editEl.className = "edit-file";
         containerEl.className = "edit-container";
         editEl.append(containerEl);
-        var imageContainer, imgEl;
+        let imageContainer, imgEl;
         if (["png", "jpeg", "webp", "tiff", "bmp", "jpg"].includes(extension2)) {
           const divImageEdit = document.createElement("div");
           const divImageContainer = document.createElement("div");
@@ -1037,10 +965,10 @@ function item() {
   });
   window.addEventListener("refresh-event-folder", listFolder);
 }
-var items = listItem.querySelectorAll(".item");
-var showInfo = new Event("show-info-file");
-var canvas, ctx, pageX, pageY, movePageX, movePageY, positionTransform, divCloneCanvas, itemsSelecting;
-var selecting = false;
+let items = listItem.querySelectorAll(".item");
+let showInfo = new Event("show-info-file");
+let canvas, ctx, pageX, pageY, movePageX, movePageY, positionTransform, divCloneCanvas, itemsSelecting;
+let selecting = false;
 function handleMouseDown(event2) {
   event2.preventDefault();
   if (!event2.target.closest(".item")) {
@@ -1068,7 +996,7 @@ function handleMouseDown(event2) {
 }
 function handleMouseMove(event2) {
   if (selecting) {
-    var x, y;
+    let x, y;
     if (event2.target === canvas) {
       x = event2.offsetX - pageX;
       y = event2.offsetY - pageY;
@@ -1136,9 +1064,9 @@ function addEventForItems() {
     item2.onclick = function(event2) {
       event2.preventDefault();
       const _this = this;
-      var startItemChecked = getItemSelecting("start");
-      var lastItemChecked = getItemSelecting("last");
-      var listItemSelecting = getItemSelecting();
+      let startItemChecked = getItemSelecting("start");
+      let lastItemChecked = getItemSelecting("last");
+      let listItemSelecting = getItemSelecting();
       if (!event2.ctrlKey && !event2.shiftKey) {
         if (listItemSelecting.length) {
           listItemSelecting.forEach((item3) => {
@@ -1156,44 +1084,46 @@ function addEventForItems() {
         }
       } else if (event2.shiftKey) {
         if (listItemSelecting.length) {
-          var isIndexNotSeamless = null;
-          for (var i = startItemChecked.index; i <= lastItemChecked.index; i++) {
+          let isIndexNotSeamless = null;
+          for (let i = startItemChecked.index; i <= lastItemChecked.index; i++) {
             if (!listItemSelecting[i]) {
               isIndexNotSeamless = i - 1;
               break;
             }
           }
           if (_this.index >= lastItemChecked.index && !isIndexNotSeamless) {
-            let indexStart2 = lastItemChecked.index + 1;
-            while (indexStart2 <= _this.index) {
-              items[indexStart2].firstElementChild.checked = true;
-              indexStart2++;
+            let indexStart = lastItemChecked.index + 1;
+            while (indexStart <= _this.index) {
+              items[indexStart].firstElementChild.checked = true;
+              indexStart++;
             }
           } else if (_this.index >= lastItemChecked.index && isIndexNotSeamless) {
-            var indexStart = isIndexNotSeamless + 1;
+            let indexStart = isIndexNotSeamless + 1;
             while (indexStart <= _this.index) {
               items[indexStart].firstElementChild.checked = true;
               indexStart++;
             }
           } else if (_this.index <= lastItemChecked.index && _this.index >= startItemChecked.index && !isIndexNotSeamless) {
-            for (var i = startItemChecked.index; i <= lastItemChecked.index; i++) {
+            for (let i = startItemChecked.index; i <= lastItemChecked.index; i++) {
               listItemSelecting[i].firstElementChild.checked = i <= _this.index;
             }
           } else if (_this.index <= lastItemChecked.index && _this.index >= startItemChecked.index && isIndexNotSeamless) {
-            for (var i = startItemChecked.index; i <= lastItemChecked.index; i++) {
+            for (let i = startItemChecked.index; i <= lastItemChecked.index; i++) {
               if (listItemSelecting[i]) {
                 listItemSelecting[i].firstElementChild.checked = i <= _this.index;
               }
             }
           } else if (_this.index < startItemChecked.index) {
-            var indexStart = _this.index;
+            let indexStart = _this.index;
             while (indexStart <= startItemChecked.index) {
               items[indexStart].firstElementChild.checked = true;
               indexStart++;
             }
           }
         } else {
-          Array.from(items).filter((item3, index) => index <= _this.index).forEach((item3) => item3.firstElementChild.checked = true);
+          Array.from(items).filter((item3, index) => index <= _this.index).forEach(
+            (item3) => item3.firstElementChild.checked = true
+          );
         }
       }
       window.dispatchEvent(showInfo);
@@ -1215,15 +1145,16 @@ function getItemSelecting(position = void 0) {
     }
     index++;
   }
+  let objectItem;
   switch (position) {
     case "start":
-      var objectItem = {
+      objectItem = {
         index: firstIndex,
         item: listItemSelecting[firstIndex]
       };
       return objectItem;
     case "last":
-      var objectItem = {
+      objectItem = {
         index: lastIndex,
         item: listItemSelecting[lastIndex]
       };
@@ -1250,7 +1181,9 @@ function startSelecting() {
   document.addEventListener("touchend", handleMouseUp);
   document.addEventListener("mousedown", function(event2) {
     if (!event2.target.closest(".item") && !event2.ctrlKey && !event2.shiftKey) {
-      getItemSelecting().forEach((item2) => item2.firstElementChild.checked = false);
+      getItemSelecting().forEach(
+        (item2) => item2.firstElementChild.checked = false
+      );
     }
   });
   window.addEventListener("refresh-event", refreshItem);
@@ -1266,7 +1199,7 @@ function startSelecting() {
       mediaInfo.innerHTML = '<p class="text-center">Chọn tệp để xem thông tin</p>';
       return false;
     }
-    var objectDataInfo = {};
+    let objectDataInfo = {};
     const imgEl = document.createElement("img");
     const tableEl = document.createElement("table");
     const tbodyEl = document.createElement("tbody");
@@ -1282,10 +1215,14 @@ function startSelecting() {
     tbodyEl.append(trTable);
     let hasNature = false;
     if (custom.extension && custom.pathAbsolute) {
-      if (["png", "gif", "jpg", "webp", "jpeg", "svg"].includes(custom.extension)) {
+      if (["png", "gif", "jpg", "webp", "jpeg", "svg"].includes(
+        custom.extension
+      )) {
         imgEl.src = `/${custom.pathAbsolute}`;
         hasNature = true;
-      } else if (["docx", "mp4", "pdf", "xlsx", "pptx"].includes(custom.extension)) {
+      } else if (["docx", "mp4", "pdf", "xlsx", "pptx"].includes(
+        custom.extension
+      )) {
         imgEl.src = `/images/admin/${custom.extension}.svg`;
       } else {
         imgEl.src = `/images/admin/file.svg`;
@@ -1314,38 +1251,53 @@ function startSelecting() {
           }
           switch (key) {
             case "filename":
-              trTable.insertAdjacentHTML("beforeend", `<td>
+              trTable.insertAdjacentHTML(
+                "beforeend",
+                `<td>
                             <div class="title">Tên tệp tin</div>
                             <div class="info">${value}</div>
-                        </td>`);
+                        </td>`
+              );
               break;
             case "extension":
-              trTable.insertAdjacentHTML("beforeend", `<td>
+              trTable.insertAdjacentHTML(
+                "beforeend",
+                `<td>
                             <div class="title">Định dạng</div>
                             <div class="info">${value}</div>
-                        </td>`);
+                        </td>`
+              );
               break;
             case "size":
-              trTable.insertAdjacentHTML("beforeend", `<td>
+              trTable.insertAdjacentHTML(
+                "beforeend",
+                `<td>
                             <div class="title">Dung lượng</div>
                             <div class="info">${value}</div>
-                        </td>`);
+                        </td>`
+              );
               break;
             case "natural":
-              trTable.insertAdjacentHTML("beforeend", `<td>
+              trTable.insertAdjacentHTML(
+                "beforeend",
+                `<td>
                             <div class="title">Kích thước</div>
                             <div class="info">${value}</div>
-                        </td>`);
+                        </td>`
+              );
               break;
             case "created_at":
               const time = new Date(value);
               const day = time.getDate();
               const month = time.getMonth();
               const year = time.getFullYear();
-              trTable.insertAdjacentHTML("beforeend", `<td>
+              trTable.insertAdjacentHTML(
+                "beforeend",
+                `<td>
                             <div class="title">Ngày tải lên</div>
                             <div class="info">${day} tháng ${month} ${year}</div>
-                        </td>`);
+                        </td>`
+              );
               break;
           }
         }
@@ -1356,14 +1308,13 @@ function startSelecting() {
 }
 const refreshItemEvent = new Event("refresh-event");
 const eventChooseImage = new Event("choose-image");
-const urlEndpoint = "https://localhost:3000";
 const buttonAddNewFolder = document.querySelector(".add-folder");
 const buttonUploadFile = document.querySelector(".upload-file");
 let dataTransfer = new DataTransfer();
 const eventAddFolder = new Event("add-folder");
 const eventUploadFile = new Event("add-file");
 const eventLoadItem = new Event("load-item");
-var formAdd, formUploadFile;
+let formAdd, formUploadFile, listEl;
 window.addEventListener("add-folder", (e) => {
   formAdd = document.createElement("form");
   formAdd.classList.add("form-add-folder");
@@ -1441,8 +1392,7 @@ window.addEventListener("add-file", (e) => {
   formUploadFile.classList.add("form-add-file");
   formUploadFile.onclick = (e2) => {
     if (e2.target === formUploadFile) {
-      formUploadFile.remove();
-      dataTransfer = new DataTransfer();
+      cleanUpFormUpload();
     }
   };
   const { divContainer, input, button } = handleUploadPlace();
@@ -1464,8 +1414,7 @@ window.addEventListener("add-file", (e) => {
       eventLoadItem.items = res.successFiles;
       window.dispatchEvent(eventLoadItem);
       notify.success(res.message);
-      formUploadFile.remove();
-      dataTransfer = new DataTransfer();
+      cleanUpFormUpload();
       window.dispatchEvent(refreshItemEvent);
     } else {
       notify.error(res.message);
@@ -1540,7 +1489,7 @@ function handleUploadPlace() {
     return dataTransfer.files;
   }
   function renderItems(items2) {
-    const listEl = Array.from(items2).map((file, index) => {
+    listEl = Array.from(items2).map((file, index) => {
       const filename = file.name;
       const extension2 = filename.slice(filename.lastIndexOf(".") + 1);
       const url = URL.createObjectURL(file);
@@ -1593,6 +1542,7 @@ function handleUploadPlace() {
         );
         dataTransfer.items.remove(indexRemove);
         item2.itemEl.remove();
+        URL.revokeObjectURL(item2.url);
         getDataTransferFiles();
       };
       item2.itemEl.draggable = true;
@@ -1649,6 +1599,13 @@ function handleUploadPlace() {
     button
   };
 }
+function cleanUpFormUpload() {
+  formUploadFile.remove();
+  dataTransfer = new DataTransfer();
+  for (const { url } of listEl) {
+    URL.revokeObjectURL(url);
+  }
+}
 window.addEventListener("load-item", (e) => {
   if (e.items && Array.isArray(e.items)) {
     e.items.forEach((item2) => {
@@ -1703,7 +1660,7 @@ function screen() {
     observer.observe(lastItem);
   }
 }
-var MAIN = (() => {
+const MAIN = (() => {
   function handleDeleteAll() {
     const deleteAllBtn = document.querySelector(".events .delete");
     deleteAllBtn && deleteAllBtn.addEventListener("click", async (e) => {

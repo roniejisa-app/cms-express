@@ -140,12 +140,6 @@ ul li a {
     }
 }
 
-.main {
-    height: calc(100vh - 60px - 60px);
-    overflow: auto;
-    max-height: calc(100vh - 60px - 40px - 32px);
-}
-
 footer {
     height: 40px;
     padding-top: 20px;
@@ -186,16 +180,16 @@ footer {
 // Done css
 
 // CSS TABLE
-.table-data{
+.table-data {
     position: relative;
 }
-table {
+.table:not(.permission) {
     background: #e6f4ff;
     border-radius: 6px;
-}
-.table {
     tbody {
-        tr:has(input:checked),
+        tr:has(input:checked) {
+            background-color: #7feaad;
+        }
         tr:hover {
             background-color: #99caf1;
         }
@@ -203,15 +197,31 @@ table {
     tr {
         label {
             position: relative;
-            width: 18px;
-            height: 18px;
+            width: 14px;
+            height: 14px;
             display: block;
             cursor: pointer;
             border: 1px solid black;
-            border-radius: 4px;
+            border-radius: 2px;
             margin: 0 auto;
             transition: 200ms;
             transition-property: box-shadow, border-color, background-color;
+            &.not-full {
+                background-color: #1677ff90;
+                border-color: #1677ff;
+                box-shadow: 0 0 3px 5px #1677ff50;
+                &::after {
+                    content: '';
+                    width: 12px;
+                    border-radius: 6px;
+                    height: 2px;
+                    background: white;
+                    transform: translate(-50%, -50%);
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                }
+            }
             &:hover,
             &:has(input:checked) {
                 border-color: #1677ff;
@@ -220,18 +230,11 @@ table {
                 &::before {
                     border-color: white;
                 }
-                &.not-full::before {
-                    width: 12px;
-                    border-radius: 6px;
-                    height: 2px;
-                    border: none;
-                    background: white;
-                    transform: translate(-50%, -50%);
-                }
             }
             &:hover {
+                background-color: transparent;
                 &::before {
-                    border-color: gray;
+                    border-color: #ebebeb;
                 }
             }
 
@@ -254,6 +257,9 @@ table {
 
 .main {
     padding: 0 1rem;
+    height: calc(100vh - 60px - 40px - 36px);
+    overflow: auto;
+    max-height: calc(100vh - 60px - 40px - 36px);
 }
 
 .header-view {
@@ -261,7 +267,7 @@ table {
     top: 0px;
     padding: 10px 0;
     background: white;
-    z-index: 1;
+    z-index: 2;
 }
 
 // END:CSS TABLE
@@ -331,6 +337,61 @@ table {
             fill: #cacaca;
         }
     }
+    .sort-show-filter {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        select {
+            padding: 5px;
+            height: 100%;
+            border: 1px solid #ebebeb;
+            border-radius: 6px;
+            margin-left: 10px;
+        }
+    }
+    .checkbox-action {
+        &[disabled] {
+            opacity: 0.5;
+        }
+        button{
+            height: -webkit-fill-available;
+        }
+        position: relative;
+        &.show {
+            ul {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: all;
+                transform: translateY(0);
+            }
+        }
+        ul {
+            min-width: 100px;
+            border-radius: 6px;
+            position: absolute;
+            left: 110%;
+            background: white;
+            top: 0;
+            z-index: 1;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(20px);
+            box-shadow: 0 1px 2px;
+            transition: 300ms;
+            overflow: hidden;
+            transition-property: visibility, transform, opacity, pointer-events;
+            li {
+                padding: 8px 10px;
+                cursor: pointer;
+                &:hover {
+                    color: white;
+                    background-color: $colorDanger;
+                }
+            }
+        }
+    }
 }
 
 // Filter box
@@ -350,7 +411,6 @@ table {
         z-index: 1;
         padding: 15px;
         background: white;
-        min-width: 500px;
         height: 100vh;
         display: block;
         transition: transform 300ms ease-in;

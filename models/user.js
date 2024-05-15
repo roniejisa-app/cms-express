@@ -61,6 +61,7 @@ module.exports = (sequelize, DataTypes) => {
                     showForm: true,
                     positionSidebar: false,
                     filter: true,
+                    sort: true
                 },
                 {
                     name: 'email',
@@ -68,8 +69,10 @@ module.exports = (sequelize, DataTypes) => {
                     type: 'text',
                     show: true,
                     showForm: true,
+                    filterDefault: true,
                     positionSidebar: false,
                     filter: true,
+                    sort: true
                 },
                 {
                     name: 'password',

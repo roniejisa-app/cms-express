@@ -142,7 +142,8 @@ module.exports = {
                     })
                 })
                 let dataResponse = eD(listMessages);
-                io.to(rooms[indexRoom].name).emit("join room success", dataResponse);
+                socket.join(rooms[indexRoom].name);
+                socket.emit("join room success", dataResponse);
             })
 
             socket.on("load-more-message", async (room, userId, page) => {

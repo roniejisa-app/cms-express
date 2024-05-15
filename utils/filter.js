@@ -6,6 +6,9 @@ module.exports = {
     convertDataFilter: (body, fields) => {
         const { field, type, value } = body
         let filters = {}
+        if (!field) {
+            return filters
+        }
         for (let i = 0; i < field.length; i++) {
             const nameSearch = field[i]
             const typeSearch = type[i]

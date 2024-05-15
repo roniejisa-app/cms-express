@@ -9,6 +9,7 @@ const event = require('../utils/event')
 const { initPaginate } = require('../utils/paginate')
 const { convertDataFilter } = require('../utils/filter')
 const ejs = require('ejs')
+const { Op } = require('sequelize')
 
 async function getData(req, isIndex = true, isForm = false) {
     const { module, id } = req.params
@@ -53,7 +54,9 @@ module.exports = {
 
         // FilterFields
         const filterFields = allFields.filter(({ filter }) => filter)
-
+        const filterDefault = allFields.find(
+            ({ filterDefault }) => filterDefault
+        )
         // Filter
         if (!limit) {
             limit = 10
@@ -62,7 +65,8 @@ module.exports = {
             page = 1
         }
         const offset = (page - 1) * limit
-        const filters = {}
+        const filters = convertDataFilter(req.query, fields)
+
         const order = [['id', 'ASC']]
         const { count, rows: listData } = await modelMain.findAndCountAll({
             where: filters,
@@ -81,6 +85,58 @@ module.exports = {
             name_show,
             paginate,
             filterFields,
+            filterDefault,
+        })
+    },
+    filter: async (req, res) => {
+        const { module, name, fields, modelMain } = await getData(req)
+
+        fields.sort((a, b) => {
+            if (!a.order) {
+                a.order = 99
+            }
+            if (!b.order) {
+                b.order = 99
+            }
+            return +a.order - +b.order
+        })
+
+        let { page, sort, sortType, limit } = req.body
+        // Filter
+        if (!limit) {
+            limit = 1
+        }
+        if (!page) {
+            page = 1
+        }
+        let order = [['id', 'ASC']]
+        const offset = (page - 1) * limit
+        const filters = convertDataFilter(req.body, fields)
+        if (sort) {
+            order = [[sort, sortType]]
+        }
+        const { count, rows: listData } = await modelMain.findAndCountAll({
+            where: filters,
+            order,
+            limit,
+            offset,
+        })
+        let paginate = initPaginate(count, limit, page, module)
+        const html = await ejs.renderFile(
+            process.cwd() + '/views/admin/views/table.ejs',
+            {
+                req,
+                fields,
+                module,
+                listData,
+                name,
+                paginate,
+            }
+        )
+        res.json({
+            status: 200,
+            data: listData,
+            html,
         })
     },
     add: async (req, res) => {
@@ -123,55 +179,7 @@ module.exports = {
             req,
         })
     },
-    filter: async (req, res) => {
-        const { module, name, fields, modelMain } = await getData(req)
 
-        fields.sort((a, b) => {
-            if (!a.order) {
-                a.order = 99
-            }
-            if (!b.order) {
-                b.order = 99
-            }
-            return +a.order - +b.order
-        })
-
-        let { page, sort, limit } = req.query
-        // Filter
-        if (!limit) {
-            limit = 10
-        }
-        if (!page) {
-            page = 1
-        }
-        const offset = (page - 1) * limit
-        const filters = convertDataFilter(req.body, fields)
-
-        const order = [['id', 'ASC']]
-        const { count, rows: listData } = await modelMain.findAndCountAll({
-            where: filters,
-            order,
-            limit,
-            offset,
-        })
-        let paginate = initPaginate(count, limit, page, module)
-        const html = await ejs.renderFile(
-            process.cwd() + '/views/admin/views/table.ejs',
-            {
-                req,
-                fields,
-                module,
-                listData,
-                name,
-                paginate,
-            }
-        )
-        res.json({
-            status: 200,
-            data: listData,
-            html,
-        })
-    },
     handleAdd: async (req, res) => {
         const { module, name_show, modelMain, fields } = await getData(
             req,
@@ -456,5 +464,54 @@ module.exports = {
         req.flash('success', `Xóa ${name_show} thành công`)
         event.emit('delete', req, module, id)
         res.redirect(`/admin/${module}`)
+    },
+    handleDeleteMulti: async (req, res) => {
+        const { module, name_show, modelMain, fields } = await getData(
+            req,
+            IS_NOT_VIEW
+        )
+        const { ids } = req.body
+        //Chỗ này sẽ xóa toàn bộ mọi thứ liên quan không để lại cái gì!!!
+        for (const id of ids) {
+            for (var i = 0; i < fields.length; i++) {
+                if (typeHasMultiple.includes(fields[i].type)) {
+                    const item = await modelMain.findByPk(id)
+                    await fields[i].addOrEditAssociate(
+                        item,
+                        DB[fields[i].modelName],
+                        [],
+                        IS_NOT_ADD
+                    )
+                }
+
+                if (fields[i].type === 'permissions') {
+                    const item = await modelMain.findByPk(id)
+                    await fields[i].addOrEditPermission(
+                        item,
+                        DB[fields[i].modelName],
+                        [],
+                        fields[i].mainKey,
+                        fields[i].subKey,
+                        fields[i].fn,
+                        IS_NOT_ADD
+                    )
+                }
+            }
+        }
+        await modelMain.destroy({
+            where: {
+                id: {
+                    [Op.in]: ids,
+                },
+            },
+        })
+        req.flash('success', `Xóa ${name_show} thành công`)
+        for (const id of ids) {
+            event.emit('delete', req, module, id)
+        }
+        res.json({
+            status: 200,
+            message: 'Xóa thành công!',
+        })
     },
 }

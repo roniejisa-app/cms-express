@@ -10,7 +10,7 @@ export const formatBytes = (bytes, decimals = 2) => {
 
 export const getBase64 = (file) => {
     return new Promise(resolve => {
-        var reader = new FileReader();
+        const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = function () {
             resolve(reader.result);
