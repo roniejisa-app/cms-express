@@ -10,9 +10,9 @@ var https = require('https');
 const { Server } = require('socket.io');
 const { socketAdmin } = require('../socket/admin');
 const socketRTC = require('../socket/rtc');
-const runNMS = require("../rtmp/admin");
+// const runNMS = require("../rtmp/admin");
 const fs = require('fs');
-const { resolve } = require('path');
+const socketClient = require('../socket/client');
 /**
  * Get port from environment and store in Express.
  */
@@ -36,6 +36,7 @@ const io = new Server(server, {
 });
 // Thêm socket vào đây
 socketAdmin(io);
+socketClient(io);
 socketRTC(io);
 
 // runNMS(Object.assign({}, {

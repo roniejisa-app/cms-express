@@ -10,12 +10,14 @@ const { initPaginate } = require('../utils/paginate')
 const { convertDataFilter } = require('../utils/filter')
 const ejs = require('ejs')
 const { Op } = require('sequelize')
+const { checkLinkExist } = require('../utils/all')
 
 async function getData(req, isIndex = true, isForm = false) {
     const { module, id } = req.params
     const { model, name, name_show } = req.menus.find(
         (itemModule) => itemModule.name === module
     )
+
     const modelMain = DB[model]
     let allFields = modelMain.fields()
     fields = isIndex
@@ -68,25 +70,29 @@ module.exports = {
         const filters = convertDataFilter(req.query, fields)
 
         const order = [['id', 'ASC']]
-        const { count, rows: listData } = await modelMain.findAndCountAll({
-            where: filters,
-            order,
-            limit,
-            offset,
-        })
-        let paginate = initPaginate(count, limit, page, module)
-        req.success = req.flash('success')
-        return res.render('admin/view', {
-            req,
-            fields,
-            module,
-            listData,
-            name,
-            name_show,
-            paginate,
-            filterFields,
-            filterDefault,
-        })
+        try {
+            const { count, rows: listData } = await modelMain.findAndCountAll({
+                where: filters,
+                order,
+                limit,
+                offset,
+            })
+            let paginate = initPaginate(count, limit, page, module)
+            req.success = req.flash('success')
+            return res.render('admin/view', {
+                req,
+                fields,
+                module,
+                listData,
+                name,
+                name_show,
+                paginate,
+                filterFields,
+                filterDefault,
+            })
+        } catch (e) {
+            res.status(404).send('<h1>' + e.parent + '</h1>')
+        }
     },
     filter: async (req, res) => {
         const { module, name, fields, modelMain } = await getData(req)
@@ -253,6 +259,20 @@ module.exports = {
                         fields[i].subKey,
                         fields[i].fn
                     )
+                }
+
+                if (fields[i].type === 'slug') {
+                    const checkLink = await checkLinkExist({
+                        value: body[fields[i].name],
+                    })
+
+                    if (checkLink.status === 200) {
+                        fields[i].slugData(
+                            item.id,
+                            body[fields[i].name],
+                            DB[fields[i].slugDB]
+                        )
+                    }
                 }
             }
             req.flash = req.flash('success', `Thêm ${name_show} thành công!`)
@@ -513,5 +533,5 @@ module.exports = {
             status: 200,
             message: 'Xóa thành công!',
         })
-    },
+    }
 }

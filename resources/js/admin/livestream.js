@@ -1,7 +1,7 @@
-import socket from "./socket.js";
+import socket from "./socket";
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 const { RTCSessionDescription } = window;
-import { PeerRS } from "../web-rtc/peer.js";
+import { PeerRS } from "../web-rtc/peer";
 
 socket.connect();
 const form = document.querySelector('form.room');

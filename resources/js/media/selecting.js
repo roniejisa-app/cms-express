@@ -1,6 +1,6 @@
-import { files, listItem, mediaInfo } from './selector.js'
-import { allAction } from './item.js'
-import { formatBytes } from '../utils/utils.js'
+import { files, listItem, mediaInfo } from './selector'
+import { allAction } from './item'
+import { formatBytes } from '../utils/utils'
 let items = listItem.querySelectorAll('.item')
 let showInfo = new Event('show-info-file')
 //Xử lý các vấn đề sau

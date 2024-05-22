@@ -1,11 +1,11 @@
-import socket from './socket.js'
-import { eD, dD, getBase64 } from '../utils/utils.js'
-import listStickers from '../sticker/list.js'
-import emojiUtil from '../sticker/showImage.js'
+import socket from './socket'
+import { eD, dD, getBase64 } from '../utils/utils'
+import listStickers from '../sticker/list'
+import emojiUtil from '../sticker/showImage'
 import emojiData from '@emoji-mart/data/sets/14/facebook.json'
 import { Picker } from 'emoji-mart'
-import langEmoji from './emoji-lang-vi.js'
-import { convertStringToEmoji } from '../utils/emoji-convert.js'
+import langEmoji from './emoji-lang-vi'
+import { convertStringToEmoji } from '../utils/emoji-convert'
 import {
     createScrollbar,
     resizeEditorChat,

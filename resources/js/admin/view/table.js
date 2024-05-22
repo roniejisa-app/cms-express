@@ -1,9 +1,9 @@
-import { rsLoading } from '../../utils/template.js'
-import CHECKBOX from './checkbox.js'
-import FILTER from './filter.js'
-import PAGINATION from './pagination.js'
-import request from './../../utils/request.js'
-import { urlEndpoint } from '../../config.js'
+import { rsLoading } from '../../utils/template'
+import CHECKBOX from './checkbox'
+import FILTER from './filter'
+import PAGINATION from './pagination'
+import request from './../../utils/request'
+import { urlEndpoint } from '../../config'
 
 const TABLE = (() => {
     const tableDataEl = document.querySelector('.table-data')

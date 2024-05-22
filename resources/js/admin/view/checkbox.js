@@ -1,7 +1,7 @@
-import notify from './../../utils/notify.js'
-import request from './../../utils/request.js'
-import { urlEndpoint } from './../../config.js'
-import TABLE from './table.js'
+import notify from './../../utils/notify'
+import request from './../../utils/request'
+import { urlEndpoint } from './../../config'
+import TABLE from './table'
 const CHECKBOX = (() => {
     function start() {
         const checkboxAll = document.querySelector('.check-all input')

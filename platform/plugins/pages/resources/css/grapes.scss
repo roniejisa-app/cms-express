@@ -1,0 +1,136 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    font-size: var(--gjs-font-size);
+}
+
+/* Reset some default styling */
+.gjs-cv-canvas {
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gjs-block {
+    height: auto;
+    min-height: auto;
+}
+
+.panel__top {
+    padding: 0;
+    width: 100%;
+    display: flex;
+    position: initial;
+    justify-content: center;
+    justify-content: space-between;
+}
+
+.panel__basic-actions {
+    position: initial;
+}
+
+.editor-row {
+    height: 100%;
+}
+
+.gjs-editor-cont {
+    overflow: auto;
+}
+
+.gjs-editor-cont::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.gjs-editor-cont::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.gjs-editor-cont::-webkit-scrollbar {
+    width: 8px;
+}
+
+.editor-canvas {
+    flex-grow: 1;
+}
+
+.panel__right {
+    width: 230px;
+    position: relative;
+    overflow-y: auto;
+    height: calc(100vh - 40px);
+}
+
+.panel__right::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.panel__right::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.panel__right::-webkit-scrollbar {
+    width: 8px;
+}
+
+.panel__switcher {
+    position: initial;
+    width: 230px;
+}
+
+.panel__switcher.gjs-hidden {
+    flex-basis: 0;
+}
+
+.panel__right.gjs-hidden {
+    flex-basis: 0;
+}
+
+.panel__devices {
+    position: initial;
+}
+
+.editor-main {
+    display: flex;
+}
+
+.editor-left {
+    flex: 1;
+}
+
+.editor-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.change-theme-button {
+    border: 1px solid currentColor;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 5px;
+    transition: border-color 300ms ease;
+    &.active {
+        border-color: white;
+    }
+}
+
+.gjs-toolbar-items{
+    display: flex;
+    align-items: center;
+}
+
+.gjs-toolbar-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.styles-container{
+    display: flex;
+    flex-direction: column-reverse;
+}

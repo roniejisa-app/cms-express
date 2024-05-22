@@ -1,11 +1,11 @@
-import request from '../utils/request.js'
-import notify from '../utils/notify.js'
-import XHR from '../utils/xhr.js'
-import { refreshItemEvent } from './selecting.js'
-import { listItemFolder, listItem, listFolderAside } from './selector.js'
-import { eventHasNewFolder, eventRefreshFolder } from './item.js'
-import template from './template.js'
-import { urlEndpoint } from '../config.js'
+import request from '../utils/request'
+import notify from '../utils/notify'
+import XHR from '../utils/xhr'
+import { refreshItemEvent } from './selecting'
+import { listItemFolder, listItem, listFolderAside } from './selector'
+import { eventHasNewFolder, eventRefreshFolder } from './item'
+import template from './template'
+import { urlEndpoint } from '../config'
 const buttonAddNewFolder = document.querySelector('.add-folder')
 const buttonUploadFile = document.querySelector('.upload-file')
 let dataTransfer = new DataTransfer()

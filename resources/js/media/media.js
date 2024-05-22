@@ -1,10 +1,10 @@
 import selecting, { eventChooseImage, getItemSelecting } from "./selecting.js";
-import upload from "./upload.js";
-import screen from "./screen.js";
-import item from "./item.js";
-import eventImage from "./event-edit-image.js";
-import XHR from "../utils/xhr.js";
-import notify from "../utils/notify.js";
+import upload from "./upload";
+import screen from "./screen";
+import item from "./item";
+import eventImage from "./event-edit-image";
+import XHR from "../utils/xhr";
+import notify from "../utils/notify";
 
 const MAIN = (() => {
     function handleDeleteAll() {

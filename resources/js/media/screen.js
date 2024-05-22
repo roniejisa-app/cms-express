@@ -1,8 +1,8 @@
-import request from '../utils/request.js';
-import { refreshItemEvent } from './selecting.js';
-import { listItem } from './selector.js'
-import { eventLoadItem } from './upload.js';
-import { eventAddAllAction } from './item.js';
+import request from '../utils/request';
+import { refreshItemEvent } from './selecting';
+import { listItem } from './selector'
+import { eventLoadItem } from './upload';
+import { eventAddAllAction } from './item';
 function screen() {
     let page = new URLSearchParams(window.location.search).get('page') ?? 1;
     let loadData = false;

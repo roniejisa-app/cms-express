@@ -9,6 +9,10 @@
             <th width="5%">STT</th>
             <% fields.forEach(field=> { %>
             <th><%= field.label %></th>
+            <% if(req.permission.some(permission =>
+            permission.includes(`${module}.custom-page`))){ %>
+            <th width="5%">Builder</th>
+            <%}%>
             <% }) %> <% if(req.permission.some(permission =>
             permission.includes(`${module}.edit`) ||
             permission.includes(`${module}.update`))){ %>
@@ -38,6 +42,16 @@
                     <%- include(`../types/view/${field.type}`,{ field,
                     value:item[field.name] }); %>
                 </td>
+                 <% if(req.permission.some(permission =>
+            permission.includes(`${module}.custom-page`))){ %>
+            <td class="text-center">
+                <a
+                    href="/admin/<%= module %>/custom-page/<%= item.id %>"
+                    class="btn btn-primary"
+                    >Builder</a
+                >
+            </td>
+            <%}%>
                 <% }) %> <% if(req.permission.some(permission =>
                 permission.includes(`${module}.edit`) ||
                 permission.includes(`${module}.update`))){ %>

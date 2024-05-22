@@ -1,10 +1,10 @@
-import { addEventCropImage, addEventEditFile } from './event-edit-image.js';
-import notify from '../utils/notify.js';
-import request from '../utils/request.js';
-import { refreshItemEvent } from './selecting.js';
-import { folderEl, listFolderAside, listItem, listItemFolder } from './selector.js';
-import template from './template.js';
-import XHR from '../utils/xhr.js';
+import { addEventCropImage, addEventEditFile } from './event-edit-image';
+import notify from '../utils/notify';
+import request from '../utils/request';
+import { refreshItemEvent } from './selecting';
+import { folderEl, listFolderAside, listItem, listItemFolder } from './selector';
+import template from './template';
+import XHR from '../utils/xhr';
 let listAnchorSide = getAnchorAsideFolder();
 const eventHasNewFolder = new Event('has-new-folder');
 const eventAddAllAction = new Event('add-all-action');

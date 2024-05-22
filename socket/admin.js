@@ -193,6 +193,7 @@ module.exports = {
                 }
                 io.to(rooms[indexRoom].name).emit("response-message-load", dataResponse);
             })
+
             socket.on("join", (data) => {
                 socket.emit("join", data);
             })
@@ -244,7 +245,6 @@ module.exports = {
                     })
                 }
             })
-
             // Feel
             socket.on("feel-message", async (room, userId, messageId, native) => {
                 const roomCurrent = rooms.find(({ name }) => name === room);
