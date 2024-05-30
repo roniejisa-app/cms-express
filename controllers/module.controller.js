@@ -2,7 +2,6 @@ const DB = require('../models/index')
 const IS_FORM = true
 const IS_NOT_ADD = false
 const IS_NOT_VIEW = false
-const typeHasData = ['selectAssoc', 'selectMultiAssoc']
 const typeHasMultiple = ['selectMultiAssoc']
 const bcrypt = require('bcrypt')
 const event = require('../utils/event')
@@ -11,34 +10,14 @@ const { convertDataFilter } = require('../utils/filter')
 const ejs = require('ejs')
 const { Op } = require('sequelize')
 const { checkLinkExist } = require('../utils/all')
+const { getData } = require('../utils/dataTable')
+const {
+    FIELD_TYPE_SELECT_ASSOC,
+    FIELD_TYPE_INTEGER,
+    FIELD_TYPE_PERMISSION,
+    FIELD_TYPE_SLUG,
+} = require('../contains/module')
 
-async function getData(req, isIndex = true, isForm = false) {
-    const { module, id } = req.params
-    const { model, name, name_show } = req.menus.find(
-        (itemModule) => itemModule.name === module
-    )
-
-    const modelMain = DB[model]
-    let allFields = modelMain.fields()
-    fields = isIndex
-        ? allFields.filter((field) => field.show)
-        : allFields.filter((field) => field.showForm)
-    if (isForm) {
-        for (var i = 0; i < fields.length; i++) {
-            if (typeHasData.includes(fields[i].type)) {
-                // Do chưa tải được nên cần lấy ngay model tại chỗ này
-                fields[i].data = await fields[i].data(DB[fields[i].modelName])
-            }
-            if (fields[i].type === 'permissions') {
-                fields[i].data = await fields[i].data(
-                    DB[fields[i].modelName],
-                    DB[fields[i].modelAssoc]
-                )
-            }
-        }
-    }
-    return { model, module, name, name_show, fields, modelMain, id, allFields }
-}
 module.exports = {
     index: async (req, res) => {
         const { module, name, name_show, fields, modelMain, allFields } =
@@ -209,14 +188,14 @@ module.exports = {
                         : [body[fields[i].name]]
                     delete body[fields[i].name]
                 }
-                if (fields[i].dataType === 'integer') {
+                if (fields[i].dataType === FIELD_TYPE_INTEGER) {
                     body[fields[i].name] = +body[fields[i].name]
                 }
 
-                if (fields[i].type === 'selectAssoc') {
+                if (fields[i].type === FIELD_TYPE_SELECT_ASSOC) {
                 }
                 // Xử lý permission
-                if (fields[i].type === 'permissions') {
+                if (fields[i].type === FIELD_TYPE_PERMISSION) {
                     if (body[fields[i].name]) {
                         fields[i].dataPermission = Array.isArray(
                             body[fields[i].name]
@@ -261,7 +240,7 @@ module.exports = {
                     )
                 }
 
-                if (fields[i].type === 'slug') {
+                if (fields[i].type === FIELD_TYPE_SLUG) {
                     const checkLink = await checkLinkExist({
                         value: body[fields[i].name],
                     })
@@ -321,7 +300,7 @@ module.exports = {
                     as: fields[i].name,
                 })
             }
-            if (fields[i].type === 'permissions') {
+            if (fields[i].type === FIELD_TYPE_PERMISSION) {
                 include = fields[i].include(
                     DB[fields[i].modelRoleModulePermission],
                     DB[fields[i].modelModulePermission]
@@ -373,11 +352,11 @@ module.exports = {
                         : [body[fields[i].name]]
                     delete body[fields[i].name]
                 }
-                if (fields[i].dataType === 'integer') {
+                if (fields[i].dataType === FIELD_TYPE_INTEGER) {
                     body[fields[i].name] = +body[fields[i].name]
                 }
                 // Xử lý permission
-                if (fields[i].type === 'permissions') {
+                if (fields[i].type === FIELD_TYPE_INTEGER) {
                     fields[i].dataPermission = Array.isArray(
                         body[fields[i].name]
                     )
@@ -533,5 +512,5 @@ module.exports = {
             status: 200,
             message: 'Xóa thành công!',
         })
-    }
+    },
 }

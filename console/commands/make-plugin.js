@@ -44,7 +44,7 @@ class MakePlugin {
         const configFile = fs.readFileSync(templatePath + 'config-plugin.tpl')
         fs.writeFileSync(
             pathPlugin + '/config.json',
-            configFile.toString().replace('plugin_name', this.name),
+            configFile.toString().replaceAll('plugin_name', this.name),
             {
                 flag: 'w+',
             }
@@ -57,7 +57,7 @@ class MakePlugin {
         )
         fs.writeFileSync(
             pathPlugin + '/routes/index.js',
-            routerTemplate.toString().replace("router_plugin",this.name),
+            routerTemplate.toString().replaceAll("router_plugin",this.name),
             {
                 flag: 'w+',
             }

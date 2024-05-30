@@ -37,7 +37,7 @@ class MakeMigration {
             )}.js`,
             migrationTemplate
                 .toString()
-                .replace('name_migration', this.migrationName),
+                .replaceAll('migration_name', this.migrationName),
             {
                 flag: 'w+',
             }

@@ -1,7 +1,7 @@
 'use strict'
 
 const fs = require('fs')
-const { globSync } = require('glob')
+const glob = require('glob')
 const path = require('path')
 const Sequelize = require('sequelize')
 const process = require('process')
@@ -40,7 +40,7 @@ fs.readdirSync(__dirname)
     })
 
 // Đăng ký tất các model trong platform vào đây
-let files = globSync(process.cwd() + '/platform/plugins/*/models/*').filter(
+let files = glob.sync(process.cwd() + '/platform/plugins/*/models/*').filter(
     (file) => {
         return (
             file.indexOf('.') !== 0 &&
@@ -51,7 +51,7 @@ let files = globSync(process.cwd() + '/platform/plugins/*/models/*').filter(
     }
 )
 for (let i = 0; i < files.length; i++) {
-    const model = require(path.join(process.cwd(), files[i]))(
+    const model = require(path.join(files[i]))(
         sequelize,
         Sequelize.DataTypes
     )

@@ -37,10 +37,10 @@
                     </label>
                 </td>
                 <td><%= index + 1 %></td>
-                <% fields.forEach(field=> { %>
+                <% fields.forEach(field=> {%>
                 <td>
                     <%- include(`../types/view/${field.type}`,{ field,
-                    value:item[field.name] }); %>
+                    value:item[field.name],item }); %>
                 </td>
                  <% if(req.permission.some(permission =>
             permission.includes(`${module}.custom-page`))){ %>

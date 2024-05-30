@@ -36,10 +36,14 @@ router.use(async (req, res, next) => {
         'roles.update',
         'roles.view',
         'pages.create',
-        'pages.delete',
         'pages.update',
+        'pages.delete',
         'pages.view',
         'pages.custom-page',
+        'tasks.view',
+        'tasks.create',
+        'tasks.delete',
+        'tasks.update',
     ]
 
     req.user = await User.findOne({

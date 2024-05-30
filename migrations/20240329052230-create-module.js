@@ -9,21 +9,12 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            name: {
-                type: Sequelize.STRING(50)
-            },
-            name_show: {
-                type: Sequelize.STRING(100)
-            },
-            order: {
-                type: Sequelize.INTEGER
-            },
-            model: {
-                type: Sequelize.STRING
-            },
-            active:{
-                type: Sequelize.BOOLEAN
-            },
+            name: Sequelize.STRING(50),
+            name_show: Sequelize.STRING(100),
+            order: Sequelize.INTEGER,
+            model: Sequelize.STRING,
+            api:Sequelize.STRING,
+            active:Sequelize.BOOLEAN,
             created_at: {
                 allowNull: false,
                 type: Sequelize.DATE,

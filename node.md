@@ -4,7 +4,7 @@ npx sequelize-cli model:generate --name User --attributes id:integer
 
 npx sequelize migration:generate --name=create_users_table
 
-# Tạo field
+## Tạo field
 
 - hasOne
 - belongsTo
@@ -13,7 +13,7 @@ npx sequelize migration:generate --name=create_users_table
 - belongsToMany
 - Xem ở module.js
 
-```
+```text
 {
     type: "selectMultiAssoc",
     modelName: 'Permission',
@@ -36,4 +36,64 @@ npx sequelize migration:generate --name=create_users_table
     },
 }
 
+```
+
+## ABCD
+
+- App
+    public
+        - plugins
+            -  pages
+                - assets
+                    - scss
+                        - [file].css
+                    - js
+                    - images
+            - products
+                - assets
+                    - scss
+                    - images
+    platform
+        - plugins
+            - pages
+                - assets
+                    - scss
+                    - js
+            - products
+                - assets
+                    - scss
+                    - jsp
+
+## COMMAND
+
+roniejisa ...
+
+- Make Plugins
+
+```bash
+roniejisa make:plugins ten_plugin
+```
+
+- Make Model - Migration
+
+```bash
+roniejisa make:model ten_plugin ten_model
+```
+
+- Make Migration
+
+```bash
+roniejisa make:migration ten_plugin ten_migration
+```
+
+- Active Plugins
+
+```bash
+roniejisa active:plugin ten_plugin key model name
+```
+
+-- Cập nhật Migration
+
+```bash
+roniejisa migration
 ```

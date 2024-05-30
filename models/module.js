@@ -73,6 +73,24 @@ module.exports = (sequelize, DataTypes) => {
                     ]
                 },
                 {
+                    name: "api",
+                    label: "API",
+                    type: "api",
+                    show: true,
+                    showForm: true,
+                    positionSidebar: true,
+                    options: [
+                        {
+                            value: 1,
+                            name: "Kích Hoạt"
+                        },
+                        {
+                            value: 0,
+                            name: "Tắt kích hoạt"
+                        }
+                    ]
+                },
+                {
                     name: 'permissions',
                     ...chooseMultiAssoc('Permission', 'id', 'value', 'Permissions'),
                     label: "Quyền",
@@ -114,7 +132,8 @@ module.exports = (sequelize, DataTypes) => {
         name_show: DataTypes.STRING,
         order: DataTypes.INTEGER,
         model: DataTypes.STRING,
-        active: DataTypes.BOOLEAN
+        active: DataTypes.BOOLEAN,
+        api: DataTypes.BOOLEAN
     }, {
         sequelize,
         modelName: 'Module',

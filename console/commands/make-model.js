@@ -22,19 +22,19 @@ class MakeModel {
         }
 
         const modelPath = pathPlugin + '/models'
-        const checkPathPluginMigration = fs.existsSync(modelPath)
-        if (!checkPathPluginMigration) {
+        const checkPathPluginModel = fs.existsSync(modelPath)
+        if (!checkPathPluginModel) {
             fs.mkdirSync(modelPath)
         }
 
-        const migrationTemplate = fs.readFileSync(
+        const modelTemplate = fs.readFileSync(
             templatePath + 'model-plugin.tpl'
         )
         fs.writeFileSync(
             `${modelPath}/${this.modelName}.js`,
-            migrationTemplate
+            modelTemplate
                 .toString()
-                .replace('modelName', this.migrationName),
+                .replaceAll('MODEL_NAME', this.modelName),
             {
                 flag: 'w+',
             }
