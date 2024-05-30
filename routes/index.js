@@ -1,15 +1,8 @@
 var express = require('express')
 var router = express.Router()
 var sendMail = require('../utils/mail')
+const db = require('../mongodb/model')
 /* GET home page. */
-router.use(function (req, res, next) {
-    req.app.set('layout', 'layouts/default')
-    next()
-})
-router.get('/grapes', async function (req, res, next) {
-    res.render('grapes')
-})
-
 router.use(function (req, res, next) {
     req.app.set('layout', 'layouts/layout')
     next()
@@ -32,4 +25,12 @@ router.get('/send-mail', async (req, res) => {
     return res.json(info)
 })
 
+router.get('/posts', async (req, res) => {
+    const data = new db.Post({
+        name: 'hehe',
+        content: 'lorem ipsum dolor sit amet',
+    })
+    await data.save()
+    return res.status(200).json(data)
+})
 module.exports = router

@@ -95,6 +95,7 @@ module.exports = (sequelize, DataTypes) => {
                         if(Array.isArray(newData)){
                             newData = newData.filter(data => data);
                         }
+                        console.log(newData);
 
                         fn = (idAdd ? 'add' : 'set') + fn;
                         await item[fn](newData);

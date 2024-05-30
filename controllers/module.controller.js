@@ -17,61 +17,23 @@ const {
     FIELD_TYPE_PERMISSION,
     FIELD_TYPE_SLUG,
 } = require('../contains/module')
-
+// Cần phân loại được nếu là mongodb
+const SQLcontroller = require('./module/sql.controller')
+const NoSqlController = require('./module/no_sql.controller')
+const controllers = {
+    SQL: {
+        index: (req, res, params) => SQLcontroller.index(req, res, params),
+    },
+    NOSQL: {
+        index:(req,res, params) => NoSqlController.index(req,res,params)
+    },
+}
 module.exports = {
     index: async (req, res) => {
-        const { module, name, name_show, fields, modelMain, allFields } =
-            await getData(req)
-        let { page, sort, limit } = req.query
-        fields.sort((a, b) => {
-            if (!a.order) {
-                a.order = 99
-            }
-            if (!b.order) {
-                b.order = 99
-            }
-            return +a.order - +b.order
-        })
-
-        // FilterFields
-        const filterFields = allFields.filter(({ filter }) => filter)
-        const filterDefault = allFields.find(
-            ({ filterDefault }) => filterDefault
-        )
-        // Filter
-        if (!limit) {
-            limit = 10
-        }
-        if (!page) {
-            page = 1
-        }
-        const offset = (page - 1) * limit
-        const filters = convertDataFilter(req.query, fields)
-
-        const order = [['id', 'ASC']]
-        try {
-            const { count, rows: listData } = await modelMain.findAndCountAll({
-                where: filters,
-                order,
-                limit,
-                offset,
-            })
-            let paginate = initPaginate(count, limit, page, module)
-            req.success = req.flash('success')
-            return res.render('admin/view', {
-                req,
-                fields,
-                module,
-                listData,
-                name,
-                name_show,
-                paginate,
-                filterFields,
-                filterDefault,
-            })
-        } catch (e) {
-            res.status(404).send('<h1>' + e.parent + '</h1>')
-        }
+        // Đầu tiên cần lấy ra loại đã sau đó redirect sang controller mongodb
+        const { type, ...params } = await getData(req)
+        console.log(type)
+        return controllers[type.toUpperCase()].index(req, res, params)
     },
     filter: async (req, res) => {
         const { module, name, fields, modelMain } = await getData(req)
@@ -164,7 +126,6 @@ module.exports = {
             req,
         })
     },
-
     handleAdd: async (req, res) => {
         const { module, name_show, modelMain, fields } = await getData(
             req,
@@ -356,7 +317,7 @@ module.exports = {
                     body[fields[i].name] = +body[fields[i].name]
                 }
                 // Xử lý permission
-                if (fields[i].type === FIELD_TYPE_INTEGER) {
+                if (fields[i].type === FIELD_TYPE_PERMISSION) {
                     fields[i].dataPermission = Array.isArray(
                         body[fields[i].name]
                     )

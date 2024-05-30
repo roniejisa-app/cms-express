@@ -97,3 +97,7 @@ roniejisa active:plugin ten_plugin key model name
 ```bash
 roniejisa migration
 ```
+
+<!-- Có thể dùng cả mongodb và sequelize -->
+<!-- Sẽ dùng mongodb để sử lý những cái như comment, chat -->
+<!-- Đã xong bước đầu -->

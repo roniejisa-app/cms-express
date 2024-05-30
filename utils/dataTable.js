@@ -3,13 +3,32 @@ const {
     FIELD_TYPE_PERMISSION,
 } = require('../contains/module')
 const DB = require('../models/index')
+const MongoDB = require('../mongodb/model')
 const { findOrCreate } = require('./cache')
+
+const functions = {
+    SQL,
+    NOSQL,
+}
 
 async function getData(req, isIndex = true, isForm = false) {
     const { module, id } = req.params
-    const { model, name, name_show } = req.menus.find(
+    const { model, name, name_show, type } = req.menus.find(
         (itemModule) => itemModule.name === module
     )
+    return functions[type.toUpperCase()](
+        model,
+        name,
+        name_show,
+        isIndex,
+        isForm,
+        id,
+        module,
+        type
+    )
+}
+
+async function SQL(model, name, name_show, isIndex, isForm, id, module, type) {
     const modelMain = DB[model]
     let allFields = modelMain.fields()
     fields = isIndex
@@ -29,13 +48,77 @@ async function getData(req, isIndex = true, isForm = false) {
             }
         }
     }
-    return { model, module, name, name_show, fields, modelMain, id, allFields }
+    return {
+        model,
+        module,
+        name,
+        name_show,
+        fields,
+        modelMain,
+        id,
+        allFields,
+        type,
+    }
+}
+
+/**
+ *
+ * @param {*} model - Tên model
+ * @param {*} name - Key
+ * @param {*} name_show - Tên hiển thị
+ * @param {*} isIndex - Kiểm tra có phải bảng không
+ * @param {*} isForm - Trong Form
+ * @param {*} id - Trong Form Sửa
+ * @param {*} module - Tên module /admmin/(module)/...
+ * @param {*} type - Kiểu SQL | NOSQL
+ * @returns
+ */
+async function NOSQL(
+    model,
+    name,
+    name_show,
+    isIndex,
+    isForm,
+    id,
+    module,
+    type
+) {
+    const modelMain = MongoDB[model]
+    let allFields = modelMain.fields()
+    fields = isIndex
+        ? allFields.filter((field) => field.show)
+        : allFields.filter((field) => field.showForm)
+    if (isForm) {
+        for (var i = 0; i < fields.length; i++) {
+            if (ARRAY_TYPE_HAS_DATA.includes(fields[i].type)) {
+                // Do chưa tải được nên cần lấy ngay model tại chỗ này
+                fields[i].data = await fields[i].data(DB[fields[i].modelName])
+            }
+            if (fields[i].type === FIELD_TYPE_PERMISSION) {
+                fields[i].data = await fields[i].data(
+                    DB[fields[i].modelName],
+                    DB[fields[i].modelAssoc]
+                )
+            }
+        }
+    }
+    return {
+        model,
+        module,
+        name,
+        name_show,
+        fields,
+        modelMain,
+        id,
+        allFields,
+        type,
+    }
 }
 
 async function getDataApi(req) {
     const { module, id } = req.params
 
-    const modules = await findOrCreate('modules-api3', async () => {
+    const modules = await findOrCreate('modules-api', async () => {
         const data = await DB['Module'].findAll({
             where: {
                 api: true,

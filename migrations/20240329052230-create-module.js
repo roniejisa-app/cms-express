@@ -14,6 +14,7 @@ module.exports = {
             order: Sequelize.INTEGER,
             model: Sequelize.STRING,
             api:Sequelize.STRING,
+            type:Sequelize.STRING,
             active:Sequelize.BOOLEAN,
             created_at: {
                 allowNull: false,

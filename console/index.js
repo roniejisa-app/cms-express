@@ -6,6 +6,7 @@ const migrationDB = require('./commands/migration')
 const MakeMigration = require('./commands/make-migration')
 const ActivePlugin = require('./commands/active-plugin')
 const MakeModel = require('./commands/make-model')
+const MakeModelMongoDB = require('./commands/make-model-mongodb')
 const argv = yargs(hideBin(process.argv)).argv
 const [type, ...params] = argv._
 
@@ -42,6 +43,11 @@ switch (type) {
         new MakeModel(params)
         new MakeMigration(params)
         break
+    case 'make:model:mongodb':
+        if (params.length < 2 || params.length > 2) {
+            console.log(`Argv gồm 2 phần là tên plugin và tên model!`)
+        }
+        new MakeModelMongoDB(params)
     default:
         console.log('Không tồn tại command này!')
 }
