@@ -3,7 +3,6 @@ const {
     Model, Op
 } = require('sequelize');
 const { string } = require('yup');
-const { choosePermission } = require('../utils/fields');
 module.exports = (sequelize, DataTypes) => {
     class Permission extends Model {
         /**
@@ -37,7 +36,6 @@ module.exports = (sequelize, DataTypes) => {
                     show: true,
                     showForm: true,
                     positionSidebar: false,
-                    ...choosePermission()
                 }
             ]
         }
