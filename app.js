@@ -9,6 +9,8 @@ var { sync } = require('glob')
 var cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
 var logger = require('morgan')
+// Tối ưu http
+const helmet = require('helmet');
 // Cấu hình cache file
 const compression = require('compression');
 var indexRouter = require('./routes/index')
@@ -57,12 +59,37 @@ app.use(
         optionsSuccessStatus: 204,
     })
 )
-
+// Flash session
 app.use(flash())
 
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs')
+
+//Set layout
+app.use(expressEjsLayout)
+app.set('layout', 'layouts/layout')
+app.use(logger('dev'))
+app.use(
+    express.json({
+        limit: '10tb',
+    })
+)
+app.use(express.urlencoded({ extended: false, limit: '10tb' }))
+app.use(cookieParser())
+
+const oneYear = 365 * 24 * 60 * 60 * 1000 // 1 year in milliseconds
+app.use(
+    express.static(path.join(__dirname, 'public'), {
+        maxAge: oneYear,
+        etag: true,
+    })
+)
+app.use(compression())
+app.use(helmet());
 app.use(passport.initialize())
 app.use(passport.session())
-const oneYear = 365 * 24 * 60 * 60 * 1000 // 1 year in milliseconds
 
 passport.serializeUser(function (user, done) {
     done(null, user.id)
@@ -101,27 +128,6 @@ passport.deserializeUser(async function (id, done) {
 
 passport.use('local', passportLocal)
 passport.use('google', passportGoogle)
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'ejs')
-app.use(expressEjsLayout)
-app.set('layout', 'layouts/layout')
-app.use(logger('dev'))
-app.use(
-    express.json({
-        limit: '10tb',
-    })
-)
-app.use(express.urlencoded({ extended: false, limit: '10tb' }))
-app.use(cookieParser())
-app.use(
-    express.static(path.join(__dirname, 'public'), {
-        maxAge: oneYear,
-        etag: true,
-    })
-)
-app.use(compression())
 
 app.use(validateMiddleware)
 app.use('/', indexRouter)

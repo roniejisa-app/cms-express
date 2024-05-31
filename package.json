@@ -53,6 +53,7 @@
         "gif-encoder-2": "^1.0.5",
         "grapesjs": "^0.21.10",
         "grapesjs-tailwind": "^1.0.11",
+        "helmet": "^7.1.0",
         "http-errors": "~1.6.3",
         "jimp": "^0.3.11",
         "jsonwebtoken": "^9.0.2",

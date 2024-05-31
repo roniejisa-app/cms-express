@@ -90,6 +90,7 @@ const TABLE = (() => {
                     'position:absolute;width:100%;height:100%;top:0;background:rgba(0,0,0,<div className="3"></div>)'
                 )}`
             )
+            console.log(urlEndpoint);
             request.setEndpoint(urlEndpoint)
             const response = await request.post(
                 `/admin/${tableDataEl.dataset.module}/filter`,

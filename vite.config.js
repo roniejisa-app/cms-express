@@ -45,13 +45,14 @@ console.log(resolve(__dirname, './utils'))
 export default defineConfig({
     resolve: {
         alias: {
-            '@': path.resolve(__dirname, 'public'),
+            '@': resolve(__dirname, 'public'),
         },
     },
     build: {
         outDir: './public/admin',
         watch: true,
         copyPublicDir: false,
+        chunkSizeWarningLimit: 2000,
         minify: true,
         rollupOptions: {
             input: [
