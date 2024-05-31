@@ -88,6 +88,7 @@ const MEDIA = (() => {
                     case 'last':
                         const imageData = JSON.parse(data);
                         textarea.innerText = data;
+                        textarea.dispatchEvent(new Event("change"));
                         const imageEl = imageFormEl.querySelector('img');
                         imageEl.src = '/' + imageData.path_absolute;
                         break;

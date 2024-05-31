@@ -1,5 +1,5 @@
 const fs = require('fs')
-const { pathPlugin } = require('../../../../utils/all')
+const { pathPlugin } = require('@utils/all')
 const pageController = {
     show: async (req, res, link) => {
         const checkFile = fs.existsSync(

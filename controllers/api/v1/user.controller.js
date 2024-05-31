@@ -1,4 +1,4 @@
-const { User } = require("../../../models/index");
+const { User } = require("@models/index");
 
 module.exports = {
     index: async (req, res) => {

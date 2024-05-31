@@ -1,6 +1,6 @@
 'use strict'
 const { Model } = require('sequelize')
-const Index = require('../../../../models/index')
+const Index = require('@models/index')
 module.exports = (sequelize, DataTypes) => {
     class Page extends Model {
         /**

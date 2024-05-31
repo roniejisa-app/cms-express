@@ -1,6 +1,6 @@
 const IS_FORM = true
 const IS_NOT_VIEW = false
-const { dataModule } = require('../utils/dataTable')
+const { dataModule } = require('@utils/dataTable')
 // Cần phân loại được nếu là mongodb
 const SQLController = require('./module/sql.controller')
 const NoSqlController = require('./module/no_sql.controller')

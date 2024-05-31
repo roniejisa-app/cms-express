@@ -1,9 +1,9 @@
 const {
     ARRAY_TYPE_HAS_DATA,
     FIELD_TYPE_PERMISSION,
-} = require('../contains/module')
-const DB = require('../models/index')
-const MongoDB = require('../mongodb/model')
+} = require('@constants/module')
+const DB = require('@models/index')
+const MongoDB = require('@mongodb/model')
 const { findOrCreate } = require('./cache')
 
 const functions = {

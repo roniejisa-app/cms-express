@@ -5,6 +5,26 @@
     "bin": {
         "roniejisa": "./console/index.js"
     },
+    "_moduleAliases": {
+        "@routes": "routes",
+        "@controllers": "controllers",
+        "@models": "models",
+        "@utils": "utils",
+        "@platform": "platform",
+        "@plugins": "platform/plugins",
+        "@resources": "resources",
+        "@console": "console",
+        "@middlewares": "middlewares",
+        "@listeners": "listeners",
+        "@bin": "bin",
+        "@job": "job",
+        "@alias": "alias",
+        "@core": "core",
+        "@mongodb": "mongodb",
+        "@config": "config",
+        "@socket": "socket",
+        "@constants": "constants"
+    },
     "scripts": {
         "start": "nodemon ./bin/www",
         "start-dev": "node ./bin/www",
@@ -37,6 +57,7 @@
         "http-errors": "~1.6.3",
         "jimp": "^0.3.11",
         "jsonwebtoken": "^9.0.2",
+        "module-alias": "^2.2.3",
         "mongodb": "^6.7.0",
         "mongoose": "^8.4.0",
         "morgan": "~1.9.1",

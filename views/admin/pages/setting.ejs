@@ -18,15 +18,15 @@
 	<div class="settings">
 		<div class="setting-sidebar">
 			<ul>
-				<% Object.values(data).forEach(tab => { %>
-				<li data-key-tab="<%= tab.key  %>"><%= tab.name  %></li>
+				<% Object.values(data).forEach((tab,index) => { %>
+				<li class="<%= index=== 0 ? 'active' :''  %>" data-key-tab="<%= tab.key  %>"><%= tab.name  %></li>
 				<% })%>
 			</ul>
 		</div>
 		<div class="setting-tab">
 			<% Object.values(data).forEach(tab => { %>
 			<div class="setting-tab__container" data-tab="<%= tab.key  %>">
-				<h1><%= tab.name  %></h1>
+				<h3><%= tab.name  %></h3>
 				<div class="setting-tab__content">
 					<div class="row">
 						<% tab.fields.forEach(field => { %>

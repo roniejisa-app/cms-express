@@ -139,13 +139,15 @@ const request = {
       const json = await response.json();
       return {
         error: false,
-        status: "OK",
+        response,
         data: json
       };
     } catch (err) {
       return {
-        error: true,
-        message: err
+        error: {
+          status: 100,
+          message: err.message
+        }
       };
     }
   },
@@ -156,10 +158,13 @@ const request = {
     request.endpoint = endpoint;
   },
   get: async (url, body = null, type = "json") => {
-    return await request.send("GET", url, body, type);
+    return request.send("GET", url, body, type);
   },
   post: async (url, body, type = "json") => {
-    return await request.send("POST", url, body, type);
+    return request.send("POST", url, body, type);
+  },
+  patch: async (url, body, type = "json") => {
+    return request.send("PATCH", url, body, type);
   }
 };
 window.addEventListener("DOMContentLoaded", function() {
@@ -205,7 +210,7 @@ const dD = (base64Data) => {
   let data = JSON.parse(decodeURIComponent(threeDecode));
   return data;
 };
-const urlEndpoint = "https://localhost:3000";
+const urlEndpoint = {}.BASE_URL;
 export {
   dD as d,
   eD as e,

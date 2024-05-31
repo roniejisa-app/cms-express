@@ -1,9 +1,9 @@
 var express = require('express')
-const apiController = require('../../controllers/api/api.controller')
+const apiController = require('@controllers/api/api.controller')
 const authRouter = require('./auth')
 const authLoggedRouter = require('./authLogged')
 var router = express.Router()
-const tokenMiddleware = require('../../middlewares/token.middleware')
+const tokenMiddleware = require('@middlewares/token.middleware')
 
 router.use('/auth', authRouter)
 router.all('*', tokenMiddleware)

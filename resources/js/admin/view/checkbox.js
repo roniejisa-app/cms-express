@@ -68,13 +68,13 @@ const CHECKBOX = (() => {
                 switch (type) {
                     case 'delete':
                         request.setEndpoint(urlEndpoint)
-                        const { status, data } = await request.post(
+                        const { response, data } = await request.post(
                             `/admin/${checkboxAction.dataset.module}/delete-multiple`,
                             {
                                 ids: dataValues,
                             }
                         )
-                        if (status === 'OK') {
+                        if (response.ok) {
                             notify.success(data.message)
                             TABLE.filter({}, true)
                         }

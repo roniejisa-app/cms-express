@@ -1,5 +1,5 @@
-const Index = require('../models/index')
-const { checkLinkExist } = require('../utils/all')
+const Index = require('@models/index')
+const { checkLinkExist } = require('@utils/all')
 module.exports = {
     dashboard: (req, res) => {
         var name_show = 'Trang tổng quan'

@@ -133,7 +133,7 @@
     }
 }
 
-summary{
+summary {
     background: #515050;
     padding: 5px 10px;
     cursor: pointer;
@@ -141,12 +141,41 @@ summary{
     color: white;
 }
 
-.settings{
+.settings {
     display: flex;
-    .setting-sidebar{
-        flex-basis: 150px;
+    flex-wrap: wrap;
+    gap: 24px;
+    .setting-sidebar {
+        flex-basis: 200px;
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            li {
+                cursor: pointer;
+                color: #ccc;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                transition: color 300ms ease-in-out,
+                    border-color 300ms ease-in-out;
+                    padding: 5px;
+                &.active,
+                &:hover {
+                    color: #1677ff;
+                    border-color: #1677ff;
+                }
+            }
+        }
     }
-    .setting-tab{
+    .setting-tab {
         flex: 1;
+    }
+    h3{
+        font-size: 1.25rem;
+        margin-bottom: 20px;
+        background: #1677ff;
+        padding: 8px 12px;
+        color: white;
+        border-radius: 6px;
     }
 }

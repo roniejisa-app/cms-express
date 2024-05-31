@@ -1,5 +1,5 @@
-const event = require("../utils/event");
-const Cache = require("../utils/cache");
+const event = require("@utils/event");
+const Cache = require("@utils/cache");
 function moduleListener() {
     event.on('create', async (...args) => {
         const [req, module, id, item, body] = args;

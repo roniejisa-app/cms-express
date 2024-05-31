@@ -125,12 +125,39 @@ summary {
 
 .settings {
   display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
 }
 .settings .setting-sidebar {
-  flex-basis: 150px;
+  flex-basis: 200px;
+}
+.settings .setting-sidebar ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.settings .setting-sidebar ul li {
+  cursor: pointer;
+  color: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: color 300ms ease-in-out, border-color 300ms ease-in-out;
+  padding: 5px;
+}
+.settings .setting-sidebar ul li.active, .settings .setting-sidebar ul li:hover {
+  color: #1677ff;
+  border-color: #1677ff;
 }
 .settings .setting-tab {
   flex: 1;
+}
+.settings h3 {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+  background: #1677ff;
+  padding: 8px 12px;
+  color: white;
+  border-radius: 6px;
 }
 
 /*# sourceMappingURL=setting.css.map */

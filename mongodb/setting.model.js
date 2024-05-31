@@ -11,8 +11,12 @@ const dataSchema = new mongoose.Schema({
     class: {
         type: String,
     },
+    order:{
+        type: Number
+    },
     key: {
         required: true,
+        unique:true,
         type: String,
     },
     type: {

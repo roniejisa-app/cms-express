@@ -2,7 +2,7 @@ const express = require('express')
 const puppeteer = require('puppeteer')
 const router = express.Router()
 const fs = require('fs')
-const { downloadFileFromLink } = require('../utils/downloadFile')
+const { downloadFileFromLink } = require('@utils/downloadFile')
 /**
  * Tải ảnh instagram
  */
@@ -102,7 +102,7 @@ router.get('/download/image/instagram/:username', (req, res) => {
                     getImages(newScrollHeight)
                 } else {
                     res.json({
-                        status: 'Ok',
+                        status: 200,
                     })
                 }
             }, 2000)

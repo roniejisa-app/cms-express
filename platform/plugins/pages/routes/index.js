@@ -25,7 +25,7 @@ router.post('/endpoint/store', async (req, res) => {
     )
     return res.json({
         status: 200,
-        type: 'ok',
+        message: 'Lưu thành công!',
     })
 })
 

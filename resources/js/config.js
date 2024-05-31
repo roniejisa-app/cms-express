@@ -1,1 +1,1 @@
-export const urlEndpoint = 'https://localhost:3000';
+export const urlEndpoint = process.env.BASE_URL;

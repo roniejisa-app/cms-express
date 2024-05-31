@@ -2,7 +2,7 @@
 const { Model, Op } = require('sequelize')
 const { string } = require('yup')
 const db = require('./index')
-const { selectAssoc, chooseMultiAssoc } = require('../utils/fields')
+const { selectAssoc, chooseMultiAssoc } = require('@utils/fields')
 module.exports = (sequelize, DataTypes) => {
     class User extends Model {
         /**

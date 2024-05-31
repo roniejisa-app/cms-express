@@ -1,4 +1,4 @@
-const Index = require('../models/index')
+const Index = require('@models/index')
 const { resolve } = require('path')
 module.exports = {
     toKebabCase: (str) => {

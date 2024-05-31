@@ -1,5 +1,5 @@
-const { User } = require('../models/index')
-const sentMail = require('../utils/mail')
+const { User } = require('@models/index')
+const sentMail = require('@utils/mail')
 const md5 = require('crypto-js/md5')
 const bcrypt = require('bcrypt')
 module.exports = {
@@ -50,7 +50,7 @@ module.exports = {
             }
         )
 
-        const link = `http://localhost:3000/reset-password?token=${token}`
+        const link = process.env.BASE_URL + `/reset-password?token=${token}`
 
         const checkSendMail = await sentMail(
             user.email,

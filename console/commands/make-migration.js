@@ -1,5 +1,5 @@
 const fs = require('fs')
-const { toSnakeCase, toKebabCase } = require('../../utils/all')
+const { toSnakeCase, toKebabCase } = require('@utils/all')
 class MakeMigration {
     constructor(params) {
         const [name_plugin, name_migration] = params

@@ -1,7 +1,6 @@
 var express = require('express')
 var router = express.Router()
-var sendMail = require('../utils/mail')
-const db = require('../mongodb/model')
+var sendMail = require('@utils/mail')
 /* GET home page. */
 router.use(function (req, res, next) {
     req.app.set('layout', 'layouts/layout')

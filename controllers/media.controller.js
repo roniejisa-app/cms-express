@@ -1,11 +1,11 @@
-const { Media } = require('../models/index');
+const { Media } = require('@models/index');
 require('dotenv').config();
-const { createFolder } = require('../utils/uploadFile');
+const { createFolder } = require('@utils/uploadFile');
 const { Op } = require('sequelize');
-const db = require('../utils/sequelize');
+const db = require('@utils/sequelize');
 const fs = require('fs');
-const { recursiveFolder, recursiveHTMLFolder } = require('../utils/all');
-const Cache = require('../utils/cache');
+const { recursiveFolder, recursiveHTMLFolder } = require('@utils/all');
+const Cache = require('@utils/cache');
 const IS_NOT_ADD = false;
 module.exports = {
     index: async (req, res, next) => {
@@ -166,7 +166,7 @@ module.exports = {
                     return res.json({
                         folder,
                         message: 'Tạo thư mục thành công',
-                        status: 'OK'
+                        status: 200
                     })
                 } catch (e) {
                     return res.json({

@@ -1,4 +1,4 @@
-const { getAllPermissionOfUser } = require('../utils/permission');
+const { getAllPermissionOfUser } = require('@utils/permission');
 // Kiêm tra phần quyền
 module.exports = (req, res, next) => {
     try {

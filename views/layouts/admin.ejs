@@ -1,4 +1,3 @@
-<% include('../utils/function')  %>
 <!DOCTYPE html>
 <html lang="en">
 	
@@ -8,8 +7,13 @@
 		<title>
 			Quản lý <% if(typeof name_show === "string") { %><%= name_show %><% }else{ '' } %>
 		</title>
+		<meta name="description" content="<%= SettingHelper.getSetting('seo_description') %>" />
+		<meta name="keywords" content="<%= SettingHelper.getSetting('seo_keywords') %>" />
+		<meta name="keywords" content="<%= SettingHelper.getSetting('seo_keywords') %>" />
+		<link rel="icon" type="image/x-icon" href="<%= SettingHelper.getSetting('favicon','image') %>">
+
 		<% if(typeof csrfToken === 'string' && csrfToken) { %>
-		<meta name="csrf-token" content="<%= csrfToken %>" />
+			<meta name="csrf-token" content="<%= csrfToken %>" />
 		<% } %>
 		<link rel="stylesheet" href="/core/css/r8.css" />
 		<link rel="stylesheet" href="/core/css/admin.css" />
@@ -54,7 +58,7 @@
 						<div class="user-dropdown">
 							<div class="name"><%= req.user.fullname %></div>
 							<div class="image">
-								<img src="<%= getImg(req.user.avatar) %>" alt="" />
+								<img src="<%= FunctionHelper.getImage(req.user.avatar) %>" alt="" />
 							</div>
 							<ul>
 								<li><a href="/admin/users/edit/<%= req.user.id %>">Sửa thông tin</a></li>
@@ -78,6 +82,7 @@
 		</main>
 		
 		<%- include('../chat/index') %>
+		<div class="cms-loading"></div>
 		<script src="/core/js/admin2.js" type="module"></script>
 	</body>
 	

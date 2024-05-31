@@ -1,7 +1,7 @@
 const express = require('express')
 const { existsSync } = require('fs')
-const { Link } = require('../models/index')
-const { isObject } = require('../utils/all')
+const { Link } = require('@models/index')
+const { isObject } = require('@utils/all')
 const router = express.Router()
 // Sử dụng cho mục đích slug 1 level
 router.get(/^\/(?!admin|grapes|api|crawler).*$/, async (req, res, next) => {

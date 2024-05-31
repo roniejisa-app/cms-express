@@ -1,7 +1,7 @@
-const { Message, chatRoom, chatRoomUser, User, MessageFeelUser } = require('../models/index');
+const { Message, chatRoom, chatRoomUser, User, MessageFeelUser } = require('@models/index');
 require('dotenv').config();
 const fs = require('fs');
-const { createFolderFromString } = require('../utils/uploadFile');
+const { createFolderFromString } = require('@utils/uploadFile');
 async function computeUserIdFromHeaders(userId) {
     return userId;
 }

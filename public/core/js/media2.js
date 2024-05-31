@@ -162,7 +162,10 @@ const XHR = {
       if (this.type === "") {
         this.setHeader("Content-Type", "application/json");
       } else if (this.type === "form") {
-        this.setHeader("Content-Type", "application/x-www-form-urlencoded");
+        this.setHeader(
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        );
       } else if (this.type === "formData") {
         this.setHeader("Content-Type", "multipart/form-data");
       }
@@ -191,14 +194,20 @@ const XHR = {
         circle.style.setProperty("--progress", percent);
         spanPercent.innerText = `${percent}%`;
         if (percent === 100) {
-          divProgress.animate([{
-            opacity: 1
-          }, {
-            opacity: 0
-          }], {
-            duration: 1e3,
-            easing: "ease-in-out"
-          }).finished.then(function() {
+          divProgress.animate(
+            [
+              {
+                opacity: 1
+              },
+              {
+                opacity: 0
+              }
+            ],
+            {
+              duration: 1e3,
+              easing: "ease-in-out"
+            }
+          ).finished.then(function() {
             divProgress.remove();
           });
         }

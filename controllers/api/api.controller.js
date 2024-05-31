@@ -1,6 +1,6 @@
-const { getDataApi } = require('../../utils/dataTable')
-const { convertDataFilter } = require('../../utils/filter')
-const { REQUEST_API } = require('../../contains/api')
+const { getDataApi } = require('@utils/dataTable')
+const { convertDataFilter } = require('@utils/filter')
+const { REQUEST_API } = require('@constants/api')
 // Hiện tại api chỉ sử dụng đối với PostgresSQL & chưa áp dụng và chỉnh sửa cho Mongoose
 const apiController = {
     all: async (req, res, next) => {

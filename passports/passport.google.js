@@ -1,47 +1,56 @@
-var GoogleStrategy = require('passport-google-oauth2').Strategy;
-require('dotenv').config();
-const { User, Provider, Role, ModulePermission, RoleModulePermission, Module, Permission } = require('../models/index');
-const { getAllPermissionOfUser } = require('../utils/permission');
+var GoogleStrategy = require('passport-google-oauth2').Strategy
+require('dotenv').config()
+const {
+    User,
+    Provider,
+    Role,
+    ModulePermission,
+    RoleModulePermission,
+    Module,
+    Permission,
+} = require('@models/index')
+const { getAllPermissionOfUser } = require('@utils/permission')
 
-module.exports = new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/callback",
-    passReqToCallback: true,
-    scope: ["profile", "email"]
-},
+module.exports = new GoogleStrategy(
+    {
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: process.env.BASE_URL + '/auth/google/callback',
+        passReqToCallback: true,
+        scope: ['profile', 'email'],
+    },
     async function (request, accessToken, refreshToken, profile, done) {
-        const { provider, email, given_name: name } = profile;
+        const { provider, email, given_name: name } = profile
         const [newProvider, created] = await Provider.findOrCreate({
             where: {
-                name: provider
+                name: provider,
             },
             defaults: {
                 name: provider,
                 created_at: new Date(),
-                updated_at: new Date()
-            }
-        });
+                updated_at: new Date(),
+            },
+        })
 
         if (!newProvider) {
             return done(null, false, {
-                message: "Provider không tồn tại!"
-            });
+                message: 'Provider không tồn tại!',
+            })
         }
 
         let [user, createdUser] = await User.findOrCreate({
             where: {
-                email
+                email,
             },
             defaults: {
                 email,
                 fullname: name,
                 provider_id: newProvider.id,
-                status: true
+                status: true,
             },
             include: {
                 model: Role,
-                as: "roles",
+                as: 'roles',
                 include: {
                     model: RoleModulePermission,
                     as: 'roleModulePermissions',
@@ -51,26 +60,27 @@ module.exports = new GoogleStrategy({
                         include: [
                             {
                                 model: Module,
-                                as: 'module'
-                            }, {
+                                as: 'module',
+                            },
+                            {
                                 model: Permission,
-                                as: 'permission'
-                            }
-                        ]
-                    }
-                }
-            }
-        });
+                                as: 'permission',
+                            },
+                        ],
+                    },
+                },
+            },
+        })
         if (createdUser) {
             const [role, createdRole] = await Role.findOrCreate({
                 where: {
-                    name: "member",
+                    name: 'member',
                 },
                 defaults: {
-                    name: "member",
+                    name: 'member',
                     created_at: new Date(),
                     updated_at: new Date(),
-                }
+                },
             })
             if (role) {
                 user.addRoles([role])
@@ -79,17 +89,17 @@ module.exports = new GoogleStrategy({
 
         if (!user) {
             return done(null, false, {
-                message: "Đã có lỗi xảy ra. Vui lòng thử lại!"
+                message: 'Đã có lỗi xảy ra. Vui lòng thử lại!',
             })
         }
         if (createdUser) {
             user = await User.findOne({
                 where: {
-                    id: user.id
+                    id: user.id,
                 },
                 include: {
                     model: Role,
-                    as: "roles",
+                    as: 'roles',
                     include: {
                         model: RoleModulePermission,
                         as: 'roleModulePermissions',
@@ -99,18 +109,19 @@ module.exports = new GoogleStrategy({
                             include: [
                                 {
                                     model: Module,
-                                    as: 'module'
-                                }, {
+                                    as: 'module',
+                                },
+                                {
                                     model: Permission,
-                                    as: 'permission'
-                                }
-                            ]
-                        }
-                    }
-                }
+                                    as: 'permission',
+                                },
+                            ],
+                        },
+                    },
+                },
             })
         }
-        const permission = getAllPermissionOfUser(user);
-        return done(null, user, permission);
+        const permission = getAllPermissionOfUser(user)
+        return done(null, user, permission)
     }
 )

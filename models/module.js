@@ -1,7 +1,7 @@
 'use strict'
 const { Model, Op } = require('sequelize')
 const { string } = require('yup')
-const { chooseMultiAssoc } = require('../utils/fields')
+const { chooseMultiAssoc } = require('@utils/fields')
 module.exports = (sequelize, DataTypes) => {
     class Module extends Model {
         /**

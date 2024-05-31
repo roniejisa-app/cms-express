@@ -41,7 +41,7 @@ const jsFiles = [
     resolve(__dirname, './resources/js/admin/livestream.js'),
     resolve(__dirname, './platform/plugins/pages/resources/js/grapes.js'),
 ]
-
+console.log(resolve(__dirname, './utils'))
 export default defineConfig({
     build: {
         outDir: './public/admin',
@@ -76,5 +76,5 @@ export default defineConfig({
         watch: {
             usePolling: true,
         },
-    },
+    }
 })

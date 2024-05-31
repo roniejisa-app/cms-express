@@ -1,13 +1,13 @@
 const express = require('express')
-const adminController = require('../../controllers/admin.controller')
+const adminController = require('@controllers/admin.controller')
 const router = express.Router()
 const moduleRouter = require('./module')
 const mediaRouter = require('./media')
 const settingRouter = require('./setting')
-const Cache = require('../../utils/cache')
-const { User } = require('../../models/index')
+const Cache = require('@utils/cache')
+const { User } = require('@models/index')
 // Bắt đầu vào quản trị
-const permissionMiddleware = require('../../middlewares/permission.middleware')
+const permissionMiddleware = require('@middlewares/permission.middleware')
 // permissionMiddleware
 router.use(async (req, res, next) => {
     req.menus = await Cache.getMenu()

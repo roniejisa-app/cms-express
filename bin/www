@@ -8,12 +8,12 @@ var app = require('../app');
 var debug = require('debug')('node3:server');
 var https = require('https');
 const { Server } = require('socket.io');
-const { socketAdmin } = require('../socket/admin');
-const socketRTC = require('../socket/rtc');
-// const runNMS = require("../rtmp/admin");
+const { socketAdmin } = require('@socket/admin');
+const socketRTC = require('@socket/rtc');
+// const runNMS = require("@rtmp/admin");
 const fs = require('fs');
-const socketClient = require('../socket/client');
-const mongodb = require('../mongodb');
+const socketClient = require('@socket/client');
+const mongodb = require('@mongodb');
 /**
  * Get port from environment and store in Express.
  */

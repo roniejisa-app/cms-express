@@ -1,4 +1,4 @@
-const { Job } = require('../models/index');
+const { Job } = require('@models/index');
 module.exports = {
     add: async (name, data) => {
         const jobContent = JSON.stringify({

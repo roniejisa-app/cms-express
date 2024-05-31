@@ -7,12 +7,12 @@ const {
     FIELD_TYPE_SLUG,
     ARRAY_TYPE_HAS_MULTIPLE,
     IS_NOT_ADD,
-} = require('../../contains/module')
-const { convertDataFilterMongoDB } = require('../../utils/filter')
-const { initPaginate } = require('../../utils/paginate')
-const event = require('../../utils/event')
-const { checkLinkExist, isNullish } = require('../../utils/all')
-const DB = require('../../models/index')
+} = require('@constants/module')
+const { convertDataFilterMongoDB } = require('@utils/filter')
+const { initPaginate } = require('@utils/paginate')
+const event = require('@utils/event')
+const { checkLinkExist, isNullish } = require('@utils/all')
+const DB = require('@models/index')
 
 module.exports = {
     index: async (req, res, params) => {
@@ -152,7 +152,7 @@ module.exports = {
                 }
             }
         }
-        req.flash = req.flash('success', `Thêm ${name_show} thành công!`)
+        req.flash('success', `Thêm ${name_show} thành công!`)
         event.emit('create', req, module, item, body)
         return res.redirect(`/admin/${module}`)
     },

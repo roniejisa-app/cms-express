@@ -1,4 +1,5 @@
 require('dotenv').config()
+require('module-alias/register');
 const session = require('express-session')
 var express = require('express')
 const cors = require('cors')
@@ -31,6 +32,8 @@ const authMiddleware = require('./middlewares/auth.middleware')
 const passportGoogle = require('./passports/passport.google')
 const validateMiddleware = require('./middlewares/validate.middleware')
 const moduleListener = require('./listeners/module')
+//Import load alias 
+const loadAlias = require("./alias/load")
 var app = express()
 app.use(
     session({
@@ -39,7 +42,11 @@ app.use(
         saveUninitialized: true,
     })
 )
+//Đăng ký listener
 moduleListener()
+loadAlias(app);
+//Đăng ký aslias
+const SettingHelper = require('./alias/SettingHelper.alias')
 app.use(
     cors({
         origin: '*',

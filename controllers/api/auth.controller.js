@@ -1,9 +1,9 @@
-const { User, UserToken } = require('../../models')
+const { User, UserToken } = require('@models')
 const {
     createToken,
     createRefreshToken,
     hashToken,
-} = require('../../utils/jwt')
+} = require('@utils/jwt')
 const bcrypt = require('bcrypt')
 
 const authController = {
@@ -117,7 +117,7 @@ const authController = {
             data: {
                 ...userData,
                 avatar:
-                    'https://localhost:3000/' +
+                    process.env.BASE_URL +
                     JSON.parse(userData.avatar).path_absolute,
             },
         })

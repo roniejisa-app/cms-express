@@ -1,5 +1,5 @@
 const { createClient } = require('redis')
-const { Module } = require('../models/index')
+const { Module } = require('@models/index')
 
 class CacheInstance {
     constructor() {

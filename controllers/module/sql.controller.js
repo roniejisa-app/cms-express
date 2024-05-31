@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt')
 const { Op } = require('sequelize')
 const ejs = require('ejs')
-const { convertDataFilter } = require('../../utils/filter')
-const { initPaginate } = require('../../utils/paginate')
+const { convertDataFilter } = require('@utils/filter')
+const { initPaginate } = require('@utils/paginate')
 const {
     FIELD_TYPE_SELECT_ASSOC,
     FIELD_TYPE_INTEGER,
@@ -10,10 +10,10 @@ const {
     FIELD_TYPE_SLUG,
     ARRAY_TYPE_HAS_MULTIPLE,
     IS_NOT_ADD,
-} = require('../../contains/module')
-const { checkLinkExist } = require('../../utils/all')
-const event = require('../../utils/event')
-const DB = require('../../models/index')
+} = require('@constants/module')
+const { checkLinkExist } = require('@utils/all')
+const event = require('@utils/event')
+const DB = require('@models/index')
 
 module.exports = {
     index: async (req, res, params) => {
@@ -154,7 +154,7 @@ module.exports = {
                     }
                 }
             }
-            req.flash = req.flash('success', `Thêm ${name_show} thành công!`)
+            req.success = req.flash('success', `Thêm ${name_show} thành công!`)
             event.emit('create', req, module, item, body)
             return res.redirect(`/admin/${module}`)
         } else {
@@ -300,8 +300,8 @@ module.exports = {
             }
         }
 
+        req.success = req.flash('success', `Sửa ${name_show} thành công!`)
         event.emit('update', req, module, id, body)
-        req.flash('success', `Sửa ${name_show} thành công!`)
         res.redirect(`/admin/${module}/edit/${id}`)
     },
     destroy: async (req, res, params) => {
