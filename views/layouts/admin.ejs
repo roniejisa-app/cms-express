@@ -9,16 +9,15 @@
 		</title>
 		<meta name="description" content="<%= SettingHelper.getSetting('seo_description') %>" />
 		<meta name="keywords" content="<%= SettingHelper.getSetting('seo_keywords') %>" />
-		<meta name="keywords" content="<%= SettingHelper.getSetting('seo_keywords') %>" />
+		<meta name="keywords" content="<%= SettingHelper.getSetting('seo_title') %>" />
+		<link rel="canonical" href="https://localhost:3000/admin/<%= typeof module === 'string' ? module : '' %>" />
 		<link rel="icon" type="image/x-icon" href="<%= SettingHelper.getSetting('favicon','image') %>">
-
 		<% if(typeof csrfToken === 'string' && csrfToken) { %>
-			<meta name="csrf-token" content="<%= csrfToken %>" />
+		<meta name="csrf-token" content="<%= csrfToken %>" />
 		<% } %>
 		<link rel="stylesheet" href="/core/css/r8.css" />
 		<link rel="stylesheet" href="/core/css/admin.css" />
 		<link rel="stylesheet" href="/core/css/chat.css" />
-		<link rel="stylesheet" href="/core/css/style.css">
 	</head>
 	
 	<body>

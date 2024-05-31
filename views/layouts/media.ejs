@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quản lý ảnh</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="/core/css/media.css">
-</head>
-
-<body>
-  <%- body %>
-  <script src="/core/js/media2.js" type="module"></script>
-</body>
-
+	
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Quản lý ảnh</title>
+		<link rel="stylesheet" href="/core/css/media.css">
+		<meta name="description" content="<%= SettingHelper.getSetting('seo_description') %>" />
+		<meta name="keywords" content="<%= SettingHelper.getSetting('seo_keywords') %>" />
+		<meta name="keywords" content="<%= SettingHelper.getSetting('seo_title') %>" />
+		<link rel="icon" type="image/x-icon" href="<%= SettingHelper.getSetting('favicon','image') %>">
+		<link rel="canonical" href="https://localhost:3000" />
+	</head>
+	
+	<body>
+		<%- body %>
+		<script src="/core/js/media2.js" type="module"></script>
+	</body>
+	
 </html>

@@ -29,15 +29,14 @@
         "start": "nodemon ./bin/www",
         "start-dev": "node ./bin/www",
         "vite": "vite",
-        "build": "vite build",
-        "admin:css": "tailwindcss -i ./resources/css/main.scss -o ./public/core/css/style.css --watch",
-        "user:css": "tailwindcss -i ./resources/css/client.scss -o ./public/src/output.css --watch"
+        "build": "vite build"
     },
     "dependencies": {
         "@emoji-mart/data": "^1.1.2",
         "@sequelize/core": "^7.0.0-alpha.37",
         "bcrypt": "^5.1.1",
         "canvas": "^2.11.2",
+        "compression": "^1.7.4",
         "connect-flash": "^0.1.1",
         "cookie-parser": "~1.4.4",
         "crypto-js": "^4.2.0",

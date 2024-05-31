@@ -171,8 +171,7 @@ ul li a:hover {
 .header-main-admin .user-dropdown img {
   width: 48px;
   height: 48px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
 }
 .header-main-admin .user-dropdown .name {
@@ -357,8 +356,7 @@ footer {
 .image-form span img {
   width: 160px;
   height: 160px;
-  -o-object-fit: scale-down;
-     object-fit: scale-down;
+  object-fit: scale-down;
 }
 .image-form .image-form-action {
   display: flex;
@@ -366,8 +364,7 @@ footer {
 }
 
 .image-table img {
-  -o-object-fit: scale-down;
-     object-fit: scale-down;
+  object-fit: scale-down;
 }
 
 .filter {
@@ -394,6 +391,8 @@ footer {
   border-radius: 6px;
   border: 1px solid #cacaca;
   padding: 10px 35px 10px 15px;
+}
+.filter .search-form input {
   transition: 200ms ease-in-out;
   transition-property: box-shadow, border-color;
 }
@@ -406,6 +405,8 @@ footer {
 }
 .filter .search-form svg {
   transition: fill 200ms ease-in-out;
+}
+.filter .search-form svg {
   top: 50%;
   transform: translateY(-50%);
   right: 15px;
@@ -543,6 +544,7 @@ footer {
   width: 100%;
   height: 2px;
   border-radius: 6px;
+  opacity: 1;
   background-image: linear-gradient(90deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
   background-size: 200% 100%;
   transition: opacity 300ms, visibility 300ms;

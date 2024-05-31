@@ -1,6 +1,6 @@
 import { resolve } from 'path'
 import { defineConfig, loadEnv } from 'vite'
-// const cssResouces = globSync(
+// const cssResources = globSync(
 //     process.cwd() + '/resources/css/**/*.scss'
 // ).map((file) => resolve(process.cwd(), file))
 // const fileJSResources = globSync(process.cwd() + '/resources/js/**/*.js').map(
@@ -43,11 +43,16 @@ const jsFiles = [
 ]
 console.log(resolve(__dirname, './utils'))
 export default defineConfig({
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, 'public'),
+        },
+    },
     build: {
         outDir: './public/admin',
         watch: true,
         copyPublicDir: false,
-        minify: false,
+        minify: true,
         rollupOptions: {
             input: [
                 // resolve(__dirname, "./resources/js/listener.js")
@@ -76,5 +81,5 @@ export default defineConfig({
         watch: {
             usePolling: true,
         },
-    }
+    },
 })

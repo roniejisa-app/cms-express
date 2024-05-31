@@ -20,8 +20,7 @@
 .local-video {
   max-width: 100%;
   max-height: calc(100vh - 80px);
-  -o-object-fit: scale-down;
-     object-fit: scale-down;
+  object-fit: scale-down;
 }
 
 .local-video {

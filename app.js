@@ -1,5 +1,5 @@
 require('dotenv').config()
-require('module-alias/register');
+require('module-alias/register')
 const session = require('express-session')
 var express = require('express')
 const cors = require('cors')
@@ -9,6 +9,8 @@ var { sync } = require('glob')
 var cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
 var logger = require('morgan')
+// Cấu hình cache file
+const compression = require('compression');
 var indexRouter = require('./routes/index')
 var authRouter = require('./routes/auth')
 var adminRouter = require('./routes/admin/admin')
@@ -32,19 +34,19 @@ const authMiddleware = require('./middlewares/auth.middleware')
 const passportGoogle = require('./passports/passport.google')
 const validateMiddleware = require('./middlewares/validate.middleware')
 const moduleListener = require('./listeners/module')
-//Import load alias 
-const loadAlias = require("./alias/load")
+//Import load alias
+const loadAlias = require('./alias/load')
 var app = express()
 app.use(
     session({
-        secret: 'f8',
+        secret: 'roniejisa-cms-express-js-mongodb-nodejs-postgresql',
         resave: false,
         saveUninitialized: true,
     })
 )
 //Đăng ký listener
 moduleListener()
-loadAlias(app);
+loadAlias(app)
 //Đăng ký aslias
 const SettingHelper = require('./alias/SettingHelper.alias')
 app.use(
@@ -55,10 +57,12 @@ app.use(
         optionsSuccessStatus: 204,
     })
 )
+
 app.use(flash())
 
 app.use(passport.initialize())
 app.use(passport.session())
+const oneYear = 365 * 24 * 60 * 60 * 1000 // 1 year in milliseconds
 
 passport.serializeUser(function (user, done) {
     done(null, user.id)
@@ -111,7 +115,13 @@ app.use(
 )
 app.use(express.urlencoded({ extended: false, limit: '10tb' }))
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(
+    express.static(path.join(__dirname, 'public'), {
+        maxAge: oneYear,
+        etag: true,
+    })
+)
+app.use(compression())
 
 app.use(validateMiddleware)
 app.use('/', indexRouter)

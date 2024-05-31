@@ -142,8 +142,7 @@
   border-radius: 50%;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .chat-box-admin .chat-content .message .right .content,
 .chat-box-admin .chat-content .message .left .content {
@@ -325,9 +324,7 @@
   left: 13px;
   bottom: 4px;
   color: #cbcbcb;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
   visibility: visible;
   pointer-events: none;
   opacity: 1;
@@ -361,9 +358,7 @@
   overflow: hidden;
 }
 .chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image * {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image .btn-add-file-message {
   position: relative;
@@ -389,11 +384,9 @@
   border-radius: 6px;
   width: 48px;
   height: 48px;
-  -o-object-fit: scale-down;
-     object-fit: scale-down;
+  object-fit: scale-down;
 }
 .chat-box-admin .chat-content .form-chat .text-chat .editor-chat-container .box-upload-image .list-image-add .item-image-add .close-image-item {
-  height: -moz-fit-content;
   height: fit-content;
   position: absolute;
   background: white;
@@ -472,7 +465,6 @@
 .sticker-box .sticker-items::-webkit-scrollbar-thumb {
   border-radius: 6px;
   background: rgba(179, 127, 235, 0.1647058824);
-  -webkit-transition: background 300ms ease;
   transition: background 300ms ease;
 }
 .sticker-box .sticker-items::-webkit-scrollbar-thumb:hover {
@@ -489,7 +481,6 @@
 .chat-box-admin *::-webkit-scrollbar-thumb {
   border-radius: 6px;
   background: rgba(179, 127, 235, 0.1647058824);
-  -webkit-transition: background 300ms ease;
   transition: background 300ms ease;
 }
 .chat-box-admin *::-webkit-scrollbar-thumb:hover {
@@ -503,9 +494,7 @@
   background: rgba(0, 0, 0, 0.05);
   transition: background 300ms ease;
   padding: 2px 0;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
   cursor: pointer;
 }
 .scroll-custom:hover {
@@ -515,6 +504,7 @@
   border-color: #b37feb;
 }
 .scroll-custom .scroll-bar {
+  cursor: move;
   transition: border-color 300ms ease;
   background: transparent;
   position: absolute;
@@ -526,7 +516,5 @@
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 6px;
   cursor: move;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }

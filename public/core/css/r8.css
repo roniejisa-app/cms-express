@@ -9,9 +9,7 @@
 
 select,
 textarea {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   resize: none;
 }
 
