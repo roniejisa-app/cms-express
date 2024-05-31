@@ -52,7 +52,6 @@ module.exports = {
                 offset,
             })
             let paginate = initPaginate(count, limit, page, module)
-            req.success = req.flash('success')
             return res.render('admin/view', {
                 req,
                 fields,
@@ -65,7 +64,7 @@ module.exports = {
                 filterDefault,
             })
         } catch (e) {
-            res.status(404).send('<h1>' + e.parent + '</h1>')
+            res.status(404).send('<h1>' + e.message + '</h1>')
         }
     },
     store: async (req, res, params) => {

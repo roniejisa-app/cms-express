@@ -77,6 +77,8 @@ module.exports = (sequelize, DataTypes) => {
                     show: true,
                     showForm: true,
                     positionSidebar: true,
+                    keyValue: 'value',
+                    keyShow: 'name',
                     options: [
                         {
                             value: 'sql',
@@ -87,6 +89,8 @@ module.exports = (sequelize, DataTypes) => {
                             name: 'NoSQL',
                         },
                     ],
+                    filter:false,
+                    order: null,
                 },
                 {
                     name: 'api',

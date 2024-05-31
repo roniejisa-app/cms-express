@@ -31,6 +31,8 @@ module.exports = {
     index: async (req, res) => {
         // Đầu tiên cần lấy ra loại đã sau đó redirect sang controller mongodb
         const { type, ...params } = await dataModule(req)
+        // Fix bug ở đây
+        console.log(controllers[type.toUpperCase()].index(req, res, params));
         return controllers[type.toUpperCase()].index(req, res, params)
     },
     filter: async (req, res) => {
