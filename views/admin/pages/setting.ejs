@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="/assets/css/setting.css">
+<form class="setting-form mt-3">
+	<div class="d-flex justify-content-between my-5 header-view">
+		<h2>Quản lý <%= name_show %></h2>
+		<div class="d-flex align-items-center">
+			<% if(req.permission.some(permission=> permission.includes(`${module}.add`) || permission.includes(`${module}.create`))){ %>
+			<button class="btn btn-success d-flex align-items-center mr-2" type="button" data-btn-modal="add-setting">
+				Thêm <%= name_show %>
+			</button>
+			<% } %>
+			<% if(req.permission.some(permission=> permission.includes(`${module}.update`) || permission.includes(`${module}.update`))){ %>
+			<button class="btn btn-danger d-flex align-items-center">
+				Lưu thiết lập
+			</button>
+			<% } %>
+		</div>
+	</div>
+	<div class="settings">
+		<div class="setting-sidebar">
+			<ul>
+				<% Object.values(data).forEach(tab => { %>
+				<li data-key-tab="<%= tab.key  %>"><%= tab.name  %></li>
+				<% })%>
+			</ul>
+		</div>
+		<div class="setting-tab">
+			<% Object.values(data).forEach(tab => { %>
+			<div class="setting-tab__container" data-tab="<%= tab.key  %>">
+				<h1><%= tab.name  %></h1>
+				<div class="setting-tab__content">
+					<div class="row">
+						<% tab.fields.forEach(field => { %>
+						<%- include(`../types/settings/${field.type}.ejs`, { field, tab, req }) %>
+						<% })%>
+					</div>
+				</div>
+			</div>
+			<% })%>
+		</div>
+	</div>
+</form>
+<%- include('../modals/addSetting') %>
+<script src="/assets/js/setting.js" type="module"></script>

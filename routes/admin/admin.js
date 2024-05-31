@@ -1,12 +1,13 @@
 const express = require('express')
-const adminController = require('../controllers/admin.controller')
+const adminController = require('../../controllers/admin.controller')
 const router = express.Router()
 const moduleRouter = require('./module')
 const mediaRouter = require('./media')
-const Cache = require('../utils/cache')
-const { User } = require('../models/index')
+const settingRouter = require('./setting')
+const Cache = require('../../utils/cache')
+const { User } = require('../../models/index')
 // Bắt đầu vào quản trị
-const permissionMiddleware = require('../middlewares/permission.middleware')
+const permissionMiddleware = require('../../middlewares/permission.middleware')
 // permissionMiddleware
 router.use(async (req, res, next) => {
     req.menus = await Cache.getMenu()
@@ -25,8 +26,8 @@ router.use(async (req, res, next) => {
         'medias.update',
         'medias.delete',
         'medias.view',
-        "permissions.add",
-        "permissions.update",
+        'permissions.add',
+        'permissions.update',
         'permissions.delete',
         'permissions.view',
         'users.delete',
@@ -48,6 +49,10 @@ router.use(async (req, res, next) => {
         'posts.create',
         'posts.delete',
         'posts.update',
+        'settings.view',
+        'settings.create',
+        'settings.delete',
+        'settings.update',
     ]
 
     req.user = await User.findOne({
@@ -62,6 +67,7 @@ router.get('/', adminController.dashboard)
 router.post('/check-link', adminController.checkLink)
 router.get('/clear-cache', Cache.clearCache)
 router.use('/medias', mediaRouter)
+router.use(settingRouter)
 router.use(moduleRouter)
 // router.use('/:{module}', usersRouter);
 // router.get('/dashboard', adminController.dashboard);

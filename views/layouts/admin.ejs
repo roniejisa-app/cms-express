@@ -6,10 +6,10 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>
-			Quản lý <% if(typeof name_show === "string") { `${name_show}` }else{ '' } %>
+			Quản lý <% if(typeof name_show === "string") { %><%= name_show %><% }else{ '' } %>
 		</title>
 		<% if(typeof csrfToken === 'string' && csrfToken) { %>
-			<meta name="csrf-token" content="<%= csrfToken %>" />
+		<meta name="csrf-token" content="<%= csrfToken %>" />
 		<% } %>
 		<link rel="stylesheet" href="/core/css/r8.css" />
 		<link rel="stylesheet" href="/core/css/admin.css" />

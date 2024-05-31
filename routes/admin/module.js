@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const moduleController = require('../controllers/module.controller');
+const moduleController = require('../../controllers/module.controller');
 var csrf = require('csurf');
 var csrfProtect = csrf({ cookie: true })
 

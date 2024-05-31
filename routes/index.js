@@ -15,7 +15,7 @@ router.get('/', function (req, res, next) {
 router.get('/test', async function (req, res, next) {
     res.render('test')
 })
-
+// Test gửi mail
 router.get('/send-mail', async (req, res) => {
     const info = await sendMail(
         'hieupm248@gmail.com',
@@ -23,13 +23,5 @@ router.get('/send-mail', async (req, res) => {
         '<h1>Hello world</h1>'
     )
     return res.json(info)
-})
-
-router.get('/posts', async (req, res) => {
-    const data = await (new db.Post()).DB.create({
-        name: 'Ngân ',
-        content: 'Xinh',
-    })
-    return res.status(200).json(data)
 })
 module.exports = router

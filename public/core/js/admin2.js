@@ -49881,6 +49881,7 @@ const CHAT = (() => {
       stickerBox.style.top = top + "px";
       stickerBox.style.left = left + "px";
       stickerBox.style.opacity = 1;
+      stickerBox.style.zIndex = 10;
     }, 200);
   }
   function createAndAddEventStickerBox(e) {
@@ -50057,6 +50058,10 @@ const CHAT = (() => {
       e.typeMessage = "message";
     } else {
       e.typeMessage = "feel";
+    }
+    if (e.typeMessage === "feel" && editorChat.innerText.trim().length === 0) {
+      editorChat.focus();
+      return false;
     }
     chat(editorChat.innerText, e);
     editorChat.innerText = "";
@@ -50461,12 +50466,6 @@ const PAGINATION = (() => {
   };
 })();
 const TABLE = (() => {
-  if (document.querySelector('meta[name="csrf-token"]')) {
-    request.setHeaders(
-      "X-CSRF-TOKEN",
-      document.querySelector('meta[name="csrf-token"]').getAttribute("content")
-    );
-  }
   const tableDataEl = document.querySelector(".table-data");
   const limitEl = document.querySelector(".sort-show-filter [data-limit]");
   const sortEl = document.querySelector(".sort-show-filter [data-sort]");

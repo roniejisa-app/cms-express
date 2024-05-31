@@ -127,12 +127,12 @@ async function getDataApi(req) {
         })
         return data
     })
-    const { model, name, name_show } = Array.from(modules).find(
+    const { model, name, name_show, type } = Array.from(modules).find(
         (moduleItem) => moduleItem.name === module
     )
-    const modelMain = DB[model]
+    const modelMain = type?.toUpperCase() === 'NOSQL' ? MongoDB[model] : DB[model]
     const allFields = modelMain.fields()
     const fields = allFields.filter((field) => field.api)
-    return { model, module, name, name_show, fields, modelMain, id }
+    return { model, module, name, name_show, fields, modelMain, id, type }
 }
 module.exports = { dataModule, getDataApi }

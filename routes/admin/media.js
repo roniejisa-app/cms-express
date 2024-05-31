@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const mediaController = require('../controllers/media.controller');
-const { upload, createFolder } = require('../utils/uploadFile');
+const mediaController = require('../../controllers/media.controller');
+const { upload, createFolder } = require('../../utils/uploadFile');
 router.get('/trash', mediaController.trash);
 router.post('/add/folder', mediaController.addFolder);
 router.post('/edit/folder/:id', mediaController.editFolder);

@@ -5,8 +5,8 @@ const tokenMiddleware = (req, res, next) => {
         const token = req
             .header(process.env.TOKEN_HEADER_KEY)
             .replace('Bearer ', '')
-        const jwtSecretKey = process.env.JWT_SECRET
-        const verified = jwt.verify(token, jwtSecretKey)
+            const jwtSecretKey = process.env.JWT_SECRET
+            const verified = jwt.verify(token, jwtSecretKey)
         if (verified) {
             req.verified = verified
             return next()

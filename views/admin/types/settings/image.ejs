@@ -1,0 +1,23 @@
+<div class="<%= field.class ?? 'col-3' %> setting-item">
+	<div class="form-group mb-3">
+		<label class="d-block mb-1"><%= field.name %></label>
+		<div class="image-form">
+			<textarea class="form-control" type="text" name="<%= field._id %>"hidden><%= field.content ?? '' %></textarea>
+			<span>
+				<img src="<% if(field.content) { %>
+                    <%= '/'+JSON.parse(field.content).path_absolute %> 
+                    <% } else { %>  
+                    <%=  '/images/admin/no-image.svg' %>
+                    <% } %>" alt="Chưa chọn ảnh" />
+			</span>
+			<div class="image-form-action">
+				<div class="btn btn-choose-image btn-success" data-type="last" type="button">
+					Chọn ảnh
+				</div>
+				<div class="btn btn-remove-image btn-danger" type="button">
+					Xóa ảnh
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

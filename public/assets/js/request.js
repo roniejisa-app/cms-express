@@ -93,6 +93,9 @@ const request = {
     post: async (url, body, type = 'json') => {
         return await request.send('POST', url, body, type)
     },
+    patch: async (url, body, type = 'json') => {
+        return await request.send('PATCH', url, body, type)
+    },
 }
 
 window.addEventListener('DOMContentLoaded', function () {

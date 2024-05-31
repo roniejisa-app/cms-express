@@ -1,0 +1,136 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: 300ms ease-in-out;
+  transition-property: visibility, opacity;
+}
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-container {
+  max-height: 80vh;
+  overflow: auto;
+  position: relative;
+  z-index: 1;
+  background: white;
+  border-radius: 6px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.modal .modal-body {
+  padding: 10px;
+}
+.modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1;
+}
+.modal .modal-footer {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  padding: 12px 12px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  background: white;
+}
+.modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.form-group {
+  position: relative;
+}
+.form-group .form-select,
+.form-group .form-control {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  padding: 10px 12px;
+  outline: none;
+  background: white;
+}
+.form-group input:-internal-autofill-selected {
+  background-color: white !important;
+  color: red;
+}
+.form-group + .form-group {
+  margin-top: 1.5rem;
+}
+.form-group label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 12px;
+  transition: 300ms ease-in-out;
+  transition-property: top, left, background-color, color, font-size;
+  border-radius: 6px;
+  color: #ccc;
+}
+.form-group label span {
+  color: red;
+}
+.form-group .form-select:has(option[value]:checked) + label {
+  top: 0;
+  left: 10px;
+  background-color: white;
+  font-size: 13px;
+  color: #1d1d1d;
+}
+.form-group .form-control:focus + label, .form-group .form-control:not(:placeholder-shown) + label, .form-group .form-control:-webkit-autofill + label {
+  top: 0;
+  left: 10px;
+  background-color: white;
+  font-size: 13px;
+  color: #1d1d1d;
+}
+.form-group:focus-within label {
+  top: 0px;
+  left: 10px;
+  background-color: white;
+  color: #1d1d1d;
+  font-size: 13px;
+}
+
+summary {
+  background: #515050;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  color: white;
+}
+
+.settings {
+  display: flex;
+}
+.settings .setting-sidebar {
+  flex-basis: 150px;
+}
+.settings .setting-tab {
+  flex: 1;
+}
+
+/*# sourceMappingURL=setting.css.map */

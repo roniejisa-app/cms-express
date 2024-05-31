@@ -1,7 +1,7 @@
 const { getDataApi } = require('../../utils/dataTable')
 const { convertDataFilter } = require('../../utils/filter')
 const { REQUEST_API } = require('../../contains/api')
-const { data } = require('autoprefixer')
+// Hiện tại api chỉ sử dụng đối với PostgresSQL & chưa áp dụng và chỉnh sửa cho Mongoose
 const apiController = {
     all: async (req, res, next) => {
         try {

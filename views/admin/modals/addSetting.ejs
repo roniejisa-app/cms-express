@@ -1,0 +1,61 @@
+<div class="modal fade" id="addModal" tabindex="-1" data-modal="modal" data-name-modal="add-setting">
+	<div class="modal-overlay"></div>
+	<div class="modal-container">
+		<form class="form-add-setting" method="POST">
+			<div class="modal-header">
+				<h3 class="modal-title">Thêm <%= name_show %></h3>
+				<button type="button" class="close btn btn-danger" data-btn-close="modal">
+					<span>&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<input type="text" name="name" class="form-control" placeholder=" " required />
+					<label>Tên <span>*</span></label>
+				</div>
+				<div class="form-group">
+					<input type="text" name="key" class="form-control" placeholder=" " required />
+					<label>Key <span>*</span></label>
+				</div>
+				<div class="form-group">
+					<input type="text" name="tab" class="form-control" placeholder=" " required />
+					<label>Tab <span>*</span></label>
+				</div>
+				<div class="form-group">
+					<input type="text" name="tab_label" class="form-control" placeholder=" " required />
+					<label>Tiêu đề Tab <span>*</span></label>
+				</div>
+				
+				<div class="form-group">
+					<select name="type" class="form-select">
+						<option value="text">Text</option>
+						<option value="image">Ảnh</option>
+						<option value="editor">Nội dung</option>
+					</select>
+					<label>Chọn loại <span>*</span></label>
+				</div>
+				<div class="mt-3">
+					<details>
+						<summary class="mb-5">Cài đặt nâng cao</summary>
+						<div class="form-group">
+							<input type="text" name="tab_label" class="form-control" value="col-6" placeholder=" " required />
+							<label>Class</label>
+						</div>
+						<div class="form-group">
+							<input type="text" name="tab_label" class="form-control" placeholder=" " value="999" required />
+							<label>Vị trí</label>
+						</div>
+					</details>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-btn-close="modal">
+					Đóng
+				</button>
+				<button class="btn btn-primary">
+					Thêm
+				</button>
+			</div>
+		</form>
+	</div>
+</div>

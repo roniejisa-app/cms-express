@@ -162,6 +162,14 @@ const request = {
     return await request.send("POST", url, body, type);
   }
 };
+window.addEventListener("DOMContentLoaded", function() {
+  if (document == null ? void 0 : document.querySelector('meta[name="csrf-token"]')) {
+    request.setHeaders(
+      "X-CSRF-TOKEN",
+      document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+    );
+  }
+});
 const formatBytes = (bytes, decimals = 2) => {
   if (!+bytes)
     return "0 Bytes";
