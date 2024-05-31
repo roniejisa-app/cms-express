@@ -21,6 +21,7 @@
         "connect-flash": "^0.1.1",
         "cookie-parser": "~1.4.4",
         "crypto-js": "^4.2.0",
+        "csurf": "^1.11.0",
         "debug": "~2.6.9",
         "dotenv": "^16.4.5",
         "edge-paths": "^3.0.5",

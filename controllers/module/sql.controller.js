@@ -9,6 +9,7 @@ const {
     FIELD_TYPE_PERMISSION,
     FIELD_TYPE_SLUG,
     ARRAY_TYPE_HAS_MULTIPLE,
+    IS_NOT_ADD,
 } = require('../../contains/module')
 const { checkLinkExist } = require('../../utils/all')
 const event = require('../../utils/event')
@@ -62,6 +63,7 @@ module.exports = {
                 paginate,
                 filterFields,
                 filterDefault,
+                csrfToken: req.csrfToken(),
             })
         } catch (e) {
             res.status(404).send('<h1>' + e.message + '</h1>')
@@ -215,6 +217,7 @@ module.exports = {
             id,
             leftFields,
             rightFields,
+            csrfToken: req.csrfToken(),
         })
     },
     update: async (req, res, params) => {
@@ -426,6 +429,7 @@ module.exports = {
                 listData,
                 name,
                 paginate,
+                csrfToken: req.csrfToken(),
             }
         )
         return res.json({

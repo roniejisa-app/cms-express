@@ -82,7 +82,7 @@ module.exports = {
                     } else if (typeSearch === 'large_than') {
                         let obj = {}
                         obj[nameSearch] = {
-                            [gt]: valueSearch,
+                            $gt: valueSearch,
                         }
                         filters['$or'].push(obj)
                     } else {
@@ -96,7 +96,6 @@ module.exports = {
                     break
             }
         }
-        console.log(filters['$or'])
         return filters
     },
 }

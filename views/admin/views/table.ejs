@@ -69,7 +69,8 @@
                         action="/admin/<%= module %>/delete/<%= item.id %>"
                         method="POST"
                         onclick="if(!confirm(`Bạn chắc chắn muốn xóa không?`)) return false"
-                    >
+                    >   
+                        <input  hidden name="_csrf" value="<%= csrfToken %>">
                         <button class="btn btn-danger">Xóa</button>
                     </form>
                 </td>

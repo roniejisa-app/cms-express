@@ -6,6 +6,14 @@ import request from './../../utils/request'
 import { urlEndpoint } from '../../config'
 
 const TABLE = (() => {
+    if (document.querySelector('meta[name="csrf-token"]')) {
+        request.setHeaders(
+            'X-CSRF-TOKEN',
+            document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute('content')
+        )
+    }
     const tableDataEl = document.querySelector('.table-data')
     const limitEl = document.querySelector('.sort-show-filter [data-limit]')
     const sortEl = document.querySelector('.sort-show-filter [data-sort]')

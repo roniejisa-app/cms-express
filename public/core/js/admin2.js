@@ -765,6 +765,7 @@ const categories = [
       "joy",
       "slightly_smiling_face",
       "upside_down_face",
+      "melting_face",
       "wink",
       "blush",
       "innocent",
@@ -785,17 +786,23 @@ const categories = [
       "money_mouth_face",
       "hugging_face",
       "face_with_hand_over_mouth",
+      "face_with_open_eyes_and_hand_over_mouth",
+      "face_with_peeking_eye",
       "shushing_face",
       "thinking_face",
+      "saluting_face",
       "zipper_mouth_face",
       "face_with_raised_eyebrow",
       "neutral_face",
       "expressionless",
       "no_mouth",
+      "dotted_line_face",
+      "face_in_clouds",
       "smirk",
       "unamused",
       "face_with_rolling_eyes",
       "grimacing",
+      "face_exhaling",
       "lying_face",
       "relieved",
       "pensive",
@@ -812,6 +819,7 @@ const categories = [
       "cold_face",
       "woozy_face",
       "dizzy_face",
+      "face_with_spiral_eyes",
       "exploding_head",
       "face_with_cowboy_hat",
       "partying_face",
@@ -820,6 +828,7 @@ const categories = [
       "nerd_face",
       "face_with_monocle",
       "confused",
+      "face_with_diagonal_mouth",
       "worried",
       "slightly_frowning_face",
       "white_frowning_face",
@@ -828,6 +837,7 @@ const categories = [
       "astonished",
       "flushed",
       "pleading_face",
+      "face_holding_back_tears",
       "frowning",
       "anguished",
       "fearful",
@@ -859,26 +869,21 @@ const categories = [
       "alien",
       "space_invader",
       "robot_face",
-      "smiley_cat",
-      "smile_cat",
-      "joy_cat",
-      "heart_eyes_cat",
-      "smirk_cat",
-      "kissing_cat",
-      "scream_cat",
-      "crying_cat_face",
-      "pouting_cat",
-      "see_no_evil",
       "wave",
       "raised_back_of_hand",
       "raised_hand_with_fingers_splayed",
       "hand",
       "spock-hand",
+      "rightwards_hand",
+      "leftwards_hand",
+      "palm_down_hand",
+      "palm_up_hand",
       "ok_hand",
       "pinched_fingers",
       "pinching_hand",
       "v",
       "crossed_fingers",
+      "hand_with_index_finger_and_thumb_crossed",
       "i_love_you_hand_sign",
       "the_horns",
       "call_me_hand",
@@ -888,6 +893,7 @@ const categories = [
       "middle_finger",
       "point_down",
       "point_up",
+      "index_pointing_at_the_viewer",
       "+1",
       "-1",
       "fist",
@@ -896,6 +902,7 @@ const categories = [
       "right-facing_fist",
       "clap",
       "raised_hands",
+      "heart_hands",
       "open_hands",
       "palms_up_together",
       "handshake",
@@ -920,6 +927,7 @@ const categories = [
       "eye",
       "tongue",
       "lips",
+      "biting_lip",
       "baby",
       "child",
       "boy",
@@ -928,6 +936,8 @@ const categories = [
       "person_with_blond_hair",
       "man",
       "bearded_person",
+      "man_with_beard",
+      "woman_with_beard",
       "red_haired_man",
       "curly_haired_man",
       "white_haired_man",
@@ -938,7 +948,9 @@ const categories = [
       "curly_haired_woman",
       "curly_haired_person",
       "white_haired_woman",
+      "white_haired_person",
       "bald_woman",
+      "bald_person",
       "blond-haired-woman",
       "blond-haired-man",
       "older_adult",
@@ -1033,6 +1045,7 @@ const categories = [
       "construction_worker",
       "male-construction-worker",
       "female-construction-worker",
+      "person_with_crown",
       "prince",
       "princess",
       "man_with_turban",
@@ -1047,6 +1060,8 @@ const categories = [
       "man_with_veil",
       "woman_with_veil",
       "pregnant_woman",
+      "pregnant_man",
+      "pregnant_person",
       "breast-feeding",
       "woman_feeding_baby",
       "man_feeding_baby",
@@ -1082,6 +1097,7 @@ const categories = [
       "zombie",
       "male_zombie",
       "female_zombie",
+      "troll",
       "massage",
       "man-getting-massage",
       "woman-getting-massage",
@@ -1206,9 +1222,18 @@ const categories = [
       "busts_in_silhouette",
       "people_hugging",
       "footprints",
+      "smiley_cat",
+      "smile_cat",
+      "joy_cat",
+      "heart_eyes_cat",
+      "smirk_cat",
+      "kissing_cat",
+      "scream_cat",
+      "crying_cat_face",
+      "pouting_cat",
+      "see_no_evil",
       "hear_no_evil",
       "speak_no_evil",
-      "kiss",
       "love_letter",
       "cupid",
       "gift_heart",
@@ -1220,6 +1245,8 @@ const categories = [
       "heart_decoration",
       "heavy_heart_exclamation_mark_ornament",
       "broken_heart",
+      "heart_on_fire",
+      "mending_heart",
       "heart",
       "orange_heart",
       "yellow_heart",
@@ -1229,6 +1256,7 @@ const categories = [
       "brown_heart",
       "black_heart",
       "white_heart",
+      "kiss",
       "100",
       "anger",
       "boom",
@@ -1236,7 +1264,6 @@ const categories = [
       "sweat_drops",
       "dash",
       "hole",
-      "bomb",
       "speech_balloon",
       "left_speech_bubble",
       "right_anger_bubble",
@@ -1348,6 +1375,7 @@ const categories = [
       "shark",
       "octopus",
       "shell",
+      "coral",
       "snail",
       "butterfly",
       "bug",
@@ -1367,6 +1395,7 @@ const categories = [
       "bouquet",
       "cherry_blossom",
       "white_flower",
+      "lotus",
       "rosette",
       "rose",
       "wilted_flower",
@@ -1386,7 +1415,10 @@ const categories = [
       "four_leaf_clover",
       "maple_leaf",
       "fallen_leaf",
-      "leaves"
+      "leaves",
+      "empty_nest",
+      "nest_with_eggs",
+      "mushroom"
     ]
   },
   {
@@ -1423,8 +1455,8 @@ const categories = [
       "broccoli",
       "garlic",
       "onion",
-      "mushroom",
       "peanuts",
+      "beans",
       "chestnut",
       "bread",
       "croissant",
@@ -1510,6 +1542,7 @@ const categories = [
       "beers",
       "clinking_glasses",
       "tumbler_glass",
+      "pouring_liquid",
       "cup_with_straw",
       "bubble_tea",
       "beverage_box",
@@ -1520,6 +1553,7 @@ const categories = [
       "fork_and_knife",
       "spoon",
       "hocho",
+      "jar",
       "amphora"
     ]
   },
@@ -1583,10 +1617,10 @@ const categories = [
       "dart",
       "yo-yo",
       "kite",
+      "gun",
       "8ball",
       "crystal_ball",
       "magic_wand",
-      "nazar_amulet",
       "video_game",
       "joystick",
       "slot_machine",
@@ -1594,6 +1628,7 @@ const categories = [
       "jigsaw",
       "teddy_bear",
       "pinata",
+      "mirror_ball",
       "nesting_dolls",
       "spades",
       "hearts",
@@ -1676,6 +1711,7 @@ const categories = [
       "bridge_at_night",
       "hotsprings",
       "carousel_horse",
+      "playground_slide",
       "ferris_wheel",
       "roller_coaster",
       "barber",
@@ -1724,12 +1760,14 @@ const categories = [
       "railway_track",
       "oil_drum",
       "fuelpump",
+      "wheel",
       "rotating_light",
       "traffic_light",
       "vertical_traffic_light",
       "octagonal_sign",
       "construction",
       "anchor",
+      "ring_buoy",
       "boat",
       "canoe",
       "speedboat",
@@ -1914,6 +1952,7 @@ const categories = [
       "pager",
       "fax",
       "battery",
+      "low_battery",
       "electric_plug",
       "computer",
       "desktop_computer",
@@ -2025,7 +2064,7 @@ const categories = [
       "hammer_and_wrench",
       "dagger_knife",
       "crossed_swords",
-      "gun",
+      "bomb",
       "boomerang",
       "bow_and_arrow",
       "shield",
@@ -2054,7 +2093,9 @@ const categories = [
       "drop_of_blood",
       "pill",
       "adhesive_bandage",
+      "crutch",
       "stethoscope",
+      "x-ray",
       "door",
       "elevator",
       "mirror",
@@ -2075,6 +2116,7 @@ const categories = [
       "roll_of_paper",
       "bucket",
       "soap",
+      "bubbles",
       "toothbrush",
       "sponge",
       "fire_extinguisher",
@@ -2083,8 +2125,11 @@ const categories = [
       "coffin",
       "headstone",
       "funeral_urn",
+      "nazar_amulet",
+      "hamsa",
       "moyai",
-      "placard"
+      "placard",
+      "identification_card"
     ]
   },
   {
@@ -2193,6 +2238,7 @@ const categories = [
       "heavy_plus_sign",
       "heavy_minus_sign",
       "heavy_division_sign",
+      "heavy_equals_sign",
       "infinity",
       "bangbang",
       "interrobang",
@@ -2592,7 +2638,7 @@ const emojis = {
         unified: "1f4af",
         native: "💯",
         x: 28,
-        y: 6
+        y: 7
       }
     ],
     version: 1
@@ -2603,14 +2649,18 @@ const emojis = {
     keywords: [
       "1234",
       "blue",
-      "square"
+      "square",
+      "1",
+      "2",
+      "3",
+      "4"
     ],
     skins: [
       {
         unified: "1f522",
         native: "🔢",
         x: 29,
-        y: 59
+        y: 60
       }
     ],
     version: 1
@@ -2633,7 +2683,7 @@ const emojis = {
         unified: "1f600",
         native: "😀",
         x: 32,
-        y: 20
+        y: 21
       }
     ],
     version: 1
@@ -2661,7 +2711,7 @@ const emojis = {
         unified: "1f603",
         native: "😃",
         x: 32,
-        y: 23
+        y: 24
       }
     ],
     version: 1
@@ -2692,7 +2742,7 @@ const emojis = {
         unified: "1f604",
         native: "😄",
         x: 32,
-        y: 24
+        y: 25
       }
     ],
     version: 1
@@ -2712,7 +2762,7 @@ const emojis = {
         unified: "1f601",
         native: "😁",
         x: 32,
-        y: 21
+        y: 22
       }
     ],
     version: 1
@@ -2740,7 +2790,7 @@ const emojis = {
         unified: "1f606",
         native: "😆",
         x: 32,
-        y: 26
+        y: 27
       }
     ],
     version: 1
@@ -2760,7 +2810,7 @@ const emojis = {
         unified: "1f605",
         native: "😅",
         x: 32,
-        y: 25
+        y: 26
       }
     ],
     version: 1
@@ -2779,7 +2829,7 @@ const emojis = {
         unified: "1f923",
         native: "🤣",
         x: 40,
-        y: 15
+        y: 17
       }
     ],
     version: 3
@@ -2799,7 +2849,7 @@ const emojis = {
         unified: "1f602",
         native: "😂",
         x: 32,
-        y: 22
+        y: 23
       }
     ],
     version: 1
@@ -2820,7 +2870,7 @@ const emojis = {
         unified: "1f642",
         native: "🙂",
         x: 33,
-        y: 28
+        y: 29
       }
     ],
     version: 1
@@ -2840,10 +2890,27 @@ const emojis = {
         unified: "1f643",
         native: "🙃",
         x: 33,
-        y: 29
+        y: 30
       }
     ],
     version: 1
+  },
+  melting_face: {
+    id: "melting_face",
+    name: "Melting Face",
+    keywords: [
+      "hot",
+      "heat"
+    ],
+    skins: [
+      {
+        unified: "1fae0",
+        native: "🫠",
+        x: 55,
+        y: 30
+      }
+    ],
+    version: 14
   },
   wink: {
     id: "wink",
@@ -2866,7 +2933,7 @@ const emojis = {
         unified: "1f609",
         native: "😉",
         x: 32,
-        y: 29
+        y: 30
       }
     ],
     version: 1
@@ -2892,7 +2959,7 @@ const emojis = {
         unified: "1f60a",
         native: "😊",
         x: 32,
-        y: 30
+        y: 31
       }
     ],
     version: 1
@@ -2910,7 +2977,7 @@ const emojis = {
         unified: "1f607",
         native: "😇",
         x: 32,
-        y: 27
+        y: 28
       }
     ],
     version: 1
@@ -2933,7 +3000,7 @@ const emojis = {
         unified: "1f970",
         native: "🥰",
         x: 43,
-        y: 58
+        y: 60
       }
     ],
     version: 11
@@ -2956,7 +3023,7 @@ const emojis = {
         unified: "1f60d",
         native: "😍",
         x: 32,
-        y: 33
+        y: 34
       }
     ],
     version: 1
@@ -2979,7 +3046,7 @@ const emojis = {
         unified: "1f929",
         native: "🤩",
         x: 40,
-        y: 38
+        y: 40
       }
     ],
     version: 5
@@ -3005,7 +3072,7 @@ const emojis = {
         unified: "1f618",
         native: "😘",
         x: 32,
-        y: 44
+        y: 45
       }
     ],
     version: 1
@@ -3026,7 +3093,7 @@ const emojis = {
         unified: "1f617",
         native: "😗",
         x: 32,
-        y: 43
+        y: 44
       }
     ],
     version: 1
@@ -3045,7 +3112,7 @@ const emojis = {
         unified: "263a-fe0f",
         native: "☺️",
         x: 57,
-        y: 4
+        y: 35
       }
     ],
     version: 1
@@ -3066,7 +3133,7 @@ const emojis = {
         unified: "1f61a",
         native: "😚",
         x: 32,
-        y: 46
+        y: 47
       }
     ],
     version: 1
@@ -3085,7 +3152,7 @@ const emojis = {
         unified: "1f619",
         native: "😙",
         x: 32,
-        y: 45
+        y: 46
       }
     ],
     version: 1
@@ -3102,8 +3169,8 @@ const emojis = {
       {
         unified: "1f972",
         native: "🥲",
-        x: 43,
-        y: 60
+        x: 44,
+        y: 1
       }
     ],
     version: 13
@@ -3128,7 +3195,7 @@ const emojis = {
         unified: "1f60b",
         native: "😋",
         x: 32,
-        y: 31
+        y: 32
       }
     ],
     version: 1
@@ -3158,7 +3225,7 @@ const emojis = {
         unified: "1f61b",
         native: "😛",
         x: 32,
-        y: 47
+        y: 48
       }
     ],
     version: 1
@@ -3190,7 +3257,7 @@ const emojis = {
         unified: "1f61c",
         native: "😜",
         x: 32,
-        y: 48
+        y: 49
       }
     ],
     version: 1
@@ -3214,7 +3281,7 @@ const emojis = {
         unified: "1f92a",
         native: "🤪",
         x: 40,
-        y: 39
+        y: 41
       }
     ],
     version: 5
@@ -3237,7 +3304,7 @@ const emojis = {
         unified: "1f61d",
         native: "😝",
         x: 32,
-        y: 49
+        y: 50
       }
     ],
     version: 1
@@ -3255,8 +3322,8 @@ const emojis = {
       {
         unified: "1f911",
         native: "🤑",
-        x: 38,
-        y: 59
+        x: 39,
+        y: 0
       }
     ],
     version: 1
@@ -3273,7 +3340,7 @@ const emojis = {
         unified: "1f917",
         native: "🤗",
         x: 39,
-        y: 4
+        y: 6
       }
     ],
     version: 1
@@ -3295,10 +3362,48 @@ const emojis = {
         unified: "1f92d",
         native: "🤭",
         x: 40,
-        y: 42
+        y: 44
       }
     ],
     version: 5
+  },
+  face_with_open_eyes_and_hand_over_mouth: {
+    id: "face_with_open_eyes_and_hand_over_mouth",
+    name: "Face with Open Eyes and Hand over Mouth",
+    keywords: [
+      "silence",
+      "secret",
+      "shock",
+      "surprise"
+    ],
+    skins: [
+      {
+        unified: "1fae2",
+        native: "🫢",
+        x: 55,
+        y: 32
+      }
+    ],
+    version: 14
+  },
+  face_with_peeking_eye: {
+    id: "face_with_peeking_eye",
+    name: "Face with Peeking Eye",
+    keywords: [
+      "scared",
+      "frightening",
+      "embarrassing",
+      "shy"
+    ],
+    skins: [
+      {
+        unified: "1fae3",
+        native: "🫣",
+        x: 55,
+        y: 33
+      }
+    ],
+    version: 14
   },
   shushing_face: {
     id: "shushing_face",
@@ -3317,7 +3422,7 @@ const emojis = {
         unified: "1f92b",
         native: "🤫",
         x: 40,
-        y: 40
+        y: 42
       }
     ],
     version: 5
@@ -3335,10 +3440,27 @@ const emojis = {
         unified: "1f914",
         native: "🤔",
         x: 39,
-        y: 1
+        y: 3
       }
     ],
     version: 1
+  },
+  saluting_face: {
+    id: "saluting_face",
+    name: "Saluting Face",
+    keywords: [
+      "respect",
+      "salute"
+    ],
+    skins: [
+      {
+        unified: "1fae1",
+        native: "🫡",
+        x: 55,
+        y: 31
+      }
+    ],
+    version: 14
   },
   zipper_mouth_face: {
     id: "zipper_mouth_face",
@@ -3354,7 +3476,7 @@ const emojis = {
         unified: "1f910",
         native: "🤐",
         x: 38,
-        y: 58
+        y: 60
       }
     ],
     version: 1
@@ -3375,7 +3497,7 @@ const emojis = {
         unified: "1f928",
         native: "🤨",
         x: 40,
-        y: 37
+        y: 39
       }
     ],
     version: 5
@@ -3398,7 +3520,7 @@ const emojis = {
         unified: "1f610",
         native: "😐",
         x: 32,
-        y: 36
+        y: 37
       }
     ],
     version: 1
@@ -3421,7 +3543,7 @@ const emojis = {
         unified: "1f611",
         native: "😑",
         x: 32,
-        y: 37
+        y: 38
       }
     ],
     version: 1
@@ -3438,10 +3560,47 @@ const emojis = {
         unified: "1f636",
         native: "😶",
         x: 33,
-        y: 16
+        y: 17
       }
     ],
     version: 1
+  },
+  dotted_line_face: {
+    id: "dotted_line_face",
+    name: "Dotted Line Face",
+    keywords: [
+      "invisible",
+      "lonely",
+      "isolation",
+      "depression"
+    ],
+    skins: [
+      {
+        unified: "1fae5",
+        native: "🫥",
+        x: 55,
+        y: 35
+      }
+    ],
+    version: 14
+  },
+  face_in_clouds: {
+    id: "face_in_clouds",
+    name: "Face in Clouds",
+    keywords: [
+      "shower",
+      "steam",
+      "dream"
+    ],
+    skins: [
+      {
+        unified: "1f636-200d-1f32b-fe0f",
+        native: "😶‍🌫️",
+        x: 33,
+        y: 16
+      }
+    ],
+    version: 13.1
   },
   smirk: {
     id: "smirk",
@@ -3459,7 +3618,7 @@ const emojis = {
         unified: "1f60f",
         native: "😏",
         x: 32,
-        y: 35
+        y: 36
       }
     ],
     version: 1
@@ -3487,7 +3646,7 @@ const emojis = {
         unified: "1f612",
         native: "😒",
         x: 32,
-        y: 38
+        y: 39
       }
     ],
     version: 1
@@ -3504,7 +3663,7 @@ const emojis = {
         unified: "1f644",
         native: "🙄",
         x: 33,
-        y: 30
+        y: 31
       }
     ],
     version: 1
@@ -3521,10 +3680,29 @@ const emojis = {
         unified: "1f62c",
         native: "😬",
         x: 33,
-        y: 3
+        y: 4
       }
     ],
     version: 1
+  },
+  face_exhaling: {
+    id: "face_exhaling",
+    name: "Face Exhaling",
+    keywords: [
+      "relieve",
+      "relief",
+      "tired",
+      "sigh"
+    ],
+    skins: [
+      {
+        unified: "1f62e-200d-1f4a8",
+        native: "😮‍💨",
+        x: 33,
+        y: 6
+      }
+    ],
+    version: 13.1
   },
   lying_face: {
     id: "lying_face",
@@ -3538,7 +3716,7 @@ const emojis = {
         unified: "1f925",
         native: "🤥",
         x: 40,
-        y: 17
+        y: 19
       }
     ],
     version: 3
@@ -3557,7 +3735,7 @@ const emojis = {
         unified: "1f60c",
         native: "😌",
         x: 32,
-        y: 32
+        y: 33
       }
     ],
     version: 1
@@ -3575,7 +3753,7 @@ const emojis = {
         unified: "1f614",
         native: "😔",
         x: 32,
-        y: 40
+        y: 41
       }
     ],
     version: 1
@@ -3593,7 +3771,7 @@ const emojis = {
         unified: "1f62a",
         native: "😪",
         x: 33,
-        y: 1
+        y: 2
       }
     ],
     version: 1
@@ -3607,7 +3785,7 @@ const emojis = {
         unified: "1f924",
         native: "🤤",
         x: 40,
-        y: 16
+        y: 18
       }
     ],
     version: 3
@@ -3626,7 +3804,7 @@ const emojis = {
         unified: "1f634",
         native: "😴",
         x: 33,
-        y: 12
+        y: 13
       }
     ],
     version: 1
@@ -3637,14 +3815,15 @@ const emojis = {
     keywords: [
       "sick",
       "ill",
-      "disease"
+      "disease",
+      "covid"
     ],
     skins: [
       {
         unified: "1f637",
         native: "😷",
         x: 33,
-        y: 17
+        y: 18
       }
     ],
     version: 1
@@ -3656,14 +3835,15 @@ const emojis = {
       "sick",
       "temperature",
       "cold",
-      "fever"
+      "fever",
+      "covid"
     ],
     skins: [
       {
         unified: "1f912",
         native: "🤒",
-        x: 38,
-        y: 60
+        x: 39,
+        y: 1
       }
     ],
     version: 1
@@ -3683,7 +3863,7 @@ const emojis = {
         unified: "1f915",
         native: "🤕",
         x: 39,
-        y: 2
+        y: 4
       }
     ],
     version: 1
@@ -3705,7 +3885,7 @@ const emojis = {
         unified: "1f922",
         native: "🤢",
         x: 40,
-        y: 14
+        y: 16
       }
     ],
     version: 3
@@ -3724,7 +3904,7 @@ const emojis = {
         unified: "1f92e",
         native: "🤮",
         x: 40,
-        y: 43
+        y: 45
       }
     ],
     version: 5
@@ -3743,7 +3923,7 @@ const emojis = {
         unified: "1f927",
         native: "🤧",
         x: 40,
-        y: 36
+        y: 38
       }
     ],
     version: 3
@@ -3762,7 +3942,7 @@ const emojis = {
         unified: "1f975",
         native: "🥵",
         x: 44,
-        y: 2
+        y: 4
       }
     ],
     version: 11
@@ -3782,7 +3962,7 @@ const emojis = {
         unified: "1f976",
         native: "🥶",
         x: 44,
-        y: 3
+        y: 5
       }
     ],
     version: 11
@@ -3801,7 +3981,7 @@ const emojis = {
         unified: "1f974",
         native: "🥴",
         x: 44,
-        y: 1
+        y: 3
       }
     ],
     version: 11
@@ -3819,10 +3999,30 @@ const emojis = {
         unified: "1f635",
         native: "😵",
         x: 33,
-        y: 14
+        y: 15
       }
     ],
     version: 1
+  },
+  face_with_spiral_eyes: {
+    id: "face_with_spiral_eyes",
+    name: "Face with Spiral Eyes",
+    keywords: [
+      "sick",
+      "ill",
+      "confused",
+      "nauseous",
+      "nausea"
+    ],
+    skins: [
+      {
+        unified: "1f635-200d-1f4ab",
+        native: "😵‍💫",
+        x: 33,
+        y: 14
+      }
+    ],
+    version: 13.1
   },
   exploding_head: {
     id: "exploding_head",
@@ -3839,7 +4039,7 @@ const emojis = {
         unified: "1f92f",
         native: "🤯",
         x: 40,
-        y: 44
+        y: 46
       }
     ],
     version: 5
@@ -3856,7 +4056,7 @@ const emojis = {
         unified: "1f920",
         native: "🤠",
         x: 40,
-        y: 12
+        y: 14
       }
     ],
     version: 3
@@ -3873,7 +4073,7 @@ const emojis = {
         unified: "1f973",
         native: "🥳",
         x: 44,
-        y: 0
+        y: 2
       }
     ],
     version: 11
@@ -3892,7 +4092,7 @@ const emojis = {
         unified: "1f978",
         native: "🥸",
         x: 44,
-        y: 10
+        y: 12
       }
     ],
     version: 13
@@ -3915,7 +4115,7 @@ const emojis = {
         unified: "1f60e",
         native: "😎",
         x: 32,
-        y: 34
+        y: 35
       }
     ],
     version: 1
@@ -3933,7 +4133,7 @@ const emojis = {
         unified: "1f913",
         native: "🤓",
         x: 39,
-        y: 0
+        y: 2
       }
     ],
     version: 1
@@ -3950,7 +4150,7 @@ const emojis = {
         unified: "1f9d0",
         native: "🧐",
         x: 47,
-        y: 11
+        y: 13
       }
     ],
     version: 5
@@ -3976,10 +4176,29 @@ const emojis = {
         unified: "1f615",
         native: "😕",
         x: 32,
-        y: 41
+        y: 42
       }
     ],
     version: 1
+  },
+  face_with_diagonal_mouth: {
+    id: "face_with_diagonal_mouth",
+    name: "Face with Diagonal Mouth",
+    keywords: [
+      "skeptic",
+      "confuse",
+      "frustrated",
+      "indifferent"
+    ],
+    skins: [
+      {
+        unified: "1fae4",
+        native: "🫤",
+        x: 55,
+        y: 34
+      }
+    ],
+    version: 14
   },
   worried: {
     id: "worried",
@@ -3994,7 +4213,7 @@ const emojis = {
         unified: "1f61f",
         native: "😟",
         x: 32,
-        y: 51
+        y: 52
       }
     ],
     version: 1
@@ -4012,7 +4231,7 @@ const emojis = {
         unified: "1f641",
         native: "🙁",
         x: 33,
-        y: 27
+        y: 28
       }
     ],
     version: 1
@@ -4031,7 +4250,7 @@ const emojis = {
         unified: "2639-fe0f",
         native: "☹️",
         x: 57,
-        y: 3
+        y: 34
       }
     ],
     version: 1
@@ -4057,7 +4276,7 @@ const emojis = {
         unified: "1f62e",
         native: "😮",
         x: 33,
-        y: 6
+        y: 7
       }
     ],
     version: 1
@@ -4074,7 +4293,7 @@ const emojis = {
         unified: "1f62f",
         native: "😯",
         x: 33,
-        y: 7
+        y: 8
       }
     ],
     version: 1
@@ -4092,7 +4311,7 @@ const emojis = {
         unified: "1f632",
         native: "😲",
         x: 33,
-        y: 10
+        y: 11
       }
     ],
     version: 1
@@ -4110,7 +4329,7 @@ const emojis = {
         unified: "1f633",
         native: "😳",
         x: 33,
-        y: 11
+        y: 12
       }
     ],
     version: 1
@@ -4120,17 +4339,39 @@ const emojis = {
     name: "Pleading Face",
     keywords: [
       "begging",
-      "mercy"
+      "mercy",
+      "cry",
+      "tears",
+      "sad",
+      "grievance"
     ],
     skins: [
       {
         unified: "1f97a",
         native: "🥺",
         x: 44,
-        y: 12
+        y: 14
       }
     ],
     version: 11
+  },
+  face_holding_back_tears: {
+    id: "face_holding_back_tears",
+    name: "Face Holding Back Tears",
+    keywords: [
+      "touched",
+      "gratitude",
+      "cry"
+    ],
+    skins: [
+      {
+        unified: "1f979",
+        native: "🥹",
+        x: 44,
+        y: 13
+      }
+    ],
+    version: 14
   },
   frowning: {
     id: "frowning",
@@ -4144,7 +4385,7 @@ const emojis = {
         unified: "1f626",
         native: "😦",
         x: 32,
-        y: 58
+        y: 59
       }
     ],
     version: 1
@@ -4164,7 +4405,7 @@ const emojis = {
         unified: "1f627",
         native: "😧",
         x: 32,
-        y: 59
+        y: 60
       }
     ],
     version: 1
@@ -4175,16 +4416,14 @@ const emojis = {
     keywords: [
       "scared",
       "terrified",
-      "nervous",
-      "oops",
-      "huh"
+      "nervous"
     ],
     skins: [
       {
         unified: "1f628",
         native: "😨",
-        x: 32,
-        y: 60
+        x: 33,
+        y: 0
       }
     ],
     version: 1
@@ -4201,7 +4440,7 @@ const emojis = {
         unified: "1f630",
         native: "😰",
         x: 33,
-        y: 8
+        y: 9
       }
     ],
     version: 1
@@ -4220,7 +4459,7 @@ const emojis = {
         unified: "1f625",
         native: "😥",
         x: 32,
-        y: 57
+        y: 58
       }
     ],
     version: 1
@@ -4244,7 +4483,7 @@ const emojis = {
         unified: "1f622",
         native: "😢",
         x: 32,
-        y: 54
+        y: 55
       }
     ],
     version: 1
@@ -4268,7 +4507,7 @@ const emojis = {
         unified: "1f62d",
         native: "😭",
         x: 33,
-        y: 4
+        y: 5
       }
     ],
     version: 1
@@ -4287,7 +4526,7 @@ const emojis = {
         unified: "1f631",
         native: "😱",
         x: 33,
-        y: 9
+        y: 10
       }
     ],
     version: 1
@@ -4307,7 +4546,7 @@ const emojis = {
         unified: "1f616",
         native: "😖",
         x: 32,
-        y: 42
+        y: 43
       }
     ],
     version: 1
@@ -4327,7 +4566,7 @@ const emojis = {
         unified: "1f623",
         native: "😣",
         x: 32,
-        y: 55
+        y: 56
       }
     ],
     version: 1
@@ -4351,7 +4590,7 @@ const emojis = {
         unified: "1f61e",
         native: "😞",
         x: 32,
-        y: 50
+        y: 51
       }
     ],
     version: 1
@@ -4371,7 +4610,7 @@ const emojis = {
         unified: "1f613",
         native: "😓",
         x: 32,
-        y: 39
+        y: 40
       }
     ],
     version: 1
@@ -4391,7 +4630,7 @@ const emojis = {
         unified: "1f629",
         native: "😩",
         x: 33,
-        y: 0
+        y: 1
       }
     ],
     version: 1
@@ -4410,7 +4649,7 @@ const emojis = {
         unified: "1f62b",
         native: "😫",
         x: 33,
-        y: 2
+        y: 3
       }
     ],
     version: 1
@@ -4426,8 +4665,8 @@ const emojis = {
       {
         unified: "1f971",
         native: "🥱",
-        x: 43,
-        y: 59
+        x: 44,
+        y: 0
       }
     ],
     version: 12
@@ -4449,7 +4688,7 @@ const emojis = {
         unified: "1f624",
         native: "😤",
         x: 32,
-        y: 56
+        y: 57
       }
     ],
     version: 1
@@ -4469,7 +4708,7 @@ const emojis = {
         unified: "1f621",
         native: "😡",
         x: 32,
-        y: 53
+        y: 54
       }
     ],
     version: 1
@@ -4491,7 +4730,7 @@ const emojis = {
         unified: "1f620",
         native: "😠",
         x: 32,
-        y: 52
+        y: 53
       }
     ],
     version: 1
@@ -4513,7 +4752,7 @@ const emojis = {
         unified: "1f92c",
         native: "🤬",
         x: 40,
-        y: 41
+        y: 43
       }
     ],
     version: 5
@@ -4530,7 +4769,7 @@ const emojis = {
         unified: "1f608",
         native: "😈",
         x: 32,
-        y: 28
+        y: 29
       }
     ],
     version: 1
@@ -4550,7 +4789,7 @@ const emojis = {
         unified: "1f47f",
         native: "👿",
         x: 25,
-        y: 8
+        y: 9
       }
     ],
     version: 1
@@ -4569,7 +4808,7 @@ const emojis = {
         unified: "1f480",
         native: "💀",
         x: 25,
-        y: 9
+        y: 10
       }
     ],
     version: 1
@@ -4590,8 +4829,8 @@ const emojis = {
       {
         unified: "2620-fe0f",
         native: "☠️",
-        x: 56,
-        y: 56
+        x: 57,
+        y: 26
       }
     ],
     version: 1
@@ -4612,7 +4851,7 @@ const emojis = {
         unified: "1f4a9",
         native: "💩",
         x: 27,
-        y: 56
+        y: 57
       }
     ],
     version: 1
@@ -4626,7 +4865,7 @@ const emojis = {
         unified: "1f921",
         native: "🤡",
         x: 40,
-        y: 13
+        y: 15
       }
     ],
     version: 3
@@ -4650,7 +4889,7 @@ const emojis = {
         unified: "1f479",
         native: "👹",
         x: 24,
-        y: 58
+        y: 59
       }
     ],
     version: 1
@@ -4672,7 +4911,7 @@ const emojis = {
         unified: "1f47a",
         native: "👺",
         x: 24,
-        y: 59
+        y: 60
       }
     ],
     version: 1
@@ -4689,8 +4928,8 @@ const emojis = {
       {
         unified: "1f47b",
         native: "👻",
-        x: 24,
-        y: 60
+        x: 25,
+        y: 0
       }
     ],
     version: 1
@@ -4710,7 +4949,7 @@ const emojis = {
         unified: "1f47d",
         native: "👽",
         x: 25,
-        y: 6
+        y: 7
       }
     ],
     version: 1
@@ -4730,7 +4969,7 @@ const emojis = {
         unified: "1f47e",
         native: "👾",
         x: 25,
-        y: 7
+        y: 8
       }
     ],
     version: 1
@@ -4749,7 +4988,7 @@ const emojis = {
         unified: "1f916",
         native: "🤖",
         x: 39,
-        y: 3
+        y: 5
       }
     ],
     version: 1
@@ -4769,7 +5008,7 @@ const emojis = {
         unified: "1f63a",
         native: "😺",
         x: 33,
-        y: 20
+        y: 21
       }
     ],
     version: 1
@@ -4787,7 +5026,7 @@ const emojis = {
         unified: "1f638",
         native: "😸",
         x: 33,
-        y: 18
+        y: 19
       }
     ],
     version: 1
@@ -4806,7 +5045,7 @@ const emojis = {
         unified: "1f639",
         native: "😹",
         x: 33,
-        y: 19
+        y: 20
       }
     ],
     version: 1
@@ -4829,7 +5068,7 @@ const emojis = {
         unified: "1f63b",
         native: "😻",
         x: 33,
-        y: 21
+        y: 22
       }
     ],
     version: 1
@@ -4847,7 +5086,7 @@ const emojis = {
         unified: "1f63c",
         native: "😼",
         x: 33,
-        y: 22
+        y: 23
       }
     ],
     version: 1
@@ -4865,7 +5104,7 @@ const emojis = {
         unified: "1f63d",
         native: "😽",
         x: 33,
-        y: 23
+        y: 24
       }
     ],
     version: 1
@@ -4885,7 +5124,7 @@ const emojis = {
         unified: "1f640",
         native: "🙀",
         x: 33,
-        y: 26
+        y: 27
       }
     ],
     version: 1
@@ -4908,7 +5147,7 @@ const emojis = {
         unified: "1f63f",
         native: "😿",
         x: 33,
-        y: 25
+        y: 26
       }
     ],
     version: 1
@@ -4925,7 +5164,7 @@ const emojis = {
         unified: "1f63e",
         native: "😾",
         x: 33,
-        y: 24
+        y: 25
       }
     ],
     version: 1
@@ -4946,7 +5185,7 @@ const emojis = {
         unified: "1f648",
         native: "🙈",
         x: 34,
-        y: 24
+        y: 25
       }
     ],
     version: 1
@@ -4966,7 +5205,7 @@ const emojis = {
         unified: "1f649",
         native: "🙉",
         x: 34,
-        y: 25
+        y: 26
       }
     ],
     version: 1
@@ -4987,28 +5226,7 @@ const emojis = {
         unified: "1f64a",
         native: "🙊",
         x: 34,
-        y: 26
-      }
-    ],
-    version: 1
-  },
-  kiss: {
-    id: "kiss",
-    name: "Kiss Mark",
-    keywords: [
-      "face",
-      "lips",
-      "love",
-      "like",
-      "affection",
-      "valentines"
-    ],
-    skins: [
-      {
-        unified: "1f48b",
-        native: "💋",
-        x: 26,
-        y: 37
+        y: 27
       }
     ],
     version: 1
@@ -5028,7 +5246,7 @@ const emojis = {
         unified: "1f48c",
         native: "💌",
         x: 26,
-        y: 38
+        y: 39
       }
     ],
     version: 1
@@ -5048,7 +5266,7 @@ const emojis = {
         unified: "1f498",
         native: "💘",
         x: 27,
-        y: 39
+        y: 40
       }
     ],
     version: 1
@@ -5066,7 +5284,7 @@ const emojis = {
         unified: "1f49d",
         native: "💝",
         x: 27,
-        y: 44
+        y: 45
       }
     ],
     version: 1
@@ -5085,7 +5303,7 @@ const emojis = {
         unified: "1f496",
         native: "💖",
         x: 27,
-        y: 37
+        y: 38
       }
     ],
     version: 1
@@ -5106,7 +5324,7 @@ const emojis = {
         unified: "1f497",
         native: "💗",
         x: 27,
-        y: 38
+        y: 39
       }
     ],
     version: 1
@@ -5127,7 +5345,7 @@ const emojis = {
         unified: "1f493",
         native: "💓",
         x: 27,
-        y: 34
+        y: 35
       }
     ],
     version: 1
@@ -5146,7 +5364,7 @@ const emojis = {
         unified: "1f49e",
         native: "💞",
         x: 27,
-        y: 45
+        y: 46
       }
     ],
     version: 1
@@ -5166,7 +5384,7 @@ const emojis = {
         unified: "1f495",
         native: "💕",
         x: 27,
-        y: 36
+        y: 37
       }
     ],
     version: 1
@@ -5185,7 +5403,7 @@ const emojis = {
         unified: "1f49f",
         native: "💟",
         x: 27,
-        y: 46
+        y: 47
       }
     ],
     version: 1
@@ -5205,7 +5423,7 @@ const emojis = {
         unified: "2763-fe0f",
         native: "❣️",
         x: 59,
-        y: 7
+        y: 38
       }
     ],
     version: 1
@@ -5227,10 +5445,45 @@ const emojis = {
         unified: "1f494",
         native: "💔",
         x: 27,
-        y: 35
+        y: 36
       }
     ],
     version: 1
+  },
+  heart_on_fire: {
+    id: "heart_on_fire",
+    name: "Heart on Fire",
+    keywords: [
+      "passionate",
+      "enthusiastic"
+    ],
+    skins: [
+      {
+        unified: "2764-fe0f-200d-1f525",
+        native: "❤️‍🔥",
+        x: 59,
+        y: 39
+      }
+    ],
+    version: 13.1
+  },
+  mending_heart: {
+    id: "mending_heart",
+    name: "Mending Heart",
+    keywords: [
+      "broken",
+      "bandage",
+      "wounded"
+    ],
+    skins: [
+      {
+        unified: "2764-fe0f-200d-1fa79",
+        native: "❤️‍🩹",
+        x: 59,
+        y: 40
+      }
+    ],
+    version: 13.1
   },
   heart: {
     id: "heart",
@@ -5248,7 +5501,7 @@ const emojis = {
         unified: "2764-fe0f",
         native: "❤️",
         x: 59,
-        y: 10
+        y: 41
       }
     ],
     version: 1
@@ -5267,7 +5520,7 @@ const emojis = {
         unified: "1f9e1",
         native: "🧡",
         x: 53,
-        y: 15
+        y: 17
       }
     ],
     version: 5
@@ -5289,7 +5542,7 @@ const emojis = {
         unified: "1f49b",
         native: "💛",
         x: 27,
-        y: 42
+        y: 43
       }
     ],
     version: 1
@@ -5311,7 +5564,7 @@ const emojis = {
         unified: "1f49a",
         native: "💚",
         x: 27,
-        y: 41
+        y: 42
       }
     ],
     version: 1
@@ -5333,7 +5586,7 @@ const emojis = {
         unified: "1f499",
         native: "💙",
         x: 27,
-        y: 40
+        y: 41
       }
     ],
     version: 1
@@ -5355,7 +5608,7 @@ const emojis = {
         unified: "1f49c",
         native: "💜",
         x: 27,
-        y: 43
+        y: 44
       }
     ],
     version: 1
@@ -5371,7 +5624,7 @@ const emojis = {
         unified: "1f90e",
         native: "🤎",
         x: 38,
-        y: 51
+        y: 53
       }
     ],
     version: 12
@@ -5387,7 +5640,7 @@ const emojis = {
         unified: "1f5a4",
         native: "🖤",
         x: 31,
-        y: 55
+        y: 56
       }
     ],
     version: 3
@@ -5403,10 +5656,31 @@ const emojis = {
         unified: "1f90d",
         native: "🤍",
         x: 38,
-        y: 50
+        y: 52
       }
     ],
     version: 12
+  },
+  kiss: {
+    id: "kiss",
+    name: "Kiss Mark",
+    keywords: [
+      "face",
+      "lips",
+      "love",
+      "like",
+      "affection",
+      "valentines"
+    ],
+    skins: [
+      {
+        unified: "1f48b",
+        native: "💋",
+        x: 26,
+        y: 38
+      }
+    ],
+    version: 1
   },
   anger: {
     id: "anger",
@@ -5420,7 +5694,7 @@ const emojis = {
         unified: "1f4a2",
         native: "💢",
         x: 27,
-        y: 49
+        y: 50
       }
     ],
     version: 1
@@ -5440,7 +5714,7 @@ const emojis = {
         unified: "1f4a5",
         native: "💥",
         x: 27,
-        y: 52
+        y: 53
       }
     ],
     version: 1
@@ -5459,7 +5733,7 @@ const emojis = {
         unified: "1f4ab",
         native: "💫",
         x: 28,
-        y: 2
+        y: 3
       }
     ],
     version: 1
@@ -5478,7 +5752,7 @@ const emojis = {
         unified: "1f4a6",
         native: "💦",
         x: 27,
-        y: 53
+        y: 54
       }
     ],
     version: 1
@@ -5502,7 +5776,7 @@ const emojis = {
         unified: "1f4a8",
         native: "💨",
         x: 27,
-        y: 55
+        y: 56
       }
     ],
     version: 1
@@ -5518,26 +5792,7 @@ const emojis = {
         unified: "1f573-fe0f",
         native: "🕳️",
         x: 30,
-        y: 58
-      }
-    ],
-    version: 1
-  },
-  bomb: {
-    id: "bomb",
-    name: "Bomb",
-    keywords: [
-      "boom",
-      "explode",
-      "explosion",
-      "terrorism"
-    ],
-    skins: [
-      {
-        unified: "1f4a3",
-        native: "💣",
-        x: 27,
-        y: 50
+        y: 59
       }
     ],
     version: 1
@@ -5557,7 +5812,7 @@ const emojis = {
         unified: "1f4ac",
         native: "💬",
         x: 28,
-        y: 3
+        y: 4
       }
     ],
     version: 1
@@ -5576,7 +5831,7 @@ const emojis = {
         unified: "1f5e8-fe0f",
         native: "🗨️",
         x: 32,
-        y: 11
+        y: 12
       }
     ],
     version: 2
@@ -5595,7 +5850,7 @@ const emojis = {
         unified: "1f5ef-fe0f",
         native: "🗯️",
         x: 32,
-        y: 12
+        y: 13
       }
     ],
     version: 1
@@ -5615,7 +5870,7 @@ const emojis = {
         unified: "1f4ad",
         native: "💭",
         x: 28,
-        y: 4
+        y: 5
       }
     ],
     version: 1
@@ -5633,7 +5888,7 @@ const emojis = {
         unified: "1f4a4",
         native: "💤",
         x: 27,
-        y: 51
+        y: 52
       }
     ],
     version: 1
@@ -5657,37 +5912,37 @@ const emojis = {
         unified: "1f44b",
         native: "👋",
         x: 12,
-        y: 38
+        y: 39
       },
       {
         unified: "1f44b-1f3fb",
         native: "👋🏻",
         x: 12,
-        y: 39
+        y: 40
       },
       {
         unified: "1f44b-1f3fc",
         native: "👋🏼",
         x: 12,
-        y: 40
+        y: 41
       },
       {
         unified: "1f44b-1f3fd",
         native: "👋🏽",
         x: 12,
-        y: 41
+        y: 42
       },
       {
         unified: "1f44b-1f3fe",
         native: "👋🏾",
         x: 12,
-        y: 42
+        y: 43
       },
       {
         unified: "1f44b-1f3ff",
         native: "👋🏿",
         x: 12,
-        y: 43
+        y: 44
       }
     ],
     version: 1
@@ -5704,37 +5959,37 @@ const emojis = {
         unified: "1f91a",
         native: "🤚",
         x: 39,
-        y: 17
+        y: 19
       },
       {
         unified: "1f91a-1f3fb",
         native: "🤚🏻",
         x: 39,
-        y: 18
+        y: 20
       },
       {
         unified: "1f91a-1f3fc",
         native: "🤚🏼",
         x: 39,
-        y: 19
+        y: 21
       },
       {
         unified: "1f91a-1f3fd",
         native: "🤚🏽",
         x: 39,
-        y: 20
+        y: 22
       },
       {
         unified: "1f91a-1f3fe",
         native: "🤚🏾",
         x: 39,
-        y: 21
+        y: 23
       },
       {
         unified: "1f91a-1f3ff",
         native: "🤚🏿",
         x: 39,
-        y: 22
+        y: 24
       }
     ],
     version: 3
@@ -5751,37 +6006,37 @@ const emojis = {
         unified: "1f590-fe0f",
         native: "🖐️",
         x: 31,
-        y: 37
+        y: 38
       },
       {
         unified: "1f590-1f3fb",
         native: "🖐🏻",
         x: 31,
-        y: 38
+        y: 39
       },
       {
         unified: "1f590-1f3fc",
         native: "🖐🏼",
         x: 31,
-        y: 39
+        y: 40
       },
       {
         unified: "1f590-1f3fd",
         native: "🖐🏽",
         x: 31,
-        y: 40
+        y: 41
       },
       {
         unified: "1f590-1f3fe",
         native: "🖐🏾",
         x: 31,
-        y: 41
+        y: 42
       },
       {
         unified: "1f590-1f3ff",
         native: "🖐🏿",
         x: 31,
-        y: 42
+        y: 43
       }
     ],
     version: 1
@@ -5802,38 +6057,38 @@ const emojis = {
       {
         unified: "270b",
         native: "✋",
-        x: 58,
-        y: 33
+        x: 59,
+        y: 3
       },
       {
         unified: "270b-1f3fb",
         native: "✋🏻",
-        x: 58,
-        y: 34
+        x: 59,
+        y: 4
       },
       {
         unified: "270b-1f3fc",
         native: "✋🏼",
-        x: 58,
-        y: 35
+        x: 59,
+        y: 5
       },
       {
         unified: "270b-1f3fd",
         native: "✋🏽",
-        x: 58,
-        y: 36
+        x: 59,
+        y: 6
       },
       {
         unified: "270b-1f3fe",
         native: "✋🏾",
-        x: 58,
-        y: 37
+        x: 59,
+        y: 7
       },
       {
         unified: "270b-1f3ff",
         native: "✋🏿",
-        x: 58,
-        y: 38
+        x: 59,
+        y: 8
       }
     ],
     version: 1
@@ -5853,40 +6108,228 @@ const emojis = {
         unified: "1f596",
         native: "🖖",
         x: 31,
-        y: 49
+        y: 50
       },
       {
         unified: "1f596-1f3fb",
         native: "🖖🏻",
         x: 31,
-        y: 50
+        y: 51
       },
       {
         unified: "1f596-1f3fc",
         native: "🖖🏼",
         x: 31,
-        y: 51
+        y: 52
       },
       {
         unified: "1f596-1f3fd",
         native: "🖖🏽",
         x: 31,
-        y: 52
+        y: 53
       },
       {
         unified: "1f596-1f3fe",
         native: "🖖🏾",
         x: 31,
-        y: 53
+        y: 54
       },
       {
         unified: "1f596-1f3ff",
         native: "🖖🏿",
         x: 31,
-        y: 54
+        y: 55
       }
     ],
     version: 1
+  },
+  rightwards_hand: {
+    id: "rightwards_hand",
+    name: "Rightwards Hand",
+    keywords: [
+      "palm",
+      "offer"
+    ],
+    skins: [
+      {
+        unified: "1faf1",
+        native: "🫱",
+        x: 55,
+        y: 45
+      },
+      {
+        unified: "1faf1-1f3fb",
+        native: "🫱🏻",
+        x: 55,
+        y: 46
+      },
+      {
+        unified: "1faf1-1f3fc",
+        native: "🫱🏼",
+        x: 55,
+        y: 47
+      },
+      {
+        unified: "1faf1-1f3fd",
+        native: "🫱🏽",
+        x: 55,
+        y: 48
+      },
+      {
+        unified: "1faf1-1f3fe",
+        native: "🫱🏾",
+        x: 55,
+        y: 49
+      },
+      {
+        unified: "1faf1-1f3ff",
+        native: "🫱🏿",
+        x: 55,
+        y: 50
+      }
+    ],
+    version: 14
+  },
+  leftwards_hand: {
+    id: "leftwards_hand",
+    name: "Leftwards Hand",
+    keywords: [
+      "palm",
+      "offer"
+    ],
+    skins: [
+      {
+        unified: "1faf2",
+        native: "🫲",
+        x: 55,
+        y: 51
+      },
+      {
+        unified: "1faf2-1f3fb",
+        native: "🫲🏻",
+        x: 55,
+        y: 52
+      },
+      {
+        unified: "1faf2-1f3fc",
+        native: "🫲🏼",
+        x: 55,
+        y: 53
+      },
+      {
+        unified: "1faf2-1f3fd",
+        native: "🫲🏽",
+        x: 55,
+        y: 54
+      },
+      {
+        unified: "1faf2-1f3fe",
+        native: "🫲🏾",
+        x: 55,
+        y: 55
+      },
+      {
+        unified: "1faf2-1f3ff",
+        native: "🫲🏿",
+        x: 55,
+        y: 56
+      }
+    ],
+    version: 14
+  },
+  palm_down_hand: {
+    id: "palm_down_hand",
+    name: "Palm Down Hand",
+    keywords: [
+      "drop"
+    ],
+    skins: [
+      {
+        unified: "1faf3",
+        native: "🫳",
+        x: 55,
+        y: 57
+      },
+      {
+        unified: "1faf3-1f3fb",
+        native: "🫳🏻",
+        x: 55,
+        y: 58
+      },
+      {
+        unified: "1faf3-1f3fc",
+        native: "🫳🏼",
+        x: 55,
+        y: 59
+      },
+      {
+        unified: "1faf3-1f3fd",
+        native: "🫳🏽",
+        x: 55,
+        y: 60
+      },
+      {
+        unified: "1faf3-1f3fe",
+        native: "🫳🏾",
+        x: 56,
+        y: 0
+      },
+      {
+        unified: "1faf3-1f3ff",
+        native: "🫳🏿",
+        x: 56,
+        y: 1
+      }
+    ],
+    version: 14
+  },
+  palm_up_hand: {
+    id: "palm_up_hand",
+    name: "Palm Up Hand",
+    keywords: [
+      "lift",
+      "offer",
+      "demand"
+    ],
+    skins: [
+      {
+        unified: "1faf4",
+        native: "🫴",
+        x: 56,
+        y: 2
+      },
+      {
+        unified: "1faf4-1f3fb",
+        native: "🫴🏻",
+        x: 56,
+        y: 3
+      },
+      {
+        unified: "1faf4-1f3fc",
+        native: "🫴🏼",
+        x: 56,
+        y: 4
+      },
+      {
+        unified: "1faf4-1f3fd",
+        native: "🫴🏽",
+        x: 56,
+        y: 5
+      },
+      {
+        unified: "1faf4-1f3fe",
+        native: "🫴🏾",
+        x: 56,
+        y: 6
+      },
+      {
+        unified: "1faf4-1f3ff",
+        native: "🫴🏿",
+        x: 56,
+        y: 7
+      }
+    ],
+    version: 14
   },
   ok_hand: {
     id: "ok_hand",
@@ -5902,37 +6345,37 @@ const emojis = {
         unified: "1f44c",
         native: "👌",
         x: 12,
-        y: 44
+        y: 45
       },
       {
         unified: "1f44c-1f3fb",
         native: "👌🏻",
         x: 12,
-        y: 45
+        y: 46
       },
       {
         unified: "1f44c-1f3fc",
         native: "👌🏼",
         x: 12,
-        y: 46
+        y: 47
       },
       {
         unified: "1f44c-1f3fd",
         native: "👌🏽",
         x: 12,
-        y: 47
+        y: 48
       },
       {
         unified: "1f44c-1f3fe",
         native: "👌🏾",
         x: 12,
-        y: 48
+        y: 49
       },
       {
         unified: "1f44c-1f3ff",
         native: "👌🏿",
         x: 12,
-        y: 49
+        y: 50
       }
     ],
     version: 1
@@ -5950,37 +6393,37 @@ const emojis = {
         unified: "1f90c",
         native: "🤌",
         x: 38,
-        y: 44
+        y: 46
       },
       {
         unified: "1f90c-1f3fb",
         native: "🤌🏻",
         x: 38,
-        y: 45
+        y: 47
       },
       {
         unified: "1f90c-1f3fc",
         native: "🤌🏼",
         x: 38,
-        y: 46
+        y: 48
       },
       {
         unified: "1f90c-1f3fd",
         native: "🤌🏽",
         x: 38,
-        y: 47
+        y: 49
       },
       {
         unified: "1f90c-1f3fe",
         native: "🤌🏾",
         x: 38,
-        y: 48
+        y: 50
       },
       {
         unified: "1f90c-1f3ff",
         native: "🤌🏿",
         x: 38,
-        y: 49
+        y: 51
       }
     ],
     version: 13
@@ -5998,37 +6441,37 @@ const emojis = {
         unified: "1f90f",
         native: "🤏",
         x: 38,
-        y: 52
+        y: 54
       },
       {
         unified: "1f90f-1f3fb",
         native: "🤏🏻",
         x: 38,
-        y: 53
+        y: 55
       },
       {
         unified: "1f90f-1f3fc",
         native: "🤏🏼",
         x: 38,
-        y: 54
+        y: 56
       },
       {
         unified: "1f90f-1f3fd",
         native: "🤏🏽",
         x: 38,
-        y: 55
+        y: 57
       },
       {
         unified: "1f90f-1f3fe",
         native: "🤏🏾",
         x: 38,
-        y: 56
+        y: 58
       },
       {
         unified: "1f90f-1f3ff",
         native: "🤏🏿",
         x: 38,
-        y: 57
+        y: 59
       }
     ],
     version: 12
@@ -6047,38 +6490,38 @@ const emojis = {
       {
         unified: "270c-fe0f",
         native: "✌️",
-        x: 58,
-        y: 39
+        x: 59,
+        y: 9
       },
       {
         unified: "270c-1f3fb",
         native: "✌🏻",
-        x: 58,
-        y: 40
+        x: 59,
+        y: 10
       },
       {
         unified: "270c-1f3fc",
         native: "✌🏼",
-        x: 58,
-        y: 41
+        x: 59,
+        y: 11
       },
       {
         unified: "270c-1f3fd",
         native: "✌🏽",
-        x: 58,
-        y: 42
+        x: 59,
+        y: 12
       },
       {
         unified: "270c-1f3fe",
         native: "✌🏾",
-        x: 58,
-        y: 43
+        x: 59,
+        y: 13
       },
       {
         unified: "270c-1f3ff",
         native: "✌🏿",
-        x: 58,
-        y: 44
+        x: 59,
+        y: 14
       }
     ],
     version: 1
@@ -6100,40 +6543,89 @@ const emojis = {
         unified: "1f91e",
         native: "🤞",
         x: 40,
-        y: 0
+        y: 2
       },
       {
         unified: "1f91e-1f3fb",
         native: "🤞🏻",
         x: 40,
-        y: 1
+        y: 3
       },
       {
         unified: "1f91e-1f3fc",
         native: "🤞🏼",
         x: 40,
-        y: 2
+        y: 4
       },
       {
         unified: "1f91e-1f3fd",
         native: "🤞🏽",
         x: 40,
-        y: 3
+        y: 5
       },
       {
         unified: "1f91e-1f3fe",
         native: "🤞🏾",
         x: 40,
-        y: 4
+        y: 6
       },
       {
         unified: "1f91e-1f3ff",
         native: "🤞🏿",
         x: 40,
-        y: 5
+        y: 7
       }
     ],
     version: 3
+  },
+  hand_with_index_finger_and_thumb_crossed: {
+    id: "hand_with_index_finger_and_thumb_crossed",
+    name: "Hand with Index Finger and Thumb Crossed",
+    keywords: [
+      "heart",
+      "love",
+      "money",
+      "expensive"
+    ],
+    skins: [
+      {
+        unified: "1faf0",
+        native: "🫰",
+        x: 55,
+        y: 39
+      },
+      {
+        unified: "1faf0-1f3fb",
+        native: "🫰🏻",
+        x: 55,
+        y: 40
+      },
+      {
+        unified: "1faf0-1f3fc",
+        native: "🫰🏼",
+        x: 55,
+        y: 41
+      },
+      {
+        unified: "1faf0-1f3fd",
+        native: "🫰🏽",
+        x: 55,
+        y: 42
+      },
+      {
+        unified: "1faf0-1f3fe",
+        native: "🫰🏾",
+        x: 55,
+        y: 43
+      },
+      {
+        unified: "1faf0-1f3ff",
+        native: "🫰🏿",
+        x: 55,
+        y: 44
+      }
+    ],
+    version: 14
   },
   i_love_you_hand_sign: {
     id: "i_love_you_hand_sign",
@@ -6151,37 +6643,37 @@ const emojis = {
         unified: "1f91f",
         native: "🤟",
         x: 40,
-        y: 6
+        y: 8
       },
       {
         unified: "1f91f-1f3fb",
         native: "🤟🏻",
         x: 40,
-        y: 7
+        y: 9
       },
       {
         unified: "1f91f-1f3fc",
         native: "🤟🏼",
         x: 40,
-        y: 8
+        y: 10
       },
       {
         unified: "1f91f-1f3fd",
         native: "🤟🏽",
         x: 40,
-        y: 9
+        y: 11
       },
       {
         unified: "1f91f-1f3fe",
         native: "🤟🏾",
         x: 40,
-        y: 10
+        y: 12
       },
       {
         unified: "1f91f-1f3ff",
         native: "🤟🏿",
         x: 40,
-        y: 11
+        y: 13
       }
     ],
     version: 5
@@ -6202,37 +6694,37 @@ const emojis = {
         unified: "1f918",
         native: "🤘",
         x: 39,
-        y: 5
+        y: 7
       },
       {
         unified: "1f918-1f3fb",
         native: "🤘🏻",
         x: 39,
-        y: 6
+        y: 8
       },
       {
         unified: "1f918-1f3fc",
         native: "🤘🏼",
         x: 39,
-        y: 7
+        y: 9
       },
       {
         unified: "1f918-1f3fd",
         native: "🤘🏽",
         x: 39,
-        y: 8
+        y: 10
       },
       {
         unified: "1f918-1f3fe",
         native: "🤘🏾",
         x: 39,
-        y: 9
+        y: 11
       },
       {
         unified: "1f918-1f3ff",
         native: "🤘🏿",
         x: 39,
-        y: 10
+        y: 12
       }
     ],
     version: 1
@@ -6250,37 +6742,37 @@ const emojis = {
         unified: "1f919",
         native: "🤙",
         x: 39,
-        y: 11
+        y: 13
       },
       {
         unified: "1f919-1f3fb",
         native: "🤙🏻",
         x: 39,
-        y: 12
+        y: 14
       },
       {
         unified: "1f919-1f3fc",
         native: "🤙🏼",
         x: 39,
-        y: 13
+        y: 15
       },
       {
         unified: "1f919-1f3fd",
         native: "🤙🏽",
         x: 39,
-        y: 14
+        y: 16
       },
       {
         unified: "1f919-1f3fe",
         native: "🤙🏾",
         x: 39,
-        y: 15
+        y: 17
       },
       {
         unified: "1f919-1f3ff",
         native: "🤙🏿",
         x: 39,
-        y: 16
+        y: 18
       }
     ],
     version: 3
@@ -6299,37 +6791,37 @@ const emojis = {
         unified: "1f448",
         native: "👈",
         x: 12,
-        y: 20
+        y: 21
       },
       {
         unified: "1f448-1f3fb",
         native: "👈🏻",
         x: 12,
-        y: 21
+        y: 22
       },
       {
         unified: "1f448-1f3fc",
         native: "👈🏼",
         x: 12,
-        y: 22
+        y: 23
       },
       {
         unified: "1f448-1f3fd",
         native: "👈🏽",
         x: 12,
-        y: 23
+        y: 24
       },
       {
         unified: "1f448-1f3fe",
         native: "👈🏾",
         x: 12,
-        y: 24
+        y: 25
       },
       {
         unified: "1f448-1f3ff",
         native: "👈🏿",
         x: 12,
-        y: 25
+        y: 26
       }
     ],
     version: 1
@@ -6348,37 +6840,37 @@ const emojis = {
         unified: "1f449",
         native: "👉",
         x: 12,
-        y: 26
+        y: 27
       },
       {
         unified: "1f449-1f3fb",
         native: "👉🏻",
         x: 12,
-        y: 27
+        y: 28
       },
       {
         unified: "1f449-1f3fc",
         native: "👉🏼",
         x: 12,
-        y: 28
+        y: 29
       },
       {
         unified: "1f449-1f3fd",
         native: "👉🏽",
         x: 12,
-        y: 29
+        y: 30
       },
       {
         unified: "1f449-1f3fe",
         native: "👉🏾",
         x: 12,
-        y: 30
+        y: 31
       },
       {
         unified: "1f449-1f3ff",
         native: "👉🏿",
         x: 12,
-        y: 31
+        y: 32
       }
     ],
     version: 1
@@ -6398,37 +6890,37 @@ const emojis = {
         unified: "1f446",
         native: "👆",
         x: 12,
-        y: 8
+        y: 9
       },
       {
         unified: "1f446-1f3fb",
         native: "👆🏻",
         x: 12,
-        y: 9
+        y: 10
       },
       {
         unified: "1f446-1f3fc",
         native: "👆🏼",
         x: 12,
-        y: 10
+        y: 11
       },
       {
         unified: "1f446-1f3fd",
         native: "👆🏽",
         x: 12,
-        y: 11
+        y: 12
       },
       {
         unified: "1f446-1f3fe",
         native: "👆🏾",
         x: 12,
-        y: 12
+        y: 13
       },
       {
         unified: "1f446-1f3ff",
         native: "👆🏿",
         x: 12,
-        y: 13
+        y: 14
       }
     ],
     version: 1
@@ -6450,37 +6942,37 @@ const emojis = {
         unified: "1f595",
         native: "🖕",
         x: 31,
-        y: 43
+        y: 44
       },
       {
         unified: "1f595-1f3fb",
         native: "🖕🏻",
         x: 31,
-        y: 44
+        y: 45
       },
       {
         unified: "1f595-1f3fc",
         native: "🖕🏼",
         x: 31,
-        y: 45
+        y: 46
       },
       {
         unified: "1f595-1f3fd",
         native: "🖕🏽",
         x: 31,
-        y: 46
+        y: 47
       },
       {
         unified: "1f595-1f3fe",
         native: "🖕🏾",
         x: 31,
-        y: 47
+        y: 48
       },
       {
         unified: "1f595-1f3ff",
         native: "🖕🏿",
         x: 31,
-        y: 48
+        y: 49
       }
     ],
     version: 1
@@ -6499,37 +6991,37 @@ const emojis = {
         unified: "1f447",
         native: "👇",
         x: 12,
-        y: 14
+        y: 15
       },
       {
         unified: "1f447-1f3fb",
         native: "👇🏻",
         x: 12,
-        y: 15
+        y: 16
       },
       {
         unified: "1f447-1f3fc",
         native: "👇🏼",
         x: 12,
-        y: 16
+        y: 17
       },
       {
         unified: "1f447-1f3fd",
         native: "👇🏽",
         x: 12,
-        y: 17
+        y: 18
       },
       {
         unified: "1f447-1f3fe",
         native: "👇🏾",
         x: 12,
-        y: 18
+        y: 19
       },
       {
         unified: "1f447-1f3ff",
         native: "👇🏿",
         x: 12,
-        y: 19
+        y: 20
       }
     ],
     version: 1
@@ -6547,41 +7039,88 @@ const emojis = {
       {
         unified: "261d-fe0f",
         native: "☝️",
-        x: 56,
-        y: 50
+        x: 57,
+        y: 20
       },
       {
         unified: "261d-1f3fb",
         native: "☝🏻",
-        x: 56,
-        y: 51
+        x: 57,
+        y: 21
       },
       {
         unified: "261d-1f3fc",
         native: "☝🏼",
-        x: 56,
-        y: 52
+        x: 57,
+        y: 22
       },
       {
         unified: "261d-1f3fd",
         native: "☝🏽",
-        x: 56,
-        y: 53
+        x: 57,
+        y: 23
       },
       {
         unified: "261d-1f3fe",
         native: "☝🏾",
-        x: 56,
-        y: 54
+        x: 57,
+        y: 24
       },
       {
         unified: "261d-1f3ff",
         native: "☝🏿",
-        x: 56,
-        y: 55
+        x: 57,
+        y: 25
       }
     ],
     version: 1
+  },
+  index_pointing_at_the_viewer: {
+    id: "index_pointing_at_the_viewer",
+    name: "Index Pointing at the Viewer",
+    keywords: [
+      "you",
+      "recruit"
+    ],
+    skins: [
+      {
+        unified: "1faf5",
+        native: "🫵",
+        x: 56,
+        y: 8
+      },
+      {
+        unified: "1faf5-1f3fb",
+        native: "🫵🏻",
+        x: 56,
+        y: 9
+      },
+      {
+        unified: "1faf5-1f3fc",
+        native: "🫵🏼",
+        x: 56,
+        y: 10
+      },
+      {
+        unified: "1faf5-1f3fd",
+        native: "🫵🏽",
+        x: 56,
+        y: 11
+      },
+      {
+        unified: "1faf5-1f3fe",
+        native: "🫵🏾",
+        x: 56,
+        y: 12
+      },
+      {
+        unified: "1faf5-1f3ff",
+        native: "🫵🏿",
+        x: 56,
+        y: 13
+      }
+    ],
+    version: 14
   },
   "+1": {
     id: "+1",
@@ -6603,37 +7142,37 @@ const emojis = {
         unified: "1f44d",
         native: "👍",
         x: 12,
-        y: 50
+        y: 51
       },
       {
         unified: "1f44d-1f3fb",
         native: "👍🏻",
         x: 12,
-        y: 51
+        y: 52
       },
       {
         unified: "1f44d-1f3fc",
         native: "👍🏼",
         x: 12,
-        y: 52
+        y: 53
       },
       {
         unified: "1f44d-1f3fd",
         native: "👍🏽",
         x: 12,
-        y: 53
+        y: 54
       },
       {
         unified: "1f44d-1f3fe",
         native: "👍🏾",
         x: 12,
-        y: 54
+        y: 55
       },
       {
         unified: "1f44d-1f3ff",
         native: "👍🏿",
         x: 12,
-        y: 55
+        y: 56
       }
     ],
     version: 1
@@ -6653,37 +7192,37 @@ const emojis = {
         unified: "1f44e",
         native: "👎",
         x: 12,
-        y: 56
+        y: 57
       },
       {
         unified: "1f44e-1f3fb",
         native: "👎🏻",
         x: 12,
-        y: 57
+        y: 58
       },
       {
         unified: "1f44e-1f3fc",
         native: "👎🏼",
         x: 12,
-        y: 58
+        y: 59
       },
       {
         unified: "1f44e-1f3fd",
         native: "👎🏽",
         x: 12,
-        y: 59
+        y: 60
       },
       {
         unified: "1f44e-1f3fe",
         native: "👎🏾",
-        x: 12,
-        y: 60
+        x: 13,
+        y: 0
       },
       {
         unified: "1f44e-1f3ff",
         native: "👎🏿",
         x: 13,
-        y: 0
+        y: 1
       }
     ],
     version: 1
@@ -6701,37 +7240,37 @@ const emojis = {
         unified: "270a",
         native: "✊",
         x: 58,
-        y: 27
+        y: 58
       },
       {
         unified: "270a-1f3fb",
         native: "✊🏻",
         x: 58,
-        y: 28
+        y: 59
       },
       {
         unified: "270a-1f3fc",
         native: "✊🏼",
         x: 58,
-        y: 29
+        y: 60
       },
       {
         unified: "270a-1f3fd",
         native: "✊🏽",
-        x: 58,
-        y: 30
+        x: 59,
+        y: 0
       },
       {
         unified: "270a-1f3fe",
         native: "✊🏾",
-        x: 58,
-        y: 31
+        x: 59,
+        y: 1
       },
       {
         unified: "270a-1f3ff",
         native: "✊🏿",
-        x: 58,
-        y: 32
+        x: 59,
+        y: 2
       }
     ],
     version: 1
@@ -6753,37 +7292,37 @@ const emojis = {
         unified: "1f44a",
         native: "👊",
         x: 12,
-        y: 32
+        y: 33
       },
       {
         unified: "1f44a-1f3fb",
         native: "👊🏻",
         x: 12,
-        y: 33
+        y: 34
       },
       {
         unified: "1f44a-1f3fc",
         native: "👊🏼",
         x: 12,
-        y: 34
+        y: 35
       },
       {
         unified: "1f44a-1f3fd",
         native: "👊🏽",
         x: 12,
-        y: 35
+        y: 36
       },
       {
         unified: "1f44a-1f3fe",
         native: "👊🏾",
         x: 12,
-        y: 36
+        y: 37
       },
       {
         unified: "1f44a-1f3ff",
         native: "👊🏿",
         x: 12,
-        y: 37
+        y: 38
       }
     ],
     version: 1
@@ -6802,37 +7341,37 @@ const emojis = {
         unified: "1f91b",
         native: "🤛",
         x: 39,
-        y: 23
+        y: 25
       },
       {
         unified: "1f91b-1f3fb",
         native: "🤛🏻",
         x: 39,
-        y: 24
+        y: 26
       },
       {
         unified: "1f91b-1f3fc",
         native: "🤛🏼",
         x: 39,
-        y: 25
+        y: 27
       },
       {
         unified: "1f91b-1f3fd",
         native: "🤛🏽",
         x: 39,
-        y: 26
+        y: 28
       },
       {
         unified: "1f91b-1f3fe",
         native: "🤛🏾",
         x: 39,
-        y: 27
+        y: 29
       },
       {
         unified: "1f91b-1f3ff",
         native: "🤛🏿",
         x: 39,
-        y: 28
+        y: 30
       }
     ],
     version: 3
@@ -6851,37 +7390,37 @@ const emojis = {
         unified: "1f91c",
         native: "🤜",
         x: 39,
-        y: 29
+        y: 31
       },
       {
         unified: "1f91c-1f3fb",
         native: "🤜🏻",
         x: 39,
-        y: 30
+        y: 32
       },
       {
         unified: "1f91c-1f3fc",
         native: "🤜🏼",
         x: 39,
-        y: 31
+        y: 33
       },
       {
         unified: "1f91c-1f3fd",
         native: "🤜🏽",
         x: 39,
-        y: 32
+        y: 34
       },
       {
         unified: "1f91c-1f3fe",
         native: "🤜🏾",
         x: 39,
-        y: 33
+        y: 35
       },
       {
         unified: "1f91c-1f3ff",
         native: "🤜🏿",
         x: 39,
-        y: 34
+        y: 36
       }
     ],
     version: 3
@@ -6901,37 +7440,37 @@ const emojis = {
         unified: "1f44f",
         native: "👏",
         x: 13,
-        y: 1
+        y: 2
       },
       {
         unified: "1f44f-1f3fb",
         native: "👏🏻",
         x: 13,
-        y: 2
+        y: 3
       },
       {
         unified: "1f44f-1f3fc",
         native: "👏🏼",
         x: 13,
-        y: 3
+        y: 4
       },
       {
         unified: "1f44f-1f3fd",
         native: "👏🏽",
         x: 13,
-        y: 4
+        y: 5
       },
       {
         unified: "1f44f-1f3fe",
         native: "👏🏾",
         x: 13,
-        y: 5
+        y: 6
       },
       {
         unified: "1f44f-1f3ff",
         native: "👏🏿",
         x: 13,
-        y: 6
+        y: 7
       }
     ],
     version: 1
@@ -6951,40 +7490,88 @@ const emojis = {
         unified: "1f64c",
         native: "🙌",
         x: 34,
-        y: 45
+        y: 46
       },
       {
         unified: "1f64c-1f3fb",
         native: "🙌🏻",
         x: 34,
-        y: 46
+        y: 47
       },
       {
         unified: "1f64c-1f3fc",
         native: "🙌🏼",
         x: 34,
-        y: 47
+        y: 48
       },
       {
         unified: "1f64c-1f3fd",
         native: "🙌🏽",
         x: 34,
-        y: 48
+        y: 49
       },
       {
         unified: "1f64c-1f3fe",
         native: "🙌🏾",
         x: 34,
-        y: 49
+        y: 50
       },
       {
         unified: "1f64c-1f3ff",
         native: "🙌🏿",
         x: 34,
-        y: 50
+        y: 51
       }
     ],
     version: 1
+  },
+  heart_hands: {
+    id: "heart_hands",
+    name: "Heart Hands",
+    keywords: [
+      "love",
+      "appreciation",
+      "support"
+    ],
+    skins: [
+      {
+        unified: "1faf6",
+        native: "🫶",
+        x: 56,
+        y: 14
+      },
+      {
+        unified: "1faf6-1f3fb",
+        native: "🫶🏻",
+        x: 56,
+        y: 15
+      },
+      {
+        unified: "1faf6-1f3fc",
+        native: "🫶🏼",
+        x: 56,
+        y: 16
+      },
+      {
+        unified: "1faf6-1f3fd",
+        native: "🫶🏽",
+        x: 56,
+        y: 17
+      },
+      {
+        unified: "1faf6-1f3fe",
+        native: "🫶🏾",
+        x: 56,
+        y: 18
+      },
+      {
+        unified: "1faf6-1f3ff",
+        native: "🫶🏿",
+        x: 56,
+        y: 19
+      }
+    ],
+    version: 14
   },
   open_hands: {
     id: "open_hands",
@@ -6998,37 +7585,37 @@ const emojis = {
         unified: "1f450",
         native: "👐",
         x: 13,
-        y: 7
+        y: 8
       },
       {
         unified: "1f450-1f3fb",
         native: "👐🏻",
         x: 13,
-        y: 8
+        y: 9
       },
       {
         unified: "1f450-1f3fc",
         native: "👐🏼",
         x: 13,
-        y: 9
+        y: 10
       },
       {
         unified: "1f450-1f3fd",
         native: "👐🏽",
         x: 13,
-        y: 10
+        y: 11
       },
       {
         unified: "1f450-1f3fe",
         native: "👐🏾",
         x: 13,
-        y: 11
+        y: 12
       },
       {
         unified: "1f450-1f3ff",
         native: "👐🏿",
         x: 13,
-        y: 12
+        y: 13
       }
     ],
     version: 1
@@ -7047,37 +7634,37 @@ const emojis = {
         unified: "1f932",
         native: "🤲",
         x: 40,
-        y: 57
+        y: 59
       },
       {
         unified: "1f932-1f3fb",
         native: "🤲🏻",
         x: 40,
-        y: 58
+        y: 60
       },
       {
         unified: "1f932-1f3fc",
         native: "🤲🏼",
-        x: 40,
-        y: 59
+        x: 41,
+        y: 0
       },
       {
         unified: "1f932-1f3fd",
         native: "🤲🏽",
-        x: 40,
-        y: 60
+        x: 41,
+        y: 1
       },
       {
         unified: "1f932-1f3fe",
         native: "🤲🏾",
         x: 41,
-        y: 0
+        y: 2
       },
       {
         unified: "1f932-1f3ff",
         native: "🤲🏿",
         x: 41,
-        y: 1
+        y: 3
       }
     ],
     version: 5
@@ -7094,37 +7681,37 @@ const emojis = {
         unified: "1f91d",
         native: "🤝",
         x: 39,
-        y: 35
+        y: 37
       },
       {
         unified: "1f91d-1f3fb",
         native: "🤝🏻",
         x: 39,
-        y: 36
+        y: 38
       },
       {
         unified: "1f91d-1f3fc",
         native: "🤝🏼",
         x: 39,
-        y: 37
+        y: 39
       },
       {
         unified: "1f91d-1f3fd",
         native: "🤝🏽",
         x: 39,
-        y: 38
+        y: 40
       },
       {
         unified: "1f91d-1f3fe",
         native: "🤝🏾",
         x: 39,
-        y: 39
+        y: 41
       },
       {
         unified: "1f91d-1f3ff",
         native: "🤝🏿",
         x: 39,
-        y: 40
+        y: 42
       }
     ],
     version: 3
@@ -7140,44 +7727,48 @@ const emojis = {
       "namaste",
       "highfive",
       "high",
-      "five"
+      "five",
+      "thank",
+      "you",
+      "thanks",
+      "appreciate"
     ],
     skins: [
       {
         unified: "1f64f",
         native: "🙏",
         x: 35,
-        y: 26
+        y: 27
       },
       {
         unified: "1f64f-1f3fb",
         native: "🙏🏻",
         x: 35,
-        y: 27
+        y: 28
       },
       {
         unified: "1f64f-1f3fc",
         native: "🙏🏼",
         x: 35,
-        y: 28
+        y: 29
       },
       {
         unified: "1f64f-1f3fd",
         native: "🙏🏽",
         x: 35,
-        y: 29
+        y: 30
       },
       {
         unified: "1f64f-1f3fe",
         native: "🙏🏾",
         x: 35,
-        y: 30
+        y: 31
       },
       {
         unified: "1f64f-1f3ff",
         native: "🙏🏿",
         x: 35,
-        y: 31
+        y: 32
       }
     ],
     version: 1
@@ -7198,38 +7789,38 @@ const emojis = {
       {
         unified: "270d-fe0f",
         native: "✍️",
-        x: 58,
-        y: 45
+        x: 59,
+        y: 15
       },
       {
         unified: "270d-1f3fb",
         native: "✍🏻",
-        x: 58,
-        y: 46
+        x: 59,
+        y: 16
       },
       {
         unified: "270d-1f3fc",
         native: "✍🏼",
-        x: 58,
-        y: 47
+        x: 59,
+        y: 17
       },
       {
         unified: "270d-1f3fd",
         native: "✍🏽",
-        x: 58,
-        y: 48
+        x: 59,
+        y: 18
       },
       {
         unified: "270d-1f3fe",
         native: "✍🏾",
-        x: 58,
-        y: 49
+        x: 59,
+        y: 19
       },
       {
         unified: "270d-1f3ff",
         native: "✍🏿",
-        x: 58,
-        y: 50
+        x: 59,
+        y: 20
       }
     ],
     version: 1
@@ -7249,37 +7840,37 @@ const emojis = {
         unified: "1f485",
         native: "💅",
         x: 25,
-        y: 53
+        y: 54
       },
       {
         unified: "1f485-1f3fb",
         native: "💅🏻",
         x: 25,
-        y: 54
+        y: 55
       },
       {
         unified: "1f485-1f3fc",
         native: "💅🏼",
         x: 25,
-        y: 55
+        y: 56
       },
       {
         unified: "1f485-1f3fd",
         native: "💅🏽",
         x: 25,
-        y: 56
+        y: 57
       },
       {
         unified: "1f485-1f3fe",
         native: "💅🏾",
         x: 25,
-        y: 57
+        y: 58
       },
       {
         unified: "1f485-1f3ff",
         native: "💅🏿",
         x: 25,
-        y: 58
+        y: 59
       }
     ],
     version: 1
@@ -7296,37 +7887,37 @@ const emojis = {
         unified: "1f933",
         native: "🤳",
         x: 41,
-        y: 2
+        y: 4
       },
       {
         unified: "1f933-1f3fb",
         native: "🤳🏻",
         x: 41,
-        y: 3
+        y: 5
       },
       {
         unified: "1f933-1f3fc",
         native: "🤳🏼",
         x: 41,
-        y: 4
+        y: 6
       },
       {
         unified: "1f933-1f3fd",
         native: "🤳🏽",
         x: 41,
-        y: 5
+        y: 7
       },
       {
         unified: "1f933-1f3fe",
         native: "🤳🏾",
         x: 41,
-        y: 6
+        y: 8
       },
       {
         unified: "1f933-1f3ff",
         native: "🤳🏿",
         x: 41,
-        y: 7
+        y: 9
       }
     ],
     version: 3
@@ -7347,37 +7938,37 @@ const emojis = {
         unified: "1f4aa",
         native: "💪",
         x: 27,
-        y: 57
+        y: 58
       },
       {
         unified: "1f4aa-1f3fb",
         native: "💪🏻",
         x: 27,
-        y: 58
+        y: 59
       },
       {
         unified: "1f4aa-1f3fc",
         native: "💪🏼",
         x: 27,
-        y: 59
+        y: 60
       },
       {
         unified: "1f4aa-1f3fd",
         native: "💪🏽",
-        x: 27,
-        y: 60
+        x: 28,
+        y: 0
       },
       {
         unified: "1f4aa-1f3fe",
         native: "💪🏾",
         x: 28,
-        y: 0
+        y: 1
       },
       {
         unified: "1f4aa-1f3ff",
         native: "💪🏿",
         x: 28,
-        y: 1
+        y: 2
       }
     ],
     version: 1
@@ -7393,7 +7984,7 @@ const emojis = {
         unified: "1f9be",
         native: "🦾",
         x: 46,
-        y: 3
+        y: 5
       }
     ],
     version: 12
@@ -7409,7 +8000,7 @@ const emojis = {
         unified: "1f9bf",
         native: "🦿",
         x: 46,
-        y: 4
+        y: 6
       }
     ],
     version: 12
@@ -7426,37 +8017,37 @@ const emojis = {
         unified: "1f9b5",
         native: "🦵",
         x: 45,
-        y: 6
+        y: 8
       },
       {
         unified: "1f9b5-1f3fb",
         native: "🦵🏻",
         x: 45,
-        y: 7
+        y: 9
       },
       {
         unified: "1f9b5-1f3fc",
         native: "🦵🏼",
         x: 45,
-        y: 8
+        y: 10
       },
       {
         unified: "1f9b5-1f3fd",
         native: "🦵🏽",
         x: 45,
-        y: 9
+        y: 11
       },
       {
         unified: "1f9b5-1f3fe",
         native: "🦵🏾",
         x: 45,
-        y: 10
+        y: 12
       },
       {
         unified: "1f9b5-1f3ff",
         native: "🦵🏿",
         x: 45,
-        y: 11
+        y: 13
       }
     ],
     version: 11
@@ -7473,37 +8064,37 @@ const emojis = {
         unified: "1f9b6",
         native: "🦶",
         x: 45,
-        y: 12
+        y: 14
       },
       {
         unified: "1f9b6-1f3fb",
         native: "🦶🏻",
         x: 45,
-        y: 13
+        y: 15
       },
       {
         unified: "1f9b6-1f3fc",
         native: "🦶🏼",
         x: 45,
-        y: 14
+        y: 16
       },
       {
         unified: "1f9b6-1f3fd",
         native: "🦶🏽",
         x: 45,
-        y: 15
+        y: 17
       },
       {
         unified: "1f9b6-1f3fe",
         native: "🦶🏾",
         x: 45,
-        y: 16
+        y: 18
       },
       {
         unified: "1f9b6-1f3ff",
         native: "🦶🏿",
         x: 45,
-        y: 17
+        y: 19
       }
     ],
     version: 11
@@ -7522,37 +8113,37 @@ const emojis = {
         unified: "1f442",
         native: "👂",
         x: 11,
-        y: 55
+        y: 56
       },
       {
         unified: "1f442-1f3fb",
         native: "👂🏻",
         x: 11,
-        y: 56
+        y: 57
       },
       {
         unified: "1f442-1f3fc",
         native: "👂🏼",
         x: 11,
-        y: 57
+        y: 58
       },
       {
         unified: "1f442-1f3fd",
         native: "👂🏽",
         x: 11,
-        y: 58
+        y: 59
       },
       {
         unified: "1f442-1f3fe",
         native: "👂🏾",
         x: 11,
-        y: 59
+        y: 60
       },
       {
         unified: "1f442-1f3ff",
         native: "👂🏿",
-        x: 11,
-        y: 60
+        x: 12,
+        y: 0
       }
     ],
     version: 1
@@ -7568,37 +8159,37 @@ const emojis = {
         unified: "1f9bb",
         native: "🦻",
         x: 45,
-        y: 56
+        y: 58
       },
       {
         unified: "1f9bb-1f3fb",
         native: "🦻🏻",
         x: 45,
-        y: 57
+        y: 59
       },
       {
         unified: "1f9bb-1f3fc",
         native: "🦻🏼",
         x: 45,
-        y: 58
+        y: 60
       },
       {
         unified: "1f9bb-1f3fd",
         native: "🦻🏽",
-        x: 45,
-        y: 59
+        x: 46,
+        y: 0
       },
       {
         unified: "1f9bb-1f3fe",
         native: "🦻🏾",
-        x: 45,
-        y: 60
+        x: 46,
+        y: 1
       },
       {
         unified: "1f9bb-1f3ff",
         native: "🦻🏿",
         x: 46,
-        y: 0
+        y: 2
       }
     ],
     version: 12
@@ -7615,37 +8206,37 @@ const emojis = {
         unified: "1f443",
         native: "👃",
         x: 12,
-        y: 0
+        y: 1
       },
       {
         unified: "1f443-1f3fb",
         native: "👃🏻",
         x: 12,
-        y: 1
+        y: 2
       },
       {
         unified: "1f443-1f3fc",
         native: "👃🏼",
         x: 12,
-        y: 2
+        y: 3
       },
       {
         unified: "1f443-1f3fd",
         native: "👃🏽",
         x: 12,
-        y: 3
+        y: 4
       },
       {
         unified: "1f443-1f3fe",
         native: "👃🏾",
         x: 12,
-        y: 4
+        y: 5
       },
       {
         unified: "1f443-1f3ff",
         native: "👃🏿",
         x: 12,
-        y: 5
+        y: 6
       }
     ],
     version: 1
@@ -7662,7 +8253,7 @@ const emojis = {
         unified: "1f9e0",
         native: "🧠",
         x: 53,
-        y: 14
+        y: 16
       }
     ],
     version: 5
@@ -7679,7 +8270,7 @@ const emojis = {
         unified: "1fac0",
         native: "🫀",
         x: 54,
-        y: 42
+        y: 56
       }
     ],
     version: 13
@@ -7695,7 +8286,7 @@ const emojis = {
         unified: "1fac1",
         native: "🫁",
         x: 54,
-        y: 43
+        y: 57
       }
     ],
     version: 13
@@ -7712,7 +8303,7 @@ const emojis = {
         unified: "1f9b7",
         native: "🦷",
         x: 45,
-        y: 18
+        y: 20
       }
     ],
     version: 11
@@ -7728,7 +8319,7 @@ const emojis = {
         unified: "1f9b4",
         native: "🦴",
         x: 45,
-        y: 5
+        y: 7
       }
     ],
     version: 11
@@ -7748,7 +8339,7 @@ const emojis = {
         unified: "1f440",
         native: "👀",
         x: 11,
-        y: 52
+        y: 53
       }
     ],
     version: 1
@@ -7768,7 +8359,7 @@ const emojis = {
         unified: "1f441-fe0f",
         native: "👁️",
         x: 11,
-        y: 54
+        y: 55
       }
     ],
     version: 1
@@ -7785,7 +8376,7 @@ const emojis = {
         unified: "1f445",
         native: "👅",
         x: 12,
-        y: 7
+        y: 8
       }
     ],
     version: 1
@@ -7802,10 +8393,29 @@ const emojis = {
         unified: "1f444",
         native: "👄",
         x: 12,
-        y: 6
+        y: 7
       }
     ],
     version: 1
+  },
+  biting_lip: {
+    id: "biting_lip",
+    name: "Biting Lip",
+    keywords: [
+      "flirt",
+      "sexy",
+      "pain",
+      "worry"
+    ],
+    skins: [
+      {
+        unified: "1fae6",
+        native: "🫦",
+        x: 55,
+        y: 36
+      }
+    ],
+    version: 14
   },
   baby: {
     id: "baby",
@@ -7821,37 +8431,37 @@ const emojis = {
         unified: "1f476",
         native: "👶",
         x: 24,
-        y: 28
+        y: 29
       },
       {
         unified: "1f476-1f3fb",
         native: "👶🏻",
         x: 24,
-        y: 29
+        y: 30
       },
       {
         unified: "1f476-1f3fc",
         native: "👶🏼",
         x: 24,
-        y: 30
+        y: 31
       },
       {
         unified: "1f476-1f3fd",
         native: "👶🏽",
         x: 24,
-        y: 31
+        y: 32
       },
       {
         unified: "1f476-1f3fe",
         native: "👶🏾",
         x: 24,
-        y: 32
+        y: 33
       },
       {
         unified: "1f476-1f3ff",
         native: "👶🏿",
         x: 24,
-        y: 33
+        y: 34
       }
     ],
     version: 1
@@ -7869,37 +8479,37 @@ const emojis = {
         unified: "1f9d2",
         native: "🧒",
         x: 50,
-        y: 11
+        y: 13
       },
       {
         unified: "1f9d2-1f3fb",
         native: "🧒🏻",
         x: 50,
-        y: 12
+        y: 14
       },
       {
         unified: "1f9d2-1f3fc",
         native: "🧒🏼",
         x: 50,
-        y: 13
+        y: 15
       },
       {
         unified: "1f9d2-1f3fd",
         native: "🧒🏽",
         x: 50,
-        y: 14
+        y: 16
       },
       {
         unified: "1f9d2-1f3fe",
         native: "🧒🏾",
         x: 50,
-        y: 15
+        y: 17
       },
       {
         unified: "1f9d2-1f3ff",
         native: "🧒🏿",
         x: 50,
-        y: 16
+        y: 18
       }
     ],
     version: 5
@@ -7918,37 +8528,37 @@ const emojis = {
         unified: "1f466",
         native: "👦",
         x: 13,
-        y: 34
+        y: 35
       },
       {
         unified: "1f466-1f3fb",
         native: "👦🏻",
         x: 13,
-        y: 35
+        y: 36
       },
       {
         unified: "1f466-1f3fc",
         native: "👦🏼",
         x: 13,
-        y: 36
+        y: 37
       },
       {
         unified: "1f466-1f3fd",
         native: "👦🏽",
         x: 13,
-        y: 37
+        y: 38
       },
       {
         unified: "1f466-1f3fe",
         native: "👦🏾",
         x: 13,
-        y: 38
+        y: 39
       },
       {
         unified: "1f466-1f3ff",
         native: "👦🏿",
         x: 13,
-        y: 39
+        y: 40
       }
     ],
     version: 1
@@ -7966,37 +8576,37 @@ const emojis = {
         unified: "1f467",
         native: "👧",
         x: 13,
-        y: 40
+        y: 41
       },
       {
         unified: "1f467-1f3fb",
         native: "👧🏻",
         x: 13,
-        y: 41
+        y: 42
       },
       {
         unified: "1f467-1f3fc",
         native: "👧🏼",
         x: 13,
-        y: 42
+        y: 43
       },
       {
         unified: "1f467-1f3fd",
         native: "👧🏽",
         x: 13,
-        y: 43
+        y: 44
       },
       {
         unified: "1f467-1f3fe",
         native: "👧🏾",
         x: 13,
-        y: 44
+        y: 45
       },
       {
         unified: "1f467-1f3ff",
         native: "👧🏿",
         x: 13,
-        y: 45
+        y: 46
       }
     ],
     version: 1
@@ -8014,37 +8624,37 @@ const emojis = {
         unified: "1f9d1",
         native: "🧑",
         x: 50,
-        y: 5
+        y: 7
       },
       {
         unified: "1f9d1-1f3fb",
         native: "🧑🏻",
         x: 50,
-        y: 6
+        y: 8
       },
       {
         unified: "1f9d1-1f3fc",
         native: "🧑🏼",
         x: 50,
-        y: 7
+        y: 9
       },
       {
         unified: "1f9d1-1f3fd",
         native: "🧑🏽",
         x: 50,
-        y: 8
+        y: 10
       },
       {
         unified: "1f9d1-1f3fe",
         native: "🧑🏾",
         x: 50,
-        y: 9
+        y: 11
       },
       {
         unified: "1f9d1-1f3ff",
         native: "🧑🏿",
         x: 50,
-        y: 10
+        y: 12
       }
     ],
     version: 5
@@ -8061,37 +8671,37 @@ const emojis = {
         unified: "1f471",
         native: "👱",
         x: 23,
-        y: 47
+        y: 48
       },
       {
         unified: "1f471-1f3fb",
         native: "👱🏻",
         x: 23,
-        y: 48
+        y: 49
       },
       {
         unified: "1f471-1f3fc",
         native: "👱🏼",
         x: 23,
-        y: 49
+        y: 50
       },
       {
         unified: "1f471-1f3fd",
         native: "👱🏽",
         x: 23,
-        y: 50
+        y: 51
       },
       {
         unified: "1f471-1f3fe",
         native: "👱🏾",
         x: 23,
-        y: 51
+        y: 52
       },
       {
         unified: "1f471-1f3ff",
         native: "👱🏿",
         x: 23,
-        y: 52
+        y: 53
       }
     ],
     version: 1
@@ -8113,37 +8723,37 @@ const emojis = {
         unified: "1f468",
         native: "👨",
         x: 17,
-        y: 13
+        y: 14
       },
       {
         unified: "1f468-1f3fb",
         native: "👨🏻",
         x: 17,
-        y: 14
+        y: 15
       },
       {
         unified: "1f468-1f3fc",
         native: "👨🏼",
         x: 17,
-        y: 15
+        y: 16
       },
       {
         unified: "1f468-1f3fd",
         native: "👨🏽",
         x: 17,
-        y: 16
+        y: 17
       },
       {
         unified: "1f468-1f3fe",
         native: "👨🏾",
         x: 17,
-        y: 17
+        y: 18
       },
       {
         unified: "1f468-1f3ff",
         native: "👨🏿",
         x: 17,
-        y: 18
+        y: 19
       }
     ],
     version: 1
@@ -8161,40 +8771,138 @@ const emojis = {
         unified: "1f9d4",
         native: "🧔",
         x: 50,
-        y: 35
+        y: 37
       },
       {
         unified: "1f9d4-1f3fb",
         native: "🧔🏻",
         x: 50,
-        y: 36
+        y: 38
       },
       {
         unified: "1f9d4-1f3fc",
         native: "🧔🏼",
         x: 50,
-        y: 37
+        y: 39
       },
       {
         unified: "1f9d4-1f3fd",
         native: "🧔🏽",
         x: 50,
-        y: 38
+        y: 40
       },
       {
         unified: "1f9d4-1f3fe",
         native: "🧔🏾",
         x: 50,
-        y: 39
+        y: 41
       },
       {
         unified: "1f9d4-1f3ff",
         native: "🧔🏿",
         x: 50,
-        y: 40
+        y: 42
       }
     ],
     version: 5
+  },
+  man_with_beard: {
+    id: "man_with_beard",
+    name: "Man: Beard",
+    keywords: [
+      "man",
+      "with",
+      "facial",
+      "hair"
+    ],
+    skins: [
+      {
+        unified: "1f9d4-200d-2642-fe0f",
+        native: "🧔‍♂️",
+        x: 50,
+        y: 31
+      },
+      {
+        unified: "1f9d4-1f3fb-200d-2642-fe0f",
+        native: "🧔🏻‍♂️",
+        x: 50,
+        y: 32
+      },
+      {
+        unified: "1f9d4-1f3fc-200d-2642-fe0f",
+        native: "🧔🏼‍♂️",
+        x: 50,
+        y: 33
+      },
+      {
+        unified: "1f9d4-1f3fd-200d-2642-fe0f",
+        native: "🧔🏽‍♂️",
+        x: 50,
+        y: 34
+      },
+      {
+        unified: "1f9d4-1f3fe-200d-2642-fe0f",
+        native: "🧔🏾‍♂️",
+        x: 50,
+        y: 35
+      },
+      {
+        unified: "1f9d4-1f3ff-200d-2642-fe0f",
+        native: "🧔🏿‍♂️",
+        x: 50,
+        y: 36
+      }
+    ],
+    version: 13.1
+  },
+  woman_with_beard: {
+    id: "woman_with_beard",
+    name: "Woman: Beard",
+    keywords: [
+      "woman",
+      "with",
+      "facial",
+      "hair"
+    ],
+    skins: [
+      {
+        unified: "1f9d4-200d-2640-fe0f",
+        native: "🧔‍♀️",
+        x: 50,
+        y: 25
+      },
+      {
+        unified: "1f9d4-1f3fb-200d-2640-fe0f",
+        native: "🧔🏻‍♀️",
+        x: 50,
+        y: 26
+      },
+      {
+        unified: "1f9d4-1f3fc-200d-2640-fe0f",
+        native: "🧔🏼‍♀️",
+        x: 50,
+        y: 27
+      },
+      {
+        unified: "1f9d4-1f3fd-200d-2640-fe0f",
+        native: "🧔🏽‍♀️",
+        x: 50,
+        y: 28
+      },
+      {
+        unified: "1f9d4-1f3fe-200d-2640-fe0f",
+        native: "🧔🏾‍♀️",
+        x: 50,
+        y: 29
+      },
+      {
+        unified: "1f9d4-1f3ff-200d-2640-fe0f",
+        native: "🧔🏿‍♀️",
+        x: 50,
+        y: 30
+      }
+    ],
+    version: 13.1
   },
   red_haired_man: {
     id: "red_haired_man",
@@ -8209,37 +8917,37 @@ const emojis = {
         unified: "1f468-200d-1f9b0",
         native: "👨‍🦰",
         x: 15,
-        y: 29
+        y: 30
       },
       {
         unified: "1f468-1f3fb-200d-1f9b0",
         native: "👨🏻‍🦰",
         x: 15,
-        y: 30
+        y: 31
       },
       {
         unified: "1f468-1f3fc-200d-1f9b0",
         native: "👨🏼‍🦰",
         x: 15,
-        y: 31
+        y: 32
       },
       {
         unified: "1f468-1f3fd-200d-1f9b0",
         native: "👨🏽‍🦰",
         x: 15,
-        y: 32
+        y: 33
       },
       {
         unified: "1f468-1f3fe-200d-1f9b0",
         native: "👨🏾‍🦰",
         x: 15,
-        y: 33
+        y: 34
       },
       {
         unified: "1f468-1f3ff-200d-1f9b0",
         native: "👨🏿‍🦰",
         x: 15,
-        y: 34
+        y: 35
       }
     ],
     version: 11
@@ -8257,37 +8965,37 @@ const emojis = {
         unified: "1f468-200d-1f9b1",
         native: "👨‍🦱",
         x: 15,
-        y: 35
+        y: 36
       },
       {
         unified: "1f468-1f3fb-200d-1f9b1",
         native: "👨🏻‍🦱",
         x: 15,
-        y: 36
+        y: 37
       },
       {
         unified: "1f468-1f3fc-200d-1f9b1",
         native: "👨🏼‍🦱",
         x: 15,
-        y: 37
+        y: 38
       },
       {
         unified: "1f468-1f3fd-200d-1f9b1",
         native: "👨🏽‍🦱",
         x: 15,
-        y: 38
+        y: 39
       },
       {
         unified: "1f468-1f3fe-200d-1f9b1",
         native: "👨🏾‍🦱",
         x: 15,
-        y: 39
+        y: 40
       },
       {
         unified: "1f468-1f3ff-200d-1f9b1",
         native: "👨🏿‍🦱",
         x: 15,
-        y: 40
+        y: 41
       }
     ],
     version: 11
@@ -8306,37 +9014,37 @@ const emojis = {
         unified: "1f468-200d-1f9b3",
         native: "👨‍🦳",
         x: 15,
-        y: 47
+        y: 48
       },
       {
         unified: "1f468-1f3fb-200d-1f9b3",
         native: "👨🏻‍🦳",
         x: 15,
-        y: 48
+        y: 49
       },
       {
         unified: "1f468-1f3fc-200d-1f9b3",
         native: "👨🏼‍🦳",
         x: 15,
-        y: 49
+        y: 50
       },
       {
         unified: "1f468-1f3fd-200d-1f9b3",
         native: "👨🏽‍🦳",
         x: 15,
-        y: 50
+        y: 51
       },
       {
         unified: "1f468-1f3fe-200d-1f9b3",
         native: "👨🏾‍🦳",
         x: 15,
-        y: 51
+        y: 52
       },
       {
         unified: "1f468-1f3ff-200d-1f9b3",
         native: "👨🏿‍🦳",
         x: 15,
-        y: 52
+        y: 53
       }
     ],
     version: 11
@@ -8353,37 +9061,37 @@ const emojis = {
         unified: "1f468-200d-1f9b2",
         native: "👨‍🦲",
         x: 15,
-        y: 41
+        y: 42
       },
       {
         unified: "1f468-1f3fb-200d-1f9b2",
         native: "👨🏻‍🦲",
         x: 15,
-        y: 42
+        y: 43
       },
       {
         unified: "1f468-1f3fc-200d-1f9b2",
         native: "👨🏼‍🦲",
         x: 15,
-        y: 43
+        y: 44
       },
       {
         unified: "1f468-1f3fd-200d-1f9b2",
         native: "👨🏽‍🦲",
         x: 15,
-        y: 44
+        y: 45
       },
       {
         unified: "1f468-1f3fe-200d-1f9b2",
         native: "👨🏾‍🦲",
         x: 15,
-        y: 45
+        y: 46
       },
       {
         unified: "1f468-1f3ff-200d-1f9b2",
         native: "👨🏿‍🦲",
         x: 15,
-        y: 46
+        y: 47
       }
     ],
     version: 11
@@ -8401,37 +9109,37 @@ const emojis = {
         unified: "1f469",
         native: "👩",
         x: 21,
-        y: 33
+        y: 34
       },
       {
         unified: "1f469-1f3fb",
         native: "👩🏻",
         x: 21,
-        y: 34
+        y: 35
       },
       {
         unified: "1f469-1f3fc",
         native: "👩🏼",
         x: 21,
-        y: 35
+        y: 36
       },
       {
         unified: "1f469-1f3fd",
         native: "👩🏽",
         x: 21,
-        y: 36
+        y: 37
       },
       {
         unified: "1f469-1f3fe",
         native: "👩🏾",
         x: 21,
-        y: 37
+        y: 38
       },
       {
         unified: "1f469-1f3ff",
         native: "👩🏿",
         x: 21,
-        y: 38
+        y: 39
       }
     ],
     version: 1
@@ -8449,37 +9157,37 @@ const emojis = {
         unified: "1f469-200d-1f9b0",
         native: "👩‍🦰",
         x: 18,
-        y: 58
+        y: 59
       },
       {
         unified: "1f469-1f3fb-200d-1f9b0",
         native: "👩🏻‍🦰",
         x: 18,
-        y: 59
+        y: 60
       },
       {
         unified: "1f469-1f3fc-200d-1f9b0",
         native: "👩🏼‍🦰",
-        x: 18,
-        y: 60
+        x: 19,
+        y: 0
       },
       {
         unified: "1f469-1f3fd-200d-1f9b0",
         native: "👩🏽‍🦰",
         x: 19,
-        y: 0
+        y: 1
       },
       {
         unified: "1f469-1f3fe-200d-1f9b0",
         native: "👩🏾‍🦰",
         x: 19,
-        y: 1
+        y: 2
       },
       {
         unified: "1f469-1f3ff-200d-1f9b0",
         native: "👩🏿‍🦰",
         x: 19,
-        y: 2
+        y: 3
       }
     ],
     version: 11
@@ -8497,37 +9205,37 @@ const emojis = {
         unified: "1f9d1-200d-1f9b0",
         native: "🧑‍🦰",
         x: 49,
-        y: 12
+        y: 14
       },
       {
         unified: "1f9d1-1f3fb-200d-1f9b0",
         native: "🧑🏻‍🦰",
         x: 49,
-        y: 13
+        y: 15
       },
       {
         unified: "1f9d1-1f3fc-200d-1f9b0",
         native: "🧑🏼‍🦰",
         x: 49,
-        y: 14
+        y: 16
       },
       {
         unified: "1f9d1-1f3fd-200d-1f9b0",
         native: "🧑🏽‍🦰",
         x: 49,
-        y: 15
+        y: 17
       },
       {
         unified: "1f9d1-1f3fe-200d-1f9b0",
         native: "🧑🏾‍🦰",
         x: 49,
-        y: 16
+        y: 18
       },
       {
         unified: "1f9d1-1f3ff-200d-1f9b0",
         native: "🧑🏿‍🦰",
         x: 49,
-        y: 17
+        y: 19
       }
     ],
     version: 12.1
@@ -8545,37 +9253,37 @@ const emojis = {
         unified: "1f469-200d-1f9b1",
         native: "👩‍🦱",
         x: 19,
-        y: 3
+        y: 4
       },
       {
         unified: "1f469-1f3fb-200d-1f9b1",
         native: "👩🏻‍🦱",
         x: 19,
-        y: 4
+        y: 5
       },
       {
         unified: "1f469-1f3fc-200d-1f9b1",
         native: "👩🏼‍🦱",
         x: 19,
-        y: 5
+        y: 6
       },
       {
         unified: "1f469-1f3fd-200d-1f9b1",
         native: "👩🏽‍🦱",
         x: 19,
-        y: 6
+        y: 7
       },
       {
         unified: "1f469-1f3fe-200d-1f9b1",
         native: "👩🏾‍🦱",
         x: 19,
-        y: 7
+        y: 8
       },
       {
         unified: "1f469-1f3ff-200d-1f9b1",
         native: "👩🏿‍🦱",
         x: 19,
-        y: 8
+        y: 9
       }
     ],
     version: 11
@@ -8593,37 +9301,37 @@ const emojis = {
         unified: "1f9d1-200d-1f9b1",
         native: "🧑‍🦱",
         x: 49,
-        y: 18
+        y: 20
       },
       {
         unified: "1f9d1-1f3fb-200d-1f9b1",
         native: "🧑🏻‍🦱",
         x: 49,
-        y: 19
+        y: 21
       },
       {
         unified: "1f9d1-1f3fc-200d-1f9b1",
         native: "🧑🏼‍🦱",
         x: 49,
-        y: 20
+        y: 22
       },
       {
         unified: "1f9d1-1f3fd-200d-1f9b1",
         native: "🧑🏽‍🦱",
         x: 49,
-        y: 21
+        y: 23
       },
       {
         unified: "1f9d1-1f3fe-200d-1f9b1",
         native: "🧑🏾‍🦱",
         x: 49,
-        y: 22
+        y: 24
       },
       {
         unified: "1f9d1-1f3ff-200d-1f9b1",
         native: "🧑🏿‍🦱",
         x: 49,
-        y: 23
+        y: 25
       }
     ],
     version: 12.1
@@ -8642,40 +9350,89 @@ const emojis = {
         unified: "1f469-200d-1f9b3",
         native: "👩‍🦳",
         x: 19,
-        y: 15
+        y: 16
       },
       {
         unified: "1f469-1f3fb-200d-1f9b3",
         native: "👩🏻‍🦳",
         x: 19,
-        y: 16
+        y: 17
       },
       {
         unified: "1f469-1f3fc-200d-1f9b3",
         native: "👩🏼‍🦳",
         x: 19,
-        y: 17
+        y: 18
       },
       {
         unified: "1f469-1f3fd-200d-1f9b3",
         native: "👩🏽‍🦳",
         x: 19,
-        y: 18
+        y: 19
       },
       {
         unified: "1f469-1f3fe-200d-1f9b3",
         native: "👩🏾‍🦳",
         x: 19,
-        y: 19
+        y: 20
       },
       {
         unified: "1f469-1f3ff-200d-1f9b3",
         native: "👩🏿‍🦳",
         x: 19,
-        y: 20
+        y: 21
       }
     ],
     version: 11
+  },
+  white_haired_person: {
+    id: "white_haired_person",
+    name: "Person: White Hair",
+    keywords: [
+      "haired",
+      "person",
+      "elder",
+      "old"
+    ],
+    skins: [
+      {
+        unified: "1f9d1-200d-1f9b3",
+        native: "🧑‍🦳",
+        x: 49,
+        y: 32
+      },
+      {
+        unified: "1f9d1-1f3fb-200d-1f9b3",
+        native: "🧑🏻‍🦳",
+        x: 49,
+        y: 33
+      },
+      {
+        unified: "1f9d1-1f3fc-200d-1f9b3",
+        native: "🧑🏼‍🦳",
+        x: 49,
+        y: 34
+      },
+      {
+        unified: "1f9d1-1f3fd-200d-1f9b3",
+        native: "🧑🏽‍🦳",
+        x: 49,
+        y: 35
+      },
+      {
+        unified: "1f9d1-1f3fe-200d-1f9b3",
+        native: "🧑🏾‍🦳",
+        x: 49,
+        y: 36
+      },
+      {
+        unified: "1f9d1-1f3ff-200d-1f9b3",
+        native: "🧑🏿‍🦳",
+        x: 49,
+        y: 37
+      }
+    ],
+    version: 12.1
   },
   bald_woman: {
     id: "bald_woman",
@@ -8689,40 +9446,87 @@ const emojis = {
         unified: "1f469-200d-1f9b2",
         native: "👩‍🦲",
         x: 19,
-        y: 9
+        y: 10
       },
       {
         unified: "1f469-1f3fb-200d-1f9b2",
         native: "👩🏻‍🦲",
         x: 19,
-        y: 10
+        y: 11
       },
       {
         unified: "1f469-1f3fc-200d-1f9b2",
         native: "👩🏼‍🦲",
         x: 19,
-        y: 11
+        y: 12
       },
       {
         unified: "1f469-1f3fd-200d-1f9b2",
         native: "👩🏽‍🦲",
         x: 19,
-        y: 12
+        y: 13
       },
       {
         unified: "1f469-1f3fe-200d-1f9b2",
         native: "👩🏾‍🦲",
         x: 19,
-        y: 13
+        y: 14
       },
       {
         unified: "1f469-1f3ff-200d-1f9b2",
         native: "👩🏿‍🦲",
         x: 19,
-        y: 14
+        y: 15
       }
     ],
     version: 11
+  },
+  bald_person: {
+    id: "bald_person",
+    name: "Person: Bald",
+    keywords: [
+      "person",
+      "hairless"
+    ],
+    skins: [
+      {
+        unified: "1f9d1-200d-1f9b2",
+        native: "🧑‍🦲",
+        x: 49,
+        y: 26
+      },
+      {
+        unified: "1f9d1-1f3fb-200d-1f9b2",
+        native: "🧑🏻‍🦲",
+        x: 49,
+        y: 27
+      },
+      {
+        unified: "1f9d1-1f3fc-200d-1f9b2",
+        native: "🧑🏼‍🦲",
+        x: 49,
+        y: 28
+      },
+      {
+        unified: "1f9d1-1f3fd-200d-1f9b2",
+        native: "🧑🏽‍🦲",
+        x: 49,
+        y: 29
+      },
+      {
+        unified: "1f9d1-1f3fe-200d-1f9b2",
+        native: "🧑🏾‍🦲",
+        x: 49,
+        y: 30
+      },
+      {
+        unified: "1f9d1-1f3ff-200d-1f9b2",
+        native: "🧑🏿‍🦲",
+        x: 49,
+        y: 31
+      }
+    ],
+    version: 12.1
   },
   "blond-haired-woman": {
     id: "blond-haired-woman",
@@ -8740,37 +9544,37 @@ const emojis = {
         unified: "1f471-200d-2640-fe0f",
         native: "👱‍♀️",
         x: 23,
-        y: 35
+        y: 36
       },
       {
         unified: "1f471-1f3fb-200d-2640-fe0f",
         native: "👱🏻‍♀️",
         x: 23,
-        y: 36
+        y: 37
       },
       {
         unified: "1f471-1f3fc-200d-2640-fe0f",
         native: "👱🏼‍♀️",
         x: 23,
-        y: 37
+        y: 38
       },
       {
         unified: "1f471-1f3fd-200d-2640-fe0f",
         native: "👱🏽‍♀️",
         x: 23,
-        y: 38
+        y: 39
       },
       {
         unified: "1f471-1f3fe-200d-2640-fe0f",
         native: "👱🏾‍♀️",
         x: 23,
-        y: 39
+        y: 40
       },
       {
         unified: "1f471-1f3ff-200d-2640-fe0f",
         native: "👱🏿‍♀️",
         x: 23,
-        y: 40
+        y: 41
       }
     ],
     version: 4
@@ -8792,37 +9596,37 @@ const emojis = {
         unified: "1f471-200d-2642-fe0f",
         native: "👱‍♂️",
         x: 23,
-        y: 41
+        y: 42
       },
       {
         unified: "1f471-1f3fb-200d-2642-fe0f",
         native: "👱🏻‍♂️",
         x: 23,
-        y: 42
+        y: 43
       },
       {
         unified: "1f471-1f3fc-200d-2642-fe0f",
         native: "👱🏼‍♂️",
         x: 23,
-        y: 43
+        y: 44
       },
       {
         unified: "1f471-1f3fd-200d-2642-fe0f",
         native: "👱🏽‍♂️",
         x: 23,
-        y: 44
+        y: 45
       },
       {
         unified: "1f471-1f3fe-200d-2642-fe0f",
         native: "👱🏾‍♂️",
         x: 23,
-        y: 45
+        y: 46
       },
       {
         unified: "1f471-1f3ff-200d-2642-fe0f",
         native: "👱🏿‍♂️",
         x: 23,
-        y: 46
+        y: 47
       }
     ],
     version: 4
@@ -8843,37 +9647,37 @@ const emojis = {
         unified: "1f9d3",
         native: "🧓",
         x: 50,
-        y: 17
+        y: 19
       },
       {
         unified: "1f9d3-1f3fb",
         native: "🧓🏻",
         x: 50,
-        y: 18
+        y: 20
       },
       {
         unified: "1f9d3-1f3fc",
         native: "🧓🏼",
         x: 50,
-        y: 19
+        y: 21
       },
       {
         unified: "1f9d3-1f3fd",
         native: "🧓🏽",
         x: 50,
-        y: 20
+        y: 22
       },
       {
         unified: "1f9d3-1f3fe",
         native: "🧓🏾",
         x: 50,
-        y: 21
+        y: 23
       },
       {
         unified: "1f9d3-1f3ff",
         native: "🧓🏿",
         x: 50,
-        y: 22
+        y: 24
       }
     ],
     version: 5
@@ -8894,37 +9698,37 @@ const emojis = {
         unified: "1f474",
         native: "👴",
         x: 24,
-        y: 16
+        y: 17
       },
       {
         unified: "1f474-1f3fb",
         native: "👴🏻",
         x: 24,
-        y: 17
+        y: 18
       },
       {
         unified: "1f474-1f3fc",
         native: "👴🏼",
         x: 24,
-        y: 18
+        y: 19
       },
       {
         unified: "1f474-1f3fd",
         native: "👴🏽",
         x: 24,
-        y: 19
+        y: 20
       },
       {
         unified: "1f474-1f3fe",
         native: "👴🏾",
         x: 24,
-        y: 20
+        y: 21
       },
       {
         unified: "1f474-1f3ff",
         native: "👴🏿",
         x: 24,
-        y: 21
+        y: 22
       }
     ],
     version: 1
@@ -8946,37 +9750,37 @@ const emojis = {
         unified: "1f475",
         native: "👵",
         x: 24,
-        y: 22
+        y: 23
       },
       {
         unified: "1f475-1f3fb",
         native: "👵🏻",
         x: 24,
-        y: 23
+        y: 24
       },
       {
         unified: "1f475-1f3fc",
         native: "👵🏼",
         x: 24,
-        y: 24
+        y: 25
       },
       {
         unified: "1f475-1f3fd",
         native: "👵🏽",
         x: 24,
-        y: 25
+        y: 26
       },
       {
         unified: "1f475-1f3fe",
         native: "👵🏾",
         x: 24,
-        y: 26
+        y: 27
       },
       {
         unified: "1f475-1f3ff",
         native: "👵🏿",
         x: 24,
-        y: 27
+        y: 28
       }
     ],
     version: 1
@@ -8992,37 +9796,37 @@ const emojis = {
         unified: "1f64d",
         native: "🙍",
         x: 35,
-        y: 2
+        y: 3
       },
       {
         unified: "1f64d-1f3fb",
         native: "🙍🏻",
         x: 35,
-        y: 3
+        y: 4
       },
       {
         unified: "1f64d-1f3fc",
         native: "🙍🏼",
         x: 35,
-        y: 4
+        y: 5
       },
       {
         unified: "1f64d-1f3fd",
         native: "🙍🏽",
         x: 35,
-        y: 5
+        y: 6
       },
       {
         unified: "1f64d-1f3fe",
         native: "🙍🏾",
         x: 35,
-        y: 6
+        y: 7
       },
       {
         unified: "1f64d-1f3ff",
         native: "🙍🏿",
         x: 35,
-        y: 7
+        y: 8
       }
     ],
     version: 1
@@ -9043,37 +9847,37 @@ const emojis = {
         unified: "1f64d-200d-2642-fe0f",
         native: "🙍‍♂️",
         x: 34,
-        y: 57
+        y: 58
       },
       {
         unified: "1f64d-1f3fb-200d-2642-fe0f",
         native: "🙍🏻‍♂️",
         x: 34,
-        y: 58
+        y: 59
       },
       {
         unified: "1f64d-1f3fc-200d-2642-fe0f",
         native: "🙍🏼‍♂️",
         x: 34,
-        y: 59
+        y: 60
       },
       {
         unified: "1f64d-1f3fd-200d-2642-fe0f",
         native: "🙍🏽‍♂️",
-        x: 34,
-        y: 60
+        x: 35,
+        y: 0
       },
       {
         unified: "1f64d-1f3fe-200d-2642-fe0f",
         native: "🙍🏾‍♂️",
         x: 35,
-        y: 0
+        y: 1
       },
       {
         unified: "1f64d-1f3ff-200d-2642-fe0f",
         native: "🙍🏿‍♂️",
         x: 35,
-        y: 1
+        y: 2
       }
     ],
     version: 4
@@ -9094,37 +9898,37 @@ const emojis = {
         unified: "1f64d-200d-2640-fe0f",
         native: "🙍‍♀️",
         x: 34,
-        y: 51
+        y: 52
       },
       {
         unified: "1f64d-1f3fb-200d-2640-fe0f",
         native: "🙍🏻‍♀️",
         x: 34,
-        y: 52
+        y: 53
       },
       {
         unified: "1f64d-1f3fc-200d-2640-fe0f",
         native: "🙍🏼‍♀️",
         x: 34,
-        y: 53
+        y: 54
       },
       {
         unified: "1f64d-1f3fd-200d-2640-fe0f",
         native: "🙍🏽‍♀️",
         x: 34,
-        y: 54
+        y: 55
       },
       {
         unified: "1f64d-1f3fe-200d-2640-fe0f",
         native: "🙍🏾‍♀️",
         x: 34,
-        y: 55
+        y: 56
       },
       {
         unified: "1f64d-1f3ff-200d-2640-fe0f",
         native: "🙍🏿‍♀️",
         x: 34,
-        y: 56
+        y: 57
       }
     ],
     version: 4
@@ -9142,37 +9946,37 @@ const emojis = {
         unified: "1f64e",
         native: "🙎",
         x: 35,
-        y: 20
+        y: 21
       },
       {
         unified: "1f64e-1f3fb",
         native: "🙎🏻",
         x: 35,
-        y: 21
+        y: 22
       },
       {
         unified: "1f64e-1f3fc",
         native: "🙎🏼",
         x: 35,
-        y: 22
+        y: 23
       },
       {
         unified: "1f64e-1f3fd",
         native: "🙎🏽",
         x: 35,
-        y: 23
+        y: 24
       },
       {
         unified: "1f64e-1f3fe",
         native: "🙎🏾",
         x: 35,
-        y: 24
+        y: 25
       },
       {
         unified: "1f64e-1f3ff",
         native: "🙎🏿",
         x: 35,
-        y: 25
+        y: 26
       }
     ],
     version: 1
@@ -9189,37 +9993,37 @@ const emojis = {
         unified: "1f64e-200d-2642-fe0f",
         native: "🙎‍♂️",
         x: 35,
-        y: 14
+        y: 15
       },
       {
         unified: "1f64e-1f3fb-200d-2642-fe0f",
         native: "🙎🏻‍♂️",
         x: 35,
-        y: 15
+        y: 16
       },
       {
         unified: "1f64e-1f3fc-200d-2642-fe0f",
         native: "🙎🏼‍♂️",
         x: 35,
-        y: 16
+        y: 17
       },
       {
         unified: "1f64e-1f3fd-200d-2642-fe0f",
         native: "🙎🏽‍♂️",
         x: 35,
-        y: 17
+        y: 18
       },
       {
         unified: "1f64e-1f3fe-200d-2642-fe0f",
         native: "🙎🏾‍♂️",
         x: 35,
-        y: 18
+        y: 19
       },
       {
         unified: "1f64e-1f3ff-200d-2642-fe0f",
         native: "🙎🏿‍♂️",
         x: 35,
-        y: 19
+        y: 20
       }
     ],
     version: 4
@@ -9236,37 +10040,37 @@ const emojis = {
         unified: "1f64e-200d-2640-fe0f",
         native: "🙎‍♀️",
         x: 35,
-        y: 8
+        y: 9
       },
       {
         unified: "1f64e-1f3fb-200d-2640-fe0f",
         native: "🙎🏻‍♀️",
         x: 35,
-        y: 9
+        y: 10
       },
       {
         unified: "1f64e-1f3fc-200d-2640-fe0f",
         native: "🙎🏼‍♀️",
         x: 35,
-        y: 10
+        y: 11
       },
       {
         unified: "1f64e-1f3fd-200d-2640-fe0f",
         native: "🙎🏽‍♀️",
         x: 35,
-        y: 11
+        y: 12
       },
       {
         unified: "1f64e-1f3fe-200d-2640-fe0f",
         native: "🙎🏾‍♀️",
         x: 35,
-        y: 12
+        y: 13
       },
       {
         unified: "1f64e-1f3ff-200d-2640-fe0f",
         native: "🙎🏿‍♀️",
         x: 35,
-        y: 13
+        y: 14
       }
     ],
     version: 4
@@ -9283,37 +10087,37 @@ const emojis = {
         unified: "1f645",
         native: "🙅",
         x: 33,
-        y: 43
+        y: 44
       },
       {
         unified: "1f645-1f3fb",
         native: "🙅🏻",
         x: 33,
-        y: 44
+        y: 45
       },
       {
         unified: "1f645-1f3fc",
         native: "🙅🏼",
         x: 33,
-        y: 45
+        y: 46
       },
       {
         unified: "1f645-1f3fd",
         native: "🙅🏽",
         x: 33,
-        y: 46
+        y: 47
       },
       {
         unified: "1f645-1f3fe",
         native: "🙅🏾",
         x: 33,
-        y: 47
+        y: 48
       },
       {
         unified: "1f645-1f3ff",
         native: "🙅🏿",
         x: 33,
-        y: 48
+        y: 49
       }
     ],
     version: 1
@@ -9332,37 +10136,37 @@ const emojis = {
         unified: "1f645-200d-2642-fe0f",
         native: "🙅‍♂️",
         x: 33,
-        y: 37
+        y: 38
       },
       {
         unified: "1f645-1f3fb-200d-2642-fe0f",
         native: "🙅🏻‍♂️",
         x: 33,
-        y: 38
+        y: 39
       },
       {
         unified: "1f645-1f3fc-200d-2642-fe0f",
         native: "🙅🏼‍♂️",
         x: 33,
-        y: 39
+        y: 40
       },
       {
         unified: "1f645-1f3fd-200d-2642-fe0f",
         native: "🙅🏽‍♂️",
         x: 33,
-        y: 40
+        y: 41
       },
       {
         unified: "1f645-1f3fe-200d-2642-fe0f",
         native: "🙅🏾‍♂️",
         x: 33,
-        y: 41
+        y: 42
       },
       {
         unified: "1f645-1f3ff-200d-2642-fe0f",
         native: "🙅🏿‍♂️",
         x: 33,
-        y: 42
+        y: 43
       }
     ],
     version: 4
@@ -9381,37 +10185,37 @@ const emojis = {
         unified: "1f645-200d-2640-fe0f",
         native: "🙅‍♀️",
         x: 33,
-        y: 31
+        y: 32
       },
       {
         unified: "1f645-1f3fb-200d-2640-fe0f",
         native: "🙅🏻‍♀️",
         x: 33,
-        y: 32
+        y: 33
       },
       {
         unified: "1f645-1f3fc-200d-2640-fe0f",
         native: "🙅🏼‍♀️",
         x: 33,
-        y: 33
+        y: 34
       },
       {
         unified: "1f645-1f3fd-200d-2640-fe0f",
         native: "🙅🏽‍♀️",
         x: 33,
-        y: 34
+        y: 35
       },
       {
         unified: "1f645-1f3fe-200d-2640-fe0f",
         native: "🙅🏾‍♀️",
         x: 33,
-        y: 35
+        y: 36
       },
       {
         unified: "1f645-1f3ff-200d-2640-fe0f",
         native: "🙅🏿‍♀️",
         x: 33,
-        y: 36
+        y: 37
       }
     ],
     version: 4
@@ -9428,37 +10232,37 @@ const emojis = {
         unified: "1f646",
         native: "🙆",
         x: 34,
-        y: 0
+        y: 1
       },
       {
         unified: "1f646-1f3fb",
         native: "🙆🏻",
         x: 34,
-        y: 1
+        y: 2
       },
       {
         unified: "1f646-1f3fc",
         native: "🙆🏼",
         x: 34,
-        y: 2
+        y: 3
       },
       {
         unified: "1f646-1f3fd",
         native: "🙆🏽",
         x: 34,
-        y: 3
+        y: 4
       },
       {
         unified: "1f646-1f3fe",
         native: "🙆🏾",
         x: 34,
-        y: 4
+        y: 5
       },
       {
         unified: "1f646-1f3ff",
         native: "🙆🏿",
         x: 34,
-        y: 5
+        y: 6
       }
     ],
     version: 1
@@ -9479,37 +10283,37 @@ const emojis = {
         unified: "1f646-200d-2642-fe0f",
         native: "🙆‍♂️",
         x: 33,
-        y: 55
+        y: 56
       },
       {
         unified: "1f646-1f3fb-200d-2642-fe0f",
         native: "🙆🏻‍♂️",
         x: 33,
-        y: 56
+        y: 57
       },
       {
         unified: "1f646-1f3fc-200d-2642-fe0f",
         native: "🙆🏼‍♂️",
         x: 33,
-        y: 57
+        y: 58
       },
       {
         unified: "1f646-1f3fd-200d-2642-fe0f",
         native: "🙆🏽‍♂️",
         x: 33,
-        y: 58
+        y: 59
       },
       {
         unified: "1f646-1f3fe-200d-2642-fe0f",
         native: "🙆🏾‍♂️",
         x: 33,
-        y: 59
+        y: 60
       },
       {
         unified: "1f646-1f3ff-200d-2642-fe0f",
         native: "🙆🏿‍♂️",
-        x: 33,
-        y: 60
+        x: 34,
+        y: 0
       }
     ],
     version: 4
@@ -9530,37 +10334,37 @@ const emojis = {
         unified: "1f646-200d-2640-fe0f",
         native: "🙆‍♀️",
         x: 33,
-        y: 49
+        y: 50
       },
       {
         unified: "1f646-1f3fb-200d-2640-fe0f",
         native: "🙆🏻‍♀️",
         x: 33,
-        y: 50
+        y: 51
       },
       {
         unified: "1f646-1f3fc-200d-2640-fe0f",
         native: "🙆🏼‍♀️",
         x: 33,
-        y: 51
+        y: 52
       },
       {
         unified: "1f646-1f3fd-200d-2640-fe0f",
         native: "🙆🏽‍♀️",
         x: 33,
-        y: 52
+        y: 53
       },
       {
         unified: "1f646-1f3fe-200d-2640-fe0f",
         native: "🙆🏾‍♀️",
         x: 33,
-        y: 53
+        y: 54
       },
       {
         unified: "1f646-1f3ff-200d-2640-fe0f",
         native: "🙆🏿‍♀️",
         x: 33,
-        y: 54
+        y: 55
       }
     ],
     version: 4
@@ -9577,37 +10381,37 @@ const emojis = {
         unified: "1f481",
         native: "💁",
         x: 25,
-        y: 22
+        y: 23
       },
       {
         unified: "1f481-1f3fb",
         native: "💁🏻",
         x: 25,
-        y: 23
+        y: 24
       },
       {
         unified: "1f481-1f3fc",
         native: "💁🏼",
         x: 25,
-        y: 24
+        y: 25
       },
       {
         unified: "1f481-1f3fd",
         native: "💁🏽",
         x: 25,
-        y: 25
+        y: 26
       },
       {
         unified: "1f481-1f3fe",
         native: "💁🏾",
         x: 25,
-        y: 26
+        y: 27
       },
       {
         unified: "1f481-1f3ff",
         native: "💁🏿",
         x: 25,
-        y: 27
+        y: 28
       }
     ],
     version: 1
@@ -9627,37 +10431,37 @@ const emojis = {
         unified: "1f481-200d-2642-fe0f",
         native: "💁‍♂️",
         x: 25,
-        y: 16
+        y: 17
       },
       {
         unified: "1f481-1f3fb-200d-2642-fe0f",
         native: "💁🏻‍♂️",
         x: 25,
-        y: 17
+        y: 18
       },
       {
         unified: "1f481-1f3fc-200d-2642-fe0f",
         native: "💁🏼‍♂️",
         x: 25,
-        y: 18
+        y: 19
       },
       {
         unified: "1f481-1f3fd-200d-2642-fe0f",
         native: "💁🏽‍♂️",
         x: 25,
-        y: 19
+        y: 20
       },
       {
         unified: "1f481-1f3fe-200d-2642-fe0f",
         native: "💁🏾‍♂️",
         x: 25,
-        y: 20
+        y: 21
       },
       {
         unified: "1f481-1f3ff-200d-2642-fe0f",
         native: "💁🏿‍♂️",
         x: 25,
-        y: 21
+        y: 22
       }
     ],
     version: 4
@@ -9677,37 +10481,37 @@ const emojis = {
         unified: "1f481-200d-2640-fe0f",
         native: "💁‍♀️",
         x: 25,
-        y: 10
+        y: 11
       },
       {
         unified: "1f481-1f3fb-200d-2640-fe0f",
         native: "💁🏻‍♀️",
         x: 25,
-        y: 11
+        y: 12
       },
       {
         unified: "1f481-1f3fc-200d-2640-fe0f",
         native: "💁🏼‍♀️",
         x: 25,
-        y: 12
+        y: 13
       },
       {
         unified: "1f481-1f3fd-200d-2640-fe0f",
         native: "💁🏽‍♀️",
         x: 25,
-        y: 13
+        y: 14
       },
       {
         unified: "1f481-1f3fe-200d-2640-fe0f",
         native: "💁🏾‍♀️",
         x: 25,
-        y: 14
+        y: 15
       },
       {
         unified: "1f481-1f3ff-200d-2640-fe0f",
         native: "💁🏿‍♀️",
         x: 25,
-        y: 15
+        y: 16
       }
     ],
     version: 4
@@ -9723,37 +10527,37 @@ const emojis = {
         unified: "1f64b",
         native: "🙋",
         x: 34,
-        y: 39
+        y: 40
       },
       {
         unified: "1f64b-1f3fb",
         native: "🙋🏻",
         x: 34,
-        y: 40
+        y: 41
       },
       {
         unified: "1f64b-1f3fc",
         native: "🙋🏼",
         x: 34,
-        y: 41
+        y: 42
       },
       {
         unified: "1f64b-1f3fd",
         native: "🙋🏽",
         x: 34,
-        y: 42
+        y: 43
       },
       {
         unified: "1f64b-1f3fe",
         native: "🙋🏾",
         x: 34,
-        y: 43
+        y: 44
       },
       {
         unified: "1f64b-1f3ff",
         native: "🙋🏿",
         x: 34,
-        y: 44
+        y: 45
       }
     ],
     version: 1
@@ -9771,37 +10575,37 @@ const emojis = {
         unified: "1f64b-200d-2642-fe0f",
         native: "🙋‍♂️",
         x: 34,
-        y: 33
+        y: 34
       },
       {
         unified: "1f64b-1f3fb-200d-2642-fe0f",
         native: "🙋🏻‍♂️",
         x: 34,
-        y: 34
+        y: 35
       },
       {
         unified: "1f64b-1f3fc-200d-2642-fe0f",
         native: "🙋🏼‍♂️",
         x: 34,
-        y: 35
+        y: 36
       },
       {
         unified: "1f64b-1f3fd-200d-2642-fe0f",
         native: "🙋🏽‍♂️",
         x: 34,
-        y: 36
+        y: 37
       },
       {
         unified: "1f64b-1f3fe-200d-2642-fe0f",
         native: "🙋🏾‍♂️",
         x: 34,
-        y: 37
+        y: 38
       },
       {
         unified: "1f64b-1f3ff-200d-2642-fe0f",
         native: "🙋🏿‍♂️",
         x: 34,
-        y: 38
+        y: 39
       }
     ],
     version: 4
@@ -9819,37 +10623,37 @@ const emojis = {
         unified: "1f64b-200d-2640-fe0f",
         native: "🙋‍♀️",
         x: 34,
-        y: 27
+        y: 28
       },
       {
         unified: "1f64b-1f3fb-200d-2640-fe0f",
         native: "🙋🏻‍♀️",
         x: 34,
-        y: 28
+        y: 29
       },
       {
         unified: "1f64b-1f3fc-200d-2640-fe0f",
         native: "🙋🏼‍♀️",
         x: 34,
-        y: 29
+        y: 30
       },
       {
         unified: "1f64b-1f3fd-200d-2640-fe0f",
         native: "🙋🏽‍♀️",
         x: 34,
-        y: 30
+        y: 31
       },
       {
         unified: "1f64b-1f3fe-200d-2640-fe0f",
         native: "🙋🏾‍♀️",
         x: 34,
-        y: 31
+        y: 32
       },
       {
         unified: "1f64b-1f3ff-200d-2640-fe0f",
         native: "🙋🏿‍♀️",
         x: 34,
-        y: 32
+        y: 33
       }
     ],
     version: 4
@@ -9865,37 +10669,37 @@ const emojis = {
         unified: "1f9cf",
         native: "🧏",
         x: 47,
-        y: 5
+        y: 7
       },
       {
         unified: "1f9cf-1f3fb",
         native: "🧏🏻",
         x: 47,
-        y: 6
+        y: 8
       },
       {
         unified: "1f9cf-1f3fc",
         native: "🧏🏼",
         x: 47,
-        y: 7
+        y: 9
       },
       {
         unified: "1f9cf-1f3fd",
         native: "🧏🏽",
         x: 47,
-        y: 8
+        y: 10
       },
       {
         unified: "1f9cf-1f3fe",
         native: "🧏🏾",
         x: 47,
-        y: 9
+        y: 11
       },
       {
         unified: "1f9cf-1f3ff",
         native: "🧏🏿",
         x: 47,
-        y: 10
+        y: 12
       }
     ],
     version: 12
@@ -9910,38 +10714,38 @@ const emojis = {
       {
         unified: "1f9cf-200d-2642-fe0f",
         native: "🧏‍♂️",
-        x: 46,
-        y: 60
+        x: 47,
+        y: 1
       },
       {
         unified: "1f9cf-1f3fb-200d-2642-fe0f",
         native: "🧏🏻‍♂️",
         x: 47,
-        y: 0
+        y: 2
       },
       {
         unified: "1f9cf-1f3fc-200d-2642-fe0f",
         native: "🧏🏼‍♂️",
         x: 47,
-        y: 1
+        y: 3
       },
       {
         unified: "1f9cf-1f3fd-200d-2642-fe0f",
         native: "🧏🏽‍♂️",
         x: 47,
-        y: 2
+        y: 4
       },
       {
         unified: "1f9cf-1f3fe-200d-2642-fe0f",
         native: "🧏🏾‍♂️",
         x: 47,
-        y: 3
+        y: 5
       },
       {
         unified: "1f9cf-1f3ff-200d-2642-fe0f",
         native: "🧏🏿‍♂️",
         x: 47,
-        y: 4
+        y: 6
       }
     ],
     version: 12
@@ -9957,37 +10761,37 @@ const emojis = {
         unified: "1f9cf-200d-2640-fe0f",
         native: "🧏‍♀️",
         x: 46,
-        y: 54
+        y: 56
       },
       {
         unified: "1f9cf-1f3fb-200d-2640-fe0f",
         native: "🧏🏻‍♀️",
         x: 46,
-        y: 55
+        y: 57
       },
       {
         unified: "1f9cf-1f3fc-200d-2640-fe0f",
         native: "🧏🏼‍♀️",
         x: 46,
-        y: 56
+        y: 58
       },
       {
         unified: "1f9cf-1f3fd-200d-2640-fe0f",
         native: "🧏🏽‍♀️",
         x: 46,
-        y: 57
+        y: 59
       },
       {
         unified: "1f9cf-1f3fe-200d-2640-fe0f",
         native: "🧏🏾‍♀️",
         x: 46,
-        y: 58
+        y: 60
       },
       {
         unified: "1f9cf-1f3ff-200d-2640-fe0f",
         native: "🧏🏿‍♀️",
-        x: 46,
-        y: 59
+        x: 47,
+        y: 0
       }
     ],
     version: 12
@@ -10004,37 +10808,37 @@ const emojis = {
         unified: "1f647",
         native: "🙇",
         x: 34,
-        y: 18
+        y: 19
       },
       {
         unified: "1f647-1f3fb",
         native: "🙇🏻",
         x: 34,
-        y: 19
+        y: 20
       },
       {
         unified: "1f647-1f3fc",
         native: "🙇🏼",
         x: 34,
-        y: 20
+        y: 21
       },
       {
         unified: "1f647-1f3fd",
         native: "🙇🏽",
         x: 34,
-        y: 21
+        y: 22
       },
       {
         unified: "1f647-1f3fe",
         native: "🙇🏾",
         x: 34,
-        y: 22
+        y: 23
       },
       {
         unified: "1f647-1f3ff",
         native: "🙇🏿",
         x: 34,
-        y: 23
+        y: 24
       }
     ],
     version: 1
@@ -10051,37 +10855,37 @@ const emojis = {
         unified: "1f647-200d-2642-fe0f",
         native: "🙇‍♂️",
         x: 34,
-        y: 12
+        y: 13
       },
       {
         unified: "1f647-1f3fb-200d-2642-fe0f",
         native: "🙇🏻‍♂️",
         x: 34,
-        y: 13
+        y: 14
       },
       {
         unified: "1f647-1f3fc-200d-2642-fe0f",
         native: "🙇🏼‍♂️",
         x: 34,
-        y: 14
+        y: 15
       },
       {
         unified: "1f647-1f3fd-200d-2642-fe0f",
         native: "🙇🏽‍♂️",
         x: 34,
-        y: 15
+        y: 16
       },
       {
         unified: "1f647-1f3fe-200d-2642-fe0f",
         native: "🙇🏾‍♂️",
         x: 34,
-        y: 16
+        y: 17
       },
       {
         unified: "1f647-1f3ff-200d-2642-fe0f",
         native: "🙇🏿‍♂️",
         x: 34,
-        y: 17
+        y: 18
       }
     ],
     version: 4
@@ -10098,37 +10902,37 @@ const emojis = {
         unified: "1f647-200d-2640-fe0f",
         native: "🙇‍♀️",
         x: 34,
-        y: 6
+        y: 7
       },
       {
         unified: "1f647-1f3fb-200d-2640-fe0f",
         native: "🙇🏻‍♀️",
         x: 34,
-        y: 7
+        y: 8
       },
       {
         unified: "1f647-1f3fc-200d-2640-fe0f",
         native: "🙇🏼‍♀️",
         x: 34,
-        y: 8
+        y: 9
       },
       {
         unified: "1f647-1f3fd-200d-2640-fe0f",
         native: "🙇🏽‍♀️",
         x: 34,
-        y: 9
+        y: 10
       },
       {
         unified: "1f647-1f3fe-200d-2640-fe0f",
         native: "🙇🏾‍♀️",
         x: 34,
-        y: 10
+        y: 11
       },
       {
         unified: "1f647-1f3ff-200d-2640-fe0f",
         native: "🙇🏿‍♀️",
         x: 34,
-        y: 11
+        y: 12
       }
     ],
     version: 4
@@ -10146,37 +10950,37 @@ const emojis = {
         unified: "1f926",
         native: "🤦",
         x: 40,
-        y: 30
+        y: 32
       },
       {
         unified: "1f926-1f3fb",
         native: "🤦🏻",
         x: 40,
-        y: 31
+        y: 33
       },
       {
         unified: "1f926-1f3fc",
         native: "🤦🏼",
         x: 40,
-        y: 32
+        y: 34
       },
       {
         unified: "1f926-1f3fd",
         native: "🤦🏽",
         x: 40,
-        y: 33
+        y: 35
       },
       {
         unified: "1f926-1f3fe",
         native: "🤦🏾",
         x: 40,
-        y: 34
+        y: 36
       },
       {
         unified: "1f926-1f3ff",
         native: "🤦🏿",
         x: 40,
-        y: 35
+        y: 37
       }
     ],
     version: 3
@@ -10194,37 +10998,37 @@ const emojis = {
         unified: "1f926-200d-2642-fe0f",
         native: "🤦‍♂️",
         x: 40,
-        y: 24
+        y: 26
       },
       {
         unified: "1f926-1f3fb-200d-2642-fe0f",
         native: "🤦🏻‍♂️",
         x: 40,
-        y: 25
+        y: 27
       },
       {
         unified: "1f926-1f3fc-200d-2642-fe0f",
         native: "🤦🏼‍♂️",
         x: 40,
-        y: 26
+        y: 28
       },
       {
         unified: "1f926-1f3fd-200d-2642-fe0f",
         native: "🤦🏽‍♂️",
         x: 40,
-        y: 27
+        y: 29
       },
       {
         unified: "1f926-1f3fe-200d-2642-fe0f",
         native: "🤦🏾‍♂️",
         x: 40,
-        y: 28
+        y: 30
       },
       {
         unified: "1f926-1f3ff-200d-2642-fe0f",
         native: "🤦🏿‍♂️",
         x: 40,
-        y: 29
+        y: 31
       }
     ],
     version: 4
@@ -10242,37 +11046,37 @@ const emojis = {
         unified: "1f926-200d-2640-fe0f",
         native: "🤦‍♀️",
         x: 40,
-        y: 18
+        y: 20
       },
       {
         unified: "1f926-1f3fb-200d-2640-fe0f",
         native: "🤦🏻‍♀️",
         x: 40,
-        y: 19
+        y: 21
       },
       {
         unified: "1f926-1f3fc-200d-2640-fe0f",
         native: "🤦🏼‍♀️",
         x: 40,
-        y: 20
+        y: 22
       },
       {
         unified: "1f926-1f3fd-200d-2640-fe0f",
         native: "🤦🏽‍♀️",
         x: 40,
-        y: 21
+        y: 23
       },
       {
         unified: "1f926-1f3fe-200d-2640-fe0f",
         native: "🤦🏾‍♀️",
         x: 40,
-        y: 22
+        y: 24
       },
       {
         unified: "1f926-1f3ff-200d-2640-fe0f",
         native: "🤦🏿‍♀️",
         x: 40,
-        y: 23
+        y: 25
       }
     ],
     version: 4
@@ -10290,37 +11094,37 @@ const emojis = {
         unified: "1f937",
         native: "🤷",
         x: 41,
-        y: 50
+        y: 52
       },
       {
         unified: "1f937-1f3fb",
         native: "🤷🏻",
         x: 41,
-        y: 51
+        y: 53
       },
       {
         unified: "1f937-1f3fc",
         native: "🤷🏼",
         x: 41,
-        y: 52
+        y: 54
       },
       {
         unified: "1f937-1f3fd",
         native: "🤷🏽",
         x: 41,
-        y: 53
+        y: 55
       },
       {
         unified: "1f937-1f3fe",
         native: "🤷🏾",
         x: 41,
-        y: 54
+        y: 56
       },
       {
         unified: "1f937-1f3ff",
         native: "🤷🏿",
         x: 41,
-        y: 55
+        y: 57
       }
     ],
     version: 3
@@ -10340,37 +11144,37 @@ const emojis = {
         unified: "1f937-200d-2642-fe0f",
         native: "🤷‍♂️",
         x: 41,
-        y: 44
+        y: 46
       },
       {
         unified: "1f937-1f3fb-200d-2642-fe0f",
         native: "🤷🏻‍♂️",
         x: 41,
-        y: 45
+        y: 47
       },
       {
         unified: "1f937-1f3fc-200d-2642-fe0f",
         native: "🤷🏼‍♂️",
         x: 41,
-        y: 46
+        y: 48
       },
       {
         unified: "1f937-1f3fd-200d-2642-fe0f",
         native: "🤷🏽‍♂️",
         x: 41,
-        y: 47
+        y: 49
       },
       {
         unified: "1f937-1f3fe-200d-2642-fe0f",
         native: "🤷🏾‍♂️",
         x: 41,
-        y: 48
+        y: 50
       },
       {
         unified: "1f937-1f3ff-200d-2642-fe0f",
         native: "🤷🏿‍♂️",
         x: 41,
-        y: 49
+        y: 51
       }
     ],
     version: 4
@@ -10390,37 +11194,37 @@ const emojis = {
         unified: "1f937-200d-2640-fe0f",
         native: "🤷‍♀️",
         x: 41,
-        y: 38
+        y: 40
       },
       {
         unified: "1f937-1f3fb-200d-2640-fe0f",
         native: "🤷🏻‍♀️",
         x: 41,
-        y: 39
+        y: 41
       },
       {
         unified: "1f937-1f3fc-200d-2640-fe0f",
         native: "🤷🏼‍♀️",
         x: 41,
-        y: 40
+        y: 42
       },
       {
         unified: "1f937-1f3fd-200d-2640-fe0f",
         native: "🤷🏽‍♀️",
         x: 41,
-        y: 41
+        y: 43
       },
       {
         unified: "1f937-1f3fe-200d-2640-fe0f",
         native: "🤷🏾‍♀️",
         x: 41,
-        y: 42
+        y: 44
       },
       {
         unified: "1f937-1f3ff-200d-2640-fe0f",
         native: "🤷🏿‍♀️",
         x: 41,
-        y: 43
+        y: 45
       }
     ],
     version: 4
@@ -10436,37 +11240,37 @@ const emojis = {
         unified: "1f9d1-200d-2695-fe0f",
         native: "🧑‍⚕️",
         x: 49,
-        y: 48
+        y: 50
       },
       {
         unified: "1f9d1-1f3fb-200d-2695-fe0f",
         native: "🧑🏻‍⚕️",
         x: 49,
-        y: 49
+        y: 51
       },
       {
         unified: "1f9d1-1f3fc-200d-2695-fe0f",
         native: "🧑🏼‍⚕️",
         x: 49,
-        y: 50
+        y: 52
       },
       {
         unified: "1f9d1-1f3fd-200d-2695-fe0f",
         native: "🧑🏽‍⚕️",
         x: 49,
-        y: 51
+        y: 53
       },
       {
         unified: "1f9d1-1f3fe-200d-2695-fe0f",
         native: "🧑🏾‍⚕️",
         x: 49,
-        y: 52
+        y: 54
       },
       {
         unified: "1f9d1-1f3ff-200d-2695-fe0f",
         native: "🧑🏿‍⚕️",
         x: 49,
-        y: 53
+        y: 55
       }
     ],
     version: 12.1
@@ -10487,37 +11291,37 @@ const emojis = {
         unified: "1f468-200d-2695-fe0f",
         native: "👨‍⚕️",
         x: 16,
-        y: 4
+        y: 5
       },
       {
         unified: "1f468-1f3fb-200d-2695-fe0f",
         native: "👨🏻‍⚕️",
         x: 16,
-        y: 5
+        y: 6
       },
       {
         unified: "1f468-1f3fc-200d-2695-fe0f",
         native: "👨🏼‍⚕️",
         x: 16,
-        y: 6
+        y: 7
       },
       {
         unified: "1f468-1f3fd-200d-2695-fe0f",
         native: "👨🏽‍⚕️",
         x: 16,
-        y: 7
+        y: 8
       },
       {
         unified: "1f468-1f3fe-200d-2695-fe0f",
         native: "👨🏾‍⚕️",
         x: 16,
-        y: 8
+        y: 9
       },
       {
         unified: "1f468-1f3ff-200d-2695-fe0f",
         native: "👨🏿‍⚕️",
         x: 16,
-        y: 9
+        y: 10
       }
     ],
     version: 4
@@ -10538,37 +11342,37 @@ const emojis = {
         unified: "1f469-200d-2695-fe0f",
         native: "👩‍⚕️",
         x: 19,
-        y: 33
+        y: 34
       },
       {
         unified: "1f469-1f3fb-200d-2695-fe0f",
         native: "👩🏻‍⚕️",
         x: 19,
-        y: 34
+        y: 35
       },
       {
         unified: "1f469-1f3fc-200d-2695-fe0f",
         native: "👩🏼‍⚕️",
         x: 19,
-        y: 35
+        y: 36
       },
       {
         unified: "1f469-1f3fd-200d-2695-fe0f",
         native: "👩🏽‍⚕️",
         x: 19,
-        y: 36
+        y: 37
       },
       {
         unified: "1f469-1f3fe-200d-2695-fe0f",
         native: "👩🏾‍⚕️",
         x: 19,
-        y: 37
+        y: 38
       },
       {
         unified: "1f469-1f3ff-200d-2695-fe0f",
         native: "👩🏿‍⚕️",
         x: 19,
-        y: 38
+        y: 39
       }
     ],
     version: 4
@@ -10584,37 +11388,37 @@ const emojis = {
         unified: "1f9d1-200d-1f393",
         native: "🧑‍🎓",
         x: 47,
-        y: 36
+        y: 38
       },
       {
         unified: "1f9d1-1f3fb-200d-1f393",
         native: "🧑🏻‍🎓",
         x: 47,
-        y: 37
+        y: 39
       },
       {
         unified: "1f9d1-1f3fc-200d-1f393",
         native: "🧑🏼‍🎓",
         x: 47,
-        y: 38
+        y: 40
       },
       {
         unified: "1f9d1-1f3fd-200d-1f393",
         native: "🧑🏽‍🎓",
         x: 47,
-        y: 39
+        y: 41
       },
       {
         unified: "1f9d1-1f3fe-200d-1f393",
         native: "🧑🏾‍🎓",
         x: 47,
-        y: 40
+        y: 42
       },
       {
         unified: "1f9d1-1f3ff-200d-1f393",
         native: "🧑🏿‍🎓",
         x: 47,
-        y: 41
+        y: 43
       }
     ],
     version: 12.1
@@ -10632,37 +11436,37 @@ const emojis = {
         unified: "1f468-200d-1f393",
         native: "👨‍🎓",
         x: 14,
-        y: 3
+        y: 4
       },
       {
         unified: "1f468-1f3fb-200d-1f393",
         native: "👨🏻‍🎓",
         x: 14,
-        y: 4
+        y: 5
       },
       {
         unified: "1f468-1f3fc-200d-1f393",
         native: "👨🏼‍🎓",
         x: 14,
-        y: 5
+        y: 6
       },
       {
         unified: "1f468-1f3fd-200d-1f393",
         native: "👨🏽‍🎓",
         x: 14,
-        y: 6
+        y: 7
       },
       {
         unified: "1f468-1f3fe-200d-1f393",
         native: "👨🏾‍🎓",
         x: 14,
-        y: 7
+        y: 8
       },
       {
         unified: "1f468-1f3ff-200d-1f393",
         native: "👨🏿‍🎓",
         x: 14,
-        y: 8
+        y: 9
       }
     ],
     version: 4
@@ -10680,37 +11484,37 @@ const emojis = {
         unified: "1f469-200d-1f393",
         native: "👩‍🎓",
         x: 17,
-        y: 37
+        y: 38
       },
       {
         unified: "1f469-1f3fb-200d-1f393",
         native: "👩🏻‍🎓",
         x: 17,
-        y: 38
+        y: 39
       },
       {
         unified: "1f469-1f3fc-200d-1f393",
         native: "👩🏼‍🎓",
         x: 17,
-        y: 39
+        y: 40
       },
       {
         unified: "1f469-1f3fd-200d-1f393",
         native: "👩🏽‍🎓",
         x: 17,
-        y: 40
+        y: 41
       },
       {
         unified: "1f469-1f3fe-200d-1f393",
         native: "👩🏾‍🎓",
         x: 17,
-        y: 41
+        y: 42
       },
       {
         unified: "1f469-1f3ff-200d-1f393",
         native: "👩🏿‍🎓",
         x: 17,
-        y: 42
+        y: 43
       }
     ],
     version: 4
@@ -10726,37 +11530,37 @@ const emojis = {
         unified: "1f9d1-200d-1f3eb",
         native: "🧑‍🏫",
         x: 47,
-        y: 54
+        y: 56
       },
       {
         unified: "1f9d1-1f3fb-200d-1f3eb",
         native: "🧑🏻‍🏫",
         x: 47,
-        y: 55
+        y: 57
       },
       {
         unified: "1f9d1-1f3fc-200d-1f3eb",
         native: "🧑🏼‍🏫",
         x: 47,
-        y: 56
+        y: 58
       },
       {
         unified: "1f9d1-1f3fd-200d-1f3eb",
         native: "🧑🏽‍🏫",
         x: 47,
-        y: 57
+        y: 59
       },
       {
         unified: "1f9d1-1f3fe-200d-1f3eb",
         native: "🧑🏾‍🏫",
         x: 47,
-        y: 58
+        y: 60
       },
       {
         unified: "1f9d1-1f3ff-200d-1f3eb",
         native: "🧑🏿‍🏫",
-        x: 47,
-        y: 59
+        x: 48,
+        y: 0
       }
     ],
     version: 12.1
@@ -10775,37 +11579,37 @@ const emojis = {
         unified: "1f468-200d-1f3eb",
         native: "👨‍🏫",
         x: 14,
-        y: 21
+        y: 22
       },
       {
         unified: "1f468-1f3fb-200d-1f3eb",
         native: "👨🏻‍🏫",
         x: 14,
-        y: 22
+        y: 23
       },
       {
         unified: "1f468-1f3fc-200d-1f3eb",
         native: "👨🏼‍🏫",
         x: 14,
-        y: 23
+        y: 24
       },
       {
         unified: "1f468-1f3fd-200d-1f3eb",
         native: "👨🏽‍🏫",
         x: 14,
-        y: 24
+        y: 25
       },
       {
         unified: "1f468-1f3fe-200d-1f3eb",
         native: "👨🏾‍🏫",
         x: 14,
-        y: 25
+        y: 26
       },
       {
         unified: "1f468-1f3ff-200d-1f3eb",
         native: "👨🏿‍🏫",
         x: 14,
-        y: 26
+        y: 27
       }
     ],
     version: 4
@@ -10824,37 +11628,37 @@ const emojis = {
         unified: "1f469-200d-1f3eb",
         native: "👩‍🏫",
         x: 17,
-        y: 55
+        y: 56
       },
       {
         unified: "1f469-1f3fb-200d-1f3eb",
         native: "👩🏻‍🏫",
         x: 17,
-        y: 56
+        y: 57
       },
       {
         unified: "1f469-1f3fc-200d-1f3eb",
         native: "👩🏼‍🏫",
         x: 17,
-        y: 57
+        y: 58
       },
       {
         unified: "1f469-1f3fd-200d-1f3eb",
         native: "👩🏽‍🏫",
         x: 17,
-        y: 58
+        y: 59
       },
       {
         unified: "1f469-1f3fe-200d-1f3eb",
         native: "👩🏾‍🏫",
         x: 17,
-        y: 59
+        y: 60
       },
       {
         unified: "1f469-1f3ff-200d-1f3eb",
         native: "👩🏿‍🏫",
-        x: 17,
-        y: 60
+        x: 18,
+        y: 0
       }
     ],
     version: 4
@@ -10870,37 +11674,37 @@ const emojis = {
         unified: "1f9d1-200d-2696-fe0f",
         native: "🧑‍⚖️",
         x: 49,
-        y: 54
+        y: 56
       },
       {
         unified: "1f9d1-1f3fb-200d-2696-fe0f",
         native: "🧑🏻‍⚖️",
         x: 49,
-        y: 55
+        y: 57
       },
       {
         unified: "1f9d1-1f3fc-200d-2696-fe0f",
         native: "🧑🏼‍⚖️",
         x: 49,
-        y: 56
+        y: 58
       },
       {
         unified: "1f9d1-1f3fd-200d-2696-fe0f",
         native: "🧑🏽‍⚖️",
         x: 49,
-        y: 57
+        y: 59
       },
       {
         unified: "1f9d1-1f3fe-200d-2696-fe0f",
         native: "🧑🏾‍⚖️",
         x: 49,
-        y: 58
+        y: 60
       },
       {
         unified: "1f9d1-1f3ff-200d-2696-fe0f",
         native: "🧑🏿‍⚖️",
-        x: 49,
-        y: 59
+        x: 50,
+        y: 0
       }
     ],
     version: 12.1
@@ -10919,37 +11723,37 @@ const emojis = {
         unified: "1f468-200d-2696-fe0f",
         native: "👨‍⚖️",
         x: 16,
-        y: 10
+        y: 11
       },
       {
         unified: "1f468-1f3fb-200d-2696-fe0f",
         native: "👨🏻‍⚖️",
         x: 16,
-        y: 11
+        y: 12
       },
       {
         unified: "1f468-1f3fc-200d-2696-fe0f",
         native: "👨🏼‍⚖️",
         x: 16,
-        y: 12
+        y: 13
       },
       {
         unified: "1f468-1f3fd-200d-2696-fe0f",
         native: "👨🏽‍⚖️",
         x: 16,
-        y: 13
+        y: 14
       },
       {
         unified: "1f468-1f3fe-200d-2696-fe0f",
         native: "👨🏾‍⚖️",
         x: 16,
-        y: 14
+        y: 15
       },
       {
         unified: "1f468-1f3ff-200d-2696-fe0f",
         native: "👨🏿‍⚖️",
         x: 16,
-        y: 15
+        y: 16
       }
     ],
     version: 4
@@ -10968,37 +11772,37 @@ const emojis = {
         unified: "1f469-200d-2696-fe0f",
         native: "👩‍⚖️",
         x: 19,
-        y: 39
+        y: 40
       },
       {
         unified: "1f469-1f3fb-200d-2696-fe0f",
         native: "👩🏻‍⚖️",
         x: 19,
-        y: 40
+        y: 41
       },
       {
         unified: "1f469-1f3fc-200d-2696-fe0f",
         native: "👩🏼‍⚖️",
         x: 19,
-        y: 41
+        y: 42
       },
       {
         unified: "1f469-1f3fd-200d-2696-fe0f",
         native: "👩🏽‍⚖️",
         x: 19,
-        y: 42
+        y: 43
       },
       {
         unified: "1f469-1f3fe-200d-2696-fe0f",
         native: "👩🏾‍⚖️",
         x: 19,
-        y: 43
+        y: 44
       },
       {
         unified: "1f469-1f3ff-200d-2696-fe0f",
         native: "👩🏿‍⚖️",
         x: 19,
-        y: 44
+        y: 45
       }
     ],
     version: 4
@@ -11014,37 +11818,37 @@ const emojis = {
         unified: "1f9d1-200d-1f33e",
         native: "🧑‍🌾",
         x: 47,
-        y: 12
+        y: 14
       },
       {
         unified: "1f9d1-1f3fb-200d-1f33e",
         native: "🧑🏻‍🌾",
         x: 47,
-        y: 13
+        y: 15
       },
       {
         unified: "1f9d1-1f3fc-200d-1f33e",
         native: "🧑🏼‍🌾",
         x: 47,
-        y: 14
+        y: 16
       },
       {
         unified: "1f9d1-1f3fd-200d-1f33e",
         native: "🧑🏽‍🌾",
         x: 47,
-        y: 15
+        y: 17
       },
       {
         unified: "1f9d1-1f3fe-200d-1f33e",
         native: "🧑🏾‍🌾",
         x: 47,
-        y: 16
+        y: 18
       },
       {
         unified: "1f9d1-1f3ff-200d-1f33e",
         native: "🧑🏿‍🌾",
         x: 47,
-        y: 17
+        y: 19
       }
     ],
     version: 12.1
@@ -11063,37 +11867,37 @@ const emojis = {
         unified: "1f468-200d-1f33e",
         native: "👨‍🌾",
         x: 13,
-        y: 46
+        y: 47
       },
       {
         unified: "1f468-1f3fb-200d-1f33e",
         native: "👨🏻‍🌾",
         x: 13,
-        y: 47
+        y: 48
       },
       {
         unified: "1f468-1f3fc-200d-1f33e",
         native: "👨🏼‍🌾",
         x: 13,
-        y: 48
+        y: 49
       },
       {
         unified: "1f468-1f3fd-200d-1f33e",
         native: "👨🏽‍🌾",
         x: 13,
-        y: 49
+        y: 50
       },
       {
         unified: "1f468-1f3fe-200d-1f33e",
         native: "👨🏾‍🌾",
         x: 13,
-        y: 50
+        y: 51
       },
       {
         unified: "1f468-1f3ff-200d-1f33e",
         native: "👨🏿‍🌾",
         x: 13,
-        y: 51
+        y: 52
       }
     ],
     version: 4
@@ -11112,37 +11916,37 @@ const emojis = {
         unified: "1f469-200d-1f33e",
         native: "👩‍🌾",
         x: 17,
-        y: 19
+        y: 20
       },
       {
         unified: "1f469-1f3fb-200d-1f33e",
         native: "👩🏻‍🌾",
         x: 17,
-        y: 20
+        y: 21
       },
       {
         unified: "1f469-1f3fc-200d-1f33e",
         native: "👩🏼‍🌾",
         x: 17,
-        y: 21
+        y: 22
       },
       {
         unified: "1f469-1f3fd-200d-1f33e",
         native: "👩🏽‍🌾",
         x: 17,
-        y: 22
+        y: 23
       },
       {
         unified: "1f469-1f3fe-200d-1f33e",
         native: "👩🏾‍🌾",
         x: 17,
-        y: 23
+        y: 24
       },
       {
         unified: "1f469-1f3ff-200d-1f33e",
         native: "👩🏿‍🌾",
         x: 17,
-        y: 24
+        y: 25
       }
     ],
     version: 4
@@ -11160,37 +11964,37 @@ const emojis = {
         unified: "1f9d1-200d-1f373",
         native: "🧑‍🍳",
         x: 47,
-        y: 18
+        y: 20
       },
       {
         unified: "1f9d1-1f3fb-200d-1f373",
         native: "🧑🏻‍🍳",
         x: 47,
-        y: 19
+        y: 21
       },
       {
         unified: "1f9d1-1f3fc-200d-1f373",
         native: "🧑🏼‍🍳",
         x: 47,
-        y: 20
+        y: 22
       },
       {
         unified: "1f9d1-1f3fd-200d-1f373",
         native: "🧑🏽‍🍳",
         x: 47,
-        y: 21
+        y: 23
       },
       {
         unified: "1f9d1-1f3fe-200d-1f373",
         native: "🧑🏾‍🍳",
         x: 47,
-        y: 22
+        y: 24
       },
       {
         unified: "1f9d1-1f3ff-200d-1f373",
         native: "🧑🏿‍🍳",
         x: 47,
-        y: 23
+        y: 25
       }
     ],
     version: 12.1
@@ -11208,37 +12012,37 @@ const emojis = {
         unified: "1f468-200d-1f373",
         native: "👨‍🍳",
         x: 13,
-        y: 52
+        y: 53
       },
       {
         unified: "1f468-1f3fb-200d-1f373",
         native: "👨🏻‍🍳",
         x: 13,
-        y: 53
+        y: 54
       },
       {
         unified: "1f468-1f3fc-200d-1f373",
         native: "👨🏼‍🍳",
         x: 13,
-        y: 54
+        y: 55
       },
       {
         unified: "1f468-1f3fd-200d-1f373",
         native: "👨🏽‍🍳",
         x: 13,
-        y: 55
+        y: 56
       },
       {
         unified: "1f468-1f3fe-200d-1f373",
         native: "👨🏾‍🍳",
         x: 13,
-        y: 56
+        y: 57
       },
       {
         unified: "1f468-1f3ff-200d-1f373",
         native: "👨🏿‍🍳",
         x: 13,
-        y: 57
+        y: 58
       }
     ],
     version: 4
@@ -11256,37 +12060,37 @@ const emojis = {
         unified: "1f469-200d-1f373",
         native: "👩‍🍳",
         x: 17,
-        y: 25
+        y: 26
       },
       {
         unified: "1f469-1f3fb-200d-1f373",
         native: "👩🏻‍🍳",
         x: 17,
-        y: 26
+        y: 27
       },
       {
         unified: "1f469-1f3fc-200d-1f373",
         native: "👩🏼‍🍳",
         x: 17,
-        y: 27
+        y: 28
       },
       {
         unified: "1f469-1f3fd-200d-1f373",
         native: "👩🏽‍🍳",
         x: 17,
-        y: 28
+        y: 29
       },
       {
         unified: "1f469-1f3fe-200d-1f373",
         native: "👩🏾‍🍳",
         x: 17,
-        y: 29
+        y: 30
       },
       {
         unified: "1f469-1f3ff-200d-1f373",
         native: "👩🏿‍🍳",
         x: 17,
-        y: 30
+        y: 31
       }
     ],
     version: 4
@@ -11303,37 +12107,37 @@ const emojis = {
         unified: "1f9d1-200d-1f527",
         native: "🧑‍🔧",
         x: 48,
-        y: 17
+        y: 19
       },
       {
         unified: "1f9d1-1f3fb-200d-1f527",
         native: "🧑🏻‍🔧",
         x: 48,
-        y: 18
+        y: 20
       },
       {
         unified: "1f9d1-1f3fc-200d-1f527",
         native: "🧑🏼‍🔧",
         x: 48,
-        y: 19
+        y: 21
       },
       {
         unified: "1f9d1-1f3fd-200d-1f527",
         native: "🧑🏽‍🔧",
         x: 48,
-        y: 20
+        y: 22
       },
       {
         unified: "1f9d1-1f3fe-200d-1f527",
         native: "🧑🏾‍🔧",
         x: 48,
-        y: 21
+        y: 23
       },
       {
         unified: "1f9d1-1f3ff-200d-1f527",
         native: "🧑🏿‍🔧",
         x: 48,
-        y: 22
+        y: 24
       }
     ],
     version: 12.1
@@ -11351,38 +12155,38 @@ const emojis = {
       {
         unified: "1f468-200d-1f527",
         native: "👨‍🔧",
-        x: 14,
-        y: 60
+        x: 15,
+        y: 0
       },
       {
         unified: "1f468-1f3fb-200d-1f527",
         native: "👨🏻‍🔧",
         x: 15,
-        y: 0
+        y: 1
       },
       {
         unified: "1f468-1f3fc-200d-1f527",
         native: "👨🏼‍🔧",
         x: 15,
-        y: 1
+        y: 2
       },
       {
         unified: "1f468-1f3fd-200d-1f527",
         native: "👨🏽‍🔧",
         x: 15,
-        y: 2
+        y: 3
       },
       {
         unified: "1f468-1f3fe-200d-1f527",
         native: "👨🏾‍🔧",
         x: 15,
-        y: 3
+        y: 4
       },
       {
         unified: "1f468-1f3ff-200d-1f527",
         native: "👨🏿‍🔧",
         x: 15,
-        y: 4
+        y: 5
       }
     ],
     version: 4
@@ -11401,37 +12205,37 @@ const emojis = {
         unified: "1f469-200d-1f527",
         native: "👩‍🔧",
         x: 18,
-        y: 28
+        y: 29
       },
       {
         unified: "1f469-1f3fb-200d-1f527",
         native: "👩🏻‍🔧",
         x: 18,
-        y: 29
+        y: 30
       },
       {
         unified: "1f469-1f3fc-200d-1f527",
         native: "👩🏼‍🔧",
         x: 18,
-        y: 30
+        y: 31
       },
       {
         unified: "1f469-1f3fd-200d-1f527",
         native: "👩🏽‍🔧",
         x: 18,
-        y: 31
+        y: 32
       },
       {
         unified: "1f469-1f3fe-200d-1f527",
         native: "👩🏾‍🔧",
         x: 18,
-        y: 32
+        y: 33
       },
       {
         unified: "1f469-1f3ff-200d-1f527",
         native: "👩🏿‍🔧",
         x: 18,
-        y: 33
+        y: 34
       }
     ],
     version: 4
@@ -11446,38 +12250,38 @@ const emojis = {
       {
         unified: "1f9d1-200d-1f3ed",
         native: "🧑‍🏭",
-        x: 47,
-        y: 60
+        x: 48,
+        y: 1
       },
       {
         unified: "1f9d1-1f3fb-200d-1f3ed",
         native: "🧑🏻‍🏭",
         x: 48,
-        y: 0
+        y: 2
       },
       {
         unified: "1f9d1-1f3fc-200d-1f3ed",
         native: "🧑🏼‍🏭",
         x: 48,
-        y: 1
+        y: 3
       },
       {
         unified: "1f9d1-1f3fd-200d-1f3ed",
         native: "🧑🏽‍🏭",
         x: 48,
-        y: 2
+        y: 4
       },
       {
         unified: "1f9d1-1f3fe-200d-1f3ed",
         native: "🧑🏾‍🏭",
         x: 48,
-        y: 3
+        y: 5
       },
       {
         unified: "1f9d1-1f3ff-200d-1f3ed",
         native: "🧑🏿‍🏭",
         x: 48,
-        y: 4
+        y: 6
       }
     ],
     version: 12.1
@@ -11497,37 +12301,37 @@ const emojis = {
         unified: "1f468-200d-1f3ed",
         native: "👨‍🏭",
         x: 14,
-        y: 27
+        y: 28
       },
       {
         unified: "1f468-1f3fb-200d-1f3ed",
         native: "👨🏻‍🏭",
         x: 14,
-        y: 28
+        y: 29
       },
       {
         unified: "1f468-1f3fc-200d-1f3ed",
         native: "👨🏼‍🏭",
         x: 14,
-        y: 29
+        y: 30
       },
       {
         unified: "1f468-1f3fd-200d-1f3ed",
         native: "👨🏽‍🏭",
         x: 14,
-        y: 30
+        y: 31
       },
       {
         unified: "1f468-1f3fe-200d-1f3ed",
         native: "👨🏾‍🏭",
         x: 14,
-        y: 31
+        y: 32
       },
       {
         unified: "1f468-1f3ff-200d-1f3ed",
         native: "👨🏿‍🏭",
         x: 14,
-        y: 32
+        y: 33
       }
     ],
     version: 4
@@ -11547,37 +12351,37 @@ const emojis = {
         unified: "1f469-200d-1f3ed",
         native: "👩‍🏭",
         x: 18,
-        y: 0
+        y: 1
       },
       {
         unified: "1f469-1f3fb-200d-1f3ed",
         native: "👩🏻‍🏭",
         x: 18,
-        y: 1
+        y: 2
       },
       {
         unified: "1f469-1f3fc-200d-1f3ed",
         native: "👩🏼‍🏭",
         x: 18,
-        y: 2
+        y: 3
       },
       {
         unified: "1f469-1f3fd-200d-1f3ed",
         native: "👩🏽‍🏭",
         x: 18,
-        y: 3
+        y: 4
       },
       {
         unified: "1f469-1f3fe-200d-1f3ed",
         native: "👩🏾‍🏭",
         x: 18,
-        y: 4
+        y: 5
       },
       {
         unified: "1f469-1f3ff-200d-1f3ed",
         native: "👩🏿‍🏭",
         x: 18,
-        y: 5
+        y: 6
       }
     ],
     version: 4
@@ -11593,37 +12397,37 @@ const emojis = {
         unified: "1f9d1-200d-1f4bc",
         native: "🧑‍💼",
         x: 48,
-        y: 11
+        y: 13
       },
       {
         unified: "1f9d1-1f3fb-200d-1f4bc",
         native: "🧑🏻‍💼",
         x: 48,
-        y: 12
+        y: 14
       },
       {
         unified: "1f9d1-1f3fc-200d-1f4bc",
         native: "🧑🏼‍💼",
         x: 48,
-        y: 13
+        y: 15
       },
       {
         unified: "1f9d1-1f3fd-200d-1f4bc",
         native: "🧑🏽‍💼",
         x: 48,
-        y: 14
+        y: 16
       },
       {
         unified: "1f9d1-1f3fe-200d-1f4bc",
         native: "🧑🏾‍💼",
         x: 48,
-        y: 15
+        y: 17
       },
       {
         unified: "1f9d1-1f3ff-200d-1f4bc",
         native: "🧑🏿‍💼",
         x: 48,
-        y: 16
+        y: 18
       }
     ],
     version: 12.1
@@ -11643,37 +12447,37 @@ const emojis = {
         unified: "1f468-200d-1f4bc",
         native: "👨‍💼",
         x: 14,
-        y: 54
+        y: 55
       },
       {
         unified: "1f468-1f3fb-200d-1f4bc",
         native: "👨🏻‍💼",
         x: 14,
-        y: 55
+        y: 56
       },
       {
         unified: "1f468-1f3fc-200d-1f4bc",
         native: "👨🏼‍💼",
         x: 14,
-        y: 56
+        y: 57
       },
       {
         unified: "1f468-1f3fd-200d-1f4bc",
         native: "👨🏽‍💼",
         x: 14,
-        y: 57
+        y: 58
       },
       {
         unified: "1f468-1f3fe-200d-1f4bc",
         native: "👨🏾‍💼",
         x: 14,
-        y: 58
+        y: 59
       },
       {
         unified: "1f468-1f3ff-200d-1f4bc",
         native: "👨🏿‍💼",
         x: 14,
-        y: 59
+        y: 60
       }
     ],
     version: 4
@@ -11693,37 +12497,37 @@ const emojis = {
         unified: "1f469-200d-1f4bc",
         native: "👩‍💼",
         x: 18,
-        y: 22
+        y: 23
       },
       {
         unified: "1f469-1f3fb-200d-1f4bc",
         native: "👩🏻‍💼",
         x: 18,
-        y: 23
+        y: 24
       },
       {
         unified: "1f469-1f3fc-200d-1f4bc",
         native: "👩🏼‍💼",
         x: 18,
-        y: 24
+        y: 25
       },
       {
         unified: "1f469-1f3fd-200d-1f4bc",
         native: "👩🏽‍💼",
         x: 18,
-        y: 25
+        y: 26
       },
       {
         unified: "1f469-1f3fe-200d-1f4bc",
         native: "👩🏾‍💼",
         x: 18,
-        y: 26
+        y: 27
       },
       {
         unified: "1f469-1f3ff-200d-1f4bc",
         native: "👩🏿‍💼",
         x: 18,
-        y: 27
+        y: 28
       }
     ],
     version: 4
@@ -11739,37 +12543,37 @@ const emojis = {
         unified: "1f9d1-200d-1f52c",
         native: "🧑‍🔬",
         x: 48,
-        y: 23
+        y: 25
       },
       {
         unified: "1f9d1-1f3fb-200d-1f52c",
         native: "🧑🏻‍🔬",
         x: 48,
-        y: 24
+        y: 26
       },
       {
         unified: "1f9d1-1f3fc-200d-1f52c",
         native: "🧑🏼‍🔬",
         x: 48,
-        y: 25
+        y: 27
       },
       {
         unified: "1f9d1-1f3fd-200d-1f52c",
         native: "🧑🏽‍🔬",
         x: 48,
-        y: 26
+        y: 28
       },
       {
         unified: "1f9d1-1f3fe-200d-1f52c",
         native: "🧑🏾‍🔬",
         x: 48,
-        y: 27
+        y: 29
       },
       {
         unified: "1f9d1-1f3ff-200d-1f52c",
         native: "🧑🏿‍🔬",
         x: 48,
-        y: 28
+        y: 30
       }
     ],
     version: 12.1
@@ -11790,37 +12594,37 @@ const emojis = {
         unified: "1f468-200d-1f52c",
         native: "👨‍🔬",
         x: 15,
-        y: 5
+        y: 6
       },
       {
         unified: "1f468-1f3fb-200d-1f52c",
         native: "👨🏻‍🔬",
         x: 15,
-        y: 6
+        y: 7
       },
       {
         unified: "1f468-1f3fc-200d-1f52c",
         native: "👨🏼‍🔬",
         x: 15,
-        y: 7
+        y: 8
       },
       {
         unified: "1f468-1f3fd-200d-1f52c",
         native: "👨🏽‍🔬",
         x: 15,
-        y: 8
+        y: 9
       },
       {
         unified: "1f468-1f3fe-200d-1f52c",
         native: "👨🏾‍🔬",
         x: 15,
-        y: 9
+        y: 10
       },
       {
         unified: "1f468-1f3ff-200d-1f52c",
         native: "👨🏿‍🔬",
         x: 15,
-        y: 10
+        y: 11
       }
     ],
     version: 4
@@ -11841,37 +12645,37 @@ const emojis = {
         unified: "1f469-200d-1f52c",
         native: "👩‍🔬",
         x: 18,
-        y: 34
+        y: 35
       },
       {
         unified: "1f469-1f3fb-200d-1f52c",
         native: "👩🏻‍🔬",
         x: 18,
-        y: 35
+        y: 36
       },
       {
         unified: "1f469-1f3fc-200d-1f52c",
         native: "👩🏼‍🔬",
         x: 18,
-        y: 36
+        y: 37
       },
       {
         unified: "1f469-1f3fd-200d-1f52c",
         native: "👩🏽‍🔬",
         x: 18,
-        y: 37
+        y: 38
       },
       {
         unified: "1f469-1f3fe-200d-1f52c",
         native: "👩🏾‍🔬",
         x: 18,
-        y: 38
+        y: 39
       },
       {
         unified: "1f469-1f3ff-200d-1f52c",
         native: "👩🏿‍🔬",
         x: 18,
-        y: 39
+        y: 40
       }
     ],
     version: 4
@@ -11887,37 +12691,37 @@ const emojis = {
         unified: "1f9d1-200d-1f4bb",
         native: "🧑‍💻",
         x: 48,
-        y: 5
+        y: 7
       },
       {
         unified: "1f9d1-1f3fb-200d-1f4bb",
         native: "🧑🏻‍💻",
         x: 48,
-        y: 6
+        y: 8
       },
       {
         unified: "1f9d1-1f3fc-200d-1f4bb",
         native: "🧑🏼‍💻",
         x: 48,
-        y: 7
+        y: 9
       },
       {
         unified: "1f9d1-1f3fd-200d-1f4bb",
         native: "🧑🏽‍💻",
         x: 48,
-        y: 8
+        y: 10
       },
       {
         unified: "1f9d1-1f3fe-200d-1f4bb",
         native: "🧑🏾‍💻",
         x: 48,
-        y: 9
+        y: 11
       },
       {
         unified: "1f9d1-1f3ff-200d-1f4bb",
         native: "🧑🏿‍💻",
         x: 48,
-        y: 10
+        y: 12
       }
     ],
     version: 12.1
@@ -11941,37 +12745,37 @@ const emojis = {
         unified: "1f468-200d-1f4bb",
         native: "👨‍💻",
         x: 14,
-        y: 48
+        y: 49
       },
       {
         unified: "1f468-1f3fb-200d-1f4bb",
         native: "👨🏻‍💻",
         x: 14,
-        y: 49
+        y: 50
       },
       {
         unified: "1f468-1f3fc-200d-1f4bb",
         native: "👨🏼‍💻",
         x: 14,
-        y: 50
+        y: 51
       },
       {
         unified: "1f468-1f3fd-200d-1f4bb",
         native: "👨🏽‍💻",
         x: 14,
-        y: 51
+        y: 52
       },
       {
         unified: "1f468-1f3fe-200d-1f4bb",
         native: "👨🏾‍💻",
         x: 14,
-        y: 52
+        y: 53
       },
       {
         unified: "1f468-1f3ff-200d-1f4bb",
         native: "👨🏿‍💻",
         x: 14,
-        y: 53
+        y: 54
       }
     ],
     version: 4
@@ -11995,37 +12799,37 @@ const emojis = {
         unified: "1f469-200d-1f4bb",
         native: "👩‍💻",
         x: 18,
-        y: 16
+        y: 17
       },
       {
         unified: "1f469-1f3fb-200d-1f4bb",
         native: "👩🏻‍💻",
         x: 18,
-        y: 17
+        y: 18
       },
       {
         unified: "1f469-1f3fc-200d-1f4bb",
         native: "👩🏼‍💻",
         x: 18,
-        y: 18
+        y: 19
       },
       {
         unified: "1f469-1f3fd-200d-1f4bb",
         native: "👩🏽‍💻",
         x: 18,
-        y: 19
+        y: 20
       },
       {
         unified: "1f469-1f3fe-200d-1f4bb",
         native: "👩🏾‍💻",
         x: 18,
-        y: 20
+        y: 21
       },
       {
         unified: "1f469-1f3ff-200d-1f4bb",
         native: "👩🏿‍💻",
         x: 18,
-        y: 21
+        y: 22
       }
     ],
     version: 4
@@ -12043,37 +12847,37 @@ const emojis = {
         unified: "1f9d1-200d-1f3a4",
         native: "🧑‍🎤",
         x: 47,
-        y: 42
+        y: 44
       },
       {
         unified: "1f9d1-1f3fb-200d-1f3a4",
         native: "🧑🏻‍🎤",
         x: 47,
-        y: 43
+        y: 45
       },
       {
         unified: "1f9d1-1f3fc-200d-1f3a4",
         native: "🧑🏼‍🎤",
         x: 47,
-        y: 44
+        y: 46
       },
       {
         unified: "1f9d1-1f3fd-200d-1f3a4",
         native: "🧑🏽‍🎤",
         x: 47,
-        y: 45
+        y: 47
       },
       {
         unified: "1f9d1-1f3fe-200d-1f3a4",
         native: "🧑🏾‍🎤",
         x: 47,
-        y: 46
+        y: 48
       },
       {
         unified: "1f9d1-1f3ff-200d-1f3a4",
         native: "🧑🏿‍🎤",
         x: 47,
-        y: 47
+        y: 49
       }
     ],
     version: 12.1
@@ -12092,37 +12896,37 @@ const emojis = {
         unified: "1f468-200d-1f3a4",
         native: "👨‍🎤",
         x: 14,
-        y: 9
+        y: 10
       },
       {
         unified: "1f468-1f3fb-200d-1f3a4",
         native: "👨🏻‍🎤",
         x: 14,
-        y: 10
+        y: 11
       },
       {
         unified: "1f468-1f3fc-200d-1f3a4",
         native: "👨🏼‍🎤",
         x: 14,
-        y: 11
+        y: 12
       },
       {
         unified: "1f468-1f3fd-200d-1f3a4",
         native: "👨🏽‍🎤",
         x: 14,
-        y: 12
+        y: 13
       },
       {
         unified: "1f468-1f3fe-200d-1f3a4",
         native: "👨🏾‍🎤",
         x: 14,
-        y: 13
+        y: 14
       },
       {
         unified: "1f468-1f3ff-200d-1f3a4",
         native: "👨🏿‍🎤",
         x: 14,
-        y: 14
+        y: 15
       }
     ],
     version: 4
@@ -12141,37 +12945,37 @@ const emojis = {
         unified: "1f469-200d-1f3a4",
         native: "👩‍🎤",
         x: 17,
-        y: 43
+        y: 44
       },
       {
         unified: "1f469-1f3fb-200d-1f3a4",
         native: "👩🏻‍🎤",
         x: 17,
-        y: 44
+        y: 45
       },
       {
         unified: "1f469-1f3fc-200d-1f3a4",
         native: "👩🏼‍🎤",
         x: 17,
-        y: 45
+        y: 46
       },
       {
         unified: "1f469-1f3fd-200d-1f3a4",
         native: "👩🏽‍🎤",
         x: 17,
-        y: 46
+        y: 47
       },
       {
         unified: "1f469-1f3fe-200d-1f3a4",
         native: "👩🏾‍🎤",
         x: 17,
-        y: 47
+        y: 48
       },
       {
         unified: "1f469-1f3ff-200d-1f3a4",
         native: "👩🏿‍🎤",
         x: 17,
-        y: 48
+        y: 49
       }
     ],
     version: 4
@@ -12189,37 +12993,37 @@ const emojis = {
         unified: "1f9d1-200d-1f3a8",
         native: "🧑‍🎨",
         x: 47,
-        y: 48
+        y: 50
       },
       {
         unified: "1f9d1-1f3fb-200d-1f3a8",
         native: "🧑🏻‍🎨",
         x: 47,
-        y: 49
+        y: 51
       },
       {
         unified: "1f9d1-1f3fc-200d-1f3a8",
         native: "🧑🏼‍🎨",
         x: 47,
-        y: 50
+        y: 52
       },
       {
         unified: "1f9d1-1f3fd-200d-1f3a8",
         native: "🧑🏽‍🎨",
         x: 47,
-        y: 51
+        y: 53
       },
       {
         unified: "1f9d1-1f3fe-200d-1f3a8",
         native: "🧑🏾‍🎨",
         x: 47,
-        y: 52
+        y: 54
       },
       {
         unified: "1f9d1-1f3ff-200d-1f3a8",
         native: "🧑🏿‍🎨",
         x: 47,
-        y: 53
+        y: 55
       }
     ],
     version: 12.1
@@ -12237,37 +13041,37 @@ const emojis = {
         unified: "1f468-200d-1f3a8",
         native: "👨‍🎨",
         x: 14,
-        y: 15
+        y: 16
       },
       {
         unified: "1f468-1f3fb-200d-1f3a8",
         native: "👨🏻‍🎨",
         x: 14,
-        y: 16
+        y: 17
       },
       {
         unified: "1f468-1f3fc-200d-1f3a8",
         native: "👨🏼‍🎨",
         x: 14,
-        y: 17
+        y: 18
       },
       {
         unified: "1f468-1f3fd-200d-1f3a8",
         native: "👨🏽‍🎨",
         x: 14,
-        y: 18
+        y: 19
       },
       {
         unified: "1f468-1f3fe-200d-1f3a8",
         native: "👨🏾‍🎨",
         x: 14,
-        y: 19
+        y: 20
       },
       {
         unified: "1f468-1f3ff-200d-1f3a8",
         native: "👨🏿‍🎨",
         x: 14,
-        y: 20
+        y: 21
       }
     ],
     version: 4
@@ -12285,37 +13089,37 @@ const emojis = {
         unified: "1f469-200d-1f3a8",
         native: "👩‍🎨",
         x: 17,
-        y: 49
+        y: 50
       },
       {
         unified: "1f469-1f3fb-200d-1f3a8",
         native: "👩🏻‍🎨",
         x: 17,
-        y: 50
+        y: 51
       },
       {
         unified: "1f469-1f3fc-200d-1f3a8",
         native: "👩🏼‍🎨",
         x: 17,
-        y: 51
+        y: 52
       },
       {
         unified: "1f469-1f3fd-200d-1f3a8",
         native: "👩🏽‍🎨",
         x: 17,
-        y: 52
+        y: 53
       },
       {
         unified: "1f469-1f3fe-200d-1f3a8",
         native: "👩🏾‍🎨",
         x: 17,
-        y: 53
+        y: 54
       },
       {
         unified: "1f469-1f3ff-200d-1f3a8",
         native: "👩🏿‍🎨",
         x: 17,
-        y: 54
+        y: 55
       }
     ],
     version: 4
@@ -12332,38 +13136,38 @@ const emojis = {
       {
         unified: "1f9d1-200d-2708-fe0f",
         native: "🧑‍✈️",
-        x: 49,
-        y: 60
+        x: 50,
+        y: 1
       },
       {
         unified: "1f9d1-1f3fb-200d-2708-fe0f",
         native: "🧑🏻‍✈️",
         x: 50,
-        y: 0
+        y: 2
       },
       {
         unified: "1f9d1-1f3fc-200d-2708-fe0f",
         native: "🧑🏼‍✈️",
         x: 50,
-        y: 1
+        y: 3
       },
       {
         unified: "1f9d1-1f3fd-200d-2708-fe0f",
         native: "🧑🏽‍✈️",
         x: 50,
-        y: 2
+        y: 4
       },
       {
         unified: "1f9d1-1f3fe-200d-2708-fe0f",
         native: "🧑🏾‍✈️",
         x: 50,
-        y: 3
+        y: 5
       },
       {
         unified: "1f9d1-1f3ff-200d-2708-fe0f",
         native: "🧑🏿‍✈️",
         x: 50,
-        y: 4
+        y: 6
       }
     ],
     version: 12.1
@@ -12382,37 +13186,37 @@ const emojis = {
         unified: "1f468-200d-2708-fe0f",
         native: "👨‍✈️",
         x: 16,
-        y: 16
+        y: 17
       },
       {
         unified: "1f468-1f3fb-200d-2708-fe0f",
         native: "👨🏻‍✈️",
         x: 16,
-        y: 17
+        y: 18
       },
       {
         unified: "1f468-1f3fc-200d-2708-fe0f",
         native: "👨🏼‍✈️",
         x: 16,
-        y: 18
+        y: 19
       },
       {
         unified: "1f468-1f3fd-200d-2708-fe0f",
         native: "👨🏽‍✈️",
         x: 16,
-        y: 19
+        y: 20
       },
       {
         unified: "1f468-1f3fe-200d-2708-fe0f",
         native: "👨🏾‍✈️",
         x: 16,
-        y: 20
+        y: 21
       },
       {
         unified: "1f468-1f3ff-200d-2708-fe0f",
         native: "👨🏿‍✈️",
         x: 16,
-        y: 21
+        y: 22
       }
     ],
     version: 4
@@ -12431,37 +13235,37 @@ const emojis = {
         unified: "1f469-200d-2708-fe0f",
         native: "👩‍✈️",
         x: 19,
-        y: 45
+        y: 46
       },
       {
         unified: "1f469-1f3fb-200d-2708-fe0f",
         native: "👩🏻‍✈️",
         x: 19,
-        y: 46
+        y: 47
       },
       {
         unified: "1f469-1f3fc-200d-2708-fe0f",
         native: "👩🏼‍✈️",
         x: 19,
-        y: 47
+        y: 48
       },
       {
         unified: "1f469-1f3fd-200d-2708-fe0f",
         native: "👩🏽‍✈️",
         x: 19,
-        y: 48
+        y: 49
       },
       {
         unified: "1f469-1f3fe-200d-2708-fe0f",
         native: "👩🏾‍✈️",
         x: 19,
-        y: 49
+        y: 50
       },
       {
         unified: "1f469-1f3ff-200d-2708-fe0f",
         native: "👩🏿‍✈️",
         x: 19,
-        y: 50
+        y: 51
       }
     ],
     version: 4
@@ -12477,37 +13281,37 @@ const emojis = {
         unified: "1f9d1-200d-1f680",
         native: "🧑‍🚀",
         x: 48,
-        y: 29
+        y: 31
       },
       {
         unified: "1f9d1-1f3fb-200d-1f680",
         native: "🧑🏻‍🚀",
         x: 48,
-        y: 30
+        y: 32
       },
       {
         unified: "1f9d1-1f3fc-200d-1f680",
         native: "🧑🏼‍🚀",
         x: 48,
-        y: 31
+        y: 33
       },
       {
         unified: "1f9d1-1f3fd-200d-1f680",
         native: "🧑🏽‍🚀",
         x: 48,
-        y: 32
+        y: 34
       },
       {
         unified: "1f9d1-1f3fe-200d-1f680",
         native: "🧑🏾‍🚀",
         x: 48,
-        y: 33
+        y: 35
       },
       {
         unified: "1f9d1-1f3ff-200d-1f680",
         native: "🧑🏿‍🚀",
         x: 48,
-        y: 34
+        y: 36
       }
     ],
     version: 12.1
@@ -12526,37 +13330,37 @@ const emojis = {
         unified: "1f468-200d-1f680",
         native: "👨‍🚀",
         x: 15,
-        y: 11
+        y: 12
       },
       {
         unified: "1f468-1f3fb-200d-1f680",
         native: "👨🏻‍🚀",
         x: 15,
-        y: 12
+        y: 13
       },
       {
         unified: "1f468-1f3fc-200d-1f680",
         native: "👨🏼‍🚀",
         x: 15,
-        y: 13
+        y: 14
       },
       {
         unified: "1f468-1f3fd-200d-1f680",
         native: "👨🏽‍🚀",
         x: 15,
-        y: 14
+        y: 15
       },
       {
         unified: "1f468-1f3fe-200d-1f680",
         native: "👨🏾‍🚀",
         x: 15,
-        y: 15
+        y: 16
       },
       {
         unified: "1f468-1f3ff-200d-1f680",
         native: "👨🏿‍🚀",
         x: 15,
-        y: 16
+        y: 17
       }
     ],
     version: 4
@@ -12575,37 +13379,37 @@ const emojis = {
         unified: "1f469-200d-1f680",
         native: "👩‍🚀",
         x: 18,
-        y: 40
+        y: 41
       },
       {
         unified: "1f469-1f3fb-200d-1f680",
         native: "👩🏻‍🚀",
         x: 18,
-        y: 41
+        y: 42
       },
       {
         unified: "1f469-1f3fc-200d-1f680",
         native: "👩🏼‍🚀",
         x: 18,
-        y: 42
+        y: 43
       },
       {
         unified: "1f469-1f3fd-200d-1f680",
         native: "👩🏽‍🚀",
         x: 18,
-        y: 43
+        y: 44
       },
       {
         unified: "1f469-1f3fe-200d-1f680",
         native: "👩🏾‍🚀",
         x: 18,
-        y: 44
+        y: 45
       },
       {
         unified: "1f469-1f3ff-200d-1f680",
         native: "👩🏿‍🚀",
         x: 18,
-        y: 45
+        y: 46
       }
     ],
     version: 4
@@ -12621,37 +13425,37 @@ const emojis = {
         unified: "1f9d1-200d-1f692",
         native: "🧑‍🚒",
         x: 48,
-        y: 35
+        y: 37
       },
       {
         unified: "1f9d1-1f3fb-200d-1f692",
         native: "🧑🏻‍🚒",
         x: 48,
-        y: 36
+        y: 38
       },
       {
         unified: "1f9d1-1f3fc-200d-1f692",
         native: "🧑🏼‍🚒",
         x: 48,
-        y: 37
+        y: 39
       },
       {
         unified: "1f9d1-1f3fd-200d-1f692",
         native: "🧑🏽‍🚒",
         x: 48,
-        y: 38
+        y: 40
       },
       {
         unified: "1f9d1-1f3fe-200d-1f692",
         native: "🧑🏾‍🚒",
         x: 48,
-        y: 39
+        y: 41
       },
       {
         unified: "1f9d1-1f3ff-200d-1f692",
         native: "🧑🏿‍🚒",
         x: 48,
-        y: 40
+        y: 42
       }
     ],
     version: 12.1
@@ -12669,37 +13473,37 @@ const emojis = {
         unified: "1f468-200d-1f692",
         native: "👨‍🚒",
         x: 15,
-        y: 17
+        y: 18
       },
       {
         unified: "1f468-1f3fb-200d-1f692",
         native: "👨🏻‍🚒",
         x: 15,
-        y: 18
+        y: 19
       },
       {
         unified: "1f468-1f3fc-200d-1f692",
         native: "👨🏼‍🚒",
         x: 15,
-        y: 19
+        y: 20
       },
       {
         unified: "1f468-1f3fd-200d-1f692",
         native: "👨🏽‍🚒",
         x: 15,
-        y: 20
+        y: 21
       },
       {
         unified: "1f468-1f3fe-200d-1f692",
         native: "👨🏾‍🚒",
         x: 15,
-        y: 21
+        y: 22
       },
       {
         unified: "1f468-1f3ff-200d-1f692",
         native: "👨🏿‍🚒",
         x: 15,
-        y: 22
+        y: 23
       }
     ],
     version: 4
@@ -12717,37 +13521,37 @@ const emojis = {
         unified: "1f469-200d-1f692",
         native: "👩‍🚒",
         x: 18,
-        y: 46
+        y: 47
       },
       {
         unified: "1f469-1f3fb-200d-1f692",
         native: "👩🏻‍🚒",
         x: 18,
-        y: 47
+        y: 48
       },
       {
         unified: "1f469-1f3fc-200d-1f692",
         native: "👩🏼‍🚒",
         x: 18,
-        y: 48
+        y: 49
       },
       {
         unified: "1f469-1f3fd-200d-1f692",
         native: "👩🏽‍🚒",
         x: 18,
-        y: 49
+        y: 50
       },
       {
         unified: "1f469-1f3fe-200d-1f692",
         native: "👩🏾‍🚒",
         x: 18,
-        y: 50
+        y: 51
       },
       {
         unified: "1f469-1f3ff-200d-1f692",
         native: "👩🏿‍🚒",
         x: 18,
-        y: 51
+        y: 52
       }
     ],
     version: 4
@@ -12763,37 +13567,37 @@ const emojis = {
         unified: "1f46e",
         native: "👮",
         x: 23,
-        y: 8
+        y: 9
       },
       {
         unified: "1f46e-1f3fb",
         native: "👮🏻",
         x: 23,
-        y: 9
+        y: 10
       },
       {
         unified: "1f46e-1f3fc",
         native: "👮🏼",
         x: 23,
-        y: 10
+        y: 11
       },
       {
         unified: "1f46e-1f3fd",
         native: "👮🏽",
         x: 23,
-        y: 11
+        y: 12
       },
       {
         unified: "1f46e-1f3fe",
         native: "👮🏾",
         x: 23,
-        y: 12
+        y: 13
       },
       {
         unified: "1f46e-1f3ff",
         native: "👮🏿",
         x: 23,
-        y: 13
+        y: 14
       }
     ],
     version: 1
@@ -12815,37 +13619,37 @@ const emojis = {
         unified: "1f46e-200d-2642-fe0f",
         native: "👮‍♂️",
         x: 23,
-        y: 2
+        y: 3
       },
       {
         unified: "1f46e-1f3fb-200d-2642-fe0f",
         native: "👮🏻‍♂️",
         x: 23,
-        y: 3
+        y: 4
       },
       {
         unified: "1f46e-1f3fc-200d-2642-fe0f",
         native: "👮🏼‍♂️",
         x: 23,
-        y: 4
+        y: 5
       },
       {
         unified: "1f46e-1f3fd-200d-2642-fe0f",
         native: "👮🏽‍♂️",
         x: 23,
-        y: 5
+        y: 6
       },
       {
         unified: "1f46e-1f3fe-200d-2642-fe0f",
         native: "👮🏾‍♂️",
         x: 23,
-        y: 6
+        y: 7
       },
       {
         unified: "1f46e-1f3ff-200d-2642-fe0f",
         native: "👮🏿‍♂️",
         x: 23,
-        y: 7
+        y: 8
       }
     ],
     version: 4
@@ -12867,37 +13671,37 @@ const emojis = {
         unified: "1f46e-200d-2640-fe0f",
         native: "👮‍♀️",
         x: 22,
-        y: 57
+        y: 58
       },
       {
         unified: "1f46e-1f3fb-200d-2640-fe0f",
         native: "👮🏻‍♀️",
         x: 22,
-        y: 58
+        y: 59
       },
       {
         unified: "1f46e-1f3fc-200d-2640-fe0f",
         native: "👮🏼‍♀️",
         x: 22,
-        y: 59
+        y: 60
       },
       {
         unified: "1f46e-1f3fd-200d-2640-fe0f",
         native: "👮🏽‍♀️",
-        x: 22,
-        y: 60
+        x: 23,
+        y: 0
       },
       {
         unified: "1f46e-1f3fe-200d-2640-fe0f",
         native: "👮🏾‍♀️",
         x: 23,
-        y: 0
+        y: 1
       },
       {
         unified: "1f46e-1f3ff-200d-2640-fe0f",
         native: "👮🏿‍♀️",
         x: 23,
-        y: 1
+        y: 2
       }
     ],
     version: 4
@@ -12916,37 +13720,37 @@ const emojis = {
         unified: "1f575-fe0f",
         native: "🕵️",
         x: 31,
-        y: 16
+        y: 17
       },
       {
         unified: "1f575-1f3fb",
         native: "🕵🏻",
         x: 31,
-        y: 17
+        y: 18
       },
       {
         unified: "1f575-1f3fc",
         native: "🕵🏼",
         x: 31,
-        y: 18
+        y: 19
       },
       {
         unified: "1f575-1f3fd",
         native: "🕵🏽",
         x: 31,
-        y: 19
+        y: 20
       },
       {
         unified: "1f575-1f3fe",
         native: "🕵🏾",
         x: 31,
-        y: 20
+        y: 21
       },
       {
         unified: "1f575-1f3ff",
         native: "🕵🏿",
         x: 31,
-        y: 21
+        y: 22
       }
     ],
     version: 1
@@ -12963,37 +13767,37 @@ const emojis = {
         unified: "1f482",
         native: "💂",
         x: 25,
-        y: 40
+        y: 41
       },
       {
         unified: "1f482-1f3fb",
         native: "💂🏻",
         x: 25,
-        y: 41
+        y: 42
       },
       {
         unified: "1f482-1f3fc",
         native: "💂🏼",
         x: 25,
-        y: 42
+        y: 43
       },
       {
         unified: "1f482-1f3fd",
         native: "💂🏽",
         x: 25,
-        y: 43
+        y: 44
       },
       {
         unified: "1f482-1f3fe",
         native: "💂🏾",
         x: 25,
-        y: 44
+        y: 45
       },
       {
         unified: "1f482-1f3ff",
         native: "💂🏿",
         x: 25,
-        y: 45
+        y: 46
       }
     ],
     version: 1
@@ -13014,37 +13818,37 @@ const emojis = {
         unified: "1f482-200d-2642-fe0f",
         native: "💂‍♂️",
         x: 25,
-        y: 34
+        y: 35
       },
       {
         unified: "1f482-1f3fb-200d-2642-fe0f",
         native: "💂🏻‍♂️",
         x: 25,
-        y: 35
+        y: 36
       },
       {
         unified: "1f482-1f3fc-200d-2642-fe0f",
         native: "💂🏼‍♂️",
         x: 25,
-        y: 36
+        y: 37
       },
       {
         unified: "1f482-1f3fd-200d-2642-fe0f",
         native: "💂🏽‍♂️",
         x: 25,
-        y: 37
+        y: 38
       },
       {
         unified: "1f482-1f3fe-200d-2642-fe0f",
         native: "💂🏾‍♂️",
         x: 25,
-        y: 38
+        y: 39
       },
       {
         unified: "1f482-1f3ff-200d-2642-fe0f",
         native: "💂🏿‍♂️",
         x: 25,
-        y: 39
+        y: 40
       }
     ],
     version: 4
@@ -13064,37 +13868,37 @@ const emojis = {
         unified: "1f482-200d-2640-fe0f",
         native: "💂‍♀️",
         x: 25,
-        y: 28
+        y: 29
       },
       {
         unified: "1f482-1f3fb-200d-2640-fe0f",
         native: "💂🏻‍♀️",
         x: 25,
-        y: 29
+        y: 30
       },
       {
         unified: "1f482-1f3fc-200d-2640-fe0f",
         native: "💂🏼‍♀️",
         x: 25,
-        y: 30
+        y: 31
       },
       {
         unified: "1f482-1f3fd-200d-2640-fe0f",
         native: "💂🏽‍♀️",
         x: 25,
-        y: 31
+        y: 32
       },
       {
         unified: "1f482-1f3fe-200d-2640-fe0f",
         native: "💂🏾‍♀️",
         x: 25,
-        y: 32
+        y: 33
       },
       {
         unified: "1f482-1f3ff-200d-2640-fe0f",
         native: "💂🏿‍♀️",
         x: 25,
-        y: 33
+        y: 34
       }
     ],
     version: 4
@@ -13112,37 +13916,37 @@ const emojis = {
         unified: "1f977",
         native: "🥷",
         x: 44,
-        y: 4
+        y: 6
       },
       {
         unified: "1f977-1f3fb",
         native: "🥷🏻",
         x: 44,
-        y: 5
+        y: 7
       },
       {
         unified: "1f977-1f3fc",
         native: "🥷🏼",
         x: 44,
-        y: 6
+        y: 8
       },
       {
         unified: "1f977-1f3fd",
         native: "🥷🏽",
         x: 44,
-        y: 7
+        y: 9
       },
       {
         unified: "1f977-1f3fe",
         native: "🥷🏾",
         x: 44,
-        y: 8
+        y: 10
       },
       {
         unified: "1f977-1f3ff",
         native: "🥷🏿",
         x: 44,
-        y: 9
+        y: 11
       }
     ],
     version: 13
@@ -13159,37 +13963,37 @@ const emojis = {
         unified: "1f477",
         native: "👷",
         x: 24,
-        y: 46
+        y: 47
       },
       {
         unified: "1f477-1f3fb",
         native: "👷🏻",
         x: 24,
-        y: 47
+        y: 48
       },
       {
         unified: "1f477-1f3fc",
         native: "👷🏼",
         x: 24,
-        y: 48
+        y: 49
       },
       {
         unified: "1f477-1f3fd",
         native: "👷🏽",
         x: 24,
-        y: 49
+        y: 50
       },
       {
         unified: "1f477-1f3fe",
         native: "👷🏾",
         x: 24,
-        y: 50
+        y: 51
       },
       {
         unified: "1f477-1f3ff",
         native: "👷🏿",
         x: 24,
-        y: 51
+        y: 52
       }
     ],
     version: 1
@@ -13211,37 +14015,37 @@ const emojis = {
         unified: "1f477-200d-2642-fe0f",
         native: "👷‍♂️",
         x: 24,
-        y: 40
+        y: 41
       },
       {
         unified: "1f477-1f3fb-200d-2642-fe0f",
         native: "👷🏻‍♂️",
         x: 24,
-        y: 41
+        y: 42
       },
       {
         unified: "1f477-1f3fc-200d-2642-fe0f",
         native: "👷🏼‍♂️",
         x: 24,
-        y: 42
+        y: 43
       },
       {
         unified: "1f477-1f3fd-200d-2642-fe0f",
         native: "👷🏽‍♂️",
         x: 24,
-        y: 43
+        y: 44
       },
       {
         unified: "1f477-1f3fe-200d-2642-fe0f",
         native: "👷🏾‍♂️",
         x: 24,
-        y: 44
+        y: 45
       },
       {
         unified: "1f477-1f3ff-200d-2642-fe0f",
         native: "👷🏿‍♂️",
         x: 24,
-        y: 45
+        y: 46
       }
     ],
     version: 4
@@ -13262,40 +14066,87 @@ const emojis = {
         unified: "1f477-200d-2640-fe0f",
         native: "👷‍♀️",
         x: 24,
-        y: 34
+        y: 35
       },
       {
         unified: "1f477-1f3fb-200d-2640-fe0f",
         native: "👷🏻‍♀️",
         x: 24,
-        y: 35
+        y: 36
       },
       {
         unified: "1f477-1f3fc-200d-2640-fe0f",
         native: "👷🏼‍♀️",
         x: 24,
-        y: 36
+        y: 37
       },
       {
         unified: "1f477-1f3fd-200d-2640-fe0f",
         native: "👷🏽‍♀️",
         x: 24,
-        y: 37
+        y: 38
       },
       {
         unified: "1f477-1f3fe-200d-2640-fe0f",
         native: "👷🏾‍♀️",
         x: 24,
-        y: 38
+        y: 39
       },
       {
         unified: "1f477-1f3ff-200d-2640-fe0f",
         native: "👷🏿‍♀️",
         x: 24,
-        y: 39
+        y: 40
       }
     ],
     version: 4
+  },
+  person_with_crown: {
+    id: "person_with_crown",
+    name: "Person with Crown",
+    keywords: [
+      "royalty",
+      "power"
+    ],
+    skins: [
+      {
+        unified: "1fac5",
+        native: "🫅",
+        x: 55,
+        y: 10
+      },
+      {
+        unified: "1fac5-1f3fb",
+        native: "🫅🏻",
+        x: 55,
+        y: 11
+      },
+      {
+        unified: "1fac5-1f3fc",
+        native: "🫅🏼",
+        x: 55,
+        y: 12
+      },
+      {
+        unified: "1fac5-1f3fd",
+        native: "🫅🏽",
+        x: 55,
+        y: 13
+      },
+      {
+        unified: "1fac5-1f3fe",
+        native: "🫅🏾",
+        x: 55,
+        y: 14
+      },
+      {
+        unified: "1fac5-1f3ff",
+        native: "🫅🏿",
+        x: 55,
+        y: 15
+      }
+    ],
+    version: 14
   },
   prince: {
     id: "prince",
@@ -13313,37 +14164,37 @@ const emojis = {
         unified: "1f934",
         native: "🤴",
         x: 41,
-        y: 8
+        y: 10
       },
       {
         unified: "1f934-1f3fb",
         native: "🤴🏻",
         x: 41,
-        y: 9
+        y: 11
       },
       {
         unified: "1f934-1f3fc",
         native: "🤴🏼",
         x: 41,
-        y: 10
+        y: 12
       },
       {
         unified: "1f934-1f3fd",
         native: "🤴🏽",
         x: 41,
-        y: 11
+        y: 13
       },
       {
         unified: "1f934-1f3fe",
         native: "🤴🏾",
         x: 41,
-        y: 12
+        y: 14
       },
       {
         unified: "1f934-1f3ff",
         native: "🤴🏿",
         x: 41,
-        y: 13
+        y: 15
       }
     ],
     version: 3
@@ -13365,37 +14216,37 @@ const emojis = {
         unified: "1f478",
         native: "👸",
         x: 24,
-        y: 52
+        y: 53
       },
       {
         unified: "1f478-1f3fb",
         native: "👸🏻",
         x: 24,
-        y: 53
+        y: 54
       },
       {
         unified: "1f478-1f3fc",
         native: "👸🏼",
         x: 24,
-        y: 54
+        y: 55
       },
       {
         unified: "1f478-1f3fd",
         native: "👸🏽",
         x: 24,
-        y: 55
+        y: 56
       },
       {
         unified: "1f478-1f3fe",
         native: "👸🏾",
         x: 24,
-        y: 56
+        y: 57
       },
       {
         unified: "1f478-1f3ff",
         native: "👸🏿",
         x: 24,
-        y: 57
+        y: 58
       }
     ],
     version: 1
@@ -13413,37 +14264,37 @@ const emojis = {
         unified: "1f473",
         native: "👳",
         x: 24,
-        y: 10
+        y: 11
       },
       {
         unified: "1f473-1f3fb",
         native: "👳🏻",
         x: 24,
-        y: 11
+        y: 12
       },
       {
         unified: "1f473-1f3fc",
         native: "👳🏼",
         x: 24,
-        y: 12
+        y: 13
       },
       {
         unified: "1f473-1f3fd",
         native: "👳🏽",
         x: 24,
-        y: 13
+        y: 14
       },
       {
         unified: "1f473-1f3fe",
         native: "👳🏾",
         x: 24,
-        y: 14
+        y: 15
       },
       {
         unified: "1f473-1f3ff",
         native: "👳🏿",
         x: 24,
-        y: 15
+        y: 16
       }
     ],
     version: 1
@@ -13463,37 +14314,37 @@ const emojis = {
         unified: "1f473-200d-2642-fe0f",
         native: "👳‍♂️",
         x: 24,
-        y: 4
+        y: 5
       },
       {
         unified: "1f473-1f3fb-200d-2642-fe0f",
         native: "👳🏻‍♂️",
         x: 24,
-        y: 5
+        y: 6
       },
       {
         unified: "1f473-1f3fc-200d-2642-fe0f",
         native: "👳🏼‍♂️",
         x: 24,
-        y: 6
+        y: 7
       },
       {
         unified: "1f473-1f3fd-200d-2642-fe0f",
         native: "👳🏽‍♂️",
         x: 24,
-        y: 7
+        y: 8
       },
       {
         unified: "1f473-1f3fe-200d-2642-fe0f",
         native: "👳🏾‍♂️",
         x: 24,
-        y: 8
+        y: 9
       },
       {
         unified: "1f473-1f3ff-200d-2642-fe0f",
         native: "👳🏿‍♂️",
         x: 24,
-        y: 9
+        y: 10
       }
     ],
     version: 4
@@ -13513,37 +14364,37 @@ const emojis = {
         unified: "1f473-200d-2640-fe0f",
         native: "👳‍♀️",
         x: 23,
-        y: 59
+        y: 60
       },
       {
         unified: "1f473-1f3fb-200d-2640-fe0f",
         native: "👳🏻‍♀️",
-        x: 23,
-        y: 60
+        x: 24,
+        y: 0
       },
       {
         unified: "1f473-1f3fc-200d-2640-fe0f",
         native: "👳🏼‍♀️",
         x: 24,
-        y: 0
+        y: 1
       },
       {
         unified: "1f473-1f3fd-200d-2640-fe0f",
         native: "👳🏽‍♀️",
         x: 24,
-        y: 1
+        y: 2
       },
       {
         unified: "1f473-1f3fe-200d-2640-fe0f",
         native: "👳🏾‍♀️",
         x: 24,
-        y: 2
+        y: 3
       },
       {
         unified: "1f473-1f3ff-200d-2640-fe0f",
         native: "👳🏿‍♀️",
         x: 24,
-        y: 3
+        y: 4
       }
     ],
     version: 4
@@ -13562,37 +14413,37 @@ const emojis = {
         unified: "1f472",
         native: "👲",
         x: 23,
-        y: 53
+        y: 54
       },
       {
         unified: "1f472-1f3fb",
         native: "👲🏻",
         x: 23,
-        y: 54
+        y: 55
       },
       {
         unified: "1f472-1f3fc",
         native: "👲🏼",
         x: 23,
-        y: 55
+        y: 56
       },
       {
         unified: "1f472-1f3fd",
         native: "👲🏽",
         x: 23,
-        y: 56
+        y: 57
       },
       {
         unified: "1f472-1f3fe",
         native: "👲🏾",
         x: 23,
-        y: 57
+        y: 58
       },
       {
         unified: "1f472-1f3ff",
         native: "👲🏿",
         x: 23,
-        y: 58
+        y: 59
       }
     ],
     version: 1
@@ -13612,37 +14463,37 @@ const emojis = {
         unified: "1f9d5",
         native: "🧕",
         x: 50,
-        y: 41
+        y: 43
       },
       {
         unified: "1f9d5-1f3fb",
         native: "🧕🏻",
         x: 50,
-        y: 42
+        y: 44
       },
       {
         unified: "1f9d5-1f3fc",
         native: "🧕🏼",
         x: 50,
-        y: 43
+        y: 45
       },
       {
         unified: "1f9d5-1f3fd",
         native: "🧕🏽",
         x: 50,
-        y: 44
+        y: 46
       },
       {
         unified: "1f9d5-1f3fe",
         native: "🧕🏾",
         x: 50,
-        y: 45
+        y: 47
       },
       {
         unified: "1f9d5-1f3ff",
         native: "🧕🏿",
         x: 50,
-        y: 46
+        y: 48
       }
     ],
     version: 5
@@ -13662,37 +14513,37 @@ const emojis = {
         unified: "1f935",
         native: "🤵",
         x: 41,
-        y: 26
+        y: 28
       },
       {
         unified: "1f935-1f3fb",
         native: "🤵🏻",
         x: 41,
-        y: 27
+        y: 29
       },
       {
         unified: "1f935-1f3fc",
         native: "🤵🏼",
         x: 41,
-        y: 28
+        y: 30
       },
       {
         unified: "1f935-1f3fd",
         native: "🤵🏽",
         x: 41,
-        y: 29
+        y: 31
       },
       {
         unified: "1f935-1f3fe",
         native: "🤵🏾",
         x: 41,
-        y: 30
+        y: 32
       },
       {
         unified: "1f935-1f3ff",
         native: "🤵🏿",
         x: 41,
-        y: 31
+        y: 33
       }
     ],
     version: 3
@@ -13709,37 +14560,37 @@ const emojis = {
         unified: "1f935-200d-2642-fe0f",
         native: "🤵‍♂️",
         x: 41,
-        y: 20
+        y: 22
       },
       {
         unified: "1f935-1f3fb-200d-2642-fe0f",
         native: "🤵🏻‍♂️",
         x: 41,
-        y: 21
+        y: 23
       },
       {
         unified: "1f935-1f3fc-200d-2642-fe0f",
         native: "🤵🏼‍♂️",
         x: 41,
-        y: 22
+        y: 24
       },
       {
         unified: "1f935-1f3fd-200d-2642-fe0f",
         native: "🤵🏽‍♂️",
         x: 41,
-        y: 23
+        y: 25
       },
       {
         unified: "1f935-1f3fe-200d-2642-fe0f",
         native: "🤵🏾‍♂️",
         x: 41,
-        y: 24
+        y: 26
       },
       {
         unified: "1f935-1f3ff-200d-2642-fe0f",
         native: "🤵🏿‍♂️",
         x: 41,
-        y: 25
+        y: 27
       }
     ],
     version: 13
@@ -13756,37 +14607,37 @@ const emojis = {
         unified: "1f935-200d-2640-fe0f",
         native: "🤵‍♀️",
         x: 41,
-        y: 14
+        y: 16
       },
       {
         unified: "1f935-1f3fb-200d-2640-fe0f",
         native: "🤵🏻‍♀️",
         x: 41,
-        y: 15
+        y: 17
       },
       {
         unified: "1f935-1f3fc-200d-2640-fe0f",
         native: "🤵🏼‍♀️",
         x: 41,
-        y: 16
+        y: 18
       },
       {
         unified: "1f935-1f3fd-200d-2640-fe0f",
         native: "🤵🏽‍♀️",
         x: 41,
-        y: 17
+        y: 19
       },
       {
         unified: "1f935-1f3fe-200d-2640-fe0f",
         native: "🤵🏾‍♀️",
         x: 41,
-        y: 18
+        y: 20
       },
       {
         unified: "1f935-1f3ff-200d-2640-fe0f",
         native: "🤵🏿‍♀️",
         x: 41,
-        y: 19
+        y: 21
       }
     ],
     version: 13
@@ -13805,37 +14656,37 @@ const emojis = {
         unified: "1f470",
         native: "👰",
         x: 23,
-        y: 29
+        y: 30
       },
       {
         unified: "1f470-1f3fb",
         native: "👰🏻",
         x: 23,
-        y: 30
+        y: 31
       },
       {
         unified: "1f470-1f3fc",
         native: "👰🏼",
         x: 23,
-        y: 31
+        y: 32
       },
       {
         unified: "1f470-1f3fd",
         native: "👰🏽",
         x: 23,
-        y: 32
+        y: 33
       },
       {
         unified: "1f470-1f3fe",
         native: "👰🏾",
         x: 23,
-        y: 33
+        y: 34
       },
       {
         unified: "1f470-1f3ff",
         native: "👰🏿",
         x: 23,
-        y: 34
+        y: 35
       }
     ],
     version: 1
@@ -13852,37 +14703,37 @@ const emojis = {
         unified: "1f470-200d-2642-fe0f",
         native: "👰‍♂️",
         x: 23,
-        y: 23
+        y: 24
       },
       {
         unified: "1f470-1f3fb-200d-2642-fe0f",
         native: "👰🏻‍♂️",
         x: 23,
-        y: 24
+        y: 25
       },
       {
         unified: "1f470-1f3fc-200d-2642-fe0f",
         native: "👰🏼‍♂️",
         x: 23,
-        y: 25
+        y: 26
       },
       {
         unified: "1f470-1f3fd-200d-2642-fe0f",
         native: "👰🏽‍♂️",
         x: 23,
-        y: 26
+        y: 27
       },
       {
         unified: "1f470-1f3fe-200d-2642-fe0f",
         native: "👰🏾‍♂️",
         x: 23,
-        y: 27
+        y: 28
       },
       {
         unified: "1f470-1f3ff-200d-2642-fe0f",
         native: "👰🏿‍♂️",
         x: 23,
-        y: 28
+        y: 29
       }
     ],
     version: 13
@@ -13899,37 +14750,37 @@ const emojis = {
         unified: "1f470-200d-2640-fe0f",
         native: "👰‍♀️",
         x: 23,
-        y: 17
+        y: 18
       },
       {
         unified: "1f470-1f3fb-200d-2640-fe0f",
         native: "👰🏻‍♀️",
         x: 23,
-        y: 18
+        y: 19
       },
       {
         unified: "1f470-1f3fc-200d-2640-fe0f",
         native: "👰🏼‍♀️",
         x: 23,
-        y: 19
+        y: 20
       },
       {
         unified: "1f470-1f3fd-200d-2640-fe0f",
         native: "👰🏽‍♀️",
         x: 23,
-        y: 20
+        y: 21
       },
       {
         unified: "1f470-1f3fe-200d-2640-fe0f",
         native: "👰🏾‍♀️",
         x: 23,
-        y: 21
+        y: 22
       },
       {
         unified: "1f470-1f3ff-200d-2640-fe0f",
         native: "👰🏿‍♀️",
         x: 23,
-        y: 22
+        y: 23
       }
     ],
     version: 13
@@ -13945,40 +14796,134 @@ const emojis = {
         unified: "1f930",
         native: "🤰",
         x: 40,
-        y: 45
+        y: 47
       },
       {
         unified: "1f930-1f3fb",
         native: "🤰🏻",
         x: 40,
-        y: 46
+        y: 48
       },
       {
         unified: "1f930-1f3fc",
         native: "🤰🏼",
         x: 40,
-        y: 47
+        y: 49
       },
       {
         unified: "1f930-1f3fd",
         native: "🤰🏽",
         x: 40,
-        y: 48
+        y: 50
       },
       {
         unified: "1f930-1f3fe",
         native: "🤰🏾",
         x: 40,
-        y: 49
+        y: 51
       },
       {
         unified: "1f930-1f3ff",
         native: "🤰🏿",
         x: 40,
-        y: 50
+        y: 52
       }
     ],
     version: 3
+  },
+  pregnant_man: {
+    id: "pregnant_man",
+    name: "Pregnant Man",
+    keywords: [
+      "baby",
+      "belly"
+    ],
+    skins: [
+      {
+        unified: "1fac3",
+        native: "🫃",
+        x: 54,
+        y: 59
+      },
+      {
+        unified: "1fac3-1f3fb",
+        native: "🫃🏻",
+        x: 54,
+        y: 60
+      },
+      {
+        unified: "1fac3-1f3fc",
+        native: "🫃🏼",
+        x: 55,
+        y: 0
+      },
+      {
+        unified: "1fac3-1f3fd",
+        native: "🫃🏽",
+        x: 55,
+        y: 1
+      },
+      {
+        unified: "1fac3-1f3fe",
+        native: "🫃🏾",
+        x: 55,
+        y: 2
+      },
+      {
+        unified: "1fac3-1f3ff",
+        native: "🫃🏿",
+        x: 55,
+        y: 3
+      }
+    ],
+    version: 14
+  },
+  pregnant_person: {
+    id: "pregnant_person",
+    name: "Pregnant Person",
+    keywords: [
+      "baby",
+      "belly"
+    ],
+    skins: [
+      {
+        unified: "1fac4",
+        native: "🫄",
+        x: 55,
+        y: 4
+      },
+      {
+        unified: "1fac4-1f3fb",
+        native: "🫄🏻",
+        x: 55,
+        y: 5
+      },
+      {
+        unified: "1fac4-1f3fc",
+        native: "🫄🏼",
+        x: 55,
+        y: 6
+      },
+      {
+        unified: "1fac4-1f3fd",
+        native: "🫄🏽",
+        x: 55,
+        y: 7
+      },
+      {
+        unified: "1fac4-1f3fe",
+        native: "🫄🏾",
+        x: 55,
+        y: 8
+      },
+      {
+        unified: "1fac4-1f3ff",
+        native: "🫄🏿",
+        x: 55,
+        y: 9
+      }
+    ],
+    version: 14
   },
   "breast-feeding": {
     id: "breast-feeding",
@@ -13994,37 +14939,37 @@ const emojis = {
         unified: "1f931",
         native: "🤱",
         x: 40,
-        y: 51
+        y: 53
       },
       {
         unified: "1f931-1f3fb",
         native: "🤱🏻",
         x: 40,
-        y: 52
+        y: 54
       },
       {
         unified: "1f931-1f3fc",
         native: "🤱🏼",
         x: 40,
-        y: 53
+        y: 55
       },
       {
         unified: "1f931-1f3fd",
         native: "🤱🏽",
         x: 40,
-        y: 54
+        y: 56
       },
       {
         unified: "1f931-1f3fe",
         native: "🤱🏾",
         x: 40,
-        y: 55
+        y: 57
       },
       {
         unified: "1f931-1f3ff",
         native: "🤱🏿",
         x: 40,
-        y: 56
+        y: 58
       }
     ],
     version: 5
@@ -14041,37 +14986,37 @@ const emojis = {
         unified: "1f469-200d-1f37c",
         native: "👩‍🍼",
         x: 17,
-        y: 31
+        y: 32
       },
       {
         unified: "1f469-1f3fb-200d-1f37c",
         native: "👩🏻‍🍼",
         x: 17,
-        y: 32
+        y: 33
       },
       {
         unified: "1f469-1f3fc-200d-1f37c",
         native: "👩🏼‍🍼",
         x: 17,
-        y: 33
+        y: 34
       },
       {
         unified: "1f469-1f3fd-200d-1f37c",
         native: "👩🏽‍🍼",
         x: 17,
-        y: 34
+        y: 35
       },
       {
         unified: "1f469-1f3fe-200d-1f37c",
         native: "👩🏾‍🍼",
         x: 17,
-        y: 35
+        y: 36
       },
       {
         unified: "1f469-1f3ff-200d-1f37c",
         native: "👩🏿‍🍼",
         x: 17,
-        y: 36
+        y: 37
       }
     ],
     version: 13
@@ -14088,37 +15033,37 @@ const emojis = {
         unified: "1f468-200d-1f37c",
         native: "👨‍🍼",
         x: 13,
-        y: 58
+        y: 59
       },
       {
         unified: "1f468-1f3fb-200d-1f37c",
         native: "👨🏻‍🍼",
         x: 13,
-        y: 59
+        y: 60
       },
       {
         unified: "1f468-1f3fc-200d-1f37c",
         native: "👨🏼‍🍼",
-        x: 13,
-        y: 60
+        x: 14,
+        y: 0
       },
       {
         unified: "1f468-1f3fd-200d-1f37c",
         native: "👨🏽‍🍼",
         x: 14,
-        y: 0
+        y: 1
       },
       {
         unified: "1f468-1f3fe-200d-1f37c",
         native: "👨🏾‍🍼",
         x: 14,
-        y: 1
+        y: 2
       },
       {
         unified: "1f468-1f3ff-200d-1f37c",
         native: "👨🏿‍🍼",
         x: 14,
-        y: 2
+        y: 3
       }
     ],
     version: 13
@@ -14135,37 +15080,37 @@ const emojis = {
         unified: "1f9d1-200d-1f37c",
         native: "🧑‍🍼",
         x: 47,
-        y: 24
+        y: 26
       },
       {
         unified: "1f9d1-1f3fb-200d-1f37c",
         native: "🧑🏻‍🍼",
         x: 47,
-        y: 25
+        y: 27
       },
       {
         unified: "1f9d1-1f3fc-200d-1f37c",
         native: "🧑🏼‍🍼",
         x: 47,
-        y: 26
+        y: 28
       },
       {
         unified: "1f9d1-1f3fd-200d-1f37c",
         native: "🧑🏽‍🍼",
         x: 47,
-        y: 27
+        y: 29
       },
       {
         unified: "1f9d1-1f3fe-200d-1f37c",
         native: "🧑🏾‍🍼",
         x: 47,
-        y: 28
+        y: 30
       },
       {
         unified: "1f9d1-1f3ff-200d-1f37c",
         native: "🧑🏿‍🍼",
         x: 47,
-        y: 29
+        y: 31
       }
     ],
     version: 13
@@ -14183,37 +15128,37 @@ const emojis = {
         unified: "1f47c",
         native: "👼",
         x: 25,
-        y: 0
+        y: 1
       },
       {
         unified: "1f47c-1f3fb",
         native: "👼🏻",
         x: 25,
-        y: 1
+        y: 2
       },
       {
         unified: "1f47c-1f3fc",
         native: "👼🏼",
         x: 25,
-        y: 2
+        y: 3
       },
       {
         unified: "1f47c-1f3fd",
         native: "👼🏽",
         x: 25,
-        y: 3
+        y: 4
       },
       {
         unified: "1f47c-1f3fe",
         native: "👼🏾",
         x: 25,
-        y: 4
+        y: 5
       },
       {
         unified: "1f47c-1f3ff",
         native: "👼🏿",
         x: 25,
-        y: 5
+        y: 6
       }
     ],
     version: 1
@@ -14285,37 +15230,37 @@ const emojis = {
         unified: "1f936",
         native: "🤶",
         x: 41,
-        y: 32
+        y: 34
       },
       {
         unified: "1f936-1f3fb",
         native: "🤶🏻",
         x: 41,
-        y: 33
+        y: 35
       },
       {
         unified: "1f936-1f3fc",
         native: "🤶🏼",
         x: 41,
-        y: 34
+        y: 36
       },
       {
         unified: "1f936-1f3fd",
         native: "🤶🏽",
         x: 41,
-        y: 35
+        y: 37
       },
       {
         unified: "1f936-1f3fe",
         native: "🤶🏾",
         x: 41,
-        y: 36
+        y: 38
       },
       {
         unified: "1f936-1f3ff",
         native: "🤶🏿",
         x: 41,
-        y: 37
+        y: 39
       }
     ],
     version: 3
@@ -14331,37 +15276,37 @@ const emojis = {
         unified: "1f9d1-200d-1f384",
         native: "🧑‍🎄",
         x: 47,
-        y: 30
+        y: 32
       },
       {
         unified: "1f9d1-1f3fb-200d-1f384",
         native: "🧑🏻‍🎄",
         x: 47,
-        y: 31
+        y: 33
       },
       {
         unified: "1f9d1-1f3fc-200d-1f384",
         native: "🧑🏼‍🎄",
         x: 47,
-        y: 32
+        y: 34
       },
       {
         unified: "1f9d1-1f3fd-200d-1f384",
         native: "🧑🏽‍🎄",
         x: 47,
-        y: 33
+        y: 35
       },
       {
         unified: "1f9d1-1f3fe-200d-1f384",
         native: "🧑🏾‍🎄",
         x: 47,
-        y: 34
+        y: 36
       },
       {
         unified: "1f9d1-1f3ff-200d-1f384",
         native: "🧑🏿‍🎄",
         x: 47,
-        y: 35
+        y: 37
       }
     ],
     version: 13
@@ -14377,37 +15322,37 @@ const emojis = {
         unified: "1f9b8",
         native: "🦸",
         x: 45,
-        y: 31
+        y: 33
       },
       {
         unified: "1f9b8-1f3fb",
         native: "🦸🏻",
         x: 45,
-        y: 32
+        y: 34
       },
       {
         unified: "1f9b8-1f3fc",
         native: "🦸🏼",
         x: 45,
-        y: 33
+        y: 35
       },
       {
         unified: "1f9b8-1f3fd",
         native: "🦸🏽",
         x: 45,
-        y: 34
+        y: 36
       },
       {
         unified: "1f9b8-1f3fe",
         native: "🦸🏾",
         x: 45,
-        y: 35
+        y: 37
       },
       {
         unified: "1f9b8-1f3ff",
         native: "🦸🏿",
         x: 45,
-        y: 36
+        y: 38
       }
     ],
     version: 11
@@ -14426,37 +15371,37 @@ const emojis = {
         unified: "1f9b8-200d-2642-fe0f",
         native: "🦸‍♂️",
         x: 45,
-        y: 25
+        y: 27
       },
       {
         unified: "1f9b8-1f3fb-200d-2642-fe0f",
         native: "🦸🏻‍♂️",
         x: 45,
-        y: 26
+        y: 28
       },
       {
         unified: "1f9b8-1f3fc-200d-2642-fe0f",
         native: "🦸🏼‍♂️",
         x: 45,
-        y: 27
+        y: 29
       },
       {
         unified: "1f9b8-1f3fd-200d-2642-fe0f",
         native: "🦸🏽‍♂️",
         x: 45,
-        y: 28
+        y: 30
       },
       {
         unified: "1f9b8-1f3fe-200d-2642-fe0f",
         native: "🦸🏾‍♂️",
         x: 45,
-        y: 29
+        y: 31
       },
       {
         unified: "1f9b8-1f3ff-200d-2642-fe0f",
         native: "🦸🏿‍♂️",
         x: 45,
-        y: 30
+        y: 32
       }
     ],
     version: 11
@@ -14475,37 +15420,37 @@ const emojis = {
         unified: "1f9b8-200d-2640-fe0f",
         native: "🦸‍♀️",
         x: 45,
-        y: 19
+        y: 21
       },
       {
         unified: "1f9b8-1f3fb-200d-2640-fe0f",
         native: "🦸🏻‍♀️",
         x: 45,
-        y: 20
+        y: 22
       },
       {
         unified: "1f9b8-1f3fc-200d-2640-fe0f",
         native: "🦸🏼‍♀️",
         x: 45,
-        y: 21
+        y: 23
       },
       {
         unified: "1f9b8-1f3fd-200d-2640-fe0f",
         native: "🦸🏽‍♀️",
         x: 45,
-        y: 22
+        y: 24
       },
       {
         unified: "1f9b8-1f3fe-200d-2640-fe0f",
         native: "🦸🏾‍♀️",
         x: 45,
-        y: 23
+        y: 25
       },
       {
         unified: "1f9b8-1f3ff-200d-2640-fe0f",
         native: "🦸🏿‍♀️",
         x: 45,
-        y: 24
+        y: 26
       }
     ],
     version: 11
@@ -14521,37 +15466,37 @@ const emojis = {
         unified: "1f9b9",
         native: "🦹",
         x: 45,
-        y: 49
+        y: 51
       },
       {
         unified: "1f9b9-1f3fb",
         native: "🦹🏻",
         x: 45,
-        y: 50
+        y: 52
       },
       {
         unified: "1f9b9-1f3fc",
         native: "🦹🏼",
         x: 45,
-        y: 51
+        y: 53
       },
       {
         unified: "1f9b9-1f3fd",
         native: "🦹🏽",
         x: 45,
-        y: 52
+        y: 54
       },
       {
         unified: "1f9b9-1f3fe",
         native: "🦹🏾",
         x: 45,
-        y: 53
+        y: 55
       },
       {
         unified: "1f9b9-1f3ff",
         native: "🦹🏿",
         x: 45,
-        y: 54
+        y: 56
       }
     ],
     version: 11
@@ -14572,37 +15517,37 @@ const emojis = {
         unified: "1f9b9-200d-2642-fe0f",
         native: "🦹‍♂️",
         x: 45,
-        y: 43
+        y: 45
       },
       {
         unified: "1f9b9-1f3fb-200d-2642-fe0f",
         native: "🦹🏻‍♂️",
         x: 45,
-        y: 44
+        y: 46
       },
       {
         unified: "1f9b9-1f3fc-200d-2642-fe0f",
         native: "🦹🏼‍♂️",
         x: 45,
-        y: 45
+        y: 47
       },
       {
         unified: "1f9b9-1f3fd-200d-2642-fe0f",
         native: "🦹🏽‍♂️",
         x: 45,
-        y: 46
+        y: 48
       },
       {
         unified: "1f9b9-1f3fe-200d-2642-fe0f",
         native: "🦹🏾‍♂️",
         x: 45,
-        y: 47
+        y: 49
       },
       {
         unified: "1f9b9-1f3ff-200d-2642-fe0f",
         native: "🦹🏿‍♂️",
         x: 45,
-        y: 48
+        y: 50
       }
     ],
     version: 11
@@ -14623,37 +15568,37 @@ const emojis = {
         unified: "1f9b9-200d-2640-fe0f",
         native: "🦹‍♀️",
         x: 45,
-        y: 37
+        y: 39
       },
       {
         unified: "1f9b9-1f3fb-200d-2640-fe0f",
         native: "🦹🏻‍♀️",
         x: 45,
-        y: 38
+        y: 40
       },
       {
         unified: "1f9b9-1f3fc-200d-2640-fe0f",
         native: "🦹🏼‍♀️",
         x: 45,
-        y: 39
+        y: 41
       },
       {
         unified: "1f9b9-1f3fd-200d-2640-fe0f",
         native: "🦹🏽‍♀️",
         x: 45,
-        y: 40
+        y: 42
       },
       {
         unified: "1f9b9-1f3fe-200d-2640-fe0f",
         native: "🦹🏾‍♀️",
         x: 45,
-        y: 41
+        y: 43
       },
       {
         unified: "1f9b9-1f3ff-200d-2640-fe0f",
         native: "🦹🏿‍♀️",
         x: 45,
-        y: 42
+        y: 44
       }
     ],
     version: 11
@@ -14669,37 +15614,37 @@ const emojis = {
         unified: "1f9d9",
         native: "🧙",
         x: 51,
-        y: 52
+        y: 54
       },
       {
         unified: "1f9d9-1f3fb",
         native: "🧙🏻",
         x: 51,
-        y: 53
+        y: 55
       },
       {
         unified: "1f9d9-1f3fc",
         native: "🧙🏼",
         x: 51,
-        y: 54
+        y: 56
       },
       {
         unified: "1f9d9-1f3fd",
         native: "🧙🏽",
         x: 51,
-        y: 55
+        y: 57
       },
       {
         unified: "1f9d9-1f3fe",
         native: "🧙🏾",
         x: 51,
-        y: 56
+        y: 58
       },
       {
         unified: "1f9d9-1f3ff",
         native: "🧙🏿",
         x: 51,
-        y: 57
+        y: 59
       }
     ],
     version: 5
@@ -14716,37 +15661,37 @@ const emojis = {
         unified: "1f9d9-200d-2642-fe0f",
         native: "🧙‍♂️",
         x: 51,
-        y: 46
+        y: 48
       },
       {
         unified: "1f9d9-1f3fb-200d-2642-fe0f",
         native: "🧙🏻‍♂️",
         x: 51,
-        y: 47
+        y: 49
       },
       {
         unified: "1f9d9-1f3fc-200d-2642-fe0f",
         native: "🧙🏼‍♂️",
         x: 51,
-        y: 48
+        y: 50
       },
       {
         unified: "1f9d9-1f3fd-200d-2642-fe0f",
         native: "🧙🏽‍♂️",
         x: 51,
-        y: 49
+        y: 51
       },
       {
         unified: "1f9d9-1f3fe-200d-2642-fe0f",
         native: "🧙🏾‍♂️",
         x: 51,
-        y: 50
+        y: 52
       },
       {
         unified: "1f9d9-1f3ff-200d-2642-fe0f",
         native: "🧙🏿‍♂️",
         x: 51,
-        y: 51
+        y: 53
       }
     ],
     version: 5
@@ -14763,37 +15708,37 @@ const emojis = {
         unified: "1f9d9-200d-2640-fe0f",
         native: "🧙‍♀️",
         x: 51,
-        y: 40
+        y: 42
       },
       {
         unified: "1f9d9-1f3fb-200d-2640-fe0f",
         native: "🧙🏻‍♀️",
         x: 51,
-        y: 41
+        y: 43
       },
       {
         unified: "1f9d9-1f3fc-200d-2640-fe0f",
         native: "🧙🏼‍♀️",
         x: 51,
-        y: 42
+        y: 44
       },
       {
         unified: "1f9d9-1f3fd-200d-2640-fe0f",
         native: "🧙🏽‍♀️",
         x: 51,
-        y: 43
+        y: 45
       },
       {
         unified: "1f9d9-1f3fe-200d-2640-fe0f",
         native: "🧙🏾‍♀️",
         x: 51,
-        y: 44
+        y: 46
       },
       {
         unified: "1f9d9-1f3ff-200d-2640-fe0f",
         native: "🧙🏿‍♀️",
         x: 51,
-        y: 45
+        y: 47
       }
     ],
     version: 5
@@ -14810,37 +15755,37 @@ const emojis = {
         unified: "1f9da",
         native: "🧚",
         x: 52,
-        y: 9
+        y: 11
       },
       {
         unified: "1f9da-1f3fb",
         native: "🧚🏻",
         x: 52,
-        y: 10
+        y: 12
       },
       {
         unified: "1f9da-1f3fc",
         native: "🧚🏼",
         x: 52,
-        y: 11
+        y: 13
       },
       {
         unified: "1f9da-1f3fd",
         native: "🧚🏽",
         x: 52,
-        y: 12
+        y: 14
       },
       {
         unified: "1f9da-1f3fe",
         native: "🧚🏾",
         x: 52,
-        y: 13
+        y: 15
       },
       {
         unified: "1f9da-1f3ff",
         native: "🧚🏿",
         x: 52,
-        y: 14
+        y: 16
       }
     ],
     version: 5
@@ -14856,37 +15801,37 @@ const emojis = {
         unified: "1f9da-200d-2642-fe0f",
         native: "🧚‍♂️",
         x: 52,
-        y: 3
+        y: 5
       },
       {
         unified: "1f9da-1f3fb-200d-2642-fe0f",
         native: "🧚🏻‍♂️",
         x: 52,
-        y: 4
+        y: 6
       },
       {
         unified: "1f9da-1f3fc-200d-2642-fe0f",
         native: "🧚🏼‍♂️",
         x: 52,
-        y: 5
+        y: 7
       },
       {
         unified: "1f9da-1f3fd-200d-2642-fe0f",
         native: "🧚🏽‍♂️",
         x: 52,
-        y: 6
+        y: 8
       },
       {
         unified: "1f9da-1f3fe-200d-2642-fe0f",
         native: "🧚🏾‍♂️",
         x: 52,
-        y: 7
+        y: 9
       },
       {
         unified: "1f9da-1f3ff-200d-2642-fe0f",
         native: "🧚🏿‍♂️",
         x: 52,
-        y: 8
+        y: 10
       }
     ],
     version: 5
@@ -14902,37 +15847,37 @@ const emojis = {
         unified: "1f9da-200d-2640-fe0f",
         native: "🧚‍♀️",
         x: 51,
-        y: 58
+        y: 60
       },
       {
         unified: "1f9da-1f3fb-200d-2640-fe0f",
         native: "🧚🏻‍♀️",
-        x: 51,
-        y: 59
+        x: 52,
+        y: 0
       },
       {
         unified: "1f9da-1f3fc-200d-2640-fe0f",
         native: "🧚🏼‍♀️",
-        x: 51,
-        y: 60
+        x: 52,
+        y: 1
       },
       {
         unified: "1f9da-1f3fd-200d-2640-fe0f",
         native: "🧚🏽‍♀️",
         x: 52,
-        y: 0
+        y: 2
       },
       {
         unified: "1f9da-1f3fe-200d-2640-fe0f",
         native: "🧚🏾‍♀️",
         x: 52,
-        y: 1
+        y: 3
       },
       {
         unified: "1f9da-1f3ff-200d-2640-fe0f",
         native: "🧚🏿‍♀️",
         x: 52,
-        y: 2
+        y: 4
       }
     ],
     version: 5
@@ -14949,37 +15894,37 @@ const emojis = {
         unified: "1f9db",
         native: "🧛",
         x: 52,
-        y: 27
+        y: 29
       },
       {
         unified: "1f9db-1f3fb",
         native: "🧛🏻",
         x: 52,
-        y: 28
+        y: 30
       },
       {
         unified: "1f9db-1f3fc",
         native: "🧛🏼",
         x: 52,
-        y: 29
+        y: 31
       },
       {
         unified: "1f9db-1f3fd",
         native: "🧛🏽",
         x: 52,
-        y: 30
+        y: 32
       },
       {
         unified: "1f9db-1f3fe",
         native: "🧛🏾",
         x: 52,
-        y: 31
+        y: 33
       },
       {
         unified: "1f9db-1f3ff",
         native: "🧛🏿",
         x: 52,
-        y: 32
+        y: 34
       }
     ],
     version: 5
@@ -14996,37 +15941,37 @@ const emojis = {
         unified: "1f9db-200d-2642-fe0f",
         native: "🧛‍♂️",
         x: 52,
-        y: 21
+        y: 23
       },
       {
         unified: "1f9db-1f3fb-200d-2642-fe0f",
         native: "🧛🏻‍♂️",
         x: 52,
-        y: 22
+        y: 24
       },
       {
         unified: "1f9db-1f3fc-200d-2642-fe0f",
         native: "🧛🏼‍♂️",
         x: 52,
-        y: 23
+        y: 25
       },
       {
         unified: "1f9db-1f3fd-200d-2642-fe0f",
         native: "🧛🏽‍♂️",
         x: 52,
-        y: 24
+        y: 26
       },
       {
         unified: "1f9db-1f3fe-200d-2642-fe0f",
         native: "🧛🏾‍♂️",
         x: 52,
-        y: 25
+        y: 27
       },
       {
         unified: "1f9db-1f3ff-200d-2642-fe0f",
         native: "🧛🏿‍♂️",
         x: 52,
-        y: 26
+        y: 28
       }
     ],
     version: 5
@@ -15042,37 +15987,37 @@ const emojis = {
         unified: "1f9db-200d-2640-fe0f",
         native: "🧛‍♀️",
         x: 52,
-        y: 15
+        y: 17
       },
       {
         unified: "1f9db-1f3fb-200d-2640-fe0f",
         native: "🧛🏻‍♀️",
         x: 52,
-        y: 16
+        y: 18
       },
       {
         unified: "1f9db-1f3fc-200d-2640-fe0f",
         native: "🧛🏼‍♀️",
         x: 52,
-        y: 17
+        y: 19
       },
       {
         unified: "1f9db-1f3fd-200d-2640-fe0f",
         native: "🧛🏽‍♀️",
         x: 52,
-        y: 18
+        y: 20
       },
       {
         unified: "1f9db-1f3fe-200d-2640-fe0f",
         native: "🧛🏾‍♀️",
         x: 52,
-        y: 19
+        y: 21
       },
       {
         unified: "1f9db-1f3ff-200d-2640-fe0f",
         native: "🧛🏿‍♀️",
         x: 52,
-        y: 20
+        y: 22
       }
     ],
     version: 5
@@ -15088,37 +16033,37 @@ const emojis = {
         unified: "1f9dc",
         native: "🧜",
         x: 52,
-        y: 45
+        y: 47
       },
       {
         unified: "1f9dc-1f3fb",
         native: "🧜🏻",
         x: 52,
-        y: 46
+        y: 48
       },
       {
         unified: "1f9dc-1f3fc",
         native: "🧜🏼",
         x: 52,
-        y: 47
+        y: 49
       },
       {
         unified: "1f9dc-1f3fd",
         native: "🧜🏽",
         x: 52,
-        y: 48
+        y: 50
       },
       {
         unified: "1f9dc-1f3fe",
         native: "🧜🏾",
         x: 52,
-        y: 49
+        y: 51
       },
       {
         unified: "1f9dc-1f3ff",
         native: "🧜🏿",
         x: 52,
-        y: 50
+        y: 52
       }
     ],
     version: 5
@@ -15136,37 +16081,37 @@ const emojis = {
         unified: "1f9dc-200d-2642-fe0f",
         native: "🧜‍♂️",
         x: 52,
-        y: 39
+        y: 41
       },
       {
         unified: "1f9dc-1f3fb-200d-2642-fe0f",
         native: "🧜🏻‍♂️",
         x: 52,
-        y: 40
+        y: 42
       },
       {
         unified: "1f9dc-1f3fc-200d-2642-fe0f",
         native: "🧜🏼‍♂️",
         x: 52,
-        y: 41
+        y: 43
       },
       {
         unified: "1f9dc-1f3fd-200d-2642-fe0f",
         native: "🧜🏽‍♂️",
         x: 52,
-        y: 42
+        y: 44
       },
       {
         unified: "1f9dc-1f3fe-200d-2642-fe0f",
         native: "🧜🏾‍♂️",
         x: 52,
-        y: 43
+        y: 45
       },
       {
         unified: "1f9dc-1f3ff-200d-2642-fe0f",
         native: "🧜🏿‍♂️",
         x: 52,
-        y: 44
+        y: 46
       }
     ],
     version: 5
@@ -15185,37 +16130,37 @@ const emojis = {
         unified: "1f9dc-200d-2640-fe0f",
         native: "🧜‍♀️",
         x: 52,
-        y: 33
+        y: 35
       },
       {
         unified: "1f9dc-1f3fb-200d-2640-fe0f",
         native: "🧜🏻‍♀️",
         x: 52,
-        y: 34
+        y: 36
       },
       {
         unified: "1f9dc-1f3fc-200d-2640-fe0f",
         native: "🧜🏼‍♀️",
         x: 52,
-        y: 35
+        y: 37
       },
       {
         unified: "1f9dc-1f3fd-200d-2640-fe0f",
         native: "🧜🏽‍♀️",
         x: 52,
-        y: 36
+        y: 38
       },
       {
         unified: "1f9dc-1f3fe-200d-2640-fe0f",
         native: "🧜🏾‍♀️",
         x: 52,
-        y: 37
+        y: 39
       },
       {
         unified: "1f9dc-1f3ff-200d-2640-fe0f",
         native: "🧜🏿‍♀️",
         x: 52,
-        y: 38
+        y: 40
       }
     ],
     version: 5
@@ -15231,37 +16176,37 @@ const emojis = {
         unified: "1f9dd",
         native: "🧝",
         x: 53,
-        y: 2
+        y: 4
       },
       {
         unified: "1f9dd-1f3fb",
         native: "🧝🏻",
         x: 53,
-        y: 3
+        y: 5
       },
       {
         unified: "1f9dd-1f3fc",
         native: "🧝🏼",
         x: 53,
-        y: 4
+        y: 6
       },
       {
         unified: "1f9dd-1f3fd",
         native: "🧝🏽",
         x: 53,
-        y: 5
+        y: 7
       },
       {
         unified: "1f9dd-1f3fe",
         native: "🧝🏾",
         x: 53,
-        y: 6
+        y: 8
       },
       {
         unified: "1f9dd-1f3ff",
         native: "🧝🏿",
         x: 53,
-        y: 7
+        y: 9
       }
     ],
     version: 5
@@ -15277,37 +16222,37 @@ const emojis = {
         unified: "1f9dd-200d-2642-fe0f",
         native: "🧝‍♂️",
         x: 52,
-        y: 57
+        y: 59
       },
       {
         unified: "1f9dd-1f3fb-200d-2642-fe0f",
         native: "🧝🏻‍♂️",
         x: 52,
-        y: 58
+        y: 60
       },
       {
         unified: "1f9dd-1f3fc-200d-2642-fe0f",
         native: "🧝🏼‍♂️",
-        x: 52,
-        y: 59
+        x: 53,
+        y: 0
       },
       {
         unified: "1f9dd-1f3fd-200d-2642-fe0f",
         native: "🧝🏽‍♂️",
-        x: 52,
-        y: 60
+        x: 53,
+        y: 1
       },
       {
         unified: "1f9dd-1f3fe-200d-2642-fe0f",
         native: "🧝🏾‍♂️",
         x: 53,
-        y: 0
+        y: 2
       },
       {
         unified: "1f9dd-1f3ff-200d-2642-fe0f",
         native: "🧝🏿‍♂️",
         x: 53,
-        y: 1
+        y: 3
       }
     ],
     version: 5
@@ -15323,37 +16268,37 @@ const emojis = {
         unified: "1f9dd-200d-2640-fe0f",
         native: "🧝‍♀️",
         x: 52,
-        y: 51
+        y: 53
       },
       {
         unified: "1f9dd-1f3fb-200d-2640-fe0f",
         native: "🧝🏻‍♀️",
         x: 52,
-        y: 52
+        y: 54
       },
       {
         unified: "1f9dd-1f3fc-200d-2640-fe0f",
         native: "🧝🏼‍♀️",
         x: 52,
-        y: 53
+        y: 55
       },
       {
         unified: "1f9dd-1f3fd-200d-2640-fe0f",
         native: "🧝🏽‍♀️",
         x: 52,
-        y: 54
+        y: 56
       },
       {
         unified: "1f9dd-1f3fe-200d-2640-fe0f",
         native: "🧝🏾‍♀️",
         x: 52,
-        y: 55
+        y: 57
       },
       {
         unified: "1f9dd-1f3ff-200d-2640-fe0f",
         native: "🧝🏿‍♀️",
         x: 52,
-        y: 56
+        y: 58
       }
     ],
     version: 5
@@ -15370,7 +16315,7 @@ const emojis = {
         unified: "1f9de",
         native: "🧞",
         x: 53,
-        y: 10
+        y: 12
       }
     ],
     version: 5
@@ -15386,7 +16331,7 @@ const emojis = {
         unified: "1f9de-200d-2642-fe0f",
         native: "🧞‍♂️",
         x: 53,
-        y: 9
+        y: 11
       }
     ],
     version: 5
@@ -15402,7 +16347,7 @@ const emojis = {
         unified: "1f9de-200d-2640-fe0f",
         native: "🧞‍♀️",
         x: 53,
-        y: 8
+        y: 10
       }
     ],
     version: 5
@@ -15418,7 +16363,7 @@ const emojis = {
         unified: "1f9df",
         native: "🧟",
         x: 53,
-        y: 13
+        y: 15
       }
     ],
     version: 5
@@ -15438,7 +16383,7 @@ const emojis = {
         unified: "1f9df-200d-2642-fe0f",
         native: "🧟‍♂️",
         x: 53,
-        y: 12
+        y: 14
       }
     ],
     version: 5
@@ -15457,10 +16402,27 @@ const emojis = {
         unified: "1f9df-200d-2640-fe0f",
         native: "🧟‍♀️",
         x: 53,
-        y: 11
+        y: 13
       }
     ],
     version: 5
+  },
+  troll: {
+    id: "troll",
+    name: "Troll",
+    keywords: [
+      "mystical",
+      "monster"
+    ],
+    skins: [
+      {
+        unified: "1f9cc",
+        native: "🧌",
+        x: 46,
+        y: 19
+      }
+    ],
+    version: 14
   },
   massage: {
     id: "massage",
@@ -15475,37 +16437,37 @@ const emojis = {
         unified: "1f486",
         native: "💆",
         x: 26,
-        y: 10
+        y: 11
       },
       {
         unified: "1f486-1f3fb",
         native: "💆🏻",
         x: 26,
-        y: 11
+        y: 12
       },
       {
         unified: "1f486-1f3fc",
         native: "💆🏼",
         x: 26,
-        y: 12
+        y: 13
       },
       {
         unified: "1f486-1f3fd",
         native: "💆🏽",
         x: 26,
-        y: 13
+        y: 14
       },
       {
         unified: "1f486-1f3fe",
         native: "💆🏾",
         x: 26,
-        y: 14
+        y: 15
       },
       {
         unified: "1f486-1f3ff",
         native: "💆🏿",
         x: 26,
-        y: 15
+        y: 16
       }
     ],
     version: 1
@@ -15524,37 +16486,37 @@ const emojis = {
         unified: "1f486-200d-2642-fe0f",
         native: "💆‍♂️",
         x: 26,
-        y: 4
+        y: 5
       },
       {
         unified: "1f486-1f3fb-200d-2642-fe0f",
         native: "💆🏻‍♂️",
         x: 26,
-        y: 5
+        y: 6
       },
       {
         unified: "1f486-1f3fc-200d-2642-fe0f",
         native: "💆🏼‍♂️",
         x: 26,
-        y: 6
+        y: 7
       },
       {
         unified: "1f486-1f3fd-200d-2642-fe0f",
         native: "💆🏽‍♂️",
         x: 26,
-        y: 7
+        y: 8
       },
       {
         unified: "1f486-1f3fe-200d-2642-fe0f",
         native: "💆🏾‍♂️",
         x: 26,
-        y: 8
+        y: 9
       },
       {
         unified: "1f486-1f3ff-200d-2642-fe0f",
         native: "💆🏿‍♂️",
         x: 26,
-        y: 9
+        y: 10
       }
     ],
     version: 4
@@ -15573,37 +16535,37 @@ const emojis = {
         unified: "1f486-200d-2640-fe0f",
         native: "💆‍♀️",
         x: 25,
-        y: 59
+        y: 60
       },
       {
         unified: "1f486-1f3fb-200d-2640-fe0f",
         native: "💆🏻‍♀️",
-        x: 25,
-        y: 60
+        x: 26,
+        y: 0
       },
       {
         unified: "1f486-1f3fc-200d-2640-fe0f",
         native: "💆🏼‍♀️",
         x: 26,
-        y: 0
+        y: 1
       },
       {
         unified: "1f486-1f3fd-200d-2640-fe0f",
         native: "💆🏽‍♀️",
         x: 26,
-        y: 1
+        y: 2
       },
       {
         unified: "1f486-1f3fe-200d-2640-fe0f",
         native: "💆🏾‍♀️",
         x: 26,
-        y: 2
+        y: 3
       },
       {
         unified: "1f486-1f3ff-200d-2640-fe0f",
         native: "💆🏿‍♀️",
         x: 26,
-        y: 3
+        y: 4
       }
     ],
     version: 4
@@ -15621,37 +16583,37 @@ const emojis = {
         unified: "1f487",
         native: "💇",
         x: 26,
-        y: 28
+        y: 29
       },
       {
         unified: "1f487-1f3fb",
         native: "💇🏻",
         x: 26,
-        y: 29
+        y: 30
       },
       {
         unified: "1f487-1f3fc",
         native: "💇🏼",
         x: 26,
-        y: 30
+        y: 31
       },
       {
         unified: "1f487-1f3fd",
         native: "💇🏽",
         x: 26,
-        y: 31
+        y: 32
       },
       {
         unified: "1f487-1f3fe",
         native: "💇🏾",
         x: 26,
-        y: 32
+        y: 33
       },
       {
         unified: "1f487-1f3ff",
         native: "💇🏿",
         x: 26,
-        y: 33
+        y: 34
       }
     ],
     version: 1
@@ -15669,37 +16631,37 @@ const emojis = {
         unified: "1f487-200d-2642-fe0f",
         native: "💇‍♂️",
         x: 26,
-        y: 22
+        y: 23
       },
       {
         unified: "1f487-1f3fb-200d-2642-fe0f",
         native: "💇🏻‍♂️",
         x: 26,
-        y: 23
+        y: 24
       },
       {
         unified: "1f487-1f3fc-200d-2642-fe0f",
         native: "💇🏼‍♂️",
         x: 26,
-        y: 24
+        y: 25
       },
       {
         unified: "1f487-1f3fd-200d-2642-fe0f",
         native: "💇🏽‍♂️",
         x: 26,
-        y: 25
+        y: 26
       },
       {
         unified: "1f487-1f3fe-200d-2642-fe0f",
         native: "💇🏾‍♂️",
         x: 26,
-        y: 26
+        y: 27
       },
       {
         unified: "1f487-1f3ff-200d-2642-fe0f",
         native: "💇🏿‍♂️",
         x: 26,
-        y: 27
+        y: 28
       }
     ],
     version: 4
@@ -15717,37 +16679,37 @@ const emojis = {
         unified: "1f487-200d-2640-fe0f",
         native: "💇‍♀️",
         x: 26,
-        y: 16
+        y: 17
       },
       {
         unified: "1f487-1f3fb-200d-2640-fe0f",
         native: "💇🏻‍♀️",
         x: 26,
-        y: 17
+        y: 18
       },
       {
         unified: "1f487-1f3fc-200d-2640-fe0f",
         native: "💇🏼‍♀️",
         x: 26,
-        y: 18
+        y: 19
       },
       {
         unified: "1f487-1f3fd-200d-2640-fe0f",
         native: "💇🏽‍♀️",
         x: 26,
-        y: 19
+        y: 20
       },
       {
         unified: "1f487-1f3fe-200d-2640-fe0f",
         native: "💇🏾‍♀️",
         x: 26,
-        y: 20
+        y: 21
       },
       {
         unified: "1f487-1f3ff-200d-2640-fe0f",
         native: "💇🏿‍♀️",
         x: 26,
-        y: 21
+        y: 22
       }
     ],
     version: 4
@@ -15765,37 +16727,37 @@ const emojis = {
         unified: "1f6b6",
         native: "🚶",
         x: 37,
-        y: 27
+        y: 28
       },
       {
         unified: "1f6b6-1f3fb",
         native: "🚶🏻",
         x: 37,
-        y: 28
+        y: 29
       },
       {
         unified: "1f6b6-1f3fc",
         native: "🚶🏼",
         x: 37,
-        y: 29
+        y: 30
       },
       {
         unified: "1f6b6-1f3fd",
         native: "🚶🏽",
         x: 37,
-        y: 30
+        y: 31
       },
       {
         unified: "1f6b6-1f3fe",
         native: "🚶🏾",
         x: 37,
-        y: 31
+        y: 32
       },
       {
         unified: "1f6b6-1f3ff",
         native: "🚶🏿",
         x: 37,
-        y: 32
+        y: 33
       }
     ],
     version: 1
@@ -15813,37 +16775,37 @@ const emojis = {
         unified: "1f6b6-200d-2642-fe0f",
         native: "🚶‍♂️",
         x: 37,
-        y: 21
+        y: 22
       },
       {
         unified: "1f6b6-1f3fb-200d-2642-fe0f",
         native: "🚶🏻‍♂️",
         x: 37,
-        y: 22
+        y: 23
       },
       {
         unified: "1f6b6-1f3fc-200d-2642-fe0f",
         native: "🚶🏼‍♂️",
         x: 37,
-        y: 23
+        y: 24
       },
       {
         unified: "1f6b6-1f3fd-200d-2642-fe0f",
         native: "🚶🏽‍♂️",
         x: 37,
-        y: 24
+        y: 25
       },
       {
         unified: "1f6b6-1f3fe-200d-2642-fe0f",
         native: "🚶🏾‍♂️",
         x: 37,
-        y: 25
+        y: 26
       },
       {
         unified: "1f6b6-1f3ff-200d-2642-fe0f",
         native: "🚶🏿‍♂️",
         x: 37,
-        y: 26
+        y: 27
       }
     ],
     version: 4
@@ -15862,37 +16824,37 @@ const emojis = {
         unified: "1f6b6-200d-2640-fe0f",
         native: "🚶‍♀️",
         x: 37,
-        y: 15
+        y: 16
       },
       {
         unified: "1f6b6-1f3fb-200d-2640-fe0f",
         native: "🚶🏻‍♀️",
         x: 37,
-        y: 16
+        y: 17
       },
       {
         unified: "1f6b6-1f3fc-200d-2640-fe0f",
         native: "🚶🏼‍♀️",
         x: 37,
-        y: 17
+        y: 18
       },
       {
         unified: "1f6b6-1f3fd-200d-2640-fe0f",
         native: "🚶🏽‍♀️",
         x: 37,
-        y: 18
+        y: 19
       },
       {
         unified: "1f6b6-1f3fe-200d-2640-fe0f",
         native: "🚶🏾‍♀️",
         x: 37,
-        y: 19
+        y: 20
       },
       {
         unified: "1f6b6-1f3ff-200d-2640-fe0f",
         native: "🚶🏿‍♀️",
         x: 37,
-        y: 20
+        y: 21
       }
     ],
     version: 4
@@ -15908,37 +16870,37 @@ const emojis = {
         unified: "1f9cd",
         native: "🧍",
         x: 46,
-        y: 30
+        y: 32
       },
       {
         unified: "1f9cd-1f3fb",
         native: "🧍🏻",
         x: 46,
-        y: 31
+        y: 33
       },
       {
         unified: "1f9cd-1f3fc",
         native: "🧍🏼",
         x: 46,
-        y: 32
+        y: 34
       },
       {
         unified: "1f9cd-1f3fd",
         native: "🧍🏽",
         x: 46,
-        y: 33
+        y: 35
       },
       {
         unified: "1f9cd-1f3fe",
         native: "🧍🏾",
         x: 46,
-        y: 34
+        y: 36
       },
       {
         unified: "1f9cd-1f3ff",
         native: "🧍🏿",
         x: 46,
-        y: 35
+        y: 37
       }
     ],
     version: 12
@@ -15954,37 +16916,37 @@ const emojis = {
         unified: "1f9cd-200d-2642-fe0f",
         native: "🧍‍♂️",
         x: 46,
-        y: 24
+        y: 26
       },
       {
         unified: "1f9cd-1f3fb-200d-2642-fe0f",
         native: "🧍🏻‍♂️",
         x: 46,
-        y: 25
+        y: 27
       },
       {
         unified: "1f9cd-1f3fc-200d-2642-fe0f",
         native: "🧍🏼‍♂️",
         x: 46,
-        y: 26
+        y: 28
       },
       {
         unified: "1f9cd-1f3fd-200d-2642-fe0f",
         native: "🧍🏽‍♂️",
         x: 46,
-        y: 27
+        y: 29
       },
       {
         unified: "1f9cd-1f3fe-200d-2642-fe0f",
         native: "🧍🏾‍♂️",
         x: 46,
-        y: 28
+        y: 30
       },
       {
         unified: "1f9cd-1f3ff-200d-2642-fe0f",
         native: "🧍🏿‍♂️",
         x: 46,
-        y: 29
+        y: 31
       }
     ],
     version: 12
@@ -16000,37 +16962,37 @@ const emojis = {
         unified: "1f9cd-200d-2640-fe0f",
         native: "🧍‍♀️",
         x: 46,
-        y: 18
+        y: 20
       },
       {
         unified: "1f9cd-1f3fb-200d-2640-fe0f",
         native: "🧍🏻‍♀️",
         x: 46,
-        y: 19
+        y: 21
       },
       {
         unified: "1f9cd-1f3fc-200d-2640-fe0f",
         native: "🧍🏼‍♀️",
         x: 46,
-        y: 20
+        y: 22
       },
       {
         unified: "1f9cd-1f3fd-200d-2640-fe0f",
         native: "🧍🏽‍♀️",
         x: 46,
-        y: 21
+        y: 23
       },
       {
         unified: "1f9cd-1f3fe-200d-2640-fe0f",
         native: "🧍🏾‍♀️",
         x: 46,
-        y: 22
+        y: 24
       },
       {
         unified: "1f9cd-1f3ff-200d-2640-fe0f",
         native: "🧍🏿‍♀️",
         x: 46,
-        y: 23
+        y: 25
       }
     ],
     version: 12
@@ -16047,37 +17009,37 @@ const emojis = {
         unified: "1f9ce",
         native: "🧎",
         x: 46,
-        y: 48
+        y: 50
       },
       {
         unified: "1f9ce-1f3fb",
         native: "🧎🏻",
         x: 46,
-        y: 49
+        y: 51
       },
       {
         unified: "1f9ce-1f3fc",
         native: "🧎🏼",
         x: 46,
-        y: 50
+        y: 52
       },
       {
         unified: "1f9ce-1f3fd",
         native: "🧎🏽",
         x: 46,
-        y: 51
+        y: 53
       },
       {
         unified: "1f9ce-1f3fe",
         native: "🧎🏾",
         x: 46,
-        y: 52
+        y: 54
       },
       {
         unified: "1f9ce-1f3ff",
         native: "🧎🏿",
         x: 46,
-        y: 53
+        y: 55
       }
     ],
     version: 12
@@ -16094,37 +17056,37 @@ const emojis = {
         unified: "1f9ce-200d-2642-fe0f",
         native: "🧎‍♂️",
         x: 46,
-        y: 42
+        y: 44
       },
       {
         unified: "1f9ce-1f3fb-200d-2642-fe0f",
         native: "🧎🏻‍♂️",
         x: 46,
-        y: 43
+        y: 45
       },
       {
         unified: "1f9ce-1f3fc-200d-2642-fe0f",
         native: "🧎🏼‍♂️",
         x: 46,
-        y: 44
+        y: 46
       },
       {
         unified: "1f9ce-1f3fd-200d-2642-fe0f",
         native: "🧎🏽‍♂️",
         x: 46,
-        y: 45
+        y: 47
       },
       {
         unified: "1f9ce-1f3fe-200d-2642-fe0f",
         native: "🧎🏾‍♂️",
         x: 46,
-        y: 46
+        y: 48
       },
       {
         unified: "1f9ce-1f3ff-200d-2642-fe0f",
         native: "🧎🏿‍♂️",
         x: 46,
-        y: 47
+        y: 49
       }
     ],
     version: 12
@@ -16141,37 +17103,37 @@ const emojis = {
         unified: "1f9ce-200d-2640-fe0f",
         native: "🧎‍♀️",
         x: 46,
-        y: 36
+        y: 38
       },
       {
         unified: "1f9ce-1f3fb-200d-2640-fe0f",
         native: "🧎🏻‍♀️",
         x: 46,
-        y: 37
+        y: 39
       },
       {
         unified: "1f9ce-1f3fc-200d-2640-fe0f",
         native: "🧎🏼‍♀️",
         x: 46,
-        y: 38
+        y: 40
       },
       {
         unified: "1f9ce-1f3fd-200d-2640-fe0f",
         native: "🧎🏽‍♀️",
         x: 46,
-        y: 39
+        y: 41
       },
       {
         unified: "1f9ce-1f3fe-200d-2640-fe0f",
         native: "🧎🏾‍♀️",
         x: 46,
-        y: 40
+        y: 42
       },
       {
         unified: "1f9ce-1f3ff-200d-2640-fe0f",
         native: "🧎🏿‍♀️",
         x: 46,
-        y: 41
+        y: 43
       }
     ],
     version: 12
@@ -16188,37 +17150,37 @@ const emojis = {
         unified: "1f9d1-200d-1f9af",
         native: "🧑‍🦯",
         x: 49,
-        y: 6
+        y: 8
       },
       {
         unified: "1f9d1-1f3fb-200d-1f9af",
         native: "🧑🏻‍🦯",
         x: 49,
-        y: 7
+        y: 9
       },
       {
         unified: "1f9d1-1f3fc-200d-1f9af",
         native: "🧑🏼‍🦯",
         x: 49,
-        y: 8
+        y: 10
       },
       {
         unified: "1f9d1-1f3fd-200d-1f9af",
         native: "🧑🏽‍🦯",
         x: 49,
-        y: 9
+        y: 11
       },
       {
         unified: "1f9d1-1f3fe-200d-1f9af",
         native: "🧑🏾‍🦯",
         x: 49,
-        y: 10
+        y: 12
       },
       {
         unified: "1f9d1-1f3ff-200d-1f9af",
         native: "🧑🏿‍🦯",
         x: 49,
-        y: 11
+        y: 13
       }
     ],
     version: 12.1
@@ -16235,37 +17197,37 @@ const emojis = {
         unified: "1f468-200d-1f9af",
         native: "👨‍🦯",
         x: 15,
-        y: 23
+        y: 24
       },
       {
         unified: "1f468-1f3fb-200d-1f9af",
         native: "👨🏻‍🦯",
         x: 15,
-        y: 24
+        y: 25
       },
       {
         unified: "1f468-1f3fc-200d-1f9af",
         native: "👨🏼‍🦯",
         x: 15,
-        y: 25
+        y: 26
       },
       {
         unified: "1f468-1f3fd-200d-1f9af",
         native: "👨🏽‍🦯",
         x: 15,
-        y: 26
+        y: 27
       },
       {
         unified: "1f468-1f3fe-200d-1f9af",
         native: "👨🏾‍🦯",
         x: 15,
-        y: 27
+        y: 28
       },
       {
         unified: "1f468-1f3ff-200d-1f9af",
         native: "👨🏿‍🦯",
         x: 15,
-        y: 28
+        y: 29
       }
     ],
     version: 12
@@ -16282,37 +17244,37 @@ const emojis = {
         unified: "1f469-200d-1f9af",
         native: "👩‍🦯",
         x: 18,
-        y: 52
+        y: 53
       },
       {
         unified: "1f469-1f3fb-200d-1f9af",
         native: "👩🏻‍🦯",
         x: 18,
-        y: 53
+        y: 54
       },
       {
         unified: "1f469-1f3fc-200d-1f9af",
         native: "👩🏼‍🦯",
         x: 18,
-        y: 54
+        y: 55
       },
       {
         unified: "1f469-1f3fd-200d-1f9af",
         native: "👩🏽‍🦯",
         x: 18,
-        y: 55
+        y: 56
       },
       {
         unified: "1f469-1f3fe-200d-1f9af",
         native: "👩🏾‍🦯",
         x: 18,
-        y: 56
+        y: 57
       },
       {
         unified: "1f469-1f3ff-200d-1f9af",
         native: "👩🏿‍🦯",
         x: 18,
-        y: 57
+        y: 58
       }
     ],
     version: 12
@@ -16329,37 +17291,37 @@ const emojis = {
         unified: "1f9d1-200d-1f9bc",
         native: "🧑‍🦼",
         x: 49,
-        y: 36
+        y: 38
       },
       {
         unified: "1f9d1-1f3fb-200d-1f9bc",
         native: "🧑🏻‍🦼",
         x: 49,
-        y: 37
+        y: 39
       },
       {
         unified: "1f9d1-1f3fc-200d-1f9bc",
         native: "🧑🏼‍🦼",
         x: 49,
-        y: 38
+        y: 40
       },
       {
         unified: "1f9d1-1f3fd-200d-1f9bc",
         native: "🧑🏽‍🦼",
         x: 49,
-        y: 39
+        y: 41
       },
       {
         unified: "1f9d1-1f3fe-200d-1f9bc",
         native: "🧑🏾‍🦼",
         x: 49,
-        y: 40
+        y: 42
       },
       {
         unified: "1f9d1-1f3ff-200d-1f9bc",
         native: "🧑🏿‍🦼",
         x: 49,
-        y: 41
+        y: 43
       }
     ],
     version: 12.1
@@ -16376,37 +17338,37 @@ const emojis = {
         unified: "1f468-200d-1f9bc",
         native: "👨‍🦼",
         x: 15,
-        y: 53
+        y: 54
       },
       {
         unified: "1f468-1f3fb-200d-1f9bc",
         native: "👨🏻‍🦼",
         x: 15,
-        y: 54
+        y: 55
       },
       {
         unified: "1f468-1f3fc-200d-1f9bc",
         native: "👨🏼‍🦼",
         x: 15,
-        y: 55
+        y: 56
       },
       {
         unified: "1f468-1f3fd-200d-1f9bc",
         native: "👨🏽‍🦼",
         x: 15,
-        y: 56
+        y: 57
       },
       {
         unified: "1f468-1f3fe-200d-1f9bc",
         native: "👨🏾‍🦼",
         x: 15,
-        y: 57
+        y: 58
       },
       {
         unified: "1f468-1f3ff-200d-1f9bc",
         native: "👨🏿‍🦼",
         x: 15,
-        y: 58
+        y: 59
       }
     ],
     version: 12
@@ -16423,37 +17385,37 @@ const emojis = {
         unified: "1f469-200d-1f9bc",
         native: "👩‍🦼",
         x: 19,
-        y: 21
+        y: 22
       },
       {
         unified: "1f469-1f3fb-200d-1f9bc",
         native: "👩🏻‍🦼",
         x: 19,
-        y: 22
+        y: 23
       },
       {
         unified: "1f469-1f3fc-200d-1f9bc",
         native: "👩🏼‍🦼",
         x: 19,
-        y: 23
+        y: 24
       },
       {
         unified: "1f469-1f3fd-200d-1f9bc",
         native: "👩🏽‍🦼",
         x: 19,
-        y: 24
+        y: 25
       },
       {
         unified: "1f469-1f3fe-200d-1f9bc",
         native: "👩🏾‍🦼",
         x: 19,
-        y: 25
+        y: 26
       },
       {
         unified: "1f469-1f3ff-200d-1f9bc",
         native: "👩🏿‍🦼",
         x: 19,
-        y: 26
+        y: 27
       }
     ],
     version: 12
@@ -16470,37 +17432,37 @@ const emojis = {
         unified: "1f9d1-200d-1f9bd",
         native: "🧑‍🦽",
         x: 49,
-        y: 42
+        y: 44
       },
       {
         unified: "1f9d1-1f3fb-200d-1f9bd",
         native: "🧑🏻‍🦽",
         x: 49,
-        y: 43
+        y: 45
       },
       {
         unified: "1f9d1-1f3fc-200d-1f9bd",
         native: "🧑🏼‍🦽",
         x: 49,
-        y: 44
+        y: 46
       },
       {
         unified: "1f9d1-1f3fd-200d-1f9bd",
         native: "🧑🏽‍🦽",
         x: 49,
-        y: 45
+        y: 47
       },
       {
         unified: "1f9d1-1f3fe-200d-1f9bd",
         native: "🧑🏾‍🦽",
         x: 49,
-        y: 46
+        y: 48
       },
       {
         unified: "1f9d1-1f3ff-200d-1f9bd",
         native: "🧑🏿‍🦽",
         x: 49,
-        y: 47
+        y: 49
       }
     ],
     version: 12.1
@@ -16517,37 +17479,37 @@ const emojis = {
         unified: "1f468-200d-1f9bd",
         native: "👨‍🦽",
         x: 15,
-        y: 59
+        y: 60
       },
       {
         unified: "1f468-1f3fb-200d-1f9bd",
         native: "👨🏻‍🦽",
-        x: 15,
-        y: 60
+        x: 16,
+        y: 0
       },
       {
         unified: "1f468-1f3fc-200d-1f9bd",
         native: "👨🏼‍🦽",
         x: 16,
-        y: 0
+        y: 1
       },
       {
         unified: "1f468-1f3fd-200d-1f9bd",
         native: "👨🏽‍🦽",
         x: 16,
-        y: 1
+        y: 2
       },
       {
         unified: "1f468-1f3fe-200d-1f9bd",
         native: "👨🏾‍🦽",
         x: 16,
-        y: 2
+        y: 3
       },
       {
         unified: "1f468-1f3ff-200d-1f9bd",
         native: "👨🏿‍🦽",
         x: 16,
-        y: 3
+        y: 4
       }
     ],
     version: 12
@@ -16564,37 +17526,37 @@ const emojis = {
         unified: "1f469-200d-1f9bd",
         native: "👩‍🦽",
         x: 19,
-        y: 27
+        y: 28
       },
       {
         unified: "1f469-1f3fb-200d-1f9bd",
         native: "👩🏻‍🦽",
         x: 19,
-        y: 28
+        y: 29
       },
       {
         unified: "1f469-1f3fc-200d-1f9bd",
         native: "👩🏼‍🦽",
         x: 19,
-        y: 29
+        y: 30
       },
       {
         unified: "1f469-1f3fd-200d-1f9bd",
         native: "👩🏽‍🦽",
         x: 19,
-        y: 30
+        y: 31
       },
       {
         unified: "1f469-1f3fe-200d-1f9bd",
         native: "👩🏾‍🦽",
         x: 19,
-        y: 31
+        y: 32
       },
       {
         unified: "1f469-1f3ff-200d-1f9bd",
         native: "👩🏿‍🦽",
         x: 19,
-        y: 32
+        y: 33
       }
     ],
     version: 12
@@ -16759,37 +17721,37 @@ const emojis = {
         unified: "1f483",
         native: "💃",
         x: 25,
-        y: 46
+        y: 47
       },
       {
         unified: "1f483-1f3fb",
         native: "💃🏻",
         x: 25,
-        y: 47
+        y: 48
       },
       {
         unified: "1f483-1f3fc",
         native: "💃🏼",
         x: 25,
-        y: 48
+        y: 49
       },
       {
         unified: "1f483-1f3fd",
         native: "💃🏽",
         x: 25,
-        y: 49
+        y: 50
       },
       {
         unified: "1f483-1f3fe",
         native: "💃🏾",
         x: 25,
-        y: 50
+        y: 51
       },
       {
         unified: "1f483-1f3ff",
         native: "💃🏿",
         x: 25,
-        y: 51
+        y: 52
       }
     ],
     version: 1
@@ -16808,37 +17770,37 @@ const emojis = {
         unified: "1f57a",
         native: "🕺",
         x: 31,
-        y: 26
+        y: 27
       },
       {
         unified: "1f57a-1f3fb",
         native: "🕺🏻",
         x: 31,
-        y: 27
+        y: 28
       },
       {
         unified: "1f57a-1f3fc",
         native: "🕺🏼",
         x: 31,
-        y: 28
+        y: 29
       },
       {
         unified: "1f57a-1f3fd",
         native: "🕺🏽",
         x: 31,
-        y: 29
+        y: 30
       },
       {
         unified: "1f57a-1f3fe",
         native: "🕺🏾",
         x: 31,
-        y: 30
+        y: 31
       },
       {
         unified: "1f57a-1f3ff",
         native: "🕺🏿",
         x: 31,
-        y: 31
+        y: 32
       }
     ],
     version: 3
@@ -16858,37 +17820,37 @@ const emojis = {
         unified: "1f574-fe0f",
         native: "🕴️",
         x: 30,
-        y: 59
+        y: 60
       },
       {
         unified: "1f574-1f3fb",
         native: "🕴🏻",
-        x: 30,
-        y: 60
+        x: 31,
+        y: 0
       },
       {
         unified: "1f574-1f3fc",
         native: "🕴🏼",
         x: 31,
-        y: 0
+        y: 1
       },
       {
         unified: "1f574-1f3fd",
         native: "🕴🏽",
         x: 31,
-        y: 1
+        y: 2
       },
       {
         unified: "1f574-1f3fe",
         native: "🕴🏾",
         x: 31,
-        y: 2
+        y: 3
       },
       {
         unified: "1f574-1f3ff",
         native: "🕴🏿",
         x: 31,
-        y: 3
+        y: 4
       }
     ],
     version: 1
@@ -16907,7 +17869,7 @@ const emojis = {
         unified: "1f46f",
         native: "👯",
         x: 23,
-        y: 16
+        y: 17
       }
     ],
     version: 1
@@ -16926,7 +17888,7 @@ const emojis = {
         unified: "1f46f-200d-2642-fe0f",
         native: "👯‍♂️",
         x: 23,
-        y: 15
+        y: 16
       }
     ],
     version: 4
@@ -16945,7 +17907,7 @@ const emojis = {
         unified: "1f46f-200d-2640-fe0f",
         native: "👯‍♀️",
         x: 23,
-        y: 14
+        y: 15
       }
     ],
     version: 4
@@ -16961,38 +17923,38 @@ const emojis = {
       {
         unified: "1f9d6",
         native: "🧖",
-        x: 50,
-        y: 59
+        x: 51,
+        y: 0
       },
       {
         unified: "1f9d6-1f3fb",
         native: "🧖🏻",
-        x: 50,
-        y: 60
+        x: 51,
+        y: 1
       },
       {
         unified: "1f9d6-1f3fc",
         native: "🧖🏼",
         x: 51,
-        y: 0
+        y: 2
       },
       {
         unified: "1f9d6-1f3fd",
         native: "🧖🏽",
         x: 51,
-        y: 1
+        y: 3
       },
       {
         unified: "1f9d6-1f3fe",
         native: "🧖🏾",
         x: 51,
-        y: 2
+        y: 4
       },
       {
         unified: "1f9d6-1f3ff",
         native: "🧖🏿",
         x: 51,
-        y: 3
+        y: 5
       }
     ],
     version: 5
@@ -17011,37 +17973,37 @@ const emojis = {
         unified: "1f9d6-200d-2642-fe0f",
         native: "🧖‍♂️",
         x: 50,
-        y: 53
+        y: 55
       },
       {
         unified: "1f9d6-1f3fb-200d-2642-fe0f",
         native: "🧖🏻‍♂️",
         x: 50,
-        y: 54
+        y: 56
       },
       {
         unified: "1f9d6-1f3fc-200d-2642-fe0f",
         native: "🧖🏼‍♂️",
         x: 50,
-        y: 55
+        y: 57
       },
       {
         unified: "1f9d6-1f3fd-200d-2642-fe0f",
         native: "🧖🏽‍♂️",
         x: 50,
-        y: 56
+        y: 58
       },
       {
         unified: "1f9d6-1f3fe-200d-2642-fe0f",
         native: "🧖🏾‍♂️",
         x: 50,
-        y: 57
+        y: 59
       },
       {
         unified: "1f9d6-1f3ff-200d-2642-fe0f",
         native: "🧖🏿‍♂️",
         x: 50,
-        y: 58
+        y: 60
       }
     ],
     version: 5
@@ -17060,37 +18022,37 @@ const emojis = {
         unified: "1f9d6-200d-2640-fe0f",
         native: "🧖‍♀️",
         x: 50,
-        y: 47
+        y: 49
       },
       {
         unified: "1f9d6-1f3fb-200d-2640-fe0f",
         native: "🧖🏻‍♀️",
         x: 50,
-        y: 48
+        y: 50
       },
       {
         unified: "1f9d6-1f3fc-200d-2640-fe0f",
         native: "🧖🏼‍♀️",
         x: 50,
-        y: 49
+        y: 51
       },
       {
         unified: "1f9d6-1f3fd-200d-2640-fe0f",
         native: "🧖🏽‍♀️",
         x: 50,
-        y: 50
+        y: 52
       },
       {
         unified: "1f9d6-1f3fe-200d-2640-fe0f",
         native: "🧖🏾‍♀️",
         x: 50,
-        y: 51
+        y: 53
       },
       {
         unified: "1f9d6-1f3ff-200d-2640-fe0f",
         native: "🧖🏿‍♀️",
         x: 50,
-        y: 52
+        y: 54
       }
     ],
     version: 5
@@ -17106,37 +18068,37 @@ const emojis = {
         unified: "1f9d7",
         native: "🧗",
         x: 51,
-        y: 16
+        y: 18
       },
       {
         unified: "1f9d7-1f3fb",
         native: "🧗🏻",
         x: 51,
-        y: 17
+        y: 19
       },
       {
         unified: "1f9d7-1f3fc",
         native: "🧗🏼",
         x: 51,
-        y: 18
+        y: 20
       },
       {
         unified: "1f9d7-1f3fd",
         native: "🧗🏽",
         x: 51,
-        y: 19
+        y: 21
       },
       {
         unified: "1f9d7-1f3fe",
         native: "🧗🏾",
         x: 51,
-        y: 20
+        y: 22
       },
       {
         unified: "1f9d7-1f3ff",
         native: "🧗🏿",
         x: 51,
-        y: 21
+        y: 23
       }
     ],
     version: 5
@@ -17155,37 +18117,37 @@ const emojis = {
         unified: "1f9d7-200d-2642-fe0f",
         native: "🧗‍♂️",
         x: 51,
-        y: 10
+        y: 12
       },
       {
         unified: "1f9d7-1f3fb-200d-2642-fe0f",
         native: "🧗🏻‍♂️",
         x: 51,
-        y: 11
+        y: 13
       },
       {
         unified: "1f9d7-1f3fc-200d-2642-fe0f",
         native: "🧗🏼‍♂️",
         x: 51,
-        y: 12
+        y: 14
       },
       {
         unified: "1f9d7-1f3fd-200d-2642-fe0f",
         native: "🧗🏽‍♂️",
         x: 51,
-        y: 13
+        y: 15
       },
       {
         unified: "1f9d7-1f3fe-200d-2642-fe0f",
         native: "🧗🏾‍♂️",
         x: 51,
-        y: 14
+        y: 16
       },
       {
         unified: "1f9d7-1f3ff-200d-2642-fe0f",
         native: "🧗🏿‍♂️",
         x: 51,
-        y: 15
+        y: 17
       }
     ],
     version: 5
@@ -17204,37 +18166,37 @@ const emojis = {
         unified: "1f9d7-200d-2640-fe0f",
         native: "🧗‍♀️",
         x: 51,
-        y: 4
+        y: 6
       },
       {
         unified: "1f9d7-1f3fb-200d-2640-fe0f",
         native: "🧗🏻‍♀️",
         x: 51,
-        y: 5
+        y: 7
       },
       {
         unified: "1f9d7-1f3fc-200d-2640-fe0f",
         native: "🧗🏼‍♀️",
         x: 51,
-        y: 6
+        y: 8
       },
       {
         unified: "1f9d7-1f3fd-200d-2640-fe0f",
         native: "🧗🏽‍♀️",
         x: 51,
-        y: 7
+        y: 9
       },
       {
         unified: "1f9d7-1f3fe-200d-2640-fe0f",
         native: "🧗🏾‍♀️",
         x: 51,
-        y: 8
+        y: 10
       },
       {
         unified: "1f9d7-1f3ff-200d-2640-fe0f",
         native: "🧗🏿‍♀️",
         x: 51,
-        y: 9
+        y: 11
       }
     ],
     version: 5
@@ -17253,7 +18215,7 @@ const emojis = {
         unified: "1f93a",
         native: "🤺",
         x: 42,
-        y: 31
+        y: 33
       }
     ],
     version: 3
@@ -17321,7 +18283,7 @@ const emojis = {
         unified: "26f7-fe0f",
         native: "⛷️",
         x: 58,
-        y: 1
+        y: 32
       }
     ],
     version: 1
@@ -17586,37 +18548,37 @@ const emojis = {
         unified: "1f6a3",
         native: "🚣",
         x: 36,
-        y: 18
+        y: 19
       },
       {
         unified: "1f6a3-1f3fb",
         native: "🚣🏻",
         x: 36,
-        y: 19
+        y: 20
       },
       {
         unified: "1f6a3-1f3fc",
         native: "🚣🏼",
         x: 36,
-        y: 20
+        y: 21
       },
       {
         unified: "1f6a3-1f3fd",
         native: "🚣🏽",
         x: 36,
-        y: 21
+        y: 22
       },
       {
         unified: "1f6a3-1f3fe",
         native: "🚣🏾",
         x: 36,
-        y: 22
+        y: 23
       },
       {
         unified: "1f6a3-1f3ff",
         native: "🚣🏿",
         x: 36,
-        y: 23
+        y: 24
       }
     ],
     version: 1
@@ -17636,37 +18598,37 @@ const emojis = {
         unified: "1f6a3-200d-2642-fe0f",
         native: "🚣‍♂️",
         x: 36,
-        y: 12
+        y: 13
       },
       {
         unified: "1f6a3-1f3fb-200d-2642-fe0f",
         native: "🚣🏻‍♂️",
         x: 36,
-        y: 13
+        y: 14
       },
       {
         unified: "1f6a3-1f3fc-200d-2642-fe0f",
         native: "🚣🏼‍♂️",
         x: 36,
-        y: 14
+        y: 15
       },
       {
         unified: "1f6a3-1f3fd-200d-2642-fe0f",
         native: "🚣🏽‍♂️",
         x: 36,
-        y: 15
+        y: 16
       },
       {
         unified: "1f6a3-1f3fe-200d-2642-fe0f",
         native: "🚣🏾‍♂️",
         x: 36,
-        y: 16
+        y: 17
       },
       {
         unified: "1f6a3-1f3ff-200d-2642-fe0f",
         native: "🚣🏿‍♂️",
         x: 36,
-        y: 17
+        y: 18
       }
     ],
     version: 4
@@ -17687,37 +18649,37 @@ const emojis = {
         unified: "1f6a3-200d-2640-fe0f",
         native: "🚣‍♀️",
         x: 36,
-        y: 6
+        y: 7
       },
       {
         unified: "1f6a3-1f3fb-200d-2640-fe0f",
         native: "🚣🏻‍♀️",
         x: 36,
-        y: 7
+        y: 8
       },
       {
         unified: "1f6a3-1f3fc-200d-2640-fe0f",
         native: "🚣🏼‍♀️",
         x: 36,
-        y: 8
+        y: 9
       },
       {
         unified: "1f6a3-1f3fd-200d-2640-fe0f",
         native: "🚣🏽‍♀️",
         x: 36,
-        y: 9
+        y: 10
       },
       {
         unified: "1f6a3-1f3fe-200d-2640-fe0f",
         native: "🚣🏾‍♀️",
         x: 36,
-        y: 10
+        y: 11
       },
       {
         unified: "1f6a3-1f3ff-200d-2640-fe0f",
         native: "🚣🏿‍♀️",
         x: 36,
-        y: 11
+        y: 12
       }
     ],
     version: 4
@@ -17887,37 +18849,37 @@ const emojis = {
         unified: "26f9-fe0f",
         native: "⛹️",
         x: 58,
-        y: 15
+        y: 46
       },
       {
         unified: "26f9-1f3fb",
         native: "⛹🏻",
         x: 58,
-        y: 16
+        y: 47
       },
       {
         unified: "26f9-1f3fc",
         native: "⛹🏼",
         x: 58,
-        y: 17
+        y: 48
       },
       {
         unified: "26f9-1f3fd",
         native: "⛹🏽",
         x: 58,
-        y: 18
+        y: 49
       },
       {
         unified: "26f9-1f3fe",
         native: "⛹🏾",
         x: 58,
-        y: 19
+        y: 50
       },
       {
         unified: "26f9-1f3ff",
         native: "⛹🏿",
         x: 58,
-        y: 20
+        y: 51
       }
     ],
     version: 1
@@ -17986,37 +18948,37 @@ const emojis = {
         unified: "1f6b4",
         native: "🚴",
         x: 36,
-        y: 52
+        y: 53
       },
       {
         unified: "1f6b4-1f3fb",
         native: "🚴🏻",
         x: 36,
-        y: 53
+        y: 54
       },
       {
         unified: "1f6b4-1f3fc",
         native: "🚴🏼",
         x: 36,
-        y: 54
+        y: 55
       },
       {
         unified: "1f6b4-1f3fd",
         native: "🚴🏽",
         x: 36,
-        y: 55
+        y: 56
       },
       {
         unified: "1f6b4-1f3fe",
         native: "🚴🏾",
         x: 36,
-        y: 56
+        y: 57
       },
       {
         unified: "1f6b4-1f3ff",
         native: "🚴🏿",
         x: 36,
-        y: 57
+        y: 58
       }
     ],
     version: 1
@@ -18035,37 +18997,37 @@ const emojis = {
         unified: "1f6b4-200d-2642-fe0f",
         native: "🚴‍♂️",
         x: 36,
-        y: 46
+        y: 47
       },
       {
         unified: "1f6b4-1f3fb-200d-2642-fe0f",
         native: "🚴🏻‍♂️",
         x: 36,
-        y: 47
+        y: 48
       },
       {
         unified: "1f6b4-1f3fc-200d-2642-fe0f",
         native: "🚴🏼‍♂️",
         x: 36,
-        y: 48
+        y: 49
       },
       {
         unified: "1f6b4-1f3fd-200d-2642-fe0f",
         native: "🚴🏽‍♂️",
         x: 36,
-        y: 49
+        y: 50
       },
       {
         unified: "1f6b4-1f3fe-200d-2642-fe0f",
         native: "🚴🏾‍♂️",
         x: 36,
-        y: 50
+        y: 51
       },
       {
         unified: "1f6b4-1f3ff-200d-2642-fe0f",
         native: "🚴🏿‍♂️",
         x: 36,
-        y: 51
+        y: 52
       }
     ],
     version: 4
@@ -18085,37 +19047,37 @@ const emojis = {
         unified: "1f6b4-200d-2640-fe0f",
         native: "🚴‍♀️",
         x: 36,
-        y: 40
+        y: 41
       },
       {
         unified: "1f6b4-1f3fb-200d-2640-fe0f",
         native: "🚴🏻‍♀️",
         x: 36,
-        y: 41
+        y: 42
       },
       {
         unified: "1f6b4-1f3fc-200d-2640-fe0f",
         native: "🚴🏼‍♀️",
         x: 36,
-        y: 42
+        y: 43
       },
       {
         unified: "1f6b4-1f3fd-200d-2640-fe0f",
         native: "🚴🏽‍♀️",
         x: 36,
-        y: 43
+        y: 44
       },
       {
         unified: "1f6b4-1f3fe-200d-2640-fe0f",
         native: "🚴🏾‍♀️",
         x: 36,
-        y: 44
+        y: 45
       },
       {
         unified: "1f6b4-1f3ff-200d-2640-fe0f",
         native: "🚴🏿‍♀️",
         x: 36,
-        y: 45
+        y: 46
       }
     ],
     version: 4
@@ -18134,37 +19096,37 @@ const emojis = {
         unified: "1f6b5",
         native: "🚵",
         x: 37,
-        y: 9
+        y: 10
       },
       {
         unified: "1f6b5-1f3fb",
         native: "🚵🏻",
         x: 37,
-        y: 10
+        y: 11
       },
       {
         unified: "1f6b5-1f3fc",
         native: "🚵🏼",
         x: 37,
-        y: 11
+        y: 12
       },
       {
         unified: "1f6b5-1f3fd",
         native: "🚵🏽",
         x: 37,
-        y: 12
+        y: 13
       },
       {
         unified: "1f6b5-1f3fe",
         native: "🚵🏾",
         x: 37,
-        y: 13
+        y: 14
       },
       {
         unified: "1f6b5-1f3ff",
         native: "🚵🏿",
         x: 37,
-        y: 14
+        y: 15
       }
     ],
     version: 1
@@ -18185,37 +19147,37 @@ const emojis = {
         unified: "1f6b5-200d-2642-fe0f",
         native: "🚵‍♂️",
         x: 37,
-        y: 3
+        y: 4
       },
       {
         unified: "1f6b5-1f3fb-200d-2642-fe0f",
         native: "🚵🏻‍♂️",
         x: 37,
-        y: 4
+        y: 5
       },
       {
         unified: "1f6b5-1f3fc-200d-2642-fe0f",
         native: "🚵🏼‍♂️",
         x: 37,
-        y: 5
+        y: 6
       },
       {
         unified: "1f6b5-1f3fd-200d-2642-fe0f",
         native: "🚵🏽‍♂️",
         x: 37,
-        y: 6
+        y: 7
       },
       {
         unified: "1f6b5-1f3fe-200d-2642-fe0f",
         native: "🚵🏾‍♂️",
         x: 37,
-        y: 7
+        y: 8
       },
       {
         unified: "1f6b5-1f3ff-200d-2642-fe0f",
         native: "🚵🏿‍♂️",
         x: 37,
-        y: 8
+        y: 9
       }
     ],
     version: 4
@@ -18237,37 +19199,37 @@ const emojis = {
         unified: "1f6b5-200d-2640-fe0f",
         native: "🚵‍♀️",
         x: 36,
-        y: 58
+        y: 59
       },
       {
         unified: "1f6b5-1f3fb-200d-2640-fe0f",
         native: "🚵🏻‍♀️",
         x: 36,
-        y: 59
+        y: 60
       },
       {
         unified: "1f6b5-1f3fc-200d-2640-fe0f",
         native: "🚵🏼‍♀️",
-        x: 36,
-        y: 60
+        x: 37,
+        y: 0
       },
       {
         unified: "1f6b5-1f3fd-200d-2640-fe0f",
         native: "🚵🏽‍♀️",
         x: 37,
-        y: 0
+        y: 1
       },
       {
         unified: "1f6b5-1f3fe-200d-2640-fe0f",
         native: "🚵🏾‍♀️",
         x: 37,
-        y: 1
+        y: 2
       },
       {
         unified: "1f6b5-1f3ff-200d-2640-fe0f",
         native: "🚵🏿‍♀️",
         x: 37,
-        y: 2
+        y: 3
       }
     ],
     version: 4
@@ -18286,37 +19248,37 @@ const emojis = {
         unified: "1f938",
         native: "🤸",
         x: 42,
-        y: 7
+        y: 9
       },
       {
         unified: "1f938-1f3fb",
         native: "🤸🏻",
         x: 42,
-        y: 8
+        y: 10
       },
       {
         unified: "1f938-1f3fc",
         native: "🤸🏼",
         x: 42,
-        y: 9
+        y: 11
       },
       {
         unified: "1f938-1f3fd",
         native: "🤸🏽",
         x: 42,
-        y: 10
+        y: 12
       },
       {
         unified: "1f938-1f3fe",
         native: "🤸🏾",
         x: 42,
-        y: 11
+        y: 13
       },
       {
         unified: "1f938-1f3ff",
         native: "🤸🏿",
         x: 42,
-        y: 12
+        y: 14
       }
     ],
     version: 3
@@ -18332,37 +19294,37 @@ const emojis = {
         unified: "1f938-200d-2642-fe0f",
         native: "🤸‍♂️",
         x: 42,
-        y: 1
+        y: 3
       },
       {
         unified: "1f938-1f3fb-200d-2642-fe0f",
         native: "🤸🏻‍♂️",
         x: 42,
-        y: 2
+        y: 4
       },
       {
         unified: "1f938-1f3fc-200d-2642-fe0f",
         native: "🤸🏼‍♂️",
         x: 42,
-        y: 3
+        y: 5
       },
       {
         unified: "1f938-1f3fd-200d-2642-fe0f",
         native: "🤸🏽‍♂️",
         x: 42,
-        y: 4
+        y: 6
       },
       {
         unified: "1f938-1f3fe-200d-2642-fe0f",
         native: "🤸🏾‍♂️",
         x: 42,
-        y: 5
+        y: 7
       },
       {
         unified: "1f938-1f3ff-200d-2642-fe0f",
         native: "🤸🏿‍♂️",
         x: 42,
-        y: 6
+        y: 8
       }
     ],
     version: 4
@@ -18378,37 +19340,37 @@ const emojis = {
         unified: "1f938-200d-2640-fe0f",
         native: "🤸‍♀️",
         x: 41,
-        y: 56
+        y: 58
       },
       {
         unified: "1f938-1f3fb-200d-2640-fe0f",
         native: "🤸🏻‍♀️",
         x: 41,
-        y: 57
+        y: 59
       },
       {
         unified: "1f938-1f3fc-200d-2640-fe0f",
         native: "🤸🏼‍♀️",
         x: 41,
-        y: 58
+        y: 60
       },
       {
         unified: "1f938-1f3fd-200d-2640-fe0f",
         native: "🤸🏽‍♀️",
-        x: 41,
-        y: 59
+        x: 42,
+        y: 0
       },
       {
         unified: "1f938-1f3fe-200d-2640-fe0f",
         native: "🤸🏾‍♀️",
-        x: 41,
-        y: 60
+        x: 42,
+        y: 1
       },
       {
         unified: "1f938-1f3ff-200d-2640-fe0f",
         native: "🤸🏿‍♀️",
         x: 42,
-        y: 0
+        y: 2
       }
     ],
     version: 4
@@ -18426,7 +19388,7 @@ const emojis = {
         unified: "1f93c",
         native: "🤼",
         x: 42,
-        y: 34
+        y: 36
       }
     ],
     version: 3
@@ -18444,7 +19406,7 @@ const emojis = {
         unified: "1f93c-200d-2642-fe0f",
         native: "🤼‍♂️",
         x: 42,
-        y: 33
+        y: 35
       }
     ],
     version: 4
@@ -18462,7 +19424,7 @@ const emojis = {
         unified: "1f93c-200d-2640-fe0f",
         native: "🤼‍♀️",
         x: 42,
-        y: 32
+        y: 34
       }
     ],
     version: 4
@@ -18480,37 +19442,37 @@ const emojis = {
         unified: "1f93d",
         native: "🤽",
         x: 42,
-        y: 47
+        y: 49
       },
       {
         unified: "1f93d-1f3fb",
         native: "🤽🏻",
         x: 42,
-        y: 48
+        y: 50
       },
       {
         unified: "1f93d-1f3fc",
         native: "🤽🏼",
         x: 42,
-        y: 49
+        y: 51
       },
       {
         unified: "1f93d-1f3fd",
         native: "🤽🏽",
         x: 42,
-        y: 50
+        y: 52
       },
       {
         unified: "1f93d-1f3fe",
         native: "🤽🏾",
         x: 42,
-        y: 51
+        y: 53
       },
       {
         unified: "1f93d-1f3ff",
         native: "🤽🏿",
         x: 42,
-        y: 52
+        y: 54
       }
     ],
     version: 3
@@ -18528,37 +19490,37 @@ const emojis = {
         unified: "1f93d-200d-2642-fe0f",
         native: "🤽‍♂️",
         x: 42,
-        y: 41
+        y: 43
       },
       {
         unified: "1f93d-1f3fb-200d-2642-fe0f",
         native: "🤽🏻‍♂️",
         x: 42,
-        y: 42
+        y: 44
       },
       {
         unified: "1f93d-1f3fc-200d-2642-fe0f",
         native: "🤽🏼‍♂️",
         x: 42,
-        y: 43
+        y: 45
       },
       {
         unified: "1f93d-1f3fd-200d-2642-fe0f",
         native: "🤽🏽‍♂️",
         x: 42,
-        y: 44
+        y: 46
       },
       {
         unified: "1f93d-1f3fe-200d-2642-fe0f",
         native: "🤽🏾‍♂️",
         x: 42,
-        y: 45
+        y: 47
       },
       {
         unified: "1f93d-1f3ff-200d-2642-fe0f",
         native: "🤽🏿‍♂️",
         x: 42,
-        y: 46
+        y: 48
       }
     ],
     version: 4
@@ -18576,37 +19538,37 @@ const emojis = {
         unified: "1f93d-200d-2640-fe0f",
         native: "🤽‍♀️",
         x: 42,
-        y: 35
+        y: 37
       },
       {
         unified: "1f93d-1f3fb-200d-2640-fe0f",
         native: "🤽🏻‍♀️",
         x: 42,
-        y: 36
+        y: 38
       },
       {
         unified: "1f93d-1f3fc-200d-2640-fe0f",
         native: "🤽🏼‍♀️",
         x: 42,
-        y: 37
+        y: 39
       },
       {
         unified: "1f93d-1f3fd-200d-2640-fe0f",
         native: "🤽🏽‍♀️",
         x: 42,
-        y: 38
+        y: 40
       },
       {
         unified: "1f93d-1f3fe-200d-2640-fe0f",
         native: "🤽🏾‍♀️",
         x: 42,
-        y: 39
+        y: 41
       },
       {
         unified: "1f93d-1f3ff-200d-2640-fe0f",
         native: "🤽🏿‍♀️",
         x: 42,
-        y: 40
+        y: 42
       }
     ],
     version: 4
@@ -18624,37 +19586,37 @@ const emojis = {
         unified: "1f93e",
         native: "🤾",
         x: 43,
-        y: 4
+        y: 6
       },
       {
         unified: "1f93e-1f3fb",
         native: "🤾🏻",
         x: 43,
-        y: 5
+        y: 7
       },
       {
         unified: "1f93e-1f3fc",
         native: "🤾🏼",
         x: 43,
-        y: 6
+        y: 8
       },
       {
         unified: "1f93e-1f3fd",
         native: "🤾🏽",
         x: 43,
-        y: 7
+        y: 9
       },
       {
         unified: "1f93e-1f3fe",
         native: "🤾🏾",
         x: 43,
-        y: 8
+        y: 10
       },
       {
         unified: "1f93e-1f3ff",
         native: "🤾🏿",
         x: 43,
-        y: 9
+        y: 11
       }
     ],
     version: 3
@@ -18670,38 +19632,38 @@ const emojis = {
       {
         unified: "1f93e-200d-2642-fe0f",
         native: "🤾‍♂️",
-        x: 42,
-        y: 59
+        x: 43,
+        y: 0
       },
       {
         unified: "1f93e-1f3fb-200d-2642-fe0f",
         native: "🤾🏻‍♂️",
-        x: 42,
-        y: 60
+        x: 43,
+        y: 1
       },
       {
         unified: "1f93e-1f3fc-200d-2642-fe0f",
         native: "🤾🏼‍♂️",
         x: 43,
-        y: 0
+        y: 2
       },
       {
         unified: "1f93e-1f3fd-200d-2642-fe0f",
         native: "🤾🏽‍♂️",
         x: 43,
-        y: 1
+        y: 3
       },
       {
         unified: "1f93e-1f3fe-200d-2642-fe0f",
         native: "🤾🏾‍♂️",
         x: 43,
-        y: 2
+        y: 4
       },
       {
         unified: "1f93e-1f3ff-200d-2642-fe0f",
         native: "🤾🏿‍♂️",
         x: 43,
-        y: 3
+        y: 5
       }
     ],
     version: 4
@@ -18718,37 +19680,37 @@ const emojis = {
         unified: "1f93e-200d-2640-fe0f",
         native: "🤾‍♀️",
         x: 42,
-        y: 53
+        y: 55
       },
       {
         unified: "1f93e-1f3fb-200d-2640-fe0f",
         native: "🤾🏻‍♀️",
         x: 42,
-        y: 54
+        y: 56
       },
       {
         unified: "1f93e-1f3fc-200d-2640-fe0f",
         native: "🤾🏼‍♀️",
         x: 42,
-        y: 55
+        y: 57
       },
       {
         unified: "1f93e-1f3fd-200d-2640-fe0f",
         native: "🤾🏽‍♀️",
         x: 42,
-        y: 56
+        y: 58
       },
       {
         unified: "1f93e-1f3fe-200d-2640-fe0f",
         native: "🤾🏾‍♀️",
         x: 42,
-        y: 57
+        y: 59
       },
       {
         unified: "1f93e-1f3ff-200d-2640-fe0f",
         native: "🤾🏿‍♀️",
         x: 42,
-        y: 58
+        y: 60
       }
     ],
     version: 4
@@ -18766,37 +19728,37 @@ const emojis = {
         unified: "1f939",
         native: "🤹",
         x: 42,
-        y: 25
+        y: 27
       },
       {
         unified: "1f939-1f3fb",
         native: "🤹🏻",
         x: 42,
-        y: 26
+        y: 28
       },
       {
         unified: "1f939-1f3fc",
         native: "🤹🏼",
         x: 42,
-        y: 27
+        y: 29
       },
       {
         unified: "1f939-1f3fd",
         native: "🤹🏽",
         x: 42,
-        y: 28
+        y: 30
       },
       {
         unified: "1f939-1f3fe",
         native: "🤹🏾",
         x: 42,
-        y: 29
+        y: 31
       },
       {
         unified: "1f939-1f3ff",
         native: "🤹🏿",
         x: 42,
-        y: 30
+        y: 32
       }
     ],
     version: 3
@@ -18815,37 +19777,37 @@ const emojis = {
         unified: "1f939-200d-2642-fe0f",
         native: "🤹‍♂️",
         x: 42,
-        y: 19
+        y: 21
       },
       {
         unified: "1f939-1f3fb-200d-2642-fe0f",
         native: "🤹🏻‍♂️",
         x: 42,
-        y: 20
+        y: 22
       },
       {
         unified: "1f939-1f3fc-200d-2642-fe0f",
         native: "🤹🏼‍♂️",
         x: 42,
-        y: 21
+        y: 23
       },
       {
         unified: "1f939-1f3fd-200d-2642-fe0f",
         native: "🤹🏽‍♂️",
         x: 42,
-        y: 22
+        y: 24
       },
       {
         unified: "1f939-1f3fe-200d-2642-fe0f",
         native: "🤹🏾‍♂️",
         x: 42,
-        y: 23
+        y: 25
       },
       {
         unified: "1f939-1f3ff-200d-2642-fe0f",
         native: "🤹🏿‍♂️",
         x: 42,
-        y: 24
+        y: 26
       }
     ],
     version: 4
@@ -18864,37 +19826,37 @@ const emojis = {
         unified: "1f939-200d-2640-fe0f",
         native: "🤹‍♀️",
         x: 42,
-        y: 13
+        y: 15
       },
       {
         unified: "1f939-1f3fb-200d-2640-fe0f",
         native: "🤹🏻‍♀️",
         x: 42,
-        y: 14
+        y: 16
       },
       {
         unified: "1f939-1f3fc-200d-2640-fe0f",
         native: "🤹🏼‍♀️",
         x: 42,
-        y: 15
+        y: 17
       },
       {
         unified: "1f939-1f3fd-200d-2640-fe0f",
         native: "🤹🏽‍♀️",
         x: 42,
-        y: 16
+        y: 18
       },
       {
         unified: "1f939-1f3fe-200d-2640-fe0f",
         native: "🤹🏾‍♀️",
         x: 42,
-        y: 17
+        y: 19
       },
       {
         unified: "1f939-1f3ff-200d-2640-fe0f",
         native: "🤹🏿‍♀️",
         x: 42,
-        y: 18
+        y: 20
       }
     ],
     version: 4
@@ -18910,37 +19872,37 @@ const emojis = {
         unified: "1f9d8",
         native: "🧘",
         x: 51,
-        y: 34
+        y: 36
       },
       {
         unified: "1f9d8-1f3fb",
         native: "🧘🏻",
         x: 51,
-        y: 35
+        y: 37
       },
       {
         unified: "1f9d8-1f3fc",
         native: "🧘🏼",
         x: 51,
-        y: 36
+        y: 38
       },
       {
         unified: "1f9d8-1f3fd",
         native: "🧘🏽",
         x: 51,
-        y: 37
+        y: 39
       },
       {
         unified: "1f9d8-1f3fe",
         native: "🧘🏾",
         x: 51,
-        y: 38
+        y: 40
       },
       {
         unified: "1f9d8-1f3ff",
         native: "🧘🏿",
         x: 51,
-        y: 39
+        y: 41
       }
     ],
     version: 5
@@ -18961,37 +19923,37 @@ const emojis = {
         unified: "1f9d8-200d-2642-fe0f",
         native: "🧘‍♂️",
         x: 51,
-        y: 28
+        y: 30
       },
       {
         unified: "1f9d8-1f3fb-200d-2642-fe0f",
         native: "🧘🏻‍♂️",
         x: 51,
-        y: 29
+        y: 31
       },
       {
         unified: "1f9d8-1f3fc-200d-2642-fe0f",
         native: "🧘🏼‍♂️",
         x: 51,
-        y: 30
+        y: 32
       },
       {
         unified: "1f9d8-1f3fd-200d-2642-fe0f",
         native: "🧘🏽‍♂️",
         x: 51,
-        y: 31
+        y: 33
       },
       {
         unified: "1f9d8-1f3fe-200d-2642-fe0f",
         native: "🧘🏾‍♂️",
         x: 51,
-        y: 32
+        y: 34
       },
       {
         unified: "1f9d8-1f3ff-200d-2642-fe0f",
         native: "🧘🏿‍♂️",
         x: 51,
-        y: 33
+        y: 35
       }
     ],
     version: 5
@@ -19012,37 +19974,37 @@ const emojis = {
         unified: "1f9d8-200d-2640-fe0f",
         native: "🧘‍♀️",
         x: 51,
-        y: 22
+        y: 24
       },
       {
         unified: "1f9d8-1f3fb-200d-2640-fe0f",
         native: "🧘🏻‍♀️",
         x: 51,
-        y: 23
+        y: 25
       },
       {
         unified: "1f9d8-1f3fc-200d-2640-fe0f",
         native: "🧘🏼‍♀️",
         x: 51,
-        y: 24
+        y: 26
       },
       {
         unified: "1f9d8-1f3fd-200d-2640-fe0f",
         native: "🧘🏽‍♀️",
         x: 51,
-        y: 25
+        y: 27
       },
       {
         unified: "1f9d8-1f3fe-200d-2640-fe0f",
         native: "🧘🏾‍♀️",
         x: 51,
-        y: 26
+        y: 28
       },
       {
         unified: "1f9d8-1f3ff-200d-2640-fe0f",
         native: "🧘🏿‍♀️",
         x: 51,
-        y: 27
+        y: 29
       }
     ],
     version: 5
@@ -19062,37 +20024,37 @@ const emojis = {
         unified: "1f6c0",
         native: "🛀",
         x: 37,
-        y: 42
+        y: 43
       },
       {
         unified: "1f6c0-1f3fb",
         native: "🛀🏻",
         x: 37,
-        y: 43
+        y: 44
       },
       {
         unified: "1f6c0-1f3fc",
         native: "🛀🏼",
         x: 37,
-        y: 44
+        y: 45
       },
       {
         unified: "1f6c0-1f3fd",
         native: "🛀🏽",
         x: 37,
-        y: 45
+        y: 46
       },
       {
         unified: "1f6c0-1f3fe",
         native: "🛀🏾",
         x: 37,
-        y: 46
+        y: 47
       },
       {
         unified: "1f6c0-1f3ff",
         native: "🛀🏿",
         x: 37,
-        y: 47
+        y: 48
       }
     ],
     version: 1
@@ -19110,37 +20072,37 @@ const emojis = {
         unified: "1f6cc",
         native: "🛌",
         x: 37,
-        y: 54
+        y: 55
       },
       {
         unified: "1f6cc-1f3fb",
         native: "🛌🏻",
         x: 37,
-        y: 55
+        y: 56
       },
       {
         unified: "1f6cc-1f3fc",
         native: "🛌🏼",
         x: 37,
-        y: 56
+        y: 57
       },
       {
         unified: "1f6cc-1f3fd",
         native: "🛌🏽",
         x: 37,
-        y: 57
+        y: 58
       },
       {
         unified: "1f6cc-1f3fe",
         native: "🛌🏾",
         x: 37,
-        y: 58
+        y: 59
       },
       {
         unified: "1f6cc-1f3ff",
         native: "🛌🏿",
         x: 37,
-        y: 59
+        y: 60
       }
     ],
     version: 1
@@ -19156,37 +20118,37 @@ const emojis = {
         unified: "1f9d1-200d-1f91d-200d-1f9d1",
         native: "🧑‍🤝‍🧑",
         x: 48,
-        y: 41
+        y: 43
       },
       {
         unified: "1f9d1-1f3fb-200d-1f91d-200d-1f9d1-1f3fb",
         native: "🧑🏻‍🤝‍🧑🏻",
         x: 48,
-        y: 42
+        y: 44
       },
       {
         unified: "1f9d1-1f3fc-200d-1f91d-200d-1f9d1-1f3fc",
         native: "🧑🏼‍🤝‍🧑🏼",
         x: 48,
-        y: 48
+        y: 50
       },
       {
         unified: "1f9d1-1f3fd-200d-1f91d-200d-1f9d1-1f3fd",
         native: "🧑🏽‍🤝‍🧑🏽",
         x: 48,
-        y: 54
+        y: 56
       },
       {
         unified: "1f9d1-1f3fe-200d-1f91d-200d-1f9d1-1f3fe",
         native: "🧑🏾‍🤝‍🧑🏾",
-        x: 48,
-        y: 60
+        x: 49,
+        y: 1
       },
       {
         unified: "1f9d1-1f3ff-200d-1f91d-200d-1f9d1-1f3ff",
         native: "🧑🏿‍🤝‍🧑🏿",
         x: 49,
-        y: 5
+        y: 7
       }
     ],
     version: 12
@@ -19210,37 +20172,37 @@ const emojis = {
         unified: "1f46d",
         native: "👭",
         x: 22,
-        y: 31
+        y: 32
       },
       {
         unified: "1f46d-1f3fb",
         native: "👭🏻",
         x: 22,
-        y: 32
+        y: 33
       },
       {
         unified: "1f46d-1f3fc",
         native: "👭🏼",
         x: 22,
-        y: 33
+        y: 34
       },
       {
         unified: "1f46d-1f3fd",
         native: "👭🏽",
         x: 22,
-        y: 34
+        y: 35
       },
       {
         unified: "1f46d-1f3fe",
         native: "👭🏾",
         x: 22,
-        y: 35
+        y: 36
       },
       {
         unified: "1f46d-1f3ff",
         native: "👭🏿",
         x: 22,
-        y: 36
+        y: 37
       }
     ],
     version: 1
@@ -19266,37 +20228,37 @@ const emojis = {
         unified: "1f46b",
         native: "👫",
         x: 21,
-        y: 40
+        y: 41
       },
       {
         unified: "1f46b-1f3fb",
         native: "👫🏻",
         x: 21,
-        y: 41
+        y: 42
       },
       {
         unified: "1f46b-1f3fc",
         native: "👫🏼",
         x: 21,
-        y: 42
+        y: 43
       },
       {
         unified: "1f46b-1f3fd",
         native: "👫🏽",
         x: 21,
-        y: 43
+        y: 44
       },
       {
         unified: "1f46b-1f3fe",
         native: "👫🏾",
         x: 21,
-        y: 44
+        y: 45
       },
       {
         unified: "1f46b-1f3ff",
         native: "👫🏿",
         x: 21,
-        y: 45
+        y: 46
       }
     ],
     version: 1
@@ -19320,37 +20282,37 @@ const emojis = {
         unified: "1f46c",
         native: "👬",
         x: 22,
-        y: 5
+        y: 6
       },
       {
         unified: "1f46c-1f3fb",
         native: "👬🏻",
         x: 22,
-        y: 6
+        y: 7
       },
       {
         unified: "1f46c-1f3fc",
         native: "👬🏼",
         x: 22,
-        y: 7
+        y: 8
       },
       {
         unified: "1f46c-1f3fd",
         native: "👬🏽",
         x: 22,
-        y: 8
+        y: 9
       },
       {
         unified: "1f46c-1f3fe",
         native: "👬🏾",
         x: 22,
-        y: 9
+        y: 10
       },
       {
         unified: "1f46c-1f3ff",
         native: "👬🏿",
         x: 22,
-        y: 10
+        y: 11
       }
     ],
     version: 1
@@ -19372,37 +20334,37 @@ const emojis = {
         unified: "1f48f",
         native: "💏",
         x: 26,
-        y: 41
+        y: 42
       },
       {
         unified: "1f48f-1f3fb",
         native: "💏🏻",
         x: 26,
-        y: 42
+        y: 43
       },
       {
         unified: "1f48f-1f3fc",
         native: "💏🏼",
         x: 26,
-        y: 43
+        y: 44
       },
       {
         unified: "1f48f-1f3fd",
         native: "💏🏽",
         x: 26,
-        y: 44
+        y: 45
       },
       {
         unified: "1f48f-1f3fe",
         native: "💏🏾",
         x: 26,
-        y: 45
+        y: 46
       },
       {
         unified: "1f48f-1f3ff",
         native: "💏🏿",
         x: 26,
-        y: 46
+        y: 47
       }
     ],
     version: 1
@@ -19421,13 +20383,38 @@ const emojis = {
         unified: "1f469-200d-2764-fe0f-200d-1f48b-200d-1f468",
         native: "👩‍❤️‍💋‍👨",
         x: 20,
-        y: 42
+        y: 43
       },
-      null,
-      null,
-      null,
-      null,
-      null
+      {
+        unified: "1f469-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fb",
+        native: "👩🏻‍❤️‍💋‍👨🏻",
+        x: 20,
+        y: 44
+      },
+      {
+        unified: "1f469-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fc",
+        native: "👩🏼‍❤️‍💋‍👨🏼",
+        x: 20,
+        y: 50
+      },
+      {
+        unified: "1f469-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fd",
+        native: "👩🏽‍❤️‍💋‍👨🏽",
+        x: 20,
+        y: 56
+      },
+      {
+        unified: "1f469-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fe",
+        native: "👩🏾‍❤️‍💋‍👨🏾",
+        x: 21,
+        y: 1
+      },
+      {
+        unified: "1f469-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3ff",
+        native: "👩🏿‍❤️‍💋‍👨🏿",
+        x: 21,
+        y: 7
+      }
     ],
     version: 2
   },
@@ -19449,13 +20436,38 @@ const emojis = {
         unified: "1f468-200d-2764-fe0f-200d-1f48b-200d-1f468",
         native: "👨‍❤️‍💋‍👨",
         x: 16,
-        y: 48
+        y: 49
       },
-      null,
-      null,
-      null,
-      null,
-      null
+      {
+        unified: "1f468-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fb",
+        native: "👨🏻‍❤️‍💋‍👨🏻",
+        x: 16,
+        y: 50
+      },
+      {
+        unified: "1f468-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fc",
+        native: "👨🏼‍❤️‍💋‍👨🏼",
+        x: 16,
+        y: 56
+      },
+      {
+        unified: "1f468-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fd",
+        native: "👨🏽‍❤️‍💋‍👨🏽",
+        x: 17,
+        y: 1
+      },
+      {
+        unified: "1f468-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fe",
+        native: "👨🏾‍❤️‍💋‍👨🏾",
+        x: 17,
+        y: 7
+      },
+      {
+        unified: "1f468-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3ff",
+        native: "👨🏿‍❤️‍💋‍👨🏿",
+        x: 17,
+        y: 13
+      }
     ],
     version: 2
   },
@@ -19477,13 +20489,38 @@ const emojis = {
         unified: "1f469-200d-2764-fe0f-200d-1f48b-200d-1f469",
         native: "👩‍❤️‍💋‍👩",
         x: 21,
-        y: 7
+        y: 8
       },
-      null,
-      null,
-      null,
-      null,
-      null
+      {
+        unified: "1f469-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fb",
+        native: "👩🏻‍❤️‍💋‍👩🏻",
+        x: 21,
+        y: 9
+      },
+      {
+        unified: "1f469-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fc",
+        native: "👩🏼‍❤️‍💋‍👩🏼",
+        x: 21,
+        y: 15
+      },
+      {
+        unified: "1f469-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fd",
+        native: "👩🏽‍❤️‍💋‍👩🏽",
+        x: 21,
+        y: 21
+      },
+      {
+        unified: "1f469-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fe",
+        native: "👩🏾‍❤️‍💋‍👩🏾",
+        x: 21,
+        y: 27
+      },
+      {
+        unified: "1f469-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3ff",
+        native: "👩🏿‍❤️‍💋‍👩🏿",
+        x: 21,
+        y: 33
+      }
     ],
     version: 2
   },
@@ -19505,37 +20542,37 @@ const emojis = {
         unified: "1f491",
         native: "💑",
         x: 27,
-        y: 7
+        y: 8
       },
       {
         unified: "1f491-1f3fb",
         native: "💑🏻",
         x: 27,
-        y: 8
+        y: 9
       },
       {
         unified: "1f491-1f3fc",
         native: "💑🏼",
         x: 27,
-        y: 9
+        y: 10
       },
       {
         unified: "1f491-1f3fd",
         native: "💑🏽",
         x: 27,
-        y: 10
+        y: 11
       },
       {
         unified: "1f491-1f3fe",
         native: "💑🏾",
         x: 27,
-        y: 11
+        y: 12
       },
       {
         unified: "1f491-1f3ff",
         native: "💑🏿",
         x: 27,
-        y: 12
+        y: 13
       }
     ],
     version: 1
@@ -19554,13 +20591,38 @@ const emojis = {
         unified: "1f469-200d-2764-fe0f-200d-1f468",
         native: "👩‍❤️‍👨",
         x: 19,
-        y: 51
+        y: 52
       },
-      null,
-      null,
-      null,
-      null,
-      null
+      {
+        unified: "1f469-1f3fb-200d-2764-fe0f-200d-1f468-1f3fb",
+        native: "👩🏻‍❤️‍👨🏻",
+        x: 19,
+        y: 53
+      },
+      {
+        unified: "1f469-1f3fc-200d-2764-fe0f-200d-1f468-1f3fc",
+        native: "👩🏼‍❤️‍👨🏼",
+        x: 19,
+        y: 59
+      },
+      {
+        unified: "1f469-1f3fd-200d-2764-fe0f-200d-1f468-1f3fd",
+        native: "👩🏽‍❤️‍👨🏽",
+        x: 20,
+        y: 4
+      },
+      {
+        unified: "1f469-1f3fe-200d-2764-fe0f-200d-1f468-1f3fe",
+        native: "👩🏾‍❤️‍👨🏾",
+        x: 20,
+        y: 10
+      },
+      {
+        unified: "1f469-1f3ff-200d-2764-fe0f-200d-1f468-1f3ff",
+        native: "👩🏿‍❤️‍👨🏿",
+        x: 20,
+        y: 16
+      }
     ],
     version: 2
   },
@@ -19584,13 +20646,38 @@ const emojis = {
         unified: "1f468-200d-2764-fe0f-200d-1f468",
         native: "👨‍❤️‍👨",
         x: 16,
-        y: 22
+        y: 23
       },
-      null,
-      null,
-      null,
-      null,
-      null
+      {
+        unified: "1f468-1f3fb-200d-2764-fe0f-200d-1f468-1f3fb",
+        native: "👨🏻‍❤️‍👨🏻",
+        x: 16,
+        y: 24
+      },
+      {
+        unified: "1f468-1f3fc-200d-2764-fe0f-200d-1f468-1f3fc",
+        native: "👨🏼‍❤️‍👨🏼",
+        x: 16,
+        y: 30
+      },
+      {
+        unified: "1f468-1f3fd-200d-2764-fe0f-200d-1f468-1f3fd",
+        native: "👨🏽‍❤️‍👨🏽",
+        x: 16,
+        y: 36
+      },
+      {
+        unified: "1f468-1f3fe-200d-2764-fe0f-200d-1f468-1f3fe",
+        native: "👨🏾‍❤️‍👨🏾",
+        x: 16,
+        y: 42
+      },
+      {
+        unified: "1f468-1f3ff-200d-2764-fe0f-200d-1f468-1f3ff",
+        native: "👨🏿‍❤️‍👨🏿",
+        x: 16,
+        y: 48
+      }
     ],
     version: 2
   },
@@ -19614,13 +20701,38 @@ const emojis = {
         unified: "1f469-200d-2764-fe0f-200d-1f469",
         native: "👩‍❤️‍👩",
         x: 20,
-        y: 16
+        y: 17
       },
-      null,
-      null,
-      null,
-      null,
-      null
+      {
+        unified: "1f469-1f3fb-200d-2764-fe0f-200d-1f469-1f3fb",
+        native: "👩🏻‍❤️‍👩🏻",
+        x: 20,
+        y: 18
+      },
+      {
+        unified: "1f469-1f3fc-200d-2764-fe0f-200d-1f469-1f3fc",
+        native: "👩🏼‍❤️‍👩🏼",
+        x: 20,
+        y: 24
+      },
+      {
+        unified: "1f469-1f3fd-200d-2764-fe0f-200d-1f469-1f3fd",
+        native: "👩🏽‍❤️‍👩🏽",
+        x: 20,
+        y: 30
+      },
+      {
+        unified: "1f469-1f3fe-200d-2764-fe0f-200d-1f469-1f3fe",
+        native: "👩🏾‍❤️‍👩🏾",
+        x: 20,
+        y: 36
+      },
+      {
+        unified: "1f469-1f3ff-200d-2764-fe0f-200d-1f469-1f3ff",
+        native: "👩🏿‍❤️‍👩🏿",
+        x: 20,
+        y: 42
+      }
     ],
     version: 2
   },
@@ -19643,7 +20755,7 @@ const emojis = {
         unified: "1f46a",
         native: "👪",
         x: 21,
-        y: 39
+        y: 40
       }
     ],
     version: 1
@@ -19663,7 +20775,7 @@ const emojis = {
         unified: "1f468-200d-1f469-200d-1f466",
         native: "👨‍👩‍👦",
         x: 14,
-        y: 43
+        y: 44
       }
     ],
     version: 2
@@ -19687,7 +20799,7 @@ const emojis = {
         unified: "1f468-200d-1f469-200d-1f467",
         native: "👨‍👩‍👧",
         x: 14,
-        y: 45
+        y: 46
       }
     ],
     version: 2
@@ -19712,7 +20824,7 @@ const emojis = {
         unified: "1f468-200d-1f469-200d-1f467-200d-1f466",
         native: "👨‍👩‍👧‍👦",
         x: 14,
-        y: 46
+        y: 47
       }
     ],
     version: 2
@@ -19736,7 +20848,7 @@ const emojis = {
         unified: "1f468-200d-1f469-200d-1f466-200d-1f466",
         native: "👨‍👩‍👦‍👦",
         x: 14,
-        y: 44
+        y: 45
       }
     ],
     version: 2
@@ -19760,7 +20872,7 @@ const emojis = {
         unified: "1f468-200d-1f469-200d-1f467-200d-1f467",
         native: "👨‍👩‍👧‍👧",
         x: 14,
-        y: 47
+        y: 48
       }
     ],
     version: 2
@@ -19783,7 +20895,7 @@ const emojis = {
         unified: "1f468-200d-1f468-200d-1f466",
         native: "👨‍👨‍👦",
         x: 14,
-        y: 38
+        y: 39
       }
     ],
     version: 2
@@ -19806,7 +20918,7 @@ const emojis = {
         unified: "1f468-200d-1f468-200d-1f467",
         native: "👨‍👨‍👧",
         x: 14,
-        y: 40
+        y: 41
       }
     ],
     version: 2
@@ -19830,7 +20942,7 @@ const emojis = {
         unified: "1f468-200d-1f468-200d-1f467-200d-1f466",
         native: "👨‍👨‍👧‍👦",
         x: 14,
-        y: 41
+        y: 42
       }
     ],
     version: 2
@@ -19853,7 +20965,7 @@ const emojis = {
         unified: "1f468-200d-1f468-200d-1f466-200d-1f466",
         native: "👨‍👨‍👦‍👦",
         x: 14,
-        y: 39
+        y: 40
       }
     ],
     version: 2
@@ -19876,7 +20988,7 @@ const emojis = {
         unified: "1f468-200d-1f468-200d-1f467-200d-1f467",
         native: "👨‍👨‍👧‍👧",
         x: 14,
-        y: 42
+        y: 43
       }
     ],
     version: 2
@@ -19899,7 +21011,7 @@ const emojis = {
         unified: "1f469-200d-1f469-200d-1f466",
         native: "👩‍👩‍👦",
         x: 18,
-        y: 11
+        y: 12
       }
     ],
     version: 2
@@ -19922,7 +21034,7 @@ const emojis = {
         unified: "1f469-200d-1f469-200d-1f467",
         native: "👩‍👩‍👧",
         x: 18,
-        y: 13
+        y: 14
       }
     ],
     version: 2
@@ -19946,7 +21058,7 @@ const emojis = {
         unified: "1f469-200d-1f469-200d-1f467-200d-1f466",
         native: "👩‍👩‍👧‍👦",
         x: 18,
-        y: 14
+        y: 15
       }
     ],
     version: 2
@@ -19969,7 +21081,7 @@ const emojis = {
         unified: "1f469-200d-1f469-200d-1f466-200d-1f466",
         native: "👩‍👩‍👦‍👦",
         x: 18,
-        y: 12
+        y: 13
       }
     ],
     version: 2
@@ -19992,7 +21104,7 @@ const emojis = {
         unified: "1f469-200d-1f469-200d-1f467-200d-1f467",
         native: "👩‍👩‍👧‍👧",
         x: 18,
-        y: 15
+        y: 16
       }
     ],
     version: 2
@@ -20014,7 +21126,7 @@ const emojis = {
         unified: "1f468-200d-1f466",
         native: "👨‍👦",
         x: 14,
-        y: 34
+        y: 35
       }
     ],
     version: 4
@@ -20037,7 +21149,7 @@ const emojis = {
         unified: "1f468-200d-1f466-200d-1f466",
         native: "👨‍👦‍👦",
         x: 14,
-        y: 33
+        y: 34
       }
     ],
     version: 4
@@ -20059,7 +21171,7 @@ const emojis = {
         unified: "1f468-200d-1f467",
         native: "👨‍👧",
         x: 14,
-        y: 37
+        y: 38
       }
     ],
     version: 4
@@ -20083,7 +21195,7 @@ const emojis = {
         unified: "1f468-200d-1f467-200d-1f466",
         native: "👨‍👧‍👦",
         x: 14,
-        y: 35
+        y: 36
       }
     ],
     version: 4
@@ -20106,7 +21218,7 @@ const emojis = {
         unified: "1f468-200d-1f467-200d-1f467",
         native: "👨‍👧‍👧",
         x: 14,
-        y: 36
+        y: 37
       }
     ],
     version: 4
@@ -20128,7 +21240,7 @@ const emojis = {
         unified: "1f469-200d-1f466",
         native: "👩‍👦",
         x: 18,
-        y: 7
+        y: 8
       }
     ],
     version: 4
@@ -20151,7 +21263,7 @@ const emojis = {
         unified: "1f469-200d-1f466-200d-1f466",
         native: "👩‍👦‍👦",
         x: 18,
-        y: 6
+        y: 7
       }
     ],
     version: 4
@@ -20173,7 +21285,7 @@ const emojis = {
         unified: "1f469-200d-1f467",
         native: "👩‍👧",
         x: 18,
-        y: 10
+        y: 11
       }
     ],
     version: 4
@@ -20197,7 +21309,7 @@ const emojis = {
         unified: "1f469-200d-1f467-200d-1f466",
         native: "👩‍👧‍👦",
         x: 18,
-        y: 8
+        y: 9
       }
     ],
     version: 4
@@ -20220,7 +21332,7 @@ const emojis = {
         unified: "1f469-200d-1f467-200d-1f467",
         native: "👩‍👧‍👧",
         x: 18,
-        y: 9
+        y: 10
       }
     ],
     version: 4
@@ -20243,7 +21355,7 @@ const emojis = {
         unified: "1f5e3-fe0f",
         native: "🗣️",
         x: 32,
-        y: 10
+        y: 11
       }
     ],
     version: 1
@@ -20261,7 +21373,7 @@ const emojis = {
         unified: "1f464",
         native: "👤",
         x: 13,
-        y: 32
+        y: 33
       }
     ],
     version: 1
@@ -20281,7 +21393,7 @@ const emojis = {
         unified: "1f465",
         native: "👥",
         x: 13,
-        y: 33
+        y: 34
       }
     ],
     version: 1
@@ -20297,7 +21409,7 @@ const emojis = {
         unified: "1fac2",
         native: "🫂",
         x: 54,
-        y: 44
+        y: 58
       }
     ],
     version: 13
@@ -20316,7 +21428,7 @@ const emojis = {
         unified: "1f463",
         native: "👣",
         x: 13,
-        y: 31
+        y: 32
       }
     ],
     version: 1
@@ -20337,7 +21449,7 @@ const emojis = {
         unified: "1f435",
         native: "🐵",
         x: 11,
-        y: 40
+        y: 41
       }
     ],
     version: 1
@@ -20374,7 +21486,7 @@ const emojis = {
         unified: "1f98d",
         native: "🦍",
         x: 44,
-        y: 31
+        y: 33
       }
     ],
     version: 3
@@ -20390,7 +21502,7 @@ const emojis = {
         unified: "1f9a7",
         native: "🦧",
         x: 44,
-        y: 57
+        y: 59
       }
     ],
     version: 12
@@ -20412,7 +21524,7 @@ const emojis = {
         unified: "1f436",
         native: "🐶",
         x: 11,
-        y: 41
+        y: 42
       }
     ],
     version: 1
@@ -20451,7 +21563,7 @@ const emojis = {
         unified: "1f9ae",
         native: "🦮",
         x: 45,
-        y: 3
+        y: 5
       }
     ],
     version: 12
@@ -20488,7 +21600,7 @@ const emojis = {
         unified: "1f429",
         native: "🐩",
         x: 11,
-        y: 28
+        y: 29
       }
     ],
     version: 1
@@ -20506,7 +21618,7 @@ const emojis = {
         unified: "1f43a",
         native: "🐺",
         x: 11,
-        y: 45
+        y: 46
       }
     ],
     version: 1
@@ -20524,7 +21636,7 @@ const emojis = {
         unified: "1f98a",
         native: "🦊",
         x: 44,
-        y: 28
+        y: 30
       }
     ],
     version: 3
@@ -20541,7 +21653,7 @@ const emojis = {
         unified: "1f99d",
         native: "🦝",
         x: 44,
-        y: 47
+        y: 49
       }
     ],
     version: 11
@@ -20561,7 +21673,7 @@ const emojis = {
         unified: "1f431",
         native: "🐱",
         x: 11,
-        y: 36
+        y: 37
       }
     ],
     version: 1
@@ -20616,7 +21728,7 @@ const emojis = {
         unified: "1f981",
         native: "🦁",
         x: 44,
-        y: 19
+        y: 21
       }
     ],
     version: 1
@@ -20637,7 +21749,7 @@ const emojis = {
         unified: "1f42f",
         native: "🐯",
         x: 11,
-        y: 34
+        y: 35
       }
     ],
     version: 1
@@ -20691,7 +21803,7 @@ const emojis = {
         unified: "1f434",
         native: "🐴",
         x: 11,
-        y: 39
+        y: 40
       }
     ],
     version: 1
@@ -20729,7 +21841,7 @@ const emojis = {
         unified: "1f984",
         native: "🦄",
         x: 44,
-        y: 22
+        y: 24
       }
     ],
     version: 1
@@ -20749,7 +21861,7 @@ const emojis = {
         unified: "1f993",
         native: "🦓",
         x: 44,
-        y: 37
+        y: 39
       }
     ],
     version: 5
@@ -20768,7 +21880,7 @@ const emojis = {
         unified: "1f98c",
         native: "🦌",
         x: 44,
-        y: 30
+        y: 32
       }
     ],
     version: 3
@@ -20784,7 +21896,7 @@ const emojis = {
         unified: "1f9ac",
         native: "🦬",
         x: 45,
-        y: 1
+        y: 3
       }
     ],
     version: 13
@@ -20805,7 +21917,7 @@ const emojis = {
         unified: "1f42e",
         native: "🐮",
         x: 11,
-        y: 33
+        y: 34
       }
     ],
     version: 1
@@ -20882,7 +21994,7 @@ const emojis = {
         unified: "1f437",
         native: "🐷",
         x: 11,
-        y: 42
+        y: 43
       }
     ],
     version: 1
@@ -20934,7 +22046,7 @@ const emojis = {
         unified: "1f43d",
         native: "🐽",
         x: 11,
-        y: 49
+        y: 50
       }
     ],
     version: 1
@@ -21009,7 +22121,7 @@ const emojis = {
         unified: "1f42a",
         native: "🐪",
         x: 11,
-        y: 29
+        y: 30
       }
     ],
     version: 1
@@ -21030,7 +22142,7 @@ const emojis = {
         unified: "1f42b",
         native: "🐫",
         x: 11,
-        y: 30
+        y: 31
       }
     ],
     version: 1
@@ -21048,7 +22160,7 @@ const emojis = {
         unified: "1f999",
         native: "🦙",
         x: 44,
-        y: 43
+        y: 45
       }
     ],
     version: 11
@@ -21068,7 +22180,7 @@ const emojis = {
         unified: "1f992",
         native: "🦒",
         x: 44,
-        y: 36
+        y: 38
       }
     ],
     version: 5
@@ -21105,7 +22217,7 @@ const emojis = {
         unified: "1f9a3",
         native: "🦣",
         x: 44,
-        y: 53
+        y: 55
       }
     ],
     version: 13
@@ -21123,7 +22235,7 @@ const emojis = {
         unified: "1f98f",
         native: "🦏",
         x: 44,
-        y: 33
+        y: 35
       }
     ],
     version: 3
@@ -21140,7 +22252,7 @@ const emojis = {
         unified: "1f99b",
         native: "🦛",
         x: 44,
-        y: 45
+        y: 47
       }
     ],
     version: 11
@@ -21160,7 +22272,7 @@ const emojis = {
         unified: "1f42d",
         native: "🐭",
         x: 11,
-        y: 32
+        y: 33
       }
     ],
     version: 1
@@ -21214,7 +22326,7 @@ const emojis = {
         unified: "1f439",
         native: "🐹",
         x: 11,
-        y: 44
+        y: 45
       }
     ],
     version: 1
@@ -21235,7 +22347,7 @@ const emojis = {
         unified: "1f430",
         native: "🐰",
         x: 11,
-        y: 35
+        y: 36
       }
     ],
     version: 1
@@ -21275,7 +22387,7 @@ const emojis = {
         unified: "1f43f-fe0f",
         native: "🐿️",
         x: 11,
-        y: 51
+        y: 52
       }
     ],
     version: 1
@@ -21292,7 +22404,7 @@ const emojis = {
         unified: "1f9ab",
         native: "🦫",
         x: 45,
-        y: 0
+        y: 2
       }
     ],
     version: 13
@@ -21310,7 +22422,7 @@ const emojis = {
         unified: "1f994",
         native: "🦔",
         x: 44,
-        y: 38
+        y: 40
       }
     ],
     version: 5
@@ -21329,7 +22441,7 @@ const emojis = {
         unified: "1f987",
         native: "🦇",
         x: 44,
-        y: 25
+        y: 27
       }
     ],
     version: 3
@@ -21347,7 +22459,7 @@ const emojis = {
         unified: "1f43b",
         native: "🐻",
         x: 11,
-        y: 47
+        y: 48
       }
     ],
     version: 1
@@ -21364,7 +22476,7 @@ const emojis = {
         unified: "1f43b-200d-2744-fe0f",
         native: "🐻‍❄️",
         x: 11,
-        y: 46
+        y: 47
       }
     ],
     version: 13
@@ -21381,7 +22493,7 @@ const emojis = {
         unified: "1f428",
         native: "🐨",
         x: 11,
-        y: 27
+        y: 28
       }
     ],
     version: 1
@@ -21399,7 +22511,7 @@ const emojis = {
         unified: "1f43c",
         native: "🐼",
         x: 11,
-        y: 48
+        y: 49
       }
     ],
     version: 1
@@ -21415,7 +22527,7 @@ const emojis = {
         unified: "1f9a5",
         native: "🦥",
         x: 44,
-        y: 55
+        y: 57
       }
     ],
     version: 12
@@ -21431,7 +22543,7 @@ const emojis = {
         unified: "1f9a6",
         native: "🦦",
         x: 44,
-        y: 56
+        y: 58
       }
     ],
     version: 12
@@ -21447,7 +22559,7 @@ const emojis = {
         unified: "1f9a8",
         native: "🦨",
         x: 44,
-        y: 58
+        y: 60
       }
     ],
     version: 12
@@ -21468,7 +22580,7 @@ const emojis = {
         unified: "1f998",
         native: "🦘",
         x: 44,
-        y: 42
+        y: 44
       }
     ],
     version: 11
@@ -21486,7 +22598,7 @@ const emojis = {
         unified: "1f9a1",
         native: "🦡",
         x: 44,
-        y: 51
+        y: 53
       }
     ],
     version: 11
@@ -21508,7 +22620,7 @@ const emojis = {
         unified: "1f43e",
         native: "🐾",
         x: 11,
-        y: 50
+        y: 51
       }
     ],
     version: 1
@@ -21525,7 +22637,7 @@ const emojis = {
         unified: "1f983",
         native: "🦃",
         x: 44,
-        y: 21
+        y: 23
       }
     ],
     version: 1
@@ -21642,7 +22754,7 @@ const emojis = {
         unified: "1f426",
         native: "🐦",
         x: 11,
-        y: 25
+        y: 26
       }
     ],
     version: 1
@@ -21659,7 +22771,7 @@ const emojis = {
         unified: "1f427",
         native: "🐧",
         x: 11,
-        y: 26
+        y: 27
       }
     ],
     version: 1
@@ -21678,7 +22790,7 @@ const emojis = {
         unified: "1f54a-fe0f",
         native: "🕊️",
         x: 30,
-        y: 27
+        y: 28
       }
     ],
     version: 1
@@ -21696,7 +22808,7 @@ const emojis = {
         unified: "1f985",
         native: "🦅",
         x: 44,
-        y: 23
+        y: 25
       }
     ],
     version: 3
@@ -21715,7 +22827,7 @@ const emojis = {
         unified: "1f986",
         native: "🦆",
         x: 44,
-        y: 24
+        y: 26
       }
     ],
     version: 3
@@ -21733,7 +22845,7 @@ const emojis = {
         unified: "1f9a2",
         native: "🦢",
         x: 44,
-        y: 52
+        y: 54
       }
     ],
     version: 11
@@ -21752,7 +22864,7 @@ const emojis = {
         unified: "1f989",
         native: "🦉",
         x: 44,
-        y: 27
+        y: 29
       }
     ],
     version: 3
@@ -21769,7 +22881,7 @@ const emojis = {
         unified: "1f9a4",
         native: "🦤",
         x: 44,
-        y: 54
+        y: 56
       }
     ],
     version: 13
@@ -21786,7 +22898,7 @@ const emojis = {
         unified: "1fab6",
         native: "🪶",
         x: 54,
-        y: 37
+        y: 47
       }
     ],
     version: 13
@@ -21801,8 +22913,8 @@ const emojis = {
       {
         unified: "1f9a9",
         native: "🦩",
-        x: 44,
-        y: 59
+        x: 45,
+        y: 0
       }
     ],
     version: 12
@@ -21821,7 +22933,7 @@ const emojis = {
         unified: "1f99a",
         native: "🦚",
         x: 44,
-        y: 44
+        y: 46
       }
     ],
     version: 11
@@ -21841,7 +22953,7 @@ const emojis = {
         unified: "1f99c",
         native: "🦜",
         x: 44,
-        y: 46
+        y: 48
       }
     ],
     version: 11
@@ -21860,7 +22972,7 @@ const emojis = {
         unified: "1f438",
         native: "🐸",
         x: 11,
-        y: 43
+        y: 44
       }
     ],
     version: 1
@@ -21917,7 +23029,7 @@ const emojis = {
         unified: "1f98e",
         native: "🦎",
         x: 44,
-        y: 32
+        y: 34
       }
     ],
     version: 3
@@ -21957,7 +23069,7 @@ const emojis = {
         unified: "1f432",
         native: "🐲",
         x: 11,
-        y: 37
+        y: 38
       }
     ],
     version: 1
@@ -21999,7 +23111,7 @@ const emojis = {
         unified: "1f995",
         native: "🦕",
         x: 44,
-        y: 39
+        y: 41
       }
     ],
     version: 5
@@ -22021,7 +23133,7 @@ const emojis = {
         unified: "1f996",
         native: "🦖",
         x: 44,
-        y: 40
+        y: 42
       }
     ],
     version: 5
@@ -22040,7 +23152,7 @@ const emojis = {
         unified: "1f433",
         native: "🐳",
         x: 11,
-        y: 38
+        y: 39
       }
     ],
     version: 1
@@ -22083,7 +23195,7 @@ const emojis = {
         unified: "1f42c",
         native: "🐬",
         x: 11,
-        y: 31
+        y: 32
       }
     ],
     version: 1
@@ -22101,7 +23213,7 @@ const emojis = {
         unified: "1f9ad",
         native: "🦭",
         x: 45,
-        y: 2
+        y: 4
       }
     ],
     version: 13
@@ -22182,7 +23294,7 @@ const emojis = {
         unified: "1f988",
         native: "🦈",
         x: 44,
-        y: 26
+        y: 28
       }
     ],
     version: 3
@@ -22226,6 +23338,24 @@ const emojis = {
     ],
     version: 1
   },
+  coral: {
+    id: "coral",
+    name: "Coral",
+    keywords: [
+      "ocean",
+      "sea",
+      "reef"
+    ],
+    skins: [
+      {
+        unified: "1fab8",
+        native: "🪸",
+        x: 54,
+        y: 49
+      }
+    ],
+    version: 14
+  },
   snail: {
     id: "snail",
     name: "Snail",
@@ -22258,7 +23388,7 @@ const emojis = {
         unified: "1f98b",
         native: "🦋",
         x: 44,
-        y: 29
+        y: 31
       }
     ],
     version: 3
@@ -22334,7 +23464,7 @@ const emojis = {
         unified: "1fab2",
         native: "🪲",
         x: 54,
-        y: 33
+        y: 43
       }
     ],
     version: 13
@@ -22370,7 +23500,7 @@ const emojis = {
         unified: "1f997",
         native: "🦗",
         x: 44,
-        y: 41
+        y: 43
       }
     ],
     version: 5
@@ -22387,7 +23517,7 @@ const emojis = {
         unified: "1fab3",
         native: "🪳",
         x: 54,
-        y: 34
+        y: 44
       }
     ],
     version: 13
@@ -22404,7 +23534,7 @@ const emojis = {
         unified: "1f577-fe0f",
         native: "🕷️",
         x: 31,
-        y: 23
+        y: 24
       }
     ],
     version: 1
@@ -22423,7 +23553,7 @@ const emojis = {
         unified: "1f578-fe0f",
         native: "🕸️",
         x: 31,
-        y: 24
+        y: 25
       }
     ],
     version: 1
@@ -22440,7 +23570,7 @@ const emojis = {
         unified: "1f982",
         native: "🦂",
         x: 44,
-        y: 20
+        y: 22
       }
     ],
     version: 1
@@ -22459,7 +23589,7 @@ const emojis = {
         unified: "1f99f",
         native: "🦟",
         x: 44,
-        y: 49
+        y: 51
       }
     ],
     version: 11
@@ -22475,7 +23605,7 @@ const emojis = {
         unified: "1fab0",
         native: "🪰",
         x: 54,
-        y: 31
+        y: 41
       }
     ],
     version: 13
@@ -22491,7 +23621,7 @@ const emojis = {
         unified: "1fab1",
         native: "🪱",
         x: 54,
-        y: 32
+        y: 42
       }
     ],
     version: 13
@@ -22503,14 +23633,15 @@ const emojis = {
       "amoeba",
       "bacteria",
       "germs",
-      "virus"
+      "virus",
+      "covid"
     ],
     skins: [
       {
         unified: "1f9a0",
         native: "🦠",
         x: 44,
-        y: 50
+        y: 52
       }
     ],
     version: 11
@@ -22528,7 +23659,7 @@ const emojis = {
         unified: "1f490",
         native: "💐",
         x: 27,
-        y: 6
+        y: 7
       }
     ],
     version: 1
@@ -22564,10 +23695,28 @@ const emojis = {
         unified: "1f4ae",
         native: "💮",
         x: 28,
-        y: 5
+        y: 6
       }
     ],
     version: 1
+  },
+  lotus: {
+    id: "lotus",
+    name: "Lotus",
+    keywords: [
+      "flower",
+      "calm",
+      "meditation"
+    ],
+    skins: [
+      {
+        unified: "1fab7",
+        native: "🪷",
+        x: 54,
+        y: 48
+      }
+    ],
+    version: 14
   },
   rosette: {
     id: "rosette",
@@ -22611,14 +23760,15 @@ const emojis = {
     name: "Wilted Flower",
     keywords: [
       "plant",
-      "nature"
+      "nature",
+      "rose"
     ],
     skins: [
       {
         unified: "1f940",
         native: "🥀",
         x: 43,
-        y: 11
+        y: 13
       }
     ],
     version: 3
@@ -22730,7 +23880,7 @@ const emojis = {
         unified: "1fab4",
         native: "🪴",
         x: 54,
-        y: 35
+        y: 45
       }
     ],
     version: 13
@@ -22862,8 +24012,8 @@ const emojis = {
       {
         unified: "2618-fe0f",
         native: "☘️",
-        x: 56,
-        y: 49
+        x: 57,
+        y: 19
       }
     ],
     version: 1
@@ -22946,6 +24096,55 @@ const emojis = {
         native: "🍃",
         x: 6,
         y: 3
+      }
+    ],
+    version: 1
+  },
+  empty_nest: {
+    id: "empty_nest",
+    name: "Empty Nest",
+    keywords: [
+      "bird"
+    ],
+    skins: [
+      {
+        unified: "1fab9",
+        native: "🪹",
+        x: 54,
+        y: 50
+      }
+    ],
+    version: 14
+  },
+  nest_with_eggs: {
+    id: "nest_with_eggs",
+    name: "Nest with Eggs",
+    keywords: [
+      "bird"
+    ],
+    skins: [
+      {
+        unified: "1faba",
+        native: "🪺",
+        x: 54,
+        y: 51
+      }
+    ],
+    version: 14
+  },
+  mushroom: {
+    id: "mushroom",
+    name: "Mushroom",
+    keywords: [
+      "plant",
+      "vegetable"
+    ],
+    skins: [
+      {
+        unified: "1f344",
+        native: "🍄",
+        x: 6,
+        y: 4
       }
     ],
     version: 1
@@ -23090,7 +24289,7 @@ const emojis = {
         unified: "1f96d",
         native: "🥭",
         x: 43,
-        y: 55
+        y: 57
       }
     ],
     version: 11
@@ -23212,7 +24411,7 @@ const emojis = {
         unified: "1fad0",
         native: "🫐",
         x: 55,
-        y: 2
+        y: 18
       }
     ],
     version: 13
@@ -23230,7 +24429,7 @@ const emojis = {
         unified: "1f95d",
         native: "🥝",
         x: 43,
-        y: 39
+        y: 41
       }
     ],
     version: 3
@@ -23265,7 +24464,7 @@ const emojis = {
         unified: "1fad2",
         native: "🫒",
         x: 55,
-        y: 4
+        y: 20
       }
     ],
     version: 13
@@ -23284,7 +24483,7 @@ const emojis = {
         unified: "1f965",
         native: "🥥",
         x: 43,
-        y: 47
+        y: 49
       }
     ],
     version: 5
@@ -23301,7 +24500,7 @@ const emojis = {
         unified: "1f951",
         native: "🥑",
         x: 43,
-        y: 27
+        y: 29
       }
     ],
     version: 3
@@ -23339,7 +24538,7 @@ const emojis = {
         unified: "1f954",
         native: "🥔",
         x: 43,
-        y: 30
+        y: 32
       }
     ],
     version: 3
@@ -23357,7 +24556,7 @@ const emojis = {
         unified: "1f955",
         native: "🥕",
         x: 43,
-        y: 31
+        y: 33
       }
     ],
     version: 3
@@ -23411,7 +24610,7 @@ const emojis = {
         unified: "1fad1",
         native: "🫑",
         x: 55,
-        y: 3
+        y: 19
       }
     ],
     version: 13
@@ -23429,7 +24628,7 @@ const emojis = {
         unified: "1f952",
         native: "🥒",
         x: 43,
-        y: 28
+        y: 30
       }
     ],
     version: 3
@@ -23452,7 +24651,7 @@ const emojis = {
         unified: "1f96c",
         native: "🥬",
         x: 43,
-        y: 54
+        y: 56
       }
     ],
     version: 11
@@ -23470,7 +24669,7 @@ const emojis = {
         unified: "1f966",
         native: "🥦",
         x: 43,
-        y: 48
+        y: 50
       }
     ],
     version: 5
@@ -23488,7 +24687,7 @@ const emojis = {
         unified: "1f9c4",
         native: "🧄",
         x: 46,
-        y: 9
+        y: 11
       }
     ],
     version: 12
@@ -23506,27 +24705,10 @@ const emojis = {
         unified: "1f9c5",
         native: "🧅",
         x: 46,
-        y: 10
+        y: 12
       }
     ],
     version: 12
-  },
-  mushroom: {
-    id: "mushroom",
-    name: "Mushroom",
-    keywords: [
-      "plant",
-      "vegetable"
-    ],
-    skins: [
-      {
-        unified: "1f344",
-        native: "🍄",
-        x: 6,
-        y: 4
-      }
-    ],
-    version: 1
   },
   peanuts: {
     id: "peanuts",
@@ -23540,10 +24722,26 @@ const emojis = {
         unified: "1f95c",
         native: "🥜",
         x: 43,
-        y: 38
+        y: 40
       }
     ],
     version: 3
+  },
+  beans: {
+    id: "beans",
+    name: "Beans",
+    keywords: [
+      "food"
+    ],
+    skins: [
+      {
+        unified: "1fad8",
+        native: "🫘",
+        x: 55,
+        y: 26
+      }
+    ],
+    version: 14
   },
   chestnut: {
     id: "chestnut",
@@ -23594,7 +24792,7 @@ const emojis = {
         unified: "1f950",
         native: "🥐",
         x: 43,
-        y: 26
+        y: 28
       }
     ],
     version: 3
@@ -23604,14 +24802,16 @@ const emojis = {
     name: "Baguette Bread",
     keywords: [
       "food",
-      "french"
+      "french",
+      "france",
+      "bakery"
     ],
     skins: [
       {
         unified: "1f956",
         native: "🥖",
         x: 43,
-        y: 32
+        y: 34
       }
     ],
     version: 3
@@ -23621,14 +24821,15 @@ const emojis = {
     name: "Flatbread",
     keywords: [
       "flour",
-      "food"
+      "food",
+      "bakery"
     ],
     skins: [
       {
         unified: "1fad3",
         native: "🫓",
         x: 55,
-        y: 5
+        y: 21
       }
     ],
     version: 13
@@ -23639,14 +24840,16 @@ const emojis = {
     keywords: [
       "food",
       "bread",
-      "twisted"
+      "twisted",
+      "germany",
+      "bakery"
     ],
     skins: [
       {
         unified: "1f968",
         native: "🥨",
         x: 43,
-        y: 50
+        y: 52
       }
     ],
     version: 5
@@ -23658,14 +24861,15 @@ const emojis = {
       "food",
       "bread",
       "bakery",
-      "schmear"
+      "schmear",
+      "jewish"
     ],
     skins: [
       {
         unified: "1f96f",
         native: "🥯",
         x: 43,
-        y: 57
+        y: 59
       }
     ],
     version: 11
@@ -23677,14 +24881,15 @@ const emojis = {
       "food",
       "breakfast",
       "flapjacks",
-      "hotcakes"
+      "hotcakes",
+      "brunch"
     ],
     skins: [
       {
         unified: "1f95e",
         native: "🥞",
         x: 43,
-        y: 40
+        y: 42
       }
     ],
     version: 3
@@ -23694,14 +24899,15 @@ const emojis = {
     name: "Waffle",
     keywords: [
       "food",
-      "breakfast"
+      "breakfast",
+      "brunch"
     ],
     skins: [
       {
         unified: "1f9c7",
         native: "🧇",
         x: 46,
-        y: 12
+        y: 14
       }
     ],
     version: 12
@@ -23711,14 +24917,15 @@ const emojis = {
     name: "Cheese Wedge",
     keywords: [
       "food",
-      "chadder"
+      "chadder",
+      "swiss"
     ],
     skins: [
       {
         unified: "1f9c0",
         native: "🧀",
         x: 46,
-        y: 5
+        y: 7
       }
     ],
     version: 1
@@ -23777,7 +24984,7 @@ const emojis = {
         unified: "1f969",
         native: "🥩",
         x: 43,
-        y: 51
+        y: 53
       }
     ],
     version: 5
@@ -23790,14 +24997,15 @@ const emojis = {
       "breakfast",
       "pork",
       "pig",
-      "meat"
+      "meat",
+      "brunch"
     ],
     skins: [
       {
         unified: "1f953",
         native: "🥓",
         x: 43,
-        y: 29
+        y: 31
       }
     ],
     version: 3
@@ -23832,7 +25040,8 @@ const emojis = {
       "chips",
       "snack",
       "fast",
-      "food"
+      "food",
+      "potato"
     ],
     skins: [
       {
@@ -23849,7 +25058,8 @@ const emojis = {
     name: "Pizza",
     keywords: [
       "food",
-      "party"
+      "party",
+      "italy"
     ],
     skins: [
       {
@@ -23867,7 +25077,8 @@ const emojis = {
     keywords: [
       "hotdog",
       "food",
-      "frankfurter"
+      "frankfurter",
+      "america"
     ],
     skins: [
       {
@@ -23885,14 +25096,16 @@ const emojis = {
     keywords: [
       "food",
       "lunch",
-      "bread"
+      "bread",
+      "toast",
+      "bakery"
     ],
     skins: [
       {
         unified: "1f96a",
         native: "🥪",
         x: 43,
-        y: 52
+        y: 54
       }
     ],
     version: 5
@@ -23943,7 +25156,7 @@ const emojis = {
         unified: "1fad4",
         native: "🫔",
         x: 55,
-        y: 6
+        y: 22
       }
     ],
     version: 13
@@ -23953,14 +25166,15 @@ const emojis = {
     name: "Stuffed Flatbread",
     keywords: [
       "food",
-      "gyro"
+      "gyro",
+      "mediterranean"
     ],
     skins: [
       {
         unified: "1f959",
         native: "🥙",
         x: 43,
-        y: 35
+        y: 37
       }
     ],
     version: 3
@@ -23969,14 +25183,15 @@ const emojis = {
     id: "falafel",
     name: "Falafel",
     keywords: [
-      "food"
+      "food",
+      "mediterranean"
     ],
     skins: [
       {
         unified: "1f9c6",
         native: "🧆",
         x: 46,
-        y: 11
+        y: 13
       }
     ],
     version: 12
@@ -23994,7 +25209,7 @@ const emojis = {
         unified: "1f95a",
         native: "🥚",
         x: 43,
-        y: 36
+        y: 38
       }
     ],
     version: 3
@@ -24007,7 +25222,8 @@ const emojis = {
       "egg",
       "food",
       "breakfast",
-      "kitchen"
+      "kitchen",
+      "skillet"
     ],
     skins: [
       {
@@ -24025,14 +25241,15 @@ const emojis = {
     keywords: [
       "cooking",
       "casserole",
-      "paella"
+      "paella",
+      "skillet"
     ],
     skins: [
       {
         unified: "1f958",
         native: "🥘",
         x: 43,
-        y: 34
+        y: 36
       }
     ],
     version: 3
@@ -24043,7 +25260,8 @@ const emojis = {
     keywords: [
       "stew",
       "meat",
-      "soup"
+      "soup",
+      "hot"
     ],
     skins: [
       {
@@ -24068,7 +25286,7 @@ const emojis = {
         unified: "1fad5",
         native: "🫕",
         x: 55,
-        y: 7
+        y: 23
       }
     ],
     version: 13
@@ -24088,7 +25306,7 @@ const emojis = {
         unified: "1f963",
         native: "🥣",
         x: 43,
-        y: 45
+        y: 47
       }
     ],
     version: 5
@@ -24099,14 +25317,15 @@ const emojis = {
     keywords: [
       "food",
       "healthy",
-      "lettuce"
+      "lettuce",
+      "vegetable"
     ],
     skins: [
       {
         unified: "1f957",
         native: "🥗",
         x: 43,
-        y: 33
+        y: 35
       }
     ],
     version: 3
@@ -24119,7 +25338,8 @@ const emojis = {
       "movie",
       "theater",
       "films",
-      "snack"
+      "snack",
+      "drama"
     ],
     skins: [
       {
@@ -24143,7 +25363,7 @@ const emojis = {
         unified: "1f9c8",
         native: "🧈",
         x: 46,
-        y: 13
+        y: 15
       }
     ],
     version: 12
@@ -24160,7 +25380,7 @@ const emojis = {
         unified: "1f9c2",
         native: "🧂",
         x: 46,
-        y: 7
+        y: 9
       }
     ],
     version: 11
@@ -24169,14 +25389,15 @@ const emojis = {
     id: "canned_food",
     name: "Canned Food",
     keywords: [
-      "soup"
+      "soup",
+      "tomatoes"
     ],
     skins: [
       {
         unified: "1f96b",
         native: "🥫",
         x: 43,
-        y: 53
+        y: 55
       }
     ],
     version: 5
@@ -24186,7 +25407,8 @@ const emojis = {
     name: "Bento Box",
     keywords: [
       "food",
-      "japanese"
+      "japanese",
+      "lunch"
     ],
     skins: [
       {
@@ -24203,7 +25425,8 @@ const emojis = {
     name: "Rice Cracker",
     keywords: [
       "food",
-      "japanese"
+      "japanese",
+      "snack"
     ],
     skins: [
       {
@@ -24237,7 +25460,6 @@ const emojis = {
     name: "Cooked Rice",
     keywords: [
       "food",
-      "china",
       "asian"
     ],
     skins: [
@@ -24295,6 +25517,7 @@ const emojis = {
     keywords: [
       "food",
       "italian",
+      "pasta",
       "noodle"
     ],
     skins: [
@@ -24312,7 +25535,8 @@ const emojis = {
     name: "Roasted Sweet Potato",
     keywords: [
       "food",
-      "nature"
+      "nature",
+      "plant"
     ],
     skins: [
       {
@@ -24408,14 +25632,15 @@ const emojis = {
     name: "Moon Cake",
     keywords: [
       "food",
-      "autumn"
+      "autumn",
+      "dessert"
     ],
     skins: [
       {
         unified: "1f96e",
         native: "🥮",
         x: 43,
-        y: 56
+        y: 58
       }
     ],
     version: 11
@@ -24448,14 +25673,15 @@ const emojis = {
       "food",
       "empanada",
       "pierogi",
-      "potsticker"
+      "potsticker",
+      "gyoza"
     ],
     skins: [
       {
         unified: "1f95f",
         native: "🥟",
         x: 43,
-        y: 41
+        y: 43
       }
     ],
     version: 5
@@ -24465,14 +25691,15 @@ const emojis = {
     name: "Fortune Cookie",
     keywords: [
       "food",
-      "prophecy"
+      "prophecy",
+      "dessert"
     ],
     skins: [
       {
         unified: "1f960",
         native: "🥠",
         x: 43,
-        y: 42
+        y: 44
       }
     ],
     version: 5
@@ -24489,7 +25716,7 @@ const emojis = {
         unified: "1f961",
         native: "🥡",
         x: 43,
-        y: 43
+        y: 45
       }
     ],
     version: 5
@@ -24506,7 +25733,7 @@ const emojis = {
         unified: "1f980",
         native: "🦀",
         x: 44,
-        y: 18
+        y: 20
       }
     ],
     version: 1
@@ -24526,7 +25753,7 @@ const emojis = {
         unified: "1f99e",
         native: "🦞",
         x: 44,
-        y: 48
+        y: 50
       }
     ],
     version: 11
@@ -24545,7 +25772,7 @@ const emojis = {
         unified: "1f990",
         native: "🦐",
         x: 44,
-        y: 34
+        y: 36
       }
     ],
     version: 3
@@ -24564,7 +25791,7 @@ const emojis = {
         unified: "1f991",
         native: "🦑",
         x: 44,
-        y: 35
+        y: 37
       }
     ],
     version: 3
@@ -24579,8 +25806,8 @@ const emojis = {
       {
         unified: "1f9aa",
         native: "🦪",
-        x: 44,
-        y: 60
+        x: 45,
+        y: 1
       }
     ],
     version: 12
@@ -24731,7 +25958,7 @@ const emojis = {
         unified: "1f9c1",
         native: "🧁",
         x: 46,
-        y: 6
+        y: 8
       }
     ],
     version: 11
@@ -24749,7 +25976,7 @@ const emojis = {
         unified: "1f967",
         native: "🥧",
         x: 43,
-        y: 49
+        y: 51
       }
     ],
     version: 5
@@ -24877,7 +26104,7 @@ const emojis = {
         unified: "1f95b",
         native: "🥛",
         x: 43,
-        y: 37
+        y: 39
       }
     ],
     version: 3
@@ -24889,14 +26116,15 @@ const emojis = {
       "coffee",
       "caffeine",
       "latte",
-      "espresso"
+      "espresso",
+      "mug"
     ],
     skins: [
       {
         unified: "2615",
         native: "☕",
-        x: 56,
-        y: 48
+        x: 57,
+        y: 18
       }
     ],
     version: 1
@@ -24913,7 +26141,7 @@ const emojis = {
         unified: "1fad6",
         native: "🫖",
         x: 55,
-        y: 8
+        y: 24
       }
     ],
     version: 13
@@ -25111,7 +26339,7 @@ const emojis = {
         unified: "1f942",
         native: "🥂",
         x: 43,
-        y: 13
+        y: 15
       }
     ],
     version: 3
@@ -25136,10 +26364,27 @@ const emojis = {
         unified: "1f943",
         native: "🥃",
         x: 43,
-        y: 14
+        y: 16
       }
     ],
     version: 3
+  },
+  pouring_liquid: {
+    id: "pouring_liquid",
+    name: "Pouring Liquid",
+    keywords: [
+      "cup",
+      "water"
+    ],
+    skins: [
+      {
+        unified: "1fad7",
+        native: "🫗",
+        x: 55,
+        y: 25
+      }
+    ],
+    version: 14
   },
   cup_with_straw: {
     id: "cup_with_straw",
@@ -25153,7 +26398,7 @@ const emojis = {
         unified: "1f964",
         native: "🥤",
         x: 43,
-        y: 46
+        y: 48
       }
     ],
     version: 5
@@ -25172,7 +26417,7 @@ const emojis = {
         unified: "1f9cb",
         native: "🧋",
         x: 46,
-        y: 16
+        y: 18
       }
     ],
     version: 13
@@ -25188,7 +26433,7 @@ const emojis = {
         unified: "1f9c3",
         native: "🧃",
         x: 46,
-        y: 8
+        y: 10
       }
     ],
     version: 12
@@ -25206,7 +26451,7 @@ const emojis = {
         unified: "1f9c9",
         native: "🧉",
         x: 46,
-        y: 14
+        y: 16
       }
     ],
     version: 12
@@ -25224,7 +26469,7 @@ const emojis = {
         unified: "1f9ca",
         native: "🧊",
         x: 46,
-        y: 15
+        y: 17
       }
     ],
     version: 12
@@ -25240,7 +26485,7 @@ const emojis = {
         unified: "1f962",
         native: "🥢",
         x: 43,
-        y: 44
+        y: 46
       }
     ],
     version: 5
@@ -25296,7 +26541,7 @@ const emojis = {
         unified: "1f944",
         native: "🥄",
         x: 43,
-        y: 15
+        y: 17
       }
     ],
     version: 3
@@ -25316,10 +26561,27 @@ const emojis = {
         unified: "1f52a",
         native: "🔪",
         x: 30,
-        y: 6
+        y: 7
       }
     ],
     version: 1
+  },
+  jar: {
+    id: "jar",
+    name: "Jar",
+    keywords: [
+      "container",
+      "sauce"
+    ],
+    skins: [
+      {
+        unified: "1fad9",
+        native: "🫙",
+        x: 55,
+        y: 27
+      }
+    ],
+    version: 14
   },
   amphora: {
     id: "amphora",
@@ -25431,7 +26693,7 @@ const emojis = {
         unified: "1f5fa-fe0f",
         native: "🗺️",
         x: 32,
-        y: 14
+        y: 15
       }
     ],
     version: 1
@@ -25450,7 +26712,7 @@ const emojis = {
         unified: "1f5fe",
         native: "🗾",
         x: 32,
-        y: 18
+        y: 19
       }
     ],
     version: 1
@@ -25468,7 +26730,7 @@ const emojis = {
         unified: "1f9ed",
         native: "🧭",
         x: 53,
-        y: 27
+        y: 29
       }
     ],
     version: 11
@@ -25507,8 +26769,8 @@ const emojis = {
       {
         unified: "26f0-fe0f",
         native: "⛰️",
-        x: 57,
-        y: 56
+        x: 58,
+        y: 26
       }
     ],
     version: 1
@@ -25545,7 +26807,7 @@ const emojis = {
         unified: "1f5fb",
         native: "🗻",
         x: 32,
-        y: 15
+        y: 16
       }
     ],
     version: 1
@@ -25709,7 +26971,7 @@ const emojis = {
         unified: "1f9f1",
         native: "🧱",
         x: 53,
-        y: 31
+        y: 33
       }
     ],
     version: 11
@@ -25725,7 +26987,7 @@ const emojis = {
         unified: "1faa8",
         native: "🪨",
         x: 54,
-        y: 26
+        y: 33
       }
     ],
     version: 13
@@ -25743,7 +27005,7 @@ const emojis = {
         unified: "1fab5",
         native: "🪵",
         x: 54,
-        y: 36
+        y: 46
       }
     ],
     version: 13
@@ -25760,7 +27022,7 @@ const emojis = {
         unified: "1f6d6",
         native: "🛖",
         x: 38,
-        y: 6
+        y: 7
       }
     ],
     version: 13
@@ -26094,7 +27356,7 @@ const emojis = {
         unified: "1f492",
         native: "💒",
         x: 27,
-        y: 33
+        y: 34
       }
     ],
     version: 1
@@ -26111,7 +27373,7 @@ const emojis = {
         unified: "1f5fc",
         native: "🗼",
         x: 32,
-        y: 16
+        y: 17
       }
     ],
     version: 1
@@ -26128,7 +27390,7 @@ const emojis = {
         unified: "1f5fd",
         native: "🗽",
         x: 32,
-        y: 17
+        y: 18
       }
     ],
     version: 1
@@ -26145,8 +27407,8 @@ const emojis = {
       {
         unified: "26ea",
         native: "⛪",
-        x: 57,
-        y: 55
+        x: 58,
+        y: 25
       }
     ],
     version: 1
@@ -26164,7 +27426,7 @@ const emojis = {
         unified: "1f54c",
         native: "🕌",
         x: 30,
-        y: 29
+        y: 30
       }
     ],
     version: 1
@@ -26180,7 +27442,7 @@ const emojis = {
         unified: "1f6d5",
         native: "🛕",
         x: 38,
-        y: 5
+        y: 6
       }
     ],
     version: 12
@@ -26199,7 +27461,7 @@ const emojis = {
         unified: "1f54d",
         native: "🕍",
         x: 30,
-        y: 30
+        y: 31
       }
     ],
     version: 1
@@ -26216,8 +27478,8 @@ const emojis = {
       {
         unified: "26e9-fe0f",
         native: "⛩️",
-        x: 57,
-        y: 54
+        x: 58,
+        y: 24
       }
     ],
     version: 1
@@ -26235,7 +27497,7 @@ const emojis = {
         unified: "1f54b",
         native: "🕋",
         x: 30,
-        y: 28
+        y: 29
       }
     ],
     version: 1
@@ -26253,8 +27515,8 @@ const emojis = {
       {
         unified: "26f2",
         native: "⛲",
-        x: 57,
-        y: 58
+        x: 58,
+        y: 28
       }
     ],
     version: 1
@@ -26272,7 +27534,7 @@ const emojis = {
         unified: "26fa",
         native: "⛺",
         x: 58,
-        y: 21
+        y: 52
       }
     ],
     version: 1
@@ -26441,7 +27703,7 @@ const emojis = {
         unified: "2668-fe0f",
         native: "♨️",
         x: 57,
-        y: 24
+        y: 55
       }
     ],
     version: 1
@@ -26462,6 +27724,23 @@ const emojis = {
       }
     ],
     version: 1
+  },
+  playground_slide: {
+    id: "playground_slide",
+    name: "Playground Slide",
+    keywords: [
+      "fun",
+      "park"
+    ],
+    skins: [
+      {
+        unified: "1f6dd",
+        native: "🛝",
+        x: 38,
+        y: 10
+      }
+    ],
+    version: 14
   },
   ferris_wheel: {
     id: "ferris_wheel",
@@ -26513,7 +27792,7 @@ const emojis = {
         unified: "1f488",
         native: "💈",
         x: 26,
-        y: 34
+        y: 35
       }
     ],
     version: 1
@@ -26550,7 +27829,7 @@ const emojis = {
         unified: "1f682",
         native: "🚂",
         x: 35,
-        y: 34
+        y: 35
       }
     ],
     version: 1
@@ -26567,7 +27846,7 @@ const emojis = {
         unified: "1f683",
         native: "🚃",
         x: 35,
-        y: 35
+        y: 36
       }
     ],
     version: 1
@@ -26588,7 +27867,7 @@ const emojis = {
         unified: "1f684",
         native: "🚄",
         x: 35,
-        y: 36
+        y: 37
       }
     ],
     version: 1
@@ -26611,7 +27890,7 @@ const emojis = {
         unified: "1f685",
         native: "🚅",
         x: 35,
-        y: 37
+        y: 38
       }
     ],
     version: 1
@@ -26629,7 +27908,7 @@ const emojis = {
         unified: "1f686",
         native: "🚆",
         x: 35,
-        y: 38
+        y: 39
       }
     ],
     version: 1
@@ -26650,7 +27929,7 @@ const emojis = {
         unified: "1f687",
         native: "🚇",
         x: 35,
-        y: 39
+        y: 40
       }
     ],
     version: 1
@@ -26667,7 +27946,7 @@ const emojis = {
         unified: "1f688",
         native: "🚈",
         x: 35,
-        y: 40
+        y: 41
       }
     ],
     version: 1
@@ -26685,7 +27964,7 @@ const emojis = {
         unified: "1f689",
         native: "🚉",
         x: 35,
-        y: 41
+        y: 42
       }
     ],
     version: 1
@@ -26702,7 +27981,7 @@ const emojis = {
         unified: "1f68a",
         native: "🚊",
         x: 35,
-        y: 42
+        y: 43
       }
     ],
     version: 1
@@ -26719,7 +27998,7 @@ const emojis = {
         unified: "1f69d",
         native: "🚝",
         x: 36,
-        y: 0
+        y: 1
       }
     ],
     version: 1
@@ -26736,7 +28015,7 @@ const emojis = {
         unified: "1f69e",
         native: "🚞",
         x: 36,
-        y: 1
+        y: 2
       }
     ],
     version: 1
@@ -26757,7 +28036,7 @@ const emojis = {
         unified: "1f68b",
         native: "🚋",
         x: 35,
-        y: 43
+        y: 44
       }
     ],
     version: 1
@@ -26775,7 +28054,7 @@ const emojis = {
         unified: "1f68c",
         native: "🚌",
         x: 35,
-        y: 44
+        y: 45
       }
     ],
     version: 1
@@ -26792,7 +28071,7 @@ const emojis = {
         unified: "1f68d",
         native: "🚍",
         x: 35,
-        y: 45
+        y: 46
       }
     ],
     version: 1
@@ -26810,7 +28089,7 @@ const emojis = {
         unified: "1f68e",
         native: "🚎",
         x: 35,
-        y: 46
+        y: 47
       }
     ],
     version: 1
@@ -26828,7 +28107,7 @@ const emojis = {
         unified: "1f690",
         native: "🚐",
         x: 35,
-        y: 48
+        y: 49
       }
     ],
     version: 1
@@ -26846,7 +28125,7 @@ const emojis = {
         unified: "1f691",
         native: "🚑",
         x: 35,
-        y: 49
+        y: 50
       }
     ],
     version: 1
@@ -26864,7 +28143,7 @@ const emojis = {
         unified: "1f692",
         native: "🚒",
         x: 35,
-        y: 50
+        y: 51
       }
     ],
     version: 1
@@ -26885,7 +28164,7 @@ const emojis = {
         unified: "1f693",
         native: "🚓",
         x: 35,
-        y: 51
+        y: 52
       }
     ],
     version: 1
@@ -26905,7 +28184,7 @@ const emojis = {
         unified: "1f694",
         native: "🚔",
         x: 35,
-        y: 52
+        y: 53
       }
     ],
     version: 1
@@ -26924,7 +28203,7 @@ const emojis = {
         unified: "1f695",
         native: "🚕",
         x: 35,
-        y: 53
+        y: 54
       }
     ],
     version: 1
@@ -26942,7 +28221,7 @@ const emojis = {
         unified: "1f696",
         native: "🚖",
         x: 35,
-        y: 54
+        y: 55
       }
     ],
     version: 1
@@ -26961,7 +28240,7 @@ const emojis = {
         unified: "1f697",
         native: "🚗",
         x: 35,
-        y: 55
+        y: 56
       }
     ],
     version: 1
@@ -26979,7 +28258,7 @@ const emojis = {
         unified: "1f698",
         native: "🚘",
         x: 35,
-        y: 56
+        y: 57
       }
     ],
     version: 1
@@ -26999,7 +28278,7 @@ const emojis = {
         unified: "1f699",
         native: "🚙",
         x: 35,
-        y: 57
+        y: 58
       }
     ],
     version: 1
@@ -27016,7 +28295,7 @@ const emojis = {
         unified: "1f6fb",
         native: "🛻",
         x: 38,
-        y: 29
+        y: 31
       }
     ],
     version: 13
@@ -27033,7 +28312,7 @@ const emojis = {
         unified: "1f69a",
         native: "🚚",
         x: 35,
-        y: 58
+        y: 59
       }
     ],
     version: 1
@@ -27052,7 +28331,7 @@ const emojis = {
         unified: "1f69b",
         native: "🚛",
         x: 35,
-        y: 59
+        y: 60
       }
     ],
     version: 1
@@ -27070,8 +28349,8 @@ const emojis = {
       {
         unified: "1f69c",
         native: "🚜",
-        x: 35,
-        y: 60
+        x: 36,
+        y: 0
       }
     ],
     version: 1
@@ -27128,7 +28407,7 @@ const emojis = {
         unified: "1f6f5",
         native: "🛵",
         x: 38,
-        y: 23
+        y: 25
       }
     ],
     version: 3
@@ -27144,7 +28423,7 @@ const emojis = {
         unified: "1f9bd",
         native: "🦽",
         x: 46,
-        y: 2
+        y: 4
       }
     ],
     version: 12
@@ -27160,7 +28439,7 @@ const emojis = {
         unified: "1f9bc",
         native: "🦼",
         x: 46,
-        y: 1
+        y: 3
       }
     ],
     version: 12
@@ -27177,7 +28456,7 @@ const emojis = {
         unified: "1f6fa",
         native: "🛺",
         x: 38,
-        y: 28
+        y: 30
       }
     ],
     version: 12
@@ -27196,7 +28475,7 @@ const emojis = {
         unified: "1f6b2",
         native: "🚲",
         x: 36,
-        y: 38
+        y: 39
       }
     ],
     version: 1
@@ -27214,7 +28493,7 @@ const emojis = {
         unified: "1f6f4",
         native: "🛴",
         x: 38,
-        y: 22
+        y: 24
       }
     ],
     version: 3
@@ -27230,7 +28509,7 @@ const emojis = {
         unified: "1f6f9",
         native: "🛹",
         x: 38,
-        y: 27
+        y: 29
       }
     ],
     version: 11
@@ -27247,7 +28526,7 @@ const emojis = {
         unified: "1f6fc",
         native: "🛼",
         x: 38,
-        y: 30
+        y: 32
       }
     ],
     version: 13
@@ -27265,7 +28544,7 @@ const emojis = {
         unified: "1f68f",
         native: "🚏",
         x: 35,
-        y: 47
+        y: 48
       }
     ],
     version: 1
@@ -27284,7 +28563,7 @@ const emojis = {
         unified: "1f6e3-fe0f",
         native: "🛣️",
         x: 38,
-        y: 14
+        y: 16
       }
     ],
     version: 1
@@ -27301,7 +28580,7 @@ const emojis = {
         unified: "1f6e4-fe0f",
         native: "🛤️",
         x: 38,
-        y: 15
+        y: 17
       }
     ],
     version: 1
@@ -27317,7 +28596,7 @@ const emojis = {
         unified: "1f6e2-fe0f",
         native: "🛢️",
         x: 38,
-        y: 13
+        y: 15
       }
     ],
     version: 1
@@ -27336,10 +28615,27 @@ const emojis = {
         unified: "26fd",
         native: "⛽",
         x: 58,
-        y: 22
+        y: 53
       }
     ],
     version: 1
+  },
+  wheel: {
+    id: "wheel",
+    name: "Wheel",
+    keywords: [
+      "car",
+      "transport"
+    ],
+    skins: [
+      {
+        unified: "1f6de",
+        native: "🛞",
+        x: 38,
+        y: 11
+      }
+    ],
+    version: 14
   },
   rotating_light: {
     id: "rotating_light",
@@ -27360,7 +28656,7 @@ const emojis = {
         unified: "1f6a8",
         native: "🚨",
         x: 36,
-        y: 28
+        y: 29
       }
     ],
     version: 1
@@ -27377,7 +28673,7 @@ const emojis = {
         unified: "1f6a5",
         native: "🚥",
         x: 36,
-        y: 25
+        y: 26
       }
     ],
     version: 1
@@ -27394,7 +28690,7 @@ const emojis = {
         unified: "1f6a6",
         native: "🚦",
         x: 36,
-        y: 26
+        y: 27
       }
     ],
     version: 1
@@ -27410,7 +28706,7 @@ const emojis = {
         unified: "1f6d1",
         native: "🛑",
         x: 38,
-        y: 3
+        y: 4
       }
     ],
     version: 3
@@ -27429,7 +28725,7 @@ const emojis = {
         unified: "1f6a7",
         native: "🚧",
         x: 36,
-        y: 27
+        y: 28
       }
     ],
     version: 1
@@ -27448,10 +28744,28 @@ const emojis = {
         unified: "2693",
         native: "⚓",
         x: 57,
-        y: 29
+        y: 60
       }
     ],
     version: 1
+  },
+  ring_buoy: {
+    id: "ring_buoy",
+    name: "Ring Buoy",
+    keywords: [
+      "life",
+      "saver",
+      "preserver"
+    ],
+    skins: [
+      {
+        unified: "1f6df",
+        native: "🛟",
+        x: 38,
+        y: 12
+      }
+    ],
+    version: 14
   },
   boat: {
     id: "boat",
@@ -27469,7 +28783,7 @@ const emojis = {
         unified: "26f5",
         native: "⛵",
         x: 58,
-        y: 0
+        y: 31
       }
     ],
     version: 1
@@ -27488,7 +28802,7 @@ const emojis = {
         unified: "1f6f6",
         native: "🛶",
         x: 38,
-        y: 24
+        y: 26
       }
     ],
     version: 3
@@ -27507,7 +28821,7 @@ const emojis = {
         unified: "1f6a4",
         native: "🚤",
         x: 36,
-        y: 24
+        y: 25
       }
     ],
     version: 1
@@ -27525,7 +28839,7 @@ const emojis = {
         unified: "1f6f3-fe0f",
         native: "🛳️",
         x: 38,
-        y: 21
+        y: 23
       }
     ],
     version: 1
@@ -27542,8 +28856,8 @@ const emojis = {
       {
         unified: "26f4-fe0f",
         native: "⛴️",
-        x: 57,
-        y: 60
+        x: 58,
+        y: 30
       }
     ],
     version: 1
@@ -27559,7 +28873,7 @@ const emojis = {
         unified: "1f6e5-fe0f",
         native: "🛥️",
         x: 38,
-        y: 16
+        y: 18
       }
     ],
     version: 1
@@ -27577,7 +28891,7 @@ const emojis = {
         unified: "1f6a2",
         native: "🚢",
         x: 36,
-        y: 5
+        y: 6
       }
     ],
     version: 1
@@ -27596,7 +28910,7 @@ const emojis = {
         unified: "2708-fe0f",
         native: "✈️",
         x: 58,
-        y: 25
+        y: 56
       }
     ],
     version: 1
@@ -27615,7 +28929,7 @@ const emojis = {
         unified: "1f6e9-fe0f",
         native: "🛩️",
         x: 38,
-        y: 17
+        y: 19
       }
     ],
     version: 1
@@ -27633,7 +28947,7 @@ const emojis = {
         unified: "1f6eb",
         native: "🛫",
         x: 38,
-        y: 18
+        y: 20
       }
     ],
     version: 1
@@ -27652,7 +28966,7 @@ const emojis = {
         unified: "1f6ec",
         native: "🛬",
         x: 38,
-        y: 19
+        y: 21
       }
     ],
     version: 1
@@ -27668,8 +28982,8 @@ const emojis = {
       {
         unified: "1fa82",
         native: "🪂",
-        x: 53,
-        y: 58
+        x: 54,
+        y: 2
       }
     ],
     version: 12
@@ -27690,7 +29004,7 @@ const emojis = {
         unified: "1f4ba",
         native: "💺",
         x: 28,
-        y: 17
+        y: 18
       }
     ],
     version: 1
@@ -27708,7 +29022,7 @@ const emojis = {
         unified: "1f681",
         native: "🚁",
         x: 35,
-        y: 33
+        y: 34
       }
     ],
     version: 1
@@ -27725,7 +29039,7 @@ const emojis = {
         unified: "1f69f",
         native: "🚟",
         x: 36,
-        y: 2
+        y: 3
       }
     ],
     version: 1
@@ -27743,7 +29057,7 @@ const emojis = {
         unified: "1f6a0",
         native: "🚠",
         x: 36,
-        y: 3
+        y: 4
       }
     ],
     version: 1
@@ -27761,7 +29075,7 @@ const emojis = {
         unified: "1f6a1",
         native: "🚡",
         x: 36,
-        y: 4
+        y: 5
       }
     ],
     version: 1
@@ -27782,7 +29096,7 @@ const emojis = {
         unified: "1f6f0-fe0f",
         native: "🛰️",
         x: 38,
-        y: 20
+        y: 22
       }
     ],
     version: 1
@@ -27804,7 +29118,7 @@ const emojis = {
         unified: "1f680",
         native: "🚀",
         x: 35,
-        y: 32
+        y: 33
       }
     ],
     version: 1
@@ -27822,7 +29136,7 @@ const emojis = {
         unified: "1f6f8",
         native: "🛸",
         x: 38,
-        y: 26
+        y: 28
       }
     ],
     version: 5
@@ -27838,7 +29152,7 @@ const emojis = {
         unified: "1f6ce-fe0f",
         native: "🛎️",
         x: 38,
-        y: 0
+        y: 1
       }
     ],
     version: 1
@@ -27855,7 +29169,7 @@ const emojis = {
         unified: "1f9f3",
         native: "🧳",
         x: 53,
-        y: 33
+        y: 35
       }
     ],
     version: 11
@@ -27878,7 +29192,7 @@ const emojis = {
         unified: "231b",
         native: "⌛",
         x: 56,
-        y: 14
+        y: 45
       }
     ],
     version: 1
@@ -27898,7 +29212,7 @@ const emojis = {
         unified: "23f3",
         native: "⏳",
         x: 56,
-        y: 27
+        y: 58
       }
     ],
     version: 1
@@ -27915,7 +29229,7 @@ const emojis = {
         unified: "231a",
         native: "⌚",
         x: 56,
-        y: 13
+        y: 44
       }
     ],
     version: 1
@@ -27932,7 +29246,7 @@ const emojis = {
         unified: "23f0",
         native: "⏰",
         x: 56,
-        y: 24
+        y: 55
       }
     ],
     version: 1
@@ -27949,7 +29263,7 @@ const emojis = {
         unified: "23f1-fe0f",
         native: "⏱️",
         x: 56,
-        y: 25
+        y: 56
       }
     ],
     version: 1
@@ -27965,7 +29279,7 @@ const emojis = {
         unified: "23f2-fe0f",
         native: "⏲️",
         x: 56,
-        y: 26
+        y: 57
       }
     ],
     version: 1
@@ -27981,7 +29295,7 @@ const emojis = {
         unified: "1f570-fe0f",
         native: "🕰️",
         x: 30,
-        y: 57
+        y: 58
       }
     ],
     version: 1
@@ -27993,6 +29307,11 @@ const emojis = {
       "clock12",
       "o",
       "clock",
+      "12",
+      "00:00",
+      "0000",
+      "12:00",
+      "1200",
       "time",
       "noon",
       "midnight",
@@ -28006,7 +29325,7 @@ const emojis = {
         unified: "1f55b",
         native: "🕛",
         x: 30,
-        y: 43
+        y: 44
       }
     ],
     version: 1
@@ -28018,6 +29337,10 @@ const emojis = {
       "clock1230",
       "twelve",
       "thirty",
+      "00:30",
+      "0030",
+      "12:30",
+      "1230",
       "time",
       "late",
       "early",
@@ -28028,7 +29351,7 @@ const emojis = {
         unified: "1f567",
         native: "🕧",
         x: 30,
-        y: 55
+        y: 56
       }
     ],
     version: 1
@@ -28040,6 +29363,11 @@ const emojis = {
       "clock1",
       "o",
       "clock",
+      "1",
+      "1:00",
+      "100",
+      "13:00",
+      "1300",
       "time",
       "late",
       "early",
@@ -28050,7 +29378,7 @@ const emojis = {
         unified: "1f550",
         native: "🕐",
         x: 30,
-        y: 32
+        y: 33
       }
     ],
     version: 1
@@ -28062,6 +29390,10 @@ const emojis = {
       "clock130",
       "one",
       "thirty",
+      "1:30",
+      "130",
+      "13:30",
+      "1330",
       "time",
       "late",
       "early",
@@ -28072,7 +29404,7 @@ const emojis = {
         unified: "1f55c",
         native: "🕜",
         x: 30,
-        y: 44
+        y: 45
       }
     ],
     version: 1
@@ -28084,6 +29416,11 @@ const emojis = {
       "clock2",
       "o",
       "clock",
+      "2",
+      "2:00",
+      "200",
+      "14:00",
+      "1400",
       "time",
       "late",
       "early",
@@ -28094,7 +29431,7 @@ const emojis = {
         unified: "1f551",
         native: "🕑",
         x: 30,
-        y: 33
+        y: 34
       }
     ],
     version: 1
@@ -28106,6 +29443,10 @@ const emojis = {
       "clock230",
       "two",
       "thirty",
+      "2:30",
+      "230",
+      "14:30",
+      "1430",
       "time",
       "late",
       "early",
@@ -28116,7 +29457,7 @@ const emojis = {
         unified: "1f55d",
         native: "🕝",
         x: 30,
-        y: 45
+        y: 46
       }
     ],
     version: 1
@@ -28128,6 +29469,11 @@ const emojis = {
       "clock3",
       "o",
       "clock",
+      "3",
+      "3:00",
+      "300",
+      "15:00",
+      "1500",
       "time",
       "late",
       "early",
@@ -28138,7 +29484,7 @@ const emojis = {
         unified: "1f552",
         native: "🕒",
         x: 30,
-        y: 34
+        y: 35
       }
     ],
     version: 1
@@ -28150,6 +29496,10 @@ const emojis = {
       "clock330",
       "three",
       "thirty",
+      "3:30",
+      "330",
+      "15:30",
+      "1530",
       "time",
       "late",
       "early",
@@ -28160,7 +29510,7 @@ const emojis = {
         unified: "1f55e",
         native: "🕞",
         x: 30,
-        y: 46
+        y: 47
       }
     ],
     version: 1
@@ -28172,6 +29522,11 @@ const emojis = {
       "clock4",
       "o",
       "clock",
+      "4",
+      "4:00",
+      "400",
+      "16:00",
+      "1600",
       "time",
       "late",
       "early",
@@ -28182,7 +29537,7 @@ const emojis = {
         unified: "1f553",
         native: "🕓",
         x: 30,
-        y: 35
+        y: 36
       }
     ],
     version: 1
@@ -28194,6 +29549,10 @@ const emojis = {
       "clock430",
       "four",
       "thirty",
+      "4:30",
+      "430",
+      "16:30",
+      "1630",
       "time",
       "late",
       "early",
@@ -28204,7 +29563,7 @@ const emojis = {
         unified: "1f55f",
         native: "🕟",
         x: 30,
-        y: 47
+        y: 48
       }
     ],
     version: 1
@@ -28216,6 +29575,11 @@ const emojis = {
       "clock5",
       "o",
       "clock",
+      "5",
+      "5:00",
+      "500",
+      "17:00",
+      "1700",
       "time",
       "late",
       "early",
@@ -28226,7 +29590,7 @@ const emojis = {
         unified: "1f554",
         native: "🕔",
         x: 30,
-        y: 36
+        y: 37
       }
     ],
     version: 1
@@ -28238,6 +29602,10 @@ const emojis = {
       "clock530",
       "five",
       "thirty",
+      "5:30",
+      "530",
+      "17:30",
+      "1730",
       "time",
       "late",
       "early",
@@ -28248,7 +29616,7 @@ const emojis = {
         unified: "1f560",
         native: "🕠",
         x: 30,
-        y: 48
+        y: 49
       }
     ],
     version: 1
@@ -28260,6 +29628,11 @@ const emojis = {
       "clock6",
       "o",
       "clock",
+      "6",
+      "6:00",
+      "600",
+      "18:00",
+      "1800",
       "time",
       "late",
       "early",
@@ -28272,7 +29645,7 @@ const emojis = {
         unified: "1f555",
         native: "🕕",
         x: 30,
-        y: 37
+        y: 38
       }
     ],
     version: 1
@@ -28284,6 +29657,10 @@ const emojis = {
       "clock630",
       "six",
       "thirty",
+      "6:30",
+      "630",
+      "18:30",
+      "1830",
       "time",
       "late",
       "early",
@@ -28294,7 +29671,7 @@ const emojis = {
         unified: "1f561",
         native: "🕡",
         x: 30,
-        y: 49
+        y: 50
       }
     ],
     version: 1
@@ -28306,6 +29683,11 @@ const emojis = {
       "clock7",
       "o",
       "clock",
+      "7",
+      "7:00",
+      "700",
+      "19:00",
+      "1900",
       "time",
       "late",
       "early",
@@ -28316,7 +29698,7 @@ const emojis = {
         unified: "1f556",
         native: "🕖",
         x: 30,
-        y: 38
+        y: 39
       }
     ],
     version: 1
@@ -28328,6 +29710,10 @@ const emojis = {
       "clock730",
       "seven",
       "thirty",
+      "7:30",
+      "730",
+      "19:30",
+      "1930",
       "time",
       "late",
       "early",
@@ -28338,7 +29724,7 @@ const emojis = {
         unified: "1f562",
         native: "🕢",
         x: 30,
-        y: 50
+        y: 51
       }
     ],
     version: 1
@@ -28350,6 +29736,11 @@ const emojis = {
       "clock8",
       "o",
       "clock",
+      "8",
+      "8:00",
+      "800",
+      "20:00",
+      "2000",
       "time",
       "late",
       "early",
@@ -28360,7 +29751,7 @@ const emojis = {
         unified: "1f557",
         native: "🕗",
         x: 30,
-        y: 39
+        y: 40
       }
     ],
     version: 1
@@ -28372,6 +29763,10 @@ const emojis = {
       "clock830",
       "eight",
       "thirty",
+      "8:30",
+      "830",
+      "20:30",
+      "2030",
       "time",
       "late",
       "early",
@@ -28382,7 +29777,7 @@ const emojis = {
         unified: "1f563",
         native: "🕣",
         x: 30,
-        y: 51
+        y: 52
       }
     ],
     version: 1
@@ -28394,6 +29789,11 @@ const emojis = {
       "clock9",
       "o",
       "clock",
+      "9",
+      "9:00",
+      "900",
+      "21:00",
+      "2100",
       "time",
       "late",
       "early",
@@ -28404,7 +29804,7 @@ const emojis = {
         unified: "1f558",
         native: "🕘",
         x: 30,
-        y: 40
+        y: 41
       }
     ],
     version: 1
@@ -28416,6 +29816,10 @@ const emojis = {
       "clock930",
       "nine",
       "thirty",
+      "9:30",
+      "930",
+      "21:30",
+      "2130",
       "time",
       "late",
       "early",
@@ -28426,7 +29830,7 @@ const emojis = {
         unified: "1f564",
         native: "🕤",
         x: 30,
-        y: 52
+        y: 53
       }
     ],
     version: 1
@@ -28438,6 +29842,11 @@ const emojis = {
       "clock10",
       "o",
       "clock",
+      "10",
+      "10:00",
+      "1000",
+      "22:00",
+      "2200",
       "time",
       "late",
       "early",
@@ -28448,7 +29857,7 @@ const emojis = {
         unified: "1f559",
         native: "🕙",
         x: 30,
-        y: 41
+        y: 42
       }
     ],
     version: 1
@@ -28460,6 +29869,10 @@ const emojis = {
       "clock1030",
       "ten",
       "thirty",
+      "10:30",
+      "1030",
+      "22:30",
+      "2230",
       "time",
       "late",
       "early",
@@ -28470,7 +29883,7 @@ const emojis = {
         unified: "1f565",
         native: "🕥",
         x: 30,
-        y: 53
+        y: 54
       }
     ],
     version: 1
@@ -28482,6 +29895,11 @@ const emojis = {
       "clock11",
       "o",
       "clock",
+      "11",
+      "11:00",
+      "1100",
+      "23:00",
+      "2300",
       "time",
       "late",
       "early",
@@ -28492,7 +29910,7 @@ const emojis = {
         unified: "1f55a",
         native: "🕚",
         x: 30,
-        y: 42
+        y: 43
       }
     ],
     version: 1
@@ -28504,6 +29922,10 @@ const emojis = {
       "clock1130",
       "eleven",
       "thirty",
+      "11:30",
+      "1130",
+      "23:30",
+      "2330",
       "time",
       "late",
       "early",
@@ -28514,7 +29936,7 @@ const emojis = {
         unified: "1f566",
         native: "🕦",
         x: 30,
-        y: 54
+        y: 55
       }
     ],
     version: 1
@@ -28823,8 +30245,8 @@ const emojis = {
       {
         unified: "2600-fe0f",
         native: "☀️",
-        x: 56,
-        y: 40
+        x: 57,
+        y: 10
       }
     ],
     version: 1
@@ -28881,7 +30303,7 @@ const emojis = {
         unified: "1fa90",
         native: "🪐",
         x: 54,
-        y: 2
+        y: 9
       }
     ],
     version: 12
@@ -28898,7 +30320,7 @@ const emojis = {
         unified: "2b50",
         native: "⭐",
         x: 59,
-        y: 24
+        y: 55
       }
     ],
     version: 1
@@ -28971,8 +30393,8 @@ const emojis = {
       {
         unified: "2601-fe0f",
         native: "☁️",
-        x: 56,
-        y: 41
+        x: 57,
+        y: 11
       }
     ],
     version: 1
@@ -28994,8 +30416,8 @@ const emojis = {
       {
         unified: "26c5",
         native: "⛅",
-        x: 57,
-        y: 47
+        x: 58,
+        y: 17
       }
     ],
     version: 1
@@ -29011,8 +30433,8 @@ const emojis = {
       {
         unified: "26c8-fe0f",
         native: "⛈️",
-        x: 57,
-        y: 48
+        x: 58,
+        y: 18
       }
     ],
     version: 1
@@ -29250,8 +30672,8 @@ const emojis = {
       {
         unified: "2602-fe0f",
         native: "☂️",
-        x: 56,
-        y: 42
+        x: 57,
+        y: 12
       }
     ],
     version: 1
@@ -29268,8 +30690,8 @@ const emojis = {
       {
         unified: "2614",
         native: "☔",
-        x: 56,
-        y: 47
+        x: 57,
+        y: 17
       }
     ],
     version: 1
@@ -29285,8 +30707,8 @@ const emojis = {
       {
         unified: "26f1-fe0f",
         native: "⛱️",
-        x: 57,
-        y: 57
+        x: 58,
+        y: 27
       }
     ],
     version: 1
@@ -29306,8 +30728,8 @@ const emojis = {
       {
         unified: "26a1",
         native: "⚡",
-        x: 57,
-        y: 38
+        x: 58,
+        y: 8
       }
     ],
     version: 1
@@ -29327,8 +30749,8 @@ const emojis = {
       {
         unified: "2744-fe0f",
         native: "❄️",
-        x: 58,
-        y: 60
+        x: 59,
+        y: 30
       }
     ],
     version: 1
@@ -29349,8 +30771,8 @@ const emojis = {
       {
         unified: "2603-fe0f",
         native: "☃️",
-        x: 56,
-        y: 43
+        x: 57,
+        y: 13
       }
     ],
     version: 1
@@ -29371,8 +30793,8 @@ const emojis = {
       {
         unified: "26c4",
         native: "⛄",
-        x: 57,
-        y: 46
+        x: 58,
+        y: 16
       }
     ],
     version: 1
@@ -29387,8 +30809,8 @@ const emojis = {
       {
         unified: "2604-fe0f",
         native: "☄️",
-        x: 56,
-        y: 44
+        x: 57,
+        y: 14
       }
     ],
     version: 1
@@ -29406,7 +30828,7 @@ const emojis = {
         unified: "1f525",
         native: "🔥",
         x: 30,
-        y: 1
+        y: 2
       }
     ],
     version: 1
@@ -29425,7 +30847,7 @@ const emojis = {
         unified: "1f4a7",
         native: "💧",
         x: 27,
-        y: 54
+        y: 55
       }
     ],
     version: 1
@@ -29545,7 +30967,7 @@ const emojis = {
         unified: "1f9e8",
         native: "🧨",
         x: 53,
-        y: 22
+        y: 24
       }
     ],
     version: 11
@@ -29566,8 +30988,8 @@ const emojis = {
       {
         unified: "2728",
         native: "✨",
-        x: 58,
-        y: 57
+        x: 59,
+        y: 27
       }
     ],
     version: 1
@@ -29638,7 +31060,12 @@ const emojis = {
       "plant",
       "nature",
       "branch",
-      "summer"
+      "summer",
+      "bamboo",
+      "wish",
+      "star",
+      "festival",
+      "tanzaku"
     ],
     skins: [
       {
@@ -29655,10 +31082,13 @@ const emojis = {
     name: "Pine Decoration",
     keywords: [
       "bamboo",
+      "japanese",
       "plant",
       "nature",
       "vegetable",
-      "panda"
+      "panda",
+      "new",
+      "years"
     ],
     skins: [
       {
@@ -29758,7 +31188,7 @@ const emojis = {
         unified: "1f9e7",
         native: "🧧",
         x: 53,
-        y: 21
+        y: 23
       }
     ],
     version: 11
@@ -29925,7 +31355,7 @@ const emojis = {
         unified: "1f947",
         native: "🥇",
         x: 43,
-        y: 17
+        y: 19
       }
     ],
     version: 3
@@ -29942,7 +31372,7 @@ const emojis = {
         unified: "1f948",
         native: "🥈",
         x: 43,
-        y: 18
+        y: 20
       }
     ],
     version: 3
@@ -29959,7 +31389,7 @@ const emojis = {
         unified: "1f949",
         native: "🥉",
         x: 43,
-        y: 19
+        y: 21
       }
     ],
     version: 3
@@ -29975,8 +31405,8 @@ const emojis = {
       {
         unified: "26bd",
         native: "⚽",
-        x: 57,
-        y: 44
+        x: 58,
+        y: 14
       }
     ],
     version: 1
@@ -29992,8 +31422,8 @@ const emojis = {
       {
         unified: "26be",
         native: "⚾",
-        x: 57,
-        y: 45
+        x: 58,
+        y: 15
       }
     ],
     version: 1
@@ -30010,7 +31440,7 @@ const emojis = {
         unified: "1f94e",
         native: "🥎",
         x: 43,
-        y: 24
+        y: 26
       }
     ],
     version: 11
@@ -30116,7 +31546,7 @@ const emojis = {
         unified: "1f94f",
         native: "🥏",
         x: 43,
-        y: 25
+        y: 27
       }
     ],
     version: 11
@@ -30209,7 +31639,7 @@ const emojis = {
         unified: "1f94d",
         native: "🥍",
         x: 43,
-        y: 23
+        y: 25
       }
     ],
     version: 11
@@ -30267,7 +31697,7 @@ const emojis = {
         unified: "1f94a",
         native: "🥊",
         x: 43,
-        y: 20
+        y: 22
       }
     ],
     version: 3
@@ -30285,7 +31715,7 @@ const emojis = {
         unified: "1f94b",
         native: "🥋",
         x: 43,
-        y: 21
+        y: 23
       }
     ],
     version: 3
@@ -30301,7 +31731,7 @@ const emojis = {
         unified: "1f945",
         native: "🥅",
         x: 43,
-        y: 16
+        y: 18
       }
     ],
     version: 3
@@ -30319,8 +31749,8 @@ const emojis = {
       {
         unified: "26f3",
         native: "⛳",
-        x: 57,
-        y: 59
+        x: 58,
+        y: 29
       }
     ],
     version: 1
@@ -30336,7 +31766,7 @@ const emojis = {
         unified: "26f8-fe0f",
         native: "⛸️",
         x: 58,
-        y: 2
+        y: 33
       }
     ],
     version: 1
@@ -30373,7 +31803,7 @@ const emojis = {
         unified: "1f93f",
         native: "🤿",
         x: 43,
-        y: 10
+        y: 12
       }
     ],
     version: 12
@@ -30430,7 +31860,7 @@ const emojis = {
         unified: "1f6f7",
         native: "🛷",
         x: 38,
-        y: 25
+        y: 27
       }
     ],
     version: 5
@@ -30446,7 +31876,7 @@ const emojis = {
         unified: "1f94c",
         native: "🥌",
         x: 43,
-        y: 22
+        y: 24
       }
     ],
     version: 5
@@ -30484,8 +31914,8 @@ const emojis = {
       {
         unified: "1fa80",
         native: "🪀",
-        x: 53,
-        y: 56
+        x: 54,
+        y: 0
       }
     ],
     version: 12
@@ -30501,11 +31931,30 @@ const emojis = {
       {
         unified: "1fa81",
         native: "🪁",
-        x: 53,
-        y: 57
+        x: 54,
+        y: 1
       }
     ],
     version: 12
+  },
+  gun: {
+    id: "gun",
+    name: "Pistol",
+    keywords: [
+      "gun",
+      "violence",
+      "weapon",
+      "revolver"
+    ],
+    skins: [
+      {
+        unified: "1f52b",
+        native: "🔫",
+        x: 30,
+        y: 8
+      }
+    ],
+    version: 1
   },
   "8ball": {
     id: "8ball",
@@ -30546,7 +31995,7 @@ const emojis = {
         unified: "1f52e",
         native: "🔮",
         x: 30,
-        y: 10
+        y: 11
       }
     ],
     version: 1
@@ -30562,28 +32011,11 @@ const emojis = {
       {
         unified: "1fa84",
         native: "🪄",
-        x: 53,
-        y: 60
+        x: 54,
+        y: 4
       }
     ],
     version: 13
-  },
-  nazar_amulet: {
-    id: "nazar_amulet",
-    name: "Nazar Amulet",
-    keywords: [
-      "bead",
-      "charm"
-    ],
-    skins: [
-      {
-        unified: "1f9ff",
-        native: "🧿",
-        x: 53,
-        y: 45
-      }
-    ],
-    version: 11
   },
   video_game: {
     id: "video_game",
@@ -30616,7 +32048,7 @@ const emojis = {
         unified: "1f579-fe0f",
         native: "🕹️",
         x: 31,
-        y: 25
+        y: 26
       }
     ],
     version: 1
@@ -30674,7 +32106,7 @@ const emojis = {
         unified: "1f9e9",
         native: "🧩",
         x: 53,
-        y: 23
+        y: 25
       }
     ],
     version: 11
@@ -30691,7 +32123,7 @@ const emojis = {
         unified: "1f9f8",
         native: "🧸",
         x: 53,
-        y: 38
+        y: 40
       }
     ],
     version: 11
@@ -30709,10 +32141,28 @@ const emojis = {
         unified: "1fa85",
         native: "🪅",
         x: 54,
-        y: 0
+        y: 5
       }
     ],
     version: 13
+  },
+  mirror_ball: {
+    id: "mirror_ball",
+    name: "Mirror Ball",
+    keywords: [
+      "disco",
+      "dance",
+      "party"
+    ],
+    skins: [
+      {
+        unified: "1faa9",
+        native: "🪩",
+        x: 54,
+        y: 34
+      }
+    ],
+    version: 14
   },
   nesting_dolls: {
     id: "nesting_dolls",
@@ -30726,7 +32176,7 @@ const emojis = {
         unified: "1fa86",
         native: "🪆",
         x: 54,
-        y: 1
+        y: 6
       }
     ],
     version: 13
@@ -30746,7 +32196,7 @@ const emojis = {
         unified: "2660-fe0f",
         native: "♠️",
         x: 57,
-        y: 20
+        y: 51
       }
     ],
     version: 1
@@ -30766,7 +32216,7 @@ const emojis = {
         unified: "2665-fe0f",
         native: "♥️",
         x: 57,
-        y: 22
+        y: 53
       }
     ],
     version: 1
@@ -30786,7 +32236,7 @@ const emojis = {
         unified: "2666-fe0f",
         native: "♦️",
         x: 57,
-        y: 23
+        y: 54
       }
     ],
     version: 1
@@ -30806,7 +32256,7 @@ const emojis = {
         unified: "2663-fe0f",
         native: "♣️",
         x: 57,
-        y: 21
+        y: 52
       }
     ],
     version: 1
@@ -30822,7 +32272,7 @@ const emojis = {
         unified: "265f-fe0f",
         native: "♟️",
         x: 57,
-        y: 19
+        y: 50
       }
     ],
     version: 11
@@ -30915,8 +32365,8 @@ const emojis = {
       {
         unified: "1f5bc-fe0f",
         native: "🖼️",
-        x: 31,
-        y: 60
+        x: 32,
+        y: 0
       }
     ],
     version: 1
@@ -30955,7 +32405,7 @@ const emojis = {
         unified: "1f9f5",
         native: "🧵",
         x: 53,
-        y: 35
+        y: 37
       }
     ],
     version: 11
@@ -30971,7 +32421,7 @@ const emojis = {
         unified: "1faa1",
         native: "🪡",
         x: 54,
-        y: 19
+        y: 26
       }
     ],
     version: 13
@@ -30989,7 +32439,7 @@ const emojis = {
         unified: "1f9f6",
         native: "🧶",
         x: 53,
-        y: 36
+        y: 38
       }
     ],
     version: 11
@@ -31006,7 +32456,7 @@ const emojis = {
         unified: "1faa2",
         native: "🪢",
         x: 54,
-        y: 20
+        y: 27
       }
     ],
     version: 13
@@ -31028,7 +32478,7 @@ const emojis = {
         unified: "1f453",
         native: "👓",
         x: 13,
-        y: 15
+        y: 16
       }
     ],
     version: 1
@@ -31047,7 +32497,7 @@ const emojis = {
         unified: "1f576-fe0f",
         native: "🕶️",
         x: 31,
-        y: 22
+        y: 23
       }
     ],
     version: 1
@@ -31065,7 +32515,7 @@ const emojis = {
         unified: "1f97d",
         native: "🥽",
         x: 44,
-        y: 15
+        y: 17
       }
     ],
     version: 11
@@ -31084,7 +32534,7 @@ const emojis = {
         unified: "1f97c",
         native: "🥼",
         x: 44,
-        y: 14
+        y: 16
       }
     ],
     version: 11
@@ -31100,7 +32550,7 @@ const emojis = {
         unified: "1f9ba",
         native: "🦺",
         x: 45,
-        y: 55
+        y: 57
       }
     ],
     version: 12
@@ -31121,7 +32571,7 @@ const emojis = {
         unified: "1f454",
         native: "👔",
         x: 13,
-        y: 16
+        y: 17
       }
     ],
     version: 1
@@ -31143,7 +32593,7 @@ const emojis = {
         unified: "1f455",
         native: "👕",
         x: 13,
-        y: 17
+        y: 18
       }
     ],
     version: 1
@@ -31160,7 +32610,7 @@ const emojis = {
         unified: "1f456",
         native: "👖",
         x: 13,
-        y: 18
+        y: 19
       }
     ],
     version: 1
@@ -31178,7 +32628,7 @@ const emojis = {
         unified: "1f9e3",
         native: "🧣",
         x: 53,
-        y: 17
+        y: 19
       }
     ],
     version: 5
@@ -31196,7 +32646,7 @@ const emojis = {
         unified: "1f9e4",
         native: "🧤",
         x: 53,
-        y: 18
+        y: 20
       }
     ],
     version: 5
@@ -31212,7 +32662,7 @@ const emojis = {
         unified: "1f9e5",
         native: "🧥",
         x: 53,
-        y: 19
+        y: 21
       }
     ],
     version: 5
@@ -31229,7 +32679,7 @@ const emojis = {
         unified: "1f9e6",
         native: "🧦",
         x: 53,
-        y: 20
+        y: 22
       }
     ],
     version: 5
@@ -31247,7 +32697,7 @@ const emojis = {
         unified: "1f457",
         native: "👗",
         x: 13,
-        y: 19
+        y: 20
       }
     ],
     version: 1
@@ -31267,7 +32717,7 @@ const emojis = {
         unified: "1f458",
         native: "👘",
         x: 13,
-        y: 20
+        y: 21
       }
     ],
     version: 1
@@ -31283,7 +32733,7 @@ const emojis = {
         unified: "1f97b",
         native: "🥻",
         x: 44,
-        y: 13
+        y: 15
       }
     ],
     version: 12
@@ -31301,7 +32751,7 @@ const emojis = {
         unified: "1fa71",
         native: "🩱",
         x: 53,
-        y: 47
+        y: 49
       }
     ],
     version: 12
@@ -31317,7 +32767,7 @@ const emojis = {
         unified: "1fa72",
         native: "🩲",
         x: 53,
-        y: 48
+        y: 50
       }
     ],
     version: 12
@@ -31333,7 +32783,7 @@ const emojis = {
         unified: "1fa73",
         native: "🩳",
         x: 53,
-        y: 49
+        y: 51
       }
     ],
     version: 12
@@ -31355,7 +32805,7 @@ const emojis = {
         unified: "1f459",
         native: "👙",
         x: 13,
-        y: 21
+        y: 22
       }
     ],
     version: 1
@@ -31376,7 +32826,7 @@ const emojis = {
         unified: "1f45a",
         native: "👚",
         x: 13,
-        y: 22
+        y: 23
       }
     ],
     version: 1
@@ -31396,7 +32846,7 @@ const emojis = {
         unified: "1f45b",
         native: "👛",
         x: 13,
-        y: 23
+        y: 24
       }
     ],
     version: 1
@@ -31415,7 +32865,7 @@ const emojis = {
         unified: "1f45c",
         native: "👜",
         x: 13,
-        y: 24
+        y: 25
       }
     ],
     version: 1
@@ -31434,7 +32884,7 @@ const emojis = {
         unified: "1f45d",
         native: "👝",
         x: 13,
-        y: 25
+        y: 26
       }
     ],
     version: 1
@@ -31451,8 +32901,8 @@ const emojis = {
       {
         unified: "1f6cd-fe0f",
         native: "🛍️",
-        x: 37,
-        y: 60
+        x: 38,
+        y: 0
       }
     ],
     version: 1
@@ -31489,7 +32939,7 @@ const emojis = {
         unified: "1fa74",
         native: "🩴",
         x: 53,
-        y: 50
+        y: 52
       }
     ],
     version: 13
@@ -31508,7 +32958,7 @@ const emojis = {
         unified: "1f45e",
         native: "👞",
         x: 13,
-        y: 26
+        y: 27
       }
     ],
     version: 1
@@ -31527,7 +32977,7 @@ const emojis = {
         unified: "1f45f",
         native: "👟",
         x: 13,
-        y: 27
+        y: 28
       }
     ],
     version: 1
@@ -31544,7 +32994,7 @@ const emojis = {
         unified: "1f97e",
         native: "🥾",
         x: 44,
-        y: 16
+        y: 18
       }
     ],
     version: 11
@@ -31564,7 +33014,7 @@ const emojis = {
         unified: "1f97f",
         native: "🥿",
         x: 44,
-        y: 17
+        y: 19
       }
     ],
     version: 11
@@ -31587,7 +33037,7 @@ const emojis = {
         unified: "1f460",
         native: "👠",
         x: 13,
-        y: 28
+        y: 29
       }
     ],
     version: 1
@@ -31608,7 +33058,7 @@ const emojis = {
         unified: "1f461",
         native: "👡",
         x: 13,
-        y: 29
+        y: 30
       }
     ],
     version: 1
@@ -31624,7 +33074,7 @@ const emojis = {
         unified: "1fa70",
         native: "🩰",
         x: 53,
-        y: 46
+        y: 48
       }
     ],
     version: 12
@@ -31644,7 +33094,7 @@ const emojis = {
         unified: "1f462",
         native: "👢",
         x: 13,
-        y: 30
+        y: 31
       }
     ],
     version: 1
@@ -31664,7 +33114,7 @@ const emojis = {
         unified: "1f451",
         native: "👑",
         x: 13,
-        y: 13
+        y: 14
       }
     ],
     version: 1
@@ -31686,7 +33136,7 @@ const emojis = {
         unified: "1f452",
         native: "👒",
         x: 13,
-        y: 14
+        y: 15
       }
     ],
     version: 1
@@ -31747,7 +33197,7 @@ const emojis = {
         unified: "1f9e2",
         native: "🧢",
         x: 53,
-        y: 16
+        y: 18
       }
     ],
     version: 5
@@ -31764,7 +33214,7 @@ const emojis = {
         unified: "1fa96",
         native: "🪖",
         x: 54,
-        y: 8
+        y: 15
       }
     ],
     version: 13
@@ -31785,8 +33235,8 @@ const emojis = {
       {
         unified: "26d1-fe0f",
         native: "⛑️",
-        x: 57,
-        y: 51
+        x: 58,
+        y: 21
       }
     ],
     version: 1
@@ -31803,7 +33253,7 @@ const emojis = {
         unified: "1f4ff",
         native: "📿",
         x: 29,
-        y: 24
+        y: 25
       }
     ],
     version: 1
@@ -31822,7 +33272,7 @@ const emojis = {
         unified: "1f484",
         native: "💄",
         x: 25,
-        y: 52
+        y: 53
       }
     ],
     version: 1
@@ -31846,7 +33296,7 @@ const emojis = {
         unified: "1f48d",
         native: "💍",
         x: 26,
-        y: 39
+        y: 40
       }
     ],
     version: 1
@@ -31865,7 +33315,7 @@ const emojis = {
         unified: "1f48e",
         native: "💎",
         x: 26,
-        y: 40
+        y: 41
       }
     ],
     version: 1
@@ -31885,7 +33335,7 @@ const emojis = {
         unified: "1f507",
         native: "🔇",
         x: 29,
-        y: 32
+        y: 33
       }
     ],
     version: 1
@@ -31905,7 +33355,7 @@ const emojis = {
         unified: "1f508",
         native: "🔈",
         x: 29,
-        y: 33
+        y: 34
       }
     ],
     version: 1
@@ -31922,7 +33372,7 @@ const emojis = {
         unified: "1f509",
         native: "🔉",
         x: 29,
-        y: 34
+        y: 35
       }
     ],
     version: 1
@@ -31942,7 +33392,7 @@ const emojis = {
         unified: "1f50a",
         native: "🔊",
         x: 29,
-        y: 35
+        y: 36
       }
     ],
     version: 1
@@ -31959,7 +33409,7 @@ const emojis = {
         unified: "1f4e2",
         native: "📢",
         x: 28,
-        y: 57
+        y: 58
       }
     ],
     version: 1
@@ -31978,7 +33428,7 @@ const emojis = {
         unified: "1f4e3",
         native: "📣",
         x: 28,
-        y: 58
+        y: 59
       }
     ],
     version: 1
@@ -31995,7 +33445,7 @@ const emojis = {
         unified: "1f4ef",
         native: "📯",
         x: 29,
-        y: 9
+        y: 10
       }
     ],
     version: 1
@@ -32015,7 +33465,7 @@ const emojis = {
         unified: "1f514",
         native: "🔔",
         x: 29,
-        y: 45
+        y: 46
       }
     ],
     version: 1
@@ -32036,7 +33486,7 @@ const emojis = {
         unified: "1f515",
         native: "🔕",
         x: 29,
-        y: 46
+        y: 47
       }
     ],
     version: 1
@@ -32198,7 +33648,7 @@ const emojis = {
         unified: "1f4fb",
         native: "📻",
         x: 29,
-        y: 21
+        y: 22
       }
     ],
     version: 1
@@ -32233,7 +33683,7 @@ const emojis = {
         unified: "1fa97",
         native: "🪗",
         x: 54,
-        y: 9
+        y: 16
       }
     ],
     version: 13
@@ -32321,7 +33771,7 @@ const emojis = {
         unified: "1fa95",
         native: "🪕",
         x: 54,
-        y: 7
+        y: 14
       }
     ],
     version: 12
@@ -32341,7 +33791,7 @@ const emojis = {
         unified: "1f941",
         native: "🥁",
         x: 43,
-        y: 12
+        y: 14
       }
     ],
     version: 3
@@ -32357,7 +33807,7 @@ const emojis = {
         unified: "1fa98",
         native: "🪘",
         x: 54,
-        y: 10
+        y: 17
       }
     ],
     version: 13
@@ -32377,7 +33827,7 @@ const emojis = {
         unified: "1f4f1",
         native: "📱",
         x: 29,
-        y: 11
+        y: 12
       }
     ],
     version: 1
@@ -32395,7 +33845,7 @@ const emojis = {
         unified: "1f4f2",
         native: "📲",
         x: 29,
-        y: 12
+        y: 13
       }
     ],
     version: 1
@@ -32413,8 +33863,8 @@ const emojis = {
       {
         unified: "260e-fe0f",
         native: "☎️",
-        x: 56,
-        y: 45
+        x: 57,
+        y: 15
       }
     ],
     version: 1
@@ -32432,7 +33882,7 @@ const emojis = {
         unified: "1f4de",
         native: "📞",
         x: 28,
-        y: 53
+        y: 54
       }
     ],
     version: 1
@@ -32450,7 +33900,7 @@ const emojis = {
         unified: "1f4df",
         native: "📟",
         x: 28,
-        y: 54
+        y: 55
       }
     ],
     version: 1
@@ -32467,7 +33917,7 @@ const emojis = {
         unified: "1f4e0",
         native: "📠",
         x: 28,
-        y: 55
+        y: 56
       }
     ],
     version: 1
@@ -32485,10 +33935,27 @@ const emojis = {
         unified: "1f50b",
         native: "🔋",
         x: 29,
-        y: 36
+        y: 37
       }
     ],
     version: 1
+  },
+  low_battery: {
+    id: "low_battery",
+    name: "Low Battery",
+    keywords: [
+      "drained",
+      "dead"
+    ],
+    skins: [
+      {
+        unified: "1faab",
+        native: "🪫",
+        x: 54,
+        y: 36
+      }
+    ],
+    version: 14
   },
   electric_plug: {
     id: "electric_plug",
@@ -32502,7 +33969,7 @@ const emojis = {
         unified: "1f50c",
         native: "🔌",
         x: 29,
-        y: 37
+        y: 38
       }
     ],
     version: 1
@@ -32522,7 +33989,7 @@ const emojis = {
         unified: "1f4bb",
         native: "💻",
         x: 28,
-        y: 18
+        y: 19
       }
     ],
     version: 1
@@ -32540,7 +34007,7 @@ const emojis = {
         unified: "1f5a5-fe0f",
         native: "🖥️",
         x: 31,
-        y: 56
+        y: 57
       }
     ],
     version: 1
@@ -32557,7 +34024,7 @@ const emojis = {
         unified: "1f5a8-fe0f",
         native: "🖨️",
         x: 31,
-        y: 57
+        y: 58
       }
     ],
     version: 1
@@ -32577,7 +34044,7 @@ const emojis = {
         unified: "2328-fe0f",
         native: "⌨️",
         x: 56,
-        y: 15
+        y: 46
       }
     ],
     version: 1
@@ -32595,7 +34062,7 @@ const emojis = {
         unified: "1f5b1-fe0f",
         native: "🖱️",
         x: 31,
-        y: 58
+        y: 59
       }
     ],
     version: 1
@@ -32612,7 +34079,7 @@ const emojis = {
         unified: "1f5b2-fe0f",
         native: "🖲️",
         x: 31,
-        y: 59
+        y: 60
       }
     ],
     version: 1
@@ -32633,7 +34100,7 @@ const emojis = {
         unified: "1f4bd",
         native: "💽",
         x: 28,
-        y: 20
+        y: 21
       }
     ],
     version: 1
@@ -32653,7 +34120,7 @@ const emojis = {
         unified: "1f4be",
         native: "💾",
         x: 28,
-        y: 21
+        y: 22
       }
     ],
     version: 1
@@ -32673,7 +34140,7 @@ const emojis = {
         unified: "1f4bf",
         native: "💿",
         x: 28,
-        y: 22
+        y: 23
       }
     ],
     version: 1
@@ -32691,7 +34158,7 @@ const emojis = {
         unified: "1f4c0",
         native: "📀",
         x: 28,
-        y: 23
+        y: 24
       }
     ],
     version: 1
@@ -32707,7 +34174,7 @@ const emojis = {
         unified: "1f9ee",
         native: "🧮",
         x: 53,
-        y: 28
+        y: 30
       }
     ],
     version: 11
@@ -32759,7 +34226,7 @@ const emojis = {
         unified: "1f4fd-fe0f",
         native: "📽️",
         x: 29,
-        y: 23
+        y: 24
       }
     ],
     version: 1
@@ -32797,7 +34264,7 @@ const emojis = {
         unified: "1f4fa",
         native: "📺",
         x: 29,
-        y: 20
+        y: 21
       }
     ],
     version: 1
@@ -32814,7 +34281,7 @@ const emojis = {
         unified: "1f4f7",
         native: "📷",
         x: 29,
-        y: 17
+        y: 18
       }
     ],
     version: 1
@@ -32831,7 +34298,7 @@ const emojis = {
         unified: "1f4f8",
         native: "📸",
         x: 29,
-        y: 18
+        y: 19
       }
     ],
     version: 1
@@ -32848,7 +34315,7 @@ const emojis = {
         unified: "1f4f9",
         native: "📹",
         x: 29,
-        y: 19
+        y: 20
       }
     ],
     version: 1
@@ -32869,7 +34336,7 @@ const emojis = {
         unified: "1f4fc",
         native: "📼",
         x: 29,
-        y: 22
+        y: 23
       }
     ],
     version: 1
@@ -32889,7 +34356,7 @@ const emojis = {
         unified: "1f50d",
         native: "🔍",
         x: 29,
-        y: 38
+        y: 39
       }
     ],
     version: 1
@@ -32909,7 +34376,7 @@ const emojis = {
         unified: "1f50e",
         native: "🔎",
         x: 29,
-        y: 39
+        y: 40
       }
     ],
     version: 1
@@ -32926,7 +34393,7 @@ const emojis = {
         unified: "1f56f-fe0f",
         native: "🕯️",
         x: 30,
-        y: 56
+        y: 57
       }
     ],
     version: 1
@@ -32943,7 +34410,7 @@ const emojis = {
         unified: "1f4a1",
         native: "💡",
         x: 27,
-        y: 48
+        y: 49
       }
     ],
     version: 1
@@ -32962,7 +34429,7 @@ const emojis = {
         unified: "1f526",
         native: "🔦",
         x: 30,
-        y: 2
+        y: 3
       }
     ],
     version: 1
@@ -32998,7 +34465,7 @@ const emojis = {
         unified: "1fa94",
         native: "🪔",
         x: 54,
-        y: 6
+        y: 13
       }
     ],
     version: 12
@@ -33018,7 +34485,7 @@ const emojis = {
         unified: "1f4d4",
         native: "📔",
         x: 28,
-        y: 43
+        y: 44
       }
     ],
     version: 1
@@ -33038,7 +34505,7 @@ const emojis = {
         unified: "1f4d5",
         native: "📕",
         x: 28,
-        y: 44
+        y: 45
       }
     ],
     version: 1
@@ -33059,7 +34526,7 @@ const emojis = {
         unified: "1f4d6",
         native: "📖",
         x: 28,
-        y: 45
+        y: 46
       }
     ],
     version: 1
@@ -33078,7 +34545,7 @@ const emojis = {
         unified: "1f4d7",
         native: "📗",
         x: 28,
-        y: 46
+        y: 47
       }
     ],
     version: 1
@@ -33098,7 +34565,7 @@ const emojis = {
         unified: "1f4d8",
         native: "📘",
         x: 28,
-        y: 47
+        y: 48
       }
     ],
     version: 1
@@ -33118,7 +34585,7 @@ const emojis = {
         unified: "1f4d9",
         native: "📙",
         x: 28,
-        y: 48
+        y: 49
       }
     ],
     version: 1
@@ -33136,7 +34603,7 @@ const emojis = {
         unified: "1f4da",
         native: "📚",
         x: 28,
-        y: 49
+        y: 50
       }
     ],
     version: 1
@@ -33156,7 +34623,7 @@ const emojis = {
         unified: "1f4d3",
         native: "📓",
         x: 28,
-        y: 42
+        y: 43
       }
     ],
     version: 1
@@ -33173,7 +34640,7 @@ const emojis = {
         unified: "1f4d2",
         native: "📒",
         x: 28,
-        y: 41
+        y: 42
       }
     ],
     version: 1
@@ -33191,7 +34658,7 @@ const emojis = {
         unified: "1f4c3",
         native: "📃",
         x: 28,
-        y: 26
+        y: 27
       }
     ],
     version: 1
@@ -33210,7 +34677,7 @@ const emojis = {
         unified: "1f4dc",
         native: "📜",
         x: 28,
-        y: 51
+        y: 52
       }
     ],
     version: 1
@@ -33229,7 +34696,7 @@ const emojis = {
         unified: "1f4c4",
         native: "📄",
         x: 28,
-        y: 27
+        y: 28
       }
     ],
     version: 1
@@ -33246,7 +34713,7 @@ const emojis = {
         unified: "1f4f0",
         native: "📰",
         x: 29,
-        y: 10
+        y: 11
       }
     ],
     version: 1
@@ -33265,7 +34732,7 @@ const emojis = {
         unified: "1f5de-fe0f",
         native: "🗞️",
         x: 32,
-        y: 8
+        y: 9
       }
     ],
     version: 1
@@ -33284,7 +34751,7 @@ const emojis = {
         unified: "1f4d1",
         native: "📑",
         x: 28,
-        y: 40
+        y: 41
       }
     ],
     version: 1
@@ -33302,7 +34769,7 @@ const emojis = {
         unified: "1f516",
         native: "🔖",
         x: 29,
-        y: 47
+        y: 48
       }
     ],
     version: 1
@@ -33339,7 +34806,7 @@ const emojis = {
         unified: "1f4b0",
         native: "💰",
         x: 28,
-        y: 7
+        y: 8
       }
     ],
     version: 1
@@ -33356,7 +34823,7 @@ const emojis = {
         unified: "1fa99",
         native: "🪙",
         x: 54,
-        y: 11
+        y: 18
       }
     ],
     version: 13
@@ -33376,7 +34843,7 @@ const emojis = {
         unified: "1f4b4",
         native: "💴",
         x: 28,
-        y: 11
+        y: 12
       }
     ],
     version: 1
@@ -33395,7 +34862,7 @@ const emojis = {
         unified: "1f4b5",
         native: "💵",
         x: 28,
-        y: 12
+        y: 13
       }
     ],
     version: 1
@@ -33414,7 +34881,7 @@ const emojis = {
         unified: "1f4b6",
         native: "💶",
         x: 28,
-        y: 13
+        y: 14
       }
     ],
     version: 1
@@ -33437,7 +34904,7 @@ const emojis = {
         unified: "1f4b7",
         native: "💷",
         x: 28,
-        y: 14
+        y: 15
       }
     ],
     version: 1
@@ -33456,7 +34923,7 @@ const emojis = {
         unified: "1f4b8",
         native: "💸",
         x: 28,
-        y: 15
+        y: 16
       }
     ],
     version: 1
@@ -33477,7 +34944,7 @@ const emojis = {
         unified: "1f4b3",
         native: "💳",
         x: 28,
-        y: 10
+        y: 11
       }
     ],
     version: 1
@@ -33494,7 +34961,7 @@ const emojis = {
         unified: "1f9fe",
         native: "🧾",
         x: 53,
-        y: 44
+        y: 46
       }
     ],
     version: 11
@@ -33514,7 +34981,7 @@ const emojis = {
         unified: "1f4b9",
         native: "💹",
         x: 28,
-        y: 16
+        y: 17
       }
     ],
     version: 1
@@ -33534,7 +35001,7 @@ const emojis = {
         unified: "2709-fe0f",
         native: "✉️",
         x: 58,
-        y: 26
+        y: 57
       }
     ],
     version: 1
@@ -33553,7 +35020,7 @@ const emojis = {
         unified: "1f4e7",
         native: "📧",
         x: 29,
-        y: 1
+        y: 2
       }
     ],
     version: 1
@@ -33570,7 +35037,7 @@ const emojis = {
         unified: "1f4e8",
         native: "📨",
         x: 29,
-        y: 2
+        y: 3
       }
     ],
     version: 1
@@ -33587,7 +35054,7 @@ const emojis = {
         unified: "1f4e9",
         native: "📩",
         x: 29,
-        y: 3
+        y: 4
       }
     ],
     version: 1
@@ -33604,7 +35071,7 @@ const emojis = {
         unified: "1f4e4",
         native: "📤",
         x: 28,
-        y: 59
+        y: 60
       }
     ],
     version: 1
@@ -33620,8 +35087,8 @@ const emojis = {
       {
         unified: "1f4e5",
         native: "📥",
-        x: 28,
-        y: 60
+        x: 29,
+        y: 0
       }
     ],
     version: 1
@@ -33641,7 +35108,7 @@ const emojis = {
         unified: "1f4e6",
         native: "📦",
         x: 29,
-        y: 0
+        y: 1
       }
     ],
     version: 1
@@ -33659,7 +35126,7 @@ const emojis = {
         unified: "1f4eb",
         native: "📫",
         x: 29,
-        y: 5
+        y: 6
       }
     ],
     version: 1
@@ -33677,7 +35144,7 @@ const emojis = {
         unified: "1f4ea",
         native: "📪",
         x: 29,
-        y: 4
+        y: 5
       }
     ],
     version: 1
@@ -33696,7 +35163,7 @@ const emojis = {
         unified: "1f4ec",
         native: "📬",
         x: 29,
-        y: 6
+        y: 7
       }
     ],
     version: 1
@@ -33715,7 +35182,7 @@ const emojis = {
         unified: "1f4ed",
         native: "📭",
         x: 29,
-        y: 7
+        y: 8
       }
     ],
     version: 1
@@ -33733,7 +35200,7 @@ const emojis = {
         unified: "1f4ee",
         native: "📮",
         x: 29,
-        y: 8
+        y: 9
       }
     ],
     version: 1
@@ -33750,7 +35217,7 @@ const emojis = {
         unified: "1f5f3-fe0f",
         native: "🗳️",
         x: 32,
-        y: 13
+        y: 14
       }
     ],
     version: 1
@@ -33771,8 +35238,8 @@ const emojis = {
       {
         unified: "270f-fe0f",
         native: "✏️",
-        x: 58,
-        y: 51
+        x: 59,
+        y: 21
       }
     ],
     version: 1
@@ -33790,8 +35257,8 @@ const emojis = {
       {
         unified: "2712-fe0f",
         native: "✒️",
-        x: 58,
-        y: 52
+        x: 59,
+        y: 22
       }
     ],
     version: 1
@@ -33811,7 +35278,7 @@ const emojis = {
         unified: "1f58b-fe0f",
         native: "🖋️",
         x: 31,
-        y: 34
+        y: 35
       }
     ],
     version: 1
@@ -33832,7 +35299,7 @@ const emojis = {
         unified: "1f58a-fe0f",
         native: "🖊️",
         x: 31,
-        y: 33
+        y: 34
       }
     ],
     version: 1
@@ -33852,7 +35319,7 @@ const emojis = {
         unified: "1f58c-fe0f",
         native: "🖌️",
         x: 31,
-        y: 35
+        y: 36
       }
     ],
     version: 1
@@ -33871,7 +35338,7 @@ const emojis = {
         unified: "1f58d-fe0f",
         native: "🖍️",
         x: 31,
-        y: 36
+        y: 37
       }
     ],
     version: 1
@@ -33898,7 +35365,7 @@ const emojis = {
         unified: "1f4dd",
         native: "📝",
         x: 28,
-        y: 52
+        y: 53
       }
     ],
     version: 1
@@ -33920,7 +35387,7 @@ const emojis = {
         unified: "1f4bc",
         native: "💼",
         x: 28,
-        y: 19
+        y: 20
       }
     ],
     version: 1
@@ -33938,7 +35405,7 @@ const emojis = {
         unified: "1f4c1",
         native: "📁",
         x: 28,
-        y: 24
+        y: 25
       }
     ],
     version: 1
@@ -33955,7 +35422,7 @@ const emojis = {
         unified: "1f4c2",
         native: "📂",
         x: 28,
-        y: 25
+        y: 26
       }
     ],
     version: 1
@@ -33973,7 +35440,7 @@ const emojis = {
         unified: "1f5c2-fe0f",
         native: "🗂️",
         x: 32,
-        y: 0
+        y: 1
       }
     ],
     version: 1
@@ -33990,7 +35457,7 @@ const emojis = {
         unified: "1f4c5",
         native: "📅",
         x: 28,
-        y: 28
+        y: 29
       }
     ],
     version: 1
@@ -34010,7 +35477,7 @@ const emojis = {
         unified: "1f4c6",
         native: "📆",
         x: 28,
-        y: 29
+        y: 30
       }
     ],
     version: 1
@@ -34029,7 +35496,7 @@ const emojis = {
         unified: "1f5d2-fe0f",
         native: "🗒️",
         x: 32,
-        y: 4
+        y: 5
       }
     ],
     version: 1
@@ -34048,7 +35515,7 @@ const emojis = {
         unified: "1f5d3-fe0f",
         native: "🗓️",
         x: 32,
-        y: 5
+        y: 6
       }
     ],
     version: 1
@@ -34065,7 +35532,7 @@ const emojis = {
         unified: "1f4c7",
         native: "📇",
         x: 28,
-        y: 30
+        y: 31
       }
     ],
     version: 1
@@ -34093,7 +35560,7 @@ const emojis = {
         unified: "1f4c8",
         native: "📈",
         x: 28,
-        y: 31
+        y: 32
       }
     ],
     version: 1
@@ -34121,7 +35588,7 @@ const emojis = {
         unified: "1f4c9",
         native: "📉",
         x: 28,
-        y: 32
+        y: 33
       }
     ],
     version: 1
@@ -34139,7 +35606,7 @@ const emojis = {
         unified: "1f4ca",
         native: "📊",
         x: 28,
-        y: 33
+        y: 34
       }
     ],
     version: 1
@@ -34156,7 +35623,7 @@ const emojis = {
         unified: "1f4cb",
         native: "📋",
         x: 28,
-        y: 34
+        y: 35
       }
     ],
     version: 1
@@ -34174,7 +35641,7 @@ const emojis = {
         unified: "1f4cc",
         native: "📌",
         x: 28,
-        y: 35
+        y: 36
       }
     ],
     version: 1
@@ -34193,7 +35660,7 @@ const emojis = {
         unified: "1f4cd",
         native: "📍",
         x: 28,
-        y: 36
+        y: 37
       }
     ],
     version: 1
@@ -34210,7 +35677,7 @@ const emojis = {
         unified: "1f4ce",
         native: "📎",
         x: 28,
-        y: 37
+        y: 38
       }
     ],
     version: 1
@@ -34227,7 +35694,7 @@ const emojis = {
         unified: "1f587-fe0f",
         native: "🖇️",
         x: 31,
-        y: 32
+        y: 33
       }
     ],
     version: 1
@@ -34250,7 +35717,7 @@ const emojis = {
         unified: "1f4cf",
         native: "📏",
         x: 28,
-        y: 38
+        y: 39
       }
     ],
     version: 1
@@ -34269,7 +35736,7 @@ const emojis = {
         unified: "1f4d0",
         native: "📐",
         x: 28,
-        y: 39
+        y: 40
       }
     ],
     version: 1
@@ -34286,7 +35753,7 @@ const emojis = {
         unified: "2702-fe0f",
         native: "✂️",
         x: 58,
-        y: 23
+        y: 54
       }
     ],
     version: 1
@@ -34303,7 +35770,7 @@ const emojis = {
         unified: "1f5c3-fe0f",
         native: "🗃️",
         x: 32,
-        y: 1
+        y: 2
       }
     ],
     version: 1
@@ -34320,7 +35787,7 @@ const emojis = {
         unified: "1f5c4-fe0f",
         native: "🗄️",
         x: 32,
-        y: 2
+        y: 3
       }
     ],
     version: 1
@@ -34340,7 +35807,7 @@ const emojis = {
         unified: "1f5d1-fe0f",
         native: "🗑️",
         x: 32,
-        y: 3
+        y: 4
       }
     ],
     version: 1
@@ -34359,7 +35826,7 @@ const emojis = {
         unified: "1f512",
         native: "🔒",
         x: 29,
-        y: 43
+        y: 44
       }
     ],
     version: 1
@@ -34377,7 +35844,7 @@ const emojis = {
         unified: "1f513",
         native: "🔓",
         x: 29,
-        y: 44
+        y: 45
       }
     ],
     version: 1
@@ -34396,7 +35863,7 @@ const emojis = {
         unified: "1f50f",
         native: "🔏",
         x: 29,
-        y: 40
+        y: 41
       }
     ],
     version: 1
@@ -34415,7 +35882,7 @@ const emojis = {
         unified: "1f510",
         native: "🔐",
         x: 29,
-        y: 41
+        y: 42
       }
     ],
     version: 1
@@ -34433,7 +35900,7 @@ const emojis = {
         unified: "1f511",
         native: "🔑",
         x: 29,
-        y: 42
+        y: 43
       }
     ],
     version: 1
@@ -34451,7 +35918,7 @@ const emojis = {
         unified: "1f5dd-fe0f",
         native: "🗝️",
         x: 32,
-        y: 7
+        y: 8
       }
     ],
     version: 1
@@ -34469,7 +35936,7 @@ const emojis = {
         unified: "1f528",
         native: "🔨",
         x: 30,
-        y: 4
+        y: 5
       }
     ],
     version: 1
@@ -34487,7 +35954,7 @@ const emojis = {
         unified: "1fa93",
         native: "🪓",
         x: 54,
-        y: 5
+        y: 12
       }
     ],
     version: 12
@@ -34503,8 +35970,8 @@ const emojis = {
       {
         unified: "26cf-fe0f",
         native: "⛏️",
-        x: 57,
-        y: 50
+        x: 58,
+        y: 20
       }
     ],
     version: 1
@@ -34522,7 +35989,7 @@ const emojis = {
         unified: "2692-fe0f",
         native: "⚒️",
         x: 57,
-        y: 28
+        y: 59
       }
     ],
     version: 1
@@ -34540,7 +36007,7 @@ const emojis = {
         unified: "1f6e0-fe0f",
         native: "🛠️",
         x: 38,
-        y: 11
+        y: 13
       }
     ],
     version: 1
@@ -34557,7 +36024,7 @@ const emojis = {
         unified: "1f5e1-fe0f",
         native: "🗡️",
         x: 32,
-        y: 9
+        y: 10
       }
     ],
     version: 1
@@ -34572,27 +36039,27 @@ const emojis = {
       {
         unified: "2694-fe0f",
         native: "⚔️",
-        x: 57,
-        y: 30
+        x: 58,
+        y: 0
       }
     ],
     version: 1
   },
-  gun: {
-    id: "gun",
-    name: "Pistol",
+  bomb: {
+    id: "bomb",
+    name: "Bomb",
     keywords: [
-      "gun",
-      "violence",
-      "weapon",
-      "revolver"
+      "boom",
+      "explode",
+      "explosion",
+      "terrorism"
     ],
     skins: [
       {
-        unified: "1f52b",
-        native: "🔫",
-        x: 30,
-        y: 7
+        unified: "1f4a3",
+        native: "💣",
+        x: 27,
+        y: 51
       }
     ],
     version: 1
@@ -34607,8 +36074,8 @@ const emojis = {
       {
         unified: "1fa83",
         native: "🪃",
-        x: 53,
-        y: 59
+        x: 54,
+        y: 3
       }
     ],
     version: 13
@@ -34641,7 +36108,7 @@ const emojis = {
         unified: "1f6e1-fe0f",
         native: "🛡️",
         x: 38,
-        y: 12
+        y: 14
       }
     ],
     version: 1
@@ -34658,7 +36125,7 @@ const emojis = {
         unified: "1fa9a",
         native: "🪚",
         x: 54,
-        y: 12
+        y: 19
       }
     ],
     version: 13
@@ -34678,7 +36145,7 @@ const emojis = {
         unified: "1f527",
         native: "🔧",
         x: 30,
-        y: 3
+        y: 4
       }
     ],
     version: 1
@@ -34694,7 +36161,7 @@ const emojis = {
         unified: "1fa9b",
         native: "🪛",
         x: 54,
-        y: 13
+        y: 20
       }
     ],
     version: 13
@@ -34712,7 +36179,7 @@ const emojis = {
         unified: "1f529",
         native: "🔩",
         x: 30,
-        y: 5
+        y: 6
       }
     ],
     version: 1
@@ -34727,8 +36194,8 @@ const emojis = {
       {
         unified: "2699-fe0f",
         native: "⚙️",
-        x: 57,
-        y: 34
+        x: 58,
+        y: 4
       }
     ],
     version: 1
@@ -34745,7 +36212,7 @@ const emojis = {
         unified: "1f5dc-fe0f",
         native: "🗜️",
         x: 32,
-        y: 6
+        y: 7
       }
     ],
     version: 1
@@ -34763,8 +36230,8 @@ const emojis = {
       {
         unified: "2696-fe0f",
         native: "⚖️",
-        x: 57,
-        y: 32
+        x: 58,
+        y: 2
       }
     ],
     version: 1
@@ -34781,7 +36248,7 @@ const emojis = {
         unified: "1f9af",
         native: "🦯",
         x: 45,
-        y: 4
+        y: 6
       }
     ],
     version: 12
@@ -34798,7 +36265,7 @@ const emojis = {
         unified: "1f517",
         native: "🔗",
         x: 29,
-        y: 48
+        y: 49
       }
     ],
     version: 1
@@ -34814,8 +36281,8 @@ const emojis = {
       {
         unified: "26d3-fe0f",
         native: "⛓️",
-        x: 57,
-        y: 52
+        x: 58,
+        y: 22
       }
     ],
     version: 1
@@ -34831,7 +36298,7 @@ const emojis = {
         unified: "1fa9d",
         native: "🪝",
         x: 54,
-        y: 15
+        y: 22
       }
     ],
     version: 13
@@ -34851,7 +36318,7 @@ const emojis = {
         unified: "1f9f0",
         native: "🧰",
         x: 53,
-        y: 30
+        y: 32
       }
     ],
     version: 11
@@ -34868,7 +36335,7 @@ const emojis = {
         unified: "1f9f2",
         native: "🧲",
         x: 53,
-        y: 32
+        y: 34
       }
     ],
     version: 11
@@ -34884,7 +36351,7 @@ const emojis = {
         unified: "1fa9c",
         native: "🪜",
         x: 54,
-        y: 14
+        y: 21
       }
     ],
     version: 13
@@ -34902,8 +36369,8 @@ const emojis = {
       {
         unified: "2697-fe0f",
         native: "⚗️",
-        x: 57,
-        y: 33
+        x: 58,
+        y: 3
       }
     ],
     version: 1
@@ -34922,7 +36389,7 @@ const emojis = {
         unified: "1f9ea",
         native: "🧪",
         x: 53,
-        y: 24
+        y: 26
       }
     ],
     version: 11
@@ -34941,7 +36408,7 @@ const emojis = {
         unified: "1f9eb",
         native: "🧫",
         x: 53,
-        y: 25
+        y: 27
       }
     ],
     version: 11
@@ -34959,7 +36426,7 @@ const emojis = {
         unified: "1f9ec",
         native: "🧬",
         x: 53,
-        y: 26
+        y: 28
       }
     ],
     version: 11
@@ -34979,7 +36446,7 @@ const emojis = {
         unified: "1f52c",
         native: "🔬",
         x: 30,
-        y: 8
+        y: 9
       }
     ],
     version: 1
@@ -34999,7 +36466,7 @@ const emojis = {
         unified: "1f52d",
         native: "🔭",
         x: 30,
-        y: 9
+        y: 10
       }
     ],
     version: 1
@@ -35018,7 +36485,7 @@ const emojis = {
         unified: "1f4e1",
         native: "📡",
         x: 28,
-        y: 56
+        y: 57
       }
     ],
     version: 1
@@ -35041,7 +36508,7 @@ const emojis = {
         unified: "1f489",
         native: "💉",
         x: 26,
-        y: 35
+        y: 36
       }
     ],
     version: 1
@@ -35060,7 +36527,7 @@ const emojis = {
         unified: "1fa78",
         native: "🩸",
         x: 53,
-        y: 51
+        y: 56
       }
     ],
     version: 12
@@ -35080,7 +36547,7 @@ const emojis = {
         unified: "1f48a",
         native: "💊",
         x: 26,
-        y: 36
+        y: 37
       }
     ],
     version: 1
@@ -35096,10 +36563,27 @@ const emojis = {
         unified: "1fa79",
         native: "🩹",
         x: 53,
-        y: 52
+        y: 57
       }
     ],
     version: 12
+  },
+  crutch: {
+    id: "crutch",
+    name: "Crutch",
+    keywords: [
+      "accessibility",
+      "assist"
+    ],
+    skins: [
+      {
+        unified: "1fa7c",
+        native: "🩼",
+        x: 53,
+        y: 60
+      }
+    ],
+    version: 14
   },
   stethoscope: {
     id: "stethoscope",
@@ -35112,10 +36596,29 @@ const emojis = {
         unified: "1fa7a",
         native: "🩺",
         x: 53,
-        y: 53
+        y: 58
       }
     ],
     version: 12
+  },
+  "x-ray": {
+    id: "x-ray",
+    name: "X-Ray",
+    keywords: [
+      "x",
+      "ray",
+      "skeleton",
+      "medicine"
+    ],
+    skins: [
+      {
+        unified: "1fa7b",
+        native: "🩻",
+        x: 53,
+        y: 59
+      }
+    ],
+    version: 14
   },
   door: {
     id: "door",
@@ -35130,7 +36633,7 @@ const emojis = {
         unified: "1f6aa",
         native: "🚪",
         x: 36,
-        y: 30
+        y: 31
       }
     ],
     version: 1
@@ -35146,7 +36649,7 @@ const emojis = {
         unified: "1f6d7",
         native: "🛗",
         x: 38,
-        y: 7
+        y: 8
       }
     ],
     version: 13
@@ -35162,7 +36665,7 @@ const emojis = {
         unified: "1fa9e",
         native: "🪞",
         x: 54,
-        y: 16
+        y: 23
       }
     ],
     version: 13
@@ -35178,7 +36681,7 @@ const emojis = {
         unified: "1fa9f",
         native: "🪟",
         x: 54,
-        y: 17
+        y: 24
       }
     ],
     version: 13
@@ -35195,7 +36698,7 @@ const emojis = {
         unified: "1f6cf-fe0f",
         native: "🛏️",
         x: 38,
-        y: 1
+        y: 2
       }
     ],
     version: 1
@@ -35212,7 +36715,7 @@ const emojis = {
         unified: "1f6cb-fe0f",
         native: "🛋️",
         x: 37,
-        y: 53
+        y: 54
       }
     ],
     version: 1
@@ -35229,7 +36732,7 @@ const emojis = {
         unified: "1fa91",
         native: "🪑",
         x: 54,
-        y: 3
+        y: 10
       }
     ],
     version: 12
@@ -35249,7 +36752,7 @@ const emojis = {
         unified: "1f6bd",
         native: "🚽",
         x: 37,
-        y: 39
+        y: 40
       }
     ],
     version: 1
@@ -35265,7 +36768,7 @@ const emojis = {
         unified: "1faa0",
         native: "🪠",
         x: 54,
-        y: 18
+        y: 25
       }
     ],
     version: 13
@@ -35283,7 +36786,7 @@ const emojis = {
         unified: "1f6bf",
         native: "🚿",
         x: 37,
-        y: 41
+        y: 42
       }
     ],
     version: 1
@@ -35301,7 +36804,7 @@ const emojis = {
         unified: "1f6c1",
         native: "🛁",
         x: 37,
-        y: 48
+        y: 49
       }
     ],
     version: 1
@@ -35317,7 +36820,7 @@ const emojis = {
         unified: "1faa4",
         native: "🪤",
         x: 54,
-        y: 22
+        y: 29
       }
     ],
     version: 13
@@ -35333,7 +36836,7 @@ const emojis = {
         unified: "1fa92",
         native: "🪒",
         x: 54,
-        y: 4
+        y: 11
       }
     ],
     version: 12
@@ -35350,7 +36853,7 @@ const emojis = {
         unified: "1f9f4",
         native: "🧴",
         x: 53,
-        y: 34
+        y: 36
       }
     ],
     version: 11
@@ -35366,7 +36869,7 @@ const emojis = {
         unified: "1f9f7",
         native: "🧷",
         x: 53,
-        y: 37
+        y: 39
       }
     ],
     version: 11
@@ -35384,7 +36887,7 @@ const emojis = {
         unified: "1f9f9",
         native: "🧹",
         x: 53,
-        y: 39
+        y: 41
       }
     ],
     version: 11
@@ -35400,7 +36903,7 @@ const emojis = {
         unified: "1f9fa",
         native: "🧺",
         x: 53,
-        y: 40
+        y: 42
       }
     ],
     version: 11
@@ -35414,7 +36917,7 @@ const emojis = {
         unified: "1f9fb",
         native: "🧻",
         x: 53,
-        y: 41
+        y: 43
       }
     ],
     version: 11
@@ -35431,7 +36934,7 @@ const emojis = {
         unified: "1faa3",
         native: "🪣",
         x: 54,
-        y: 21
+        y: 28
       }
     ],
     version: 13
@@ -35450,10 +36953,29 @@ const emojis = {
         unified: "1f9fc",
         native: "🧼",
         x: 53,
-        y: 42
+        y: 44
       }
     ],
     version: 11
+  },
+  bubbles: {
+    id: "bubbles",
+    name: "Bubbles",
+    keywords: [
+      "soap",
+      "fun",
+      "carbonation",
+      "sparkling"
+    ],
+    skins: [
+      {
+        unified: "1fae7",
+        native: "🫧",
+        x: 55,
+        y: 37
+      }
+    ],
+    version: 14
   },
   toothbrush: {
     id: "toothbrush",
@@ -35467,7 +36989,7 @@ const emojis = {
         unified: "1faa5",
         native: "🪥",
         x: 54,
-        y: 23
+        y: 30
       }
     ],
     version: 13
@@ -35485,7 +37007,7 @@ const emojis = {
         unified: "1f9fd",
         native: "🧽",
         x: 53,
-        y: 43
+        y: 45
       }
     ],
     version: 11
@@ -35501,7 +37023,7 @@ const emojis = {
         unified: "1f9ef",
         native: "🧯",
         x: 53,
-        y: 29
+        y: 31
       }
     ],
     version: 11
@@ -35517,7 +37039,7 @@ const emojis = {
         unified: "1f6d2",
         native: "🛒",
         x: 38,
-        y: 4
+        y: 5
       }
     ],
     version: 3
@@ -35537,7 +37059,7 @@ const emojis = {
         unified: "1f6ac",
         native: "🚬",
         x: 36,
-        y: 32
+        y: 33
       }
     ],
     version: 1
@@ -35561,8 +37083,8 @@ const emojis = {
       {
         unified: "26b0-fe0f",
         native: "⚰️",
-        x: 57,
-        y: 42
+        x: 58,
+        y: 12
       }
     ],
     version: 1
@@ -35580,7 +37102,7 @@ const emojis = {
         unified: "1faa6",
         native: "🪦",
         x: 54,
-        y: 24
+        y: 31
       }
     ],
     version: 13
@@ -35599,11 +37121,45 @@ const emojis = {
       {
         unified: "26b1-fe0f",
         native: "⚱️",
-        x: 57,
-        y: 43
+        x: 58,
+        y: 13
       }
     ],
     version: 1
+  },
+  nazar_amulet: {
+    id: "nazar_amulet",
+    name: "Nazar Amulet",
+    keywords: [
+      "bead",
+      "charm"
+    ],
+    skins: [
+      {
+        unified: "1f9ff",
+        native: "🧿",
+        x: 53,
+        y: 47
+      }
+    ],
+    version: 11
+  },
+  hamsa: {
+    id: "hamsa",
+    name: "Hamsa",
+    keywords: [
+      "religion",
+      "protection"
+    ],
+    skins: [
+      {
+        unified: "1faac",
+        native: "🪬",
+        x: 54,
+        y: 37
+      }
+    ],
+    version: 14
   },
   moyai: {
     id: "moyai",
@@ -35619,7 +37175,7 @@ const emojis = {
         unified: "1f5ff",
         native: "🗿",
         x: 32,
-        y: 19
+        y: 20
       }
     ],
     version: 1
@@ -35635,10 +37191,26 @@ const emojis = {
         unified: "1faa7",
         native: "🪧",
         x: 54,
-        y: 25
+        y: 32
       }
     ],
     version: 13
+  },
+  identification_card: {
+    id: "identification_card",
+    name: "Identification Card",
+    keywords: [
+      "document"
+    ],
+    skins: [
+      {
+        unified: "1faaa",
+        native: "🪪",
+        x: 54,
+        y: 35
+      }
+    ],
+    version: 14
   },
   atm: {
     id: "atm",
@@ -35679,7 +37251,7 @@ const emojis = {
         unified: "1f6ae",
         native: "🚮",
         x: 36,
-        y: 34
+        y: 35
       }
     ],
     version: 1
@@ -35700,7 +37272,7 @@ const emojis = {
         unified: "1f6b0",
         native: "🚰",
         x: 36,
-        y: 36
+        y: 37
       }
     ],
     version: 1
@@ -35719,7 +37291,7 @@ const emojis = {
         unified: "267f",
         native: "♿",
         x: 57,
-        y: 27
+        y: 58
       }
     ],
     version: 1
@@ -35744,7 +37316,7 @@ const emojis = {
         unified: "1f6b9",
         native: "🚹",
         x: 37,
-        y: 35
+        y: 36
       }
     ],
     version: 1
@@ -35770,7 +37342,7 @@ const emojis = {
         unified: "1f6ba",
         native: "🚺",
         x: 37,
-        y: 36
+        y: 37
       }
     ],
     version: 1
@@ -35791,7 +37363,7 @@ const emojis = {
         unified: "1f6bb",
         native: "🚻",
         x: 37,
-        y: 37
+        y: 38
       }
     ],
     version: 1
@@ -35809,7 +37381,7 @@ const emojis = {
         unified: "1f6bc",
         native: "🚼",
         x: 37,
-        y: 38
+        y: 39
       }
     ],
     version: 1
@@ -35829,7 +37401,7 @@ const emojis = {
         unified: "1f6be",
         native: "🚾",
         x: 37,
-        y: 40
+        y: 41
       }
     ],
     version: 1
@@ -35847,7 +37419,7 @@ const emojis = {
         unified: "1f6c2",
         native: "🛂",
         x: 37,
-        y: 49
+        y: 50
       }
     ],
     version: 1
@@ -35866,7 +37438,7 @@ const emojis = {
         unified: "1f6c3",
         native: "🛃",
         x: 37,
-        y: 50
+        y: 51
       }
     ],
     version: 1
@@ -35885,7 +37457,7 @@ const emojis = {
         unified: "1f6c4",
         native: "🛄",
         x: 37,
-        y: 51
+        y: 52
       }
     ],
     version: 1
@@ -35903,7 +37475,7 @@ const emojis = {
         unified: "1f6c5",
         native: "🛅",
         x: 37,
-        y: 52
+        y: 53
       }
     ],
     version: 1
@@ -35923,8 +37495,8 @@ const emojis = {
       {
         unified: "26a0-fe0f",
         native: "⚠️",
-        x: 57,
-        y: 37
+        x: 58,
+        y: 7
       }
     ],
     version: 1
@@ -35946,7 +37518,7 @@ const emojis = {
         unified: "1f6b8",
         native: "🚸",
         x: 37,
-        y: 34
+        y: 35
       }
     ],
     version: 1
@@ -35967,8 +37539,8 @@ const emojis = {
       {
         unified: "26d4",
         native: "⛔",
-        x: 57,
-        y: 53
+        x: 58,
+        y: 23
       }
     ],
     version: 1
@@ -35992,7 +37564,7 @@ const emojis = {
         unified: "1f6ab",
         native: "🚫",
         x: 36,
-        y: 31
+        y: 32
       }
     ],
     version: 1
@@ -36010,7 +37582,7 @@ const emojis = {
         unified: "1f6b3",
         native: "🚳",
         x: 36,
-        y: 39
+        y: 40
       }
     ],
     version: 1
@@ -36030,7 +37602,7 @@ const emojis = {
         unified: "1f6ad",
         native: "🚭",
         x: 36,
-        y: 33
+        y: 34
       }
     ],
     version: 1
@@ -36052,7 +37624,7 @@ const emojis = {
         unified: "1f6af",
         native: "🚯",
         x: 36,
-        y: 35
+        y: 36
       }
     ],
     version: 1
@@ -36073,7 +37645,7 @@ const emojis = {
         unified: "1f6b1",
         native: "🚱",
         x: 36,
-        y: 37
+        y: 38
       }
     ],
     version: 1
@@ -36092,7 +37664,7 @@ const emojis = {
         unified: "1f6b7",
         native: "🚷",
         x: 37,
-        y: 33
+        y: 34
       }
     ],
     version: 1
@@ -36110,7 +37682,7 @@ const emojis = {
         unified: "1f4f5",
         native: "📵",
         x: 29,
-        y: 15
+        y: 16
       }
     ],
     version: 1
@@ -36132,7 +37704,7 @@ const emojis = {
         unified: "1f51e",
         native: "🔞",
         x: 29,
-        y: 55
+        y: 56
       }
     ],
     version: 1
@@ -36149,8 +37721,8 @@ const emojis = {
       {
         unified: "2622-fe0f",
         native: "☢️",
-        x: 56,
-        y: 57
+        x: 57,
+        y: 27
       }
     ],
     version: 1
@@ -36166,8 +37738,8 @@ const emojis = {
       {
         unified: "2623-fe0f",
         native: "☣️",
-        x: 56,
-        y: 58
+        x: 57,
+        y: 28
       }
     ],
     version: 1
@@ -36187,7 +37759,7 @@ const emojis = {
         unified: "2b06-fe0f",
         native: "⬆️",
         x: 59,
-        y: 20
+        y: 51
       }
     ],
     version: 1
@@ -36211,7 +37783,7 @@ const emojis = {
         unified: "2197-fe0f",
         native: "↗️",
         x: 56,
-        y: 8
+        y: 39
       }
     ],
     version: 1
@@ -36229,7 +37801,7 @@ const emojis = {
         unified: "27a1-fe0f",
         native: "➡️",
         x: 59,
-        y: 14
+        y: 45
       }
     ],
     version: 1
@@ -36252,7 +37824,7 @@ const emojis = {
         unified: "2198-fe0f",
         native: "↘️",
         x: 56,
-        y: 9
+        y: 40
       }
     ],
     version: 1
@@ -36271,7 +37843,7 @@ const emojis = {
         unified: "2b07-fe0f",
         native: "⬇️",
         x: 59,
-        y: 21
+        y: 52
       }
     ],
     version: 1
@@ -36294,7 +37866,7 @@ const emojis = {
         unified: "2199-fe0f",
         native: "↙️",
         x: 56,
-        y: 10
+        y: 41
       }
     ],
     version: 1
@@ -36313,7 +37885,7 @@ const emojis = {
         unified: "2b05-fe0f",
         native: "⬅️",
         x: 59,
-        y: 19
+        y: 50
       }
     ],
     version: 1
@@ -36337,7 +37909,7 @@ const emojis = {
         unified: "2196-fe0f",
         native: "↖️",
         x: 56,
-        y: 7
+        y: 38
       }
     ],
     version: 1
@@ -36357,7 +37929,7 @@ const emojis = {
         unified: "2195-fe0f",
         native: "↕️",
         x: 56,
-        y: 6
+        y: 37
       }
     ],
     version: 1
@@ -36376,7 +37948,7 @@ const emojis = {
         unified: "2194-fe0f",
         native: "↔️",
         x: 56,
-        y: 5
+        y: 36
       }
     ],
     version: 1
@@ -36400,7 +37972,7 @@ const emojis = {
         unified: "21a9-fe0f",
         native: "↩️",
         x: 56,
-        y: 11
+        y: 42
       }
     ],
     version: 1
@@ -36421,7 +37993,7 @@ const emojis = {
         unified: "21aa-fe0f",
         native: "↪️",
         x: 56,
-        y: 12
+        y: 43
       }
     ],
     version: 1
@@ -36441,7 +38013,7 @@ const emojis = {
         unified: "2934-fe0f",
         native: "⤴️",
         x: 59,
-        y: 17
+        y: 48
       }
     ],
     version: 1
@@ -36461,7 +38033,7 @@ const emojis = {
         unified: "2935-fe0f",
         native: "⤵️",
         x: 59,
-        y: 18
+        y: 49
       }
     ],
     version: 1
@@ -36480,7 +38052,7 @@ const emojis = {
         unified: "1f503",
         native: "🔃",
         x: 29,
-        y: 28
+        y: 29
       }
     ],
     version: 1
@@ -36499,7 +38071,7 @@ const emojis = {
         unified: "1f504",
         native: "🔄",
         x: 29,
-        y: 29
+        y: 30
       }
     ],
     version: 1
@@ -36516,7 +38088,7 @@ const emojis = {
         unified: "1f519",
         native: "🔙",
         x: 29,
-        y: 50
+        y: 51
       }
     ],
     version: 1
@@ -36532,7 +38104,7 @@ const emojis = {
         unified: "1f51a",
         native: "🔚",
         x: 29,
-        y: 51
+        y: 52
       }
     ],
     version: 1
@@ -36549,7 +38121,7 @@ const emojis = {
         unified: "1f51b",
         native: "🔛",
         x: 29,
-        y: 52
+        y: 53
       }
     ],
     version: 1
@@ -36565,7 +38137,7 @@ const emojis = {
         unified: "1f51c",
         native: "🔜",
         x: 29,
-        y: 53
+        y: 54
       }
     ],
     version: 1
@@ -36583,7 +38155,7 @@ const emojis = {
         unified: "1f51d",
         native: "🔝",
         x: 29,
-        y: 54
+        y: 55
       }
     ],
     version: 1
@@ -36602,7 +38174,7 @@ const emojis = {
         unified: "1f6d0",
         native: "🛐",
         x: 38,
-        y: 2
+        y: 3
       }
     ],
     version: 1
@@ -36619,8 +38191,8 @@ const emojis = {
       {
         unified: "269b-fe0f",
         native: "⚛️",
-        x: 57,
-        y: 35
+        x: 58,
+        y: 5
       }
     ],
     version: 1
@@ -36640,7 +38212,7 @@ const emojis = {
         unified: "1f549-fe0f",
         native: "🕉️",
         x: 30,
-        y: 26
+        y: 27
       }
     ],
     version: 1
@@ -36655,8 +38227,8 @@ const emojis = {
       {
         unified: "2721-fe0f",
         native: "✡️",
-        x: 58,
-        y: 56
+        x: 59,
+        y: 26
       }
     ],
     version: 1
@@ -36675,7 +38247,7 @@ const emojis = {
         unified: "2638-fe0f",
         native: "☸️",
         x: 57,
-        y: 2
+        y: 33
       }
     ],
     version: 1
@@ -36691,7 +38263,7 @@ const emojis = {
         unified: "262f-fe0f",
         native: "☯️",
         x: 57,
-        y: 1
+        y: 32
       }
     ],
     version: 1
@@ -36706,8 +38278,8 @@ const emojis = {
       {
         unified: "271d-fe0f",
         native: "✝️",
-        x: 58,
-        y: 55
+        x: 59,
+        y: 25
       }
     ],
     version: 1
@@ -36723,8 +38295,8 @@ const emojis = {
       {
         unified: "2626-fe0f",
         native: "☦️",
-        x: 56,
-        y: 59
+        x: 57,
+        y: 29
       }
     ],
     version: 1
@@ -36739,8 +38311,8 @@ const emojis = {
       {
         unified: "262a-fe0f",
         native: "☪️",
-        x: 56,
-        y: 60
+        x: 57,
+        y: 30
       }
     ],
     version: 1
@@ -36756,7 +38328,7 @@ const emojis = {
         unified: "262e-fe0f",
         native: "☮️",
         x: 57,
-        y: 0
+        y: 31
       }
     ],
     version: 1
@@ -36777,7 +38349,7 @@ const emojis = {
         unified: "1f54e",
         native: "🕎",
         x: 30,
-        y: 31
+        y: 32
       }
     ],
     version: 1
@@ -36799,7 +38371,7 @@ const emojis = {
         unified: "1f52f",
         native: "🔯",
         x: 30,
-        y: 11
+        y: 12
       }
     ],
     version: 1
@@ -36819,7 +38391,7 @@ const emojis = {
         unified: "2648",
         native: "♈",
         x: 57,
-        y: 7
+        y: 38
       }
     ],
     version: 1
@@ -36839,7 +38411,7 @@ const emojis = {
         unified: "2649",
         native: "♉",
         x: 57,
-        y: 8
+        y: 39
       }
     ],
     version: 1
@@ -36859,7 +38431,7 @@ const emojis = {
         unified: "264a",
         native: "♊",
         x: 57,
-        y: 9
+        y: 40
       }
     ],
     version: 1
@@ -36879,7 +38451,7 @@ const emojis = {
         unified: "264b",
         native: "♋",
         x: 57,
-        y: 10
+        y: 41
       }
     ],
     version: 1
@@ -36899,7 +38471,7 @@ const emojis = {
         unified: "264c",
         native: "♌",
         x: 57,
-        y: 11
+        y: 42
       }
     ],
     version: 1
@@ -36919,7 +38491,7 @@ const emojis = {
         unified: "264d",
         native: "♍",
         x: 57,
-        y: 12
+        y: 43
       }
     ],
     version: 1
@@ -36939,7 +38511,7 @@ const emojis = {
         unified: "264e",
         native: "♎",
         x: 57,
-        y: 13
+        y: 44
       }
     ],
     version: 1
@@ -36960,7 +38532,7 @@ const emojis = {
         unified: "264f",
         native: "♏",
         x: 57,
-        y: 14
+        y: 45
       }
     ],
     version: 1
@@ -36980,7 +38552,7 @@ const emojis = {
         unified: "2650",
         native: "♐",
         x: 57,
-        y: 15
+        y: 46
       }
     ],
     version: 1
@@ -37000,7 +38572,7 @@ const emojis = {
         unified: "2651",
         native: "♑",
         x: 57,
-        y: 16
+        y: 47
       }
     ],
     version: 1
@@ -37020,7 +38592,7 @@ const emojis = {
         unified: "2652",
         native: "♒",
         x: 57,
-        y: 17
+        y: 48
       }
     ],
     version: 1
@@ -37040,7 +38612,7 @@ const emojis = {
         unified: "2653",
         native: "♓",
         x: 57,
-        y: 18
+        y: 49
       }
     ],
     version: 1
@@ -37059,8 +38631,8 @@ const emojis = {
       {
         unified: "26ce",
         native: "⛎",
-        x: 57,
-        y: 49
+        x: 58,
+        y: 19
       }
     ],
     version: 1
@@ -37082,7 +38654,7 @@ const emojis = {
         unified: "1f500",
         native: "🔀",
         x: 29,
-        y: 25
+        y: 26
       }
     ],
     version: 1
@@ -37099,7 +38671,7 @@ const emojis = {
         unified: "1f501",
         native: "🔁",
         x: 29,
-        y: 26
+        y: 27
       }
     ],
     version: 1
@@ -37118,7 +38690,7 @@ const emojis = {
         unified: "1f502",
         native: "🔂",
         x: 29,
-        y: 27
+        y: 28
       }
     ],
     version: 1
@@ -37138,8 +38710,8 @@ const emojis = {
       {
         unified: "25b6-fe0f",
         native: "▶️",
-        x: 56,
-        y: 34
+        x: 57,
+        y: 4
       }
     ],
     version: 1
@@ -37161,7 +38733,7 @@ const emojis = {
         unified: "23e9",
         native: "⏩",
         x: 56,
-        y: 17
+        y: 48
       }
     ],
     version: 1
@@ -37187,7 +38759,7 @@ const emojis = {
         unified: "23ed-fe0f",
         native: "⏭️",
         x: 56,
-        y: 21
+        y: 52
       }
     ],
     version: 1
@@ -37212,7 +38784,7 @@ const emojis = {
         unified: "23ef-fe0f",
         native: "⏯️",
         x: 56,
-        y: 23
+        y: 54
       }
     ],
     version: 1
@@ -37232,8 +38804,8 @@ const emojis = {
       {
         unified: "25c0-fe0f",
         native: "◀️",
-        x: 56,
-        y: 35
+        x: 57,
+        y: 5
       }
     ],
     version: 1
@@ -37252,7 +38824,7 @@ const emojis = {
         unified: "23ea",
         native: "⏪",
         x: 56,
-        y: 18
+        y: 49
       }
     ],
     version: 1
@@ -37276,7 +38848,7 @@ const emojis = {
         unified: "23ee-fe0f",
         native: "⏮️",
         x: 56,
-        y: 22
+        y: 53
       }
     ],
     version: 1
@@ -37301,7 +38873,7 @@ const emojis = {
         unified: "1f53c",
         native: "🔼",
         x: 30,
-        y: 24
+        y: 25
       }
     ],
     version: 1
@@ -37322,7 +38894,7 @@ const emojis = {
         unified: "23eb",
         native: "⏫",
         x: 56,
-        y: 19
+        y: 50
       }
     ],
     version: 1
@@ -37344,7 +38916,7 @@ const emojis = {
         unified: "1f53d",
         native: "🔽",
         x: 30,
-        y: 25
+        y: 26
       }
     ],
     version: 1
@@ -37365,7 +38937,7 @@ const emojis = {
         unified: "23ec",
         native: "⏬",
         x: 56,
-        y: 20
+        y: 51
       }
     ],
     version: 1
@@ -37385,7 +38957,7 @@ const emojis = {
         unified: "23f8-fe0f",
         native: "⏸️",
         x: 56,
-        y: 28
+        y: 59
       }
     ],
     version: 1
@@ -37404,7 +38976,7 @@ const emojis = {
         unified: "23f9-fe0f",
         native: "⏹️",
         x: 56,
-        y: 29
+        y: 60
       }
     ],
     version: 1
@@ -37423,8 +38995,8 @@ const emojis = {
       {
         unified: "23fa-fe0f",
         native: "⏺️",
-        x: 56,
-        y: 30
+        x: 57,
+        y: 0
       }
     ],
     version: 1
@@ -37441,7 +39013,7 @@ const emojis = {
         unified: "23cf-fe0f",
         native: "⏏️",
         x: 56,
-        y: 16
+        y: 47
       }
     ],
     version: 1
@@ -37485,7 +39057,7 @@ const emojis = {
         unified: "1f505",
         native: "🔅",
         x: 29,
-        y: 30
+        y: 31
       }
     ],
     version: 1
@@ -37504,7 +39076,7 @@ const emojis = {
         unified: "1f506",
         native: "🔆",
         x: 29,
-        y: 31
+        y: 32
       }
     ],
     version: 1
@@ -37529,7 +39101,7 @@ const emojis = {
         unified: "1f4f6",
         native: "📶",
         x: 29,
-        y: 16
+        y: 17
       }
     ],
     version: 1
@@ -37547,7 +39119,7 @@ const emojis = {
         unified: "1f4f3",
         native: "📳",
         x: 29,
-        y: 13
+        y: 14
       }
     ],
     version: 1
@@ -37567,7 +39139,7 @@ const emojis = {
         unified: "1f4f4",
         native: "📴",
         x: 29,
-        y: 14
+        y: 15
       }
     ],
     version: 1
@@ -37586,7 +39158,7 @@ const emojis = {
         unified: "2640-fe0f",
         native: "♀️",
         x: 57,
-        y: 5
+        y: 36
       }
     ],
     version: 4
@@ -37604,7 +39176,7 @@ const emojis = {
         unified: "2642-fe0f",
         native: "♂️",
         x: 57,
-        y: 6
+        y: 37
       }
     ],
     version: 4
@@ -37619,8 +39191,8 @@ const emojis = {
       {
         unified: "26a7-fe0f",
         native: "⚧️",
-        x: 57,
-        y: 39
+        x: 58,
+        y: 9
       }
     ],
     version: 13
@@ -37640,8 +39212,8 @@ const emojis = {
       {
         unified: "2716-fe0f",
         native: "✖️",
-        x: 58,
-        y: 54
+        x: 59,
+        y: 24
       }
     ],
     version: 1
@@ -37663,7 +39235,7 @@ const emojis = {
         unified: "2795",
         native: "➕",
         x: 59,
-        y: 11
+        y: 42
       }
     ],
     version: 1
@@ -37684,7 +39256,7 @@ const emojis = {
         unified: "2796",
         native: "➖",
         x: 59,
-        y: 12
+        y: 43
       }
     ],
     version: 1
@@ -37704,10 +39276,26 @@ const emojis = {
         unified: "2797",
         native: "➗",
         x: 59,
-        y: 13
+        y: 44
       }
     ],
     version: 1
+  },
+  heavy_equals_sign: {
+    id: "heavy_equals_sign",
+    name: "Heavy Equals Sign",
+    keywords: [
+      "math"
+    ],
+    skins: [
+      {
+        unified: "1f7f0",
+        native: "🟰",
+        x: 38,
+        y: 45
+      }
+    ],
+    version: 14
   },
   infinity: {
     id: "infinity",
@@ -37720,7 +39308,7 @@ const emojis = {
         unified: "267e-fe0f",
         native: "♾️",
         x: 57,
-        y: 26
+        y: 57
       }
     ],
     version: 11
@@ -37737,7 +39325,7 @@ const emojis = {
         unified: "203c-fe0f",
         native: "‼️",
         x: 56,
-        y: 1
+        y: 32
       }
     ],
     version: 1
@@ -37756,7 +39344,7 @@ const emojis = {
         unified: "2049-fe0f",
         native: "⁉️",
         x: 56,
-        y: 2
+        y: 33
       }
     ],
     version: 1
@@ -37773,7 +39361,7 @@ const emojis = {
         unified: "2753",
         native: "❓",
         x: 59,
-        y: 3
+        y: 34
       }
     ],
     version: 1
@@ -37793,7 +39381,7 @@ const emojis = {
         unified: "2754",
         native: "❔",
         x: 59,
-        y: 4
+        y: 35
       }
     ],
     version: 1
@@ -37814,7 +39402,7 @@ const emojis = {
         unified: "2755",
         native: "❕",
         x: 59,
-        y: 5
+        y: 36
       }
     ],
     version: 1
@@ -37835,7 +39423,7 @@ const emojis = {
         unified: "2757",
         native: "❗",
         x: 59,
-        y: 6
+        y: 37
       }
     ],
     version: 1
@@ -37856,7 +39444,7 @@ const emojis = {
         unified: "3030-fe0f",
         native: "〰️",
         x: 59,
-        y: 26
+        y: 57
       }
     ],
     version: 1
@@ -37875,7 +39463,7 @@ const emojis = {
         unified: "1f4b1",
         native: "💱",
         x: 28,
-        y: 8
+        y: 9
       }
     ],
     version: 1
@@ -37895,7 +39483,7 @@ const emojis = {
         unified: "1f4b2",
         native: "💲",
         x: 28,
-        y: 9
+        y: 10
       }
     ],
     version: 1
@@ -37914,8 +39502,8 @@ const emojis = {
       {
         unified: "2695-fe0f",
         native: "⚕️",
-        x: 57,
-        y: 31
+        x: 58,
+        y: 1
       }
     ],
     version: 4
@@ -37935,7 +39523,7 @@ const emojis = {
         unified: "267b-fe0f",
         native: "♻️",
         x: 57,
-        y: 25
+        y: 56
       }
     ],
     version: 1
@@ -37954,8 +39542,8 @@ const emojis = {
       {
         unified: "269c-fe0f",
         native: "⚜️",
-        x: 57,
-        y: 36
+        x: 58,
+        y: 6
       }
     ],
     version: 1
@@ -37972,7 +39560,7 @@ const emojis = {
         unified: "1f531",
         native: "🔱",
         x: 30,
-        y: 13
+        y: 14
       }
     ],
     version: 1
@@ -37989,7 +39577,7 @@ const emojis = {
         unified: "1f4db",
         native: "📛",
         x: 28,
-        y: 50
+        y: 51
       }
     ],
     version: 1
@@ -38006,7 +39594,7 @@ const emojis = {
         unified: "1f530",
         native: "🔰",
         x: 30,
-        y: 12
+        y: 13
       }
     ],
     version: 1
@@ -38023,7 +39611,7 @@ const emojis = {
         unified: "2b55",
         native: "⭕",
         x: 59,
-        y: 25
+        y: 56
       }
     ],
     version: 1
@@ -38047,7 +39635,7 @@ const emojis = {
         unified: "2705",
         native: "✅",
         x: 58,
-        y: 24
+        y: 55
       }
     ],
     version: 1
@@ -38071,8 +39659,8 @@ const emojis = {
       {
         unified: "2611-fe0f",
         native: "☑️",
-        x: 56,
-        y: 46
+        x: 57,
+        y: 16
       }
     ],
     version: 1
@@ -38092,8 +39680,8 @@ const emojis = {
       {
         unified: "2714-fe0f",
         native: "✔️",
-        x: 58,
-        y: 53
+        x: 59,
+        y: 23
       }
     ],
     version: 1
@@ -38114,7 +39702,7 @@ const emojis = {
         unified: "274c",
         native: "❌",
         x: 59,
-        y: 1
+        y: 32
       }
     ],
     version: 1
@@ -38136,7 +39724,7 @@ const emojis = {
         unified: "274e",
         native: "❎",
         x: 59,
-        y: 2
+        y: 33
       }
     ],
     version: 1
@@ -38155,7 +39743,7 @@ const emojis = {
         unified: "27b0",
         native: "➰",
         x: 59,
-        y: 15
+        y: 46
       }
     ],
     version: 1
@@ -38172,7 +39760,7 @@ const emojis = {
         unified: "27bf",
         native: "➿",
         x: 59,
-        y: 16
+        y: 47
       }
     ],
     version: 1
@@ -38193,7 +39781,7 @@ const emojis = {
         unified: "303d-fe0f",
         native: "〽️",
         x: 59,
-        y: 27
+        y: 58
       }
     ],
     version: 1
@@ -38211,8 +39799,8 @@ const emojis = {
       {
         unified: "2733-fe0f",
         native: "✳️",
-        x: 58,
-        y: 58
+        x: 59,
+        y: 28
       }
     ],
     version: 1
@@ -38233,8 +39821,8 @@ const emojis = {
       {
         unified: "2734-fe0f",
         native: "✴️",
-        x: 58,
-        y: 59
+        x: 59,
+        y: 29
       }
     ],
     version: 1
@@ -38255,7 +39843,7 @@ const emojis = {
         unified: "2747-fe0f",
         native: "❇️",
         x: 59,
-        y: 0
+        y: 31
       }
     ],
     version: 1
@@ -38275,7 +39863,7 @@ const emojis = {
         unified: "2122-fe0f",
         native: "™️",
         x: 56,
-        y: 3
+        y: 34
       }
     ],
     version: 1
@@ -38294,7 +39882,7 @@ const emojis = {
         unified: "1f51f",
         native: "🔟",
         x: 29,
-        y: 56
+        y: 57
       }
     ],
     version: 1
@@ -38315,7 +39903,7 @@ const emojis = {
         unified: "1f520",
         native: "🔠",
         x: 29,
-        y: 57
+        y: 58
       }
     ],
     version: 1
@@ -38334,7 +39922,7 @@ const emojis = {
         unified: "1f521",
         native: "🔡",
         x: 29,
-        y: 58
+        y: 59
       }
     ],
     version: 1
@@ -38356,8 +39944,8 @@ const emojis = {
       {
         unified: "1f523",
         native: "🔣",
-        x: 29,
-        y: 60
+        x: 30,
+        y: 0
       }
     ],
     version: 1
@@ -38376,7 +39964,7 @@ const emojis = {
         unified: "1f524",
         native: "🔤",
         x: 30,
-        y: 0
+        y: 1
       }
     ],
     version: 1
@@ -38508,7 +40096,7 @@ const emojis = {
         unified: "2139-fe0f",
         native: "ℹ️",
         x: 56,
-        y: 4
+        y: 35
       }
     ],
     version: 1
@@ -38544,8 +40132,8 @@ const emojis = {
       {
         unified: "24c2-fe0f",
         native: "Ⓜ️",
-        x: 56,
-        y: 31
+        x: 57,
+        y: 1
       }
     ],
     version: 1
@@ -39027,7 +40615,7 @@ const emojis = {
         unified: "3297-fe0f",
         native: "㊗️",
         x: 59,
-        y: 28
+        y: 59
       }
     ],
     version: 1
@@ -39050,7 +40638,7 @@ const emojis = {
         unified: "3299-fe0f",
         native: "㊙️",
         x: 59,
-        y: 29
+        y: 60
       }
     ],
     version: 1
@@ -39116,7 +40704,7 @@ const emojis = {
         unified: "1f534",
         native: "🔴",
         x: 30,
-        y: 16
+        y: 17
       }
     ],
     version: 1
@@ -39133,7 +40721,7 @@ const emojis = {
         unified: "1f7e0",
         native: "🟠",
         x: 38,
-        y: 31
+        y: 33
       }
     ],
     version: 12
@@ -39150,7 +40738,7 @@ const emojis = {
         unified: "1f7e1",
         native: "🟡",
         x: 38,
-        y: 32
+        y: 34
       }
     ],
     version: 12
@@ -39167,7 +40755,7 @@ const emojis = {
         unified: "1f7e2",
         native: "🟢",
         x: 38,
-        y: 33
+        y: 35
       }
     ],
     version: 12
@@ -39186,7 +40774,7 @@ const emojis = {
         unified: "1f535",
         native: "🔵",
         x: 30,
-        y: 17
+        y: 18
       }
     ],
     version: 1
@@ -39203,7 +40791,7 @@ const emojis = {
         unified: "1f7e3",
         native: "🟣",
         x: 38,
-        y: 34
+        y: 36
       }
     ],
     version: 12
@@ -39220,7 +40808,7 @@ const emojis = {
         unified: "1f7e4",
         native: "🟤",
         x: 38,
-        y: 35
+        y: 37
       }
     ],
     version: 12
@@ -39237,8 +40825,8 @@ const emojis = {
       {
         unified: "26ab",
         native: "⚫",
-        x: 57,
-        y: 41
+        x: 58,
+        y: 11
       }
     ],
     version: 1
@@ -39254,8 +40842,8 @@ const emojis = {
       {
         unified: "26aa",
         native: "⚪",
-        x: 57,
-        y: 40
+        x: 58,
+        y: 10
       }
     ],
     version: 1
@@ -39271,7 +40859,7 @@ const emojis = {
         unified: "1f7e5",
         native: "🟥",
         x: 38,
-        y: 36
+        y: 38
       }
     ],
     version: 12
@@ -39287,7 +40875,7 @@ const emojis = {
         unified: "1f7e7",
         native: "🟧",
         x: 38,
-        y: 38
+        y: 40
       }
     ],
     version: 12
@@ -39303,7 +40891,7 @@ const emojis = {
         unified: "1f7e8",
         native: "🟨",
         x: 38,
-        y: 39
+        y: 41
       }
     ],
     version: 12
@@ -39319,7 +40907,7 @@ const emojis = {
         unified: "1f7e9",
         native: "🟩",
         x: 38,
-        y: 40
+        y: 42
       }
     ],
     version: 12
@@ -39335,7 +40923,7 @@ const emojis = {
         unified: "1f7e6",
         native: "🟦",
         x: 38,
-        y: 37
+        y: 39
       }
     ],
     version: 12
@@ -39351,7 +40939,7 @@ const emojis = {
         unified: "1f7ea",
         native: "🟪",
         x: 38,
-        y: 41
+        y: 43
       }
     ],
     version: 12
@@ -39367,7 +40955,7 @@ const emojis = {
         unified: "1f7eb",
         native: "🟫",
         x: 38,
-        y: 42
+        y: 44
       }
     ],
     version: 12
@@ -39385,7 +40973,7 @@ const emojis = {
         unified: "2b1b",
         native: "⬛",
         x: 59,
-        y: 22
+        y: 53
       }
     ],
     version: 1
@@ -39404,7 +40992,7 @@ const emojis = {
         unified: "2b1c",
         native: "⬜",
         x: 59,
-        y: 23
+        y: 54
       }
     ],
     version: 1
@@ -39421,8 +41009,8 @@ const emojis = {
       {
         unified: "25fc-fe0f",
         native: "◼️",
-        x: 56,
-        y: 37
+        x: 57,
+        y: 7
       }
     ],
     version: 1
@@ -39439,8 +41027,8 @@ const emojis = {
       {
         unified: "25fb-fe0f",
         native: "◻️",
-        x: 56,
-        y: 36
+        x: 57,
+        y: 6
       }
     ],
     version: 1
@@ -39457,8 +41045,8 @@ const emojis = {
       {
         unified: "25fe",
         native: "◾",
-        x: 56,
-        y: 39
+        x: 57,
+        y: 9
       }
     ],
     version: 1
@@ -39476,8 +41064,8 @@ const emojis = {
       {
         unified: "25fd",
         native: "◽",
-        x: 56,
-        y: 38
+        x: 57,
+        y: 8
       }
     ],
     version: 1
@@ -39493,8 +41081,8 @@ const emojis = {
       {
         unified: "25aa-fe0f",
         native: "▪️",
-        x: 56,
-        y: 32
+        x: 57,
+        y: 2
       }
     ],
     version: 1
@@ -39510,8 +41098,8 @@ const emojis = {
       {
         unified: "25ab-fe0f",
         native: "▫️",
-        x: 56,
-        y: 33
+        x: 57,
+        y: 3
       }
     ],
     version: 1
@@ -39529,7 +41117,7 @@ const emojis = {
         unified: "1f536",
         native: "🔶",
         x: 30,
-        y: 18
+        y: 19
       }
     ],
     version: 1
@@ -39547,7 +41135,7 @@ const emojis = {
         unified: "1f537",
         native: "🔷",
         x: 30,
-        y: 19
+        y: 20
       }
     ],
     version: 1
@@ -39565,7 +41153,7 @@ const emojis = {
         unified: "1f538",
         native: "🔸",
         x: 30,
-        y: 20
+        y: 21
       }
     ],
     version: 1
@@ -39583,7 +41171,7 @@ const emojis = {
         unified: "1f539",
         native: "🔹",
         x: 30,
-        y: 21
+        y: 22
       }
     ],
     version: 1
@@ -39602,7 +41190,7 @@ const emojis = {
         unified: "1f53a",
         native: "🔺",
         x: 30,
-        y: 22
+        y: 23
       }
     ],
     version: 1
@@ -39621,7 +41209,7 @@ const emojis = {
         unified: "1f53b",
         native: "🔻",
         x: 30,
-        y: 23
+        y: 24
       }
     ],
     version: 1
@@ -39643,7 +41231,7 @@ const emojis = {
         unified: "1f4a0",
         native: "💠",
         x: 27,
-        y: 47
+        y: 48
       }
     ],
     version: 1
@@ -39662,7 +41250,7 @@ const emojis = {
         unified: "1f518",
         native: "🔘",
         x: 29,
-        y: 49
+        y: 50
       }
     ],
     version: 1
@@ -39679,7 +41267,7 @@ const emojis = {
         unified: "1f533",
         native: "🔳",
         x: 30,
-        y: 15
+        y: 16
       }
     ],
     version: 1
@@ -39697,7 +41285,7 @@ const emojis = {
         unified: "1f532",
         native: "🔲",
         x: 30,
-        y: 14
+        y: 15
       }
     ],
     version: 1
@@ -39737,7 +41325,7 @@ const emojis = {
         unified: "1f6a9",
         native: "🚩",
         x: 36,
-        y: 29
+        y: 30
       }
     ],
     version: 1
@@ -42134,7 +43722,8 @@ const emojis = {
       "japanese",
       "nation",
       "country",
-      "banner"
+      "banner",
+      "ja"
     ],
     skins: [
       {
@@ -45290,6 +46879,10 @@ var $f72b75cf796873c7$export$2e2bcd8739ae039 = {
 const $c84d045dcc34faf5$var$CACHE = /* @__PURE__ */ new Map();
 const $c84d045dcc34faf5$var$VERSIONS = [
   {
+    v: 15,
+    emoji: "🫨"
+  },
+  {
     v: 14,
     emoji: "🫠"
   },
@@ -45493,7 +47086,7 @@ var $b247ea80b67298d5$export$2e2bcd8739ae039 = {
     value: 24
   },
   emojiVersion: {
-    value: 14,
+    value: 15,
     choices: [
       1,
       2,
@@ -45505,7 +47098,8 @@ var $b247ea80b67298d5$export$2e2bcd8739ae039 = {
       12.1,
       13,
       13.1,
-      14
+      14,
+      15
     ]
   },
   exceptEmojis: {
@@ -45534,7 +47128,7 @@ var $b247ea80b67298d5$export$2e2bcd8739ae039 = {
       "hi",
       "it",
       "ja",
-      "kr",
+      "ko",
       "nl",
       "pl",
       "pt",
@@ -46162,8 +47756,8 @@ function $254755d3f438722f$export$2e2bcd8739ae039(props) {
   if (!emoji)
     return props.fallback;
   const emojiSkin = emoji.skins[skin - 1] || emoji.skins[0];
-  const imageSrc = emojiSkin.src || (props.set != "native" && !props.spritesheet ? typeof props.getImageURL === "function" ? props.getImageURL(props.set, emojiSkin.unified) : `https://cdn.jsdelivr.net/npm/emoji-datasource-${props.set}@14.0.0/img/${props.set}/64/${emojiSkin.unified}.png` : void 0);
-  const spritesheetSrc = typeof props.getSpritesheetURL === "function" ? props.getSpritesheetURL(props.set) : `https://cdn.jsdelivr.net/npm/emoji-datasource-${props.set}@14.0.0/img/${props.set}/sheets-256/64.png`;
+  const imageSrc = emojiSkin.src || (props.set != "native" && !props.spritesheet ? typeof props.getImageURL === "function" ? props.getImageURL(props.set, emojiSkin.unified) : `https://cdn.jsdelivr.net/npm/emoji-datasource-${props.set}@15.0.1/img/${props.set}/64/${emojiSkin.unified}.png` : void 0);
+  const spritesheetSrc = typeof props.getSpritesheetURL === "function" ? props.getSpritesheetURL(props.set) : `https://cdn.jsdelivr.net/npm/emoji-datasource-${props.set}@15.0.1/img/${props.set}/sheets-256/64.png`;
   return /* @__PURE__ */ $bd9dd35321b03dd4$export$34b9dba7ce09269b("span", {
     class: "emoji-mart-emoji",
     "data-emoji-set": props.set,
@@ -46705,7 +48299,9 @@ class $89bd6bb200cc8fef$export$2e2bcd8739ae039 extends $fb96b826c0c5f37a$export$
     this.observe();
   }
   unregister() {
+    var _a;
     document.removeEventListener("click", this.handleClickOutside);
+    (_a = this.darkMedia) == null ? void 0 : _a.removeEventListener("change", this.darkMediaCallback);
     this.unobserve();
   }
   observe() {
@@ -46767,13 +48363,7 @@ class $89bd6bb200cc8fef$export$2e2bcd8739ae039 extends $fb96b826c0c5f37a$export$
       this.darkMedia = matchMedia("(prefers-color-scheme: dark)");
       if (this.darkMedia.media.match(/^not/))
         return "light";
-      this.darkMedia.addListener(() => {
-        if (this.props.theme != "auto")
-          return;
-        this.setState({
-          theme: this.darkMedia.matches ? "dark" : "light"
-        });
-      });
+      this.darkMedia.addEventListener("change", this.darkMediaCallback);
     }
     return this.darkMedia.matches ? "dark" : "light";
   }
@@ -47468,6 +49058,13 @@ class $89bd6bb200cc8fef$export$2e2bcd8739ae039 extends $fb96b826c0c5f37a$export$
   }
   constructor(props) {
     super();
+    $c770c458706daa72$export$2e2bcd8739ae039(this, "darkMediaCallback", () => {
+      if (this.props.theme != "auto")
+        return;
+      this.setState({
+        theme: this.darkMedia.matches ? "dark" : "light"
+      });
+    });
     $c770c458706daa72$export$2e2bcd8739ae039(this, "handleClickOutside", (e) => {
       const { element } = this.props;
       if (e.target != element) {
@@ -48864,6 +50461,12 @@ const PAGINATION = (() => {
   };
 })();
 const TABLE = (() => {
+  if (document.querySelector('meta[name="csrf-token"]')) {
+    request.setHeaders(
+      "X-CSRF-TOKEN",
+      document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+    );
+  }
   const tableDataEl = document.querySelector(".table-data");
   const limitEl = document.querySelector(".sort-show-filter [data-limit]");
   const sortEl = document.querySelector(".sort-show-filter [data-sort]");

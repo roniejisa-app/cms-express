@@ -3,7 +3,7 @@ const authController = require('../controllers/auth.controller');
 const passport = require('passport');
 var router = express.Router();
 
-router.get('/login', authController.login);
+router.get("/login", authController.login);
 router.post('/login', passport.authenticate('local', {
     failureRedirect: "/login",
     failureFlash: true,

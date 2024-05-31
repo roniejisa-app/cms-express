@@ -68,6 +68,7 @@ module.exports = {
                 paginate,
                 filterFields,
                 filterDefault,
+                csrfToken: req.csrfToken(),
             })
         } catch (e) {
             res.status(404).send('<h1>' + e.parent + '</h1>')
@@ -208,6 +209,7 @@ module.exports = {
             id,
             leftFields,
             rightFields,
+            csrfToken: req.csrfToken(),
         })
     },
     update: async (req, res, params) => {
@@ -371,6 +373,7 @@ module.exports = {
                 listData,
                 name,
                 paginate,
+                csrfToken: req.csrfToken(),
             }
         )
         return res.json({

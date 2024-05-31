@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Nunito Sans", sans-serif !important;
+}
+
+option,
+select,
+a,
+button,
+input {
+  font-family: "Nunito Sans", sans-serif !important;
+}
+
+.login {
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.login-box {
+  padding: 10px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 500px;
+  width: 100%;
+}
+.login-box .container {
+  background: white;
+  border-radius: 6px;
+  padding: 1rem;
+  box-shadow: 0 0 5px 0.5px #ccc;
+}
+.login-box h1 {
+  color: blueviolet;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  position: relative;
+}
+.form-group .form-control {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  padding: 8px 12px;
+  outline: none;
+  background: white;
+}
+.form-group input:-internal-autofill-selected {
+  background-color: white !important;
+  color: red;
+}
+.form-group + .form-group {
+  margin-top: 1.5rem;
+}
+.form-group label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 12px;
+  transition: 300ms ease-in-out;
+  transition-property: top, left, background-color, color, font-size;
+  border-radius: 6px;
+}
+.form-group label span {
+  color: red;
+}
+.form-group .form-control:focus + label, .form-group .form-control:not(:placeholder-shown) + label, .form-group .form-control:-webkit-autofill + label {
+  top: -5px;
+  left: 10px;
+  background-color: white;
+  color: #ccc;
+  font-size: 14px;
+}
+.form-group:focus-within label {
+  top: -5px;
+  background-color: white;
+  color: #ccc;
+}
+
+.preview-image {
+  flex: 1;
+  font-size: 0;
+}
+.preview-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.btn-login {
+  border-radius: 6px;
+  padding: 8px;
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: blueviolet;
+  color: white;
+  margin-bottom: 20px;
+  font-size: 1.125rem;
+  cursor: pointer;
+  transition: background-color 300ms ease-in-out;
+}
+.btn-login:hover {
+  background-color: #7319c8;
+}
+
+.alert-danger {
+  color: orangered;
+}
+
+.alert {
+  margin-bottom: 12px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.login-width {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.login-width a {
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=login.css.map */
