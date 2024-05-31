@@ -1,10 +1,21 @@
 @use './r8/variable' as *;
 @use 'variable' as *;
 @use 'mixins' as *;
+@use 'fonts' as *;
 
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Nunito', sans-serif !important;
     color: $colorText;
+}
+
+textarea,
+option,
+select,
+a,
+button,
+input,
+* {
+    font-family: 'Nunito', sans-serif !important;
 }
 
 ul li button,

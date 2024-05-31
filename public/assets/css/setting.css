@@ -149,7 +149,26 @@ summary {
   border-color: #1677ff;
 }
 .settings .setting-tab {
+  position: relative;
   flex: 1;
+}
+.settings .setting-tab__container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: 300ms ease-in-out;
+  transition-property: opacity, visibility, transform;
+  transform: translateY(30px);
+}
+.settings .setting-tab__container.active {
+  z-index: 1;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 .settings h3 {
   font-size: 1.25rem;

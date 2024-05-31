@@ -199,6 +199,7 @@ module.exports = {
         const data = await model.DB.findOne({
             _id: id,
         }).exec()
+        req.success = req.flash('success')
         return res.render('admin/edit', {
             layout: 'layouts/admin',
             req,

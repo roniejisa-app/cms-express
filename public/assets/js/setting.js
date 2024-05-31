@@ -1,4 +1,5 @@
 import MODAL from './modal.js'
+import TAB from './tab.js'
 import request from './request.js'
 import notify from './notify.js'
 import LOADING from './loading.js'

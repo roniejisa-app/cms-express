@@ -45,6 +45,7 @@ module.exports = {
         const filters = convertDataFilter(req.query, fields)
 
         const order = [['id', 'ASC']]
+        req.success = req.flash('success');
         try {
             const { count, rows: listData } = await modelMain.findAndCountAll({
                 where: filters,
@@ -154,7 +155,7 @@ module.exports = {
                     }
                 }
             }
-            req.success = req.flash('success', `Thêm ${name_show} thành công!`)
+            req.flash('success', `Thêm ${name_show} thành công!`)
             event.emit('create', req, module, item, body)
             return res.redirect(`/admin/${module}`)
         } else {
@@ -206,7 +207,7 @@ module.exports = {
             },
             include,
         })
-
+        req.success = req.flash('success');
         return res.render('admin/edit', {
             layout: 'layouts/admin',
             req,
@@ -300,7 +301,7 @@ module.exports = {
             }
         }
 
-        req.success = req.flash('success', `Sửa ${name_show} thành công!`)
+        req.flash('success', `Sửa ${name_show} thành công!`)
         event.emit('update', req, module, id, body)
         res.redirect(`/admin/${module}/edit/${id}`)
     },
@@ -387,7 +388,7 @@ module.exports = {
         })
     },
     filter: async (req, res, params) => {
-        const { module, name, fields, modelMain } = params;
+        const { module, name, fields, modelMain } = params
 
         fields.sort((a, b) => {
             if (!a.order) {

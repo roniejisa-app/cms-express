@@ -7,6 +7,14 @@
   list-style: none;
 }
 
+select,
+textarea {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  resize: none;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
