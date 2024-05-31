@@ -9,6 +9,9 @@ const dataSchema = new mongoose.Schema({
         required: true,
         type: String,
     },
+    image: {
+        type: String,
+    },
 })
 
 class Post {
@@ -39,19 +42,25 @@ class Post {
                 filter: true,
                 sort: true,
             },
+            {
+                name: 'image',
+                label: 'Ảnh đại diện',
+                type: 'image',
+                show: true,
+                showForm: true,
+                filterDefault: true,
+                positionSidebar: true,
+                filter: false,
+                sort: false,
+                order: 1,
+            },
         ]
     }
 
     static validate(id = null) {
         let validate = {
-            fullname: string().required('Vui lòng nhập tên'),
-            content: string().test(
-                'check-status',
-                'Trạng thái không hợp lệ',
-                (value) => {
-                    return +value === 0 || +value === 1
-                }
-            ),
+            name: string().required('Vui lòng nhập tên'),
+            content: string().required("Vui lòng nhập nội dung"),
         }
         return validate
     }

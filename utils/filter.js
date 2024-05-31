@@ -50,4 +50,53 @@ module.exports = {
         }
         return filters
     },
+    convertDataFilterMongoDB: (body, fields) => {
+        const { field, type, value } = body
+        let filters = {}
+        if (!field) {
+            return filters
+        }
+        for (let i = 0; i < field.length; i++) {
+            const nameSearch = field[i]
+            const typeSearch = type[i]
+            const valueSearch = value[i]
+            if (valueSearch === '') {
+                continue
+            }
+            const fieldInfo = fields.find(({ name }) => name === nameSearch)
+            if (!filters['$or']) {
+                filters['$or'] = []
+            }
+            switch (fieldInfo.type) {
+                case 'text':
+                    if (typeSearch === 'equal') {
+                        let obj = {}
+                        obj[nameSearch] = valueSearch
+                        filters['$or'].push(obj)
+                    } else if (typeSearch === 'small_than') {
+                        let obj = {}
+                        obj[nameSearch] = {
+                            $lt: valueSearch,
+                        }
+                        filters['$or'].push(obj)
+                    } else if (typeSearch === 'large_than') {
+                        let obj = {}
+                        obj[nameSearch] = {
+                            [gt]: valueSearch,
+                        }
+                        filters['$or'].push(obj)
+                    } else {
+                        let obj = {}
+                        obj[nameSearch] = {
+                            $regex: `${valueSearch}`,
+                            $options: 'i',
+                        }
+                        filters['$or'].push(obj)
+                    }
+                    break
+            }
+        }
+        console.log(filters['$or'])
+        return filters
+    },
 }

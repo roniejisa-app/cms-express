@@ -172,5 +172,8 @@ module.exports = {
     },
     isObject:(value)=>{
         return value && typeof value === 'object' && value.constructor === Object;
+    },
+    isNullish:(data) => {
+        return data === null || data === undefined;
     }
 }

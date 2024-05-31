@@ -101,3 +101,4 @@ roniejisa migration
 <!-- Có thể dùng cả mongodb và sequelize -->
 <!-- Sẽ dùng mongodb để sử lý những cái như comment, chat -->
 <!-- Đã xong bước đầu -->
+<!-- Nên dùng mongodb khi dữ liệu lớn và thường không có liên kết các bảng -->

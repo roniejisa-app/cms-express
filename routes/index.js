@@ -26,11 +26,10 @@ router.get('/send-mail', async (req, res) => {
 })
 
 router.get('/posts', async (req, res) => {
-    const data = new db.Post({
-        name: 'hehe',
-        content: 'lorem ipsum dolor sit amet',
+    const data = await (new db.Post()).DB.create({
+        name: 'Ngân ',
+        content: 'Xinh',
     })
-    await data.save()
     return res.status(200).json(data)
 })
 module.exports = router

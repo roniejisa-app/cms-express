@@ -11,7 +11,7 @@ const functions = {
     NOSQL,
 }
 
-async function getData(req, isIndex = true, isForm = false) {
+async function dataModule(req, isIndex = true, isForm = false) {
     const { module, id } = req.params
     const { model, name, name_show, type } = req.menus.find(
         (itemModule) => itemModule.name === module
@@ -69,7 +69,7 @@ async function SQL(model, name, name_show, isIndex, isForm, id, module, type) {
  * @param {*} isIndex - Kiểm tra có phải bảng không
  * @param {*} isForm - Trong Form
  * @param {*} id - Trong Form Sửa
- * @param {*} module - Tên module /admmin/(module)/...
+ * @param {*} module - Tên module /admin/(module)/...
  * @param {*} type - Kiểu SQL | NOSQL
  * @returns
  */
@@ -135,4 +135,4 @@ async function getDataApi(req) {
     const fields = allFields.filter((field) => field.api)
     return { model, module, name, name_show, fields, modelMain, id }
 }
-module.exports = { getData, getDataApi }
+module.exports = { dataModule, getDataApi }
