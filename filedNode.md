@@ -53,7 +53,8 @@
 ```
 
 - Các thuộc tính và lưu ý đặt biệt:
-Lưu ý: Nếu được hãy đặt option item có 2 thuộc tính là value, name để không cần chỉnh sửa core nhiều
+
+- Lưu ý: Nếu được hãy đặt option item có 2 thuộc tính là value, name để không cần chỉnh sửa core nhiều
 
 ### PASSWORD
 
@@ -70,7 +71,8 @@ Lưu ý: Nếu được hãy đặt option item có 2 thuộc tính là value, n
 ```
 
 - Các thuộc tính và lưu ý đặt biệt:
-hash - (boolean) để có thể mã hóa dữ liệu dưới dạng bcrypt
+
+1. hash - (boolean) để có thể mã hóa dữ liệu dưới dạng bcrypt
 
 ## Phức Tạp
 
@@ -102,10 +104,12 @@ hash - (boolean) để có thể mã hóa dữ liệu dưới dạng bcrypt
 ```
 
 - Các thuộc tính và lưu ý đặt biệt:
-keyValue: (string) - là thuộc tính để lưu trữ trong cơ sở dữ liệu
-keyShow: (string) - là thuộc tính hiển thị bên ngoài nhìn thấy
-options: (array) - Là nơi lưu các giá trị được chọn
-Lưu ý: Nếu được hãy đặt option item có 2 thuộc tính là value, name để không cần chỉnh sửa core nhiều
+
+1. keyValue: (string) - là thuộc tính để lưu trữ trong cơ sở dữ liệu
+2. keyShow: (string) - là thuộc tính hiển thị bên ngoài nhìn thấy
+3. options: (array) - Là nơi lưu các giá trị được chọn
+
+- Lưu ý: Nếu được hãy đặt option item có 2 thuộc tính là value, name để không cần chỉnh sửa core nhiều
 
 ### SELECT IN TABLE OTHER
 
@@ -129,7 +133,7 @@ Các thuộc tính và lưu ý đặt biệt:
 2. field chính của bảng liên kết tới
 3. field hiển thị ở ngoài
 
-VD. selectAssoc('Provider', 'id', 'name')
+- VD. selectAssoc('Provider', 'id', 'name')
 
 ## Siêu phức tạp
 
@@ -151,4 +155,4 @@ VD. selectAssoc('Provider', 'id', 'name')
 
 1. chỉ cần thêm ...choosePermission()
 
-Lưu ý: không xóa các trường trong bảng mặc định
+- Lưu ý: không xóa các trường trong bảng mặc định
