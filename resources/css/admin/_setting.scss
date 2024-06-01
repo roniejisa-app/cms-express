@@ -61,7 +61,7 @@
         visibility: visible;
     }
 }
-
+.modal,
 .settings {
     display: flex;
     flex-wrap: wrap;
@@ -159,8 +159,8 @@
                     padding: 5px;
                 &.active,
                 &:hover {
-                    color: #1677ff;
-                    border-color: #1677ff;
+                    color: var(--color-main);
+                    border-color: var(--color-main);
                 }
             }
         }
@@ -185,14 +185,16 @@
                 visibility: visible;
                 transform: translateY(0);
             }
+            h3{
+                font-size: 1.25rem;
+                margin-bottom: 20px;
+                background: var(--color-main);
+                padding: 8px 12px;
+                color: white;
+                border-radius: 6px;
+            }
         }
     }
-    h3{
-        font-size: 1.25rem;
-        margin-bottom: 20px;
-        background: #1677ff;
-        padding: 8px 12px;
-        color: white;
-        border-radius: 6px;
-    }
+    
+
 }

@@ -31,13 +31,13 @@
 }
 .text {
     &-danger {
-        color: $colorDanger;
+        color: var(--color-orange);
     }
     &-success {
-        color: $colorSuccess;
+        color: var(--color-main);
     }
     &-warning {
-        color: $colorDanger;
+        color: $colorWarning;
     }
     &-primary {
         color: $colorPrimary;
@@ -48,10 +48,10 @@
     color: white;
     border-radius: 6px;
     &-success {
-        background-color: $colorSuccess;
+        background-color: var(--color-main);
     }
     &-danger {
-        background-color: $colorDanger;
+        background-color: var(--color-orange);
     }
 }
 
@@ -63,10 +63,10 @@
     font-weight: bold;
     border: none;
     &-success {
-        background-color: $colorSuccess;
+        background-color: var(--color-main);
     }
     &-danger {
-        background-color: $colorDanger;
+        background-color: var(--color-orange);
     }
     &-warning{
         background-color: $colorWarning;

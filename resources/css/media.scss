@@ -1,6 +1,25 @@
 @use 'fonts';
-$colorMain: #80afe7;
-$colorMainBold: #2b86f5;
+$colorMain: #5549be;
+$colorMainBold: #493fa2;
+:root {
+    --color-main: #5549be;
+    --color-main-90: #5549be90;
+    --color-main-80: #5549be80;
+    --color-main-70: #5549be70;
+    --color-main-60: #5549be60;
+    --color-main-50: #5549be50;
+    --color-orange: #fc7f52;
+    --color-body: #f8f8f9;
+    --color-box: #ffffff;
+    --color-text: #232323;
+    --color-green: #56ab79;
+    --color-blue: #1f63b1;
+    --color-blue-light: #ecf7ff;
+    --color-main-light: #f6f5ff;
+    --color-orange-light: #fff9f5;
+    --color-red: #f18d83;
+    --main-bg-color: #dbdeef;
+}
 
 html {
     font-size: 16px;
@@ -14,7 +33,7 @@ html {
 }
 
 body {
-    font-family: "Nunito", sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 
 .media {
@@ -122,7 +141,7 @@ aside {
                 }
             }
 
-            a:has(svg)+ul {
+            a:has(svg) + ul {
                 padding-left: 26px;
             }
 
@@ -170,7 +189,7 @@ aside {
 
                 &.delete {
                     background: coral;
-                    fill: white
+                    fill: white;
                 }
 
                 &.choose-file {
@@ -212,14 +231,11 @@ aside {
                 }
             }
         }
-
     }
 
     h1 {
         transform: translateX(5px);
     }
-
-
 
     h2 {
         margin-bottom: 20px;
@@ -309,7 +325,7 @@ aside {
                 transition: opacity 0.4s ease;
 
                 &::before {
-                    content: "";
+                    content: '';
                     position: absolute;
                     top: 0;
                     left: 0;
@@ -429,7 +445,7 @@ aside {
                 flex-direction: column;
             }
 
-            tr+tr {
+            tr + tr {
                 margin-top: 20px;
             }
 
@@ -469,7 +485,7 @@ aside {
 
         a {
             gap: 5px;
-            transition: color .3s;
+            transition: color 0.3s;
 
             &:hover {
                 color: $colorMain;
@@ -481,7 +497,7 @@ aside {
 
             svg {
                 path {
-                    transition: fill .3s;
+                    transition: fill 0.3s;
                 }
 
                 width: 10px;
@@ -490,8 +506,8 @@ aside {
         }
 
         li {
-            +li::before {
-                content: ">";
+            + li::before {
+                content: '>';
                 margin: 0 10px;
                 font-size: 14px;
             }
@@ -512,7 +528,7 @@ aside {
 .form-add-folder {
     cursor: pointer;
     position: fixed;
-    background: #80afe799;
+    background: var(--color-main-90);
     top: 0;
     left: 0;
     width: 100%;
@@ -552,7 +568,7 @@ aside {
 //CSS UPLOAD PLACE
 .form-add-file {
     position: fixed;
-    background: #80afe799;
+    background: var(--color-main-90);
     top: 0;
     left: 0;
     width: 100%;
@@ -590,7 +606,10 @@ aside {
                 width: 100%;
                 padding: 10px;
                 display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(calc(100% / 12), 1fr));
+                grid-template-columns: repeat(
+                    auto-fill,
+                    minmax(calc(100% / 12), 1fr)
+                );
                 grid-auto-rows: 115px;
                 gap: 10px;
                 max-height: 68vh;
@@ -650,8 +669,7 @@ aside {
         background: $colorMain;
         border-radius: 5px;
         font-size: 16px;
-        text-shadow: $colorMain 0px 4px 6px -1px,
-            $colorMain 0px 2px 4px -1px;
+        text-shadow: $colorMain 0px 4px 6px -1px, $colorMain 0px 2px 4px -1px;
     }
 }
 
@@ -696,7 +714,8 @@ aside {
             &.fg {
                 transform: rotate(-90deg);
                 transform-origin: var(--half-size) var(--half-size);
-                stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
+                stroke-dasharray: var(--dash)
+                    calc(var(--circumference) - var(--dash));
                 transition: stroke-dasharray 0.3s linear 0s;
                 stroke: url(#GradientColor);
             }
@@ -763,7 +782,6 @@ aside {
                     width: auto;
                     max-width: 100%;
                 }
-
             }
 
             .toolbar {
@@ -839,8 +857,6 @@ aside {
                     width: 100%;
                     border: 1px solid #cacaca;
                 }
-
-
             }
         }
 
@@ -859,7 +875,6 @@ aside {
             width: 100%;
             justify-content: flex-end;
 
-
             button {
                 padding: 10px 30px;
                 border: none;
@@ -870,11 +885,11 @@ aside {
             }
 
             .btn-submit {
-                background: #0088ff;
+                background: var(--color-main);
             }
 
             .btn-reset {
-                background: red;
+                background: var(--color-orange);
             }
         }
     }
@@ -917,7 +932,7 @@ aside {
                 align-items: center;
                 gap: 10px;
                 transition-property: background, color;
-                transition: .3s ease;
+                transition: 0.3s ease;
                 cursor: pointer;
 
                 &:hover {
@@ -931,7 +946,7 @@ aside {
 
                 svg {
                     transition-property: fill;
-                    transition: .3s ease;
+                    transition: 0.3s ease;
                     fill: black;
                     width: 16px;
                     height: 16px;

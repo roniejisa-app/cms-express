@@ -202,5 +202,5 @@ Các thuộc tính và lưu ý đặt biệt:
 2. field chính của bảng liên kết tới
 3. field hiển thị ở ngoài
 4. field để render theo cấp
-5. ``` Không bắt buộc ``` Nếu có ```text (BOOLEAN) Lấy dữ liệu trong constant/model``` thì sẽ kiểm tra và in ra cấp đúng để không bị select nhầm dẫn tới loop vô hạn.
+5. ``` Không bắt buộc ``` Nếu có ```text (BOOLEAN) Lấy dữ liệu trong constants/model``` thì sẽ kiểm tra và in ra cấp đúng để không bị select nhầm dẫn tới loop vô hạn.
 6. ``` Không bắt buộc ``` Một mảng để kiểm tra những bảng liên quan khác sẽ có tên ```model``` và ```tên trường``` map với bảng hiện tại thường là kiểm tra với id của bảng hiện tại.

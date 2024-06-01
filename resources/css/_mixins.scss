@@ -3,14 +3,18 @@
         transition: 200ms ease-in-out;
         transition-property: box-shadow, border-color;
         &:focus {
-            border-color: #1677ff;
-            box-shadow: 0 0 2px 5px #1677ff50;
+            border-color: var(--color-main-90);
+            box-shadow: 0 0 2px 5px var(--color-main-50);
             + svg {
-                fill: #1677ff;
+                fill: var(--color-main);
             }
         }
     }
     svg {
         transition: fill 200ms ease-in-out;
     }
+}
+
+@mixin shadow(){
+    box-shadow: 0 1px 2px #00000008,0 1px 6px -1px #00000005,0 2px 4px #00000005;
 }

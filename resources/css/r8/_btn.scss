@@ -14,11 +14,11 @@
     }
 
     &-success {
-        background: $colorSuccess;
+        background: var(--color-main);
     }
 
     &-danger {
-        background: $colorDanger;
+        background: var(--color-orange);
     }
 
     &-warning {
