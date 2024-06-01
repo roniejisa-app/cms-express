@@ -4,30 +4,7 @@
 @use 'fonts' as *;
 @use './admin/setting' as *;
 
-:root {
-    --color-main: #5549be;
-    --color-main-90: #5549be90;
-    --color-main-80: #5549be80;
-    --color-main-70: #5549be70;
-    --color-main-60: #5549be60;
-    --color-main-50: #5549be50;
-    --color-orange: #fc7f52;
-    --color-body: #f8f8f9;
-    --color-box: #ffffff;
-    --color-text: #232323;
-    --color-green: #56ab79;
-    --color-blue: #1f63b1;
-    --color-blue-light: #ecf7ff;
-    --color-main-light: #f6f5ff;
-    --color-orange-light: #fff9f5;
-    --color-red: #f18d83;
-    --main-bg-color: #dbdeef;
-
-    --padding-main: 32px;
-    --border-radius-main: 25px;
-    --padding-menu: 20px;
-}
-
+// RESET
 *,
 textarea,
 option,
@@ -46,11 +23,14 @@ ul li button,
 ul li a {
     transition: 300ms ease-in-out;
     transition-property: color;
-
     &:hover {
         color: var(--color-main) !important;
+        span {
+            color: var(--color-main) !important;
+        }
     }
 }
+// ALL
 main {
     padding: var(--padding-main);
     background: linear-gradient(
@@ -73,19 +53,14 @@ main {
     @include shadow();
 }
 
-.main-content {
-    overflow-x: hidden;
-    max-width: calc(100% - 200px);
-    flex: 1;
-}
-
+// HEADER MENU
 .header-menu {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 8px;
     position: relative;
-    height: 60px;
+    height: var(--height-header);
     @include shadow();
     .logo {
         font-size: 0;
@@ -97,11 +72,11 @@ main {
         }
     }
 }
-
+// BUTTON TOGGLE SMALL MENU
 .toggle-sidebar {
     position: absolute;
     bottom: 0;
-    transform: translateY(50%) translate(50%);
+    transform: translate(50%, -50%);
     right: 0;
     cursor: pointer;
     padding: 5px;
@@ -114,7 +89,8 @@ main {
     align-items: center;
     z-index: 10;
     border: 1px solid var(--color-main);
-    transition: background-color 300ms ease-in-out;
+    transition: 300ms ease-in-out;
+    transition-property: background-color, transform;
     &:hover {
         background-color: var(--color-body);
         svg {
@@ -129,10 +105,11 @@ main {
     }
 }
 
+// MENU
 .menu-admin {
     border-top-left-radius: var(--border-radius-main);
     border-bottom-left-radius: var(--border-radius-main);
-    flex-basis: 200px;
+    min-width: 200px;
     background: var(--color-box);
     height: calc(100vh - var(--padding-main) * 2);
     @include shadow();
@@ -140,29 +117,128 @@ main {
     aside {
         position: relative;
     }
+    aside {
+        > ul {
+            overflow: auto;
+            height: calc(
+                100vh - var(--padding-main) * 2 - var(--height-header) -
+                    var(--padding-menu)
+            );
+            li {
+                &:has(.active) {
+                    .collapse-menu {
+                        background: var(--color-main-20);
+                    }
+                }
+                position: relative;
+                div,
+                a {
+                    padding: 8px 8px 8px 16px;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    span {
+                        color: var(--color-text);
+                        font-weight: 600;
+                    }
+                    &.active {
+                        span {
+                            color: var(--color-main) !important;
+                        }
+                    }
+                }
+                ul {
+                    position: relative;
+                    margin-left: 28px;
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 1px;
+                        height: 100%;
+                        background-color: var(--color-main-60);
+                    }
 
-    ul {
-        overflow: auto;
-        height: calc(
-            100vh - var(--padding-main) * 2 - 60px - var(--padding-menu) * 2
-        );
-        padding: var(--padding-menu) 0;
-        li {
-            a {
-                padding: 8px 16px;
-                display: block;
-                color: var(--color-text);
-                font-weight: 600;
-                &.active {
-                    color: var(--color-main) !important;
+                    li {
+                        position: relative;
+
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            left: 0;
+                            top: 50%;
+                            transform: translateY(-50%) translateX(-50%);
+                            width: 14px;
+                            border-radius: 50%;
+                            height: 14px;
+                            z-index: 1;
+                            background: var(--color-box);
+                            border: 1px solid var(--color-main-60);
+                        }
+
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            left: 0;
+                            top: 50%;
+                            transform: translateY(-50%) translateX(-50%);
+                            width: 6px;
+                            border-radius: 50%;
+                            height: 6px;
+                            z-index: 1;
+                            background: var(--color-box);
+                            border: 1px solid var(--color-main-60);
+                        }
+                        &:has(.active) {
+                            background: var(--color-main-20);
+                            &::after {
+                                background: var(--color-main);
+                            }
+                        }
+                    }
                 }
             }
         }
     }
+
+    .link-icon {
+        svg {
+            width: var(--svg-icon-menu);
+            height: var(--svg-icon-menu);
+        }
+    }
+}
+// CSS MENU
+.collapse-menu {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 8px 8px 16px;
+    position: relative;
+    cursor: pointer;
+    .collapse-svg {
+        svg {
+            width: var(--svg-icon-menu);
+            height: var(--svg-icon-menu);
+        }
+    }
+    i {
+        position: absolute;
+        bottom: 0;
+        right: 8px;
+        padding: 5px;
+        cursor: pointer;
+        svg {
+            width: 14px;
+            height: 14px;
+        }
+    }
 }
 
+// HEADER MAIN
 .header-main-admin {
-    height: 60px;
+    height: var(--height-header);
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -257,11 +333,25 @@ main {
     }
 }
 
-footer {
-    height: 40px;
-    padding-top: 20px;
+// MIDDLE
+.main-content {
+    overflow-x: hidden;
+    max-width: calc(100% - 200px);
+    flex: 1;
 }
 
+.main {
+    padding: 0 1rem;
+    height: calc(
+        100vh - var(--height-header) - 40px - 36px - var(--padding-main) * 2
+    );
+    overflow: auto;
+    max-height: calc(
+        100vh - var(--height-header) - 40px - 36px - var(--padding-main) * 2
+    );
+}
+
+//PAGINATE
 .paginate {
     margin-top: 10px;
     justify-content: flex-end;
@@ -294,7 +384,11 @@ footer {
     }
 }
 
-// Done css
+// FOOTER
+footer {
+    height: 40px;
+    padding-top: 20px;
+}
 
 // CSS TABLE
 .table-data {
@@ -376,13 +470,6 @@ footer {
     }
 }
 
-.main {
-    padding: 0 1rem;
-    height: calc(100vh - 60px - 40px - 36px - var(--padding-main) * 2);
-    overflow: auto;
-    max-height: calc(100vh - 60px - 40px - 36px - var(--padding-main) * 2);
-}
-
 .header-view {
     position: sticky;
     top: 0px;
@@ -410,7 +497,7 @@ footer {
             height: 160px;
             object-fit: scale-down;
             border-radius: 6px;
-            @include shadow()
+            @include shadow();
         }
     }
 
@@ -593,7 +680,7 @@ footer {
         }
     }
 }
-
+// LOADING
 .cms-loading {
     position: fixed;
     z-index: 9999;
@@ -623,8 +710,9 @@ footer {
         visibility: visible;
     }
 }
+// FORM GROUP
 .form-group {
-    padding: 6px;
+    padding: 12px;
     border-radius: 6px;
     background-color: var(--color-box);
     @include shadow();
@@ -632,17 +720,116 @@ footer {
         font-weight: 600;
     }
 }
+
+// SCROLLBAR
 ::-webkit-scrollbar {
     width: 8px;
     background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-    background-color: var(--color-main-light);
+    background-color: var(--color-main-60);
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 300ms ease;
     &:hover {
         background-color: var(--color-main);
+    }
+}
+
+// Small Menu
+body.menu-small {
+    main {
+        padding-left: calc(var(--padding-main) + var(--width-sidebar-small));
+    }
+    .main-container {
+        position: relative;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+
+    .menu-admin {
+        min-width: initial;
+        position: absolute;
+        width: var(--width-sidebar-small);
+        left: calc(0px - var(--width-sidebar-small));
+        .link-text {
+            display: none;
+        }
+        aside {
+            ul {
+                direction: rtl;
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                overflow: auto;
+                li {
+                    .link {
+                        justify-content: center;
+                    }
+                    div,
+                    a {
+                        padding: 8px;
+                    }
+                }
+            }
+
+            .collapse-menu {
+                justify-content: center;
+                padding: 8px;
+                i {
+                    display: none;
+                }
+                .collapse-text {
+                    display: none;
+                }
+                + ul {
+                    direction: initial;
+                    --width-ul: 160px;
+                    position: fixed;
+                    transform: translate(100%, -48px);
+                    z-index: 99;
+                    min-width: var(--width-ul);
+                    background: var(--color-box);
+                    border-top-right-radius: 12px;
+                    border-bottom-right-radius: 12px;
+                    margin-left: 0;
+                    display: none;
+                    &.show {
+                        display: block;
+                    }
+                    @include shadow();
+                    &::after {
+                        display: none;
+                    }
+                    li {
+                        + li {
+                            margin: 0;
+                        }
+                        div,
+                        a {
+                            margin-left: 20px;
+                            padding: 4px 12px;
+                            justify-content: stretch;
+                            .link-text {
+                                display: block;
+                            }
+                        }
+                        &::after,
+                        &::before {
+                            left: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .main-content {
+        max-width: 100%;
+    }
+
+    .toggle-sidebar {
+        transform: scaleX(-1) translate(-50%, -50%);
     }
 }
 

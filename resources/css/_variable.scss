@@ -1,3 +1,40 @@
 $colorBackgroundChat: #b37feb;
 $colorButtonChat: #b37feb2a;
-$colorText: #322C2B;
+$colorText: #322c2b;
+
+:root {
+    --color-main: #5549be;
+    --color-main-90: #5549be90;
+    --color-main-80: #5549be80;
+    --color-main-70: #5549be70;
+    --color-main-60: #5549be60;
+    --color-main-50: #5549be50;
+    --color-main-40: #5549be40;
+    --color-main-30: #5549be30;
+    --color-main-20: #5549be20;
+    --color-main-10: #5549be10;
+    --color-orange: #fc7f52;
+    --color-body: #f8f8f9;
+    --color-box: #ffffff;
+    --color-text: #232323;
+    --color-green: #56ab79;
+    --color-blue: #1f63b1;
+    --color-blue-light: #ecf7ff;
+    --color-main-light: #f6f5ff;
+    --color-orange-light: #fff9f5;
+    --color-red: #f18d83;
+    --main-bg-color: #dbdeef;
+    --padding-main: 32px;
+    --border-radius-main: 25px;
+    --padding-menu: 20px;
+    //Cấu hình chiều cao cố định
+    --height-header: 60px;
+    // Cấu hình small
+    --width-sidebar-small: 72px;
+    --svg-icon-menu: 24px;
+}
+
+
+.menu-small{
+    --svg-icon-menu: 32px;
+}
