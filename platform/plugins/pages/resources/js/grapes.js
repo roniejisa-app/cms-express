@@ -38,7 +38,7 @@ const editor = GrapesJS.init({
     deviceManager: deviceManager(),
     storageManager: storeManager(ENDPOINT, id),
     canvas: {
-        styles: ['/core/css/custom.css'],
+        styles: ['/core/plugins/pages/css/custom.css'],
     },
     pluginsOpts: [plugin, countdown],
     plugins: [(editor) => plugin(editor, {}), countdown],

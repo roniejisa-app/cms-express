@@ -15,18 +15,27 @@
 		<% if(typeof csrfToken === 'string' && csrfToken) { %>
 		<meta name="csrf-token" content="<%= csrfToken %>" />
 		<% } %>
-		<link rel="stylesheet" href="/core/css/r8.css" />
-		<link rel="stylesheet" href="/core/css/admin.css" />
-		<link rel="stylesheet" href="/core/css/chat.css" />
+		<link rel="stylesheet" href="/core/admin/css/r8.css" />
+		<link rel="stylesheet" href="/core/admin/css/admin.css" />
+		<link rel="stylesheet" href="/core/admin/css/chat.css" />
 	</head>
 	
 	<body>
 		<main>
-			<div class="row g-0">
-				<div class="col-12 col-md-2 menu-admin">
+			<div class="main-container">
+				<div class="menu-admin">
 					<aside>
-						<div class="header-menu my-5">
-							<h1>Quản Trị</h1>
+						<div class="header-menu">
+							<a href="/admin" class="logo">
+								<img src="<%= SettingHelper.getSetting('logo','image') %>" />
+							</a>
+							<span class="toggle-sidebar">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+									<!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+									<path
+											d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+								</svg>
+							</span>
 						</div>
 						<ul class="ul">
 							<li><a class="link <%= typeof module === 'undefined' ? 'active' : '' %>" href="/admin">Tổng quan</a></li>
@@ -43,7 +52,7 @@
 						</ul>
 					</aside>
 				</div>
-				<div class="col-12 col-md-10">
+				<div class="main-content">
 					<header class="header-main-admin">
 						<div class="notification">
 							<span class="icon">
@@ -82,7 +91,7 @@
 		
 		<%- include('../chat/index') %>
 		<div class="cms-loading"></div>
-		<script src="/core/js/admin2.js" type="module"></script>
+		<script src="/core/admin/js/admin2.js" type="module"></script>
 	</body>
 	
 </html>

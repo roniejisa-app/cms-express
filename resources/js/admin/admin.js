@@ -1,10 +1,11 @@
-import CHAT from "./chat.js";
-import MEDIA from "./media.js";
-import TABLE from "./view/table.js";
-import CRUD from './crud.js';
+import CHAT from './chat'
+import MEDIA from './media'
+import TABLE from './view/table'
+import MENU from './layouts/menu'
+import CRUD from './crud'
 window.addEventListener('DOMContentLoaded', function () {
-    MEDIA.init();
-    MEDIA.event();
-    CHAT.init();
-    TABLE.init();
+    MEDIA.init()
+    MEDIA.event()
+    CHAT.init()
+    TABLE.init()
 })

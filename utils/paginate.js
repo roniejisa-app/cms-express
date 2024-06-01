@@ -11,7 +11,7 @@ module.exports = {
         }
         for (let i = 1; i <= totalPage; i++) {
             if (i === +page) {
-                output += `<a class="${i === +page ? 'active' : ''}">${i}</a>`
+                output += `<span class="${i === +page ? 'active' : ''}">${i}</span>`
             } else if (
                 [
                     1,

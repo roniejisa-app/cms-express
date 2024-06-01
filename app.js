@@ -10,9 +10,9 @@ var cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
 var logger = require('morgan')
 // Tối ưu http
-const helmet = require('helmet');
+const helmet = require('helmet')
 // Cấu hình cache file
-const compression = require('compression');
+const compression = require('compression')
 var indexRouter = require('./routes/index')
 var authRouter = require('./routes/auth')
 var adminRouter = require('./routes/admin/admin')
@@ -48,9 +48,8 @@ app.use(
 )
 //Đăng ký listener
 moduleListener()
+//Đăng ký aliases
 loadAlias(app)
-//Đăng ký aslias
-const SettingHelper = require('./alias/SettingHelper.alias')
 app.use(
     cors({
         origin: '*',
@@ -61,7 +60,6 @@ app.use(
 )
 // Flash session
 app.use(flash())
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
@@ -87,7 +85,16 @@ app.use(
     })
 )
 app.use(compression())
-app.use(helmet());
+// Đăng ký cho sử dụng các link vào
+app.use(
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                'img-src': ["'self'", 'https://cdn.jsdelivr.net'],
+            },
+        },
+    })
+)
 app.use(passport.initialize())
 app.use(passport.session())
 

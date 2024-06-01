@@ -28,23 +28,77 @@ ul li a {
     }
 }
 
+.main-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main-content{
+    overflow-x: hidden;
+    max-width: calc(100% - 200px);
+    flex: 1;
+}
+
+.header-menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    position: relative;
+    height: 60px;
+    box-shadow: 0 1px 2px #00000008,0 1px 6px -1px #00000005,0 2px 4px #00000005;
+    .logo{
+        font-size: 0;
+        img{
+            border-radius: 6px;
+            box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+            height: 40px;
+            object-fit: contain;
+        }
+    }
+
+}
+
+.toggle-sidebar{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) translateX(50%);
+    right: 0;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    background: #1677ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg{
+        fill: white;
+        width: 16px;
+        height: 16px;
+    }
+}
+
 .menu-admin {
+    flex-basis: 200px;
     background: $colorBackground;
     height: 100vh;
-    overflow: auto;
     box-shadow: 1px 0px 2px 0 rgba(0, 0, 0, 0.03),
         1px 0px 6px -1px rgba(0, 0, 0, 0.02), 1px 0px 4px 0 rgba(0, 0, 0, 0.02);
 
     aside {
-        padding: 0 16px;
+        position: relative;
     }
 
     ul {
+        overflow: auto;
         li {
             a {
-                padding: 8px 0;
+                padding: 8px;
                 display: block;
                 color: $colorText;
+
 
                 &.active {
                     color: #1677ff;
@@ -161,7 +215,7 @@ footer {
     justify-content: flex-end;
     display: flex;
     gap: 10px;
-
+    span,
     a {
         display: flex;
         justify-content: center;

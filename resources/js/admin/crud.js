@@ -1,3 +1,4 @@
+import request from '../utils/request'
 import { toKebabCase } from '../utils/support'
 import { urlEndpoint } from './../config'
 import notify from './../utils/notify'
@@ -8,7 +9,7 @@ const CRUD = (() => {
     let inputTimer = {}
     let oldValue = {}
     listTypes.forEach((inputEl, index) => {
-        oldValue[index] = inputEl.value;
+        oldValue[index] = inputEl.value
         inputEl.oninput = ({ target }) => {
             clearTimeout(inputTimer[index])
             inputTimer[index] = setTimeout(async () => {
@@ -20,20 +21,14 @@ const CRUD = (() => {
                 if (idEl) {
                     objData.id = idEl.dataset.id
                 }
-                const response = await fetch(
-                    urlEndpoint + `/admin/check-link`,
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(objData),
-                    }
+                request.setEndpoint(urlEndpoint, objData)
+                const { data } = await request.post(
+                    `/admin/check-link`,
+                    objData
                 )
-                const data = await response.json();
                 if (data.message) {
                     notify.error(data.message)
-                    inputEl.value = oldValue[index];
+                    inputEl.value = oldValue[index]
                     return false
                 }
             }, 500)

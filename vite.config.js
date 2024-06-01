@@ -1,5 +1,10 @@
 import { resolve } from 'path'
 import { defineConfig, loadEnv } from 'vite'
+const minimist = require('minimist');
+
+// Parse command-line arguments
+const args = minimist(process.argv.slice(2));
+const target = args._[0] || 'default';
 // const cssResources = globSync(
 //     process.cwd() + '/resources/css/**/*.scss'
 // ).map((file) => resolve(process.cwd(), file))
@@ -26,6 +31,58 @@ function preserveDirectoryStructure() {
         },
     }
 }
+const plugins = {
+    admin: {
+        files: {
+            css: [
+                resolve(__dirname, './resources/css/admin.scss'),
+                resolve(__dirname, './resources/css/r8/r8.scss'),
+                resolve(__dirname, './resources/css/chat.scss'),
+            ],
+            js: [resolve(__dirname, './resources/js/admin/admin.js')],
+        },
+        dir: resolve(__dirname, './public/core/admin'),
+    },
+    media: {
+        files: {
+            css: [resolve(__dirname, './resources/css/media.scss')],
+            js: [resolve(__dirname, './resources/js/media/media.js')],
+        },
+        dir: resolve(__dirname, './public/core/media'),
+    },
+    meet: {
+        files: {
+            css: [resolve(__dirname, './resources/css/meet.scss')],
+            js: [resolve(__dirname, './resources/js/admin/livestream.js')],
+        },
+        dir: resolve(__dirname, './public/core/meet'),
+    },
+    pages: {
+        files: {
+            css: [
+                resolve(
+                    __dirname,
+                    './platform/plugins/pages/resources/css/custom.scss'
+                ),
+            ],
+            js: [
+                resolve(
+                    __dirname,
+                    './platform/plugins/pages/resources/js/grapes.js'
+                ),
+            ],
+        },
+        dir: resolve(__dirname, './public/core/plugins/pages'),
+    },
+}
+
+const getDir = (type) => {
+    return plugins[type].dir
+}
+
+const getFile = (type) => {
+    return [...plugins[type].files.css, ...plugins[type].files.js]
+}
 
 const scssFiles = [
     resolve(__dirname, './resources/css/media.scss'),
@@ -33,15 +90,16 @@ const scssFiles = [
     resolve(__dirname, './resources/css/chat.scss'),
     resolve(__dirname, './resources/css/meet.scss'),
     resolve(__dirname, './resources/css/r8/r8.scss'),
-    resolve(__dirname, './platform/plugins/pages/resources/css/custom.scss'),
+    // resolve(__dirname, './platform/plugins/pages/resources/css/custom.scss'),
 ]
 const jsFiles = [
     resolve(__dirname, './resources/js/media/media.js'),
     resolve(__dirname, './resources/js/admin/admin.js'),
-    resolve(__dirname, './resources/js/admin/livestream.js'),
-    resolve(__dirname, './platform/plugins/pages/resources/js/grapes.js'),
+    resolve(__dirname, './resources/js/listener.js'),
+    // resolve(__dirname, './resources/js/admin/livestream.js'),
+    // resolve(__dirname, './platform/plugins/pages/resources/js/grapes.js'),
 ]
-console.log(resolve(__dirname, './utils'))
+
 export default defineConfig({
     resolve: {
         alias: {
@@ -55,13 +113,14 @@ export default defineConfig({
         chunkSizeWarningLimit: 2000,
         minify: true,
         rollupOptions: {
-            input: [
-                // resolve(__dirname, "./resources/js/listener.js")
-                ...scssFiles,
-                ...jsFiles,
-            ],
+            // input: [
+            //     ...scssFiles,
+            //     ...jsFiles,
+            // ],
+            input: getFile(type),
             output: {
-                dir: resolve(__dirname, './public/core'),
+                // dir: resolve(__dirname, './public/core'),
+                dir: getDir(type),
                 // assetFileNames: function (file) {
                 //     console.log(file);
                 //     return file
