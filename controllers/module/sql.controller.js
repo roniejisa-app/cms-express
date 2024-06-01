@@ -29,7 +29,19 @@ module.exports = {
             }
             return +a.order - +b.order
         })
-
+        // Thêm edge loading
+        let include = []
+        for (let i = 0; i < fields.length; i++) {
+            if (fields[i].include && Array.isArray(fields[i].include) && fields[i].show) {
+                include = [
+                    ...include,
+                    ...fields[i].include.map(({ model, as }) => ({
+                        model: DB[model],
+                        as,
+                    })),
+                ]
+            }
+        }
         // FilterFields
         const filterFields = allFields.filter(({ filter }) => filter)
         const filterDefault = allFields.find(
@@ -51,11 +63,16 @@ module.exports = {
         try {
             const { count, rows: listData } = await modelMain.findAndCountAll({
                 where: filters,
+                include,
                 order,
                 limit,
                 offset,
             })
-            let paginate = initPaginate(count, limit, page).replaceAll(process.env.PAGINATE_HASH,module)
+
+            let paginate = initPaginate(count, limit, page).replaceAll(
+                process.env.PAGINATE_HASH,
+                module
+            )
             return res.render('admin/view', {
                 req,
                 fields,

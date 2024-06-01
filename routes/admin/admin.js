@@ -8,13 +8,9 @@ const Cache = require('@utils/cache')
 const { User } = require('@models/index')
 // Bắt đầu vào quản trị
 const permissionMiddleware = require('@middlewares/permission.middleware')
+const { buildMenuList } = require('@utils/all')
 // permissionMiddleware
 router.use(async (req, res, next) => {
-    req.menus = await Cache.getMenu()
-    if (!req.menus || Array.isArray(req.menus) || true) {
-        await Cache.setMenu(req, true)
-    }
-
     req.permission = [
         'modules.view',
         'modules.add',
@@ -58,12 +54,31 @@ router.use(async (req, res, next) => {
         'manager_modules.delete',
         'manager_modules.update',
     ]
+    req.menus = await Cache.getMenu()
+    if (!req.menus || Array.isArray(req.menus) || true) {
+        await Cache.setMenu(req, true)
+    }
 
+    const menuView = req.menus.filter((menu) =>
+        req.permission.some((permission) => {
+            return permission.includes(`${menu.name}.view`) && menu.active
+        })
+    )
+
+    req.menuList = await Cache.findOrCreate(
+        'menuList',
+        buildMenuList(menuView),
+        true
+    )
+
+    req.menuList = Object.values(req.menuList).reverse()
+    console.log(req.menuList);
     req.user = await User.findOne({
         where: {
             email: 'roniejisa@gmail.com',
         },
     })
+
     req.app.set('layout', 'layouts/admin')
     next()
 })

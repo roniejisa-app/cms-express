@@ -1,5 +1,5 @@
 const { createClient } = require('redis')
-const { Module } = require('@models/index')
+const { Module, ManagerModule } = require('@models/index')
 
 class CacheInstance {
     constructor() {
@@ -25,7 +25,14 @@ module.exports = {
     },
     setMenu: async (req, clearCache = false) => {
         if (!req.menus || !Array.isArray(req.menus) || clearCache) {
-            req.menus = await Module.findAll()
+            req.menus = await Module.findAll({
+                include: [
+                    {
+                        model: ManagerModule,
+                        as: 'managerModule',
+                    },
+                ],
+            })
             module.exports.set('menus', req.menus)
         }
     },

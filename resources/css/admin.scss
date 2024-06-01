@@ -22,8 +22,9 @@ body {
 ul li button,
 ul li a {
     transition: 300ms ease-in-out;
-    transition-property: color;
+    transition-property: color, background-color;
     &:hover {
+        background-color: var(--color-main-20) !important;
         color: var(--color-main) !important;
         span {
             color: var(--color-main) !important;
@@ -142,6 +143,7 @@ main {
                         font-weight: 600;
                     }
                     &.active {
+                        background-color: var(--color-main-20) !important;
                         span {
                             color: var(--color-main) !important;
                         }
@@ -769,6 +771,9 @@ body.menu-small {
                     div,
                     a {
                         padding: 8px;
+                        &.active{
+                            background: var(--color-main-20);
+                        }
                     }
                 }
             }
@@ -784,7 +789,7 @@ body.menu-small {
                 }
                 + ul {
                     direction: initial;
-                    --width-ul: 160px;
+                    --width-ul: 240px;
                     position: fixed;
                     transform: translate(100%, -48px);
                     z-index: 99;

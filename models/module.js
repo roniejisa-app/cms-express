@@ -3,6 +3,7 @@ const { Model, Op } = require('sequelize')
 const { string } = require('yup')
 const { chooseMultiAssoc, selectParentAssoc } = require('@utils/fields')
 const { NO_CHECK_LEVEL } = require('@constants/model')
+const DB = require('./index')
 module.exports = (sequelize, DataTypes) => {
     class Module extends Model {
         /**
@@ -18,9 +19,9 @@ module.exports = (sequelize, DataTypes) => {
                 as: 'permissions',
             })
 
-            Module.hasOne(models.ManagerModule, {
+            Module.belongsTo(models.ManagerModule, {
                 foreignKey: 'manager_module_id',
-                as: 'managerModules',
+                as: 'managerModule',
             })
         }
         static fields() {
@@ -143,6 +144,12 @@ module.exports = (sequelize, DataTypes) => {
                         'manager_module_id',
                         NO_CHECK_LEVEL
                     ),
+                    include: [
+                        {
+                            model: 'ManagerModule',
+                            as: 'managerModule',
+                        },
+                    ],
                     show: true,
                     showForm: true,
                     positionSidebar: true,

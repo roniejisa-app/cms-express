@@ -255,4 +255,28 @@ module.exports = {
         // Trả về kết quả là nodeHTML kết hợp với childrenHTML
         return nodeHTML + childrenHTML
     },
+    buildMenuList: (modules) => {
+        const menuList = {}
+        modules.forEach((data) => {
+            if (data.manager_module_id) {
+                const key =
+                    '0' +
+                    data.managerModule.order +
+                    '_' +
+                    data.manager_module_id +
+                    '_manager'
+                if (!menuList[key]) {
+                    menuList[key] = {
+                        ...data.managerModule.dataValues,
+                        childs: [],
+                    }
+                }
+                delete data.managerModule
+                menuList[key].childs.push({ ...data.dataValues })
+            } else {
+                menuList['1' + data.id] = { ...data.dataValues }
+            }
+        })
+        return menuList
+    },
 }

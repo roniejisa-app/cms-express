@@ -1,0 +1,15 @@
+<% if(typeof req.menus === 'object'){ %> <%
+    req.menus.filter(menu => req.permission.some(permission =>
+    {
+        return permission.includes(`${menu.name}.view`) && menu.active 
+    })).forEach(menu => {
+    %>
+<li>
+	<a class="link <% if(typeof module === "string" && menu.name === module){%>active<%}%>" href="/admin/<%= menu.name  %>">
+		<span class="link-icon">
+			<%- include('./svg') %>
+		</span>
+		<span class="link-text"><%= menu.name_show %></span>
+	</a>
+</li>
+<%})%> <% } %>

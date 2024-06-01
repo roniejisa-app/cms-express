@@ -54,7 +54,6 @@ module.exports = (sequelize, DataTypes) => {
                     keyValue: 'id',
                     keyLabel: 'name',
                     keyChild: 'child',
-                    
                     ...selectParentAssoc(
                         'ManagerModule',
                         'id',
@@ -72,7 +71,13 @@ module.exports = (sequelize, DataTypes) => {
                             },
                         ]
                     ),
-                    show: true,
+                    include: [
+                        {
+                            model: 'ManagerModule',
+                            as: 'parent',
+                        },
+                    ],
+                    show: false,
                     showForm: true,
                     positionSidebar: false,
                 },
