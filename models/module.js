@@ -1,7 +1,8 @@
 'use strict'
 const { Model, Op } = require('sequelize')
 const { string } = require('yup')
-const { chooseMultiAssoc } = require('@utils/fields')
+const { chooseMultiAssoc, selectParentAssoc } = require('@utils/fields')
+const { NO_CHECK_LEVEL } = require('@constants/model')
 module.exports = (sequelize, DataTypes) => {
     class Module extends Model {
         /**
@@ -127,6 +128,24 @@ module.exports = (sequelize, DataTypes) => {
                     show: false,
                     showForm: true,
                     positionSidebar: false,
+                },
+                {
+                    name: 'manager_module_id',
+                    label: 'Module cha',
+                    type: 'selectParentAssoc',
+                    keyValue: 'id',
+                    keyLabel: 'name',
+                    keyChild: 'child',
+                    ...selectParentAssoc(
+                        'ManagerModule',
+                        'id',
+                        'name',
+                        'manager_module_id',
+                        NO_CHECK_LEVEL
+                    ),
+                    show: true,
+                    showForm: true,
+                    positionSidebar: true,
                 },
             ]
         }

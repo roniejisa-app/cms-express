@@ -157,7 +157,7 @@ Các thuộc tính và lưu ý đặt biệt:
 
 - Lưu ý: không xóa các trường trong bảng mặc định
 
-#### Siêu phức tạp
+#### Cực khoai
 
 ```javascript
 {
@@ -172,6 +172,7 @@ Các thuộc tính và lưu ý đặt biệt:
         'id',
         'name',
         'manager_module_id',
+        NO_CHECK_LEVEL,
         [
             {
                 model: 'Module',
@@ -191,9 +192,15 @@ Các thuộc tính và lưu ý đặt biệt:
 
 - Các thuộc tính và lưu ý đặt biệt:
 
+1. keyValue: (string) - field chính lấy dữ liệu
+2. keyLabel: (string) - field hiển thị ở ngoài
+3. keyChild: (string) - ```Quan trọng``` dùng để phân cấp.
+
 - Thêm ```javascript...selectParentAssoc``` thuộc tính này bao gồm
 
 1. Tên model lấy dữ liệu
 2. field chính của bảng liên kết tới
 3. field hiển thị ở ngoài
-4. Một mảng để kiểm tra những bảng liên quan khác sẽ có tên ```model``` và ```tên trường``` map với bảng hiện tại thường là kiểm tra với id của bảng hiện tại.
+4. field để render theo cấp
+5. ``` Không bắt buộc ``` Nếu có ```text (BOOLEAN) Lấy dữ liệu trong constant/model``` thì sẽ kiểm tra và in ra cấp đúng để không bị select nhầm dẫn tới loop vô hạn.
+6. ``` Không bắt buộc ``` Một mảng để kiểm tra những bảng liên quan khác sẽ có tên ```model``` và ```tên trường``` map với bảng hiện tại thường là kiểm tra với id của bảng hiện tại.

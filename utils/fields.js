@@ -64,7 +64,8 @@ module.exports = {
         valueKey,
         labelKey,
         parentName,
-        modelRelateTo
+        hasCheckLevel = false,
+        modelRelateTo = []
     ) => {
         return {
             data: async (model) => {
@@ -91,38 +92,42 @@ module.exports = {
              * Cách giải quyết: để quy bắt đầu từ chính nó
              */
             dataEdit: async (model, name, id) => {
-                // id là id hiện tại
-                // Lặp đi lặp lại tìm cha, tìm con cho tới khi không còn cấp nào nữa thì thôi
-                // Đầu tiên sẽ là tìm con của chính nó
-                // Sau đó sẽ tìm
-                let childIds = [id]
-                async function findAllParents(childIds, blackList = []) {
-                    if (childIds.length === 0) {
-                        return blackList
+                let filters = {}
+                if (hasCheckLevel) {
+                    // id là id hiện tại
+                    // Lặp đi lặp lại tìm cha, tìm con cho tới khi không còn cấp nào nữa thì thôi
+                    // Đầu tiên sẽ là tìm con của chính nó
+                    // Sau đó sẽ tìm
+                    let childIds = [id]
+                    async function findAllParents(childIds, blackList = []) {
+                        if (childIds.length === 0) {
+                            return blackList
+                        }
+                        const children = await model.findAll({
+                            attributes: ['id'],
+                            where: {
+                                [name]: {
+                                    [Op.in]: childIds,
+                                },
+                            },
+                        })
+                        childIds = children.map((child) => child.id)
+                        blackList = [...new Set([...blackList, ...childIds])]
+                        return findAllParents(childIds, blackList)
                     }
-                    const children = await model.findAll({
-                        attributes: ['id'],
+                    const blackList = await findAllParents(childIds, [])
+                    blackList.push(id)
+                    // Lấy danh sách các id con
+
+                    filters = {
                         where: {
-                            [name]: {
-                                [Op.in]: childIds,
+                            id: {
+                                [Op.notIn]: blackList,
                             },
                         },
-                    })
-                    childIds = children.map((child) => child.id)
-                    blackList = [...new Set([...blackList, ...childIds])]
-                    return findAllParents(childIds, blackList)
+                    }
                 }
-                const blackList = await findAllParents(childIds, [])
-                blackList.push(id)
-                // Lấy danh sách các id con
-
-                let filters = {
-                    where: {
-                        id: {
-                            [Op.notIn]: blackList,
-                        },
-                    },
-                }
+                
                 const results = await model.findAll({
                     attributes: [valueKey, labelKey, parentName],
                     ...filters,
@@ -140,17 +145,22 @@ module.exports = {
             canBeDeleted: async (DB, id) => {
                 // Muốn xóa thì phải không có thằng nào là con
                 // Không có thằng nào liên kết với nó
-                const data = await Promise.all(
-                    modelRelateTo.map(async ({ model, field }) => {
-                        const count = await DB[model].findAll({
-                            attributes: ['id'],
-                            where: {
-                                [field]: id,
-                            },
-                        })
-                        return count.length === 0
-                    })
-                )
+
+                const data =
+                    modelRelateTo.length > 0
+                        ? await Promise.all(
+                              modelRelateTo.map(async ({ model, field }) => {
+                                  const count = await DB[model].findAll({
+                                      attributes: ['id'],
+                                      where: {
+                                          [field]: id,
+                                      },
+                                  })
+                                  return count.length === 0
+                              })
+                          )
+                        : true
+
                 return data.every((item) => item)
             },
             type: 'selectParentAssoc',
