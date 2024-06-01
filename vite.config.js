@@ -1,16 +1,8 @@
 import { resolve } from 'path'
-import { defineConfig, loadEnv } from 'vite'
-const minimist = require('minimist');
-
+import { defineConfig } from 'vite'
+const name = process.env.BUILD_TARGET;
 // Parse command-line arguments
-const args = minimist(process.argv.slice(2));
-const target = args._[0] || 'default';
-// const cssResources = globSync(
-//     process.cwd() + '/resources/css/**/*.scss'
-// ).map((file) => resolve(process.cwd(), file))
-// const fileJSResources = globSync(process.cwd() + '/resources/js/**/*.js').map(
-//     (file) => resolve(process.cwd(), file)
-// )
+
 
 function preserveDirectoryStructure() {
     return {
@@ -113,24 +105,9 @@ export default defineConfig({
         chunkSizeWarningLimit: 2000,
         minify: true,
         rollupOptions: {
-            // input: [
-            //     ...scssFiles,
-            //     ...jsFiles,
-            // ],
-            input: getFile(type),
+            input: getFile(name),
             output: {
-                // dir: resolve(__dirname, './public/core'),
-                dir: getDir(type),
-                // assetFileNames: function (file) {
-                //     console.log(file);
-                //     return file
-                //         ? `[ext]/[name].[ext]`
-                //         : `[ext]/[name]-[hash].[ext]`;
-                // },
-                // chunkFileNames: function (file) {
-                // },
-                // entryFileNames: function (file) {
-                // }
+                dir: getDir(name),
                 entryFileNames: `js/[name].js`,
                 chunkFileNames: `js/[name].js`,
                 assetFileNames: `[ext]/[name].[ext]`,
