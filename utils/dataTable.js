@@ -38,7 +38,17 @@ async function SQL(model, name, name_show, isIndex, isForm, id, module, type) {
         for (var i = 0; i < fields.length; i++) {
             if (ARRAY_TYPE_HAS_DATA.includes(fields[i].type)) {
                 // Do chưa tải được nên cần lấy ngay model tại chỗ này
-                fields[i].data = await fields[i].data(DB[fields[i].modelName])
+                if (id && typeof fields[i].dataEdit === 'function') {
+                    fields[i].data = await fields[i].dataEdit(
+                        DB[fields[i].modelName],
+                        fields[i].name,
+                        id
+                    )
+                } else {
+                    fields[i].data = await fields[i].data(
+                        DB[fields[i].modelName]
+                    )
+                }
             }
             if (fields[i].type === FIELD_TYPE_PERMISSION) {
                 fields[i].data = await fields[i].data(
@@ -130,7 +140,8 @@ async function getDataApi(req) {
     const { model, name, name_show, type } = Array.from(modules).find(
         (moduleItem) => moduleItem.name === module
     )
-    const modelMain = type?.toUpperCase() === 'NOSQL' ? MongoDB[model] : DB[model]
+    const modelMain =
+        type?.toUpperCase() === 'NOSQL' ? MongoDB[model] : DB[model]
     const allFields = modelMain.fields()
     const fields = allFields.filter((field) => field.api)
     return { model, module, name, name_show, fields, modelMain, id, type }

@@ -9,6 +9,7 @@ const {
     FIELD_TYPE_PERMISSION,
     FIELD_TYPE_SLUG,
     ARRAY_TYPE_HAS_MULTIPLE,
+    ARRAY_TYPE_HAS_DATA,
     IS_NOT_ADD,
 } = require('@constants/module')
 const { checkLinkExist } = require('@utils/all')
@@ -45,7 +46,8 @@ module.exports = {
         const filters = convertDataFilter(req.query, fields)
 
         const order = [['id', 'ASC']]
-        req.success = req.flash('success');
+        req.success = req.flash('success')
+        req.error = req.flash('error')
         try {
             const { count, rows: listData } = await modelMain.findAndCountAll({
                 where: filters,
@@ -53,7 +55,7 @@ module.exports = {
                 limit,
                 offset,
             })
-            let paginate = initPaginate(count, limit, page, module)
+            let paginate = initPaginate(count, limit, page).replaceAll(process.env.PAGINATE_HASH,module)
             return res.render('admin/view', {
                 req,
                 fields,
@@ -207,7 +209,8 @@ module.exports = {
             },
             include,
         })
-        req.success = req.flash('success');
+
+        req.success = req.flash('success')
         return res.render('admin/edit', {
             layout: 'layouts/admin',
             req,
@@ -308,37 +311,61 @@ module.exports = {
     destroy: async (req, res, params) => {
         const { module, name_show, modelMain, id, fields } = params
         //Chỗ này sẽ xóa toàn bộ mọi thứ liên quan không để lại cái gì!!!
-        for (var i = 0; i < fields.length; i++) {
-            if (ARRAY_TYPE_HAS_MULTIPLE.includes(fields[i].type)) {
-                const item = await modelMain.findByPk(id)
-                await fields[i].addOrEditAssociate(
-                    item,
-                    DB[fields[i].modelName],
-                    [],
-                    IS_NOT_ADD
-                )
-            }
 
-            if (fields[i].type === 'permissions') {
-                const item = await modelMain.findByPk(id)
-                await fields[i].addOrEditPermission(
-                    item,
-                    DB[fields[i].modelName],
-                    [],
-                    fields[i].mainKey,
-                    fields[i].subKey,
-                    fields[i].fn,
-                    IS_NOT_ADD
-                )
+        const canBeDeleted = await new Promise(async (resolve, reject) => {
+            for (var i = 0; i < fields.length; i++) {
+                if (ARRAY_TYPE_HAS_MULTIPLE.includes(fields[i].type)) {
+                    const item = await modelMain.findByPk(id)
+                    await fields[i].addOrEditAssociate(
+                        item,
+                        DB[fields[i].modelName],
+                        [],
+                        IS_NOT_ADD
+                    )
+                }
+
+                if (
+                    ARRAY_TYPE_HAS_DATA.includes(fields[i].type) &&
+                    typeof fields[i].canBeDeleted === 'function'
+                ) {
+                    const checkHasDelete = await fields[i].canBeDeleted(DB, id)
+                    if (!checkHasDelete) {
+                        resolve(false)
+                    }
+                }
+
+                if (fields[i].type === 'permissions') {
+                    const item = await modelMain.findByPk(id)
+                    await fields[i].addOrEditPermission(
+                        item,
+                        DB[fields[i].modelName],
+                        [],
+                        fields[i].mainKey,
+                        fields[i].subKey,
+                        fields[i].fn,
+                        IS_NOT_ADD
+                    )
+                }
+
+                if (i === fields.length - 1) {
+                    resolve(true)
+                }
             }
+        })
+        if (!canBeDeleted) {
+            req.flash(
+                'error',
+                `Xóa ${name_show} không thành công, vui lòng tìm và xóa tất cả các dữ liệu liên quan trước`
+            )
+            return res.redirect(`/admin/${module}`)
         }
         await modelMain.destroy({
             where: {
                 id,
             },
         })
-        req.flash('success', `Xóa ${name_show} thành công`)
         event.emit('delete', req, module, id)
+        req.flash('success', `Xóa ${name_show} thành công`)
         res.redirect(`/admin/${module}`)
     },
     destroyMulti: async (req, res, params) => {

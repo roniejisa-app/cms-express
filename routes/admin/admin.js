@@ -53,6 +53,10 @@ router.use(async (req, res, next) => {
         'settings.create',
         'settings.delete',
         'settings.update',
+        'manager_modules.view',
+        'manager_modules.create',
+        'manager_modules.delete',
+        'manager_modules.update',
     ]
 
     req.user = await User.findOne({

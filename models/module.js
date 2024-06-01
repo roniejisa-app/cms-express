@@ -16,12 +16,17 @@ module.exports = (sequelize, DataTypes) => {
                 otherKey: 'permission_id',
                 as: 'permissions',
             })
+
+            Module.hasOne(models.ManagerModule, {
+                foreignKey: 'manager_module_id',
+                as: 'managerModules',
+            })
         }
         static fields() {
             return [
                 {
                     name: 'name',
-                    label: 'Key',
+                    label: 'Tên bảng',
                     type: 'text',
                     show: true,
                     showForm: true,
@@ -166,6 +171,8 @@ module.exports = (sequelize, DataTypes) => {
             active: DataTypes.BOOLEAN,
             api: DataTypes.BOOLEAN,
             type: DataTypes.STRING,
+            manager_module_id: DataTypes.INTEGER,
+            icon: DataTypes.STRING,
         },
         {
             sequelize,

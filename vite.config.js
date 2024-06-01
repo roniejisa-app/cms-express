@@ -1,8 +1,7 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
-const name = process.env.BUILD_TARGET;
+const name = process.env.BUILD_TARGET
 // Parse command-line arguments
-
 
 function preserveDirectoryStructure() {
     return {
@@ -66,6 +65,13 @@ const plugins = {
         },
         dir: resolve(__dirname, './public/core/plugins/pages'),
     },
+    login: {
+        files: {
+            css: [resolve(__dirname, './resources/css/admin/login.scss')],
+            js: [],
+        },
+        dir: resolve(__dirname, './public/core/login'),
+    },
 }
 
 const getDir = (type) => {
@@ -75,22 +81,6 @@ const getDir = (type) => {
 const getFile = (type) => {
     return [...plugins[type].files.css, ...plugins[type].files.js]
 }
-
-const scssFiles = [
-    resolve(__dirname, './resources/css/media.scss'),
-    resolve(__dirname, './resources/css/admin.scss'),
-    resolve(__dirname, './resources/css/chat.scss'),
-    resolve(__dirname, './resources/css/meet.scss'),
-    resolve(__dirname, './resources/css/r8/r8.scss'),
-    // resolve(__dirname, './platform/plugins/pages/resources/css/custom.scss'),
-]
-const jsFiles = [
-    resolve(__dirname, './resources/js/media/media.js'),
-    resolve(__dirname, './resources/js/admin/admin.js'),
-    resolve(__dirname, './resources/js/listener.js'),
-    // resolve(__dirname, './resources/js/admin/livestream.js'),
-    // resolve(__dirname, './platform/plugins/pages/resources/js/grapes.js'),
-]
 
 export default defineConfig({
     resolve: {

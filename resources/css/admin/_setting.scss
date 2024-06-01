@@ -62,58 +62,56 @@
     }
 }
 
-.form-group {
-    position: relative;
-    .form-select,
-    .form-control {
-        border: 1px solid #ccc;
+.settings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    summary {
+        background: #515050;
+        padding: 5px 10px;
+        cursor: pointer;
         border-radius: 6px;
-        width: 100%;
-        padding: 10px 12px;
-        outline: none;
-        background: white;
+        color: white;
     }
-
-    input {
-        &:-internal-autofill-selected {
-            background-color: white !important;
-            color: red;
+    .form-group {
+        position: relative;
+        .form-select,
+        .form-control {
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            width: 100%;
+            padding: 10px 12px;
+            outline: none;
+            background: white;
         }
-    }
-
-    + .form-group {
-        margin-top: 1.5rem;
-    }
-
-    label {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 12px;
-        transition: 300ms ease-in-out;
-        transition-property: top, left, background-color, color, font-size;
-        border-radius: 6px;
-        color: #ccc;
-        span {
-            color: red;
+    
+        input {
+            &:-internal-autofill-selected {
+                background-color: white !important;
+                color: red;
+            }
         }
-    }
-
-    .form-select {
-        &:has(option[value]:checked) + label {
-            top: 0;
-            left: 10px;
-            background-color: white;
-            font-size: 13px;
-            color: #1d1d1d;
+    
+        + .form-group {
+            margin-top: 1.5rem;
         }
-    }
-
-    .form-control {
-        &:focus,
-        &:not(:placeholder-shown),
-        &:-webkit-autofill {
-            & + label {
+    
+        label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 12px;
+            transition: 300ms ease-in-out;
+            transition-property: top, left, background-color, color, font-size;
+            border-radius: 6px;
+            color: #ccc;
+            span {
+                color: red;
+            }
+        }
+    
+        .form-select {
+            &:has(option[value]:checked) + label {
                 top: 0;
                 left: 10px;
                 background-color: white;
@@ -121,30 +119,30 @@
                 color: #1d1d1d;
             }
         }
-    }
-    &:focus-within {
-        label {
-            top: 0px;
-            left: 10px;
-            background-color: white;
-            color: #1d1d1d;
-            font-size: 13px;
+    
+        .form-control {
+            &:focus,
+            &:not(:placeholder-shown),
+            &:-webkit-autofill {
+                & + label {
+                    top: 0;
+                    left: 10px;
+                    background-color: white;
+                    font-size: 13px;
+                    color: #1d1d1d;
+                }
+            }
+        }
+        &:focus-within {
+            label {
+                top: 0px;
+                left: 10px;
+                background-color: white;
+                color: #1d1d1d;
+                font-size: 13px;
+            }
         }
     }
-}
-
-summary {
-    background: #515050;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 6px;
-    color: white;
-}
-
-.settings {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
     .setting-sidebar {
         flex-basis: 200px;
         ul {

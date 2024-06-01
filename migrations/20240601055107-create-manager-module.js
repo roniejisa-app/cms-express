@@ -2,22 +2,29 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable('modules', {
+        await queryInterface.createTable('manager_modules', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER,
             },
-            name: Sequelize.STRING(50),
-            name_show: Sequelize.STRING(100),
-            order: Sequelize.INTEGER,
-            model: Sequelize.STRING,
-            api: Sequelize.STRING,
-            type: Sequelize.STRING,
-            active: Sequelize.BOOLEAN,
-            manager_module_id: Sequelize.INTEGER,
-            icon: Sequelize.STRING,
+            icon: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            name: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            manager_module_id: {
+                type: Sequelize.INTEGER,
+                defaultValue: 0,
+            },
+            order: {
+                type: Sequelize.INTEGER,
+                defaultValue: 999,
+            },
             created_at: {
                 allowNull: false,
                 type: Sequelize.DATE,
@@ -31,6 +38,6 @@ module.exports = {
         })
     },
     async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable('Modules')
+        await queryInterface.dropTable('manager_modules')
     },
 }

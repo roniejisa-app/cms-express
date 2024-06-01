@@ -1,3 +1,6 @@
+const { Op } = require('sequelize')
+const { buildTree, printTree } = require('./all')
+
 module.exports = {
     /**
      * Thêm hoặc sửa Item thêm quan hệ cho chính nó
@@ -51,6 +54,106 @@ module.exports = {
                 return results
             },
             type: 'selectAssoc',
+            modelName: modelName,
+            valueKey: valueKey,
+            labelKey: labelKey,
+        }
+    },
+    selectParentAssoc: (
+        modelName,
+        valueKey,
+        labelKey,
+        parentName,
+        modelRelateTo
+    ) => {
+        return {
+            data: async (model) => {
+                const results = await model.findAll({
+                    attributes: [valueKey, labelKey, parentName],
+                })
+                const arr = results.map((item) => {
+                    return item.dataValues
+                })
+                // Xây dựng cây từ danh sách dữ liệu ban đầu
+                const tree = buildTree(arr, null, 1, parentName, valueKey)
+                return {
+                    printTree,
+                    tree,
+                }
+            },
+            /**
+             *
+             * @param {*} model Model sử dụng
+             * @param {*} name Tên trường hiện tại cần tìm cha, con
+             * @param {*} id ID hiện tại
+             * @returns
+             * Yêu cầu: Lấy tất cả các giá trị không liên quan tới con và cha của nó
+             * Cách giải quyết: để quy bắt đầu từ chính nó
+             */
+            dataEdit: async (model, name, id) => {
+                // id là id hiện tại
+                // Lặp đi lặp lại tìm cha, tìm con cho tới khi không còn cấp nào nữa thì thôi
+                // Đầu tiên sẽ là tìm con của chính nó
+                // Sau đó sẽ tìm
+                let childIds = [id]
+                async function findAllParents(childIds, blackList = []) {
+                    if (childIds.length === 0) {
+                        return blackList
+                    }
+                    const children = await model.findAll({
+                        attributes: ['id'],
+                        where: {
+                            [name]: {
+                                [Op.in]: childIds,
+                            },
+                        },
+                    })
+                    childIds = children.map((child) => child.id)
+                    blackList = [...new Set([...blackList, ...childIds])]
+                    return findAllParents(childIds, blackList)
+                }
+                const blackList = await findAllParents(childIds, [])
+                blackList.push(id)
+                // Lấy danh sách các id con
+
+                let filters = {
+                    where: {
+                        id: {
+                            [Op.notIn]: blackList,
+                        },
+                    },
+                }
+                const results = await model.findAll({
+                    attributes: [valueKey, labelKey, parentName],
+                    ...filters,
+                })
+                const arr = results.map((item) => {
+                    return item.dataValues
+                })
+
+                const tree = buildTree(arr, null, 1, parentName, valueKey)
+                return {
+                    printTree,
+                    tree,
+                }
+            },
+            canBeDeleted: async (DB, id) => {
+                // Muốn xóa thì phải không có thằng nào là con
+                // Không có thằng nào liên kết với nó
+                const data = await Promise.all(
+                    modelRelateTo.map(async ({ model, field }) => {
+                        const count = await DB[model].findAll({
+                            attributes: ['id'],
+                            where: {
+                                [field]: id,
+                            },
+                        })
+                        return count.length === 0
+                    })
+                )
+                return data.every((item) => item)
+            },
+            type: 'selectParentAssoc',
             modelName: modelName,
             valueKey: valueKey,
             labelKey: labelKey,

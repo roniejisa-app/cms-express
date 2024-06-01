@@ -2,7 +2,7 @@
 @use 'variable' as *;
 @use 'mixins' as *;
 @use 'fonts' as *;
-
+@use './admin/setting' as *;
 body {
     font-family: 'Nunito', sans-serif !important;
     color: $colorText;

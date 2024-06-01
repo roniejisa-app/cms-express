@@ -170,10 +170,89 @@ module.exports = {
             pathname
         )
     },
-    isObject:(value)=>{
-        return value && typeof value === 'object' && value.constructor === Object;
+    isObject: (value) => {
+        return (
+            value && typeof value === 'object' && value.constructor === Object
+        )
     },
-    isNullish:(data) => {
-        return data === null || data === undefined;
-    }
+    isNullish: (data) => {
+        return data === null || data === undefined
+    },
+    buildTree: (list, parentId = null, level = 1, keyParent, keyValue) => {
+        return list
+            .filter((item) => item[keyParent] === parentId)
+            .map((item) => ({
+                ...item,
+                level,
+                child: module.exports.buildTree(
+                    list,
+                    item[keyValue],
+                    level + 1,
+                    keyParent,
+                    keyValue
+                ),
+            }))
+    },
+    printTree: (
+        node,
+        nameChild,
+        valueKey,
+        labelKey,
+        level = 0,
+        activeId = null,
+        tag = 'option',
+        activeAttribute = 'selected',
+        stringPrefix = [
+            '🔴',
+            '🟠',
+            '🟡',
+            '🟢',
+            '🔵',
+            '🟣',
+            '💛',
+            '🧡',
+            '🩷',
+            '❤️',
+            '💚',
+            '💙',
+            '🩵',
+            '💜',
+            '🤎',
+            '🖤',
+            '🩶',
+            '🤍',
+        ]
+    ) => {
+        const prefix = stringPrefix[level].repeat(level)
+
+        // Sử dụng map để duyệt qua mảng con của mỗi nút
+        const arrayChild = Array.isArray(node) ? node : node[nameChild]
+        const childrenHTML =
+            arrayChild && arrayChild.length > 0
+                ? arrayChild
+                      .map((child) =>
+                          module.exports.printTree(
+                              child,
+                              nameChild,
+                              valueKey,
+                              labelKey,
+                              level + 1,
+                              activeId,
+                              tag,
+                              activeAttribute,
+                              stringPrefix
+                          )
+                      )
+                      .join('')
+                : ''
+        // Tạo thẻ HTML với tùy chọn được chọn (nếu cần)
+        const selected =
+            activeId && node[valueKey] === activeId ? ` ${activeAttribute}` : ''
+        let nodeHTML = ''
+        if (!Array.isArray(node)) {
+            nodeHTML = `<${tag} value="${node[valueKey]}"${selected}>${prefix} ${node[labelKey]}</${tag}>`
+        }
+        // Trả về kết quả là nodeHTML kết hợp với childrenHTML
+        return nodeHTML + childrenHTML
+    },
 }

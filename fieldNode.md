@@ -156,3 +156,44 @@ Các thuộc tính và lưu ý đặt biệt:
 1. chỉ cần thêm ...choosePermission()
 
 - Lưu ý: không xóa các trường trong bảng mặc định
+
+#### Siêu phức tạp
+
+```javascript
+{
+    name: 'manager_module_id',
+    label: 'Module cha',
+    type: 'selectParentAssoc',
+    keyValue: 'id',
+    keyLabel: 'name',
+    keyChild: 'child',
+    ...selectParentAssoc(
+        'ManagerModule',
+        'id',
+        'name',
+        'manager_module_id',
+        [
+            {
+                model: 'Module',
+                field: 'manager_module_id',
+            },
+            {
+                model: 'ManagerModule',
+                field: 'manager_module_id',
+            },
+        ]
+    ),
+    show: true,
+    showForm: true,
+    positionSidebar: false,
+},
+```
+
+- Các thuộc tính và lưu ý đặt biệt:
+
+- Thêm ```javascript...selectParentAssoc``` thuộc tính này bao gồm
+
+1. Tên model lấy dữ liệu
+2. field chính của bảng liên kết tới
+3. field hiển thị ở ngoài
+4. Một mảng để kiểm tra những bảng liên quan khác sẽ có tên ```model``` và ```tên trường``` map với bảng hiện tại thường là kiểm tra với id của bảng hiện tại.

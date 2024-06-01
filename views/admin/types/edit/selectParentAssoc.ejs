@@ -1,0 +1,7 @@
+<div class="form-group mb-3">
+	<label class="d-block mb-1"><%= field.label %></label>
+	<select name="<%= field.name %>" class="form-control">
+		<option value="">-- Chọn <%= field.label %> --</option>
+		<%- field.data.printTree(field.data.tree, field.keyChild, field.keyValue, field.keyLabel, 0, data[field.name]) %>
+	</select>
+</div>

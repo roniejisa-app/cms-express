@@ -90,7 +90,7 @@ app.use(
     helmet({
         contentSecurityPolicy: {
             directives: {
-                'img-src': ["'self'", 'https://cdn.jsdelivr.net'],
+                'img-src': ["'self'", 'https://cdn.jsdelivr.net','https://picsum.photos','https://fastly.picsum.photos','blob:'],
             },
         },
     })
