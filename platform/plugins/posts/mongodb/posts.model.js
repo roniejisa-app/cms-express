@@ -34,7 +34,7 @@ class Post {
             {
                 name: 'content',
                 label: 'Nội dung',
-                type: 'text',
+                type: 'editor',
                 show: true,
                 showForm: true,
                 filterDefault: true,

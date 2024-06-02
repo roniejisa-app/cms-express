@@ -80,7 +80,7 @@
         border-radius: 6px;
         color: white;
     }
-    .form-group {
+    .form-group:not(.image) {
         position: relative;
         .form-select,
         .form-control {

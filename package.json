@@ -26,8 +26,8 @@
         "@constants": "constants"
     },
     "scripts": {
-        "start": "nodemon ./bin/www",
-        "start-dev": "node ./bin/www",
+        "dev": "nodemon ./bin/www",
+        "dev-fe": "node ./bin/www",
         "build": "node vite-build.js"
     },
     "dependencies": {
