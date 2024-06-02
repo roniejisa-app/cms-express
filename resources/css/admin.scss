@@ -19,6 +19,10 @@ body {
     vertical-align: middle;
 }
 
+input[type='checkbox'] {
+    accent-color: var(--color-main);
+}
+
 ul li button,
 ul li a {
     transition: 300ms ease-in-out;
@@ -31,6 +35,7 @@ ul li a {
         }
     }
 }
+
 // ALL
 main {
     padding: var(--padding-main);
@@ -76,14 +81,14 @@ main {
 // BUTTON TOGGLE SMALL MENU
 .toggle-sidebar {
     position: absolute;
-    bottom: 0;
+    top: 50%;
     transform: translate(50%, -50%);
     right: 0;
     cursor: pointer;
     padding: 5px;
     border-radius: 50%;
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     background-color: var(--color-main);
     display: flex;
     justify-content: center;
@@ -128,7 +133,7 @@ main {
             li {
                 &:has(.active) {
                     .collapse-menu {
-                        background: var(--color-main-20);
+                        @include backgroundGradient();
                     }
                 }
                 position: relative;
@@ -143,7 +148,7 @@ main {
                         font-weight: 600;
                     }
                     &.active {
-                        background-color: var(--color-main-20) !important;
+                        @include backgroundGradient();
                         span {
                             color: var(--color-main) !important;
                         }
@@ -151,15 +156,16 @@ main {
                 }
                 ul {
                     position: relative;
-                    margin-left: 28px;
+                    margin-left: 24px;
                     &:after {
                         content: '';
                         position: absolute;
                         left: 0;
                         top: 0;
                         width: 1px;
-                        height: 100%;
-                        background-color: var(--color-main-60);
+                        height: calc(100% - 10px);
+                        @include backgroundGradient();
+                        animation: background-loading 1.5s linear infinite;
                     }
 
                     li {
@@ -193,7 +199,7 @@ main {
                             border: 1px solid var(--color-main-60);
                         }
                         &:has(.active) {
-                            background: var(--color-main-20);
+                            @include backgroundGradient();
                             &::after {
                                 background: var(--color-main);
                             }
@@ -443,7 +449,7 @@ footer {
             &:has(input:checked) {
                 border-color: var(--color-main);
                 box-shadow: 0 0 3px 5px var(--color-main-50);
-                background-color: var(--color-main-90);
+                @include backgroundGradient();
                 &::before {
                     border-color: white;
                 }
@@ -512,6 +518,17 @@ footer {
 .image-table {
     img {
         object-fit: scale-down;
+    }
+}
+
+.table-view-icon {
+    width: 32px;
+    height: 32px;
+    display: block;
+    svg,
+    img {
+        width: 100%;
+        height: 100%;
     }
 }
 
@@ -723,6 +740,13 @@ footer {
     }
 }
 
+[role='button'] {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
 // SCROLLBAR
 ::-webkit-scrollbar {
     width: 8px;
@@ -771,8 +795,8 @@ body.menu-small {
                     div,
                     a {
                         padding: 8px;
-                        &.active{
-                            background: var(--color-main-20);
+                        &.active {
+                            @include backgroundGradient();
                         }
                     }
                 }
@@ -791,7 +815,7 @@ body.menu-small {
                     direction: initial;
                     --width-ul: 240px;
                     position: fixed;
-                    transform: translate(100%, -48px);
+                    transform: translate(100%, -40px);
                     z-index: 99;
                     min-width: var(--width-ul);
                     background: var(--color-box);
@@ -813,7 +837,7 @@ body.menu-small {
                         div,
                         a {
                             margin-left: 20px;
-                            padding: 4px 12px;
+                            padding: 8px 12px;
                             justify-content: stretch;
                             .link-text {
                                 display: block;
@@ -835,17 +859,5 @@ body.menu-small {
 
     .toggle-sidebar {
         transform: scaleX(-1) translate(-50%, -50%);
-    }
-}
-
-@keyframes background-loading {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
     }
 }

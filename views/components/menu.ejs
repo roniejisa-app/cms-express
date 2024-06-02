@@ -1,0 +1,42 @@
+<ul>
+    <li tooltip="Tổng quan" tooltip-type="right">
+        <a class="link <%= typeof module === 'undefined' ? 'active' : '' %>" href="/admin">
+            <span class="link-icon"><%- include('../icons/dashboard') %></span>
+            <span class="link-text">Tổng quan</span>
+        </a>
+    </li>
+    <% if(typeof req.menuList){%>
+        <% req.menuList.forEach(menu => { %>
+        <% if(menu.childs && menu.childs.length){ %>
+            <li>
+                <div class="collapse-menu">
+                    <span class="collapse-svg">
+                        <%- menu.icon %>
+                    </span>
+                    <span class="collapse-text"><%= menu.name %></span>
+                    <i>
+                        <%- include('../icons/down') %>
+                    </i>
+                </div>
+                <ul>
+                    <% menu.childs.forEach(child => { %>
+                    <li>
+                        <a href="/admin/<%= child.name  %>" class="link <%= typeof module === "string" && module === child.name ? 'active' : '' %>">
+                            <span class="link-icon"><%- child.icon %></span>
+                            <span class="link-text"><%= child.name_show %></span>
+                        </a>
+                    </li>
+                    <% }) %>
+                </ul>
+            </li>
+        <% } else if(!menu.childs){ %>
+            <li tooltip="<%= menu.name_show %>" tooltip-type="right">
+                <a class="link <%= typeof module === "string" && module === menu.name ? 'active' : '' %>" href="/admin/<%= menu.name  %>">
+                    <span class="link-icon"><%- menu.icon %></span>
+                    <span class="link-text"><%= menu.name_show %></span>
+                </a>
+            </li>
+        <% } %>
+        <% }) %>
+    <% } %>
+</ul>

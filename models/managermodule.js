@@ -34,10 +34,11 @@ module.exports = (sequelize, DataTypes) => {
                 {
                     name: 'icon',
                     label: 'Icon',
-                    type: 'image',
+                    type: 'icon',
                     show: true,
                     showForm: true,
-                    positionSidebar: true,
+                    positionSidebar: false,
+                    order:999
                 },
                 {
                     name: 'name',

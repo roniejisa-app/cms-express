@@ -11,7 +11,7 @@
     <tbody>
       <% field.data.forEach(module => { %>
       <tr>
-        <td>Quản lý <%= module[field.labelKey] %></td>
+        <td><%= module[field.labelKey] %></td>
         <td>
           <div class="grid gap-2">
             <% module[field.asModelAssoc].forEach(permission => { %>

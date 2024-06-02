@@ -2,7 +2,7 @@
   <label class="d-block mb-1"><%= field.label %></label>
   <select name="<%= field.name %>" class="form-control">
     <% field.options.forEach(option => { %>
-    <option value="<%= option.value %>" <% if(+req.old[field.name] === option.value) { %>selected<% } %>>
+    <option value="<%= option.value %>" <% if(data[field.name] === option.value) { %>selected<% } %>>
       <%= option.name %>
     </option>
     <% }) %>

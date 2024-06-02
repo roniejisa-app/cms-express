@@ -16,6 +16,7 @@ async function dataModule(req, isIndex = true, isForm = false) {
     const { model, name, name_show, type } = req.menus.find(
         (itemModule) => itemModule.name === module
     )
+    console.log(type);
     return functions[type.toUpperCase()](
         model,
         name,

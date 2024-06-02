@@ -15,6 +15,44 @@
     }
 }
 
-@mixin shadow(){
-    box-shadow: 0 1px 2px #00000008,0 1px 6px -1px #00000005,0 2px 4px #00000005;
+@mixin shadow() {
+    box-shadow: 0 1px 2px #00000008, 0 1px 6px -1px #00000005,
+        0 2px 4px #00000005;
+}
+
+@mixin backgroundGradient($type: 'light', $time: 6s) {
+    @if $type == 'light' {
+        background: linear-gradient(
+            45deg,
+            var(--color-main-10),
+            var(--color-main-20),
+            var(--color-main-light),
+            var(--color-main-20),
+            var(--color-main-10)
+        );
+    }
+    @if $type == 'bold' {
+        background: linear-gradient(
+            45deg,
+            var(--color-main-80),
+            var(--color-main-90),
+            var(--color-main),
+            var(--color-main-90),
+            var(--color-main-80)
+        );
+    }
+    background-size: 200% 100%;
+    animation: background-loading $time linear infinite;
+}
+
+@keyframes background-loading {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }

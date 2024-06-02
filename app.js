@@ -97,7 +97,9 @@ app.use(
                     'https://fastly.picsum.photos',
                     'blob:',
                     'https://www.svgrepo.com',
+                    'data:',
                 ],
+                'script-src': ["'self'", 'https://cdn.jsdelivr.net','https://cdn.tailwindcss.com/'],
             },
         },
     })

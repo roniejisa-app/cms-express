@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
                     name: 'name',
                     label: 'Tên bảng',
                     type: 'text',
-                    show: true,
+                    show: false,
                     showForm: true,
                     positionSidebar: false,
                 },
@@ -41,6 +41,7 @@ module.exports = (sequelize, DataTypes) => {
                     show: true,
                     showForm: true,
                     positionSidebar: false,
+                    order:1
                 },
                 {
                     name: 'order',
@@ -153,6 +154,16 @@ module.exports = (sequelize, DataTypes) => {
                     show: true,
                     showForm: true,
                     positionSidebar: true,
+                    order:3,
+                },
+                {
+                    name: 'icon',
+                    label: 'Icon',
+                    type: 'icon',
+                    show: true,
+                    showForm: true,
+                    positionSidebar: false,
+                    order: 1,
                 },
             ]
         }

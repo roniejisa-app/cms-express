@@ -76,3 +76,11 @@
         background-color: $colorPrimary;
     }
 }
+
+.grid{
+    display: grid;
+}
+
+.gap-2{
+    grid-gap: 8px;
+}

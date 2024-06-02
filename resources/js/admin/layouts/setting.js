@@ -4,6 +4,7 @@ import MENU from './menu.js'
 import notify from './../../utils/notify.js'
 import LOADING from './loading.js'
 import request from './../../utils/request.js'
+import TOOLTIP from './tooltip.js'
 const SETTING = (() => {
     function init() {
         const formUpdateSetting = document.querySelector('.setting-form')
@@ -96,5 +97,6 @@ window.addEventListener('DOMContentLoaded', function () {
     MENU.init()
     MODAL.init()
     TAB.init()
+    TOOLTIP.init()
 })
 export default SETTING
