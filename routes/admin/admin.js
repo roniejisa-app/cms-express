@@ -71,8 +71,7 @@ router.use(async (req, res, next) => {
         true
     )
 
-    req.menuList = Object.values(req.menuList).reverse()
-    console.log(req.menuList);
+    req.menuList = Object.values(req.menuList)
     req.user = await User.findOne({
         where: {
             email: 'roniejisa@gmail.com',

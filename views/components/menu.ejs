@@ -9,13 +9,14 @@
         <% req.menuList.forEach(menu => { %>
         <% if(menu.childs && menu.childs.length){ %>
             <li>
-                <div class="collapse-menu">
+                <% const isActive = menu.childs.some(({name}) => typeof module === 'string' && module === name ) %>
+                <div class="collapse-menu <%= isActive ? '' : 'hidden' %> ">
                     <span class="collapse-svg">
                         <%- menu.icon %>
                     </span>
                     <span class="collapse-text"><%= menu.name %></span>
                     <i>
-                        <%- include('../icons/down') %>
+                        <%- include('../icons/down', { isActive }) %>
                     </i>
                 </div>
                 <ul>

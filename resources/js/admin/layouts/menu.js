@@ -20,6 +20,59 @@ const MENU = (() => {
             ul.addEventListener('mouseleave', handleMouseLeave)
         }
         collapse.addEventListener('mousemove', handleCollapseMouseMove)
+
+        const handleToggleMenuChild = function () {
+            const height = this.getBoundingClientRect().height
+            const listElement = this.nextElementSibling
+            const svg = this.querySelector('i svg')
+            const totalMaxHeight = listElement.children.length * height
+            if (this.classList.contains('hidden')) {
+                svg.style.transform = 'scaleY(-1)'
+                listElement
+                    .animate(
+                        [
+                            {
+                                maxHeight: 0,
+                            },
+                            {
+                                maxHeight: totalMaxHeight + 'px',
+                            },
+                        ],
+                        {
+                            duration: 300,
+                            fill: 'forwards',
+                        }
+                    )
+                    .finished.then((res) => {
+                        this.classList.remove('hidden')
+                        listElement.style.maxHeight = totalMaxHeight + 'px'
+                    })
+            } else {
+                listElement.style.overflow = 'hidden';
+                svg.style.transform = null
+                listElement
+                    .animate(
+                        [
+                            {
+                                maxHeight: totalMaxHeight + 'px',
+                            },
+                            {
+                                maxHeight: 0,
+                            },
+                        ],
+                        {
+                            duration: 300,
+                            fill: 'forwards',
+                        }
+                    )
+                    .finished.then((res) => {
+                        this.classList.add('hidden')
+                        listElement.style.overflow = null;
+                        listElement.style.maxHeight = null;
+                    })
+            }
+        }
+        collapse.addEventListener('click', handleToggleMenuChild)
     }
 
     document.addEventListener('mousemove', (e) => {
@@ -34,6 +87,9 @@ const MENU = (() => {
             ul.classList.remove('show')
         }
     })
+
+    // ul li
+
     return {
         init: () => {
             toggleBtn.onclick = () => {

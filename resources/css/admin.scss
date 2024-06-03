@@ -156,11 +156,11 @@ main {
                 }
                 ul {
                     position: relative;
-                    margin-left: 24px;
+                    padding-left: 24px;
                     &:after {
                         content: '';
                         position: absolute;
-                        left: 0;
+                        left: 24px;
                         top: 0;
                         width: 1px;
                         height: calc(100% - 10px);
@@ -177,9 +177,9 @@ main {
                             left: 0;
                             top: 50%;
                             transform: translateY(-50%) translateX(-50%);
-                            width: 14px;
+                            width: 8px;
                             border-radius: 50%;
-                            height: 14px;
+                            height: 8px;
                             z-index: 1;
                             background: var(--color-box);
                             border: 1px solid var(--color-main-60);
@@ -191,17 +191,20 @@ main {
                             left: 0;
                             top: 50%;
                             transform: translateY(-50%) translateX(-50%);
-                            width: 6px;
+                            width: 4px;
                             border-radius: 50%;
-                            height: 6px;
+                            height: 4px;
                             z-index: 1;
-                            background: var(--color-box);
+                            @include backgroundGradient();
                             border: 1px solid var(--color-main-60);
                         }
                         &:has(.active) {
-                            @include backgroundGradient();
-                            &::after {
+                            &::before {
                                 background: var(--color-main);
+                            }
+                            &::after {
+                                background: var(--color-box);
+                                box-shadow: 0 0 0 0.2rem var(--color-main-70);
                             }
                         }
                     }
@@ -225,6 +228,13 @@ main {
     padding: 8px 8px 8px 16px;
     position: relative;
     cursor: pointer;
+    &.hidden {
+        + ul {
+            transition: max-height 0.5s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+    }
     .collapse-svg {
         svg {
             width: var(--svg-icon-menu);
@@ -238,6 +248,7 @@ main {
         padding: 5px;
         cursor: pointer;
         svg {
+            transition: 300ms ease-in-out;
             width: 14px;
             height: 14px;
         }
@@ -805,6 +816,12 @@ body.menu-small {
             .collapse-menu {
                 justify-content: center;
                 padding: 8px;
+                &.hidden {
+                    + ul {
+                        max-height: initial;
+                        overflow: initial;
+                    }
+                }
                 i {
                     display: none;
                 }
