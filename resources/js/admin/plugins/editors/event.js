@@ -1,65 +1,47 @@
 import MEDIA from '../../media'
 export const eventClick = {
-    onclick: (e, value, element, ...params) => {
-        e.stopPropagation()
-        if (element.classList.contains('active')) {
-            element.classList.remove('active')
-        } else {
+    onclick: ({ event, value, element, ...params }) => {
+        event.stopPropagation()
+        if (!element.classList.contains('active')) {
             element.classList.add('active')
+        } else {
+            element.classList.remove('active')
         }
-        backRange(...params)
+        backRange(params)
         document.execCommand(value, false, null)
     },
 }
 export const eventClickNoActive = {
-    onclick: (e, value, element, ...params) => {
-        e.stopPropagation()
-        backRange(...params)
+    onclick: ({ event, value, ...params }) => {
+        event.stopPropagation()
+        backRange(params)
         document.execCommand(value, false, null)
     },
 }
 
-export const eventChangeFontSize = {
-    onchange: (e, value, element, ...params) => {
-        backRange(...params)
-        document.execCommand('fontSize', false, e.target.value)
-    },
-}
-
-export const eventChangeHiliteColor = {
-    onchange: (e, value, element, ...params) => {
-        console.log(value)
-        backRange(...params)
-        document.execCommand('hiliteColor', false, e.target.value)
-    },
-}
-
-export const eventChangeHeading = {
-    onchange: (e, value, element, ...params) => {
-        backRange(...params)
-        document.execCommand('heading', false, value)
-    },
-}
-
-export const eventChangeFontStyle = {
-    onchange: (e, value, element, ...params) => {
-        backRange(...params)
-        document.execCommand('foreColor', false, e.target.value)
+export const eventChangeForValue = {
+    onchange: ({ value, cmd, ...params }) => {
+        backRange(params)
+        document.execCommand(cmd, false, value)
+        // hiliteColor
+        // fontSize
+        // heading
+        // foreColor
     },
 }
 
 export const eventCustomImage = {
-    onclick: (e, element, shadow, range) => {
-        const source = e.target.dataset.source
-        const content = shadow.querySelector('.content')
+    onclick: ({event, shadowRoot, range}) => {
+        const source = event.target.dataset.source
+        const content = shadowRoot.querySelector('.content')
         switch (source) {
             case 'cms':
                 let uniqueId =
                     Date.now().toString(36) +
                     Math.random().toString(36).substring(2)
                 content.dataset.id = uniqueId
-                content.dataset.type = e.target.dataset.type
-                MEDIA.loadFrame(e, content, e.target)
+                content.dataset.type = event.target.dataset.type
+                MEDIA.loadFrame(event, content, event.target)
                 break
             case 'upload':
                 const input = document.createElement('input')
@@ -78,7 +60,7 @@ export const eventCustomImage = {
                         } else {
                             content.append(img)
                         }
-                        dispatchData(shadow)
+                        dispatchData(shadowRoot)
                     }
                 }
                 break
@@ -92,14 +74,14 @@ export const eventCustomImage = {
                     } else {
                         content.append(img)
                     }
-                    dispatchData(shadow)
+                    dispatchData(shadowRoot)
                 }
                 break
         }
     },
 }
 export const eventCustomLink = {
-    onclick: (e, element, shadow, range, data) => {
+    onclick: ({element, shadowRoot, range, cmsEditor, ...params}) => {
         // Kiểm tra active thì lấy ra thẻ a
         let anchor = null
         let title = range ? range : ''
@@ -107,7 +89,7 @@ export const eventCustomLink = {
         let target = ''
         let rel = ''
         if (element.classList.contains('active')) {
-            anchor = data.listElements.find((el) => el.localName === 'a')
+            anchor = cmsEditor.listElements.find((el) => el.localName === 'a')
             if (anchor) {
                 title = anchor.innerHTML || ''
                 url = anchor.getAttribute('href') || ''
@@ -117,64 +99,19 @@ export const eventCustomLink = {
             }
         }
 
-        const content = shadow.querySelector('.content')
-        backRange(shadow, range)
+        const content = shadowRoot.querySelector('.content')
+        backRange({shadowRoot, range, ...params})
         const form = document.createElement('form')
-        form.innerHTML = `<div class="form-group">
-            <label>Tiêu đề</label>
-            <textarea type="text" name="name">${title}</textarea>
-        </div>    
-        <div class="form-group">
-            <label>Đường dẫn</label>
-            <input type="text" name="url" placeholder="Đường dẫn..." value="${url}">
-        </div>
-        <div class="form-group">
-            <label>Target</label>
-            <select name="target">
-                <option value="">Tab hiện tại</option>
-                <option value="_blank" ${
-                    target === '_blank' ? 'selected' : ''
-                }>Tab mới</option>
-                <option value="_parent" ${
-                    target === '_parent' ? 'selected' : ''
-                }>Tab mở tab hiện tại</option>
-                <option value="_top" ${
-                    target === '_top' ? 'selected' : ''
-                }>Tab hiện tại và thường dùng trong iframe</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Rel</label>
-            <select name="rel">
-                <option value="">Không</option>
-                <option value="noopener" ${
-                    rel === 'noopener' ? 'selected' : ''
-                }>noopener</option>
-                <option value="noreferrer" ${
-                    rel === 'noreferrer' ? 'selected' : ''
-                }>noreferrer</option>
-                <option value="noopener noreferrer" ${
-                    rel === 'noopener noreferrer' ? 'selected' : ''
-                }>noopener noreferrer</option>
-                <option value="noopener nofollow" ${
-                    rel === 'noopener nofollow' ? 'selected' : ''
-                }>noopener nofollow</option>
-                <option value="nofollow" ${
-                    rel === 'nofollow' ? 'selected' : ''
-                }>nofollow</option>
-            </select>
-        </div>
-        <button>Lưu</button>`
-        const modal = createModal(shadow, form)
+        form.innerHTML = addFormModal(title, url, target, rel)
+        const modal = createModal(shadowRoot, form)
 
         form.addEventListener('submit', (e) => {
             e.preventDefault()
-            const form = Object.fromEntries([...new FormData(e.target)]);
+            const form = Object.fromEntries([...new FormData(e.target)])
             const name = form.name
             const url = form.url
             const target = form.target
             const rel = form.rel
-            console.log(form);
             if (anchor) {
                 anchor.innerHTML = name
                 anchor.href = url
@@ -198,16 +135,64 @@ export const eventCustomLink = {
     },
 }
 
-function createModal(shadow, html) {
+function addFormModal(title, url, target, rel) {
+    return `<div class="form-group">
+    <label>Tiêu đề</label>
+    <textarea type="text" name="name">${title}</textarea>
+</div>    
+<div class="form-group">
+    <label>Đường dẫn</label>
+    <input type="text" name="url" placeholder="Đường dẫn..." value="${url}">
+</div>
+<div class="form-group">
+    <label>Target</label>
+    <select name="target">
+        <option value="">Tab hiện tại</option>
+        <option value="_blank" ${
+            target === '_blank' ? 'selected' : ''
+        }>Tab mới</option>
+        <option value="_parent" ${
+            target === '_parent' ? 'selected' : ''
+        }>Tab mở tab hiện tại</option>
+        <option value="_top" ${
+            target === '_top' ? 'selected' : ''
+        }>Tab hiện tại và thường dùng trong iframe</option>
+    </select>
+</div>
+<div class="form-group">
+    <label>Rel</label>
+    <select name="rel">
+        <option value="">Không</option>
+        <option value="noopener" ${
+            rel === 'noopener' ? 'selected' : ''
+        }>noopener</option>
+        <option value="noreferrer" ${
+            rel === 'noreferrer' ? 'selected' : ''
+        }>noreferrer</option>
+        <option value="noopener noreferrer" ${
+            rel === 'noopener noreferrer' ? 'selected' : ''
+        }>noopener noreferrer</option>
+        <option value="noopener nofollow" ${
+            rel === 'noopener nofollow' ? 'selected' : ''
+        }>noopener nofollow</option>
+        <option value="nofollow" ${
+            rel === 'nofollow' ? 'selected' : ''
+        }>nofollow</option>
+    </select>
+</div>
+<button>Lưu</button>`
+}
+
+function createModal(shadowRoot, html) {
     const modal = document.createElement('div')
-    shadow.append(modal)
+    shadowRoot.append(modal)
     modal.className = 'modal'
     modal.insertAdjacentHTML(
         'beforeend',
         `<div class="modal-dialog">
             <div class="modal-header">
                 <h3>Thêm liên kết</h3>
-                <div class="close" onclick="this.parentElement.parentElement.remove()">&times;</div>
+                <div class="close">&times;</div>
             </div>
             <div class="modal-body">
                 
@@ -215,20 +200,31 @@ function createModal(shadow, html) {
         </div>`
     )
     const modalBody = modal.querySelector('.modal-body')
+    const close = modal.querySelector('.close')
+    close.addEventListener('click', () => {
+        modal.remove()
+    })
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.remove()
+        }
+    })
     modalBody.append(html)
     return modal
 }
-export const backRange = (shadow, range) => {
+export const backRange = ({ shadowRoot, selectionType, range }) => {
     if (range) {
-        const selection = shadow.getSelection()
-        selection.removeAllRanges()
+        const selection = shadowRoot.getSelection()
+        if(selectionType === 'Caret') {
+            selection.removeAllRanges()
+        }
         selection.addRange(range)
     }
-    dispatchData(shadow)
+    dispatchData(shadowRoot)
 }
 
-export const dispatchData = (shadow) => {
-    const content = shadow.querySelector('.content')
+export const dispatchData = (shadowRoot) => {
+    const content = shadowRoot.querySelector('.content')
     const nameInsertValue = content.dataset.name
     const el = document.querySelector(`[name="${nameInsertValue}"]`)
     el.innerHTML = content.innerHTML

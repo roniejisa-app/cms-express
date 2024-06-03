@@ -54,12 +54,13 @@ ol, ul {
     border: 1px solid #ffffff; 
     transition: border-color 300ms ease, background-color 300ms ease;
 }
-.toolbar button:hover,
+
+.createLink.active,
 .toolbar button.active{
     border-color: var(--color-main);
 }
 
-.toolbar button:hover,
+.createLink.active svg,
 .toolbar button.active svg{
     fill: var(--color-main);
 }
@@ -88,6 +89,7 @@ input[type="color"]{
 input[type="color" i]::-webkit-color-swatch {
     border-radius: 50%;
 }
+.createLink,
 .insertImage{
     position: relative;
     cursor: pointer;
@@ -95,12 +97,15 @@ input[type="color" i]::-webkit-color-swatch {
     padding: 3px 5px;
     display: flex;
     align-items: center;
+    border : 1px solid transparent;
 }
+
 .createLink svg,
 .insertImage svg{
     width: 20px;
     height: 20px;
 }
+
 .insertImage ul{
     position: absolute;
     list-style: none;
@@ -163,19 +168,63 @@ input[type="color" i]::-webkit-color-swatch {
     max-width: 400px;
     width: 100%;
 }
+.modal .modal-dialog .modal-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
 
-.modal form .from-group{
+.modal .modal-dialog .modal-header .close{
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background: var(--color-main);
+    color: var(--color-box);
+    border: 1px solid var(--color-main);
+    transition: background 300ms ease, color 300ms ease;
+}
+
+.modal .modal-dialog .modal-header .close:hover{
+    background: var(--color-box);
+    color: var(--color-main);
+}
+
+.modal form .form-group{
     display: flex;
     flex-direction: column;
     gap: 5px;
     margin-bottom: 10px;
 }
 
+.modal form .form-group textarea,
 .modal form .form-group input,
 .modal form .form-group select{
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 6px;
+    padding: 8px 12px;
+}
+
+.modal form button{
+    margin-top: 10px;
+    width: 100%;
+    border: 1px solid var(--color-main);
+    border-radius: 6px;
     padding: 3px 5px;
+    background: var(--color-main);
+    color: var(--color-box);
+    cursor: pointer;
+    transition: background 300ms ease, color 300ms ease;
+}
+
+.modal form button:hover{
+    background: var(--color-box);
+    color: var(--color-main);
 }
 `

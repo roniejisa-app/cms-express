@@ -3,6 +3,9 @@
         "contenteditable",
         "fullname",
         "Hilite",
+        "nofollow",
+        "noopener",
+        "noreferrer",
         "NOSQL",
         "roniejisa"
     ]

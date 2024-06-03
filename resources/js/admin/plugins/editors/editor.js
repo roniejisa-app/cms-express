@@ -1,45 +1,29 @@
+import {
+    CONTAINER_CLASS,
+    CUSTOM_EVENT_CONTENT_FILE,
+    ERROR_INIT,
+    PREFIX_BG_COLOR_CHECK,
+    PREFIX_COLOR_CHECK,
+} from './constants'
 import { backRange, dispatchData } from './event'
+import { rgbToHex } from './helper'
 import { style } from './style'
 import { toolbars } from './toolbar'
-function rgbToHex(rgb) {
-    var rgbRegex =
-        /^rgb\(\s*(-?\d+)(%?)\s*,\s*(-?\d+)(%?)\s*,\s*(-?\d+)(%?)\s*\)$/
-    var result,
-        r,
-        g,
-        b,
-        hex = ''
-    if ((result = rgbRegex.exec(rgb))) {
-        r = componentFromStr(result[1], result[2])
-        g = componentFromStr(result[3], result[4])
-        b = componentFromStr(result[5], result[6])
 
-        hex = '#' + (0x1000000 + (r << 16) + (g << 8) + b).toString(16).slice(1)
-    }
-    return hex
-}
-
-function componentFromStr(numStr, percent) {
-    var num = Math.max(0, parseInt(numStr, 10))
-    return percent
-        ? Math.floor((255 * Math.min(100, num)) / 100)
-        : Math.min(255, num)
-}
 class EDITOR extends HTMLElement {
     constructor(callback) {
         super()
         // Báo ngay khi thiếu attribute
         if (!this.dataset.name) {
-            console.error(
-                'Vui lòng thêm thuộc tính data-name riêng biệt vào thẻ cms-editor 🤣'
-            )
+            console.error(ERROR_INIT)
             return false
         }
-        this.arrayUsed = [];
-        this.listElements = null;
+        this.arrayUsed = []
+        this.listElements = null
         this.toolbars = {}
         this.init()
         this.savedRange
+        this.selectionType
         if (typeof callback === 'function') {
             callback(this)
         }
@@ -52,86 +36,90 @@ class EDITOR extends HTMLElement {
         this.divContent = this.initContent()
         // Tạo một bảng thêm tất cả các toolbar vào khi click kiểm tra thuộc mảng thì active lên
         const container = document.createElement('div')
-        container.className = 'container'
+        container.className = CONTAINER_CLASS
         container.append(this.divToolbar, this.divContent)
         this.shadowRoot.append(container)
         this.addEventCatchAll()
         this.addEventSaveRanger()
         this.addEventCustomToolbar()
     }
+
     addEventCustomToolbar = () => {
-        window.addEventListener('content-file', (e) => {
+        window.addEventListener(CUSTOM_EVENT_CONTENT_FILE, (e) => {
             const divContent = this.shadowRoot.querySelector('.content')
-            if (
-                divContent.dataset.id !== e.detail.uuid ||
-                divContent.dataset.type !== e.detail.type
-            )
-                return false
-            backRange(this.shadowRoot, this.savedRange)
-            divContent.insertAdjacentHTML(
-                'beforeend',
-                e.detail.files
-                    .map(
-                        (file) =>
-                            `<img src="/${
-                                JSON.parse(file).path_absolute
-                            }" alt="image">`
-                    )
-                    .join('')
+            if (divContent.dataset.id !== e.detail.uuid || divContent.dataset.type !== e.detail.type) return false
+            backRange({shadowRoot: this.shadowRoot, range: this.savedRange, selectionType: this.selectionType})
+            divContent.insertAdjacentHTML('beforeend',
+                e.detail.files.map((file) => `<img src="/${JSON.parse(file).path_absolute}" alt="image">`).join('')
             )
             dispatchData(this.shadowRoot)
         })
-    }
-    addEventSaveRanger = () => {
-        this.shadowRoot.addEventListener('keyup', this.saveRange)
-        this.shadowRoot.addEventListener('mouseup', this.saveRange)
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.shadowRoot.querySelector('.modal') && this.shadowRoot.querySelector('.modal').remove()
+            }
+        })
     }
 
-    saveRange = (e) => {
+    addEventSaveRanger = () => {
+        this.shadowRoot.addEventListener('keyup', this.saveRangeFnc)
+        this.shadowRoot.addEventListener('mouseup', this.saveRangeFnc)
+    }
+
+    saveRangeFnc = (e) => {
         // Kiểm tra nếu là toolbar thì không lưu range
-        if (e.target.closest('.toolbar') || e.target.closest('.modal'))
-            return false
+        if (e.target.closest('.toolbar') || e.target.closest('.modal')) return false
         const selection = this.shadowRoot.getSelection()
         if (selection.rangeCount > 0) {
             this.savedRange = selection.getRangeAt(0)
+            this.selectionType = selection.type;
         }
         dispatchData(this.shadowRoot)
     }
 
-    eventClick = (e) => {
+    
+
+    setElementValue(obj, value, type) {
+        if (type === 'color' || type === 'bg-color') {
+            obj.element.value = value
+        } else if (['font-size', 'heading'].includes(type)) {
+            const indexOfSelect = obj.data.findIndex((size) => size === value)
+            if (indexOfSelect != -1) {
+                obj.element.selectedIndex = indexOfSelect
+            }
+        } else {
+            obj.element.classList.add('active')
+        }
+    }
+
+    addEventCatchAll = () => {
+        this.shadowRoot.addEventListener('click', (e) => this.eventDetect(e))
+        this.shadowRoot.addEventListener('keyup', (e) => this.eventDetect(e))
+    }
+
+    eventDetect = (e) => {
         // Cần kiểm tra trước thẻ
-        if (e.target.closest('.toolbar') || e.target.closest('.modal'))
-            return false
-        this.arrayUsed = [];
-        const selection = this.shadowRoot.getSelection
-            ? this.shadowRoot.getSelection()
-            : window.getSelection()
+        if (e.target.closest('.toolbar') || e.target.closest('.modal')) return false
+        this.arrayUsed = []
+        const selection = this.shadowRoot.getSelection ? this.shadowRoot.getSelection() : window.getSelection()
         if (selection.rangeCount > 0) {
             const range = selection.getRangeAt(0)
             const container = range.startContainer
-            let targetElement
-
-            if (container.nodeType === Node.TEXT_NODE) {
-                targetElement = container.parentNode
-            } else {
-                targetElement = container
-            }
+            let targetElement = container.nodeType === Node.TEXT_NODE ? container.parentNode : container
             this.listElements = this.getParentAndActive(targetElement, [])
-            this.listElements.forEach((el) => {
-                this.arrayUsed = [...this.arrayUsed, ...this.detectAndActive(el)]
-            })
-            //console.log(this.toolbars)
-            //console.log(this.arrayUsed)
+            this.arrayUsed = this.listElements.reduce((arr, el) => {
+                return [...arr,...this.detectAndActive(el)];
+            },[])
             /*
                     1. Khớp type là button
                     2. Khớp data thì là select
                     3. Khớp bắt đầu với # thì là input color
-
                     Cần thêm link
 
                 */
             // console.log(this.toolbars)
-            // console.log(this.arrayUsed)
+            console.log(this.arrayUsed)
             for (const [type, obj] of Object.entries(this.toolbars)) {
                 let checkActive = false
                 let value = ''
@@ -146,30 +134,18 @@ class EDITOR extends HTMLElement {
                     }
                 } else if (this.arrayUsed.includes(type)) {
                     checkActive = true
-                } else if (
-                    type === 'color' &&
-                    this.arrayUsed.some((el) => el.startsWith('color||'))
-                ) {
-                    const indexNumber = this.arrayUsed.findIndex((el) =>
-                        el.startsWith('color||')
-                    )
+                } else if (type === 'color') {
+                    const indexNumber = this.arrayUsed.findIndex((el) => el.startsWith(PREFIX_COLOR_CHECK))
                     if (indexNumber !== -1) {
                         checkActive = true
-                        value = this.arrayUsed[indexNumber].replace('color||', '')
+                        value = this.arrayUsed[indexNumber].replace(PREFIX_COLOR_CHECK,'')
                     }
-                } else if (
-                    type === 'bg-color' &&
-                    this.arrayUsed.some((el) => el.startsWith('bg-color||'))
-                ) {
-                    const indexNumber = this.arrayUsed.findIndex((el) =>
-                        el.startsWith('bg-color||')
-                    )
+                } else if (type === 'bg-color') {
+                    const indexNumber = this.arrayUsed.findIndex((el) => el.startsWith(PREFIX_BG_COLOR_CHECK))
                     if (indexNumber !== -1) {
                         checkActive = true
-                        value = this.arrayUsed[indexNumber].replace('bg-color||', '')
-                        value = value.startsWith('rgb')
-                            ? rgbToHex(value)
-                            : value
+                        value = this.arrayUsed[indexNumber].replace(PREFIX_BG_COLOR_CHECK,'')
+                        value = value.startsWith('rgb') ? rgbToHex(value) : value
                     }
                 } else if (['font-size', 'heading'].includes(type)) {
                     const indexNumber = this.arrayUsed.findIndex((el) => !isNaN(+el))
@@ -178,38 +154,29 @@ class EDITOR extends HTMLElement {
                         value = this.arrayUsed[indexNumber]
                     }
                 }
+
+                // Lưu lại dữ liệu
                 if (checkActive) {
-                    if (type === 'color') {
-                        obj.element.value = value
-                    } else if (type === 'bg-color') {
-                        obj.element.value = value
-                    } else if (['font-size', 'heading'].includes(type)) {
-                        const indexOfSelect = obj.data.findIndex(
-                            (size) => size === value
-                        )
-                        if (indexOfSelect != -1) {
-                            obj.element.selectedIndex = indexOfSelect
-                        }
-                    } else {
-                        obj.element.classList.add('active')
-                    }
+                    this.setElementValue(obj, value, type)
                 } else {
-                    if (type === 'color') {
-                        obj.element.value = '#000000'
-                    } else if (type === 'bg-color') {
-                        obj.element.value = '#ffffff'
-                    } else if (['font-size', 'heading'].includes(type)) {
-                        obj.element.selectedIndex = 0
-                    } else {
-                        obj.element.classList.remove('active')
+                    switch (type) {
+                        case 'color':
+                            obj.element.value = '#000000'
+                            break
+                        case 'bg-color':
+                            obj.element.value = '#ffffff'
+                            break
+                        case 'font-size':
+                        case 'heading':
+                            obj.element.selectedIndex = 0;
+                            break;
+                        default:
+                            obj.element.classList.remove('active')
+                            break
                     }
                 }
             }
         }
-    }
-
-    addEventCatchAll = () => {
-        this.shadowRoot.addEventListener('click', (e) => this.eventClick(e))
     }
 
     detectAndActive(el) {
@@ -217,15 +184,15 @@ class EDITOR extends HTMLElement {
         const localName = el.localName
         // Style
         const textAlign = el.style.textAlign
-        const colorStyle = el.style.color ? 'color||' + el.style.color : null
+        const colorStyle = el.style.color ? PREFIX_COLOR_CHECK + el.style.color : null
         const fontWeight = el.style.fontWeight
         const fontStyle = el.style.fontSize
         const backgroundColor = el.style.backgroundColor
-            ? 'bg-color||' + el.style.backgroundColor
+            ? PREFIX_BG_COLOR_CHECK + el.style.backgroundColor
             : null
         //Attribute
         const color = el.getAttribute('color')
-            ? 'color||' + el.getAttribute('color')
+            ? PREFIX_COLOR_CHECK + el.getAttribute('color')
             : null
         const size = el.getAttribute('size')
         return [
@@ -242,7 +209,7 @@ class EDITOR extends HTMLElement {
 
     getParentAndActive(targetElement, arrEl) {
         let currentEl = targetElement
-
+        console.log(currentEl);
         while (currentEl !== null && currentEl.closest('.content')) {
             arrEl.push(currentEl)
             currentEl = currentEl.parentElement
@@ -265,101 +232,49 @@ class EDITOR extends HTMLElement {
             toolbar.className = className + ' toolbar-group'
             switch (data.type) {
                 case 'select':
-                    const select = document.createElement('select')
+                    const selectEl = document.createElement('select')
                     this.toolbars[data.name] = {
-                        element: select,
+                        element: selectEl,
                         data: [],
                     }
                     for (const tool of data.tools) {
                         const option = document.createElement('option')
                         option.value = tool.value
                         option.innerHTML = tool.html
-                        select.append(option)
+                        selectEl.append(option)
                         // Thêm các biên vào đây
                         this.toolbars[data.name].data.push(tool.check)
                     }
-                    for (const [even, func] of Object.entries(data.events)) {
-                        select[even] = (e) =>
-                            func(
-                                e,
-                                select.value,
-                                select,
-                                this.shadowRoot,
-                                this.savedRange
-                            )
-                    }
-                    toolbar.append(select)
+                    this.addEventToolbar(data, selectEl, undefined, true)
+                    toolbar.append(selectEl)
                     break
                 case 'color':
                 case 'bg-color':
-                    const color = document.createElement('input')
-                    color.type = 'color'
-                    for (const [even, func] of Object.entries(data.events)) {
-                        color[even] = (e) => {
-                            func(
-                                e,
-                                color.value,
-                                color,
-                                this.shadowRoot,
-                                this.savedRange
-                            )
-                        }
-                    }
-                    toolbar.append(color)
+                    const colorInput = document.createElement('input')
+                    colorInput.type = 'color'
+                    toolbar.append(colorInput)
+                    this.addEventToolbar(data, colorInput, undefined, true)
                     this.toolbars[data.type] = {
-                        element: color,
+                        element: colorInput,
                     }
                     break
                 case 'insertImage':
-                    const divImage = document.createElement('div')
-                    divImage.className = data.type
-                    divImage.innerHTML = data.html
-                    toolbar.append(divImage)
-                    for (const [even, func] of Object.entries(data.events)) {
-                        divImage[even] = (e) => {
-                            func(e, divImage, this.shadowRoot, this.savedRange)
-                        }
-                    }
+                    const divImage = this.addToolbar(toolbar, data);
+                    this.addEventToolbar(data, divImage);
                     break
                 case 'createLink':
-                    const divLink = document.createElement('div')
-                    divLink.className = data.type
-                    divLink.innerHTML = data.html
-                    toolbar.append(divLink)
-                    for (const [even, func] of Object.entries(data.events)) {
-                        divLink[even] = (e) => {
-                            func(e, divLink, this.shadowRoot, this.savedRange, this)
-                        }
-                    }
-                    data.check &&
-                        (this.toolbars[data.check] = {
-                            element: divLink,
-                        })
+                    const divLink = this.addToolbar(toolbar, data);
+                    this.addEventToolbar(data, divLink);
+                    data.check && (this.toolbars[data.check] = {element: divLink})
                     break
                 default:
                     for (const tool of data.tools) {
                         const button = document.createElement('button')
                         button.innerHTML = tool.html
-
                         button.setAttribute('tooltip', tool.html)
-                        for (const [even, func] of Object.entries(
-                            data.events
-                        )) {
-                            button[even] = (e) => {
-                                func(
-                                    e,
-                                    tool.value,
-                                    button,
-                                    this.shadowRoot,
-                                    this.savedRange
-                                )
-                            }
-                        }
                         toolbar.append(button)
-                        tool.check &&
-                            (this.toolbars[tool.check] = {
-                                element: button,
-                            })
+                        this.addEventToolbar(data, button, tool.value);
+                        tool.check && (this.toolbars[tool.check] = { element: button})
                     }
                     break
             }
@@ -367,6 +282,33 @@ class EDITOR extends HTMLElement {
         }
         return divToolbar
     }
+
+    addToolbar(toolbar, data){
+        const element = document.createElement('div')
+        element.className = data.type
+        element.innerHTML = data.html
+        toolbar.append(element)
+        return element;
+    }
+    addEventToolbar(data, element, value = null, isElementValue = false){
+        for (const [even, func] of Object.entries(data.events)) {
+            element[even] = (e) => {
+                e.stopPropagation()
+                const params = {
+                    event: e,
+                    value: isElementValue ? element.value : value,
+                    cmsEditor: this,
+                    shadowRoot: this.shadowRoot,
+                    range: this.savedRange,
+                    selectionType: this.selectionType,
+                    element,
+                    cmd: data.cmd
+                }
+                func(params)
+            }
+        }
+    }
+
     initContent() {
         const divContent = document.createElement('div')
         divContent.className = 'content'
