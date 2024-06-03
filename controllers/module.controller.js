@@ -122,7 +122,7 @@ module.exports = {
                 body,
             })
         } else {
-            res.redirect(`/admin/${params.module}/edit/${id}`)
+            res.redirect(`/admin/${params.module}/edit/${params.id}`)
         }
     },
     handleDelete: async (req, res) => {

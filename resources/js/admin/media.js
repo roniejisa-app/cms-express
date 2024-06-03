@@ -57,7 +57,6 @@ const MEDIA = (() => {
     }
 
     function removeImage(imageForm) {
-        console.log(imageForm)
         const imgEl = imageForm.querySelector('img')
         imgEl.src = '/images/admin/no-image.svg'
         const textarea = imageForm.querySelector('textarea')
@@ -110,6 +109,8 @@ const MEDIA = (() => {
                 iframeBox.remove()
             })
         },
+
+        loadFrame: showMedia,
     }
 })()
 export default MEDIA

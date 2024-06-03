@@ -1,22 +1,29 @@
-import { dispatchData } from './event'
+import { backRange, dispatchData } from './event'
+import { style } from './style'
 import { toolbars } from './toolbar'
 function rgbToHex(rgb) {
-    var rgbRegex = /^rgb\(\s*(-?\d+)(%?)\s*,\s*(-?\d+)(%?)\s*,\s*(-?\d+)(%?)\s*\)$/;
-    var result, r, g, b, hex = "";
-    if ( (result = rgbRegex.exec(rgb)) ) {
-        r = componentFromStr(result[1], result[2]);
-        g = componentFromStr(result[3], result[4]);
-        b = componentFromStr(result[5], result[6]);
+    var rgbRegex =
+        /^rgb\(\s*(-?\d+)(%?)\s*,\s*(-?\d+)(%?)\s*,\s*(-?\d+)(%?)\s*\)$/
+    var result,
+        r,
+        g,
+        b,
+        hex = ''
+    if ((result = rgbRegex.exec(rgb))) {
+        r = componentFromStr(result[1], result[2])
+        g = componentFromStr(result[3], result[4])
+        b = componentFromStr(result[5], result[6])
 
-        hex = "#" + (0x1000000 + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        hex = '#' + (0x1000000 + (r << 16) + (g << 8) + b).toString(16).slice(1)
     }
-    return hex;
+    return hex
 }
 
 function componentFromStr(numStr, percent) {
-    var num = Math.max(0, parseInt(numStr, 10));
-    return percent ?
-        Math.floor(255 * Math.min(100, num) / 100) : Math.min(255, num);
+    var num = Math.max(0, parseInt(numStr, 10))
+    return percent
+        ? Math.floor((255 * Math.min(100, num)) / 100)
+        : Math.min(255, num)
 }
 class EDITOR extends HTMLElement {
     constructor(callback) {
@@ -28,6 +35,8 @@ class EDITOR extends HTMLElement {
             )
             return false
         }
+        this.arrayUsed = [];
+        this.listElements = null;
         this.toolbars = {}
         this.init()
         this.savedRange
@@ -48,14 +57,40 @@ class EDITOR extends HTMLElement {
         this.shadowRoot.append(container)
         this.addEventCatchAll()
         this.addEventSaveRanger()
+        this.addEventCustomToolbar()
     }
-
+    addEventCustomToolbar = () => {
+        window.addEventListener('content-file', (e) => {
+            const divContent = this.shadowRoot.querySelector('.content')
+            if (
+                divContent.dataset.id !== e.detail.uuid ||
+                divContent.dataset.type !== e.detail.type
+            )
+                return false
+            backRange(this.shadowRoot, this.savedRange)
+            divContent.insertAdjacentHTML(
+                'beforeend',
+                e.detail.files
+                    .map(
+                        (file) =>
+                            `<img src="/${
+                                JSON.parse(file).path_absolute
+                            }" alt="image">`
+                    )
+                    .join('')
+            )
+            dispatchData(this.shadowRoot)
+        })
+    }
     addEventSaveRanger = () => {
         this.shadowRoot.addEventListener('keyup', this.saveRange)
         this.shadowRoot.addEventListener('mouseup', this.saveRange)
     }
 
-    saveRange = () => {
+    saveRange = (e) => {
+        // Kiểm tra nếu là toolbar thì không lưu range
+        if (e.target.closest('.toolbar') || e.target.closest('.modal'))
+            return false
         const selection = this.shadowRoot.getSelection()
         if (selection.rangeCount > 0) {
             this.savedRange = selection.getRangeAt(0)
@@ -63,8 +98,11 @@ class EDITOR extends HTMLElement {
         dispatchData(this.shadowRoot)
     }
 
-    eventClick = () => {
+    eventClick = (e) => {
         // Cần kiểm tra trước thẻ
+        if (e.target.closest('.toolbar') || e.target.closest('.modal'))
+            return false
+        this.arrayUsed = [];
         const selection = this.shadowRoot.getSelection
             ? this.shadowRoot.getSelection()
             : window.getSelection()
@@ -78,13 +116,12 @@ class EDITOR extends HTMLElement {
             } else {
                 targetElement = container
             }
-            const listElements = this.getParentAndActive(targetElement, [])
-            let arrCheck = []
-            listElements.forEach((el) => {
-                arrCheck = [...arrCheck, ...this.detectAndActive(el)]
+            this.listElements = this.getParentAndActive(targetElement, [])
+            this.listElements.forEach((el) => {
+                this.arrayUsed = [...this.arrayUsed, ...this.detectAndActive(el)]
             })
             //console.log(this.toolbars)
-            //console.log(arrCheck)
+            //console.log(this.arrayUsed)
             /*
                     1. Khớp type là button
                     2. Khớp data thì là select
@@ -94,7 +131,7 @@ class EDITOR extends HTMLElement {
 
                 */
             // console.log(this.toolbars)
-            console.log(arrCheck)
+            // console.log(this.arrayUsed)
             for (const [type, obj] of Object.entries(this.toolbars)) {
                 let checkActive = false
                 let value = ''
@@ -102,48 +139,50 @@ class EDITOR extends HTMLElement {
                 if (type.includes('||')) {
                     const types = type.split('||')
                     for (let typeItem of types) {
-                        if (!checkActive && arrCheck.includes(typeItem)) {
+                        if (!checkActive && this.arrayUsed.includes(typeItem)) {
                             checkActive = true
                             break
                         }
                     }
-                } else if (arrCheck.includes(type)) {
+                } else if (this.arrayUsed.includes(type)) {
                     checkActive = true
                 } else if (
                     type === 'color' &&
-                    arrCheck.some((el) => el.startsWith('color||'))
+                    this.arrayUsed.some((el) => el.startsWith('color||'))
                 ) {
-                    const indexNumber = arrCheck.findIndex((el) =>
+                    const indexNumber = this.arrayUsed.findIndex((el) =>
                         el.startsWith('color||')
                     )
                     if (indexNumber !== -1) {
                         checkActive = true
-                        value = arrCheck[indexNumber].replace('color||', '')
+                        value = this.arrayUsed[indexNumber].replace('color||', '')
                     }
                 } else if (
                     type === 'bg-color' &&
-                    arrCheck.some((el) => el.startsWith('bg-color||'))
+                    this.arrayUsed.some((el) => el.startsWith('bg-color||'))
                 ) {
-                    const indexNumber = arrCheck.findIndex((el) =>
+                    const indexNumber = this.arrayUsed.findIndex((el) =>
                         el.startsWith('bg-color||')
                     )
                     if (indexNumber !== -1) {
                         checkActive = true
-                        value = arrCheck[indexNumber].replace('bg-color||', '')
-                        value = value.startsWith('rgb') ? rgbToHex(value) : value;
+                        value = this.arrayUsed[indexNumber].replace('bg-color||', '')
+                        value = value.startsWith('rgb')
+                            ? rgbToHex(value)
+                            : value
                     }
                 } else if (['font-size', 'heading'].includes(type)) {
-                    const indexNumber = arrCheck.findIndex((el) => !isNaN(+el))
+                    const indexNumber = this.arrayUsed.findIndex((el) => !isNaN(+el))
                     if (indexNumber !== -1) {
                         checkActive = true
-                        value = arrCheck[indexNumber]
+                        value = this.arrayUsed[indexNumber]
                     }
                 }
                 if (checkActive) {
                     if (type === 'color') {
-                        obj.element.value = value;
+                        obj.element.value = value
                     } else if (type === 'bg-color') {
-                        obj.element.value = value;
+                        obj.element.value = value
                     } else if (['font-size', 'heading'].includes(type)) {
                         const indexOfSelect = obj.data.findIndex(
                             (size) => size === value
@@ -158,7 +197,7 @@ class EDITOR extends HTMLElement {
                     if (type === 'color') {
                         obj.element.value = '#000000'
                     } else if (type === 'bg-color') {
-                        obj.element.value = 'transparent'
+                        obj.element.value = '#ffffff'
                     } else if (['font-size', 'heading'].includes(type)) {
                         obj.element.selectedIndex = 0
                     } else {
@@ -170,7 +209,7 @@ class EDITOR extends HTMLElement {
     }
 
     addEventCatchAll = () => {
-        this.shadowRoot.addEventListener('click', () => this.eventClick())
+        this.shadowRoot.addEventListener('click', (e) => this.eventClick(e))
     }
 
     detectAndActive(el) {
@@ -203,7 +242,8 @@ class EDITOR extends HTMLElement {
 
     getParentAndActive(targetElement, arrEl) {
         let currentEl = targetElement
-        while (!currentEl || !currentEl.classList.contains('content')) {
+
+        while (currentEl !== null && currentEl.closest('.content')) {
             arrEl.push(currentEl)
             currentEl = currentEl.parentElement
         }
@@ -212,95 +252,7 @@ class EDITOR extends HTMLElement {
 
     styles() {
         const toolbarStyles = new CSSStyleSheet()
-        toolbarStyles.replaceSync(`
-            *{
-                box-sizing: border-box;
-                margin: 0;
-                padding: 0;
-                max-width: 100%;
-            }
-
-            ol, ul {
-                padding-left: 1.5em;
-            }
-
-            .container{
-                max-height: 600px;
-                position: relative;
-                overflow: auto;
-                box-shadow: rgb(231, 231, 231) 0px 0px 0px 0.1em inset;
-                border-radius: 6px;
-                padding-bottom: 20px;
-            }
-            .toolbar {
-                display: flex;
-                align-items: center;
-                padding: 10px;
-                gap: 12px;
-                flex-wrap: wrap;
-                position: sticky;
-                top: 0;
-                left: 0;
-                background: white;
-                box-shadow: rgb(231, 231, 231) 0px 0px 0px 0.1em inset;
-                border-radius: 6px;
-            }
-            .toolbar-group{
-                display: flex;
-                gap: 2px;
-            }
-            .toolbar select{
-                border: none;
-                background: none;
-                border-radius: 6px;
-                border: 1px solid #ccc;
-                padding: 3px 5px;
-            }
-            .toolbar button {
-                border: none;
-                background: none;
-                cursor: pointer;
-                border-radius: 6px;
-                padding: 3px 5px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border: 1px solid #ffffff; 
-                transition: border-color 300ms ease, background-color 300ms ease;
-            }
-            .toolbar button.active{
-                border-color: var(--color-main);
-            }
-            
-            .toolbar button.active svg{
-                fill: var(--color-main);
-            }
-
-            .toolbar button svg {
-                transition: fill 300ms ease;
-                width: 1rem;
-                height: 1rem;
-            }
-            .content{
-                word-break: break-word;
-                min-height: 200px;
-                outline: none;
-                padding-bottom:30px;
-                border-radius: 6px;
-                padding:12px 15px;
-            }
-            input[type="color"]{
-                background: none;
-                border: none;
-                max-width: 24px;
-                min-height: 24px;
-                cursor: pointer;
-            }
-            
-            input[type="color" i]::-webkit-color-swatch {
-                border-radius: 50%;
-            }
-        `)
+        toolbarStyles.replaceSync(style)
         return [toolbarStyles]
     }
     // Print Toolbar
@@ -357,6 +309,32 @@ class EDITOR extends HTMLElement {
                     this.toolbars[data.type] = {
                         element: color,
                     }
+                    break
+                case 'insertImage':
+                    const divImage = document.createElement('div')
+                    divImage.className = data.type
+                    divImage.innerHTML = data.html
+                    toolbar.append(divImage)
+                    for (const [even, func] of Object.entries(data.events)) {
+                        divImage[even] = (e) => {
+                            func(e, divImage, this.shadowRoot, this.savedRange)
+                        }
+                    }
+                    break
+                case 'createLink':
+                    const divLink = document.createElement('div')
+                    divLink.className = data.type
+                    divLink.innerHTML = data.html
+                    toolbar.append(divLink)
+                    for (const [even, func] of Object.entries(data.events)) {
+                        divLink[even] = (e) => {
+                            func(e, divLink, this.shadowRoot, this.savedRange, this)
+                        }
+                    }
+                    data.check &&
+                        (this.toolbars[data.check] = {
+                            element: divLink,
+                        })
                     break
                 default:
                     for (const tool of data.tools) {
