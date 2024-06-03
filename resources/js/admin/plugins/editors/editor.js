@@ -1,5 +1,23 @@
 import { dispatchData } from './event'
 import { toolbars } from './toolbar'
+function rgbToHex(rgb) {
+    var rgbRegex = /^rgb\(\s*(-?\d+)(%?)\s*,\s*(-?\d+)(%?)\s*,\s*(-?\d+)(%?)\s*\)$/;
+    var result, r, g, b, hex = "";
+    if ( (result = rgbRegex.exec(rgb)) ) {
+        r = componentFromStr(result[1], result[2]);
+        g = componentFromStr(result[3], result[4]);
+        b = componentFromStr(result[5], result[6]);
+
+        hex = "#" + (0x1000000 + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    }
+    return hex;
+}
+
+function componentFromStr(numStr, percent) {
+    var num = Math.max(0, parseInt(numStr, 10));
+    return percent ?
+        Math.floor(255 * Math.min(100, num) / 100) : Math.min(255, num);
+}
 class EDITOR extends HTMLElement {
     constructor(callback) {
         super()
@@ -65,8 +83,8 @@ class EDITOR extends HTMLElement {
             listElements.forEach((el) => {
                 arrCheck = [...arrCheck, ...this.detectAndActive(el)]
             })
-            // console.log(this.toolbars)
-            // console.log(arrCheck)
+            //console.log(this.toolbars)
+            //console.log(arrCheck)
             /*
                     1. Khớp type là button
                     2. Khớp data thì là select
@@ -75,10 +93,11 @@ class EDITOR extends HTMLElement {
                     Cần thêm link
 
                 */
+            // console.log(this.toolbars)
+            console.log(arrCheck)
             for (const [type, obj] of Object.entries(this.toolbars)) {
                 let checkActive = false
                 let value = ''
-
                 // Có thể là thẻ b hoặc bold
                 if (type.includes('||')) {
                     const types = type.split('||')
@@ -92,18 +111,28 @@ class EDITOR extends HTMLElement {
                     checkActive = true
                 } else if (
                     type === 'color' &&
-                    arrCheck.some(
-                        (el) => el.startsWith('#') || el.startsWith('rgb')
-                    )
+                    arrCheck.some((el) => el.startsWith('color||'))
                 ) {
                     const indexNumber = arrCheck.findIndex((el) =>
-                        el.startsWith('#')
+                        el.startsWith('color||')
                     )
                     if (indexNumber !== -1) {
                         checkActive = true
-                        value = arrCheck[indexNumber]
+                        value = arrCheck[indexNumber].replace('color||', '')
                     }
-                } else if (type === 'select') {
+                } else if (
+                    type === 'bg-color' &&
+                    arrCheck.some((el) => el.startsWith('bg-color||'))
+                ) {
+                    const indexNumber = arrCheck.findIndex((el) =>
+                        el.startsWith('bg-color||')
+                    )
+                    if (indexNumber !== -1) {
+                        checkActive = true
+                        value = arrCheck[indexNumber].replace('bg-color||', '')
+                        value = value.startsWith('rgb') ? rgbToHex(value) : value;
+                    }
+                } else if (['font-size', 'heading'].includes(type)) {
                     const indexNumber = arrCheck.findIndex((el) => !isNaN(+el))
                     if (indexNumber !== -1) {
                         checkActive = true
@@ -112,9 +141,10 @@ class EDITOR extends HTMLElement {
                 }
                 if (checkActive) {
                     if (type === 'color') {
-                        obj.element.value = value
-                    } else if (type === 'select') {
-                        // console.log(obj)
+                        obj.element.value = value;
+                    } else if (type === 'bg-color') {
+                        obj.element.value = value;
+                    } else if (['font-size', 'heading'].includes(type)) {
                         const indexOfSelect = obj.data.findIndex(
                             (size) => size === value
                         )
@@ -127,7 +157,9 @@ class EDITOR extends HTMLElement {
                 } else {
                     if (type === 'color') {
                         obj.element.value = '#000000'
-                    } else if (type === 'select') {
+                    } else if (type === 'bg-color') {
+                        obj.element.value = 'transparent'
+                    } else if (['font-size', 'heading'].includes(type)) {
                         obj.element.selectedIndex = 0
                     } else {
                         obj.element.classList.remove('active')
@@ -146,10 +178,16 @@ class EDITOR extends HTMLElement {
         const localName = el.localName
         // Style
         const textAlign = el.style.textAlign
-        const colorStyle = el.style.color
+        const colorStyle = el.style.color ? 'color||' + el.style.color : null
         const fontWeight = el.style.fontWeight
+        const fontStyle = el.style.fontSize
+        const backgroundColor = el.style.backgroundColor
+            ? 'bg-color||' + el.style.backgroundColor
+            : null
         //Attribute
         const color = el.getAttribute('color')
+            ? 'color||' + el.getAttribute('color')
+            : null
         const size = el.getAttribute('size')
         return [
             textAlign,
@@ -158,12 +196,14 @@ class EDITOR extends HTMLElement {
             size,
             colorStyle,
             fontWeight,
+            fontStyle,
+            backgroundColor,
         ].filter((item) => item)
     }
 
     getParentAndActive(targetElement, arrEl) {
         let currentEl = targetElement
-        while (!currentEl.classList.contains('content')) {
+        while (!currentEl || !currentEl.classList.contains('content')) {
             arrEl.push(currentEl)
             currentEl = currentEl.parentElement
         }
@@ -225,14 +265,21 @@ class EDITOR extends HTMLElement {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                border: 1px solid #ffffff; 
+                transition: border-color 300ms ease, background-color 300ms ease;
             }
+            .toolbar button.active{
+                border-color: var(--color-main);
+            }
+            
             .toolbar button.active svg{
                 fill: var(--color-main);
-                color: var(--color-main);
             }
+
             .toolbar button svg {
-                width: 14px;
-                height: 14px;
+                transition: fill 300ms ease;
+                width: 1rem;
+                height: 1rem;
             }
             .content{
                 word-break: break-word;
@@ -242,6 +289,17 @@ class EDITOR extends HTMLElement {
                 border-radius: 6px;
                 padding:12px 15px;
             }
+            input[type="color"]{
+                background: none;
+                border: none;
+                max-width: 24px;
+                min-height: 24px;
+                cursor: pointer;
+            }
+            
+            input[type="color" i]::-webkit-color-swatch {
+                border-radius: 50%;
+            }
         `)
         return [toolbarStyles]
     }
@@ -250,12 +308,13 @@ class EDITOR extends HTMLElement {
         const divToolbar = document.createElement('div')
         divToolbar.className = 'toolbar'
         for (const [className, data] of Object.entries(toolbars)) {
+            if (data.hidden) continue
             const toolbar = document.createElement('div')
             toolbar.className = className + ' toolbar-group'
             switch (data.type) {
                 case 'select':
                     const select = document.createElement('select')
-                    this.toolbars[data.type] = {
+                    this.toolbars[data.name] = {
                         element: select,
                         data: [],
                     }
@@ -265,7 +324,7 @@ class EDITOR extends HTMLElement {
                         option.innerHTML = tool.html
                         select.append(option)
                         // Thêm các biên vào đây
-                        this.toolbars[data.type].data.push(tool.check)
+                        this.toolbars[data.name].data.push(tool.check)
                     }
                     for (const [even, func] of Object.entries(data.events)) {
                         select[even] = (e) =>
@@ -280,6 +339,7 @@ class EDITOR extends HTMLElement {
                     toolbar.append(select)
                     break
                 case 'color':
+                case 'bg-color':
                     const color = document.createElement('input')
                     color.type = 'color'
                     for (const [even, func] of Object.entries(data.events)) {

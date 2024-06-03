@@ -1,6 +1,8 @@
 import {
     eventChangeFontSize,
     eventChangeFontStyle,
+    eventChangeHeading,
+    eventChangeHiliteColor,
     eventClick,
     eventClickNoActive,
 } from './event'
@@ -27,48 +29,96 @@ export const toolbars = {
             ...eventClickNoActive,
         },
     },
-    fontSizes: {
+    headings: {
         type: 'select',
+        name: 'heading',
+        hidden: true,
         tools: [
             {
                 check: '',
-                html: 'Normal',
-                value: 3,
+                html: 'Heading',
+                value: '',
             },
             {
-                check: '7',
+                check: 'H1',
                 html: 'H1',
-                value: 7,
+                value: 'H1',
             },
             {
-                check: '6',
+                check: 'H2',
                 html: 'H2',
-                value: 6,
+                value: 'H2',
             },
             {
-                check: '6',
+                check: 'H3',
                 html: 'H3',
-                value: 5,
+                value: 'H3',
             },
             {
-                check: '4',
+                check: 'H4',
                 html: 'H4',
-                value: 4,
+                value: 'H4',
             },
             {
-                check: '3',
+                check: 'H5',
                 html: 'H5',
-                value: 3,
+                value: 'H5',
             },
             {
-                check: '2',
+                check: 'H6',
                 html: 'H6',
-                value: 2,
+                value: 'H6',
+            },
+        ],
+        events: {
+            ...eventChangeHeading,
+        },
+        styles: {},
+    },
+    fontSizes: {
+        type: 'select',
+        name:'font-size',
+        tools: [
+            {
+                check: '',
+                html: 'Font Size',
+                value: 3,
             },
             {
                 check: '1',
-                html: 'H7',
+                html: '10px',
                 value: 1,
+            },
+            {
+                check: '2',
+                html: '13px',
+                value: 2,
+            },
+            {
+                check: '3',
+                html: '16px',
+                value: 3,
+            },
+            {
+                check: '4',
+                html: '18px',
+                value: 4,
+            },
+
+            {
+                check: '5',
+                html: '24px',
+                value: 5,
+            },
+            {
+                check: '6',
+                html: '32px',
+                value: 6,
+            },
+            {
+                check: '7',
+                html: '48px',
+                value: 7,
             },
         ],
         events: {
@@ -175,6 +225,13 @@ export const toolbars = {
         tools: [],
         events: {
             ...eventChangeFontStyle,
+        },
+    },
+    hiliteColors: {
+        type: 'bg-color',
+        tools: [],
+        events: {
+            ...eventChangeHiliteColor,
         },
     },
 }

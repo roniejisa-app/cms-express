@@ -26,6 +26,21 @@ export const eventChangeFontSize = {
     },
 }
 
+export const eventChangeHiliteColor = {
+    onchange: (e, value, element, ...params) => {
+        console.log(value);
+        backRange(...params)
+        document.execCommand('hiliteColor', false, e.target.value)
+    },
+}
+
+export const eventChangeHeading = {
+    onchange: (e, value, element, ...params) => {
+        backRange(...params)
+        document.execCommand('heading', false, value)
+    },
+}
+
 export const eventChangeFontStyle = {
     onchange: (e, value, element, ...params) => {
         backRange(...params)
