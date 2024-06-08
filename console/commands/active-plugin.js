@@ -1,5 +1,5 @@
-const db = require('@models/index')
-const dbMongo = require('@mongodb/model.js')
+const db = require('../../models/index')
+const dbMongo = require('../../mongodb/model.js')
 class ActivePlugin {
     constructor(params) {
         const [plugin, key, model, name, type] = params

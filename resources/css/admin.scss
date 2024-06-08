@@ -2,6 +2,7 @@
 @use 'variable' as *;
 @use 'mixins' as *;
 @use 'fonts' as *;
+@use 'support' as *;
 @use './admin/setting' as *;
 
 // RESET
@@ -460,7 +461,7 @@ footer {
             &:has(input:checked) {
                 border-color: var(--color-main);
                 box-shadow: 0 0 3px 5px var(--color-main-50);
-                @include backgroundGradient();
+                @include backgroundGradient('bold');
                 &::before {
                     border-color: white;
                 }
@@ -838,7 +839,7 @@ body.menu-small {
                     background: var(--color-box);
                     border-top-right-radius: 12px;
                     border-bottom-right-radius: 12px;
-                    margin-left: 0;
+                    padding-left: 0;
                     display: none;
                     &.show {
                         display: block;
@@ -876,5 +877,77 @@ body.menu-small {
 
     .toggle-sidebar {
         transform: scaleX(-1) translate(-50%, -50%);
+    }
+}
+
+.action-view {
+    position: relative;
+    background: var(--color-orange);
+    color: var(--color-box);
+    border-radius: 6px;
+    &:hover {
+        ul {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    .btn-action {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: none;
+        background: none;
+    }
+    ul {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        background: white;
+        width: 200px;
+        right: 0;
+        li {
+            &:nth-child(1) {
+                svg {
+                    fill: green;
+                }
+            }
+            a {
+                display: flex;
+                gap: 6px;
+                padding: 10px;
+            }
+            .import-excel-form {
+                cursor: pointer;
+                width: 100%;
+                display: flex;
+                gap: 6px;
+                text-align: left;
+                padding: 10px;
+                border: none;
+                background: transparent;
+            }
+        }
+    }
+
+    .btn-text {
+        color: var(--color-box);
+    }
+
+    .btn-icon {
+        fill: var(--color-box);
+    }
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+// belongs
+[belongs-to-many]{
+    max-height: 200px;
+    overflow: auto;
+    label{
+        width: 100%;
+        display: block;
     }
 }

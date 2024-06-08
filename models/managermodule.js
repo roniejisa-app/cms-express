@@ -2,7 +2,7 @@
 const { Model } = require('sequelize')
 const { string } = require('yup')
 const { selectParentAssoc } = require('../utils/fields')
-const { HAS_CHECK_LEVEL } = require('@constants/model')
+const { HAS_CHECK_LEVEL } = require('../constants/model')
 
 module.exports = (sequelize, DataTypes) => {
     class ManagerModule extends Model {

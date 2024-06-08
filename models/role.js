@@ -3,7 +3,7 @@ const {
     Model
 } = require('sequelize');
 const { string } = require('yup');
-const { choosePermission } = require('@utils/fields');
+const { choosePermission } = require('../utils/fields');
 module.exports = (sequelize, DataTypes) => {
     class Role extends Model {
         static associate(models) {

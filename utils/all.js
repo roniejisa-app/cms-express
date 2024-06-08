@@ -1,4 +1,3 @@
-const Index = require('@models/index')
 const { resolve } = require('path')
 module.exports = {
     toKebabCase: (str) => {
@@ -140,27 +139,6 @@ module.exports = {
         })
         return newAsideFolders
     },
-    checkLinkExist: async (params) => {
-        const { value, id } = params
-        const linkData = await Index.Link.findOne({
-            where: {
-                url: value,
-            },
-        })
-        // Cần kiểm tra để check xem có tồn tại không
-        if (!linkData || +id === +linkData.model_id) {
-            return {
-                status: 200,
-                data: value,
-            }
-        }
-
-        return {
-            status: 100,
-            message: 'Đã được sử dụng!',
-            data: '',
-        }
-    },
     pathPlugin: (plugin, folder, pathname) => {
         return resolve(
             process.cwd(),
@@ -203,12 +181,13 @@ module.exports = {
         tag = 'option',
         activeAttribute = 'selected',
         stringPrefix = [
+            '',
+            '🟣',
             '🔴',
             '🟠',
             '🟡',
             '🟢',
             '🔵',
-            '🟣',
             '💛',
             '🧡',
             '🩷',
@@ -224,7 +203,6 @@ module.exports = {
         ]
     ) => {
         const prefix = stringPrefix[level].repeat(level)
-
         // Sử dụng map để duyệt qua mảng con của mỗi nút
         const arrayChild = Array.isArray(node) ? node : node[nameChild]
         const childrenHTML =
@@ -254,6 +232,78 @@ module.exports = {
         }
         // Trả về kết quả là nodeHTML kết hợp với childrenHTML
         return nodeHTML + childrenHTML
+    },
+    printTreeChoose: (
+        node,
+        nameChild,
+        valueKey,
+        labelKey,
+        nameKey,
+        level = 0,
+        activeId = null,
+        tag = 'option',
+        activeAttribute = 'selected',
+        stringPrefix = [
+            '',
+            '🟣',
+            '🔴',
+            '🟠',
+            '🟡',
+            '🟢',
+            '🔵',
+            '💛',
+            '🧡',
+            '🩷',
+            '❤️',
+            '💚',
+            '💙',
+            '🩵',
+            '💜',
+            '🤎',
+            '🖤',
+            '🩶',
+            '🤍',
+        ]
+    ) => {
+        const prefix = level > 1 ? '-'.repeat(level - 1) : '';
+        // Sử dụng map để duyệt qua mảng con của mỗi nút
+        const arrayChild = Array.isArray(node) ? node : node[nameChild]
+        const childrenHTML =
+            arrayChild && arrayChild.length > 0
+                ? arrayChild
+                      .map((child) =>
+                          module.exports.printTreeChoose(
+                              child,
+                              nameChild,
+                              valueKey,
+                              labelKey,
+                              nameKey,
+                              level + 1,
+                              activeId,
+                              tag,
+                              activeAttribute,
+                              stringPrefix
+                          )
+                      )
+                      .join('')
+                : ''
+        // Tạo thẻ HTML với tùy chọn được chọn (nếu cần)
+        const checked = activeId
+            ? activeId && node[valueKey] === activeId
+        : false
+        let nodeHTML = ''
+        if (!Array.isArray(node)) {
+            nodeHTML = `<${tag} ${node[valueKey] ? `list-of="${node[valueKey]}"` : '' }>
+                <input name="${nameKey}[]" type="checkbox" value="${
+                node[valueKey]
+            }" ${checked ? 'checked' : ''} />
+                <span>
+                    ${prefix} ${node[labelKey]}
+                </span>
+            </${tag}>`
+        }
+        // Trả về kết quả là nodeHTML kết hợp với childrenHTML
+        return nodeHTML + (childrenHTML ? `<div ${node[valueKey] ? `child-of="${node[valueKey]}"`: `belongs-to-many="${nameKey}"`}>` + childrenHTML + '</div>' : '')
     },
     buildMenuList: (modules) => {
         const menuList = {}

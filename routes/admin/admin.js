@@ -1,5 +1,5 @@
 const express = require('express')
-const adminController = require('@controllers/admin.controller')
+const adminController = require('../../controllers/admin.controller')
 const router = express.Router()
 const moduleRouter = require('./module')
 const mediaRouter = require('./media')
@@ -53,6 +53,10 @@ router.use(async (req, res, next) => {
         'manager_modules.create',
         'manager_modules.delete',
         'manager_modules.update',
+        'post_categories.view',
+        'post_categories.create',
+        'post_categories.delete',
+        'post_categories.update',
     ]
     req.menus = await Cache.getMenu()
     if (!req.menus || Array.isArray(req.menus) || true) {
@@ -71,7 +75,7 @@ router.use(async (req, res, next) => {
         true
     )
 
-    req.menuList = Object.values(req.menuList)
+    req.menuList = Object.values(req.menuList).sort((a,b) => a.order - b.order)
     req.user = await User.findOne({
         where: {
             email: 'roniejisa@gmail.com',

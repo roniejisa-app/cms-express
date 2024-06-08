@@ -15,6 +15,7 @@ const {
 const { checkLinkExist } = require('@utils/all')
 const event = require('@utils/event')
 const DB = require('@models/index')
+const ExcelJS = require('exceljs')
 
 module.exports = {
     index: async (req, res, params) => {
@@ -32,7 +33,11 @@ module.exports = {
         // Thêm edge loading
         let include = []
         for (let i = 0; i < fields.length; i++) {
-            if (fields[i].include && Array.isArray(fields[i].include) && fields[i].show) {
+            if (
+                fields[i].include &&
+                Array.isArray(fields[i].include) &&
+                fields[i].show
+            ) {
                 include = [
                     ...include,
                     ...fields[i].include.map(({ model, as }) => ({
@@ -458,11 +463,29 @@ module.exports = {
         if (sort) {
             order = [[sort, sortType]]
         }
+        // Thêm edge loading
+        let include = []
+        for (let i = 0; i < fields.length; i++) {
+            if (
+                fields[i].include &&
+                Array.isArray(fields[i].include) &&
+                fields[i].show
+            ) {
+                include = [
+                    ...include,
+                    ...fields[i].include.map(({ model, as }) => ({
+                        model: DB[model],
+                        as,
+                    })),
+                ]
+            }
+        }
         const { count, rows: listData } = await modelMain.findAndCountAll({
             where: filters,
             order,
             limit,
             offset,
+            include,
         })
         let paginate = initPaginate(count, limit, page, module)
         const html = await ejs.renderFile(
@@ -481,6 +504,213 @@ module.exports = {
             status: 200,
             data: listData,
             html,
+        })
+    },
+    exampleExcel: async (req, res, params) => {
+        const { fields, modelMain } = params
+
+        res.setHeader(
+            'Content-Type',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+        res.setHeader(
+            'Content-Disposition',
+            'attachment; filename=' + 'example.xlsx'
+        )
+        const workbook = new ExcelJS.Workbook()
+        workbook.creator = req.user.fullname
+        workbook.lastModifiedBy = req.user.fullname
+        workbook.created = new Date()
+        workbook.modified = new Date()
+        workbook.lastPrinted = new Date()
+        const worksheet = workbook.addWorksheet('Mẫu dữ liệu', {
+            views: [{ state: 'frozen', ySplit: 2 }],
+        })
+
+        let excelHeaders = fields.reduce((initialArr, field) => {
+            if (field.excel) {
+                initialArr.push({
+                    header: field.excel.label,
+                    key: field.excel.key,
+                    width: field.excel.width,
+                    data: field.excel.data,
+                    style: {
+                        font: {
+                            size: 14,
+                        },
+                    },
+                })
+            }
+            return initialArr
+        }, [])
+        // Lấy ra thông tin các cột có thể thêm bằng excel
+        excelHeaders = [
+            {
+                header: 'STT',
+                key: 'id',
+                data: 1,
+                width: 10,
+                style: {
+                    ...excelHeaders[0].style,
+                    alignment: {
+                        vertical: 'middle',
+                        horizontal: 'center',
+                    },
+                },
+            },
+            ...excelHeaders,
+        ]
+        worksheet.columns = excelHeaders
+        // Cấu hình màu sắc cho cột đầu và cột 2
+        worksheet.getRow(1).eachCell((cell, colNumber) => {
+            cell.font = {
+                size: 14,
+                color: { argb: 'FFFFFFFF' }, // Màu chữ trắng
+            }
+            cell.fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: { argb: 'FF006400' }, // Background màu xanh lá đậm (DarkGreen)
+            }
+        })
+        const data = {}
+        // Thêm dữ liệu mẫu
+        excelHeaders.forEach((field) => {
+            data[field.key] = field.data
+        })
+        worksheet.addRow(data)
+        workbook.xlsx.write(res).then(function () {
+            res.end()
+        })
+    },
+    downloadExcel: async (req, res, params) => {
+        const { fields, modelMain } = params
+
+        res.setHeader(
+            'Content-Type',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+        res.setHeader(
+            'Content-Disposition',
+            'attachment; filename=' + 'example.xlsx'
+        )
+        const workbook = new ExcelJS.Workbook()
+        workbook.creator = req.user.fullname
+        workbook.lastModifiedBy = req.user.fullname
+        workbook.created = new Date()
+        workbook.modified = new Date()
+        workbook.lastPrinted = new Date()
+        const worksheet = workbook.addWorksheet('Mẫu dữ liệu', {
+            views: [{ state: 'frozen', ySplit: 2 }],
+        })
+
+        let excelHeaders = fields.reduce((initialArr, field) => {
+            if (field.excel) {
+                initialArr.push({
+                    header: field.excel.label,
+                    key: field.excel.key,
+                    width: field.excel.width,
+                    data: field.excel.data,
+                    style: {
+                        font: {
+                            size: 14,
+                        },
+                    },
+                })
+            }
+            return initialArr
+        }, [])
+
+        excelHeaders = [
+            {
+                header: 'ID',
+                key: 'id',
+                width: 10,
+                data: 'STT',
+                style: {
+                    ...excelHeaders[0].style,
+                    alignment: {
+                        vertical: 'middle',
+                        horizontal: 'center',
+                    },
+                },
+            },
+            ...excelHeaders,
+        ]
+        worksheet.columns = excelHeaders
+
+        worksheet.getRow(1).eachCell((cell, colNumber) => {
+            cell.font = {
+                size: 14,
+                color: { argb: 'FFFFFFFF' }, // Màu chữ trắng
+            }
+            cell.fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: { argb: 'FF006400' }, // Background màu xanh lá đậm (DarkGreen)
+            }
+        })
+        // In giá trị cột mẫu vào bảng
+        let dataExample = {}
+        excelHeaders.forEach((field) => {
+            dataExample[field.key] = field.data
+        })
+        worksheet.addRow(dataExample)
+
+        // Lấy dữ liệu của bảng
+        const data = await modelMain.findAll({
+            attributes: excelHeaders.map((field) => field.key),
+        })
+        // Để lấy dữ liệu mặc định cho hàng 2 trở đi
+        data.forEach((dataColumn) => {
+            const dataExcel = {}
+            excelHeaders.forEach((column) => {
+                dataExcel[column.key] = dataColumn[column.key]
+            })
+            worksheet.addRow(dataExcel)
+        })
+
+        workbook.xlsx.write(res).then(function () {
+            res.end()
+        })
+    },
+    storeExcel: async (req, res, params) => {
+        const { fields, modelMain } = params
+        const workbook = new ExcelJS.Workbook()
+        // Lấy ra buffer để đọc
+        await workbook.xlsx.load(req.file.buffer)
+        // Lấy ra những trường được import
+        let fieldExcels = fields.reduce((initialArr, field) => {
+            if (field.excel) {
+                initialArr.push(field.excel.key)
+            }
+            return initialArr
+        }, [])
+        fieldExcels = ['STT', ...fieldExcels]
+        // Lấy ra từng bảng
+        const data = [] 
+        workbook.eachSheet((worksheet) => {
+            // Lấy từng hàng bắt đầu từ cột số 2 bỏ qua cột số 1,2 vì là tên cột và dữ liệu từng cột
+            worksheet.eachRow((row, rowNumber) => {
+                if (rowNumber > 2) {
+                    const item = {}
+                    // Đặt dữ liệu cho mặc định
+                    // Cấu trúc dữ liệu:
+                    row.eachCell((cell, colNumber) => {
+                        if (colNumber > 1) {
+                            // Lưu giữ liệu theo đúng cột trong bảng
+                            item[fieldExcels[colNumber - 1]] = cell.value
+                        }
+                    })
+                    data.push(item)
+                }
+            })
+        })
+        const uploadData = await modelMain.bulkCreate(data)
+        res.json({
+            status: 200,
+            data: uploadData,
+            message: 'Đã nhập xong',
         })
     },
 }

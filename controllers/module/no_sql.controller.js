@@ -13,6 +13,7 @@ const { initPaginate } = require('@utils/paginate')
 const event = require('@utils/event')
 const { checkLinkExist, isNullish } = require('@utils/all')
 const DB = require('@models/index')
+const ExcelJS = require('exceljs');
 
 module.exports = {
     index: async (req, res, params) => {
@@ -28,7 +29,6 @@ module.exports = {
             }
             return +a.order - +b.order
         })
-
         // FilterFields
         const filterFields = allFields.filter(({ filter }) => filter)
         const filterDefault = allFields.find(
@@ -43,18 +43,17 @@ module.exports = {
         }
         const offset = (page - 1) * limit
         const filters = convertDataFilterMongoDB(req.query, fields)
+        const selectField = fields.reduce((obj = {}, next) => {
+            obj[next.name] = 1
+            return obj
+        },{})
         const order = {
             _id: 1,
         }
         try {
-            const [count, listData] = await Promise.all(
-                [
+            const [count, listData] = await Promise.all([
                     model.DB.find(filters).count('_id'),
-                    model.DB.find(filters)
-                        .limit(limit)
-                        .skip(offset)
-                        .sort(order),
-                ].map((data) => data)
+                    model.DB.find(filters).limit(limit).skip(offset).sort(order).select(selectField)].map((data) => data)
             )
             let paginate = initPaginate(count, limit, page, module)
             req.success = req.flash('success')
@@ -351,16 +350,20 @@ module.exports = {
             _id: 1,
         }
         const offset = (page - 1) * limit
-        console.log(req.body)
+        
         const filters = convertDataFilterMongoDB(req.body, fields)
         if (sort) {
             order = {}
             order[sort === 'id' ? '_id' : sort] = sortType
         }
+        const selectField = fields.reduce((obj = {}, next) => {
+            obj[next.name] = 1
+            return obj
+        },{})
         const [count, listData] = await Promise.all(
             [
                 model.DB.find(filters).count('_id'),
-                model.DB.find(filters).limit(limit).skip(offset).sort(order),
+                model.DB.find(filters).limit(limit).skip(offset).sort(order).select(selectField),
             ].map((data) => data)
         )
 
@@ -383,4 +386,11 @@ module.exports = {
             html,
         })
     },
+    exampleExcel:async(req,res,params) =>{
+        const workbook = new ExcelJS.Workbook();
+        return res.json({
+            status:100,
+            message:"Chưa thêm kiểu này!"
+        })
+    }
 }

@@ -64,6 +64,7 @@ module.exports = {
                 continue
             }
             const fieldInfo = fields.find(({ name }) => name === nameSearch)
+            if(!fieldInfo) return filters;
             if (!filters['$or']) {
                 filters['$or'] = []
             }

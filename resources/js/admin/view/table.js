@@ -4,7 +4,9 @@ import FILTER from './filter'
 import PAGINATION from './pagination'
 import request from './../../utils/request'
 import { urlEndpoint } from '../../config'
-
+import LOADING from '../layouts/loading'
+import XHR from '../../utils/xhr'
+import notify from '../../utils/notify'
 const TABLE = (() => {
     const tableDataEl = document.querySelector('.table-data')
     const limitEl = document.querySelector('.sort-show-filter [data-limit]')
@@ -37,6 +39,62 @@ const TABLE = (() => {
         sortEl.onchange = () => TABLE.filter({}, true)
     }
 
+    function importExcel() {
+        const importExcelForm = document.querySelector('.import-excel-form')
+        if (!importExcelForm) return
+        importExcelForm.onclick = () => {
+            const inputFile = document.createElement('input')
+            inputFile.type = 'file'
+            inputFile.click()
+            inputFile.onchange = async (e) => {
+                const file = e.target.files[0]
+                const module = importExcelForm.dataset.module
+                LOADING.show()
+                XHR.setType('formData')
+                const data = await XHR.post(
+                    `${urlEndpoint}/admin/${module}/import-excel`,
+                    {
+                        file,
+                    }
+                )
+                LOADING.hide()
+                notify.success(data.message)
+            }
+        }
+    }
+
+    function chooseBelongsToMany() {
+        const elements = document.querySelectorAll('[belongs-to-many]')
+        for (const element of elements) {
+            const checkboxs = element.querySelectorAll('input[type="checkbox"]')
+            for (const inputCheckbox of checkboxs) {
+                inputCheckbox.onchange = (e) => {
+                    if (inputCheckbox.checked) {
+                        // Click vào chat thì hủy hết con
+                        const value = inputCheckbox.value
+                        const listParent = getValueCheckboxParent(inputCheckbox)
+                        for (const parent of listParent) {
+                            
+                        }
+                    } else {
+                        // Click vào chat thì hủy hết con
+                        //
+                    }
+                }
+            }
+        }
+    }
+
+    function getValueCheckboxParent(element) {
+        let listValueCheckbox = []
+        let parentElement = element.closest(`[child-of]`)
+        while (parentElement) {
+            listValueCheckbox.push(parentElement.getAttribute('child-of'))
+            parentElement = parentElement.previousElementSibling.closest(`[child-of]`);
+        }
+        return listValueCheckbox
+    }
+
     return {
         filter: async (data, useOldData = false) => {
             if (useOldData) {
@@ -48,7 +106,6 @@ const TABLE = (() => {
                         if (Array.isArray(oldData)) {
                             if (!indexDuplicate && index === 0) {
                                 indexDuplicate = oldData.findIndex((data) => {
-                                    console.log(data, value)
                                     return data === value
                                 })
                             }
@@ -87,10 +144,9 @@ const TABLE = (() => {
             tableDataEl.insertAdjacentHTML(
                 'beforeend',
                 `${rsLoading(
-                    'position:absolute;width:100%;height:100%;top:0;background:rgba(0,0,0,<div className="3"></div>)'
+                    'position:absolute;width:100%;height:100%;top:0;background:var(--color-main))'
                 )}`
             )
-            console.log(urlEndpoint);
             request.setEndpoint(urlEndpoint)
             const response = await request.post(
                 `/admin/${tableDataEl.dataset.module}/filter`,
@@ -101,6 +157,8 @@ const TABLE = (() => {
         },
         init: () => {
             searchInputDefault()
+            importExcel()
+            chooseBelongsToMany()
             typeof FILTER.init === 'function' && FILTER.init()
             typeof CHECKBOX.init === 'function' && CHECKBOX.init()
             typeof PAGINATION.init === 'function' && PAGINATION.init()

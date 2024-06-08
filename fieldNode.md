@@ -11,6 +11,16 @@
 - showForm: (boolean) - Hiển thị bên trong form (Thêm, Sửa)
 - positionSidebar: (boolean) - form có 2 bên bên to điền false, bên nhỏ điền true
 - filter: (boolean) - Bật bộ lọc ở bên ngoài
+- excel: (object) - Có chế độ thêm bằng excel hay không
+
+```javascript
+    excel:{
+        label: 'Danh mục cha',
+        key: "post_category_id",
+        data: 'ID',
+        width: 25
+    }
+```
 
 ## Đơn giản
 

@@ -1,8 +1,7 @@
 'use strict'
 const { Model } = require('sequelize')
-const Index = require('../../../../models/index')
 module.exports = (sequelize, DataTypes) => {
-    class Page extends Model {
+    class PostPostCategory extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
@@ -15,27 +14,15 @@ module.exports = (sequelize, DataTypes) => {
         static fields() {
             return [
                 {
-                    name: 'url',
-                    label: 'Đường dẫn',
-                    type: 'slug',
+                    name: 'name',
+                    label: 'Tên',
+                    type: 'text',
                     show: true,
                     sort: true,
                     filter: true,
                     showForm: true,
                     filterDefault: true,
                     positionSidebar: false,
-                    slugDB: 'Link',
-                    slugData: async (id, data, db) => {
-                        const dataDB = {
-                            controller:
-                                '/platform/plugins/pages/controllers/page.controller.js',
-                            method: 'show',
-                            model: 'Page',
-                            model_id: id,
-                            url: data,
-                        }
-                        await db.create(dataDB)
-                    },
                 },
             ]
         }
@@ -44,22 +31,23 @@ module.exports = (sequelize, DataTypes) => {
             return validate
         }
     }
-    Page.init(
+    PostPostCategory.init(
         {
             id: {
                 primaryKey: true,
                 autoIncrement: true,
                 type: DataTypes.INTEGER,
             },
-            url: DataTypes.STRING
+            post_category_id: DataTypes.INTEGER,
+            post_id: DataTypes.INTEGER,
         },
         {
             sequelize,
-            modelName: 'Page',
-            tableName: 'pages',
+            modelName: 'PostPostCategory',
+            tableName: 'post_post_category',
             createdAt: 'created_at',
             updatedAt: 'updated_at',
         }
     )
-    return Page
+    return PostPostCategory
 }

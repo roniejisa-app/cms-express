@@ -1,5 +1,5 @@
 const { Op } = require('sequelize')
-const { buildTree, printTree } = require('./all')
+const { buildTree, printTree, printTreeChoose } = require('./all')
 
 module.exports = {
     /**
@@ -127,7 +127,7 @@ module.exports = {
                         },
                     }
                 }
-                
+
                 const results = await model.findAll({
                     attributes: [valueKey, labelKey, parentName],
                     ...filters,
@@ -167,6 +167,65 @@ module.exports = {
             modelName: modelName,
             valueKey: valueKey,
             labelKey: labelKey,
+        }
+    },
+    chooseBeLongToMany: (
+        modelName,
+        valueKey,
+        labelKey,
+        parentName,
+        hasCheckLevel = false,
+        modelRelateTo = []
+    ) => {
+        return {
+            type: 'chooseBeLongToMany',
+            modelName: modelName,
+            data: async (model) => {
+                console.log(model);
+                const results = await model.findAll({
+                    attributes: [valueKey, labelKey, parentName],
+                })
+                const arr = results.map((item) => {
+                    return item.dataValues
+                })
+                // Xây dựng cây từ danh sách dữ liệu ban đầu
+                const tree = buildTree(arr, null, 1, parentName, valueKey)
+                return {
+                    printTreeChoose,
+                    tree,
+                }
+            },
+            addOrEditPermission: async (
+                item,
+                model,
+                data,
+                mainKey,
+                subKey,
+                fn,
+                idAdd = true
+            ) => {
+                let newData = await Promise.all(
+                    data.map(async function (item) {
+                        if (item) {
+                            const [mainId, subId] = item.split('|')
+                            const filter = {}
+                            filter[mainKey] = mainId
+                            filter[subKey] = subId
+                            return model.findOne({
+                                where: filter,
+                            })
+                        }
+                        return false
+                    })
+                )
+
+                if (Array.isArray(newData)) {
+                    newData = newData.filter((data) => data)
+                }
+
+                fn = (idAdd ? 'add' : 'set') + fn
+                await item[fn](newData)
+            },
         }
     },
     choosePermission: () => {
@@ -242,5 +301,5 @@ module.exports = {
             valueKeyOfAssoc: 'id', // Chỗ này ngoài view
             labelKeyOfAssoc: 'name', // Chỗ này ngoài view
         }
-    },
+    }
 }

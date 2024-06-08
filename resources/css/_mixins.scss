@@ -56,3 +56,9 @@
         background-position: 0% 50%;
     }
 }
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}

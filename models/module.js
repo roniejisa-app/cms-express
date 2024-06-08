@@ -1,8 +1,8 @@
 'use strict'
 const { Model, Op } = require('sequelize')
 const { string } = require('yup')
-const { chooseMultiAssoc, selectParentAssoc } = require('@utils/fields')
-const { NO_CHECK_LEVEL } = require('@constants/model')
+const { chooseMultiAssoc, selectParentAssoc } = require('../utils/fields')
+const { NO_CHECK_LEVEL } = require('../constants/model')
 const DB = require('./index')
 module.exports = (sequelize, DataTypes) => {
     class Module extends Model {
