@@ -331,21 +331,11 @@ module.exports = {
         res.redirect(`/admin/${module}/edit/${id}`)
     },
     destroy: async (req, res, params) => {
-        const { module, name_show, modelMain, id, fields } = params
+        const { module, name_show, modelMain, id, fields, model } = params
         //Chỗ này sẽ xóa toàn bộ mọi thứ liên quan không để lại cái gì!!!
 
         const canBeDeleted = await new Promise(async (resolve, reject) => {
             for (var i = 0; i < fields.length; i++) {
-                if (ARRAY_TYPE_HAS_MULTIPLE.includes(fields[i].type)) {
-                    const item = await modelMain.findByPk(id)
-                    await fields[i].addOrEditAssociate(
-                        item,
-                        DB[fields[i].modelName],
-                        [],
-                        IS_NOT_ADD
-                    )
-                }
-
                 if (
                     ARRAY_TYPE_HAS_DATA.includes(fields[i].type) &&
                     typeof fields[i].canBeDeleted === 'function'
@@ -355,20 +345,6 @@ module.exports = {
                         resolve(false)
                     }
                 }
-
-                if (fields[i].type === 'permissions') {
-                    const item = await modelMain.findByPk(id)
-                    await fields[i].addOrEditPermission(
-                        item,
-                        DB[fields[i].modelName],
-                        [],
-                        fields[i].mainKey,
-                        fields[i].subKey,
-                        fields[i].fn,
-                        IS_NOT_ADD
-                    )
-                }
-
                 if (i === fields.length - 1) {
                     resolve(true)
                 }
@@ -381,11 +357,46 @@ module.exports = {
             )
             return res.redirect(`/admin/${module}`)
         }
+        for (let field of fields) {
+            if (ARRAY_TYPE_HAS_MULTIPLE.includes(field.type)) {
+                const item = await modelMain.findByPk(id)
+                await field.addOrEditAssociate(
+                    item,
+                    DB[field.modelName],
+                    [],
+                    IS_NOT_ADD
+                )
+            }
+
+            if (field.type === FIELD_TYPE_PERMISSION) {
+                const item = await modelMain.findByPk(id)
+                await field.addOrEditPermission(
+                    item,
+                    DB[field.modelName],
+                    [],
+                    field.mainKey,
+                    field.subKey,
+                    field.fn,
+                    IS_NOT_ADD
+                )
+            }
+
+            if (field.type === FIELD_TYPE_SLUG) {
+                await DB['Link'].destroy({
+                    where: {
+                        model_id: id,
+                        model: model.charAt(0).toUpperCase() + model.slice(1),
+                    },
+                })
+            }
+        }
+        
         await modelMain.destroy({
             where: {
                 id,
             },
         })
+
         event.emit('delete', req, module, id)
         req.flash('success', `Xóa ${name_show} thành công`)
         res.redirect(`/admin/${module}`)
@@ -406,7 +417,7 @@ module.exports = {
                     )
                 }
 
-                if (fields[i].type === 'permissions') {
+                if (fields[i].type === FIELD_TYPE_PERMISSION) {
                     const item = await modelMain.findByPk(id)
                     await fields[i].addOrEditPermission(
                         item,

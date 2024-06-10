@@ -180,6 +180,7 @@ module.exports = (sequelize, DataTypes) => {
             let validate = {
                 name: string().required('Vui lòng nhập tên'),
                 content: string().required('Vui lòng nhập nội dung'),
+                slug: string().required('Vui lòng nhập đường dẫn'),
             }
             return validate
         }
