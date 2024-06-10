@@ -61,6 +61,7 @@ const MEDIA = (() => {
         imgEl.src = '/images/admin/no-image.svg'
         const textarea = imageForm.querySelector('textarea')
         textarea.innerText = ''
+        textarea.dispatchEvent(new Event('change'))
     }
 
     return {

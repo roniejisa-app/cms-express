@@ -240,7 +240,7 @@ module.exports = {
         labelKey,
         nameKey,
         level = 0,
-        activeId = null,
+        listActive = [],
         tag = 'option',
         activeAttribute = 'selected',
         stringPrefix = [
@@ -265,7 +265,7 @@ module.exports = {
             '🤍',
         ]
     ) => {
-        const prefix = level > 1 ? '-'.repeat(level - 1) : '';
+        const prefix = level > 1 ? '-'.repeat(level - 1) : ''
         // Sử dụng map để duyệt qua mảng con của mỗi nút
         const arrayChild = Array.isArray(node) ? node : node[nameChild]
         const childrenHTML =
@@ -279,7 +279,7 @@ module.exports = {
                               labelKey,
                               nameKey,
                               level + 1,
-                              activeId,
+                              listActive,
                               tag,
                               activeAttribute,
                               stringPrefix
@@ -288,13 +288,15 @@ module.exports = {
                       .join('')
                 : ''
         // Tạo thẻ HTML với tùy chọn được chọn (nếu cần)
-        const checked = activeId
-            ? activeId && node[valueKey] === activeId
-        : false
+        const checked = listActive.map((item) => +item).includes(node[valueKey])
+            ? true
+            : false
         let nodeHTML = ''
         if (!Array.isArray(node)) {
-            nodeHTML = `<${tag} ${node[valueKey] ? `list-of="${node[valueKey]}"` : '' }>
-                <input name="${nameKey}[]" type="checkbox" value="${
+            nodeHTML = `<${tag} ${
+                node[valueKey] ? `list-of="${node[valueKey]}"` : ''
+            }>
+                <input name="${nameKey}" type="checkbox" value="${
                 node[valueKey]
             }" ${checked ? 'checked' : ''} />
                 <span>
@@ -303,7 +305,18 @@ module.exports = {
             </${tag}>`
         }
         // Trả về kết quả là nodeHTML kết hợp với childrenHTML
-        return nodeHTML + (childrenHTML ? `<div ${node[valueKey] ? `child-of="${node[valueKey]}"`: `belongs-to-many="${nameKey}"`}>` + childrenHTML + '</div>' : '')
+        return (
+            nodeHTML +
+            (childrenHTML
+                ? `<div ${
+                      node[valueKey]
+                          ? `child-of="${node[valueKey]}"`
+                          : `belongs-to-many="${nameKey}"`
+                  }>` +
+                  childrenHTML +
+                  '</div>'
+                : '')
+        )
     },
     buildMenuList: (modules) => {
         const menuList = {}
@@ -328,5 +341,25 @@ module.exports = {
             }
         })
         return menuList
+    },
+    checkLinkExist: async (DBLink, value) => {
+        const linkData = await DBLink.findOne({
+            where: {
+                url: value,
+            },
+        })
+        // Cần kiểm tra để check xem có tồn tại không
+        if (!linkData || +id === +linkData.model_id) {
+            return {
+                status: 200,
+                data: value,
+            }
+        }
+
+        return {
+            status: 100,
+            message: 'Đã được sử dụng!',
+            data: '',
+        }
     },
 }

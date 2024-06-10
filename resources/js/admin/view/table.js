@@ -66,19 +66,26 @@ const TABLE = (() => {
     function chooseBelongsToMany() {
         const elements = document.querySelectorAll('[belongs-to-many]')
         for (const element of elements) {
-            const checkboxs = element.querySelectorAll('input[type="checkbox"]')
-            for (const inputCheckbox of checkboxs) {
+            const checkEls = element.querySelectorAll('input[type="checkbox"]')
+            for (const inputCheckbox of checkEls) {
                 inputCheckbox.onchange = (e) => {
                     if (inputCheckbox.checked) {
                         // Click vào chat thì hủy hết con
                         const value = inputCheckbox.value
-                        const listParent = getValueCheckboxParent(inputCheckbox)
+                        const listParent = getValueCheckboxParent(inputCheckbox);
                         for (const parent of listParent) {
-                            
+                            const inputCheckbox = Array.from(checkEls).find(el => {
+                                return +el.value === +parent && !el.checked;
+                            });
+                            if(inputCheckbox){
+                                inputCheckbox.checked = true;
+                            }
                         }
                     } else {
-                        // Click vào chat thì hủy hết con
-                        //
+                        // Kiểm tra lấy tất cả con
+                        element.querySelectorAll(`[child-of="${inputCheckbox.value}"] input:checked`).forEach((el) => {
+                            el.checked = false;
+                        })
                     }
                 }
             }

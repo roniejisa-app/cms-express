@@ -943,11 +943,27 @@ body.menu-small {
     }
 }
 // belongs
-[belongs-to-many]{
+[belongs-to-many] {
     max-height: 200px;
     overflow: auto;
-    label{
+    label {
         width: 100%;
         display: block;
+    }
+    > [list-of] {
+        background: var(--color-main-50);
+        padding: 8px;
+        cursor: pointer;
+    }
+    [list-of] {
+        padding: 4px 8px;
+        cursor: pointer;
+        transition: background-color 300ms ease;
+        &:hover{
+            background-color: var(--color-main-70);
+        }
+        + [child-of] {
+            padding-left: 16px;
+        }
     }
 }

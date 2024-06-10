@@ -2,6 +2,7 @@
 const { Model } = require('sequelize')
 const { chooseBeLongToMany } = require('../../../../utils/fields')
 const { HAS_CHECK_LEVEL } = require('../../../../constants/model')
+const { string } = require('yup')
 module.exports = (sequelize, DataTypes) => {
     class Post extends Model {
         /**
@@ -11,6 +12,12 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            Post.belongsToMany(models.PostCategory, {
+                through: 'post_post_category',
+                foreignKey: 'post_id',
+                otherKey: 'post_category_id',
+                as: 'postCategories',
+            })
         }
 
         static fields() {
@@ -123,6 +130,9 @@ module.exports = (sequelize, DataTypes) => {
                 {
                     name: 'post_category_id',
                     label: 'Danh mục tin tức',
+                    modelName: 'PostCategory',
+                    modelAs: 'postCategories',
+                    modelKey: 'id',
                     keyChild: 'child',
                     keyLabel: 'name',
                     keyValue: 'id',
@@ -131,6 +141,7 @@ module.exports = (sequelize, DataTypes) => {
                         'id',
                         'name',
                         'post_category_id',
+                        'PostCategories',
                         HAS_CHECK_LEVEL,
                         [
                             {

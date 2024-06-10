@@ -174,8 +174,10 @@ module.exports = {
         valueKey,
         labelKey,
         parentName,
+        fn,
         hasCheckLevel = false,
-        modelRelateTo = []
+        modelRelateTo = [],
+        
     ) => {
         return {
             type: 'chooseBeLongToMany',
@@ -195,36 +197,18 @@ module.exports = {
                     tree,
                 }
             },
-            addOrEditPermission: async (
-                item,
-                model,
-                data,
-                mainKey,
-                subKey,
-                fn,
-                idAdd = true
-            ) => {
-                let newData = await Promise.all(
-                    data.map(async function (item) {
-                        if (item) {
-                            const [mainId, subId] = item.split('|')
-                            const filter = {}
-                            filter[mainKey] = mainId
-                            filter[subKey] = subId
-                            return model.findOne({
-                                where: filter,
-                            })
-                        }
-                        return false
+            addOrEditAssociate: async (item, model, data, isAdd = true) => {
+                data = await Promise.all(
+                    data.map((id) => {
+                        return model.findByPk(id)
                     })
                 )
-
-                if (Array.isArray(newData)) {
-                    newData = newData.filter((data) => data)
+                console.log(fn);
+                const newFn = (isAdd ? 'add' : 'set') + fn
+                if (isAdd && !data.length) {
+                    return true
                 }
-
-                fn = (idAdd ? 'add' : 'set') + fn
-                await item[fn](newData)
+                await item[newFn](data)
             },
         }
     },

@@ -166,10 +166,10 @@ module.exports = {
                 }
 
                 if (fields[i].type === FIELD_TYPE_SLUG) {
-                    const checkLink = await checkLinkExist({
-                        value: body[fields[i].name],
-                    })
-
+                    const checkLink = await checkLinkExist(
+                        DB['Link'],
+                        body[fields[i].name]
+                    )
                     if (checkLink.status === 200) {
                         fields[i].slugData(
                             item.id,
@@ -215,7 +215,7 @@ module.exports = {
             if (ARRAY_TYPE_HAS_MULTIPLE.includes(fields[i].type)) {
                 include.push({
                     model: DB[fields[i].modelName],
-                    as: fields[i].name,
+                    as: fields[i].modelAs,
                 })
             }
             if (fields[i].type === FIELD_TYPE_PERMISSION) {
@@ -688,7 +688,7 @@ module.exports = {
         }, [])
         fieldExcels = ['STT', ...fieldExcels]
         // Lấy ra từng bảng
-        const data = [] 
+        const data = []
         workbook.eachSheet((worksheet) => {
             // Lấy từng hàng bắt đầu từ cột số 2 bỏ qua cột số 1,2 vì là tên cột và dữ liệu từng cột
             worksheet.eachRow((row, rowNumber) => {
