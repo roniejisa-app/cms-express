@@ -183,7 +183,6 @@ module.exports = {
             type: 'chooseBeLongToMany',
             modelName: modelName,
             data: async (model) => {
-                console.log(model);
                 const results = await model.findAll({
                     attributes: [valueKey, labelKey, parentName],
                 })
@@ -203,7 +202,6 @@ module.exports = {
                         return model.findByPk(id)
                     })
                 )
-                console.log(fn);
                 const newFn = (isAdd ? 'add' : 'set') + fn
                 if (isAdd && !data.length) {
                     return true

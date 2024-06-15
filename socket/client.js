@@ -7,7 +7,6 @@ const socketClient = async (io) => {
         socket.on('chat-now', ({ room, content, username }) => {
             const rooms = io.of('/').adapter.rooms
             const roomData = rooms.get(room)
-            console.log(roomData)
             io.to(room).emit('send-chat', {
                 username,
                 content,

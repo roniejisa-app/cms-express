@@ -119,7 +119,7 @@ class EDITOR extends HTMLElement {
 
                 */
             // console.log(this.toolbars)
-            console.log(this.arrayUsed)
+            // console.log(this.arrayUsed)
             for (const [type, obj] of Object.entries(this.toolbars)) {
                 let checkActive = false
                 let value = ''
@@ -209,7 +209,6 @@ class EDITOR extends HTMLElement {
 
     getParentAndActive(targetElement, arrEl) {
         let currentEl = targetElement
-        console.log(currentEl);
         while (currentEl !== null && currentEl.closest('.content')) {
             arrEl.push(currentEl)
             currentEl = currentEl.parentElement

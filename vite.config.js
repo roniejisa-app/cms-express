@@ -3,25 +3,6 @@ import { defineConfig } from 'vite'
 const name = process.env.BUILD_TARGET
 // Parse command-line arguments
 
-function preserveDirectoryStructure() {
-    return {
-        name: 'preserve-directory-structure',
-        generateBundle(options, bundle) {
-            console.log(options)
-            for (const [fileName, chunkInfo] of Object.entries(bundle)) {
-                // console.log(fileName, chunkInfo);
-                // if (chunkInfo.type === 'asset' && fileName.endsWith('.css')) {
-                //   const originalPath = cssFiles.find(file => file.path.endsWith(fileName.replace(/assets\//, '')))?.name;
-                //   if (originalPath) {
-                //     const newFileName = path.join('assets', originalPath);
-                //     bundle[newFileName] = chunkInfo;
-                //     delete bundle[fileName];
-                //   }
-                // }
-            }
-        },
-    }
-}
 const plugins = {
     admin: {
         files: {

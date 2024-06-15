@@ -43,7 +43,6 @@ class MakeMigration {
             }
         )
         // Ở chỗ này bắt đầu thêm nhưng file cần cho plugin
-        // console.log();
         // fs.mkdir(file, data)
     }
 }

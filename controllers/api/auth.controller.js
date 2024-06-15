@@ -8,7 +8,6 @@ const bcrypt = require('bcrypt')
 
 const authController = {
     login: async (req, res) => {
-        console.log(req.body)
         const { email, password } = req.body
         const user = await User.findOne({ where: { email } })
         if (!user) {
@@ -110,7 +109,6 @@ const authController = {
             },
         })
         const userData = { ...user.dataValues }
-        console.log()
         return res.status(200).json({
             status: 200,
             message: 'Success',
