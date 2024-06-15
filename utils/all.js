@@ -330,14 +330,14 @@ module.exports = {
                     '_manager'
                 if (!menuList[key]) {
                     menuList[key] = {
-                        ...data.managerModule.dataValues,
+                        ...(data.managerModule.dataValues ? data.managerModule.dataValues : data.managerModule),
                         childs: [],
                     }
                 }
                 delete data.managerModule
-                menuList[key].childs.push({ ...data.dataValues })
+                menuList[key].childs.push({ ...data.dataValues ? data.dataValues : data })
             } else {
-                menuList['1' + data.id] = { ...data.dataValues }
+                menuList['1' + data.id] = { ...data.dataValues ? data.dataValues : data }
             }
         })
         return menuList

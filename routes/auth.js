@@ -2,6 +2,8 @@ var express = require('express');
 const authController = require('@controllers/auth.controller');
 const passport = require('passport');
 var router = express.Router();
+const Cache = require('@utils/cache');
+const authMiddleware = require('../middlewares/auth.middleware');
 
 router.get("/login", authController.login);
 router.post('/login', passport.authenticate('local', {
@@ -35,7 +37,8 @@ router.get('/auth/google/callback', passport.authenticate('google', {
     })
 })
 
-router.post('/logout', (req, res) => {
+router.post('/logout',authMiddleware, async (req, res) => {
+    await Cache.clearAllCache();
     req.logout((err) => {})
     return res.redirect('/login');
 })

@@ -38,6 +38,8 @@ const validateMiddleware = require('./middlewares/validate.middleware')
 const moduleListener = require('./listeners/module')
 //Import load alias
 const loadAlias = require('./alias/load')
+const Cache = require('./utils/cache')
+const { CACHE_USER_LOGGED } = require('./constants/cache')
 var app = express()
 app.use(
     session({
@@ -99,7 +101,11 @@ app.use(
                     'https://www.svgrepo.com',
                     'data:',
                 ],
-                'script-src': ["'self'", 'https://cdn.jsdelivr.net','https://cdn.tailwindcss.com/'],
+                'script-src': [
+                    "'self'",
+                    'https://cdn.jsdelivr.net',
+                    'https://cdn.tailwindcss.com/',
+                ],
             },
         },
     })
@@ -112,32 +118,35 @@ passport.serializeUser(function (user, done) {
 })
 
 passport.deserializeUser(async function (id, done) {
-    const user = await User.findOne({
-        where: {
-            id,
-        },
-        include: {
-            model: Role,
-            as: 'roles',
+    const user = await Cache.findOrCreate(CACHE_USER_LOGGED + id, async () => {
+        const user = await User.findOne({
+            where: {
+                id,
+            },
             include: {
-                model: RoleModulePermission,
-                as: 'roleModulePermissions',
+                model: Role,
+                as: 'roles',
                 include: {
-                    model: ModulePermission,
-                    as: 'modulePermission',
-                    include: [
-                        {
-                            model: Module,
-                            as: 'module',
-                        },
-                        {
-                            model: Permission,
-                            as: 'permission',
-                        },
-                    ],
+                    model: RoleModulePermission,
+                    as: 'roleModulePermissions',
+                    include: {
+                        model: ModulePermission,
+                        as: 'modulePermission',
+                        include: [
+                            {
+                                model: Module,
+                                as: 'module',
+                            },
+                            {
+                                model: Permission,
+                                as: 'permission',
+                            },
+                        ],
+                    },
                 },
             },
-        },
+        })
+        return user
     })
     done(null, user)
 })
@@ -159,7 +168,7 @@ for (let i = 0; i < files.length; i++) {
     const router = require(path.join(files[i]))
     app.use('/', router)
 }
-// app.use(authMiddleware);
+app.use(authMiddleware)
 app.use('/admin', adminRouter)
 app.use('/crawler', crawlerRouter)
 app.use('/api', apiRouter)

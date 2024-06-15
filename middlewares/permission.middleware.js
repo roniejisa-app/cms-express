@@ -1,9 +1,9 @@
 const { getAllPermissionOfUser } = require('@utils/permission');
 // Kiêm tra phần quyền
-module.exports = (req, res, next) => {
+module.exports =async (req, res, next) => {
     try {
         const [_, admin, module, action, id] = req.originalUrl.split('/');
-        const permission = getAllPermissionOfUser(req.user);
+        const permission =await getAllPermissionOfUser(req.user);
         if (permission.filter(permission => permission.match(/.+.view/)).length) {
             req.permission = permission;
             var flag = false;

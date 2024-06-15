@@ -1,5 +1,11 @@
 const { createClient } = require('redis')
 const { Module, ManagerModule } = require('@models/index')
+const {
+    CACHE_ADMIN_MENU,
+    CACHE_USER_PERMISSION,
+    CACHE_ADMIN_MENU_LIST,
+    CACHE_USER_LOGGED,
+} = require('../constants/cache')
 
 class CacheInstance {
     constructor() {
@@ -8,7 +14,9 @@ class CacheInstance {
 
     async connect() {
         if (!this.connectionPromise) {
-            this.connectionPromise = await createClient()
+            this.connectionPromise = await createClient({
+                url: process.env.REDIS_URL,
+            })
                 .on('error', (err) => console.log('Redis Client Error', err))
                 .connect()
         }
@@ -20,8 +28,8 @@ var Cache = new CacheInstance().connect()
 
 module.exports = {
     Cache,
-    getMenu: async () => {
-        return JSON.parse(await (await Cache).get('menus'))
+    getMenu: async (user) => {
+        return JSON.parse(await (await Cache).get(CACHE_ADMIN_MENU+user.id))
     },
     setMenu: async (req, clearCache = false) => {
         if (!req.menus || !Array.isArray(req.menus) || clearCache) {
@@ -33,7 +41,7 @@ module.exports = {
                     },
                 ],
             })
-            module.exports.set('menus', req.menus)
+            module.exports.set(CACHE_ADMIN_MENU+req.user.id, req.menus)
         }
     },
     set: async (key, value) => {
@@ -44,12 +52,12 @@ module.exports = {
             return false
         }
     },
-    get: async (key) => {
+    get: async (key, defaultValue = false) => {
         let data = await (await Cache).get(key)
         if (JSON.parse(data) === 'true' || JSON.parse(data) === false) {
             return JSON.parse(data) === 'true'
         }
-        return data ? JSON.parse(data) : false
+        return data ? JSON.parse(data) : defaultValue
     },
     findOrCreate: async (key, cb, clearCache = false, ...args) => {
         let data = await module.exports.get(key)
@@ -74,6 +82,14 @@ module.exports = {
         } else {
             return cb
         }
+    },
+    clearAllCache: async (req, res) => {
+        await Promise.all([
+            (await Cache).del(CACHE_USER_PERMISSION + req.users.id),
+            (await Cache).del(CACHE_ADMIN_MENU + req.users.id),
+            (await Cache).del(CACHE_ADMIN_MENU_LIST + req.users.id),
+            (await Cache).del(CACHE_USER_LOGGED + req.users.id)
+        ])
     },
     clearCache: async (req, res) => {
         await module.exports.setMenu(req, true)

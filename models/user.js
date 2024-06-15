@@ -114,6 +114,8 @@ module.exports = (sequelize, DataTypes) => {
                 {
                     name: 'roles',
                     label: 'Vai trò',
+                    modelName:"Role",
+                    modelAs:"roles",
                     ...chooseMultiAssoc('Role', 'id', 'name', 'Roles'),
                     show: false,
                     showForm: true,

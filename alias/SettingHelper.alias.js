@@ -1,6 +1,7 @@
 const Setting = require('@mongodb/setting.model')
 const { findOrCreate } = require('@utils/cache')
 const functionHelperInstance = require('./FunctionHelper.alias')
+const { CACHE_CMS_HELPER } = require('../constants/cache')
 class SettingHelper {
     constructor() {
         this.settings = null
@@ -14,7 +15,7 @@ class SettingHelper {
     }
     async loadAlias() {
         return findOrCreate(
-            'cms_setting_helper',
+            CACHE_CMS_HELPER,
             async () => {
                 const model = new Setting()
                 const data = await model.DB.find({}, { key: 1, content: 1 })

@@ -6,6 +6,7 @@ const db = require('@utils/sequelize');
 const fs = require('fs');
 const { recursiveFolder, recursiveHTMLFolder } = require('@utils/all');
 const Cache = require('@utils/cache');
+const { CACHE_CLEAR_CACHE_ASIDE_FOLDER, CACHE_ASIDE_FOLDER } = require('../constants/cache');
 const IS_NOT_ADD = false;
 module.exports = {
     index: async (req, res, next) => {
@@ -89,8 +90,8 @@ module.exports = {
             } catch (e) {
                 return res.redirect('/404');
             }
-            let clearCache = await Cache.get('clearCacheAsideFolder');
-            let asideFolders = await Cache.findOrCreate('asideFolders', async function () {
+            let clearCache = await Cache.get(CACHE_CLEAR_CACHE_ASIDE_FOLDER);
+            let asideFolders = await Cache.findOrCreate(CACHE_ASIDE_FOLDER, async function () {
                 let asideFolders = [];
                 try {
                     asideFolders = await Media.findAll({
@@ -104,7 +105,7 @@ module.exports = {
                 } catch (e) {
                     asideFolders = [];
                 }
-                await Cache.set('clearCacheAsideFolder', false)
+                await Cache.set(CACHE_CLEAR_CACHE_ASIDE_FOLDER, false)
                 return recursiveFolder(asideFolders);
             }, clearCache);
             res.render('media/index', {
@@ -153,7 +154,7 @@ module.exports = {
             })
             let pathAbsolute = pathStarts;
             const dataFolder = createFolder(pathAbsolute);
-            await Cache.set('clearCacheAsideFolder', true);
+            await Cache.set(CACHE_CLEAR_CACHE_ASIDE_FOLDER, true);
             if (dataFolder.status) {
                 try {
                     const folder = await Media.create({
@@ -293,7 +294,7 @@ module.exports = {
                     id
                 }
             })
-            await Cache.set('clearCacheAsideFolder', true);
+            await Cache.set(CACHE_CLEAR_CACHE_ASIDE_FOLDER, true);
             res.json({
                 status: 200,
                 folderName,
@@ -375,7 +376,7 @@ module.exports = {
             })
         }
         try {
-            await Cache.set('clearCacheAsideFolder', true);
+            await Cache.set(CACHE_CLEAR_CACHE_ASIDE_FOLDER, true);
             await Media.restore({
                 where: {
                     id: {
@@ -403,7 +404,7 @@ module.exports = {
                     id
                 }
             })
-            await Cache.set('clearCacheAsideFolder', true)
+            await Cache.set(CACHE_CLEAR_CACHE_ASIDE_FOLDER, true)
             res.json({
                 status: 200,
                 message: "Xóa thành công!"
@@ -424,7 +425,7 @@ module.exports = {
             })
         }
         try {
-            await Cache.set('clearCacheAsideFolder', true)
+            await Cache.set(CACHE_CLEAR_CACHE_ASIDE_FOLDER, true)
             await Media.destroy({
                 where: {
                     id: {
