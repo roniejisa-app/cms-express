@@ -1,6 +1,6 @@
 const DB = require('@mongodb/model')
 const model = new DB.Setting().DB
-const csrf = require('csurf');
+const csrf = require('csurf')
 
 const settingController = {
     index: async (req, res) => {
@@ -30,6 +30,13 @@ const settingController = {
     },
     store: async (req, res) => {
         try {
+            // cần kiểm tra nếu đã tồn tại thì không được tọa key đó nữa
+            const { key } = req.body
+            const exist = await model.findOne({ key })
+            if (exist) {
+                throw new Error('Key đặt đã tồn tại')
+            }
+
             const data = await model.create(req.body)
             return res.status(200).json({
                 status: 200,
@@ -37,10 +44,10 @@ const settingController = {
                 message: 'Thêm cài đặt thành công!',
             })
         } catch (e) {
-            return res.status(100).json({
+            return res.status(200).json({
                 errors: {
                     status: 100,
-                    message: e.errorResponse.errmsg,
+                    message: e.message,
                 },
             })
         }
@@ -65,7 +72,7 @@ const settingController = {
                 message: 'Cập nhật thành công!',
             })
         } catch (e) {
-            return res.status(100).json({
+            return res.status(200).json({
                 errors: {
                     status: 100,
                     message: e.errorResponse.errmsg,

@@ -42,6 +42,7 @@ module.exports = (sequelize, DataTypes) => {
                     showForm: true,
                     filterDefault: true,
                     positionSidebar: false,
+                    api:true,
                     excel: {
                         label: 'Tên tin tức',
                         key: "name",

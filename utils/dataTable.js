@@ -136,7 +136,7 @@ async function getDataApi(req) {
             },
         })
         return data
-    })
+    },true)
     const { model, name, name_show, type } = Array.from(modules).find(
         (moduleItem) => moduleItem.name === module
     )

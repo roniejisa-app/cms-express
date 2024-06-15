@@ -120,6 +120,8 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     name: 'permissions',
+                    modelName: 'Permission',
+                    modelAs: 'permissions',
                     ...chooseMultiAssoc(
                         'Permission',
                         'id',

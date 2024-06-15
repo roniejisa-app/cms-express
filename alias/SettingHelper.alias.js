@@ -30,12 +30,19 @@ class SettingHelper {
     }
 
     getSetting(key, type = null) {
-        const data = this.settings[key] ?? ''
-        switch (type) {
-            case 'image':
-                return functionHelperInstance.getImage(data)
-            default:
-                return data
+        try{
+            const data = this.settings[key] ?? ''
+            switch (type) {
+                case 'image':
+                    return functionHelperInstance.getImage(data)
+                default:
+                    return data
+            }
+        }catch(e){
+            console.log("Có lỗi ở đây!")
+            console.log(e);
+            console.log(key);
+            return ''
         }
     }
 
