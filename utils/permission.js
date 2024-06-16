@@ -4,7 +4,6 @@ const { CACHE_USER_PERMISSION } = require('../constants/cache')
 module.exports = {
     getAllPermissionOfUser: async (user) => {
         // Chỗ này cần lưu cache
-
         var permissions = await Cache.get(CACHE_USER_PERMISSION + user.id, [])
 
         if (permissions.length > 0) {
@@ -22,7 +21,7 @@ module.exports = {
             })
         })
 
-        await Cache.set(CACHE_USER_PERMISSION, permissions)
+        await Cache.set(CACHE_USER_PERMISSION+user.id, permissions)
         return permissions
     },
 }

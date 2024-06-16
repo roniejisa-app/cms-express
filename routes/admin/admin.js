@@ -83,7 +83,7 @@ router.use(permissionMiddleware, async (req, res, next) => {
 })
 router.get('/', adminController.dashboard)
 router.post('/check-link', adminController.checkLink)
-router.get('/clear-cache', Cache.clearCache)
+router.get('/clear-cache', Cache.clearAllCache)
 router.use('/medias', mediaRouter)
 router.use(settingRouter)
 router.use(moduleRouter)

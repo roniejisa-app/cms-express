@@ -30,7 +30,6 @@ const {
     Permission,
     Link,
 } = require('./models/index')
-// const { getAllPermissionOfUser } = require('./utils/permission');
 const passportLocal = require('./passports/passport.local')
 const authMiddleware = require('./middlewares/auth.middleware')
 const passportGoogle = require('./passports/passport.google')
