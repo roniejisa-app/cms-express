@@ -183,7 +183,6 @@ module.exports = {
                 errors
             })
         }
-
     },
     addFile: async (req, res) => {
         if (req.files && req.files.length) {

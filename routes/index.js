@@ -13,23 +13,24 @@ router.get('/', function (req, res, next) {
 })
 
 router.get('/test', async function (req, res, next) {
-    let data = await Module.findAll({
-        include: [
-            {
-                model: ManagerModule,
-                as: 'managerModule',
-            },
-        ],
-    })
-    const arr = Array.from(data).map((i) => {
-        return {
-            ...i.dataValues,
-            managerModule: i.managerModule
-                ? { ...i.managerModule.dataValues }
-                : null,
-        }
-    })
-    res.status(200).json({ message: 'ok' })
+    // let data = await Module.findAll({
+    //     include: [
+    //         {
+    //             model: ManagerModule,
+    //             as: 'managerModule',
+    //         },
+    //     ],
+    // })
+    // const arr = Array.from(data).map((i) => {
+    //     return {
+    //         ...i.dataValues,
+    //         managerModule: i.managerModule
+    //             ? { ...i.managerModule.dataValues }
+    //             : null,
+    //     }
+    // })
+    const pathToFolder = process.cwd() + process.env.FOLDER_UPLOAD_SERVER
+    res.status(200).json({ message: pathToFolder })
 })
 // Test gửi mail
 router.get('/send-mail', async (req, res) => {
