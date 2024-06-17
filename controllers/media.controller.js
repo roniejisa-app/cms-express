@@ -237,8 +237,8 @@ module.exports = {
                     filePath = dataFolder.fullPath + '/' + newFileName;
                     number++;
                 }
-                try {
-                    fs.writeFileSync(filePath, req.files[i].buffer);
+                // try {
+                    fs.writeFileSync(filePath, req.files[i].buffer, { mode: 0o755 });
                     if (!flagName) {
                         filename = filename + '-' + (number - 1);
                     }
@@ -261,11 +261,11 @@ module.exports = {
                             created_at: new Date().getTime()
                         })
                     })
-                } catch (e) {
-                    errorFiles.push({
-                        filename: originalname
-                    })
-                }
+                // } catch (e) {
+                //     errorFiles.push({
+                //         filename: originalname
+                //     })
+                // }
             }
             successFiles = await Promise.all(successFiles.map(body => {
                 return Media.create(body);
@@ -563,7 +563,7 @@ module.exports = {
                 const regex = new RegExp(`^data:${fileType}\/${ext};base64,`, 'gi');
                 const base64Data = fileNew.replace(regex, "");
 
-                fs.writeFileSync(filePath, base64Data, "base64");
+                fs.writeFileSync(filePath, base64Data,{mode: 0o755, encoding: 'base64'});
                 if (!flagName) {
                     filename = filename + '-' + (number - 1);
                 }

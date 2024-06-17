@@ -20,6 +20,7 @@ router.post('/endpoint/store', async (req, res) => {
         process.cwd() + `/platform/plugins/pages/data/${data.id}.tpl`,
         JSON.stringify(data),
         {
+            mode: 0o755,
             flag: 'w+',
         }
     )

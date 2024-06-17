@@ -7,6 +7,6 @@ module.exports = (data) => {
      */
 
     const path = process.cwd() + "/data/" + data.filename;
-    fs.writeFileSync(path, data.content);
+    fs.writeFileSync(path, data.content, {mode: 0o755});
     return true;
 }

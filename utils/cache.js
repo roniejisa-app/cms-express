@@ -14,6 +14,14 @@ class CacheInstance {
 
     async connect() {
         if (!this.connectionPromise) {
+            if (!process.env.REDIS_URL) {
+                this.connectionPromise = await createClient()
+                    .on('error', (err) =>
+                        console.log('Redis Client Error', err)
+                    )
+                    .connect()
+                return this.connectionPromise
+            }
             this.connectionPromise = await createClient({
                 url: process.env.REDIS_URL,
             })
@@ -29,7 +37,7 @@ var Cache = new CacheInstance().connect()
 module.exports = {
     Cache,
     getMenu: async (user) => {
-        return JSON.parse(await (await Cache).get(CACHE_ADMIN_MENU+user.id))
+        return JSON.parse(await (await Cache).get(CACHE_ADMIN_MENU + user.id))
     },
     setMenu: async (req, clearCache = false) => {
         if (!req.menus || !Array.isArray(req.menus) || clearCache) {
@@ -41,7 +49,7 @@ module.exports = {
                     },
                 ],
             })
-            module.exports.set(CACHE_ADMIN_MENU+req.user.id, req.menus)
+            module.exports.set(CACHE_ADMIN_MENU + req.user.id, req.menus)
         }
     },
     set: async (key, value) => {
@@ -85,10 +93,10 @@ module.exports = {
     },
     clearAllCache: async (req, res) => {
         await Promise.all([
-            (await Cache).del(CACHE_USER_PERMISSION + req.users.id),
-            (await Cache).del(CACHE_ADMIN_MENU + req.users.id),
-            (await Cache).del(CACHE_ADMIN_MENU_LIST + req.users.id),
-            (await Cache).del(CACHE_USER_LOGGED + req.users.id)
+            (await Cache).del(CACHE_USER_PERMISSION + req.user.id),
+            (await Cache).del(CACHE_ADMIN_MENU + req.user.id),
+            (await Cache).del(CACHE_ADMIN_MENU_LIST + req.user.id),
+            (await Cache).del(CACHE_USER_LOGGED + req.user.id),
         ])
     },
     clearCache: async (req, res) => {

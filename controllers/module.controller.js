@@ -14,9 +14,12 @@ const controllers = {
         destroyMulti: (req, res, params) =>
             SQLController.destroyMulti(req, res, params),
         filter: (req, res, params) => SQLController.filter(req, res, params),
-        exampleExcel: (req, res, params) => SQLController.exampleExcel(req, res, params),
-        downloadExcel: (req, res, params) => SQLController.downloadExcel(req,res, params),
-        storeExcel: (req, res, params) => SQLController.storeExcel(req,res, params),
+        exampleExcel: (req, res, params) =>
+            SQLController.exampleExcel(req, res, params),
+        downloadExcel: (req, res, params) =>
+            SQLController.downloadExcel(req, res, params),
+        storeExcel: (req, res, params) =>
+            SQLController.storeExcel(req, res, params),
     },
     NOSQL: {
         index: (req, res, params) => NoSqlController.index(req, res, params),
@@ -39,7 +42,7 @@ module.exports = {
     },
     filter: async (req, res) => {
         const { type, ...params } = await dataModule(req)
-        return controllers[type.toUpperCase()].filter(req, res, params)
+        return await controllers[type.toUpperCase()].filter(req, res, params)
     },
     /**
      *
@@ -78,18 +81,20 @@ module.exports = {
                 return +a.order - +b.order
             })
 
-        console.log( res.render('admin/add', {
-            model,
-            module,
-            name,
-            name_show,
-            fields,
-            id,
-            leftFields,
-            rightFields,
-            req,
-            csrfToken: req.csrfToken(),
-        }));
+        console.log(
+            res.render('admin/add', {
+                model,
+                module,
+                name,
+                name_show,
+                fields,
+                id,
+                leftFields,
+                rightFields,
+                req,
+                csrfToken: req.csrfToken(),
+            })
+        )
         return res.render('admin/add', {
             model,
             module,
@@ -153,12 +158,12 @@ module.exports = {
         const { type, ...params } = await dataModule(req)
         return controllers[type.toUpperCase()].exampleExcel(req, res, params)
     },
-    downloadExcel: async(req,res) => {
+    downloadExcel: async (req, res) => {
         const { type, ...params } = await dataModule(req)
         return controllers[type.toUpperCase()].downloadExcel(req, res, params)
     },
-    storeExcel: async(req,res) => {
+    storeExcel: async (req, res) => {
         const { type, ...params } = await dataModule(req)
         return controllers[type.toUpperCase()].storeExcel(req, res, params)
-    }
+    },
 }

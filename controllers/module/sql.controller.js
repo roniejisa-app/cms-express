@@ -390,7 +390,7 @@ module.exports = {
                 })
             }
         }
-        
+
         await modelMain.destroy({
             where: {
                 id,
@@ -513,7 +513,6 @@ module.exports = {
         )
         return res.json({
             status: 200,
-            data: listData,
             html,
         })
     },

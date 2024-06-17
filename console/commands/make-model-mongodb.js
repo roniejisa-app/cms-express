@@ -36,6 +36,7 @@ class MakeModelMongoDB {
                 .toString()
                 .replaceAll('MODEL_NAME', this.modelName),
             {
+                mode: 0o755,
                 flag: 'w+',
             }
         )

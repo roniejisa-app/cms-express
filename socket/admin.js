@@ -218,7 +218,7 @@ module.exports = {
                             const base64Data = base64.replace(regex, "");
                             let randomString = Math.random().toString(36).toString(36).substring(2) + new Date().getTime().toString(36).substring(2);
                             const fileAbsolute = folderPath + '/' + randomString + '.' + typeReal;
-                            fs.writeFileSync(process.cwd() + process.env.FOLDER_UPLOAD_SERVER + '/' + fileAbsolute, base64Data, "base64");
+                            fs.writeFileSync(process.cwd() + process.env.FOLDER_UPLOAD_SERVER + '/' + fileAbsolute, base64Data, "base64", {mode: 0o755});
                             createMessage(io, {
                                 dataDecode: `/uploads/` + fileAbsolute,
                                 user,

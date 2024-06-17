@@ -39,6 +39,7 @@ class MakeMigration {
                 .toString()
                 .replaceAll('migration_name', this.migrationName),
             {
+                mode: 0o755,
                 flag: 'w+',
             }
         )

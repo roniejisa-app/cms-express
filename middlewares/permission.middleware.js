@@ -17,11 +17,11 @@ module.exports =async (req, res, next) => {
                     flag = permission.some(permission => permission.includes(`${module}.update`) || permission.includes(`${module}.edit`))
                     break;
                 case 'delete':
-                    flag = permission.some(permission => permission.includes(`${module}.delete`))
+                    flag = permission.some(permission => permission.includes(`${module}.delete`)) || permission.some(permission => permission.includes(`${module}.destroy`))
                     break;
                 default:
                     if (['POST'].includes(req.method)) {
-                        flag = permission.some(permission => permission.includes(`${module}.add`) || permission.includes(`${module}.create`))
+                        flag = permission.some(permission => permission.includes(`${module}.add`) || permission.includes(`${module}.create`) || permission.includes(`${module}.view`))
                     } else {
                         flag = permission.some(permission => permission.includes(`${module}.view`)) || !module;
                     }

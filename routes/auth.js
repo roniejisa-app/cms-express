@@ -38,7 +38,7 @@ router.get('/auth/google/callback', passport.authenticate('google', {
 })
 
 router.post('/logout',authMiddleware, async (req, res) => {
-    await Cache.clearAllCache();
+    await Cache.clearAllCache(req,res);
     req.logout((err) => {})
     return res.redirect('/login');
 })

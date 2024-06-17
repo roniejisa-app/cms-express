@@ -37,6 +37,7 @@ class MakePlugin {
             pathPlugin + '/readme.md',
             '# Làm plugin thì phải có hướng dẫn sử dụng mới là plugin nhé 🤣',
             {
+                mode: 0o755,
                 flag: 'w+',
             }
         )
@@ -46,6 +47,7 @@ class MakePlugin {
             pathPlugin + '/config.json',
             configFile.toString().replaceAll('plugin_name', this.name),
             {
+                mode: 0o755,
                 flag: 'w+',
             }
         )
@@ -59,6 +61,7 @@ class MakePlugin {
             pathPlugin + '/routes/index.js',
             routerTemplate.toString().replaceAll("router_plugin",this.name),
             {
+                mode: 0o755,
                 flag: 'w+',
             }
         )
