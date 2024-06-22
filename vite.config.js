@@ -53,6 +53,15 @@ const plugins = {
         },
         dir: resolve(__dirname, './public/core/login'),
     },
+    plugins: {
+        files: {
+            css: [resolve(__dirname, './resources/plugin/style.scss')],
+            js: [
+                resolve(__dirname, './resources/plugin/script.js'),
+            ],
+        },
+        dir: resolve(__dirname, './public/core/plugin'),
+    },
 }
 
 const getDir = (type) => {

@@ -8,14 +8,16 @@ class FunctionHelper {
     init() {}
 
     getImage(data) {
-        const checkValue = checkHelperInstance.isString(data);
-        if(checkValue){
+        try{
             const obj = JSON.parse(data);
             const checkObj = checkHelperInstance.isObject(obj);
             if(!checkObj) return this.defaultImage;
             if(checkObj && !obj.path_absolute) return this.defaultImage;
             if(checkObj && obj.path_absolute && obj.path_absolute.startsWith("/")) return (this.baseUrl + obj.path_absolute);
             if(checkObj && obj.path_absolute) return process.env.BASE_URL + '/' + obj.path_absolute;
+        }catch(error){
+            // Kiểm tra nếu có http thì trả về data còn không thì trả thẳng bằng với defaultImage
+            if(data.startsWith('http')) return data;
         }
         return this.defaultImage;
     }

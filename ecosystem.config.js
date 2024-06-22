@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
         {
-            name: process.env.APP_NAME || 'RONIEJISA',
+            name: process.env.APP_NAME || 'CMS EXPRESS JS',
             script: './bin/www',
             instances: 1,
             autorestart: true,

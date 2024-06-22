@@ -13,3 +13,4 @@ Cha Giao diện cấp 1
 Con: Giao diện cấp 1
 Cha: Cài dặt
 
+Muốn cài đặt plugin thì bắt buộc tài khoản này phải được thêm dấu hiệu có thể cài plugin trong code bằng tay không có cách nào khác

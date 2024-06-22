@@ -1,7 +1,5 @@
 const DB = require('@mongodb/model')
 const model = new DB.Setting().DB
-const csrf = require('csurf')
-
 const settingController = {
     index: async (req, res) => {
         try {

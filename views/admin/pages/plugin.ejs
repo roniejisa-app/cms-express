@@ -1,0 +1,20 @@
+<div class="plugins">
+    <% plugins.forEach (({label, name, image, description, installed}) => {%>
+    <div class="plugin">
+        <div class="info">
+            <span>
+                <img src="<%= FunctionHelper.getImage(image) %>" />
+            </span>
+            <div>
+                <h3><%= label || name %></h3>
+                <p><%= description %></p>
+            </div>
+        </div>
+        <div>
+            <button class="btn-install wave" <%=installed ? 'disabled' : '' %> data-name="<%= name %>">
+                <span><%= installed ? 'Đã cài đặt' : 'Cài đặt' %></span>
+            </button>
+        </div>
+    </div>
+    <% }) %>
+</div>

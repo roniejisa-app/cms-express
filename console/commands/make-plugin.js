@@ -32,6 +32,22 @@ class MakePlugin {
         if (!checkPathPlugin) {
             fs.mkdirSync('platform/plugins/' + this.name)
         }
+        // Tạo file version.json
+
+        fs.writeFileSync(
+            pathPlugin + '/version.json',
+            JSON.stringify({
+                version: '1.0.0',
+                name: this.name,
+                description: 'Plugin ' + this.name,
+                author: 'Làm plugin thì phải có hướng dẫn sử dụng là plugin nhé 🤣',
+                license: 'MIT',
+            }),
+            {
+                mode: 0o755,
+                flag: 'w+',
+            }
+        )
         // Readme
         fs.writeFileSync(
             pathPlugin + '/readme.md',
@@ -59,7 +75,7 @@ class MakePlugin {
         )
         fs.writeFileSync(
             pathPlugin + '/routes/index.js',
-            routerTemplate.toString().replaceAll("router_plugin",this.name),
+            routerTemplate.toString().replaceAll('router_plugin', this.name),
             {
                 mode: 0o755,
                 flag: 'w+',

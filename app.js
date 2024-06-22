@@ -89,24 +89,25 @@ app.use(compression())
 // Đăng ký cho sử dụng các link vào
 app.use(
     helmet({
-        contentSecurityPolicy: {
-            directives: {
-                'img-src': [
-                    "'self'",
-                    'https://cdn.jsdelivr.net',
-                    'https://picsum.photos',
-                    'https://fastly.picsum.photos',
-                    'blob:',
-                    'https://www.svgrepo.com',
-                    'data:',
-                ],
-                'script-src': [
-                    "'self'",
-                    'https://cdn.jsdelivr.net',
-                    'https://cdn.tailwindcss.com/',
-                ],
-            },
-        },
+        contentSecurityPolicy: false,
+        // contentSecurityPolicy: {
+        //     directives: {
+        //         'img-src': [
+        //             "'self'",
+        //             'https://cdn.jsdelivr.net',
+        //             'https://picsum.photos',
+        //             'https://fastly.picsum.photos',
+        //             'blob:',
+        //             'https://www.svgrepo.com',
+        //             'data:',
+        //         ],
+        //         'script-src': [
+        //             "'self'",
+        //             'https://cdn.jsdelivr.net',
+        //             'https://cdn.tailwindcss.com/',
+        //         ],
+        //     },
+        // },
     })
 )
 app.use(passport.initialize())
@@ -167,7 +168,7 @@ for (let i = 0; i < files.length; i++) {
     const router = require(path.join(files[i]))
     app.use('/', router)
 }
-app.use(authMiddleware)
+// app.use(authMiddleware)
 app.use('/admin', adminRouter)
 app.use('/crawler', crawlerRouter)
 app.use('/api', apiRouter)

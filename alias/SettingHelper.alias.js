@@ -40,10 +40,8 @@ class SettingHelper {
                     return data
             }
         }catch(e){
-            console.log("Có lỗi ở đây!")
-            console.log(e);
-            console.log(key);
-            return ''
+            console.log("Có lỗi redis " + key )
+            return '';
         }
     }
 

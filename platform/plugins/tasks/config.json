@@ -1,5 +1,9 @@
 {
-    "data": "roniejisa/tasks",
+    "label": "Công việc",
+    "name": "tasks",
     "author": "roniejisa",
-    "version": "1.0"
+    "dateUpdate": "22/06/2024",
+    "image": "https://i.ibb.co/0cQkxQx/roniejisa.png",
+    "description": "Xử lý vấn đề liên quan đến todo list dễ dàng thêm sửa xóa",
+    "version": "0.0.1"
 }

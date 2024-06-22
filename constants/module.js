@@ -10,6 +10,17 @@ const ARRAY_TYPE_HAS_DATA = [
     'chooseBeLongToMany',
 ]
 const IS_NOT_ADD = false
+
+const ARRAY_LIST_MODULE_ROOT = [
+    'roles',
+    'users',
+    'permissions',
+    'modules',
+    'medias',
+    'settings',
+    'manager_modules',
+]
+
 module.exports = {
     FIELD_TYPE_SELECT_ASSOC,
     FIELD_TYPE_INTEGER,
@@ -18,4 +29,5 @@ module.exports = {
     ARRAY_TYPE_HAS_DATA,
     ARRAY_TYPE_HAS_MULTIPLE,
     IS_NOT_ADD,
+    ARRAY_LIST_MODULE_ROOT,
 }
