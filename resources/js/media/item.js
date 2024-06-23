@@ -55,7 +55,7 @@ function listFolder() {
                                 button.setAttribute('disabled', true);
                                 e.preventDefault();
                                 request.setEndpoint('');
-                                const res = await request.post(`/admin/medias/edit/folder/${dataFolder.id}`, {
+                                const res = await request.post(import.meta.env.VITE_AP+`/medias/edit/folder/${dataFolder.id}`, {
                                     folderName: input.value,
                                 });
 
@@ -83,7 +83,7 @@ function listFolder() {
                             if (confirm('Chuyển mục này vào thùng rác!')) {
                                 // try {
                                 request.setEndpoint('');
-                                const res = await request.post(`/admin/medias/delete/${dataFolder.id}`);
+                                const res = await request.post(import.meta.env.VITE_AP+`/medias/delete/${dataFolder.id}`);
                                 if (res.data.status === 200) {
                                     notify.success(res.data.message);
                                     folder.remove();
@@ -112,7 +112,7 @@ function listFolder() {
                             break;
                         case 'restore':
                             try {
-                                const res = await request.post(`/admin/medias/restore-all`, {
+                                const res = await request.post(import.meta.env.VITE_AP+`/medias/restore-all`, {
                                     ids: [id],
                                     restore: true
                                 });
@@ -134,7 +134,8 @@ function listFolder() {
                             break;
                         case 'delete-force':
                             if (confirm('Bạn có chắc muốn xóa tệp tin này? Chúng sẽ không còn xuất hiện trên blog của bạn, bao gồm bài viết, trang, và widget. Hành động này không thể phục hồi.')) {
-                                const response = await XHR.post('/admin/medias/delete-force', {
+                                XHR.setEndpoint('');
+                                const response = await XHR.post(import.meta.env.VITE_AP+'/medias/delete-force', {
                                     ids: [dataFolder.id]
                                 });
                                 if (response.status === 200) {
@@ -177,8 +178,8 @@ function showFolderChild() {
         if (e.target.nodeName === 'svg' || e.target.nodeName === 'path') {
             e.preventDefault();
             if (!this.nextElementSibling) {
-                const media_id = this.getAttribute('href').replace('/admin/medias/', '');
-                const res = await request.get('/admin/medias/folder/' + media_id);
+                const media_id = this.getAttribute('href').replace(import.meta.env.VITE_AP+'/medias/', '');
+                const res = await request.get(import.meta.env.VITE_AP+'/medias/folder/' + media_id);
                 this.insertAdjacentHTML('afterend', template.listItemFolderAside(res.data.folders, res.data.id));
                 window.dispatchEvent(eventHasNewFolder);
             }
@@ -206,7 +207,7 @@ function allAction() {
                 if (confirm('Chuyển mục này vào thùng rác!')) {
                     try {
                         request.setEndpoint('');
-                        const res = await request.post(`/admin/medias/delete/${id}`);
+                        const res = await request.post(import.meta.env.VITE_AP+`/medias/delete/${id}`);
                         if (res.data.status === 200) {
                             notify.success(res.data.message);
                             item.remove();
@@ -305,7 +306,8 @@ function allAction() {
         if (restoreItemBtn) {
             restoreItemBtn.onclick = async () => {
                 if (confirm('Bạn muốn khôi phục tệp tin này!')) {
-                    const response = await XHR.post('/admin/medias/restore-all', {
+                    XHR.setEndpoint("");
+                    const response = await XHR.post(import.meta.env.VITE_AP+'/medias/restore-all', {
                         ids: [id]
                     });
                     if (response.status === 200) {
@@ -323,7 +325,8 @@ function allAction() {
         if (deleteItemBtn) {
             deleteItemBtn.onclick = async () => {
                 if (confirm('Bạn có chắc muốn xóa tệp tin này? Chúng sẽ không còn xuất hiện trên blog của bạn, bao gồm bài viết, trang, và widget. Hành động này không thể phục hồi.')) {
-                    const response = await XHR.post('/admin/medias/delete-force', {
+                    XHR.setEndpoint("");
+                    const response = await XHR.post(import.meta.env.VITE_AP+'/medias/delete-force', {
                         ids: [id]
                     });
                     if (response.status === 200) {
@@ -349,9 +352,10 @@ function handleFormSubmit(form, divInfoEdit) {
             const imageInfoEl = divInfoEdit.querySelector('.image img');
             formData.base64Image = imageInfoEl.src;
         }
-        const media_id = window.location.pathname.replace('/admin/medias', '');
+        const media_id = window.location.pathname.replace(import.meta.env.VITE_AP+'/medias', '');
         formData.media_id = media_id;
         try {
+            XHR.setEndpoint("");
             const response = await XHR.patch(form.getAttribute('action'), formData);
             if (response.status === 200) {
                 notify.success(response.message)

@@ -4,8 +4,7 @@ import { refreshItemEvent } from './selecting'
 import { listItem } from './selector'
 import template from './template'
 import XHR from '../utils/xhr'
-import { urlEndpoint } from '../config'
-XHR.setEndpoint(urlEndpoint)
+XHR.setEndpoint(import.meta.env.VITE_BU)
 let rotate = 0
 let flip = 1
 let elementCurrent = {}
@@ -68,7 +67,7 @@ function addEventEditFile(
             if (confirm('Bạn có muốn khôi phục lại ảnh gốc không?')) {
                 try {
                     const response = await XHR.patch(
-                        `/admin/medias/edit-file/${id}`,
+                        import.meta.env.VITE_AP+`/medias/edit-file/${id}`,
                         {
                             changeImage: 'original',
                         }

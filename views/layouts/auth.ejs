@@ -9,7 +9,7 @@
 		<meta name="keywords" content="<%= SettingHelper.getSetting('seo_keywords') %>" />
 		<meta name="keywords" content="<%= SettingHelper.getSetting('seo_title') %>" />
         <link rel="icon" type="image/x-icon" href="<%= SettingHelper.getSetting('favicon','image') %>">
-		<link rel="canonical" href="https://localhost:3000" />
+		<link rel="canonical" href="<%= process.env.VITE_BU %>" />
 		<link rel="stylesheet" href="./core/login/css/login.css">
 	</head>
 	

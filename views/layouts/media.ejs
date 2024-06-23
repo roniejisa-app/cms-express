@@ -10,7 +10,7 @@
 		<meta name="keywords" content="<%= SettingHelper.getSetting('seo_keywords') %>" />
 		<meta name="keywords" content="<%= SettingHelper.getSetting('seo_title') %>" />
 		<link rel="icon" type="image/x-icon" href="<%= SettingHelper.getSetting('favicon','image') %>">
-		<link rel="canonical" href="https://localhost:3000/admins/media" />
+		<link rel="canonical" href="<%= process.env.BASE_URL %><%= process.env.VITE_AP %>/media" />
 	</head>
 	
 	<body>

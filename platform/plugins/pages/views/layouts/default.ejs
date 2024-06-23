@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="<%= SettingHelper.getSetting('seo_description') %>" />
+    <meta name="keywords" content="<%= SettingHelper.getSetting('seo_keywords') %>" />
+    <meta name="keywords" content="<%= SettingHelper.getSetting('seo_title') %>" />
+    <link rel="canonical" href="<%= process.env.BASE_URL %><%= process.env.VITE_AP %>/<%= typeof module === 'string' ? module : '' %>" />
+    <link rel="icon" type="image/x-icon" href="<%= SettingHelper.getSetting('favicon','image') %>">
 </head>
 <body>
     <main>

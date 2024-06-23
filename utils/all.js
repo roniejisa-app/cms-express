@@ -70,7 +70,7 @@ module.exports = {
                 path = path.slice(0, path.lastIndexOf('/')) + ('/' + folder.id)
             }
             output += `<li data-id="${folder.id}">`
-            output += `<a href="/admin/medias/${path}" class="${
+            output += `<a href="${process.env.VITE_AP}/medias/${path}" class="${
                 idActives.length
                     ? +idActives[idActives.length - 1] === folder.id
                         ? 'active'

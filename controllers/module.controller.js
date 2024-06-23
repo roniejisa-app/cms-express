@@ -121,7 +121,7 @@ module.exports = {
                 modelMain,
             })
         } else {
-            return res.redirect(`/admin/${params.module}/add`)
+            return res.redirect(process.env.VITE_AP+`/${params.module}/add`)
         }
     },
     edit: async (req, res) => {
@@ -143,7 +143,7 @@ module.exports = {
                 body,
             })
         } else {
-            res.redirect(`/admin/${params.module}/edit/${params.id}`)
+            res.redirect(process.env.VITE_AP+`/${params.module}/edit/${params.id}`)
         }
     },
     handleDelete: async (req, res) => {

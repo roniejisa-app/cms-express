@@ -181,9 +181,9 @@ module.exports = {
             }
             req.flash('success', `Thêm ${name_show} thành công!`)
             event.emit('create', req, module, item, body)
-            return res.redirect(`/admin/${module}`)
+            return res.redirect(process.env.VITE_AP + `/${module}`)
         } else {
-            return res.redirect(`/admin/${module}/add`)
+            return res.redirect(process.env.VITE_AP + `/${module}/add`)
         }
     },
     edit: async (req, res, params) => {
@@ -328,7 +328,7 @@ module.exports = {
 
         req.flash('success', `Sửa ${name_show} thành công!`)
         event.emit('update', req, module, id, body)
-        res.redirect(`/admin/${module}/edit/${id}`)
+        res.redirect(process.env.VITE_AP + `/${module}/edit/${id}`)
     },
     destroy: async (req, res, params) => {
         const { module, name_show, modelMain, id, fields, model } = params
@@ -355,7 +355,7 @@ module.exports = {
                 'error',
                 `Xóa ${name_show} không thành công, vui lòng tìm và xóa tất cả các dữ liệu liên quan trước`
             )
-            return res.redirect(`/admin/${module}`)
+            return res.redirect(process.env.VITE_AP+`/${module}`)
         }
         for (let field of fields) {
             if (ARRAY_TYPE_HAS_MULTIPLE.includes(field.type)) {
@@ -399,7 +399,7 @@ module.exports = {
 
         event.emit('delete', req, module, id)
         req.flash('success', `Xóa ${name_show} thành công`)
-        res.redirect(`/admin/${module}`)
+        res.redirect(process.env.VITE_AP+`/${module}`)
     },
     destroyMulti: async (req, res, params) => {
         const { module, name_show, modelMain, fields } = params

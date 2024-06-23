@@ -169,7 +169,7 @@ for (let i = 0; i < files.length; i++) {
     app.use('/', router)
 }
 // app.use(authMiddleware)
-app.use('/admin', adminRouter)
+app.use(process.env.VITE_AP, adminRouter)
 app.use('/crawler', crawlerRouter)
 app.use('/api', apiRouter)
 app.use('/', customRouter)

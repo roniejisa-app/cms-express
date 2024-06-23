@@ -1,6 +1,5 @@
 import request from '../utils/request'
 import { toKebabCase } from '../utils/support'
-import { urlEndpoint } from './../config'
 import notify from './../utils/notify'
 const CRUD = (() => {
     function init() {
@@ -21,9 +20,9 @@ const CRUD = (() => {
                     if (idEl) {
                         objData.id = idEl.dataset.id
                     }
-                    request.setEndpoint(urlEndpoint, objData)
+                    request.setEndpoint(import.meta.env.VITE_BU, objData)
                     const { data } = await request.post(
-                        `/admin/check-link`,
+                        import.meta.env.VITE_AP + `/check-link`,
                         objData
                     )
                     if (data.message) {

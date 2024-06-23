@@ -1,6 +1,5 @@
 import notify from './../../utils/notify'
 import request from './../../utils/request'
-import { urlEndpoint } from './../../config'
 import TABLE from './table'
 const CHECKBOX = (() => {
     function start() {
@@ -67,9 +66,9 @@ const CHECKBOX = (() => {
 
                 switch (type) {
                     case 'delete':
-                        request.setEndpoint(urlEndpoint)
+                        request.setEndpoint(import.meta.env.VITE_BU)
                         const { response, data } = await request.post(
-                            `/admin/${checkboxAction.dataset.module}/delete-multiple`,
+                            import.meta.env.VITE_AP+`/${checkboxAction.dataset.module}/delete-multiple`,
                             {
                                 ids: dataValues,
                             }

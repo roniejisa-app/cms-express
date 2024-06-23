@@ -12,7 +12,7 @@ router.use((req, res, next) => {
     next()
 })
 
-router.get('/admin/pages/custom-page/:id', pageController.customPage)
+router.get(process.env.VITE_AP+'/pages/custom-page/:id', pageController.customPage)
 
 router.post('/endpoint/store', async (req, res) => {
     const data = req.body

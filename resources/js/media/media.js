@@ -18,7 +18,7 @@ const MAIN = (() => {
                     )
                     deleteAllBtn.setAttribute('disabled', true)
                     const response = await XHR.post(
-                        '/admin/medias/delete-all',
+                        import.meta.env.VITE_AP+'/medias/delete-all',
                         {
                             ids,
                         }
@@ -50,7 +50,7 @@ const MAIN = (() => {
                     )
                     restoreAllBtn.setAttribute('disabled', true)
                     const response = await XHR.post(
-                        '/admin/medias/restore-all',
+                        import.meta.env.VITE_AP+'/medias/restore-all',
                         {
                             ids,
                         }
@@ -86,7 +86,7 @@ const MAIN = (() => {
                     )
                     deleteForceAll.setAttribute('disabled', true)
                     const response = await XHR.post(
-                        '/admin/medias/delete-force',
+                        import.meta.env.VITE_AP+'/medias/delete-force',
                         {
                             ids,
                         }

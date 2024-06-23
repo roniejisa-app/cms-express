@@ -5,7 +5,6 @@ import { refreshItemEvent } from './selecting'
 import { listItemFolder, listItem, listFolderAside } from './selector'
 import { eventHasNewFolder, eventRefreshFolder } from './item'
 import template from './template'
-import { urlEndpoint } from '../config'
 const buttonAddNewFolder = document.querySelector('.add-folder')
 const buttonUploadFile = document.querySelector('.upload-file')
 let dataTransfer = new DataTransfer()
@@ -24,13 +23,13 @@ window.addEventListener('add-folder', (e) => {
 
     divContainer.append(input, button)
     formAdd.append(divContainer)
-    const media_id = window.location.pathname.replace('/admin/medias', '')
+    const media_id = window.location.pathname.replace(import.meta.env.VITE_AP+'/medias', '')
 
     button.innerText = 'Thêm thư mục'
     formAdd.onsubmit = async (e) => {
         button.setAttribute('disabled', true)
         e.preventDefault()
-        request.setEndpoint(urlEndpoint + '/admin')
+        request.setEndpoint(import.meta.env.VITE_BU + import.meta.env.VITE_AP)
         const res = await request.post('/medias/add/folder', {
             folderName: input.value,
             media_id,
@@ -51,7 +50,7 @@ window.addEventListener('add-folder', (e) => {
              * Kiểm tra nếu media_id khác null
              */
             let anchor = listFolderAside.querySelector(
-                `[href="/admin/medias/${
+                `[href="${import.meta.env.VITE_AP}/medias/${
                     media_id.startsWith('/') ? media_id.slice(1) : media_id
                 }"]`
             )
@@ -115,9 +114,9 @@ window.addEventListener('add-file', (e) => {
     formUploadFile.onsubmit = async (e) => {
         e.preventDefault()
         button.setAttribute('disabled', true)
-        XHR.setEndpoint(urlEndpoint + '/admin')
+        XHR.setEndpoint(import.meta.env.VITE_BU + import.meta.env.VITE_AP)
 
-        const media_id = window.location.pathname.replace('/admin/medias', '')
+        const media_id = window.location.pathname.replace(import.meta.env.VITE_AP + '/medias', '')
         XHR.setType('formData')
         // Xử lý process
 

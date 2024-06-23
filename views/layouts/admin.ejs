@@ -10,7 +10,7 @@
 		<meta name="description" content="<%= SettingHelper.getSetting('seo_description') %>" />
 		<meta name="keywords" content="<%= SettingHelper.getSetting('seo_keywords') %>" />
 		<meta name="keywords" content="<%= SettingHelper.getSetting('seo_title') %>" />
-		<link rel="canonical" href="https://localhost:3000/admin/<%= typeof module === 'string' ? module : '' %>" />
+		<link rel="canonical" href="<%= process.env.BASE_URL %><%= process.env.VITE_AP %>/<%= typeof module === 'string' ? module : '' %>" />
 		<link rel="icon" type="image/x-icon" href="<%= SettingHelper.getSetting('favicon','image') %>">
 		<% if(typeof csrfToken === 'string' && csrfToken) { %>
 		<meta name="csrf-token" content="<%= csrfToken %>" />
@@ -26,7 +26,7 @@
 				<div class="menu-admin">
 					<aside>
 						<div class="header-menu">
-							<a href="/admin" class="logo">
+							<a href="<%= process.env.VITE_AP %>" class="logo">
 								<img src="<%= SettingHelper.getSetting('logo','image') %>" />
 							</a>
 							<span class="toggle-sidebar">
@@ -56,8 +56,8 @@
 								<img src="<%= FunctionHelper.getImage(req.user.avatar) %>" alt="" />
 							</div>
 							<ul>
-								<li><a href="/admin/users/edit/<%= req.user.id %>">Sửa thông tin</a></li>
-								<li><a href="/admin/users/edit/<%= req.user.id %>">Đổi mật khẩu</a></li>
+								<li><a href="<%= process.env.VITE_AP %>/users/edit/<%= req.user.id %>">Sửa thông tin</a></li>
+								<li><a href="<%= process.env.VITE_AP %>/users/edit/<%= req.user.id %>">Đổi mật khẩu</a></li>
 								<li>
 									<form action="/logout" method="POST"><button>Đăng xuất</button></form>
 								</li>

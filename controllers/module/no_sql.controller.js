@@ -13,7 +13,7 @@ const { initPaginate } = require('@utils/paginate')
 const event = require('@utils/event')
 const { checkLinkExist, isNullish } = require('@utils/all')
 const DB = require('@models/index')
-const ExcelJS = require('exceljs');
+const ExcelJS = require('exceljs')
 
 module.exports = {
     index: async (req, res, params) => {
@@ -46,14 +46,20 @@ module.exports = {
         const selectField = fields.reduce((obj = {}, next) => {
             obj[next.name] = 1
             return obj
-        },{})
+        }, {})
         const order = {
             _id: 1,
         }
         try {
-            const [count, listData] = await Promise.all([
+            const [count, listData] = await Promise.all(
+                [
                     model.DB.find(filters).count('_id'),
-                    model.DB.find(filters).limit(limit).skip(offset).sort(order).select(selectField)].map((data) => data)
+                    model.DB.find(filters)
+                        .limit(limit)
+                        .skip(offset)
+                        .sort(order)
+                        .select(selectField),
+                ].map((data) => data)
             )
             let paginate = initPaginate(count, limit, page, module)
             req.success = req.flash('success')
@@ -153,7 +159,7 @@ module.exports = {
         }
         req.flash('success', `Thêm ${name_show} thành công!`)
         event.emit('create', req, module, item, body)
-        return res.redirect(`/admin/${module}`)
+        return res.redirect(process.env.VITE_AP + `/${module}`)
     },
     edit: async (req, res, params) => {
         const { module, name_show, modelMain, fields, id } = params
@@ -293,7 +299,7 @@ module.exports = {
 
         event.emit('update', req, module, id, body)
         req.flash('success', `Sửa ${name_show} thành công!`)
-        res.redirect(`/admin/${module}/edit/${id}`)
+        res.redirect(process.env.VITE_AP + `/${module}/edit/${id}`)
     },
     destroy: async (req, res, params) => {
         const { module, name_show, modelMain, id, fields } = params
@@ -305,7 +311,7 @@ module.exports = {
         })
         req.flash('success', `Xóa ${name_show} thành công`)
         event.emit('delete', req, module, id)
-        res.redirect(`/admin/${module}`)
+        res.redirect(process.env.VITE_AP + `/` + module)
     },
     destroyMulti: async (req, res, params) => {
         const { module, name_show, modelMain, fields } = params
@@ -350,7 +356,7 @@ module.exports = {
             _id: 1,
         }
         const offset = (page - 1) * limit
-        
+
         const filters = convertDataFilterMongoDB(req.body, fields)
         if (sort) {
             order = {}
@@ -359,11 +365,15 @@ module.exports = {
         const selectField = fields.reduce((obj = {}, next) => {
             obj[next.name] = 1
             return obj
-        },{})
+        }, {})
         const [count, listData] = await Promise.all(
             [
                 model.DB.find(filters).count('_id'),
-                model.DB.find(filters).limit(limit).skip(offset).sort(order).select(selectField),
+                model.DB.find(filters)
+                    .limit(limit)
+                    .skip(offset)
+                    .sort(order)
+                    .select(selectField),
             ].map((data) => data)
         )
 
@@ -386,11 +396,11 @@ module.exports = {
             html,
         })
     },
-    exampleExcel:async(req,res,params) =>{
-        const workbook = new ExcelJS.Workbook();
+    exampleExcel: async (req, res, params) => {
+        const workbook = new ExcelJS.Workbook()
         return res.json({
-            status:100,
-            message:"Chưa thêm kiểu này!"
+            status: 100,
+            message: 'Chưa thêm kiểu này!',
         })
-    }
+    },
 }

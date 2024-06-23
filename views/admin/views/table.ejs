@@ -46,7 +46,7 @@
             permission.includes(`${module}.custom-page`))){ %>
             <td class="text-center">
                 <a
-                    href="/admin/<%= module %>/custom-page/<%= item.id %>"
+                    href="<%= process.env.VITE_AP %>/<%= module %>/custom-page/<%= item.id %>"
                     class="btn btn-success"
                     >Builder</a
                 >
@@ -57,7 +57,7 @@
                 permission.includes(`${module}.update`))){ %>
                 <td class="text-center">
                     <a
-                        href="/admin/<%= module %>/edit/<%= item.id %>"
+                        href="<%= process.env.VITE_AP %>/<%= module %>/edit/<%= item.id %>"
                         class="btn btn-warning"
                         >Sửa</a
                     >
@@ -66,7 +66,7 @@
                 permission.includes(`${module}.delete`))){ %>
                 <td class="text-center">
                     <form
-                        action="/admin/<%= module %>/delete/<%= item.id %>"
+                        action="<%= process.env.VITE_AP %>/<%= module %>/delete/<%= item.id %>"
                         method="POST"
                         onclick="if(!confirm(`Bạn chắc chắn muốn xóa không?`)) return false"
                     >   

@@ -1,5 +1,6 @@
 const fs = require('fs')
 const { pathPlugin } = require('@utils/all')
+const { Page } = require('@models')
 const pageController = {
     show: async (req, res, link) => {
         const checkFile = fs.existsSync(
@@ -18,9 +19,11 @@ const pageController = {
     },
     customPage: async (req, res) => {
         const { id } = req.params
+        const currentData = await Page.findByPk(id)
         res.render('grapes', {
             layout: 'layouts/default',
             id,
+            currentData,
         })
     },
 }

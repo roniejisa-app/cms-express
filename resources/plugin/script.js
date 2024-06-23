@@ -7,7 +7,7 @@ const INSTALL_PLUGIN = (() => {
             const pluginName = btn.getAttribute('data-name')
             btn.innerText = 'Đang cài đặt...'
             request
-                .post('/admin/plugin/install', {
+                .post(import.meta.env.VITE_AP+'/plugin/install', {
                     name: pluginName,
                 })
                 .then((response) => {

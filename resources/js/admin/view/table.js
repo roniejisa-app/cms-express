@@ -3,7 +3,6 @@ import CHECKBOX from './checkbox'
 import FILTER from './filter'
 import PAGINATION from './pagination'
 import request from './../../utils/request'
-import { urlEndpoint } from '../../config'
 import LOADING from '../layouts/loading'
 import XHR from '../../utils/xhr'
 import notify from '../../utils/notify'
@@ -52,7 +51,7 @@ const TABLE = (() => {
                 LOADING.show()
                 XHR.setType('formData')
                 const data = await XHR.post(
-                    `${urlEndpoint}/admin/${module}/import-excel`,
+                    `${import.meta.env.VITE_BU + import.meta.env.VITE_AP}/${module}/import-excel`,
                     {
                         file,
                     }
@@ -154,9 +153,9 @@ const TABLE = (() => {
                     'position:absolute;width:100%;height:100%;top:0;background:var(--color-main))'
                 )}`
             )
-            request.setEndpoint(urlEndpoint)
+            request.setEndpoint(import.meta.env.VITE_BU)
             const response = await request.post(
-                `/admin/${tableDataEl.dataset.module}/filter`,
+                import.meta.env.VITE_AP+`/${tableDataEl.dataset.module}/filter`,
                 filterBody
             )
             tableDataEl.innerHTML = response.data.html

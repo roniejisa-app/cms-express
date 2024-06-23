@@ -1,6 +1,6 @@
 <ul>
     <li tooltip="Tổng quan" tooltip-type="right">
-        <a class="link <%= typeof module === 'undefined' ? 'active' : '' %>" href="/admin">
+        <a class="link <%= typeof module === 'undefined' ? 'active' : '' %>" href="<%= process.env.VITE_AP %>">
             <span class="link-icon"><%- include('../icons/dashboard') %></span>
             <span class="link-text">Tổng quan</span>
         </a>
@@ -22,7 +22,7 @@
                 <ul>
                     <% menu.childs.forEach(child => { %>
                     <li>
-                        <a href="/admin/<%= child.name  %>" class="link <%= typeof module === "string" && module === child.name ? 'active' : '' %>">
+                        <a href="<%= process.env.VITE_AP %>/<%= child.name  %>" class="link <%= typeof module === "string" && module === child.name ? 'active' : '' %>">
                             <span class="link-icon"><%- child.icon %></span>
                             <span class="link-text"><%= child.name_show %></span>
                         </a>
@@ -32,7 +32,7 @@
             </li>
         <% } else if(!menu.childs){ %>
             <li tooltip="<%= menu.name_show %>" tooltip-type="right">
-                <a class="link <%= typeof module === "string" && module === menu.name ? 'active' : '' %>" href="/admin/<%= menu.name  %>">
+                <a class="link <%= typeof module === "string" && module === menu.name ? 'active' : '' %>" href="<%= process.env.VITE_AP %>/<%= menu.name  %>">
                     <span class="link-icon"><%- menu.icon %></span>
                     <span class="link-text"><%= menu.name_show %></span>
                 </a>

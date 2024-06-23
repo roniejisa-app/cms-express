@@ -1,6 +1,6 @@
 <div class="filter-box">
     <div class="overlay"></div>
-    <form action="/admin/<%= module %>/filter">
+    <form action="<%= process.env.VITE_AP %>/<%= module %>/filter">
         <div class="d-flex justify-content-between align-items-center">
             <h2 class="mb-3">Lọc thông tin</h2>
             <button class="status status-danger close-filter cursor-pointer" type="button">&times;</button>

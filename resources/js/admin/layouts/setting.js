@@ -16,7 +16,7 @@ const SETTING = (() => {
             LOADING.show(formAddSetting)
             const formData = Object.fromEntries([...new FormData(e.target)])
             const { data, error } = await request.post(
-                '/admin/settings',
+                import.meta.env.VITE_AP+'/settings',
                 formData
             )
             LOADING.hide(formAddSetting)
@@ -56,7 +56,7 @@ const SETTING = (() => {
             // const formData = Object.fromEntries([...new FormData(e.target)])
             LOADING.show(formUpdateSetting)
             const { data, error } = await request.patch(
-                '/admin/settings',
+                import.meta.env.VITE_AP+'/settings',
                 formData
             )
             LOADING.hide(formUpdateSetting)

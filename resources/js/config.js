@@ -1,1 +1,0 @@
-export const urlEndpoint = 'https://localhost:3000';

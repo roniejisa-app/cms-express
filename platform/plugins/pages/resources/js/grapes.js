@@ -11,7 +11,7 @@ import plugin from '../plugins/grapesjs-tailwind/index'
 import countdown from '../plugins/countdown/index'
 import { dragMode } from './settings/dragmode'
 
-const ENDPOINT = 'https://localhost:3000/endpoint'
+const ENDPOINT = import.meta.env.VITE_BU+'/endpoint'
 const id = document.querySelector('.editor-main').id
 const escapeName = (name) =>
     `${name}`.trim().replace(/([^a-z0-9\w-:/]+)/gi, '-')

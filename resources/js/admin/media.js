@@ -33,7 +33,7 @@ const MEDIA = (() => {
         iframeContainer.append(loading)
         document.body.append(iframeContainer)
         const iframeImage = document.createElement('iframe')
-        iframeImage.setAttribute('src', '/admin/medias')
+        iframeImage.setAttribute('src', import.meta.env.VITE_AP+'/medias')
         Object.assign(iframeImage.style, {
             width: '0',
             height: '0',

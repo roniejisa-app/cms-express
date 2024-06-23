@@ -17,7 +17,7 @@ class CacheInstance {
             if (!process.env.REDIS_URL) {
                 this.connectionPromise = await createClient()
                     .on('error', (err) =>
-                        console.log('Redis Client Error', err)
+                        console.log('Redis Client Error ----')
                     )
                     .connect()
                 return this.connectionPromise
@@ -101,6 +101,6 @@ module.exports = {
     },
     clearCache: async (req, res) => {
         await module.exports.setMenu(req, true)
-        res.redirect('/admin')
+        res.redirect(process.env.VITE_AP)
     },
 }
