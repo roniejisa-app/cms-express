@@ -1,13 +1,13 @@
 {
-    "label": "plugin_label",
-    "name": "plugin_name",
+    "label": "Hehe",
+    "name": "hehe",
     "module": [
         {
-            "name": "plugin_name"
+            "name": "hehe"
         }
     ],
     "author": "roniejisa",
-    "dateUpdate": "plugin_date",
+    "dateUpdate": "24/06/2024",
     "image": "https://i.ibb.co/0cQkxQx/roniejisa.png",
     "version": "0.0.1"
 }

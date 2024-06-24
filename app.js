@@ -178,6 +178,7 @@ app.use('/api', apiRouter)
 app.use('/', customRouter)
 
 app.use((error, req, res, next) => {
+    console.log(error);
     switch (error.code) {
         case 'LIMIT_UNEXPECTED_FILE':
             return res.json({

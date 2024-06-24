@@ -76,12 +76,7 @@ async function types(type) {
             new MakeMigration(params)
             break
         case 'make:model':
-            if (params.length < 2 || params.length > 2) {
-                console.log('Argv gồm 2 phần là tên plugin và tên model!')
-                return false
-            }
-            new MakeModel(params)
-            new MakeMigration(params)
+            new MakeModel()
             break
         case 'make:model:mongodb':
             if (params.length < 2 || params.length > 2) {

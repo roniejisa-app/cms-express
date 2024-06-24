@@ -1,38 +1,36 @@
 const fs = require('fs')
-const { toSnakeCase, toKebabCase } = require('../../utils/all')
+const { toKebabCase } = require('../../utils/all')
+const p = require('@clack/prompts')
+const color = require('picocolors')
 class MakeMigration {
-    constructor(params) {
-        const [name_plugin, name_migration] = params
-        this.pluginName = name_plugin
-        this.migrationName = name_migration
-        const data = this.createRoot()
-        if (data && !data.status) {
-            console.log(data.message)
+    constructor(pluginName = '') {
+        if (pluginName) {
+            this.pluginName = pluginName
         }
+        const data = this.createRoot()
     }
 
-    createRoot() {
-        const pathPlugin = 'platform/plugins/' + this.pluginName
-        const templatePath = 'console/templates/'
-        const checkPathPlugin = fs.existsSync(pathPlugin)
-        if (!checkPathPlugin) {
-            return {
-                status: false,
-                message: 'Plugin không tồn tại!',
+    async createRoot() {
+        if (!this.pluginName) {
+            await this.createOrCheck('Plugin tên?', true, 'pluginName')
+            if (typeof this.pluginName === 'symbol') {
+                return p.outro(color.red('Đã thoát!'))
             }
         }
 
-        const migrationPath = pathPlugin + '/migrations'
-        const checkPathPluginMigration = fs.existsSync(migrationPath)
+        const pathPlugin = 'platform/plugins/' + this.pluginName
+        const templatePath = 'console/templates/'
+        this.migrationPath = pathPlugin + '/migrations'
+        const checkPathPluginMigration = fs.existsSync(this.migrationPath)
         if (!checkPathPluginMigration) {
-            fs.mkdirSync(migrationPath)
+            fs.mkdirSync(this.migrationPath)
         }
-
+        await this.newMigration('Tên migration', 'migrationName')
         const migrationTemplate = fs.readFileSync(
             templatePath + 'migration-plugin.tpl'
         )
         fs.writeFileSync(
-            `${migrationPath}/${new Date().getTime()}-${toKebabCase(
+            `${this.migrationPath}/${new Date().getTime()}-${toKebabCase(
                 this.migrationName
             )}.js`,
             migrationTemplate
@@ -43,8 +41,43 @@ class MakeMigration {
                 flag: 'w+',
             }
         )
+        p.outro('Đã tạo migration '+color.green(this.migrationName)+' thành công!')
         // Ở chỗ này bắt đầu thêm nhưng file cần cho plugin
         // fs.mkdir(file, data)
+    }
+
+    async newMigration(name, key) {
+        this[key] = await p.text({
+            message: name,
+        })
+
+        if (this[key] === undefined) {
+            p.outro(color.red('Vui lòng nhập tên migration!'))
+            return await this.newMigration(name, key)
+        }
+    }
+
+    async createOrCheck(name, check = false, key) {
+        this[key] = await p.text({
+            message: name,
+        })
+        if (typeof this[key] === 'symbol') return false
+        if (!check) return
+
+        if (check) {
+            this.checkPathPlugin = fs.existsSync(
+                'platform/plugins/' + this[key]
+            )
+        }
+
+        if (check && !this.checkPathPlugin) {
+            await p.outro(
+                color.red(
+                    `Plugin ${color.cyan(this[key])} không tồn tại tồn tại!`
+                )
+            )
+            return await this.newField(name, check, key)
+        }
     }
 }
 
