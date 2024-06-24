@@ -1,7 +1,7 @@
 const { getAllPermissionOfUser } = require('@utils/permission')
 // Kiêm tra phần quyền
 const linkStatic = (link) => {
-    return ['check-link'].includes(link)
+    return ['check-link',"plugin-i"].includes(link)
 }
 
 module.exports = async (req, res, next) => {

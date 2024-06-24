@@ -135,6 +135,9 @@ passport.deserializeUser(async function (id, done) {
                         include: [
                             {
                                 model: Module,
+                                where: {
+                                    active: true,
+                                },
                                 as: 'module',
                             },
                             {
@@ -193,6 +196,11 @@ app.use((err, req, res, next) => {
             status: err.status || 500,
         },
     })
+})
+
+app.use((req, res, next) => {
+    console.log(req.ip);
+    res.status(404).render('404')
 })
 
 module.exports = app

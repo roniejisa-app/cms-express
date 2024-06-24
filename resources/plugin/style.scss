@@ -6,14 +6,6 @@
 :root {
     --color-main: #5549be;
     --color-main-10: #5549be10;
-    --color-body: #f8f8f9;
-    --color-box: #ffffff;
-    --color-text: #232323;
-    --color-green: #56ab79;
-    --color-blue: #1f63b1;
-    --color-blue-light: #ecf7ff;
-    --color-main-light: #f6f5ff;
-    --color-orange-light: #fff9f5;
     --color-red: #f18d83;
 }
 body {
@@ -65,10 +57,13 @@ body {
                 color: #fff;
             }
 
-            &[disabled] {
-                cursor: not-allowed;
-                opacity: 0.5;
-                pointer-events: none;
+            &[data-type="uninstall"] {
+                border: 1px solid var(--color-red);
+                color: var(--color-red);
+                &:hover{
+                    background-color: var(--color-red);
+                    color: #fff;
+                }
             }
         }
     }

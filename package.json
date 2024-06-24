@@ -31,6 +31,7 @@
         "build": "node vite-build.js"
     },
     "dependencies": {
+        "@clack/prompts": "^0.7.0",
         "@emoji-mart/data": "^1.1.2",
         "@sequelize/core": "^7.0.0-alpha.37",
         "bcrypt": "^5.1.1",
@@ -72,6 +73,7 @@
         "passport-local": "^1.0.0",
         "pg": "^8.11.3",
         "pg-hstore": "^2.3.4",
+        "picocolors": "^1.0.1",
         "puppeteer": "^22.8.0",
         "puppeteer-core": "^22.8.0",
         "redis": "^5.0.0-next.4",
@@ -80,7 +82,6 @@
         "socket.io-client": "^4.7.5",
         "start": "^5.1.0",
         "umzug": "^3.8.0",
-        "yargs": "^17.1.1-candidate.0",
         "yup": "^1.4.0"
     },
     "devDependencies": {

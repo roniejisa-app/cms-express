@@ -12,10 +12,6 @@ const { buildMenuList } = require('@utils/all')
 const { CACHE_ADMIN_MENU_LIST } = require('../../constants/cache')
 const pluginRouter = require('./plugin');
 
-
-
-// Cài đặt plugin cần đứng ở đây vì khi bắt đầu người dùng phải có quyền rồi
-router.use(pluginRouter);
 // permissionMiddleware
 router.use(permissionMiddleware, async (req, res, next) => {
     // req.permission = [
@@ -91,7 +87,10 @@ router.get('/', adminController.dashboard)
 router.post('/check-link', adminController.checkLink)
 router.get('/clear-cache', Cache.clearAllCache)
 router.use('/medias', mediaRouter)
-router.use(settingRouter);
+router.use('/settings',settingRouter);
+// Cài đặt plugin cần đứng ở đây vì khi bắt đầu người dùng phải có quyền rồi
+router.use('/plugin-i',pluginRouter);
+
 router.use(moduleRouter);
 // router.use('/:{module}', usersRouter);
 // router.get('/dashboard', adminController.dashboard);

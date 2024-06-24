@@ -5,13 +5,26 @@ const INSTALL_PLUGIN = (() => {
         btn.addEventListener('click', (e) => {
             e.preventDefault()
             const pluginName = btn.getAttribute('data-name')
-            btn.innerText = 'Đang cài đặt...'
+            const pluginType = btn.getAttribute('data-type')
+            if (pluginType === 'install') {
+                btn.innerText = 'Đang cài đặt...'
+            }
+            if (pluginType === 'uninstall') {
+                btn.innerText = 'Đang hủy...'
+            }
             request
-                .post(import.meta.env.VITE_AP+'/plugin/install', {
+                .post(import.meta.env.VITE_AP + '/plugin-i/' + pluginType, {
                     name: pluginName,
                 })
                 .then((response) => {
-                    btn.innerText = 'Đã cài đặt'
+                    if (pluginType === 'install') {
+                        btn.dataset.type = 'uninstall'
+                        btn.innerText = 'Đã cài đặt'
+                    }
+                    if (pluginType === 'uninstall') {
+                        btn.dataset.type = 'install'
+                        btn.innerText = 'Cài đặt'
+                    }
                 })
                 .catch((error) => {
                     btn.innerText = 'Cài đặt'

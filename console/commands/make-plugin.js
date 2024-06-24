@@ -1,32 +1,14 @@
 const fs = require('fs')
+const p = require('@clack/prompts')
+const color = require('picocolors')
 class MakePlugin {
-    constructor(params) {
-        const [name] = params
-        this.name = name
-        const data = this.createRoot()
-        if (data && !data.status) {
-            console.log(data.message)
-        }
+    constructor() {
+        this.createRoot()
     }
 
-    createRoot() {
-        const checkPathPlatform = fs.existsSync('platform')
-        if (!checkPathPlatform) {
-            fs.mkdirSync('platform')
-        }
-
-        const checkPathPluginRoot = fs.existsSync('platform/plugins')
-        if (!checkPathPluginRoot) {
-            fs.mkdirSync('platform/plugins')
-        }
-
-        const checkPathPlugin = fs.existsSync('platform/plugins/' + this.name)
-        if (checkPathPlugin) {
-            return {
-                status: false,
-                message: 'Plugin đã tồn tại!',
-            }
-        }
+    async createRoot() {
+        const type = await this.createNamePlugin()
+        if(!type) return false;
         const pathPlugin = 'platform/plugins/' + this.name
         const templatePath = 'console/templates/'
         if (!checkPathPlugin) {
@@ -84,6 +66,28 @@ class MakePlugin {
         // Ở chỗ này bắt đầu thêm nhưng file cần cho plugin
         // console.log();
         // fs.mkdir(file, data)
+    }
+    async createNamePlugin() {
+        this.name = await p.text({
+            message: 'Tên plugin?',
+        })
+
+        const checkPathPlatform = fs.existsSync('platform')
+        if (!checkPathPlatform) {
+            fs.mkdirSync('platform')
+        }
+
+        const checkPathPluginRoot = fs.existsSync('platform/plugins')
+        if (!checkPathPluginRoot) {
+            fs.mkdirSync('platform/plugins')
+        }
+
+        const checkPathPlugin = fs.existsSync('platform/plugins/' + this.name)
+        if (checkPathPlugin) {
+            await p.note('Plugin đã tồn tại. Vui lý đặt tên khác.')
+            return await this.createNamePlugin()
+        }
+        return true
     }
 }
 

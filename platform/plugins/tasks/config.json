@@ -1,6 +1,11 @@
 {
     "label": "Công việc",
     "name": "tasks",
+    "module": [
+        {
+            "name": "tasks"
+        }
+    ],
     "author": "roniejisa",
     "dateUpdate": "22/06/2024",
     "image": "https://i.ibb.co/0cQkxQx/roniejisa.png",

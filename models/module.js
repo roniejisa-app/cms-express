@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
                     show: true,
                     showForm: true,
                     positionSidebar: false,
-                    order:1
+                    order: 1,
                 },
                 {
                     name: 'order',
@@ -60,24 +60,24 @@ module.exports = (sequelize, DataTypes) => {
                     showForm: true,
                     positionSidebar: false,
                 },
-                {
-                    name: 'active',
-                    label: 'Trạng thái',
-                    type: 'status',
-                    show: true,
-                    showForm: true,
-                    positionSidebar: true,
-                    options: [
-                        {
-                            value: 1,
-                            name: 'Kích Hoạt',
-                        },
-                        {
-                            value: 0,
-                            name: 'Tắt kích hoạt',
-                        },
-                    ],
-                },
+                // {
+                //     name: 'active',
+                //     label: 'Trạng thái',
+                //     type: 'status',
+                //     show: true,
+                //     showForm: true,
+                //     positionSidebar: true,
+                //     options: [
+                //         {
+                //             value: 1,
+                //             name: 'Kích Hoạt',
+                //         },
+                //         {
+                //             value: 0,
+                //             name: 'Tắt kích hoạt',
+                //         },
+                //     ],
+                // },
                 {
                     name: 'type',
                     label: 'Loại cơ sở dữ liệu',
@@ -156,7 +156,7 @@ module.exports = (sequelize, DataTypes) => {
                     show: true,
                     showForm: true,
                     positionSidebar: true,
-                    order:3,
+                    order: 3,
                 },
                 {
                     name: 'icon',
@@ -168,6 +168,11 @@ module.exports = (sequelize, DataTypes) => {
                     order: 1,
                 },
             ]
+        }
+        static filter() {
+            return {
+                active: true,
+            }
         }
         static validate(id) {
             const validate = {

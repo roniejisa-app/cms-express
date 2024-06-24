@@ -60,8 +60,11 @@ module.exports = {
             page = 1
         }
         const offset = (page - 1) * limit
-        const filters = convertDataFilter(req.query, fields)
-
+        let filters = convertDataFilter(req.query, fields)
+        console.log(typeof modelMain.filter);
+        const staticFilter = typeof modelMain.filter !== 'undefined' ? modelMain.filter() : {};
+        filters = { ...staticFilter, ...filters }
+        console.log(filters);
         const order = [['id', 'ASC']]
         req.success = req.flash('success')
         req.error = req.flash('error')
@@ -355,7 +358,7 @@ module.exports = {
                 'error',
                 `Xóa ${name_show} không thành công, vui lòng tìm và xóa tất cả các dữ liệu liên quan trước`
             )
-            return res.redirect(process.env.VITE_AP+`/${module}`)
+            return res.redirect(process.env.VITE_AP + `/${module}`)
         }
         for (let field of fields) {
             if (ARRAY_TYPE_HAS_MULTIPLE.includes(field.type)) {
@@ -399,7 +402,7 @@ module.exports = {
 
         event.emit('delete', req, module, id)
         req.flash('success', `Xóa ${name_show} thành công`)
-        res.redirect(process.env.VITE_AP+`/${module}`)
+        res.redirect(process.env.VITE_AP + `/${module}`)
     },
     destroyMulti: async (req, res, params) => {
         const { module, name_show, modelMain, fields } = params

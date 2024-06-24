@@ -1,6 +1,11 @@
 {
     "label": "Builder",
     "name": "pages",
+    "module": [
+        {
+            "name": "pages"
+        }
+    ],
     "author": "roniejisa",
     "dateUpdate": "22/06/2024",
     "image": "https://i.ibb.co/0cQkxQx/roniejisa.png",

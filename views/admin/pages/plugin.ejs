@@ -11,7 +11,7 @@
             </div>
         </div>
         <div>
-            <button class="btn-install wave" <%=installed ? 'disabled' : '' %> data-name="<%= name %>">
+            <button class="btn-install wave" data-type="<%=installed ? 'uninstall' : 'install' %>"  data-name="<%= name %>">
                 <span><%= installed ? 'Đã cài đặt' : 'Cài đặt' %></span>
             </button>
         </div>

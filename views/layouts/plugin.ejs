@@ -4,6 +4,9 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Cài đặt Plugin cho APP</title>
+        <% if(typeof csrfToken === 'string' && csrfToken) { %>
+        <meta name="csrf-token" content="<%= csrfToken %>" />
+        <% } %>
         <link rel="stylesheet" href="/core/plugin/css/style.css" />
     </head>
     <body>
