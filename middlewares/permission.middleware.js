@@ -56,7 +56,6 @@ module.exports = async (req, res, next) => {
                                 permission.includes(`${module}.view`)
                             ) || !module
                     }
-                    console.log(flag, module)
                     break
             }
             if (!flag) {

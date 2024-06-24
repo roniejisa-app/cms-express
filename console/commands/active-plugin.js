@@ -3,7 +3,6 @@ const dbMongo = require('../../mongodb/model.js')
 class ActivePlugin {
     constructor(params) {
         const [plugin, key, model, name, type] = params
-        // console.log(plugin, key, model, permission);
         this.name = name
         this.plugin = plugin
         this.key = key

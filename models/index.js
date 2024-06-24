@@ -51,7 +51,7 @@ let files = glob.sync(process.cwd() + '/platform/plugins/*/models/*').filter(
     }
 )
 for (let i = 0; i < files.length; i++) {
-    const model = require(path.join(files[i]))(
+    const model = require(path.join(process.cwd(),files[i]))(
         sequelize,
         Sequelize.DataTypes
     )

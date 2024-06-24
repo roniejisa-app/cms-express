@@ -61,10 +61,8 @@ module.exports = {
         }
         const offset = (page - 1) * limit
         let filters = convertDataFilter(req.query, fields)
-        console.log(typeof modelMain.filter);
         const staticFilter = typeof modelMain.filter !== 'undefined' ? modelMain.filter() : {};
         filters = { ...staticFilter, ...filters }
-        console.log(filters);
         const order = [['id', 'ASC']]
         req.success = req.flash('success')
         req.error = req.flash('error')

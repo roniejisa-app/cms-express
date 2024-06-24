@@ -3,8 +3,8 @@ const router = express.Router();
 const https = require('https');
 const fs = require('fs');
 const GIFEncoder = require('gif-encoder-2')
-const { createCanvas, Image } = require('canvas')
-const { writeFile } = require('fs')
+// const { createCanvas, Image } = require('canvas')
+// const { writeFile } = require('fs')
 const path = require('path')
 
 router.get('/download-image-facebook', (req, res) => {
@@ -55,68 +55,68 @@ router.get('/download-image-facebook', (req, res) => {
     })
 })
 
-router.get('/edit-image-to-gif', (req, res) => {
-    const { widthOne, heightOne, arrayPosition } = frameCanvas(4, 5, 394, 315, 5);
-    const canvas = createCanvas(widthOne, heightOne);
-    const ctx = canvas.getContext('2d')
-    ctx.globalCompositeOperation = "screen";
-    const encoder = new GIFEncoder(widthOne, heightOne, 'neuquant', true);
-    encoder.setDelay(99);
-    encoder.setQuality(60);
-    encoder.setThreshold(100);
-    encoder.setPaletteSize(7);
-    encoder.setTransparent("0x52ff5d");
-    encoder.start()
-    const image = new Image();
-    image.src = path.join(process.cwd(), 'public/images/emoji/first/3.png')
-    for (let i = 0; i < arrayPosition.length; i++) {
-        drawBackground(image, arrayPosition[i].sx, arrayPosition[i].sy, arrayPosition[i].dx, arrayPosition[i].dy)
-    }
-    function frameCanvas(totalRow, totalColumn, widthImage, heightImage, countLeftInTotalRow) {
-        const widthOne = widthImage / totalColumn;
-        const heightOne = heightImage / totalRow;
-        let leftE = 0;
-        let topE = 0;
-        let countLeft = 0;
-        let countTop = 0;
-        let arrayPosition = [];
-        while (true) {
-            if (countLeft === totalColumn || (countLeft === countLeftInTotalRow && countTop === totalRow - 1)) {
-                countLeft = 0;
-                countTop++;
-            }
-            if (countTop === totalRow) {
-                countTop = 0;
-                break;
-            }
-            //
-            arrayPosition.push({
-                sx: leftE,
-                sy: topE,
-            })
+// router.get('/edit-image-to-gif', (req, res) => {
+//     const { widthOne, heightOne, arrayPosition } = frameCanvas(4, 5, 394, 315, 5);
+//     const canvas = createCanvas(widthOne, heightOne);
+//     const ctx = canvas.getContext('2d')
+//     ctx.globalCompositeOperation = "screen";
+//     const encoder = new GIFEncoder(widthOne, heightOne, 'neuquant', true);
+//     encoder.setDelay(99);
+//     encoder.setQuality(60);
+//     encoder.setThreshold(100);
+//     encoder.setPaletteSize(7);
+//     encoder.setTransparent("0x52ff5d");
+//     encoder.start()
+//     const image = new Image();
+//     image.src = path.join(process.cwd(), 'public/images/emoji/first/3.png')
+//     for (let i = 0; i < arrayPosition.length; i++) {
+//         drawBackground(image, arrayPosition[i].sx, arrayPosition[i].sy, arrayPosition[i].dx, arrayPosition[i].dy)
+//     }
+//     function frameCanvas(totalRow, totalColumn, widthImage, heightImage, countLeftInTotalRow) {
+//         const widthOne = widthImage / totalColumn;
+//         const heightOne = heightImage / totalRow;
+//         let leftE = 0;
+//         let topE = 0;
+//         let countLeft = 0;
+//         let countTop = 0;
+//         let arrayPosition = [];
+//         while (true) {
+//             if (countLeft === totalColumn || (countLeft === countLeftInTotalRow && countTop === totalRow - 1)) {
+//                 countLeft = 0;
+//                 countTop++;
+//             }
+//             if (countTop === totalRow) {
+//                 countTop = 0;
+//                 break;
+//             }
+//             //
+//             arrayPosition.push({
+//                 sx: leftE,
+//                 sy: topE,
+//             })
 
-            // Cần tính thêm tọa độ lúc cuối
-            leftE = countLeft * +widthOne;
-            topE = countTop * +heightOne;
-            countLeft++;
-        }
-        return {
-            widthOne, heightOne, arrayPosition
-        };
-    }
+//             // Cần tính thêm tọa độ lúc cuối
+//             leftE = countLeft * +widthOne;
+//             topE = countTop * +heightOne;
+//             countLeft++;
+//         }
+//         return {
+//             widthOne, heightOne, arrayPosition
+//         };
+//     }
 
 
-    function drawBackground(image, sx, sy) {
-        ctx.clearRect(0, 0, widthOne, heightOne);
-        ctx.save();
-        ctx.drawImage(image, sx, sy, widthOne, heightOne, 0, 0, widthOne, heightOne);
-        encoder.addFrame(ctx)
-    }
-    encoder.finish()
-    const buffer = encoder.out.getData()
-    writeFile(path.join(process.cwd(), 'public', 'images', 'emoji', 'gif', 'beginner.gif'), buffer, error => {
-        console.log(error)
-    })
-    return true;
-});
+//     function drawBackground(image, sx, sy) {
+//         ctx.clearRect(0, 0, widthOne, heightOne);
+//         ctx.save();
+//         ctx.drawImage(image, sx, sy, widthOne, heightOne, 0, 0, widthOne, heightOne);
+//         encoder.addFrame(ctx)
+//     }
+//     encoder.finish()
+//     const buffer = encoder.out.getData()
+//     writeFile(path.join(process.cwd(), 'public', 'images', 'emoji', 'gif', 'beginner.gif'), buffer, error => {
+//         console.log(error)
+//     })
+//     return true;
+// });
 module.exports = router;

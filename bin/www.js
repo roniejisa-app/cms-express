@@ -24,6 +24,7 @@ var credentials = {
     key: key,
     cert: cert
 };
+
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 

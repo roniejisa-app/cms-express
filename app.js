@@ -168,7 +168,7 @@ let files = sync(process.cwd() + '/platform/plugins/*/routes/*').filter(
     }
 )
 for (let i = 0; i < files.length; i++) {
-    const router = require(path.join(files[i]))
+    const router = require(path.join(process.cwd(),files[i]))
     app.use('/', router)
 }
 // app.use(authMiddleware)
@@ -199,7 +199,6 @@ app.use((err, req, res, next) => {
 })
 
 app.use((req, res, next) => {
-    console.log(req.ip);
     res.status(404).render('404')
 })
 
