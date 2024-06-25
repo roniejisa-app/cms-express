@@ -59,11 +59,7 @@ async function types(type) {
             new MakePlugin()
             break
         case 'active:plugin':
-            if (!params.length) {
-                console.log('Vui lòng chuyền param!')
-                return false
-            }
-            new ActivePlugin(params)
+            new ActivePlugin()
             break
         case 'migration':
             migrationDB()

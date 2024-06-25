@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const { Op } = require('sequelize')
 const ejs = require('ejs')
 const { convertDataFilter } = require('@utils/filter')

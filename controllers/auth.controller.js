@@ -1,7 +1,7 @@
 const { User } = require('@models/index')
 const sentMail = require('@utils/mail')
 const md5 = require('crypto-js/md5')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 module.exports = {
     login: (req, res) => {
         if (req.user) {

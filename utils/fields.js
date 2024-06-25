@@ -145,23 +145,26 @@ module.exports = {
             canBeDeleted: async (DB, id) => {
                 // Muốn xóa thì phải không có thằng nào là con
                 // Không có thằng nào liên kết với nó
-
-                const data =
-                    modelRelateTo.length > 0
-                        ? await Promise.all(
-                              modelRelateTo.map(async ({ model, field }) => {
-                                  const count = await DB[model].findAll({
-                                      attributes: ['id'],
-                                      where: {
-                                          [field]: id,
-                                      },
+                try{
+                    const data =
+                        modelRelateTo.length > 0
+                            ? await Promise.all(
+                                  modelRelateTo.map(async ({ model, field }) => {
+                                      const count = await DB[model].findAll({
+                                          attributes: ['id'],
+                                          where: {
+                                              [field]: id,
+                                          },
+                                      })
+                                      return count.length === 0
                                   })
-                                  return count.length === 0
-                              })
-                          )
-                        : true
-
-                return data.every((item) => item)
+                              )
+                            : true
+    
+                    return data.every((item) => item)
+                }catch(e){
+                    return true;
+                }
             },
             type: 'selectParentAssoc',
             modelName: modelName,
@@ -176,8 +179,7 @@ module.exports = {
         parentName,
         fn,
         hasCheckLevel = false,
-        modelRelateTo = [],
-        
+        modelRelateTo = []
     ) => {
         return {
             type: 'chooseBeLongToMany',
@@ -283,5 +285,5 @@ module.exports = {
             valueKeyOfAssoc: 'id', // Chỗ này ngoài view
             labelKeyOfAssoc: 'name', // Chỗ này ngoài view
         }
-    }
+    },
 }

@@ -18,6 +18,10 @@ class MakePlugin {
         }
 
         await this.newField('Tên plugin?', false, 'label')
+        if (typeof this.label === 'symbol') {
+            p.outro(color.red('Đã thoát'))
+            return false
+        }
         await this.newField('Key plugin?', true, 'name')
         if (typeof this.name === 'symbol') {
             p.outro(color.red('Đã thoát'))
