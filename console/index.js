@@ -69,20 +69,13 @@ async function types(type) {
             migrationDB()
             break
         case 'make:migration':
-            if (params.length < 2 || params.length > 2) {
-                console.log('Argv gồm 2 phần là tên plugin và tên migration!')
-                return false
-            }
-            new MakeMigration(params)
+            new MakeMigration()
             break
         case 'make:model':
             new MakeModel()
             break
         case 'make:model:mongodb':
-            if (params.length < 2 || params.length > 2) {
-                console.log(`Argv gồm 2 phần là tên plugin và tên model!`)
-            }
-            new MakeModelMongoDB(params)
+            new MakeModelMongoDB()
         default:
             console.log('Không tồn tại command này!')
     }

@@ -1,5 +1,7 @@
 const db = require('../../models/index')
 const dbMongo = require('../../mongodb/model.js')
+const p = require('@clack/prompts')
+const color = require('picocolors')
 class ActivePlugin {
     constructor(params) {
         const [plugin, key, model, name, type] = params
@@ -41,6 +43,27 @@ class ActivePlugin {
             await dataModule.addPermissions(dataPermission)
         } else {
             await dataModule.setPermissions(dataPermission)
+        }
+    }
+
+    async newField(name, check = false, key) {
+        this[key] = await p.text({
+            message: name,
+        })
+        if (typeof this[key] === 'symbol') return false
+        if (!check) return
+
+        if (check) {
+            this.checkPathPlugin = fs.existsSync(
+                'platform/plugins/' + this[key]
+            )
+        }
+
+        if (check && this.checkPathPlugin) {
+            await p.outro(
+                color.red(`Plugin ${color.cyan(this[key])} đã tồn tại!`)
+            )
+            return await this.newField(name, check, key)
         }
     }
 }
