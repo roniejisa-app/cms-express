@@ -171,7 +171,7 @@ for (let i = 0; i < files.length; i++) {
     const router = require(path.join(process.cwd(),files[i]))
     app.use('/', router)
 }
-// app.use(authMiddleware)
+app.use(authMiddleware)
 app.use(process.env.VITE_AP, adminRouter)
 app.use('/crawler', crawlerRouter)
 app.use('/api', apiRouter)

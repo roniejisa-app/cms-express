@@ -1,9 +1,9 @@
 {
-    "label": "hehe",
-    "name": "hehe",
+    "label": "Convert Webp",
+    "name": "convert-webp",
     "module": [
         {
-            "name": "hehe"
+            "name": "convert-webp"
         }
     ],
     "author": "roniejisa",
