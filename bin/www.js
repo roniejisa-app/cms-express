@@ -14,6 +14,7 @@ const socketRTC = require('@socket/rtc');
 const fs = require('fs');
 const socketClient = require('@socket/client');
 const mongodb = require('@mongodb');
+const { logError } = require('../utils/log');
 /**
  * Get port from environment and store in Express.
  */
@@ -81,7 +82,7 @@ function normalizePort(val) {
  */
 
 function onError(error) {
-    console.log(error);
+    logError("Lỗi trong file www.js" + error);
     if (error.syscall !== 'listen') {
         throw error;
     }
@@ -110,7 +111,6 @@ function onError(error) {
  */
 
 function onListening() {
-    console.log('Listening on port ' + port);
     var addr = server.address();
     var bind = typeof addr === 'string'
         ? 'pipe ' + addr

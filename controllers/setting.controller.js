@@ -1,4 +1,5 @@
 const DB = require('@mongodb/model')
+const { logError } = require('../utils/log')
 const model = new DB.Setting().DB
 const settingController = {
     index: async (req, res) => {
@@ -23,7 +24,7 @@ const settingController = {
                 csrfToken: req.csrfToken(),
             })
         } catch (e) {
-            console.log(e)
+            logError('error setting' + e)
         }
     },
     store: async (req, res) => {

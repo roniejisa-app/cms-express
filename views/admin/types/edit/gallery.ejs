@@ -1,6 +1,6 @@
 <div class="form-group mb-3">
     <label class="d-block mb-1"><%= field.label %></label>
-    <div class="image-form" data-type="last">
+    <div class="image-form" data-type="multiple">
         <textarea
             class="form-control"
             type="text"
@@ -8,20 +8,20 @@
             placeholder="<%= field.placeholder ?? field.label  %>"
             hidden
         ><%= req.old[field.name] ?? data[field.name] %></textarea>
-        <span>
-            <img
-                src="<% if(req.old[field.name]){ %>
-                    <%= '/'+JSON.parse(req.old[field.name]).path_absolute %> 
-                    <% } else if(data[field.name]) { %>
-                    <%= '/'+JSON.parse(data[field.name]).path_absolute %> 
-                    <% } else { %>  
-                    <%=  '/images/admin/no-image.svg' %>
-                    <% } %>"
-                alt="Chưa chọn ảnh"
-            />
-        </span>
+        <div class="cms-gallery">
+            <% if(req.old[field.name] ?? data[field.name]) {%>
+                <% JSON.parse(req.old[field.name] ?? data[field.name]).forEach((item) => { 
+                    const img = JSON.parse(item)    
+                %>
+                    <div class="cms-gallery-item" data-id="<%= img.uniqueId %>">
+                        <img src="/<%= img.path_absolute %>"/>
+                        <div class="btn-remove-gallery" type="button">&times;</div>
+                    </div>
+                <% }) %>
+            <% } %>
+        </div>
         <div class="image-form-action">
-            <div class="btn btn-choose-image btn-success" data-type="last" type="button">
+            <div class="btn btn-choose-image btn-success" data-type="multiple" type="button">
                 Chọn ảnh
             </div>
             <div class="btn btn-remove-image btn-danger" type="button">

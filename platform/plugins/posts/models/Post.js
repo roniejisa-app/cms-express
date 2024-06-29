@@ -76,6 +76,16 @@ module.exports = (sequelize, DataTypes) => {
                     sort: true,
                 },
                 {
+                    name:"gallery",
+                    label: "Thư viện ảnh",
+                    type: "gallery",
+                    show: false,
+                    showForm: true,
+                    positionSidebar: false,
+                    filter: false,
+                    sort: false,
+                },
+                {
                     name: 'image',
                     label: 'Ảnh đại diện',
                     type: 'image',

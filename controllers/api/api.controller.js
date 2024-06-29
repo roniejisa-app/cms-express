@@ -4,6 +4,7 @@ const { REQUEST_API } = require('@constants/api')
 // Hiện tại api chỉ sử dụng đối với PostgresSQL & chưa áp dụng và chỉnh sửa cho Mongoose
 const SQLController = require('./module/sql.controller')
 const NoSqlController = require('./module/no_sql.controller')
+const { logError } = require('../../utils/log')
 const controllers = {
     SQL: {
         all: (req, res, params) => SQLController.all(req, res, params),
@@ -36,7 +37,7 @@ const apiController = {
             const { type, ...params } = await getDataApi(req)
             return controllers[type.toUpperCase()].one(req, res, params)
         } catch (e) {
-            console.log(e)
+            logError('error api one ' + e)
             next()
         }
     },
@@ -45,7 +46,7 @@ const apiController = {
             const { type, ...params } = await getDataApi(req)
             return controllers[type.toUpperCase()].create(req, res, params)
         } catch (e) {
-            console.log(e.message)
+            logError('error api create ' + e)
             next()
         }
     },
@@ -54,7 +55,7 @@ const apiController = {
             const { type, ...params } = await getDataApi(req)
             return controllers[type.toUpperCase()].update(req, res, params)
         } catch (e) {
-            console.log(e.message)
+            logError('error api update' + e)
             next()
         }
     },
@@ -63,7 +64,7 @@ const apiController = {
             const { type, ...params } = await getDataApi(req)
             return controllers[type.toUpperCase()].delete(req, res, params)
         } catch (e) {
-            console.log(e.message)
+            logError('error api delete ' + e)
             next()
         }
     },

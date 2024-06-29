@@ -39,6 +39,7 @@ const moduleListener = require('./listeners/module')
 const loadAlias = require('./alias/load')
 const Cache = require('./utils/cache')
 const { CACHE_USER_LOGGED } = require('./constants/cache')
+const { logError } = require('./utils/log')
 var app = express()
 app.use(
     session({
@@ -53,7 +54,7 @@ moduleListener()
 loadAlias(app)
 app.use(
     cors({
-        origin: '*',
+        origin: process.env.DOMAIN_ORIGIN,
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         preflightContinue: false,
         optionsSuccessStatus: 204,
@@ -171,14 +172,14 @@ for (let i = 0; i < files.length; i++) {
     const router = require(path.join(process.cwd(),files[i]))
     app.use('/', router)
 }
-app.use(authMiddleware)
+app.use('/api', apiRouter)
+// app.use(authMiddleware)
 app.use(process.env.VITE_AP, adminRouter)
 app.use('/crawler', crawlerRouter)
-app.use('/api', apiRouter)
 app.use('/', customRouter)
 
 app.use((error, req, res, next) => {
-    console.log(error);
+    logError("Lỗi trong file: " + error);
     switch (error.code) {
         case 'LIMIT_UNEXPECTED_FILE':
             return res.json({

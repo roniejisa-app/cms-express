@@ -3,7 +3,8 @@
     "name": "convert-webp",
     "module": [
         {
-            "name": "convert-webp"
+            "name": "convert-webp",
+            "name_show": "Chuyển đổi ảnh sang webp"
         }
     ],
     "author": "roniejisa",

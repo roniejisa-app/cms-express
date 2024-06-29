@@ -1,6 +1,6 @@
 const { sync } = require('glob')
 const { readFileSync } = require('fs')
-const { Module } = require('@models')
+const { Module, Permission } = require('@models')
 const cache = require('../utils/cache')
 const pluginController = {
     index: async (req, res) => {
@@ -37,10 +37,41 @@ const pluginController = {
         })
         if (module) {
             module.update({ active: true })
+        } else {
+            // Tìm đến folder trong plugins
+            const data = readFileSync(
+                process.cwd() + `/platform/plugins/${name}/config.json`,
+                'utf8'
+            )
+            const obj = JSON.parse(data)
+            for (const module of obj.module) {
+                const body = {
+                    name: module.name,
+                    name_show: module.name_show,
+                    order: 9999,
+                    active: true,
+                }
+                if (module.model) {
+                    body.model = module.model
+                }
+                const dataModule = await Module.create(body)
+                if (module.permission) {
+                    const dataPermission = await Promise.all(
+                        module.permission.split(',').map((permission) =>
+                            Permission.findOne({
+                                where: {
+                                    value: permission.trim(),
+                                },
+                            })
+                        )
+                    )
+                    await dataModule.setPermissions(dataPermission)
+                }
+            }
         }
         // Kiểm tra nếu chưa có thì phải sinh ra module ở đây
-        
-        await cache.clearAllCache(req,res)
+
+        // await cache.clearAllCache(req,res)
         return res.json({ status: 200 })
     },
     uninstall: async (req, res) => {
@@ -54,7 +85,7 @@ const pluginController = {
             module.update({ active: false })
         }
         //Clear cache
-        await cache.clearAllCache(req,res)
+        await cache.clearAllCache(req, res)
         return res.json({ status: 200 })
     },
 }

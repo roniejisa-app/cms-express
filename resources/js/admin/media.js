@@ -1,5 +1,8 @@
+import DragField from '../utils/drag'
+import { randomId } from '../utils/utils'
+
 const MEDIA = (() => {
-    async function showMedia(e, imageForm, buttonChooseImage) {
+    async function showMedia(e, imageForm) {
         const iframeContainer = document.createElement('div')
         iframeContainer.className = 'media-box'
         const loading = document.createElement('div')
@@ -33,7 +36,7 @@ const MEDIA = (() => {
         iframeContainer.append(loading)
         document.body.append(iframeContainer)
         const iframeImage = document.createElement('iframe')
-        iframeImage.setAttribute('src', import.meta.env.VITE_AP+'/medias')
+        iframeImage.setAttribute('src', import.meta.env.VITE_AP + '/medias')
         Object.assign(iframeImage.style, {
             width: '0',
             height: '0',
@@ -43,7 +46,7 @@ const MEDIA = (() => {
         })
         iframeContainer.append(iframeImage)
         iframeImage.dataset.uuid = imageForm.dataset.id
-        iframeImage.dataset.type = buttonChooseImage.dataset.type
+        iframeImage.dataset.type = imageForm.dataset.type
         iframeImage.onload = function () {
             loading.remove()
             Object.assign(iframeImage.style, {
@@ -64,14 +67,42 @@ const MEDIA = (() => {
         textarea.dispatchEvent(new Event('change'))
     }
 
+    function removeGallery(imageForm) {
+        const gallery = imageForm.querySelector('.cms-gallery')
+        gallery.innerHTML = ''
+        const textarea = imageForm.querySelector('textarea')
+        textarea.innerText = ''
+        textarea.dispatchEvent(new Event('change'))
+    }
+
+    function removeImageMultiple(galleryEl, textareaEl) {
+        const items = galleryEl.querySelectorAll('.btn-remove-gallery')
+        const obj = JSON.parse(textareaEl.innerText)
+        for (let item of items) {
+            item.onclick = (e) => {
+                e.stopPropagation();
+                const imageItem = item.parentElement;
+                const id = imageItem.dataset.id
+                const index = obj.findIndex((item) => {
+                    const dataItem = JSON.parse(item)
+                    return dataItem.uniqueId === id
+                })
+                if (index !== -1) {
+                    obj.splice(index, 1)
+                }
+                textareaEl.innerText = obj.length > 0 ? JSON.stringify(obj) : "";
+                textareaEl.dispatchEvent(new Event('change'))
+                imageItem.remove();
+            }
+        }
+    }
     return {
         init: () => {
             const imageFormEls = document.querySelectorAll('.image-form')
             imageFormEls.forEach((imageForm) => {
-                let uniqueId =
-                    Date.now().toString(36) +
-                    Math.random().toString(36).substring(2)
+                let uniqueId = randomId()
                 imageForm.dataset.id = uniqueId
+                const type = imageForm.dataset.type
                 const buttonChooseImage =
                     imageForm.querySelector('.btn-choose-image')
                 const buttonRemoveImage =
@@ -79,13 +110,33 @@ const MEDIA = (() => {
                 imageForm.addEventListener('click', () => {
                     buttonChooseImage.click()
                 })
+                const textareaEl = imageForm.querySelector('textarea')
+                if (type === 'multiple' && textareaEl.innerHTML !== '') {
+                    const galleryEl = imageForm.querySelector('.cms-gallery');
+                    new DragField(
+                        galleryEl,
+                        textareaEl,
+                        '.cms-gallery-item'
+                    ).init()
+                    removeImageMultiple(galleryEl, textareaEl)
+                }
                 buttonChooseImage.addEventListener('click', (e) => {
                     e.stopPropagation()
                     showMedia(e, imageForm, buttonChooseImage)
                 })
                 buttonRemoveImage.addEventListener('click', (e) => {
                     e.stopPropagation()
-                    removeImage(imageForm)
+                    // Kiểm tra xem có ảnh hay không đã
+                    if (textareaEl.innerHTML === '') return
+                    if (!confirm('Xóa ảnh')) return
+                    switch (type) {
+                        case 'last':
+                            removeImage(imageForm)
+                            break
+                        case 'multiple':
+                            removeGallery(imageForm)
+                            break
+                    }
                 })
             })
         },
@@ -93,6 +144,7 @@ const MEDIA = (() => {
             window.addEventListener('choose-image', function (e) {
                 const data = e.data
                 const type = e.typeImage
+                // Cái này để lấy ra field hiện tại của danh sách ảnh
                 const imageFormEl = document.querySelector(
                     `.image-form[data-id="${e.uuid}"]`
                 )
@@ -100,12 +152,43 @@ const MEDIA = (() => {
                 switch (type) {
                     case 'last':
                         const imageData = JSON.parse(data)
-                        textarea.innerText = data
-                        textarea.dispatchEvent(new Event('change'))
                         const imageEl = imageFormEl.querySelector('img')
                         imageEl.src = '/' + imageData.path_absolute
+                        textarea.innerText = data
+                        break
+                    case 'multiple':
+                        const galleryEl =
+                            imageFormEl.querySelector('.cms-gallery')
+                        data.forEach((image) => {
+                            const imageData = JSON.parse(image)
+                            const imageEl = document.createElement('div')
+                            imageEl.className = 'cms-gallery-item'
+                            imageEl.dataset.id = imageData.uniqueId
+                            imageEl.innerHTML = `
+                                <img src="/${imageData.path_absolute}" />
+                                <button type="button" class="btn-remove-gallery" data-id="${imageData.id}">&times;</button>
+                            `
+                            galleryEl.append(imageEl)
+                        })
+                        if (textarea.innerText !== '') {
+                            const old = JSON.parse(textarea.innerText)
+                            textarea.innerText = JSON.stringify([
+                                ...old,
+                                ...data,
+                            ])
+                        } else {
+                            textarea.innerText = JSON.stringify(data)
+                        }
+                        new DragField(
+                            galleryEl,
+                            textarea,
+                            '.cms-gallery-item'
+                        ).init()
+                        removeImageMultiple(galleryEl, textarea)
                         break
                 }
+
+                textarea.dispatchEvent(new Event('change'))
                 const iframeBox = document.querySelector('.media-box')
                 iframeBox.remove()
             })

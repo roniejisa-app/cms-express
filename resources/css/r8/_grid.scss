@@ -58,6 +58,7 @@ $grids: (
     @for $i from 1 through 12 {
         .col-#{$prefix}#{$i} {
             flex-basis: calc(100% / 12) * $i;
+            max-width: calc(100% / 12) * $i;
             padding: 0 calc($defaultGutter / 2);
         }
     }

@@ -5,6 +5,7 @@ import item from './item'
 import eventImage from './event-edit-image'
 import XHR from '../utils/xhr'
 import notify from '../utils/notify'
+import { randomId } from '../utils/utils.js'
 
 const MAIN = (() => {
     function handleDeleteAll() {
@@ -18,7 +19,7 @@ const MAIN = (() => {
                     )
                     deleteAllBtn.setAttribute('disabled', true)
                     const response = await XHR.post(
-                        import.meta.env.VITE_AP+'/medias/delete-all',
+                        import.meta.env.VITE_AP + '/medias/delete-all',
                         {
                             ids,
                         }
@@ -50,7 +51,7 @@ const MAIN = (() => {
                     )
                     restoreAllBtn.setAttribute('disabled', true)
                     const response = await XHR.post(
-                        import.meta.env.VITE_AP+'/medias/restore-all',
+                        import.meta.env.VITE_AP + '/medias/restore-all',
                         {
                             ids,
                         }
@@ -86,7 +87,7 @@ const MAIN = (() => {
                     )
                     deleteForceAll.setAttribute('disabled', true)
                     const response = await XHR.post(
-                        import.meta.env.VITE_AP+'/medias/delete-force',
+                        import.meta.env.VITE_AP + '/medias/delete-force',
                         {
                             ids,
                         }
@@ -126,6 +127,24 @@ const MAIN = (() => {
                     eventChooseImage.uuid = uuid
                     eventChooseImage.data = objectData.item.dataset.file
                     eventChooseImage.typeImage = type
+                    window.parent.dispatchEvent(eventChooseImage)
+                    break
+                case 'multiple':
+                    const images = getItemSelecting(type)
+                    if (!images.length) {
+                        return notify.error('Vui lòng chọn tệp tin')
+                    }
+                    eventChooseImage.uuid = uuid
+                    eventChooseImage.typeImage = type
+
+                    eventChooseImage.data = images
+                        .map((item) => {
+                            const uniqueId = randomId()
+                            const jsonFile = item.dataset.file
+                            const obj = JSON.parse(jsonFile)
+                            return JSON.stringify({ ...obj, uniqueId })
+                        })
+                        .filter((file) => file)
                     window.parent.dispatchEvent(eventChooseImage)
                     break
                 default:

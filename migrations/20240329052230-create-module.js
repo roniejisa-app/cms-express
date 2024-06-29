@@ -16,6 +16,7 @@ module.exports = {
             api: Sequelize.STRING,
             type: Sequelize.STRING,
             active: Sequelize.BOOLEAN,
+            public_api: Sequelize.BOOLEAN,
             manager_module_id: Sequelize.INTEGER,
             icon: Sequelize.STRING,
             created_at: {

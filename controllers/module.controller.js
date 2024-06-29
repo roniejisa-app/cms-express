@@ -85,20 +85,6 @@ module.exports = {
                 return +a.order - +b.order
             })
 
-        console.log(
-            res.render('admin/add', {
-                model,
-                module,
-                name,
-                name_show,
-                fields,
-                id,
-                leftFields,
-                rightFields,
-                req,
-                csrfToken: req.csrfToken(),
-            })
-        )
         return res.render('admin/add', {
             model,
             module,

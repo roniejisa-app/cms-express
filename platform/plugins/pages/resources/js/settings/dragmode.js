@@ -26,7 +26,7 @@ export const dragMode = (editor) => {
             const { dragMode } = component.getAttributes()
             component.toolbar.splice(0, 1)
             const defaultToolbar = component.toolbar
-            console.log(defaultToolbar)
+            // console.log(defaultToolbar)
             if (!dragMode) {
                 component.setDragMode('absolute')
                 component.setAttributes({

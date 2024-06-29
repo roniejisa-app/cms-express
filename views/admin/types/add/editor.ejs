@@ -3,6 +3,6 @@
 	<textarea class="form-control" type="text" name="<%= field.name %>" placeholder="<%= field.placeholder ?? field.label  %>" hidden><%= req.old[field.name] ?? '' %></textarea>
 	<cms-editor data-name="<%= field.name %>"><%= req.old[field.name] ?? '' %></cms-editor>
 	<% if (req.error && req.error[field.name]) { %>
-	<p class="text-danger"><%= req.error[field.name] %></p>
+	<p class="text-danger mt-2"><%= req.error[field.name] %></p>
 	<% } %>
 </div>

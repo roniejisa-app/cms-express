@@ -471,7 +471,9 @@ module.exports = {
         }
         let order = [['id', 'ASC']]
         const offset = (page - 1) * limit
-        const filters = convertDataFilter(req.body, fields)
+        let filters = convertDataFilter(req.body, fields)
+        const staticFilter = typeof modelMain.filter !== 'undefined' ? modelMain.filter() : {};
+        filters = { ...staticFilter, ...filters }
         if (sort) {
             order = [[sort, sortType]]
         }

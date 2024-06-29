@@ -9,6 +9,7 @@ const MakeModelMongoDB = require('./commands/make-model-mongodb')
 
 const p = require('@clack/prompts')
 const color = require('picocolors')
+const { logError } = require('../utils/log')
 async function askQuestion(question, answers) {
     const options = []
     answers.forEach((answer) => {
@@ -73,12 +74,7 @@ async function types(type) {
         case 'make:model:mongodb':
             new MakeModelMongoDB()
         default:
-            console.log('Không tồn tại command này!')
+            logError('Không tồn tại command này!')
     }
 }
-
-function text(message, validate) {
-    p.log('Vui lòng nhập kiểu dữ liệu phù hợp:')
-}
-
 main()

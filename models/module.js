@@ -119,6 +119,24 @@ module.exports = (sequelize, DataTypes) => {
                     ],
                 },
                 {
+                    name: 'public_api',
+                    label: 'API NO TOKEN',
+                    type: 'api',
+                    show: true,
+                    showForm: true,
+                    positionSidebar: true,
+                    options: [
+                        {
+                            value: 1,
+                            name: 'Kích Hoạt',
+                        },
+                        {
+                            value: 0,
+                            name: 'Tắt kích hoạt',
+                        },
+                    ],
+                },
+                {
                     name: 'permissions',
                     modelName: 'Permission',
                     modelAs: 'permissions',
@@ -214,6 +232,7 @@ module.exports = (sequelize, DataTypes) => {
             model: DataTypes.STRING,
             active: DataTypes.BOOLEAN,
             api: DataTypes.BOOLEAN,
+            public_api: DataTypes.BOOLEAN,
             type: DataTypes.STRING,
             manager_module_id: DataTypes.INTEGER,
             icon: DataTypes.STRING,

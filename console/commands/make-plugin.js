@@ -81,7 +81,6 @@ class MakePlugin {
 
         p.outro(`Plugin ${color.green(this.name)} đã được tạo.`)
         // Ở chỗ này bắt đầu thêm nhưng file cần cho plugin
-        // console.log();
         // fs.mkdir(file, data)
     }
 

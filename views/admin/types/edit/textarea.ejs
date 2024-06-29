@@ -2,6 +2,6 @@
 	<label class="d-block mb-1"><%= field.label %></label>
 	<textarea class="form-control" type="text" name="<%= field.name %>" placeholder="<%= field.placeholder ?? field.label  %>"><%= req.old[field.name] ?? data[field.name] %></textarea>
 	<% if (req.error && req.error[field.name]) { %>
-	<p class="text-danger"><%= req.error[field.name] %></p>
+	<p class="text-danger mt-2"><%= req.error[field.name] %></p>
 	<% } %>
 </div>
