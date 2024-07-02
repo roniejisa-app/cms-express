@@ -1,0 +1,45 @@
+{
+    "label": "ecommerce",
+    "name": "ecommerce",
+    "module": [
+        {
+            "name": "products",
+            "name_show": "Sản phẩm",
+            "model": "Product",
+            "type": "sql",
+            "permission": "create,update,delete,view"
+        },
+        {
+            "name": "product_attributes",
+            "name_show": "Thuộc tính sản phẩm",
+            "model": "ProductAttribute",
+            "type": "sql",
+            "permission": "create,update,delete,view"
+        },
+        {
+            "name": "product_attribute_details",
+            "name_show": "Giá trị thuộc tính",
+            "model": "ProductAttributeDetail",
+            "type": "sql",
+            "permission": "create,update,delete,view"
+        },
+        {
+            "name": "product_categories",
+            "name_show": "Danh mục sản phẩm",
+            "model": "ProductCategory",
+            "type": "sql",
+            "permission": "create,update,delete,view"
+        },
+        {
+            "name": "product_brands",
+            "name_show": "Thương hiệu sản phẩm",
+            "model": "ProductBrand",
+            "type": "sql",
+            "permission": "create,update,delete,view"
+        }
+    ],
+    "author": "roniejisa",
+    "dateUpdate": "01/07/2024",
+    "image": "https://i.ibb.co/0cQkxQx/roniejisa.png",
+    "version": "0.0.1"
+}

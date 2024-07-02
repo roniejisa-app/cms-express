@@ -41,13 +41,13 @@ async function main() {
             )
         )}`
     )
-    const question1 = new Question("What's do")
     const answer = await askQuestion('Bạn muốn dùng chức năng gì?', [
         'make:plugin',
         'active:plugin',
         'make:migration',
         'make:model',
         'make:model:mongodb',
+        'migration',
     ])
     await types(answer)
 }
@@ -73,6 +73,7 @@ async function types(type) {
             break
         case 'make:model:mongodb':
             new MakeModelMongoDB()
+            break;
         default:
             logError('Không tồn tại command này!')
     }

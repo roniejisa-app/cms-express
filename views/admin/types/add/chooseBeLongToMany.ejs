@@ -1,6 +1,10 @@
 <div class="form-group mb-3">
     <label class="d-block mb-1"><%= field.label %></label>
     <div>
-        <%- field.data.printTreeChoose(field.data.tree, field.keyChild, field.keyValue, field.keyLabel, field.name, 0, req.old[field.name] ?? [], 'label') %>
+        <% if(field.data.tree.length){ %>
+            <%- field.data.printTreeChoose(field.data.tree, field.keyChild, field.keyValue, field.keyLabel, field.name, 0, req.old[field.name] ?? [], 'label') %>
+        <% } else { %>
+            Chưa có <%= field.label.toLowerCase() %> nào 
+        <% } %>
     </div>
 </div>
