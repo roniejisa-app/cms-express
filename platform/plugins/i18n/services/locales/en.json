@@ -90,5 +90,6 @@
 	"exists": "exists",
 	"data_not_found": "data_not_found",
 	"model": "model",
-	"module": "module"
+	"module": "module",
+	"require": "require"
 }

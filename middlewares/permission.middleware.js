@@ -1,7 +1,19 @@
 const { getAllPermissionOfUser } = require('@utils/permission')
 // Kiêm tra phần quyền
-const linkStatic = (link) => {
-    return ['check-link',"plugin-i"].includes(link)
+const linkStatic = (link,method) => {
+    const links = [
+        {
+            link: 'check-link',
+            method: ['POST'],
+        },{
+            link: 'plugin-i',
+            method: ['GET'],
+        },{
+            link: undefined,
+            method: ['GET'],
+        }
+    ]
+    return links.findIndex(linkItem => linkItem.link === link && linkItem.method.includes(method)) !== -1
 }
 
 module.exports = async (req, res, next) => {
@@ -41,7 +53,7 @@ module.exports = async (req, res, next) => {
                         )
                     break
                 default:
-                    if (linkStatic(module)) {
+                    if (linkStatic(module,req.method)) {
                         flag = true
                     } else if (['POST'].includes(req.method)) {
                         flag = permission.some(
@@ -51,21 +63,26 @@ module.exports = async (req, res, next) => {
                                 permission.includes(`${module}.view`)
                         )
                     } else {
-                        flag =
-                            permission.some((permission) =>
-                                permission.includes(`${module}.view`)
-                            ) || !module
+                        flag = permission.some((permission) =>
+                            permission.includes(`${module}.view`)
+                        )
+                        console.log(flag);
                     }
                     break
             }
             if (!flag) {
-                res.redirect(process.env.VITE_AP)
+                return res.redirect(process.env.VITE_AP)
             }
+
             next()
         } else {
             res.redirect('/')
         }
     } catch (e) {
-        res.redirect('/login')
+        if (!req.user) {
+            res.redirect('/login')
+        } else {
+            res.redirect('/')
+        }
     }
 }

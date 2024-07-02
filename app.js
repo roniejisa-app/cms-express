@@ -130,7 +130,6 @@ for (let i = 0; i < serviceFiles.length; i++) {
 
 app.use(async (req, res, next) => {
     const langCurrent = await cache.get('lang', 'en')
-    console.log(langCurrent);
     const { lang } = req.cookies
     const { lang: queryLang } = req.query
     queryLang
@@ -194,21 +193,31 @@ app.use('/', authRouter)
 app.use('/', chatRouter)
 
 // Đăng ký các file trong plugin tại đây nhưng không được vượt validate
-let files = sync(process.cwd() + '/platform/plugins/*/routes/*').filter(
+let routeFiles = sync(process.cwd() + '/platform/plugins/*/routes/*').filter(
     (file) => {
-        return file.indexOf('.') !== 0 && file.slice(-3) === '.js'
+        return file.indexOf('.') !== 0 && file.slice(-3) === '.js' && file.indexOf('admin.js') === -1
     }
 )
 
-for (let i = 0; i < files.length; i++) {
-    const router = require(path.join(process.cwd(), files[i]))
+for (let i = 0; i < routeFiles.length; i++) {
+    const router = require(path.join(process.cwd(), routeFiles[i]))
     app.use('/', router)
 }
 app.use('/api', apiRouter)
-// app.use(authMiddleware)
+app.use(customRouter)
+app.use(authMiddleware)
+// Đăng ký các file trong plugin tại đây nhưng không được vượt validate
+let adminFiles = sync(process.cwd() + '/platform/plugins/*/routes/*').filter(
+    (file) => {
+        return file.indexOf('.') !== 0 && file.slice(-3) === '.js' && file.indexOf('admin.js') !== -1
+    }
+)
+for (let i = 0; i < adminFiles.length; i++) {
+    const router = require(path.join(process.cwd(), adminFiles[i]))
+    app.use(process.env.VITE_AP, router)
+}
 app.use(process.env.VITE_AP, adminRouter)
 app.use('/crawler', crawlerRouter)
-app.use('/', customRouter)
 
 app.use((error, req, res, next) => {
     console.log(error)

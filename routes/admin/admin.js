@@ -8,12 +8,10 @@ const Cache = require('@utils/cache')
 const { User } = require('@models/index')
 // Bắt đầu vào quản trị
 const permissionMiddleware = require('@middlewares/permission.middleware')
-const { buildMenuList } = require('@utils/all')
-const { CACHE_ADMIN_MENU_LIST } = require('../../constants/cache')
 const pluginRouter = require('./plugin');
 const adminMiddleware = require('@middlewares/admin.middleware')
 // permissionMiddleware
-router.use(adminMiddleware)
+router.use(permissionMiddleware, adminMiddleware)
 router.get('/', adminController.dashboard)
 router.post('/check-link', adminController.checkLink)
 router.get('/clear-cache', Cache.clearAllCache)
