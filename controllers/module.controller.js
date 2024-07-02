@@ -85,7 +85,6 @@ module.exports = {
                 return +a.order - +b.order
             })
         
-            console.log("hello");
         return res.render('admin/add', {
             model,
             module,

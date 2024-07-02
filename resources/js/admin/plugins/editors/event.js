@@ -31,7 +31,7 @@ export const eventChangeForValue = {
 }
 
 export const eventCustomImage = {
-    onclick: ({event, shadowRoot, range}) => {
+    onclick: ({ event, shadowRoot, range }) => {
         const source = event.target.dataset.source
         const content = shadowRoot.querySelector('.content')
         switch (source) {
@@ -81,7 +81,7 @@ export const eventCustomImage = {
     },
 }
 export const eventCustomLink = {
-    onclick: ({element, shadowRoot, range, cmsEditor, ...params}) => {
+    onclick: ({ element, shadowRoot, range, cmsEditor, ...params }) => {
         // Kiểm tra active thì lấy ra thẻ a
         let anchor = null
         let title = range ? range : ''
@@ -100,7 +100,7 @@ export const eventCustomLink = {
         }
 
         const content = shadowRoot.querySelector('.content')
-        backRange({shadowRoot, range, ...params})
+        backRange({ shadowRoot, range, ...params })
         const form = document.createElement('form')
         form.innerHTML = addFormModal(title, url, target, rel)
         const modal = createModal(shadowRoot, form)
@@ -215,7 +215,7 @@ function createModal(shadowRoot, html) {
 export const backRange = ({ shadowRoot, selectionType, range }) => {
     if (range) {
         const selection = shadowRoot.getSelection()
-        if(selectionType === 'Caret') {
+        if (selectionType === 'Caret') {
             selection.removeAllRanges()
         }
         selection.addRange(range)
@@ -225,7 +225,6 @@ export const backRange = ({ shadowRoot, selectionType, range }) => {
 
 export const dispatchData = (shadowRoot) => {
     const content = shadowRoot.querySelector('.content')
-    const nameInsertValue = content.dataset.name
-    const el = document.querySelector(`[name="${nameInsertValue}"]`)
+    const el = shadowRoot.host.previousElementSibling
     el.innerHTML = content.innerHTML
 }

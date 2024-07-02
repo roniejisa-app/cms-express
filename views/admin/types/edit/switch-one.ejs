@@ -1,0 +1,8 @@
+<div class="form-group mb-3">
+    <label class="d-block mb-1"><%= field.label %></label>
+    <label class="switch">
+        <input type="checkbox" <% if(data[field.name]) { %>checked<% } %>>
+        <span></span>
+        <input type="hidden" name="<%= field.name %>" value="<%= +data[field.name] ? 1 : 0 %>">
+    </label>
+</div>

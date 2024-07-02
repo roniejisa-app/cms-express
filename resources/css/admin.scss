@@ -1002,3 +1002,54 @@ body.menu-small {
         }
     }
 }
+
+//switch
+.switch {
+    --width-switch: 40px;
+    --spacer-switch: 2px;
+    position: relative;
+    display: inline-block;
+    width: var(--width-switch);
+    height: calc(var(--width-switch) / 2);
+    border-radius: 99px;
+    input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    span {
+        border-radius: 99px;
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+    }
+    span:before {
+        border-radius: 50%;
+        position: absolute;
+        content: '';
+        height: calc(var(--width-switch) / 2 - var(--spacer-switch) * 2);
+        width: calc(var(--width-switch) / 2 - var(--spacer-switch) * 2);
+        left: var(--spacer-switch);
+        bottom: var(--spacer-switch);
+        background-color: white;
+        -webkit-transition: transform 0.4s;
+        transition: transform 0.4s;
+    }
+    input:checked + span {
+        background-color: var(--color-main);
+    }
+    input:focus + span {
+        box-shadow: 0 0 1px var(--color-main);
+    }
+    input:checked + span:before {
+        -webkit-transform: translateX(calc(var(--width-switch) - var(--width-switch) / 2));
+        -ms-transform: translateX(calc(var(--width-switch) - var(--width-switch) / 2));
+        transform: translateX(calc(var(--width-switch) - var(--width-switch) / 2));
+    }
+}

@@ -216,7 +216,10 @@ module.exports = (sequelize, DataTypes) => {
             ]
         }
         static validate(id) {
-            let validate = {}
+            let validate = {
+                name: string().required('Vui điền tên'),
+                slug: string().required('Vui điền đường dẫn'),
+            }
             return validate
         }
     }

@@ -1,5 +1,8 @@
 'use strict'
 const { Model } = require('sequelize')
+const { selectParentAssoc } = require('@utils/fields')
+const { HAS_CHECK_LEVEL } = require('../../../../constants/model')
+const { string } = require('yup')
 module.exports = (sequelize, DataTypes) => {
     class ProductCategory extends Model {
         /**
@@ -64,8 +67,8 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     name: 'description',
-                    label: 'Mô tả ngắn',
-                    type: 'textarea',
+                    label: 'Mô tả',
+                    type: 'editor',
                     show: false,
                     showForm: true,
                     positionSidebar: false,
@@ -78,7 +81,7 @@ module.exports = (sequelize, DataTypes) => {
                     type: 'image',
                     show: false,
                     showForm: true,
-                    positionSidebar: false,
+                    positionSidebar: true,
                     filter: true,
                     sort: true,
                 },
@@ -120,12 +123,15 @@ module.exports = (sequelize, DataTypes) => {
                     ],
                     show: false,
                     showForm: true,
-                    positionSidebar: false,
+                    positionSidebar: true,
                 },
             ]
         }
         static validate(id) {
-            let validate = {}
+            let validate = {
+                name: string().required('Vui điền tên'),
+                slug: string().required('Vui điền đường dẫn'),
+            }
             return validate
         }
     }
