@@ -5,16 +5,16 @@ module.exports = {
     /**
      * Thêm hoặc sửa Item thêm quan hệ cho chính nó
      * @param {*} modelName // Model Associate
-     * @param {*} valueKey // Key giá trị thê
-     * @param {*} labelKey // Key Tên hiển thị
+     * @param {*} keyValue // Key giá trị thê
+     * @param {*} keyLabel // Key Tên hiển thị
      * @param {*} fn // Định danh của associate
      */
-    chooseMultiAssoc: (modelName, valueKey, labelKey, fn) => {
+    chooseMultiAssoc: (modelName, keyValue, keyLabel, fn) => {
         return {
             type: 'selectMultiAssoc',
             modelName: modelName,
-            valueKey: valueKey,
-            labelKey: labelKey,
+            keyValue: keyValue,
+            keyLabel: keyLabel,
             /**
              * Thêm hoặc sửa Item thêm quan hệ cho chính nó
              * @param {*} item // Item hiện tại đang chỉnh sửa hoặc thêm
@@ -35,34 +35,34 @@ module.exports = {
                 await item[newFn](data)
             },
             data: async (model) => {
-                return await model.findAll({ attribute: [valueKey, labelKey] })
+                return await model.findAll({ attribute: [keyValue, keyLabel] })
             },
         }
     },
     /**
      * Thêm hoặc sửa Item thêm quan hệ cho chính nó
      * @param {*} modelName // Model Associate
-     * @param {*} valueKey // Key giá trị thê
-     * @param {*} labelKey // Key Tên hiển thị
+     * @param {*} keyLabel // Key giá trị thê
+     * @param {*} keyValue // Key Tên hiển thị
      */
-    selectAssoc: (modelName, valueKey, labelKey) => {
+    selectAssoc: (modelName, keyValue, keyLabel) => {
         return {
             data: async (model) => {
                 const results = await model.findAll({
-                    attributes: [valueKey, labelKey],
+                    attributes: [keyValue, keyLabel],
                 })
                 return results
             },
             type: 'selectAssoc',
             modelName: modelName,
-            valueKey: valueKey,
-            labelKey: labelKey,
+            keyValue: keyValue,
+            keyLabel: keyLabel,
         }
     },
     selectParentAssoc: (
         modelName,
-        valueKey,
-        labelKey,
+        keyValue,
+        keyLabel,
         parentName,
         hasCheckLevel = false,
         modelRelateTo = []
@@ -70,13 +70,13 @@ module.exports = {
         return {
             data: async (model) => {
                 const results = await model.findAll({
-                    attributes: [valueKey, labelKey, parentName],
+                    attributes: [keyLabel, keyValue, parentName],
                 })
                 const arr = results.map((item) => {
                     return item.dataValues
                 })
                 // Xây dựng cây từ danh sách dữ liệu ban đầu
-                const tree = buildTree(arr, null, 1, parentName, valueKey)
+                const tree = buildTree(arr, null, 1, parentName, keyValue)
                 return {
                     printTree,
                     tree,
@@ -129,14 +129,14 @@ module.exports = {
                 }
 
                 const results = await model.findAll({
-                    attributes: [valueKey, labelKey, parentName],
+                    attributes: [keyValue, keyLabel, parentName],
                     ...filters,
                 })
                 const arr = results.map((item) => {
                     return item.dataValues
                 })
 
-                const tree = buildTree(arr, null, 1, parentName, valueKey)
+                const tree = buildTree(arr, null, 1, parentName, keyValue)
                 return {
                     printTree,
                     tree,
@@ -145,37 +145,41 @@ module.exports = {
             canBeDeleted: async (DB, id) => {
                 // Muốn xóa thì phải không có thằng nào là con
                 // Không có thằng nào liên kết với nó
-                try{
+                try {
                     const data =
                         modelRelateTo.length > 0
                             ? await Promise.all(
-                                  modelRelateTo.map(async ({ model, field }) => {
-                                      const count = await DB[model].findAll({
-                                          attributes: ['id'],
-                                          where: {
-                                              [field]: id,
-                                          },
-                                      })
-                                      return count.length === 0
-                                  })
+                                  modelRelateTo.map(
+                                      async ({ model, field }) => {
+                                          const count = await DB[model].findAll(
+                                              {
+                                                  attributes: ['id'],
+                                                  where: {
+                                                      [field]: id,
+                                                  },
+                                              }
+                                          )
+                                          return count.length === 0
+                                      }
+                                  )
                               )
                             : true
-    
+
                     return data.every((item) => item)
-                }catch(e){
-                    return true;
+                } catch (e) {
+                    return true
                 }
             },
             type: 'selectParentAssoc',
             modelName: modelName,
-            valueKey: valueKey,
-            labelKey: labelKey,
+            keyValue: keyValue,
+            keyLabel: keyLabel,
         }
     },
     chooseBeLongToMany: (
         modelName,
-        valueKey,
-        labelKey,
+        keyValue,
+        keyLabel,
         parentName,
         fn,
         hasCheckLevel = false,
@@ -186,13 +190,13 @@ module.exports = {
             modelName: modelName,
             data: async (model) => {
                 const results = await model.findAll({
-                    attributes: [valueKey, labelKey, parentName],
+                    attributes: [keyValue, keyLabel, parentName],
                 })
                 const arr = results.map((item) => {
                     return item.dataValues
                 })
                 // Xây dựng cây từ danh sách dữ liệu ban đầu
-                const tree = buildTree(arr, null, 1, parentName, valueKey)
+                const tree = buildTree(arr, null, 1, parentName, keyValue)
                 return {
                     printTreeChoose,
                     tree,
@@ -279,11 +283,11 @@ module.exports = {
             mainKey: 'module_id',
             subKey: 'permission_id',
             fn: 'ModulePermissions',
-            valueKey: 'id',
-            labelKey: 'name_show',
+            keyValue: 'id',
+            keyLabel: 'name_show',
             asModelAssoc: 'permissions', // Chỗ này ở form
-            valueKeyOfAssoc: 'id', // Chỗ này ngoài view
-            labelKeyOfAssoc: 'name', // Chỗ này ngoài view
+            keyValueOfAssoc: 'id', // Chỗ này ngoài view
+            keyLabelOfAssoc: 'name', // Chỗ này ngoài view
         }
     },
 }

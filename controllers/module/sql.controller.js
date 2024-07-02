@@ -41,6 +41,7 @@ module.exports = {
                 include = [
                     ...include,
                     ...fields[i].include.map(({ model, as }) => ({
+                        attributes: [fields[i].keyValue, fields[i].keyLabel],
                         model: DB[model],
                         as,
                     })),

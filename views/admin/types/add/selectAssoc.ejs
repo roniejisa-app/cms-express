@@ -3,7 +3,7 @@
   <select name="<%= field.name %>" class="form-control">
     <option value="">-- Chọn <%= field.label %> --</option>
     <% field.data.forEach(option => { %>
-    <option value="<%= option[field.valueKey] %>" <% if(typeof req.old === 'object' && req.old[field.name] === option[field.valueKey]) { %> selected <% } %>>
+    <option value="<%= option[field.keyValue] %>" <% if(typeof req.old === 'object' && req.old[field.name] === option[field.keyValue]) { %> selected <% } %>>
       <%= option.name %>
     </option>
     <% }) %>

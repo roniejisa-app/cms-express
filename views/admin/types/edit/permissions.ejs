@@ -11,17 +11,17 @@
     <tbody>
       <% field.data.forEach(module => { %>
       <tr>
-        <td><%= module[field.labelKey] %></td>
+        <td><%= module[field.keyLabel] %></td>
         <td>
           <div class="grid gap-2">
             <% module[field.asModelAssoc].forEach(permission => { %>
             <label role="button">
-              <input type="checkbox" name="<%= field.name %>" value="<%= module[field.valueKey] %>|<%= permission[field.valueKeyOfAssoc] %>" <% if(data[field.asRoleModulePermission].some(item => {
-                return ((item && item[field.asModulePermission] && item[field.asModulePermission][field.mainKey] && +item[field.asModulePermission][field.mainKey] === +module[field.valueKey]) 
+              <input type="checkbox" name="<%= field.name %>" value="<%= module[field.keyValue] %>|<%= permission[field.keyValueOfAssoc] %>" <% if(data[field.asRoleModulePermission].some(item => {
+                return ((item && item[field.asModulePermission] && item[field.asModulePermission][field.mainKey] && +item[field.asModulePermission][field.mainKey] === +module[field.keyValue]) 
                 && 
-                (+item[field.asModulePermission][field.subKey] === +permission[field.valueKeyOfAssoc])
+                (+item[field.asModulePermission][field.subKey] === +permission[field.keyValueOfAssoc])
                 )})){%> checked <% } %>>
-              <%= permission[field.labelKeyOfAssoc] %>
+              <%= permission[field.keyLabelOfAssoc] %>
             </label>
             <% }) %>
           </div>

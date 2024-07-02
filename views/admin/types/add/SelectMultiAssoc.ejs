@@ -3,8 +3,8 @@
   <div class="grid">
     <% field.data.forEach(option => { %>
     <label role="button">
-      <input name="<%= field.name %>" value="<%= option[field.valueKey] %>" type="checkbox">
-      <%= option[field.labelKey] %>
+      <input name="<%= field.name %>" value="<%= option[field.keyValue] %>" type="checkbox">
+      <%= option[field.keyLabel] %>
     </label>
     <% }) %>
     </input>

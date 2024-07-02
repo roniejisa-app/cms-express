@@ -174,8 +174,8 @@ module.exports = {
     printTree: (
         node,
         nameChild,
-        valueKey,
-        labelKey,
+        keyValue,
+        keyLabel,
         level = 0,
         activeId = null,
         tag = 'option',
@@ -212,8 +212,8 @@ module.exports = {
                           module.exports.printTree(
                               child,
                               nameChild,
-                              valueKey,
-                              labelKey,
+                              keyValue,
+                              keyLabel,
                               level + 1,
                               activeId,
                               tag,
@@ -225,10 +225,10 @@ module.exports = {
                 : ''
         // Tạo thẻ HTML với tùy chọn được chọn (nếu cần)
         const selected =
-            activeId && node[valueKey] === activeId ? ` ${activeAttribute}` : ''
+            activeId && node[keyValue] === activeId ? ` ${activeAttribute}` : ''
         let nodeHTML = ''
         if (!Array.isArray(node)) {
-            nodeHTML = `<${tag} value="${node[valueKey]}"${selected}>${prefix} ${node[labelKey]}</${tag}>`
+            nodeHTML = `<${tag} value="${node[keyValue]}"${selected}>${prefix} ${node[keyLabel]}</${tag}>`
         }
         // Trả về kết quả là nodeHTML kết hợp với childrenHTML
         return nodeHTML + childrenHTML
@@ -236,8 +236,8 @@ module.exports = {
     printTreeChoose: (
         node,
         nameChild,
-        valueKey,
-        labelKey,
+        keyValue,
+        keyLabel,
         nameKey,
         level = 0,
         listActive = [],
@@ -275,8 +275,8 @@ module.exports = {
                           module.exports.printTreeChoose(
                               child,
                               nameChild,
-                              valueKey,
-                              labelKey,
+                              keyValue,
+                              keyLabel,
                               nameKey,
                               level + 1,
                               listActive,
@@ -288,19 +288,19 @@ module.exports = {
                       .join('')
                 : ''
         // Tạo thẻ HTML với tùy chọn được chọn (nếu cần)
-        const checked = listActive.map((item) => +item).includes(node[valueKey])
+        const checked = listActive.map((item) => +item).includes(node[keyValue])
             ? true
             : false
         let nodeHTML = ''
         if (!Array.isArray(node)) {
             nodeHTML = `<${tag} ${
-                node[valueKey] ? `list-of="${node[valueKey]}"` : ''
+                node[keyValue] ? `list-of="${node[keyValue]}"` : ''
             }>
                 <input name="${nameKey}" type="checkbox" value="${
-                node[valueKey]
+                node[keyValue]
             }" ${checked ? 'checked' : ''} />
                 <span>
-                    ${prefix} ${node[labelKey]}
+                    ${prefix} ${node[keyLabel]}
                 </span>
             </${tag}>`
         }
@@ -309,8 +309,8 @@ module.exports = {
             nodeHTML +
             (childrenHTML
                 ? `<div ${
-                      node[valueKey]
-                          ? `child-of="${node[valueKey]}"`
+                      node[keyValue]
+                          ? `child-of="${node[keyValue]}"`
                           : `belongs-to-many="${nameKey}"`
                   }>` +
                   childrenHTML +
@@ -330,14 +330,20 @@ module.exports = {
                     '_manager'
                 if (!menuList[key]) {
                     menuList[key] = {
-                        ...(data.managerModule.dataValues ? data.managerModule.dataValues : data.managerModule),
+                        ...(data.managerModule.dataValues
+                            ? data.managerModule.dataValues
+                            : data.managerModule),
                         childs: [],
                     }
                 }
                 delete data.managerModule
-                menuList[key].childs.push({ ...data.dataValues ? data.dataValues : data })
+                menuList[key].childs.push({
+                    ...(data.dataValues ? data.dataValues : data),
+                })
             } else {
-                menuList['1' + data.id] = { ...data.dataValues ? data.dataValues : data }
+                menuList['1' + data.id] = {
+                    ...(data.dataValues ? data.dataValues : data),
+                }
             }
         })
         return menuList

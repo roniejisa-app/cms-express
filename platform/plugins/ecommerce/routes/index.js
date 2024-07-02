@@ -5,7 +5,8 @@ router.get('/ecommerce', (req, res) => {
     return res.json({
         status: 200,
         message: i18n.__('require', {
-            name: 'Ecommerce'}),
+            name: 'Ecommerce',
+        }),
     })
 })
 

@@ -12,13 +12,13 @@
     <tbody>
       <% field.data.forEach(module => { %>
       <tr>
-        <td><%= module[field.labelKey] %></td>
+        <td><%= module[field.keyLabel] %></td>
         <td>
           <div class="grid gap-2">
             <% module[field.asModelAssoc].forEach(permission => { %>
             <label role="button">
-              <input type="checkbox" name="<%= field.name %>" value="<%= module[field.valueKey] %>|<%= permission[field.valueKeyOfAssoc] %>">
-              <%= permission[field.labelKeyOfAssoc] %>
+              <input type="checkbox" name="<%= field.name %>" value="<%= module[field.keyValue] %>|<%= permission[field.keyValueOfAssoc] %>">
+              <%= permission[field.keyLabelOfAssoc] %>
             </label>
             <% }) %>
           </div>

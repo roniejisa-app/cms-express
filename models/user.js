@@ -3,6 +3,7 @@ const { Model, Op } = require('sequelize')
 const { string } = require('yup')
 const db = require('./index')
 const { selectAssoc, chooseMultiAssoc } = require('../utils/fields')
+const i18n = require('i18n')
 module.exports = (sequelize, DataTypes) => {
     class User extends Model {
         /**
@@ -55,13 +56,13 @@ module.exports = (sequelize, DataTypes) => {
             return [
                 {
                     name: 'fullname',
-                    label: 'Tên',
+                    label: i18n.__('name'),
                     type: 'text',
                     show: true,
                     showForm: true,
                     positionSidebar: false,
                     filter: true,
-                    sort: true
+                    sort: true,
                 },
                 {
                     name: 'email',
@@ -72,7 +73,7 @@ module.exports = (sequelize, DataTypes) => {
                     filterDefault: true,
                     positionSidebar: false,
                     filter: true,
-                    sort: true
+                    sort: true,
                 },
                 {
                     name: 'password',
@@ -114,8 +115,8 @@ module.exports = (sequelize, DataTypes) => {
                 {
                     name: 'roles',
                     label: 'Vai trò',
-                    modelName:"Role",
-                    modelAs:"roles",
+                    modelName: 'Role',
+                    modelAs: 'roles',
                     ...chooseMultiAssoc('Role', 'id', 'name', 'Roles'),
                     show: false,
                     showForm: true,

@@ -1,6 +1,6 @@
 require('dotenv').config()
 require('module-alias/register')
-const i18n = require('i18n');
+const i18n = require('i18n')
 const session = require('express-session')
 var express = require('express')
 const cors = require('cors')
@@ -128,9 +128,9 @@ for (let i = 0; i < serviceFiles.length; i++) {
 }
 
 app.use((req, res, next) => {
-    const { lang } = req.cookies;
+    const { lang } = req.cookies
     lang ? i18n.setLocale(lang) : i18n.setLocale('en')
-    next();
+    next()
 })
 
 passport.serializeUser(function (user, done) {

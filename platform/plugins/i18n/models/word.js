@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
             // define association here
             Word.belongsTo(models.Language, {
                 foreignKey: 'code',
+                targetKey: 'code',
                 as: 'language',
             })
         }
@@ -49,6 +50,12 @@ module.exports = (sequelize, DataTypes) => {
                     type: 'text',
                     show: true,
                     ...selectAssoc('Language', 'code', 'name'),
+                    include: [
+                        {
+                            model: 'Language',
+                            as: 'language',
+                        },
+                    ],
                     sort: true,
                     filter: true,
                     showForm: true,
@@ -94,7 +101,6 @@ module.exports = (sequelize, DataTypes) => {
     Word.init(
         {
             id: {
-                allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: DataTypes.INTEGER,
