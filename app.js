@@ -33,6 +33,8 @@ const {
 } = require('./models/index')
 const passportLocal = require('./passports/passport.local')
 const authMiddleware = require('./middlewares/auth.middleware')
+const permissionMiddleware = require('@middlewares/permission.middleware')
+const adminMiddleware = require('@middlewares/admin.middleware')
 const passportGoogle = require('./passports/passport.google')
 const validateMiddleware = require('./middlewares/validate.middleware')
 const moduleListener = require('./listeners/module')
@@ -205,7 +207,8 @@ for (let i = 0; i < routeFiles.length; i++) {
 }
 app.use('/api', apiRouter)
 app.use(customRouter)
-app.use(authMiddleware)
+// Nếu muốn fake thì phải comment lại middleware này
+// app.use(authMiddleware, permissionMiddleware, adminMiddleware)
 // Đăng ký các file trong plugin tại đây nhưng không được vượt validate
 let adminFiles = sync(process.cwd() + '/platform/plugins/*/routes/*').filter(
     (file) => {
