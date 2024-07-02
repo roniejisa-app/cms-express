@@ -111,11 +111,5 @@ router.use('/medias', mediaRouter)
 router.use('/settings',settingRouter);
 // Cài đặt plugin cần đứng ở đây vì khi bắt đầu người dùng phải có quyền rồi
 router.use('/plugin-i',pluginRouter);
-
 router.use(moduleRouter);
-// router.use('/:{module}', usersRouter);
-// router.get('/dashboard', adminController.dashboard);
-// router.use('/roles', rolesRouter);
-// router.use('/permissions', permissionsRouter);
-
 module.exports = router
