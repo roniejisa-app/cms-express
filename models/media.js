@@ -3,6 +3,7 @@ const { string } = require('yup');
 const {
     Model
 } = require('sequelize');
+const i18n = require('i18n')
 module.exports = (sequelize, DataTypes) => {
     class Media extends Model {
         /**
@@ -25,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 
         static validateFolder() {
             return {
-                folderName: string().required('Vui lòng điền tên thư mục')
+                folderName: string().required(i18n.__('required', { name: i18n.__('folderName')})),
             }
         }
     }

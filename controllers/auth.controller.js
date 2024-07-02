@@ -2,6 +2,7 @@ const { User } = require('@models/index')
 const sentMail = require('@utils/mail')
 const md5 = require('crypto-js/md5')
 const bcrypt = require('bcryptjs')
+const i18n = require('i18n')
 module.exports = {
     login: (req, res) => {
         if (req.user) {
@@ -34,7 +35,10 @@ module.exports = {
         })
 
         if (!user) {
-            req.flash('msgError', 'Tài khoản này không tồn tại!')
+            req.flash(
+                'msgError',
+                i18n.__('does_not_exist', { name: i18n.__('account') })
+            )
             return res.redirect('/lost-password')
         }
 
@@ -54,16 +58,16 @@ module.exports = {
 
         const checkSendMail = await sentMail(
             user.email,
-            'Lấy lại mật khẩu',
-            `<a href="${link}">Lấy lại mật khẩu</a>`
+            i18n.__('recover', { name: i18n.__('password') }),
+            `<a href="${link}">${i18n.__('recover', { name: i18n.__('password') })}</a>`
         )
 
         if (!checkSendMail) {
-            req.flash('msgError', 'Vui lòng gửi lại sau giây lát!')
+            req.flash('msgError', i18n.__('please_resend'))
             return res.redirect('/lost-password')
         }
 
-        req.flash('msgSuccess', 'Gửi mail lấy lại mật khẩu thành công!')
+        req.flash('msgSuccess', i18n.__('sent_email_recover_success', { name: i18n.__('password') }))
 
         return res.redirect('/lost-password')
     },
@@ -75,7 +79,7 @@ module.exports = {
             },
         })
         if (!user) {
-            req.flash('msgError', 'Mã xác nhận không tồn tại vui lòng thử lại!')
+            req.flash('msgError', i18n.__('does_not_exist', { name: i18n.__('verify_code') }))
             return res.redirect('/lost-password')
         }
         return res.render('auth/reset-password', {
@@ -92,7 +96,7 @@ module.exports = {
         })
 
         if (!user) {
-            req.flash('msgError', 'Mã xác nhận không tồn tại vui lòng thử lại!')
+            req.flash('msgError', i18n.__('does_not_exist', { name: i18n.__('verify_code') }))
             return res.redirect('/lost-password')
         }
         const saltRounds = await bcrypt.genSalt(10)
@@ -109,7 +113,7 @@ module.exports = {
             }
         )
 
-        req.flash('success', 'Đổi mật khẩu thành công vui lòng đăng nhập!')
+        req.flash('success', i18n.__('update_success', { name: i18n.__('password') }))
         return res.redirect('/login')
     },
 }

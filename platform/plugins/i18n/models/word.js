@@ -18,6 +18,12 @@ module.exports = (sequelize, DataTypes) => {
                 targetKey: 'code',
                 as: 'language',
             })
+
+            Word.belongsTo(models.Module, {
+                foreignKey: 'module',
+                targetKey: 'name',
+                as: 'moduleItem',
+            })
         }
 
         static fields() {
@@ -37,6 +43,24 @@ module.exports = (sequelize, DataTypes) => {
                     name: 'value',
                     label: 'Ghi nội',
                     type: 'text',
+                    show: true,
+                    sort: true,
+                    filter: true,
+                    showForm: true,
+                    filterDefault: true,
+                    positionSidebar: false,
+                },
+                {
+                    name: 'module',
+                    label: 'Module',
+                    type: 'text',
+                    ...selectAssoc('Module', 'name', 'name_show'),
+                    include: [
+                        {
+                            model: 'Module',
+                            as: 'moduleItem',
+                        },
+                    ],
                     show: true,
                     sort: true,
                     filter: true,
@@ -105,6 +129,7 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 type: DataTypes.INTEGER,
             },
+            module: DataTypes.STRING,
             key: DataTypes.STRING,
             value: DataTypes.STRING,
             code: DataTypes.STRING,

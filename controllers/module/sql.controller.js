@@ -3,6 +3,7 @@ const { Op } = require('sequelize')
 const ejs = require('ejs')
 const { convertDataFilter } = require('@utils/filter')
 const { initPaginate } = require('@utils/paginate')
+const i18n = require('i18n') 
 const {
     FIELD_TYPE_SELECT_ASSOC,
     FIELD_TYPE_INTEGER,
@@ -181,7 +182,7 @@ module.exports = {
                     }
                 }
             }
-            req.flash('success', `Thêm ${name_show} thành công!`)
+            req.flash('success', i18n.__('add_success', { name: name_show }))
             event.emit('create', req, module, item, body)
             return res.redirect(process.env.VITE_AP + `/${module}`)
         } else {
@@ -327,8 +328,8 @@ module.exports = {
                 )
             }
         }
-
-        req.flash('success', `Sửa ${name_show} thành công!`)
+        console.log(name_show);
+        req.flash('success', i18n.__('update_success', { name: name_show }))
         event.emit('update', req, module, id, body)
         res.redirect(process.env.VITE_AP + `/${module}/edit/${id}`)
     },
@@ -355,7 +356,7 @@ module.exports = {
         if (!canBeDeleted) {
             req.flash(
                 'error',
-                `Xóa ${name_show} không thành công, vui lòng tìm và xóa tất cả các dữ liệu liên quan trước`
+                i18n.__('delete_failed_find_delete_all_associated_data', { name: name_show })
             )
             return res.redirect(process.env.VITE_AP + `/${module}`)
         }
@@ -400,7 +401,7 @@ module.exports = {
         })
 
         event.emit('delete', req, module, id)
-        req.flash('success', `Xóa ${name_show} thành công`)
+        req.flash('success', i18n.__('delete_success', { name: name_show }))
         res.redirect(process.env.VITE_AP + `/${module}`)
     },
     destroyMulti: async (req, res, params) => {
@@ -440,13 +441,13 @@ module.exports = {
                 },
             },
         })
-        req.flash('success', `Xóa ${name_show} thành công`)
+        req.flash('success', i18n.__('delete_success', { name: name_show }))
         for (const id of ids) {
             event.emit('delete', req, module, id)
         }
         res.json({
             status: 200,
-            message: 'Xóa thành công!',
+            message: i18n.__('delete_success'),
         })
     },
     filter: async (req, res, params) => {
@@ -506,6 +507,7 @@ module.exports = {
         const html = await ejs.renderFile(
             process.cwd() + '/views/admin/views/table.ejs',
             {
+                i18n,
                 req,
                 fields,
                 module,
@@ -537,7 +539,7 @@ module.exports = {
         workbook.created = new Date()
         workbook.modified = new Date()
         workbook.lastPrinted = new Date()
-        const worksheet = workbook.addWorksheet('Mẫu dữ liệu', {
+        const worksheet = workbook.addWorksheet(i18n.__('example', { name: i18n.__('data') }), {
             views: [{ state: 'frozen', ySplit: 2 }],
         })
 
@@ -614,7 +616,7 @@ module.exports = {
         workbook.created = new Date()
         workbook.modified = new Date()
         workbook.lastPrinted = new Date()
-        const worksheet = workbook.addWorksheet('Mẫu dữ liệu', {
+        const worksheet = workbook.addWorksheet(i18n.__('example', { name: i18n.__('data') }), {
             views: [{ state: 'frozen', ySplit: 2 }],
         })
 
@@ -724,7 +726,7 @@ module.exports = {
         res.json({
             status: 200,
             data: uploadData,
-            message: 'Đã nhập xong',
+            message: i18n.__('import_success', { name: i18n.__('data') }),
         })
     },
 }

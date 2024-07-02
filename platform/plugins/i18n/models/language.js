@@ -2,6 +2,7 @@
 const { Op } = require('sequelize')
 const { Model } = require('sequelize')
 const { string } = require('yup')
+const i18n = require('i18n')
 module.exports = (sequelize, DataTypes) => {
     class Language extends Model {
         /**
@@ -20,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
             return [
                 {
                     name: 'name',
-                    label: 'Tên ngôn ngã',
+                    label: i18n.__('language.name'),
                     type: 'text',
                     show: true,
                     sort: true,
@@ -31,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     name: 'code',
-                    label: 'Kí hiệu',
+                    label: i18n.__('language.code'),
                     type: 'text',
                     show: true,
                     sort: true,
@@ -42,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     name: 'default',
-                    label: 'Mặc định',
+                    label: i18n.__('language.default'),
                     type: 'switch-one',
                     show: true,
                     sort: true,
@@ -53,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     name: 'active',
-                    label: 'Kích hoạt',
+                    label: i18n.__('language.active'),
                     type: 'switch-one',
                     show: true,
                     sort: true,
@@ -67,10 +68,10 @@ module.exports = (sequelize, DataTypes) => {
 
         static validate(id = null) {
             let validate = {
-                name: string().required('Vui điền tên'),
+                name: string().required(i18n.__('required', { name: i18n.__('language.name') })),
                 code: string()
-                    .required('Vui lòng điền code')
-                    .test('check-code', 'Code đã tồn tại', async (value) => {
+                    .required(i18n.__('required', { name: i18n.__('language.code') }))
+                    .test('check-code', i18n.__('exists', { name: i18n.__('language.code') }), async (value) => {
                         const result = id
                             ? await Language.findOne({
                                   where: {

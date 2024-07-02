@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
             return [
                 {
                     name: 'fullname',
-                    label: i18n.__('name'),
+                    label: i18n.__('users.name'),
                     type: 'text',
                     show: true,
                     showForm: true,
@@ -66,7 +66,7 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     name: 'email',
-                    label: 'Email',
+                    label: i18n.__('users.email'),
                     type: 'text',
                     show: true,
                     showForm: true,
@@ -77,7 +77,7 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     name: 'password',
-                    label: 'Mật khẩu',
+                    label: i18n.__('users.password'),
                     type: 'password',
                     show: false,
                     showForm: true,
@@ -86,7 +86,7 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     name: 'status',
-                    label: 'Trạng thái',
+                    label: i18n.__('users.status'),
                     type: 'status',
                     show: true,
                     showForm: true,
@@ -95,18 +95,18 @@ module.exports = (sequelize, DataTypes) => {
                     options: [
                         {
                             value: 1,
-                            name: 'Kích Hoạt',
+                            name: i18n.__('users.status.active'),
                         },
                         {
                             value: 0,
-                            name: 'Tắt kích hoạt',
+                            name: i18n.__('users.status.inactive'),
                         },
                     ],
                 },
                 {
                     name: 'provider_id',
                     ...selectAssoc('Provider', 'id', 'name'),
-                    label: 'Đăng nhập qua',
+                    label: i18n.__('users.loginWith'),
                     show: false,
                     showForm: true,
                     positionSidebar: true,
@@ -114,7 +114,7 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     name: 'roles',
-                    label: 'Vai trò',
+                    label: i18n.__('users.roles'),
                     modelName: 'Role',
                     modelAs: 'roles',
                     ...chooseMultiAssoc('Role', 'id', 'name', 'Roles'),
@@ -125,7 +125,7 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     name: 'avatar',
-                    label: 'Ảnh đại diện',
+                    label: i18n.__('users.avatar'),
                     type: 'image',
                     show: true,
                     showForm: true,
@@ -136,11 +136,11 @@ module.exports = (sequelize, DataTypes) => {
         }
         static validate(id = null) {
             let validate = {
-                fullname: string().required('Vui lòng nhập tên'),
+                fullname: string().required(i18n.__('users.required',{name: i18n.__('users.name')})),
                 email: string()
-                    .required('Vui lòng nhập email')
-                    .email('Không đúng định dạng email')
-                    .test('check-email', 'Email đã tồn tại', async (value) => {
+                    .required(i18n.__('users.required',{name: i18n.__('users.email')}))
+                    .email(i18n.__("users.incorect_format",{name: i18n.__('users.email')}))
+                    .test('check-email', i18n.__("users.exists", {name: i18n.__('users.email')}), async (value) => {
                         const result = id
                             ? await User.findOne({
                                   where: {
@@ -159,7 +159,7 @@ module.exports = (sequelize, DataTypes) => {
                     }),
                 status: string().test(
                     'check-status',
-                    'Trạng thái không hợp lệ',
+                    i18n.__("users.invalid",{name: i18n.__('users.status')}),
                     (value) => {
                         return +value === 0 || +value === 1
                     }
@@ -167,8 +167,8 @@ module.exports = (sequelize, DataTypes) => {
             }
             if (!id) {
                 validate.password = string()
-                    .min(6, 'Mật khẩu phải có ít nhất 6 ký tự')
-                    .required('Vui lòng nhập mật khẩu')
+                    .min(6, i18n.__("users.password_min", {name: i18n.__('users.password'), length: 6}))
+                    .required(i18n.__("users.required",{name: i18n.__('users.password')}))
             }
             return validate
         }

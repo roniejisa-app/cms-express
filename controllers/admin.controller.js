@@ -1,8 +1,9 @@
-const DB = require("@models/index")
+const DB = require('@models/index')
 const { checkLinkExist } = require('../utils/all')
+const i18n = require('i18n')
 module.exports = {
     dashboard: (req, res) => {
-        var name_show = 'Trang tổng quan'
+        var name_show = i18n.__('dashboard')
         return res.render('admin/pages/dashboard', { req, name_show })
     },
     checkLink: async (req, res) => {
@@ -22,7 +23,7 @@ module.exports = {
 
         return res.json({
             status: 100,
-            message: 'Đã được sử dụng!',
+            message: i18n.__('exist', { name: i18n.__('link') }),
             data: '',
         })
     },

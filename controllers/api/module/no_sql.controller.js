@@ -1,15 +1,7 @@
-const bcrypt = require('bcrypt')
-const {
-    FIELD_TYPE_INTEGER,
-    FIELD_TYPE_PERMISSION,
-    ARRAY_TYPE_HAS_MULTIPLE,
-    IS_NOT_ADD,
-} = require('@constants/module')
 const { convertDataFilterMongoDB } = require('@utils/filter')
 const event = require('@utils/event')
-const DB = require('@models/index')
 const { REQUEST_API } = require('@constants/api')
-
+const i18n = require('i18n')
 module.exports = {
     all: async (req, res, params) => {
         const { fields, modelMain } = params
@@ -93,7 +85,7 @@ module.exports = {
             return res.status(400).json({
                 errors: {
                     code: 400,
-                    message: 'Thêm dữ liệu không thành công',
+                    message: i18n.__('create_failed', { name: i18n.__('data') }),
                     details: req.errors,
                 },
             })
@@ -122,8 +114,8 @@ module.exports = {
             return res.status(400).json({
                 errors: {
                     code: 400,
-                    message: 'Thay đổi dữ liệu không thành công',
-                    details: keyNotAvailable.join(', ') + ' không tồn tại!',
+                    message: i18n.__('change_failed', { name: i18n.__('data') }),
+                    details: keyNotAvailable.join(', ') + ' ' + i18n.__('does_not_exist'),
                 },
             })
         }
@@ -136,8 +128,8 @@ module.exports = {
             return res.status(400).json({
                 errors: {
                     code: 400,
-                    message: 'Không tồn tại dữ liệu trong bảng!',
-                    details: 'Không có dữ liệu trong bảng',
+                    message: i18n.__('no_data_exist', { name: i18n.__('table') }),
+                    details: i18n.__('no_data_in', { name: i18n.__('table') }),
                 },
             })
         }
@@ -163,7 +155,7 @@ module.exports = {
         res.status(200).json({
             status: 200,
             data: itemUpdate,
-            message: 'Thay đổi dữ liệu thành công',
+            message: i18n.__('update_success', { name: i18n.__('data') }),
         })
     },
     delete: async (req, res, params) => {
@@ -178,7 +170,7 @@ module.exports = {
 
         return res.status(200).json({
             status: 200,
-            message: 'Xóa dữ liệu thành công!',
+            message: i18n.__('delete_success', { name: i18n.__('data') }),
         })
     },
 }

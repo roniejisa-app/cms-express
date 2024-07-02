@@ -3,6 +3,7 @@ const {
     Model, Op
 } = require('sequelize');
 const { string } = require('yup');
+const i18n = require('i18n')
 module.exports = (sequelize, DataTypes) => {
     class Permission extends Model {
         /**
@@ -23,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
             return [
                 {
                     name: 'value',
-                    label: 'Giá trị',
+                    label: i18n.__('permission.value'),
                     type: 'text',
                     show: true,
                     showForm: true,
@@ -31,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     name: 'name',
-                    label: 'Tên quyền',
+                    label: i18n.__('permission.name'),
                     type: 'text',
                     show: true,
                     showForm: true,
@@ -42,9 +43,9 @@ module.exports = (sequelize, DataTypes) => {
 
         static validate(id = null) {
             const validate = {
-                value: string().required("Vui lòng nhập mã").matches(/[a-z]/, {
-                    message: "Không đúng định dạng!"
-                }).test('check-name', "Quyền đã tồn tại", async (value) => {
+                value: string().required(i18n.__('permission.value')).matches(/[a-z]/, {
+                    message: i18n.__('permission.incorrect_format')
+                }).test('check-name', i18n.__('permission.exist'), async (value) => {
                     const result = id ? await Permission.findOne({
                         where: {
                             value,
@@ -59,7 +60,7 @@ module.exports = (sequelize, DataTypes) => {
                     });
                     return !result;
                 }),
-                name: string().required("Vui lòng nhập tên quyền")
+                name: string().required(i18n.__('required', { name: i18n.__('permission.name') }))
             }
             return validate;
         }

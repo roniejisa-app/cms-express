@@ -45,6 +45,23 @@ const plugins = {
             ],
         },
         dir: resolve(__dirname, './public/core/plugins/pages'),
+    }, 
+    i18n: {
+        files: {
+            css: [
+                resolve(
+                    __dirname,
+                    './platform/plugins/i18n/resources/css/i18n.scss'
+                ),
+            ],
+            js: [
+                resolve(
+                    __dirname,
+                    './platform/plugins/i18n/resources/js/i18n.js'
+                ),
+            ],
+        },
+        dir: resolve(__dirname, './public/core/plugins/i18n'),
     },
     login: {
         files: {

@@ -3,6 +3,7 @@ require('dotenv').config();
 const { createFolder } = require('@utils/uploadFile');
 const { Op } = require('sequelize');
 const db = require('@utils/sequelize');
+const i18n = require('i18n');
 const fs = require('fs');
 const { recursiveFolder, recursiveHTMLFolder } = require('@utils/all');
 const Cache = require('@utils/cache');
@@ -166,7 +167,7 @@ module.exports = {
                     })
                     return res.json({
                         folder,
-                        message: 'Tạo thư mục thành công',
+                        message: i18n.__('create_success', { name: i18n.__('folder') }),
                         status: 200
                     })
                 } catch (e) {
@@ -273,14 +274,14 @@ module.exports = {
 
             res.json({
                 successFiles,
-                message: errorFiles.length > 0 ? 'Một số file tải lên không thành công' : 'Tải file thành công',
+                message: errorFiles.length > 0 ? i18n.__('some_uploads_failed', { name: i18n.__('file') }) : i18n.__('uploads_successful', { name: i18n.__('file') }),
                 errorFiles,
                 status: 200,
             })
         } else {
             res.json({
                 status: 100,
-                message: 'Vui lòng chọn file'
+                message: i18n.__('please_select', { name: i18n.__('file') })
             })
         }
     },
@@ -297,12 +298,12 @@ module.exports = {
             res.json({
                 status: 200,
                 folderName,
-                message: "Thay đổi folder thành công!"
+                message: i18n.__('update_success', { name: i18n.__('folder') })
             })
         } catch (e) {
             res.json({
                 status: 100,
-                message: "Thay đổi folder không thành công!"
+                message: i18n.__('update_failed', { name: i18n.__('folder') })
             })
         }
     },
@@ -371,7 +372,7 @@ module.exports = {
         if (!Array.isArray(ids) || !ids.length) {
             return res.json({
                 status: 100,
-                message: "Vui lòng chọn tệp tin!"
+                message: i18n.__('please_select', { name: i18n.__('file') })
             })
         }
         try {
@@ -386,12 +387,12 @@ module.exports = {
 
             res.json({
                 status: 200,
-                message: "Khôi phục thành công"
+                message: i18n.__('restore_success', { name: i18n.__('file') })
             })
         } catch (e) {
             res.json({
                 status: 100,
-                message: "Xóa không thành công"
+                message: i18n.__('restore_failed', { name: i18n.__('file') })
             })
         }
     },
@@ -406,12 +407,12 @@ module.exports = {
             await Cache.set(CACHE_CLEAR_CACHE_ASIDE_FOLDER, true)
             res.json({
                 status: 200,
-                message: "Xóa thành công!"
+                message: i18n.__('delete_success', { name: i18n.__('file') })
             })
         } catch (e) {
             res.json({
                 status: 100,
-                message: "Xóa không thành công"
+                message: i18n.__('delete_failed', { name: i18n.__('file') })
             })
         }
     },
@@ -420,7 +421,7 @@ module.exports = {
         if (!Array.isArray(ids) || !ids.length) {
             return res.json({
                 status: 100,
-                message: "Vui lòng chọn tệp tin!"
+                message: i18n.__('please_select', { name: i18n.__('file') })
             })
         }
         try {
@@ -434,12 +435,12 @@ module.exports = {
             })
             res.json({
                 status: 200,
-                message: "Xóa thành công!"
+                message: i18n.__('delete_success', { name: i18n.__('file') })
             })
         } catch (e) {
             res.json({
                 status: 100,
-                message: "Xóa không thành công"
+                message: i18n.__('delete_failed', { name: i18n.__('file') })
             })
         }
     },
@@ -448,7 +449,7 @@ module.exports = {
         if (!Array.isArray(ids) || !ids.length) {
             return res.json({
                 status: 100,
-                message: "Vui lòng chọn tệp tin!"
+                message: i18n.__('please_select', { name: i18n.__('file') })
             })
         }
         let medias = [];
@@ -484,12 +485,12 @@ module.exports = {
             })
             res.json({
                 status: 200,
-                message: "Xóa thành công!"
+                message: i18n.__('delete_success', { name: i18n.__('file') })
             })
         } catch (e) {
             res.json({
                 status: 100,
-                message: "Xóa không thành công"
+                message: i18n.__('delete_failed', { name: i18n.__('file') })
             })
         }
     },
@@ -626,7 +627,7 @@ module.exports = {
             return res.json({
                 status: 200,
                 data: newData,
-                message: 'Cập nhật ảnh mới thành công'
+                message: i18n.__('update_success', { name: i18n.__('file') }),
             })
         } catch (e) {
             return res.json({

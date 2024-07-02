@@ -51,7 +51,7 @@ module.exports = {
             return res.status(404).json({
                 errors: {
                     code: 404,
-                    message: 'Dữ liệu không tồn tại!',
+                    message: i18n.__('does_not_exist', { name: i18n.__('data') }),
                 },
             })
         }
@@ -74,7 +74,7 @@ module.exports = {
             return res.status(400).json({
                 errors: {
                     code: 400,
-                    message: 'Thêm dữ liệu không thành công',
+                    message: i18n.__('create_failed', { name: i18n.__('data') }),
                     details: req.errors,
                 },
             })
@@ -97,8 +97,8 @@ module.exports = {
             return res.status(400).json({
                 errors: {
                     code: 400,
-                    message: 'Thay đổi dữ liệu không thành công',
-                    details: keyNotAvailable.join(', ') + ' không tồn tại!',
+                    message: i18n.__('change_failed', { name: i18n.__('data') }),
+                    details: keyNotAvailable.join(', ') + ' ' + i18n.__('does_not_exist'),
                 },
             })
         }
@@ -112,8 +112,8 @@ module.exports = {
             return res.status(400).json({
                 errors: {
                     code: 400,
-                    message: 'Không tồn tại dữ liệu trong bảng!',
-                    details: 'Không có dữ liệu trong bảng',
+                    message: i18n.__('no_data_exist', { name: i18n.__('table') }),
+                    details: i18n.__('no_data_in', { name: i18n.__('table') }),
                 },
             })
         }
@@ -127,7 +127,7 @@ module.exports = {
         return res.status(200).json({
             status: 200,
             data: modelItem,
-            message: 'Thay đổi dữ liệu thành công',
+            message: i18n.__('update_success', { name: i18n.__('data') }),
         })
     },
     delete: async (req, res, params) => {
@@ -141,7 +141,7 @@ module.exports = {
         event.emit('delete', req, module, id)
         res.status(200).json({
             status: 200,
-            message: 'Xóa dữ liệu thành công!',
+            message: i18n.__('delete_success', { name: i18n.__('data') }),
         })
     },
 }

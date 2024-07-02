@@ -2,6 +2,7 @@ const { sync } = require('glob')
 const path = require('path')
 const fs = require('fs')
 const basename = path.basename(__filename)
+const i18n = require('i18n');
 const checkAliasFile = (file) => {
     return (
         file.indexOf('.') !== 0 &&
@@ -22,6 +23,8 @@ const loadAlias = async (app) => {
         ))
         await app.locals[file.replace('.alias.js', '')].init()
     }
+
+    app.locals.i18n = i18n
     // Tính sau
     // let aliasPlugins = glob
     //     .sync(process.cwd() + '/platform/plugins/*/models/*')

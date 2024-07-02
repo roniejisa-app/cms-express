@@ -4,6 +4,7 @@ const { string } = require('yup')
 const { chooseMultiAssoc, selectParentAssoc } = require('../utils/fields')
 const { NO_CHECK_LEVEL } = require('../constants/model')
 const DB = require('./index')
+const i18n = require('i18n')
 module.exports = (sequelize, DataTypes) => {
     class Module extends Model {
         /**
@@ -28,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
             return [
                 {
                     name: 'name',
-                    label: 'Tên bảng',
+                    label: i18n.__('module.name'),
                     type: 'text',
                     show: false,
                     showForm: true,
@@ -36,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     name: 'name_show',
-                    label: 'Tên hiển thị',
+                    label: i18n.__('module.name_show'),
                     type: 'text',
                     show: true,
                     showForm: true,
@@ -45,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     name: 'order',
-                    label: 'Thứ tự',
+                    label: i18n.__('order'),
                     dataType: 'integer',
                     type: 'text',
                     show: true,
@@ -80,7 +81,7 @@ module.exports = (sequelize, DataTypes) => {
                 // },
                 {
                     name: 'type',
-                    label: 'Loại cơ sở dữ liệu',
+                    label: i18n.__('module.type'),
                     type: 'select',
                     show: true,
                     keyValue: 'value',
@@ -110,11 +111,11 @@ module.exports = (sequelize, DataTypes) => {
                     options: [
                         {
                             value: 1,
-                            name: 'Kích Hoạt',
+                            name: i18n.__('active'),
                         },
                         {
                             value: 0,
-                            name: 'Tắt kích hoạt',
+                            name: i18n.__('inactive'),
                         },
                     ],
                 },
@@ -128,11 +129,11 @@ module.exports = (sequelize, DataTypes) => {
                     options: [
                         {
                             value: 1,
-                            name: 'Kích Hoạt',
+                            name: i18n.__('active'),
                         },
                         {
                             value: 0,
-                            name: 'Tắt kích hoạt',
+                            name: i18n.__('inactive'),
                         },
                     ],
                 },
@@ -146,14 +147,14 @@ module.exports = (sequelize, DataTypes) => {
                         'value',
                         'Permissions'
                     ),
-                    label: 'Quyền',
+                    label: i18n.__('module.permission'),
                     show: false,
                     showForm: true,
                     positionSidebar: false,
                 },
                 {
                     name: 'manager_module_id',
-                    label: 'Module cha',
+                    label: i18n.__('module.parent'),
                     type: 'selectParentAssoc',
                     keyValue: 'id',
                     keyLabel: 'name',
@@ -178,7 +179,7 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     name: 'icon',
-                    label: 'Icon',
+                    label: i18n.__('icon'),
                     type: 'icon',
                     show: true,
                     showForm: true,
@@ -194,10 +195,9 @@ module.exports = (sequelize, DataTypes) => {
         }
         static validate(id) {
             const validate = {
-                model: string().required('Vui lòng nhập Model'),
                 name: string()
-                    .required('Vui lòng nhập Key')
-                    .test('check-user', 'Key đã tồn tại!', async (value) => {
+                    .required(i18n.__('required', { name: 'Key'}))
+                    .test('check-user', i18n.__('exist', { name: i18n.__('module') }), async (value) => {
                         const result = id
                             ? await Module.findOne({
                                   where: {

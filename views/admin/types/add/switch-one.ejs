@@ -1,7 +1,8 @@
 <div class="form-group mb-3">
     <label class="d-block mb-1"><%= field.label %></label>
     <label class="switch">
-        <input type="checkbox" name="<%= field.name %>">
+        <input type="checkbox" <% if(+req.old[field.name] === 1) { %>checked<% } %>>
         <span></span>
+        <input type="hidden" name="<%= field.name %>" value="<%= req.old[field.name] ?? 0 %>">
     </label>
 </div>

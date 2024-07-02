@@ -4,6 +4,7 @@ const {
 } = require('sequelize');
 const { string } = require('yup');
 const { choosePermission } = require('../utils/fields');
+const i18n = require('i18n')
 module.exports = (sequelize, DataTypes) => {
     class Role extends Model {
         static associate(models) {
@@ -38,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
             return [
                 {
                     name: 'name',
-                    label: 'Tên',
+                    label: i18n.__('name'),
                     type: 'text',
                     show: true,
                     showForm: true,
@@ -47,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
                 {
                     name: "roles",
                     type: "permissions",
-                    label: "Quyền",
+                    label: i18n.__('roles.permissions'),
                     show: false,
                     showForm: true,
                     positionSidebar: false,
@@ -58,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
 
         static validate() {
             const validate = {
-                name: string().required("Vui lòng nhập tên")
+                name: string().required(i18n.__('required', { name: i18n.__('name') })),
             }
             return validate;
         }

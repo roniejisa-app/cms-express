@@ -14,7 +14,7 @@ const event = require('@utils/event')
 const { checkLinkExist, isNullish } = require('@utils/all')
 const DB = require('@models/index')
 const ExcelJS = require('exceljs')
-
+const i18n = require('i18n')
 module.exports = {
     index: async (req, res, params) => {
         const { module, name, name_show, fields, modelMain, allFields } = params
@@ -157,7 +157,7 @@ module.exports = {
                 }
             }
         }
-        req.flash('success', `Thêm ${name_show} thành công!`)
+        req.flash('success', i18n.__('create_success', { name: name_show }))
         event.emit('create', req, module, item, body)
         return res.redirect(process.env.VITE_AP + `/${module}`)
     },
@@ -298,7 +298,7 @@ module.exports = {
         }
 
         event.emit('update', req, module, id, body)
-        req.flash('success', `Sửa ${name_show} thành công!`)
+        req.flash('success', i18n.__('update_success', { name: name_show }))
         res.redirect(process.env.VITE_AP + `/${module}/edit/${id}`)
     },
     destroy: async (req, res, params) => {
@@ -309,7 +309,7 @@ module.exports = {
         await model.DB.deleteOne({
             _id: id,
         })
-        req.flash('success', `Xóa ${name_show} thành công`)
+        req.flash('success', i18n.__('delete_success', { name: name_show }))
         event.emit('delete', req, module, id)
         res.redirect(process.env.VITE_AP + `/` + module)
     },
@@ -322,13 +322,13 @@ module.exports = {
         await model.DB.deleteMany({
             _id: { $in: ids },
         })
-        req.flash('success', `Xóa ${name_show} thành công`)
+        req.flash('success', i18n.__('delete_success', { name: name_show }))
         for (const id of ids) {
             event.emit('delete', req, module, id)
         }
         res.json({
             status: 200,
-            message: 'Xóa thành công!',
+            message: i18n.__('delete_success'),
         })
     },
     filter: async (req, res, params) => {

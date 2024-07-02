@@ -1,8 +1,8 @@
 <ul>
-    <li tooltip="Tổng quan" tooltip-type="right">
+    <li tooltip="<%= i18n.__("dashboard") %>" tooltip-type="right">
         <a class="link <%= typeof module === 'undefined' ? 'active' : '' %>" href="<%= process.env.VITE_AP %>">
             <span class="link-icon"><%- include('../icons/dashboard') %></span>
-            <span class="link-text">Tổng quan</span>
+            <span class="link-text"><%= i18n.__("dashboard") %></span>
         </a>
     </li>
     <% if(typeof req.menuList){%>

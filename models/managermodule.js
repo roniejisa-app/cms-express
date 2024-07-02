@@ -3,7 +3,7 @@ const { Model } = require('sequelize')
 const { string } = require('yup')
 const { selectParentAssoc } = require('../utils/fields')
 const { HAS_CHECK_LEVEL } = require('../constants/model')
-
+const i18n = require('i18n')
 module.exports = (sequelize, DataTypes) => {
     class ManagerModule extends Model {
         /**
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
             return [
                 {
                     name: 'icon',
-                    label: 'Icon',
+                    label: i18n.__('manager_module.icon'),
                     type: 'icon',
                     show: true,
                     showForm: true,
@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     name: 'name',
-                    label: 'Tên',
+                    label: i18n.__('name'),
                     type: 'text',
                     show: true,
                     showForm: true,
@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     name: 'manager_module_id',
-                    label: 'Module cha',
+                    label: i18n.__('manager_module.parent'),
                     type: 'selectParentAssoc',
                     keyValue: 'id',
                     keyLabel: 'name',
@@ -84,7 +84,7 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     name: 'order',
-                    label: 'Thứ tự',
+                    label: i18n.__('order'),
                     type: 'text',
                     show: true,
                     showForm: true,
@@ -95,9 +95,9 @@ module.exports = (sequelize, DataTypes) => {
 
         static validate() {
             const validate = {
-                name: string().required('Vui điền tên'),
+                name: string().required(i18n.__('required', { name: i18n.__('name') })),
                 order: string(),
-                icon: string().required('Vui lòng nhập hình ảnh'),
+                icon: string().required(i18n.__('required', { name: i18n.__('icon') })),
             }
             return validate
         }

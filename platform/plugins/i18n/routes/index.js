@@ -1,18 +1,21 @@
 const express = require('express')
 const router = express.Router()
-const {Language,Word} = require('../../../../models/index')
+const i18n = require("i18n")
+const adminMiddleware = require("../../../../middlewares/admin.middleware")
+const { pathPlugin } = require('../../../../utils/all')
 
-router.get('/i18n',async (req, res) => {
-    const data =await Language.findAll({
-        include:{
-            model: Word,
-            as:'words'
-        }
-    })
-    console.log(data);
+router.use(adminMiddleware)
+router.get(process.env.VITE_AP+'/words', (req, res) => {
+    req.app.set('layout', 'layouts/admin')
+    res.render(pathPlugin('i18n','views','index'),{
+        req
+    });
+})
+
+router.get('/',async (req, res) => {
     return res.json({
         status: 200,
-        message: 'Hi',
+        message: i18n.__("users:required"),
     })
 })
 

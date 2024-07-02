@@ -18,6 +18,7 @@
 		<link rel="stylesheet" href="/core/admin/css/r8.css" />
 		<link rel="stylesheet" href="/core/admin/css/admin.css" />
 		<link rel="stylesheet" href="/core/admin/css/chat.css" />
+		<%- defineContent('style') %>
 	</head>
 	
 	<body class="<%= req.cookies?.smallMenu == 1 ? 'menu-small' : '' %>">
@@ -56,10 +57,10 @@
 								<img src="<%= FunctionHelper.getImage(req.user.avatar) %>" alt="" />
 							</div>
 							<ul>
-								<li><a href="<%= process.env.VITE_AP %>/users/edit/<%= req.user.id %>">Sửa thông tin</a></li>
-								<li><a href="<%= process.env.VITE_AP %>/users/edit/<%= req.user.id %>">Đổi mật khẩu</a></li>
+								<li><a href="<%= process.env.VITE_AP %>/users/edit/<%= req.user.id %>"><%= i18n.__('edit',{name: i18n.__('profile')}) %></a></li>
+								<li><a href="<%= process.env.VITE_AP %>/users/edit/<%= req.user.id %>"><%= i18n.__('change_password') %></a></li>
 								<li>
-									<form action="/logout" method="POST"><button>Đăng xuất</button></form>
+									<form action="/logout" method="POST"><button><%= i18n.__('logout') %></button></form>
 								</li>
 							</ul>
 						</div>
@@ -79,6 +80,7 @@
 		<%- include('../chat/index') %>
 		<div class="cms-loading"></div>
 		<script src="/core/admin/js/admin2.js" type="module"></script>
+		<%- defineContent('script') %>
 	</body>
 	
 </html>

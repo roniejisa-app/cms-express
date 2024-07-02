@@ -13,6 +13,7 @@ module.exports = {
             key: Sequelize.STRING,
             value: Sequelize.STRING,
             code: Sequelize.STRING,
+            module: Sequelize.STRING,
             created_at: {
                 type: Sequelize.DATE,
                 defaultValue: Sequelize.fn('NOW'),

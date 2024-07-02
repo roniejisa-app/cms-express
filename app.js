@@ -41,6 +41,7 @@ const loadAlias = require('./alias/load')
 const Cache = require('./utils/cache')
 const { CACHE_USER_LOGGED } = require('./constants/cache')
 const { logError } = require('./utils/log')
+const cache = require('./utils/cache')
 var app = express()
 app.use(
     session({
@@ -127,9 +128,19 @@ for (let i = 0; i < serviceFiles.length; i++) {
     service(app)
 }
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
+    const langCurrent = await cache.get('lang', 'en')
+    console.log(langCurrent);
     const { lang } = req.cookies
-    lang ? i18n.setLocale(lang) : i18n.setLocale('en')
+    const { lang: queryLang } = req.query
+    queryLang
+        ? i18n.setLocale(queryLang)
+        : langCurrent
+        ? i18n.setLocale(langCurrent)
+        : i18n.setLocale(lang)
+    res.cookie('lang', queryLang || langCurrent || lang, {
+        maxAge: 365 * 24 * 60 * 60 * 1000,
+    })
     next()
 })
 
@@ -200,7 +211,8 @@ app.use('/crawler', crawlerRouter)
 app.use('/', customRouter)
 
 app.use((error, req, res, next) => {
-    logError('Lỗi trong file: ' + error)
+    console.log(error)
+    // logError('Lỗi trong file: ' + error)
     switch (error.code) {
         case 'LIMIT_UNEXPECTED_FILE':
             return res.json({

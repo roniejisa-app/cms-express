@@ -1,6 +1,7 @@
 const DB = require('@mongodb/model')
 const { logError } = require('../utils/log')
 const model = new DB.Setting().DB
+const i18n = require('i18n')
 const settingController = {
     index: async (req, res) => {
         try {
@@ -19,7 +20,7 @@ const settingController = {
             return res.render('admin/pages/setting', {
                 req,
                 module: 'settings',
-                name_show: 'Cài đặt',
+                name_show: i18n.__('setting'),
                 data,
                 csrfToken: req.csrfToken(),
             })
@@ -33,14 +34,14 @@ const settingController = {
             const { key } = req.body
             const exist = await model.findOne({ key })
             if (exist) {
-                throw new Error('Key đặt đã tồn tại')
+                throw new Error(i18n.__('exists', { name: 'Key' }))
             }
 
             const data = await model.create(req.body)
             return res.status(200).json({
                 status: 200,
                 data,
-                message: 'Thêm cài đặt thành công!',
+                message: i18n.__('create_success', { name: i18n.__('setting') }),
             })
         } catch (e) {
             return res.status(200).json({
@@ -68,7 +69,7 @@ const settingController = {
             return res.status(200).json({
                 status: 200,
                 data: update,
-                message: 'Cập nhật thành công!',
+                message: i18n.__('update_success', { name: i18n.__('setting') }),
             })
         } catch (e) {
             return res.status(200).json({
