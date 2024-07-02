@@ -1,5 +1,6 @@
 require('dotenv').config()
 require('module-alias/register')
+const i18n = require('i18n');
 const session = require('express-session')
 var express = require('express')
 const cors = require('cors')
@@ -114,6 +115,24 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
+// Đăng ký các service trong plugin tại đây nhưng không được vượt validate
+let serviceFiles = sync(
+    process.cwd() + '/platform/plugins/*/services/*'
+).filter((file) => {
+    return file.indexOf('.') !== 0 && file.slice(-3) === '.js'
+})
+
+for (let i = 0; i < serviceFiles.length; i++) {
+    const service = require(path.join(process.cwd(), serviceFiles[i]))
+    service(app)
+}
+
+app.use((req, res, next) => {
+    const { lang } = req.cookies;
+    lang ? i18n.setLocale(lang) : i18n.setLocale('en')
+    next();
+})
+
 passport.serializeUser(function (user, done) {
     done(null, user.id)
 })
@@ -162,14 +181,16 @@ app.use(validateMiddleware)
 app.use('/', indexRouter)
 app.use('/', authRouter)
 app.use('/', chatRouter)
-// Đăng ký các file tại đây
+
+// Đăng ký các file trong plugin tại đây nhưng không được vượt validate
 let files = sync(process.cwd() + '/platform/plugins/*/routes/*').filter(
     (file) => {
         return file.indexOf('.') !== 0 && file.slice(-3) === '.js'
     }
 )
+
 for (let i = 0; i < files.length; i++) {
-    const router = require(path.join(process.cwd(),files[i]))
+    const router = require(path.join(process.cwd(), files[i]))
     app.use('/', router)
 }
 app.use('/api', apiRouter)
@@ -179,7 +200,7 @@ app.use('/crawler', crawlerRouter)
 app.use('/', customRouter)
 
 app.use((error, req, res, next) => {
-    logError("Lỗi trong file: " + error);
+    logError('Lỗi trong file: ' + error)
     switch (error.code) {
         case 'LIMIT_UNEXPECTED_FILE':
             return res.json({

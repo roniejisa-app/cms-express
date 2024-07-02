@@ -105,7 +105,6 @@ module.exports = (sequelize, DataTypes) => {
             return validate
         }
         static associate(models) {
-            // define association here
         }
     }
     Language.init(
