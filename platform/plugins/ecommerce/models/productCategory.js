@@ -1,6 +1,6 @@
 'use strict'
 const { Model } = require('sequelize')
-const { selectParentAssoc } = require('@utils/fields')
+const { selectParentAssoc } = require('../../../../utils/fields')
 const { HAS_CHECK_LEVEL } = require('../../../../constants/model')
 const { string } = require('yup')
 module.exports = (sequelize, DataTypes) => {

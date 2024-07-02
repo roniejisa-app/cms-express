@@ -1,0 +1,24 @@
+{
+    "label": "i18n",
+    "name": "i18n",
+    "module": [
+        {
+            "name": "words",
+            "name_show": "Dịch",
+            "model": "Word",
+            "type": "sql",
+            "permission": "create,update,delete,view"
+        },
+        {
+            "name": "languages",
+            "name_show": "Ngôn ngữ",
+            "model": "Language",
+            "type": "sql",
+            "permission": "create,update,delete,view"
+        }
+    ],
+    "author": "roniejisa",
+    "dateUpdate": "02/07/2024",
+    "image": "https://i.ibb.co/0cQkxQx/roniejisa.png",
+    "version": "0.0.1"
+}

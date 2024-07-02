@@ -103,7 +103,7 @@ module.exports = {
             req,
             IS_NOT_VIEW
         )
-        const body = await req.validate(req.body, modelMain.validate())
+        const body = await req.validate(req.body, modelMain.validate(null, req.body))
         if (body) {
             return controllers[type.toUpperCase()].store(req, res, {
                 ...params,
@@ -125,7 +125,7 @@ module.exports = {
             req,
             IS_NOT_VIEW
         )
-        const body = await req.validate(req.body, modelMain.validate(params.id))
+        const body = await req.validate(req.body, modelMain.validate(params.id, req.body))
         if (body) {
             return controllers[type.toUpperCase()].update(req, res, {
                 ...params,

@@ -14,7 +14,13 @@ const pluginController = {
                 const data = readFileSync(file, 'utf8')
                 const obj = JSON.parse(data)
                 const checkHasInstall = objModules.findIndex(
-                    (module) => module.name === obj.name && module.active
+                    (module) =>
+                        (module.name === obj.name ||
+                            (obj.module &&
+                                obj.module
+                                    .map((module) => module.name)
+                                    .includes(module.name))) &&
+                        module.active
                 )
                 return {
                     ...obj,

@@ -7,4 +7,7 @@
     </option>
     <% }) %>
   </select>
+  <% if (req.error && req.error[field.name]) { %>
+    <p class="text-danger mt-2"><%= req.error[field.name] %></p>
+  <% } %>
 </div>

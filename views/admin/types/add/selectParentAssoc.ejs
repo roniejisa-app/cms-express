@@ -4,4 +4,7 @@
 		<option value="">-- Chọn <%= field.label %> --</option>
 		<%- field.data.printTree(field.data.tree, field.keyChild, field.keyValue, field.keyLabel) %>
 	</select>
+	<% if (req.error && req.error[field.name]) { %>
+		<p class="text-danger mt-2"><%= req.error[field.name] %></p>
+	  <% } %>
 </div>

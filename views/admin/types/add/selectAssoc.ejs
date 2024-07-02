@@ -3,9 +3,12 @@
   <select name="<%= field.name %>" class="form-control">
     <option value="">-- Chọn <%= field.label %> --</option>
     <% field.data.forEach(option => { %>
-    <option value="<%= option.id %>" <% if(typeof data === 'object' && +data[field.name] === option.value) { %> selected <% } %>>
+    <option value="<%= option[field.valueKey] %>" <% if(typeof req.old === 'object' && req.old[field.name] === option[field.valueKey]) { %> selected <% } %>>
       <%= option.name %>
     </option>
     <% }) %>
   </select>
+  <% if (req.error && req.error[field.name]) { %>
+    <p class="text-danger mt-2"><%= req.error[field.name] %></p>
+  <% } %>
 </div>

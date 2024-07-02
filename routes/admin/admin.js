@@ -91,6 +91,10 @@ router.use(async (req, res, next) => {
         'languages.create',
         'languages.delete',
         'languages.update',
+        'words.view',
+        'words.create',
+        'words.delete',
+        'words.update'
     ]
     req.menus = await Cache.getMenu(req.user)
     if (!req.menus) {
