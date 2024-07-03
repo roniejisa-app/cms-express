@@ -45,10 +45,10 @@
 	"language.active": "Kích Hoạt",
 	"exists": "{{name}} Đã Tồn Tại",
 	"update_success": "Cập nhật {{name}} Thành Công",
-	"model": "model",
-	"module": "module",
-	"exist": "exist",
-	"delete": "delete",
-	"delete_success": "delete_success",
-	"add_success": "add_success"
+	"model": "Model {{name}}",
+	"module": "Module {{name}}",
+	"exist": "{{name}} Đã Tôn Tại",
+	"delete": "Xóa {{name}}",
+	"delete_success": "Xóa {{name}} Thành Công",
+	"add_success": "Thêm {{name}} Thành Công"
 }

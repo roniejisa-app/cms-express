@@ -11,11 +11,6 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            Language.hasMany(models.Word, {
-                foreignKey: 'code',
-                sourceKey: 'code',
-                as: 'words',
-            })
         }
         static fields() {
             return [
@@ -88,7 +83,7 @@ module.exports = (sequelize, DataTypes) => {
                               })
                         return !result
                     }),
-                default: string().test(
+                default: string("???").test(
                     'check-default',
                     'Thay đổi mặc định',
                     async (value) => {
@@ -105,8 +100,8 @@ module.exports = (sequelize, DataTypes) => {
                                 language.default = false
                                 await language.save()
                             }
-                            return true
                         }
+                        return true
                     }
                 ),
             }

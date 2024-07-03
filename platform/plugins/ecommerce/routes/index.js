@@ -4,7 +4,7 @@ const i18n = require('i18n')
 router.get('/ecommerce', (req, res) => {
     return res.json({
         status: 200,
-        message: i18n.__('require', {
+        message: i18n.__('required', {
             name: 'Ecommerce',
         }),
     })

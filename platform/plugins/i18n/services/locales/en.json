@@ -86,10 +86,9 @@
 	"language.code": "Code",
 	"language.default": "Language Default",
 	"language.active": "Active",
-	"required": "required",
-	"exists": "exists",
-	"data_not_found": "data_not_found",
-	"model": "model",
-	"module": "module",
-	"require": "require"
+	"required": "Please Enter A {{name}}",
+	"exists": "{{name}} Already Exists",
+	"data_not_found":  "Data Not Found",
+	"model": "Model {{name}}",
+	"module": "Module {{name}}"
 }

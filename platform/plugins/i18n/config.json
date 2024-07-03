@@ -4,9 +4,7 @@
     "module": [
         {
             "name": "words",
-            "name_show": "Dịch",
-            "model": "Word",
-            "type": "sql",
+            "name_show": "Bảng dịch",
             "permission": "create,update,delete,view"
         },
         {

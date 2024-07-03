@@ -5,4 +5,7 @@
         <span></span>
         <input type="hidden" name="<%= field.name %>" value="<%= +data[field.name] ? 1 : 0 %>">
     </label>
+    <% if (req.error && req.error[field.name]) { %>
+        <p class="text-danger mt-2"><%= req.error[field.name] %></p>
+        <% } %>
 </div>

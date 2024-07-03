@@ -29,7 +29,6 @@ const {
     RoleModulePermission,
     Module,
     Permission,
-    Link,
 } = require('./models/index')
 const passportLocal = require('./passports/passport.local')
 const authMiddleware = require('./middlewares/auth.middleware')
@@ -42,8 +41,9 @@ const moduleListener = require('./listeners/module')
 const loadAlias = require('./alias/load')
 const Cache = require('./utils/cache')
 const { CACHE_USER_LOGGED } = require('./constants/cache')
-const { logError } = require('./utils/log')
 const cache = require('./utils/cache')
+const loadService = require('./services/load')
+const loadListener = require('./listeners/load')
 var app = express()
 app.use(
     session({
@@ -119,27 +119,16 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 // Đăng ký các service trong plugin tại đây nhưng không được vượt validate
-let serviceFiles = sync(
-    process.cwd() + '/platform/plugins/*/services/*'
-).filter((file) => {
-    return file.indexOf('.') !== 0 && file.slice(-3) === '.js'
-})
-
-for (let i = 0; i < serviceFiles.length; i++) {
-    const service = require(path.join(process.cwd(), serviceFiles[i]))
-    service(app)
-}
-
+loadService(app)
+// Đăng ký các listener
+loadListener(app)
 app.use(async (req, res, next) => {
     const langCurrent = await cache.get('lang', 'en')
     const { lang } = req.cookies
     const { lang: queryLang } = req.query
-    queryLang
-        ? i18n.setLocale(queryLang)
-        : langCurrent
-        ? i18n.setLocale(langCurrent)
-        : i18n.setLocale(lang)
-    res.cookie('lang', queryLang || langCurrent || lang, {
+    const setLang = queryLang || langCurrent || lang || 'en'
+    i18n.setLocale(setLang)
+    res.cookie('lang', setLang, {
         maxAge: 365 * 24 * 60 * 60 * 1000,
     })
     next()
@@ -197,7 +186,11 @@ app.use('/', chatRouter)
 // Đăng ký các file trong plugin tại đây nhưng không được vượt validate
 let routeFiles = sync(process.cwd() + '/platform/plugins/*/routes/*').filter(
     (file) => {
-        return file.indexOf('.') !== 0 && file.slice(-3) === '.js' && file.indexOf('admin.js') === -1
+        return (
+            file.indexOf('.') !== 0 &&
+            file.slice(-3) === '.js' &&
+            file.indexOf('admin.js') === -1
+        )
     }
 )
 
@@ -212,7 +205,11 @@ app.use(customRouter)
 // Đăng ký các file trong plugin tại đây nhưng không được vượt validate
 let adminFiles = sync(process.cwd() + '/platform/plugins/*/routes/*').filter(
     (file) => {
-        return file.indexOf('.') !== 0 && file.slice(-3) === '.js' && file.indexOf('admin.js') !== -1
+        return (
+            file.indexOf('.') !== 0 &&
+            file.slice(-3) === '.js' &&
+            file.indexOf('admin.js') !== -1
+        )
     }
 )
 for (let i = 0; i < adminFiles.length; i++) {

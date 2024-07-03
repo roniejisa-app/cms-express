@@ -1,5 +1,5 @@
 const i18n = require('i18n')
-const { Language, Word } = require('../../../../models/index')
+const { Language } = require('../../../../models/index')
 const cache = require('../../../../utils/cache')
 const path = require('path')
 const service = async (app) => {
@@ -18,6 +18,7 @@ const service = async (app) => {
         )
         return language
     })
+    
     i18n.configure({
         locales: language,
         cookie: 'lang',

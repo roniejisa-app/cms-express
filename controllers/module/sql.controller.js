@@ -252,6 +252,7 @@ module.exports = {
     update: async (req, res, params) => {
         const { module, name_show, modelMain, id, fields, body } = params
         // Chỉnh sửa đầu vào của dữ liệu
+
         for (let i = 0; i < fields.length; i++) {
             if (fields[i].hash) {
                 if (body[fields[i].name] !== '') {
@@ -265,6 +266,7 @@ module.exports = {
                     delete body[fields[i].name]
                 }
             }
+
             if (ARRAY_TYPE_HAS_MULTIPLE.includes(fields[i].type)) {
                 fields[i].dataForm = Array.isArray(body[fields[i].name])
                     ? body[fields[i].name]
@@ -292,7 +294,6 @@ module.exports = {
                     : null
             }
         }
-
         await modelMain.update(
             {
                 ...body,
