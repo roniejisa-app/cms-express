@@ -30,7 +30,9 @@ const XHR = {
             }
 
             xhr.addEventListener('progress', function (e) {
+                if (!e.lengthComputable) return;
                 let percent = +((e.loaded / e.total) * 100).toFixed(2)
+                if(percent > 100) percent = 100
                 let divProgress =
                     document.body.querySelector('.progress-upload')
                 if (!document.body.querySelector('.progress-upload')) {

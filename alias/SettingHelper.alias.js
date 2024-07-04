@@ -2,7 +2,7 @@ const Setting = require('@mongodb/setting.model')
 const { findOrCreate } = require('@utils/cache')
 const functionHelperInstance = require('./FunctionHelper.alias')
 const { CACHE_CMS_HELPER } = require('../constants/cache')
-const { logError } = require('../utils/log')
+const { logError } = require('../utils/write')
 class SettingHelper {
     constructor() {
         this.settings = null
@@ -41,7 +41,7 @@ class SettingHelper {
                     return data
             }
         }catch(e){
-            logError("Có lỗi redis " + key )
+            logError(e)
             return '';
         }
     }

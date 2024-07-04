@@ -14,7 +14,7 @@ const socketRTC = require('@socket/rtc');
 const fs = require('fs');
 const socketClient = require('@socket/client');
 const mongodb = require('@mongodb');
-const { logError } = require('../utils/log');
+const { logError } = require('../utils/write');
 /**
  * Get port from environment and store in Express.
  */

@@ -1,10 +1,7 @@
 const { getDataApi } = require('@utils/dataTable')
-const { convertDataFilter } = require('@utils/filter')
-const { REQUEST_API } = require('@constants/api')
-// Hiện tại api chỉ sử dụng đối với PostgresSQL & chưa áp dụng và chỉnh sửa cho Mongoose
 const SQLController = require('./module/sql.controller')
 const NoSqlController = require('./module/no_sql.controller')
-const { logError } = require('../../utils/log')
+const { logError } = require('../../utils/write')
 const controllers = {
     SQL: {
         all: (req, res, params) => SQLController.all(req, res, params),

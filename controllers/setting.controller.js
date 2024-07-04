@@ -1,5 +1,5 @@
 const DB = require('@mongodb/model')
-const { logError } = require('../utils/log')
+const { logError } = require('../utils/write')
 const model = new DB.Setting().DB
 const i18n = require('i18n')
 const settingController = {

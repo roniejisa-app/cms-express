@@ -2,16 +2,38 @@
 <link rel="stylesheet" href="/core/plugins/i18n/css/i18n.css">
 <%- contentFor('body') %>
 <div class="d-flex justify-content-between my-5 header-view">
-    <h2>Quản lý Module</h2>
+    <h2>Quản lý <%= name_show %></h2>
+    <div class="i18n-bar">
+        <div>
+            <input type="text" placeholder="Tìm kiếm">
+        </div>
+        <form class="i18n-form">
+            <select name="language">
+                <% langData.forEach(lang => { %>
+                    <option value="<%= lang.code  %>" <%= lang.default ? 'selected' : '' %>><%= lang.name  %></option>
+                <% }) %>
+            </select>
+            <p>Chọn ngôn ngữ</p>
+        </form>
+    </div>
 </div>
 <div class="table-data" data-module="words">
     <table class="table">
-        <tr>
-            <th>Code</th>
-            <th>Language</th>
-            <th>Word</th>
-            <th>Actions</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(const [key,value] of Object.entries(words)){ %>
+                <tr>
+                    <td><%= key  %></td>
+                    <td data-key="<%= key  %>"><%= value  %></td>
+                </tr>
+            <% } %>
+        </tbody>
+
     </table>
 </div>
 <%- contentFor('script') %>

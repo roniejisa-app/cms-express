@@ -1,4 +1,3 @@
-import { randomId } from '../../../utils/utils'
 import {
     CONTAINER_CLASS,
     CUSTOM_EVENT_CONTENT_FILE,

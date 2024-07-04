@@ -9,7 +9,6 @@ const MakeModelMongoDB = require('./commands/make-model-mongodb')
 
 const p = require('@clack/prompts')
 const color = require('picocolors')
-const { logError } = require('../utils/log')
 async function askQuestion(question, answers) {
     const options = []
     answers.forEach((answer) => {
@@ -22,14 +21,6 @@ async function askQuestion(question, answers) {
         options: options,
     })
     return answer
-}
-
-class Question {
-    constructor(question, answersArray, correctAnswerIndex) {
-        this.question = question
-        this.answersArray = answersArray
-        this.correctAnswerIndex = correctAnswerIndex
-    }
 }
 
 async function main() {
@@ -75,7 +66,8 @@ async function types(type) {
             new MakeModelMongoDB()
             break;
         default:
-            logError('Không tồn tại command này!')
+            p.outro(color.red('Type not found!'))
+            return;
     }
 }
 main()

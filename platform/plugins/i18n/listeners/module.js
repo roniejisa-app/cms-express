@@ -1,7 +1,7 @@
 const event = require('../../../../utils/event')
 const { Language } = require('../../../../models')
-const path = require('path');
-const cache = require('../../../../utils/cache');
+const path = require('path')
+const cache = require('../../../../utils/cache')
 async function chooseLanguage(req, module, body, isCreate = false) {
     if (module === 'languages' && +body.active === 1) {
         await cache.set('lang', body.code)
@@ -9,27 +9,22 @@ async function chooseLanguage(req, module, body, isCreate = false) {
             const language = await cache.findOrCreate(
                 'langData',
                 async () => {
-                    const data = await Language.findAll(
-                        {
-                            attributes: ['code', 'default'],
-                            where: {
-                                active: true,
-                            },
+                    const data = await Language.findAll({
+                        attributes: ['name', 'code', 'default'],
+                        where: {
+                            active: true,
                         },
-                        true
-                    )
-                    const language = JSON.parse(JSON.stringify(data)).map(
-                        (item) => item.code
-                    )
+                    })
+                    const language = JSON.parse(JSON.stringify(data))
                     return language
                 },
                 true
             )
             i18n.configure({
-                locales: language,
+                locales: language.map(({ code }) => code),
                 cookie: 'lang',
                 queryParameter: 'lang',
-                directory: path.resolve(__dirname, '../services/locales'),
+                directory: path.resolve(__dirname, '../locales'),
             })
             req.app.use(i18n.init)
         }
