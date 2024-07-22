@@ -508,7 +508,7 @@ module.exports = {
         const html = await ejs.renderFile(
             process.cwd() + '/views/admin/views/table.ejs',
             {
-                i18n,
+                ...req.app.locals,
                 req,
                 fields,
                 module,

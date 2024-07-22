@@ -39,6 +39,8 @@ const validateMiddleware = require('./middlewares/validate.middleware')
 const moduleListener = require('./listeners/module')
 //Import load alias
 const loadAlias = require('./alias/load')
+const loadInstance = require("./system/loadInstance");
+
 const Cache = require('./utils/cache')
 const { CACHE_USER_LOGGED } = require('./constants/cache')
 const cache = require('./utils/cache')
@@ -56,6 +58,8 @@ app.use(
 moduleListener()
 //Đăng ký aliases
 loadAlias(app)
+//Đăng ký các service phục vụ bảng quản trị,...
+loadInstance(app)
 app.use(
     cors({
         origin: process.env.DOMAIN_ORIGIN,
@@ -220,7 +224,6 @@ app.use(process.env.VITE_AP, adminRouter)
 app.use('/crawler', crawlerRouter)
 
 app.use((error, req, res, next) => {
-    console.log(error)
     // logError('Lỗi trong file: ' + error)
     switch (error.code) {
         case 'LIMIT_UNEXPECTED_FILE':
@@ -231,19 +234,39 @@ app.use((error, req, res, next) => {
     }
 })
 
-// error handler
-app.use((err, req, res, next) => {
-    console.error(err.stack) // Ghi log lỗi ra console
-    res.status(err.status || 500).json({
-        error: {
-            message: err.message || 'Internal Server Error',
-            status: err.status || 500,
-        },
-    })
-})
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
 
-app.use((req, res, next) => {
-    res.status(404).render('404')
-})
+// error handlers
+
+// development error handler
+// will print stacktrace
+if (process.env.DEVELOPMENT == true) {
+    app.use(function (err, req, res, next) {
+        res.status(err.status || 500);
+        return res.render('error', {
+            message: err.message,
+            error: err,
+            layout:false,
+            req
+        });
+    });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {},
+        layout:false,
+        req,
+    });
+});
 
 module.exports = app

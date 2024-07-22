@@ -1,3 +1,6 @@
+<%- contentFor('style') %>
+<%- add_asset_form(module, FORM_ACCESS,'js','css') %>
+<%- contentFor('body') %>
 <form action="<%= process.env.VITE_AP %>/<%= module %>/edit/<%= id %>" method="POST" data-id="<%= id %>" data-module="<%= module %>">
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
     <div class="d-flex justify-content-between my-5 header-view">
@@ -23,3 +26,5 @@
         </div>
     </div>
 </form>
+<%- contentFor('script') %>
+<%- add_asset_form(module,FORM_ACCESS,'js') %>

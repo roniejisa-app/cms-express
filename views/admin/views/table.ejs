@@ -55,6 +55,7 @@
             permission.includes(`${module}.edit`) ||
             permission.includes(`${module}.update`))){ %>
             <td class="text-center">
+                <%- add_button_table(module, 'BUTTON_TABLE') %> 
                 <a
                     href="<%= process.env.VITE_AP %>/<%= module %>/edit/<%= item.id %>"
                     class="btn btn-warning"

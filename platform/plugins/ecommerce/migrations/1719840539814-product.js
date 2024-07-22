@@ -60,6 +60,22 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false
             },
+            price: Sequelize.DECIMAL,
+            quantity: Sequelize.INTEGER,
+            sku: Sequelize.STRING,
+            variant: Sequelize.BOOLEAN,
+            width:{
+                type: Sequelize.DECIMAL
+            },
+            height:{
+                type: Sequelize.DECIMAL
+            },
+            length:{
+                type: Sequelize.DECIMAL
+            },
+            weight:{
+                type: Sequelize.DECIMAL
+            },
             created_at: {
                 defaultValue: Sequelize.fn('NOW'),
                 type: Sequelize.DATE,

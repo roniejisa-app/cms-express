@@ -62,5 +62,9 @@
   "users.password_min": "{{name}} Phải Có Ít Nhất {{length}} ký tự",
   "uploads_successful": "Tải {{name}} Lên Thành Công",
   "folderName": "Thư Mục",
-  "create_success": "Tạo {{name}} Thành Công"
+  "create_success": "Tạo {{name}} Thành Công",
+  "seo_title": "Tiêu Đề SEO",
+  "seo_description": "Mô Tả SEO",
+  "seo_keywords": "Từ Khóa SEO",
+  "link": "Đường dẫn"
 }

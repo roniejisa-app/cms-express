@@ -84,6 +84,10 @@ module.exports = async (req, res, next) => {
         'words.create',
         'words.delete',
         'words.update',
+        'crawls.view',
+        'crawls.create',
+        'crawls.delete',
+        'crawls.update',
     ]
     req.menus = await Cache.getMenu(req.user)
     if (!req.menus) {

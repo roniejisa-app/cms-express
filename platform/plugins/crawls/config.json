@@ -1,0 +1,16 @@
+{
+    "label": "crawl",
+    "name": "crawl",
+    "module": [
+        {
+            "name": "crawls",
+            "model": "Crawl",
+            "name_show": "Cào dữ liệu",
+            "permission": "create,update,delete,view"
+        }
+    ],
+    "author": "roniejisa",
+    "dateUpdate": "15/07/2024",
+    "image": "https://i.ibb.co/0cQkxQx/roniejisa.png",
+    "version": "0.0.1"
+}

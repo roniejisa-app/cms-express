@@ -36,6 +36,13 @@
             "model": "ProductBrand",
             "type": "sql",
             "permission": "create,update,delete,view"
+        },
+        {
+            "name": "orders",
+            "name_show": "Quản lý đơn hàng",
+            "model": "Order",
+            "type": "sql",
+            "permission": "create,update,delete,view"
         }
     ],
     "author": "roniejisa",

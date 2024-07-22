@@ -79,6 +79,15 @@ const plugins = {
         },
         dir: resolve(__dirname, './public/core/plugin'),
     },
+    ecommerce: {
+        files: {
+            css: [resolve(__dirname, './platform/plugins/ecommerce/resources/scss/product-variant.scss')],
+            js: [
+                resolve(__dirname, './platform/plugins/ecommerce/resources/js/product-variant.js'),
+            ],
+        },
+        dir: resolve(__dirname, './public/core/plugins/ecommerce'),
+    },
 }
 
 const getDir = (type) => {

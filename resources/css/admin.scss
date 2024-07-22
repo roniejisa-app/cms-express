@@ -15,7 +15,6 @@ button,
 input,
 body {
     font-family: 'Nunito', sans-serif !important;
-    color: $colorText;
     font-size: 16px;
     vertical-align: middle;
 }
@@ -1048,8 +1047,82 @@ body.menu-small {
         box-shadow: 0 0 1px var(--color-main);
     }
     input:checked + span:before {
-        -webkit-transform: translateX(calc(var(--width-switch) - var(--width-switch) / 2));
-        -ms-transform: translateX(calc(var(--width-switch) - var(--width-switch) / 2));
-        transform: translateX(calc(var(--width-switch) - var(--width-switch) / 2));
+        -webkit-transform: translateX(
+            calc(var(--width-switch) - var(--width-switch) / 2)
+        );
+        -ms-transform: translateX(
+            calc(var(--width-switch) - var(--width-switch) / 2)
+        );
+        transform: translateX(
+            calc(var(--width-switch) - var(--width-switch) / 2)
+        );
+    }
+}
+
+//seo
+
+.form-seo {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    max-width: 680px;
+    flex-direction: column;
+    width: 100%;
+    background: white;
+    padding: 12px;
+    span {
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+        justify-content: center;
+        display: flex;
+        width: 100%;
+        height: 350px;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: scale-down;
+            object-position: center;
+            border-radius: 6px;
+        }
+    }
+    .image-form-action {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        z-index: 1;
+        display: flex;
+        .btn-remove-image,
+        .btn-choose-image{
+            border-radius: 50%;
+            border: 1px solid #f0f2f5;
+            background: white;
+            padding: 6px;
+            svg{
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+    .form-seo-content {
+        background-color: #f0f2f5;
+        padding: 12px 16px;
+        z-index: 1;
+        .form-control {
+            border: none;
+            &[name='seo_title'] {
+                padding: 0;
+                font-weight: 600;
+                font-size: 18px;
+                color: #050505;
+                background-color: transparent;
+            }
+        }
+    }
+
+    .seo-facebook {
+        border-radius: 6px;
+        overflow: hidden;
+        border: 1px solid #f0f2f5;
+        position: relative;
     }
 }

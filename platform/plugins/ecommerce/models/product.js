@@ -36,9 +36,8 @@ module.exports = (sequelize, DataTypes) => {
                     showForm: true,
                     filterDefault: true,
                     positionSidebar: false,
-                    order:1
+                    order: 1,
                 },
-
                 {
                     name: 'slug',
                     label: 'Đường dẫn',
@@ -60,31 +59,7 @@ module.exports = (sequelize, DataTypes) => {
                         }
                         await db.create(dataDB)
                     },
-                    order:2
-                },
-                {
-                    name: 'price',
-                    label: 'Giá',
-                    type: 'text',
-                    show: true,
-                    sort: true,
-                    filter: true,
-                    showForm: true,
-                    filterDefault: false,
-                    positionSidebar: false,
-                    order:3
-                },
-                {
-                    name: 'price_sale',
-                    label: 'Giá giảm',
-                    type: 'text',
-                    show: true,
-                    sort: true,
-                    filter: true,
-                    showForm: true,
-                    filterDefault: false,
-                    positionSidebar: false,
-                    order:4
+                    order: 2,
                 },
                 {
                     name: 'description',
@@ -118,9 +93,8 @@ module.exports = (sequelize, DataTypes) => {
                     showForm: true,
                     filterDefault: false,
                     positionSidebar: false,
-                    order:10
+                    order: 10,
                 },
-
                 {
                     name: 'highlight',
                     label: 'Đặc điểm nổi bật',
@@ -132,7 +106,6 @@ module.exports = (sequelize, DataTypes) => {
                     filterDefault: false,
                     positionSidebar: false,
                 },
-
                 {
                     name: 'specification',
                     label: 'Thông số kỹ thuật',
@@ -186,7 +159,7 @@ module.exports = (sequelize, DataTypes) => {
                     positionSidebar: true,
                     // filter: true,
                 },
-                 {
+                {
                     name: 'product_category_id',
                     label: 'Danh mục sản phẩm',
                     modelName: 'ProductCategory',
@@ -200,7 +173,7 @@ module.exports = (sequelize, DataTypes) => {
                         'id',
                         'name',
                         'product_category_id',
-                        'ProductCategories',
+                        'ProductCategories'
                         // HAS_CHECK_LEVEL,
                         // [
                         //     {
@@ -212,6 +185,21 @@ module.exports = (sequelize, DataTypes) => {
                     show: false,
                     showForm: true,
                     positionSidebar: true,
+                },
+                {
+                    name: 'product_variant',
+                    label: 'Biến thể sản phẩm',
+                    type: 'product_variant',
+                    show: false,
+                    showForm: true,
+                    order: 1
+                },
+                {
+                    name: 'shipping',
+                    label: 'Shipping',
+                    type: 'shipping',
+                    show: false,
+                    showForm: true,
                 },
             ]
         }
@@ -232,8 +220,6 @@ module.exports = (sequelize, DataTypes) => {
             },
             name: DataTypes.STRING,
             slug: DataTypes.STRING,
-            price: DataTypes.DECIMAL,
-            price_sale: DataTypes.DECIMAL,
             description: DataTypes.TEXT,
             image: DataTypes.TEXT,
             images: DataTypes.TEXT,
@@ -246,6 +232,14 @@ module.exports = (sequelize, DataTypes) => {
             product_brand_id: DataTypes.INTEGER,
             created_at: DataTypes.DATE,
             updated_at: DataTypes.DATE,
+            seo_title: DataTypes.STRING,
+            seo_description: DataTypes.STRING,
+            seo_keywords: DataTypes.STRING,
+            seo_image: DataTypes.TEXT,
+            price: DataTypes.DECIMAL,
+            quantity: DataTypes.INTEGER,
+            sku: DataTypes.STRING,
+            variant: DataTypes.BOOLEAN
         },
         {
             sequelize,

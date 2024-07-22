@@ -1,0 +1,197 @@
+[product-variant] {
+    display: flex;
+    flex-direction: column;
+    .variant-group-item {
+    }
+    .input-group {
+        margin-top: 6px;
+        position: relative;
+        border: 1px solid #cacaca;
+        border-radius: 8px;
+        .prefix {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 10px;
+        }
+        &:has(.prefix) input {
+            padding-left: 30px;
+        }
+    }
+}
+
+[product-no-variant] {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    > div {
+        flex-basis: calc(100% / 3);
+    }
+    input {
+        border-radius: 8px;
+        border: none;
+        width: 100%;
+        padding: 4px 10px;
+    }
+    .price {
+        display: flex;
+        align-items: center;
+    }
+}
+
+[product-variant-list] {
+    margin-top: 10px;
+    .product-variant-header {
+        display: flex;
+        justify-content: space-between;
+    }
+    .variant-item-top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+    .text-required {
+        color: red;
+    }
+    .text-variant-name {
+        font-weight: bold;
+    }
+    .tooltip {
+        position: relative;
+        &:hover {
+            .tooltip-show {
+                display: block;
+            }
+        }
+    }
+    .tooltip-show {
+        min-width: 500px;
+        width: 100%;
+        background: #353535;
+        padding: 8px;
+        position: absolute;
+        display: none;
+        color: white;
+        transform: translateY(-50%);
+        left: calc(100% + 10px);
+        padding-left: 30px;
+        border-radius: 8px;
+        li {
+            list-style: circle;
+        }
+    }
+    .group-product-variant {
+        position: relative;
+        input {
+            padding: 6px;
+            border-radius: 6px;
+            border: 1px solid #cacaca;
+            width: 100%;
+        }
+        .option-suggestion {
+            display: none;
+            position: absolute;
+            top: calc(100% + 2px);
+            left: 0;
+            width: 100%;
+            border: 1px solid #cacaca;
+            background: white;
+            z-index: 2;
+            border-radius: 6px;
+            li {
+                padding: 6px;
+                &:hover {
+                    background: var(--color-main-60);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+.variant-item {
+    background-color: #ebebeb;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+[variant-options] {
+   
+    input {
+        padding: 6px;
+        border-radius: 6px;
+        border: 1px solid #cacaca;
+        width: 100%;
+        flex-basis: 1;
+    }
+
+    .image{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 106px;
+        height: 106px;
+        color:#0000008c;
+        border: 1px dotted #cacaca;
+        justify-content: center;
+        background: white;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .item{
+        svg{
+            width: 24px;
+            height: 24px;
+            fill:#0000008c;       
+        }
+        display: flex;
+        gap: 10px;
+        [drag-item]{
+            cursor: all-scroll;
+        }
+
+        [delete-item]{
+            cursor: pointer;
+        }
+    }
+
+    .content{
+        display: flex;
+        flex: 1;
+        align-items: baseline;
+    }
+
+    .content-info{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .action{
+        display: flex;
+        gap: 16px;
+        svg{
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+[product-variant-options] .text-center {
+    text-align: center;
+}
+
+[variant-done]{
+    margin-top: 10px;
+    border: none;
+    background: var(--color-main);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}

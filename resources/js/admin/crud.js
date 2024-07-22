@@ -21,14 +21,16 @@ const CRUD = (() => {
                         objData.id = idEl.dataset.id
                     }
                     request.setEndpoint(import.meta.env.VITE_BU, objData)
-                    const { data } = await request.post(
+                    const { data:{message, data} } = await request.post(
                         import.meta.env.VITE_AP + `/check-link`,
                         objData
                     )
-                    if (data.message) {
-                        notify.error(data.message)
+                    if (message) {
+                        notify.error(message)
                         inputEl.value = oldValue[index]
                         return false
+                    }else{
+                        target.value = data
                     }
                 }, 500)
             }

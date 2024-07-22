@@ -41,6 +41,7 @@ module.exports = {
             // Fix bug ở đây
             return controllers[type.toUpperCase()].index(req, res, params)
         }catch(err){
+            console.log(err);
             next();
         }
     },
