@@ -1,3 +1,6 @@
+<%- contentFor('style') %>
+<%- add_asset_form(module, 'TABLE_VIEW','css') %>
+<%- contentFor('body') %>
 <div class="d-flex justify-content-between my-5 header-view">
     <h2>Quản lý <%= name_show %></h2>
     <% if(req.permission.some(permission=> permission.includes(`${module}.add`)
@@ -125,3 +128,5 @@
     <%- include("./views/table") %>
 </div>
 <%- include("./filter/filter") %>
+<%- contentFor('script') %>
+<%- add_asset_form(module,'TABLE_VIEW','js') %>

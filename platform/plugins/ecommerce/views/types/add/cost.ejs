@@ -1,0 +1,8 @@
+<div class="form-group mb-3" sale-cost>
+    <label class="d-block mb-1">
+        <%= field.label %>
+    </label>
+    <textarea name="<%= field.name %>" hidden><%= req.old[field.name] ?? '' %></textarea>
+    <div costs></div>
+    <button type="button" add-cost>Thêm phí</button>
+</div>

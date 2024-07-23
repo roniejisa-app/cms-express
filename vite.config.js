@@ -88,6 +88,19 @@ const plugins = {
         },
         dir: resolve(__dirname, './public/core/plugins/ecommerce'),
     },
+    saleCost: {
+        files: {
+            css: [
+                resolve(__dirname, './platform/plugins/ecommerce/resources/scss/costs.scss'),
+                resolve(__dirname, './platform/plugins/ecommerce/resources/scss/costs-view.scss')
+            ],
+            js: [
+                resolve(__dirname, './platform/plugins/ecommerce/resources/js/costs.js'),
+                resolve(__dirname, './platform/plugins/ecommerce/resources/js/costs-view.js'),
+            ],
+        },
+        dir: resolve(__dirname, './public/core/plugins/sale-cost'),
+    },
 }
 
 const getDir = (type) => {

@@ -6,7 +6,7 @@ module.exports = {
             attributes: [
                 {
                     key: 'href',
-                    value: '/core/plugins/sale-cost/css/costs.css',
+                    value: '/core/plugins/sale-cost/css/costs-view.css',
                 },
             ],
             hasCloseTag: true
@@ -19,25 +19,12 @@ module.exports = {
             attributes: [
                 {
                     key: 'src',
-                    value: '/core/plugins/sale-cost/js/costs2.js',
+                    value: '/core/plugins/sale-cost/js/costs-view2.js',
                 },
                 {
                     key: 'type',
                     value: 'module'
                 }
-            ],
-        },
-    ],
-    element: [
-        {
-            type: 'button',
-            name: 'sale-costs',
-            value:"hehe",
-            attributes: [
-                {
-                    key: 'href',
-                    value: '/core/plugins/sale-cost/css/costs.css',
-                },
             ],
         },
     ]

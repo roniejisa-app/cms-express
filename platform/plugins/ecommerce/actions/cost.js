@@ -28,17 +28,4 @@ module.exports = {
             ],
         },
     ],
-    element: [
-        {
-            type: 'button',
-            name: 'sale-costs',
-            value:"hehe",
-            attributes: [
-                {
-                    key: 'href',
-                    value: '/core/plugins/sale-cost/css/costs.css',
-                },
-            ],
-        },
-    ]
 }

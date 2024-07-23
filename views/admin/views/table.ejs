@@ -37,10 +37,17 @@
                 </label>
             </td>
             <td><%= index + 1 %></td>
-            <% fields.forEach(field=> {%>
+            <% 
+                fields.forEach(field=> {
+                    let typeView = field.type;
+                    let pluginView = '..';
+                    if(typeView.includes("|")){
+                        [pluginView, typeView] = typeView.split('|')
+                        pluginView = process.cwd()+`/platform/plugins/${pluginView}/views`
+                    }
+            %>
             <td>
-                <%- include(`../types/view/${field.type}`,{ field,
-                value:item[field.name],item }); %>
+                <%- include(`${pluginView}/types/view/${typeView}`,{ field, value:item[field.name],item }); %>
             </td>
             <% if(req.permission.some(permission =>
             permission.includes(`${module}.custom-page`))){ %>
@@ -55,7 +62,7 @@
             permission.includes(`${module}.edit`) ||
             permission.includes(`${module}.update`))){ %>
             <td class="text-center">
-                <%- add_button_table(module, 'BUTTON_TABLE') %> 
+                <%- add_asset_form(module, 'BUTTON_TABLE','element') %> 
                 <a
                     href="<%= process.env.VITE_AP %>/<%= module %>/edit/<%= item.id %>"
                     class="btn btn-warning"

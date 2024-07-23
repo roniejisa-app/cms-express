@@ -236,6 +236,7 @@ module.exports = {
         })
 
         req.success = req.flash('success')
+       
         return res.render('admin/edit', {
             layout: 'layouts/admin',
             req,

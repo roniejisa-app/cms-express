@@ -12,12 +12,31 @@
     </div>
     <div class="row">
         <div class="col-12 col-md-9">
-            <% leftFields.forEach(field => { %> <%-
-            include(`./types/add/${field.type}`, { field,req }) %> <% }) %>
+            <% 
+                leftFields.forEach(field => {
+                // Chỗ này sau có thể chỉnh lại để tối ưu hơn
+                let typeView = field.type;
+                let pluginView = '.';
+                if(typeView.includes("|")){
+                    [pluginView, typeView] = typeView.split('|')
+                    pluginView = process.cwd()+`/platform/plugins/${pluginView}/views`
+                }
+            %>  
+                <%- include(`${pluginView}/types/add/${typeView}`, { field,req }) %> 
+            <% }) %>
         </div>
         <div class="col-12 col-md-3">
-            <% rightFields.forEach(field => { %> <%-
-            include(`./types/add/${field.type}`, { field,req }) %> <% }) %>
+            <% 
+                rightFields.forEach(field => { 
+                let typeView = field.type;
+                let pluginView = '.';
+                if(typeView.includes("|")){
+                    [pluginView, typeView] = typeView.split('|')
+                    pluginView = process.cwd()+`/platform/plugins/${pluginView}/views`
+                }
+            %> 
+                <%- include(`${pluginView}/types/add/${typeView}`, { field,req }) %> 
+            <% }) %>
         </div>
     </div>
 </form>

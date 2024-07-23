@@ -1,5 +1,5 @@
 <%- contentFor('style') %>
-<%- add_asset_form(module, FORM_ACCESS,'js','css') %>
+<%- add_asset_form(module, 'FORM_ACCESS','css') %>
 <%- contentFor('body') %>
 <form action="<%= process.env.VITE_AP %>/<%= module %>/edit/<%= id %>" method="POST" data-id="<%= id %>" data-module="<%= module %>">
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
@@ -27,4 +27,4 @@
     </div>
 </form>
 <%- contentFor('script') %>
-<%- add_asset_form(module,FORM_ACCESS,'js') %>
+<%- add_asset_form(module,'FORM_ACCESS','js') %>

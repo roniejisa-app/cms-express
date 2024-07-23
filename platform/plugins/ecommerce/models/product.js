@@ -189,7 +189,7 @@ module.exports = (sequelize, DataTypes) => {
                 {
                     name: 'product_variant',
                     label: 'Biến thể sản phẩm',
-                    type: 'product_variant',
+                    type: 'ecommerce|product_variant',
                     show: false,
                     showForm: true,
                     order: 1

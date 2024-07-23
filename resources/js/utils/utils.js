@@ -41,3 +41,24 @@ export const randomId = () => {
     let randomString = Math.random().toString(36).toString(36).substring(2) + new Date().getTime().toString(36).substring(2);
     return randomString;
 }
+
+export const getNumber = (string) => {
+    // try{
+        const convertedString = string.replace(/(-?\d+([.,]\d+)?)%/g, (match, number) => {
+            // Thay dấu phẩy thành dấu chấm
+            const convertedNumber = parseFloat(number.replace(',', '.'));
+            // Trả về số đã chuyển đổi sang thập phân
+            return convertedNumber.toString();
+        });
+        return convertedString;
+    // }catch(e){
+    //     return string;
+    // }
+}
+
+export const getPrice = (number) => {
+    number = String(number).replaceAll(",","");
+    if(number === "") return "";
+    const string = new Intl.NumberFormat().format(number);
+    return string;
+}

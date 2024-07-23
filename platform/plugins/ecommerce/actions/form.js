@@ -9,6 +9,7 @@ module.exports = {
                     value: '/core/plugins/ecommerce/css/product-variant.css',
                 },
             ],
+            hasCloseTag: true
         },
     ],
     js: [
@@ -25,7 +26,6 @@ module.exports = {
                     value: 'module'
                 }
             ],
-            hasCloseTag: true
         },
     ],
 }
