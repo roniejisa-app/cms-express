@@ -1,7 +1,10 @@
 <div class="form-group mb-3" product-variant>
-    <label class="d-block mb-1">
-        <%= field.label %>
-    </label>
+    <div class="d-flex justify-content-between">
+        <label class="d-block mb-1">
+            <%= field.label %>
+        </label>
+        <button type="button" update-variant>Cập nhật</button>
+    </div>
     <label class="switch" switch-product-variant>
         <input type="checkbox" <% if(+req.old[field.name]===1) { %>checked<% } %>>
             <span></span>
@@ -67,10 +70,12 @@
                                 </ul>
                             </div>
                         </div>
-                        <label>
-                            <input type="checkbox" has-image checked/>
-                            Add image
-                        </label>
+                        <div class="variant-item-action">
+                            <label>
+                                <input type="checkbox" has-image checked/>
+                                Add image
+                            </label>
+                        </div>
                     </div>
                     <div>
                         <div class="group-product-variant">

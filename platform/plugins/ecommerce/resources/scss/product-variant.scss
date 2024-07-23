@@ -68,6 +68,7 @@
         }
     }
     .tooltip-show {
+        z-index: 1;
         min-width: 500px;
         width: 100%;
         background: #353535;
@@ -120,7 +121,6 @@
 }
 
 [variant-options] {
-   
     input {
         padding: 6px;
         border-radius: 6px;
@@ -148,6 +148,9 @@
             width: 24px;
             height: 24px;
             fill:#0000008c;       
+        }
+        +.item{
+            margin-top: 10px;
         }
         display: flex;
         gap: 10px;
@@ -182,6 +185,7 @@
         }
     }
 }
+
 [product-variant-options] .text-center {
     text-align: center;
 }
@@ -193,5 +197,9 @@
     color: white;
     padding: 8px 12px;
     border-radius: 6px;
+    cursor: pointer;
+}
+
+.variant-item-action label{
     cursor: pointer;
 }
